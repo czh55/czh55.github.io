@@ -21,9 +21,9 @@
   </script>
 
   <meta property="og:type" content="website">
-<meta property="og:title" content="陈志恒的博客">
+<meta property="og:title" content="陈志恒的技术博客">
 <meta property="og:url" content="http://www.chenzhiheng.cn/page/12/index.html">
-<meta property="og:site_name" content="陈志恒的博客">
+<meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
@@ -40,7 +40,7 @@
   };
 </script>
 
-  <title>陈志恒的博客</title>
+  <title>陈志恒的技术博客</title>
   
 
 
@@ -93,7 +93,7 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">陈志恒的博客</span>
+        <span class="site-title">陈志恒的技术博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -158,6 +158,764 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/%E5%AE%B9%E9%94%99%EF%BC%8C%E9%AB%98%E5%8F%AF%E7%94%A8%E5%92%8C%E7%81%BE%E5%A4%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/%E5%AE%B9%E9%94%99%EF%BC%8C%E9%AB%98%E5%8F%AF%E7%94%A8%E5%92%8C%E7%81%BE%E5%A4%87/" class="post-title-link" itemprop="url">容错，高可用和灾备</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-15 11:05:00" itemprop="dateCreated datePublished" datetime="2019-12-15T11:05:00+08:00">2019-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_分布式/软件设计</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/%E5%AE%B9%E9%94%99%EF%BC%8C%E9%AB%98%E5%8F%AF%E7%94%A8%E5%92%8C%E7%81%BE%E5%A4%87/" class="post-meta-item leancloud_visitors" data-flag-title="容错，高可用和灾备" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>36</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月15日 下午11:05<br><a href="http://www.ruanyifeng.com/blog/2019/11/fault-tolerance.html" target="_blank" rel="noopener">容错，高可用和灾备 - 阮一峰的网络日志</a><br><img src="/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/%E5%AE%B9%E9%94%99%EF%BC%8C%E9%AB%98%E5%8F%AF%E7%94%A8%E5%92%8C%E7%81%BE%E5%A4%87/bg2019111708.jpg" alt><br><img src="/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/%E5%AE%B9%E9%94%99%EF%BC%8C%E9%AB%98%E5%8F%AF%E7%94%A8%E5%92%8C%E7%81%BE%E5%A4%87/bg2019111709.jpg" alt><br><img src="/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/%E5%AE%B9%E9%94%99%EF%BC%8C%E9%AB%98%E5%8F%AF%E7%94%A8%E5%92%8C%E7%81%BE%E5%A4%87/bg2019111710.jpg" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/%E5%A6%82%E4%BD%95%E9%99%8D%E4%BD%8E%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%A4%8D%E6%9D%82%E6%80%A7%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/%E5%A6%82%E4%BD%95%E9%99%8D%E4%BD%8E%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%A4%8D%E6%9D%82%E6%80%A7%EF%BC%9F/" class="post-title-link" itemprop="url">如何降低软件的复杂性？</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-15 10:49:00" itemprop="dateCreated datePublished" datetime="2019-12-15T10:49:00+08:00">2019-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_分布式/软件设计</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E8%BD%AF%E4%BB%B6%E8%AE%BE%E8%AE%A1/%E5%A6%82%E4%BD%95%E9%99%8D%E4%BD%8E%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%A4%8D%E6%9D%82%E6%80%A7%EF%BC%9F/" class="post-meta-item leancloud_visitors" data-flag-title="如何降低软件的复杂性？" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>412</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月15日 下午10:49<br><a href="http://www.ruanyifeng.com/blog/2018/09/complexity.html" target="_blank" rel="noopener">如何降低软件的复杂性？ - 阮一峰的网络日志</a></p>
+<ol>
+<li><strong>复杂性的来源主要有两个：代码的含义模糊和互相依赖。</strong><ul>
+<li>模糊指的是，代码里面的重要信息，看不出来。依赖指的是，某个模块的代码，不结合其他模块，就会无法理解。</li>
+<li>复杂性的危害在于，它会递增。你做错了一个决定，导致后面的代码都基于前面的错误实现，整个软件变得越来越复杂。”我们先把产品做出来，后面再改进”，这根本做不到。</li>
+</ul>
+</li>
+<li>复杂性的隔离<ul>
+<li>降低复杂性的基本方法，就是把复杂性隔离。<strong>“如果能把复杂性隔离在一个模块，不与其他模块互动，就达到了消除复杂性的目的。”</strong></li>
+</ul>
+</li>
+<li>接口和实现：<ul>
+<li>模块分成接口和实现。接口要简单，实现可以复杂。</li>
+</ul>
+</li>
+<li>减少抛错<ul>
+<li>有些软件设计者喜欢抛错，一遇到问题，就抛出一个 Exception。这也导致了复杂性，用户必须面对所有的 Exception。”反正我告诉你出错了，怎么解决是你的事。”</li>
+<li>正确的做法是，除了那些必须告诉用户的错误，其他错误尽量在软件内部处理掉，不要抛出。</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%9A%E9%85%8D%E7%AC%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%9A%E9%85%8D%E7%AC%A6/" class="post-title-link" itemprop="url">命令行通配符</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-15 10:42:00" itemprop="dateCreated datePublished" datetime="2019-12-15T10:42:00+08:00">2019-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%91%BD%E4%BB%A4%E8%A1%8C%E9%80%9A%E9%85%8D%E7%AC%A6/" class="post-meta-item leancloud_visitors" data-flag-title="命令行通配符" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>35</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月15日 下午10:42<br><a href="http://www.ruanyifeng.com/blog/2018/09/bash-wildcards.html" target="_blank" rel="noopener">命令行通配符教程 - 阮一峰的网络日志</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/14/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">异步编程的理解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-14 11:46:00" itemprop="dateCreated datePublished" datetime="2019-12-14T11:46:00+08:00">2019-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-python-%E8%AF%AD%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">c数据科学/czh_python/语法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/14/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="异步编程的理解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>802</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月14日 上午11:46</p>
+<p><a href="http://www.ruanyifeng.com/blog/2019/11/python-asyncio.html" target="_blank" rel="noopener">Python 异步编程入门 - 阮一峰的网络日志</a></p>
+<ol>
+<li>有了 <a href="https://timber.io/blog/multiprocessing-vs-multithreading-in-python-what-you-need-to-know/" target="_blank" rel="noopener">多线程（threading）和多进程（multiprocessing）</a> ，就没必要一定支持异步了。如果一个线程（或进程）阻塞，新建其他线程（或进程）就可以了，程序不会卡死。</li>
+<li>但是，多线程有”线程竞争”的问题，处理起来很复杂，还涉及加锁。对于简单的异步任务来说（比如与网页互动），写起来很麻烦。</li>
+<li>asyncio 模块最大特点就是，只存在一个线程，跟 JavaScript 一样。<br>由于只有一个线程，就不可能多个任务同时运行。<ul>
+<li>asyncio 是”多任务合作”模式（cooperative multitasking），允许异步任务交出执行权给其他任务，等到其他任务完成，再收回执行权继续往下执行，这跟 JavaScript 也是一样的。</li>
+<li>由于代码的执行权在多个任务之间交换，所以看上去好像多个任务同时运行，<strong>其实底层只有一个线程，多个任务分享运行时间</strong>。</li>
+<li>表面上，这是一个不合理的设计，明明有多线程多进程的能力，为什么放着多余的 CPU 核心不用，而只用一个线程呢？但是就像前面说的，单线程简化了很多问题，使得代码逻辑变得简单，写法符合直觉。</li>
+</ul>
+</li>
+<li>asyncio 模块在单线程上启动一个事件循环（event loop），时刻监听新进入循环的事件，加以处理，并不断重复这个过程，直到异步任务结束。事件循环的内部机制，可以参考  <a href="https://wangdoc.com/javascript/async/general.html" target="_blank" rel="noopener">JavaScript 的模型</a> ，两者是一样的。</li>
+<li>总结：<ul>
+<li>最关键的：其实底层只有一个线程，多个任务分享运行时间</li>
+<li>让我不经思考，程序本身就是串行执行的，异步编程也是串行执行。也就说，<strong>所谓的异步编程是可以直接转化为串行的程序的</strong>。</li>
+<li>那么，异步编程的意义是什么❓<ul>
+<li><strong>编程单元</strong>，这个概念是我自己编的，意思是虽然我们正常的程序就可以完成异步编程的工作，但是使用异步编程之后，我们还可以保证依然是已函数为我们编程的单元，使代码更加调理，<strong>自己变编程的时候也更容易将复杂功能抽象模块化</strong>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Systemd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Systemd/" class="post-title-link" itemprop="url">Systemd</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-14 11:23:00" itemprop="dateCreated datePublished" datetime="2019-12-14T11:23:00+08:00">2019-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Systemd/" class="post-meta-item leancloud_visitors" data-flag-title="Systemd" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>66</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月14日 上午11:23<br><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html" target="_blank" rel="noopener">Systemd 入门教程：命令篇 - 阮一峰的网络日志</a><br><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html" target="_blank" rel="noopener">Systemd 入门教程：实战篇 - 阮一峰的网络日志</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Linux%20%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%B9%E6%B3%95bg%E3%80%81disown%E3%80%81nohup%E3%80%81tmux%E3%80%81sytemd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Linux%20%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%B9%E6%B3%95bg%E3%80%81disown%E3%80%81nohup%E3%80%81tmux%E3%80%81sytemd/" class="post-title-link" itemprop="url">Linux 守护进程的启动方法bg、disown、nohup、tmux、sytemd</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-14 11:11:00" itemprop="dateCreated datePublished" datetime="2019-12-14T11:11:00+08:00">2019-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Linux%20%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%B9%E6%B3%95bg%E3%80%81disown%E3%80%81nohup%E3%80%81tmux%E3%80%81sytemd/" class="post-meta-item leancloud_visitors" data-flag-title="Linux 守护进程的启动方法bg、disown、nohup、tmux、sytemd" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>915</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月14日 上午11:11<br><a href="http://www.ruanyifeng.com/blog/2016/02/linux-daemon.html" target="_blank" rel="noopener">Linux 守护进程的启动方法 - 阮一峰的网络日志</a></p>
+<ol>
+<li>只要在命令的尾部加上符号<code>&amp;</code>，启动的进程就会成为”后台任务”。如果要让正在运行的”前台任务”变为”后台任务”，可以先按ctrl + z，然后执行bg命令（让最近一个暂停的”后台任务”继续执行）。</li>
+<li>“后台任务”有两个特点<ul>
+<li>继承当前 session （对话）的标准输出（stdout）和标准错误（stderr）。因此，后台任务的所有输出依然会同步地在命令行下显示。</li>
+<li>不再继承当前 session 的标准输入（stdin）。你无法向这个任务输入指令了。如果它试图读取标准输入，就会暂停执行（halt）。</li>
+</ul>
+</li>
+<li>用户退出 session 以后:<ul>
+<li>用户准备退出 session</li>
+<li>系统向该 session 发出SIGHUP信号</li>
+<li>session 将SIGHUP信号发给所有子进程</li>
+<li>子进程收到SIGHUP信号后，自动退出</li>
+</ul>
+</li>
+<li>disown命令。<ul>
+<li>它可以将指定任务从”后台任务”列表（jobs命令的返回结果）之中移除。一个”后台任务”只要不在这个列表之中，session 就肯定不会向它发出SIGHUP信号</li>
+<li>“后台任务”的标准 I_O 继承自当前 session，disown命令并没有改变这一点。一旦”后台任务”读写标准 I_O，就会发现它已经不存在了，所以就报错终止执行。</li>
+</ul>
+</li>
+<li>对”后台任务”的标准 I/O 进行重定向.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node server.js &gt; stdout.txt 2&gt; stderr.txt &lt; &#x2F;dev&#x2F;null &amp;</span><br><span class="line">disown</span><br></pre></td></tr></table></figure></li>
+<li>nohup命令对进程做了三件事：<ul>
+<li>阻止SIGHUP信号发到这个进程。</li>
+<li>关闭标准输入。该进程不再能够接收任何输入，即使运行在前台。</li>
+<li>重定向标准输出和标准错误到文件nohup.out。</li>
+<li>nohup:<ol>
+<li>nohup命令实际上将子进程与它所在的 session 分离了</li>
+<li>nohup命令不会自动把进程变为”后台任务”，所以必须加上&amp;符号</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>Screen 命令与 Tmux 命令</li>
+<li>systemd:<ul>
+<li>Linux系统有自己的守护进程管理工具 Systemd 。它是操作系统的一部分，直接与内核交互，性能出色，功能极其强大。我们完全可以将程序交给 Systemd ，让系统统一管理，成为真正意义上的系统服务</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E6%89%93%E5%8D%B0%EF%BC%9Alinux%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E6%89%93%E5%8D%B0%EF%BC%9Alinux%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/" class="post-title-link" itemprop="url">打印：linux一切皆文件的系统讲解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-14 10:39:00" itemprop="dateCreated datePublished" datetime="2019-12-14T10:39:00+08:00">2019-12-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-%E6%95%B4%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_计算机系统/整理</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E6%89%93%E5%8D%B0%EF%BC%9Alinux%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="打印：linux一切皆文件的系统讲解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>219</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月14日 上午10:39</p>
+<p><a href="https://www.cnblogs.com/MrVolleyball/p/9957679.html" target="_blank" rel="noopener">linux一切皆文件之文件描述符（一） - wilson排球 - 博客园</a><br><a href="https://www.cnblogs.com/MrVolleyball/p/9961793.html" target="_blank" rel="noopener">linux一切皆文件之Unix domain socket描述符（二） - wilson排球 - 博客园</a><br><a href="https://www.cnblogs.com/MrVolleyball/p/9987208.html" target="_blank" rel="noopener">linux一切皆文件之tcp socket描述符（三） - wilson排球 - 博客园</a><br><a href="https://www.cnblogs.com/MrVolleyball/p/9993137.html" target="_blank" rel="noopener">linux一切皆文件之块设备文件（四） - wilson排球 - 博客园</a><br><a href="https://www.cnblogs.com/MrVolleyball/p/10024540.html" target="_blank" rel="noopener">linux一切皆文件之tty字符设备(深入理解sshd创建pty的过程) （五） - wilson排球 - 博客园</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E9%99%90%E5%88%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%99%BB%E5%BD%95%EF%BC%9A%E5%8F%AA%E8%83%BD%E6%9C%AC%E6%9C%BASSH%E5%85%AC%E9%92%A5%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95%E6%8C%87%E5%AE%9A%E7%94%A8%E6%88%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -167,7 +925,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
+      <meta itemprop="name" content="陈志恒的技术博客">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -275,7 +1033,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
+      <meta itemprop="name" content="陈志恒的技术博客">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -380,7 +1138,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
+      <meta itemprop="name" content="陈志恒的技术博客">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -475,860 +1233,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E7%90%86%E8%A7%A3inode/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E7%90%86%E8%A7%A3inode/" class="post-title-link" itemprop="url">理解inode</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-13 02:12:00" itemprop="dateCreated datePublished" datetime="2019-12-13T02:12:00+08:00">2019-12-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-%E6%95%B4%E7%90%86/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_计算机系统/整理</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E7%90%86%E8%A7%A3inode/" class="post-meta-item leancloud_visitors" data-flag-title="理解inode" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>623</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月13日 下午2:12</p>
-<p><a href="https://www.ruanyifeng.com/blog/2011/12/inode.html" target="_blank" rel="noopener">理解inode - 阮一峰的网络日志</a><br>理解inode，不仅有助于提高系统操作水平，还有助于体会Unix设计哲学，即如何把底层的复杂性抽象成一个简单概念，从而大大简化用户接口。</p>
-<ol>
-<li>inode也会消耗硬盘空间，所以硬盘格式化的时候，操作系统自动将硬盘分成两个区域。一个是数据区，存放文件数据；另一个是inode区（inode table），存放inode所包含的信息。</li>
-<li>Unix/Linux系统内部不使用文件名，而使用inode号码来识别文件。对于系统来说，文件名只是inode号码便于识别的别称或者绰号。</li>
-<li><strong>理解目录的权限</strong>。<ul>
-<li>目录文件的读权限（r）和写权限（w），都是针对目录文件本身。由于目录文件内只有文件名和inode号码，所以如果只有读权限，只能获取文件名，无法获取其他信息，因为其他信息都储存在inode节点中，而读取inode节点内的信息需要目录文件的执行权限（x）。</li>
-</ul>
-</li>
-<li>硬链接：<ul>
-<li>源文件与目标文件的inode号码相同，都指向同一个inode。inode信息中有一项叫做”链接数”，记录指向该inode的文件名总数，这时就会增加1。</li>
-</ul>
-</li>
-<li><strong>inode的特殊作用</strong><ol>
-<li>有时，文件名包含特殊字符，无法正常删除。这时，直接删除inode节点，就能起到删除文件的作用。</li>
-<li>移动文件或重命名文件，只是改变文件名，不影响inode号码。</li>
-<li>打开一个文件以后，系统就以inode号码来识别这个文件，不再考虑文件名。因此，通常来说，系统无法从inode号码得知文件名。</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/lsof/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/lsof/" class="post-title-link" itemprop="url">lsof</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-13 01:51:00" itemprop="dateCreated datePublished" datetime="2019-12-13T01:51:00+08:00">2019-12-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/lsof/" class="post-meta-item leancloud_visitors" data-flag-title="lsof" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>299</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月13日 下午1:51</p>
-<p><a href="https://www.cnblogs.com/sparkbj/p/7161669.html" target="_blank" rel="noopener">linux lsof命令详解 - 星火spark - 博客园</a></p>
-<ul>
-<li>lsof(list open files)是一个列出当前系统打开文件的工具。在linux环境下，任何事物都以文件的形式存在，<strong>通过文件不仅仅可以访问常规数据，还可以访问网络连接和硬件</strong>。</li>
-<li>所以如传输控制协议 (TCP) 和用户数据报协议 (UDP) 套接字等，<strong>系统在后台都为该应用程序分配了一个文件描述符</strong>，无论这个文件的本质如何，<strong>该文件描述符为应用程序与基础操作系统之间的交互提供了通用接口</strong>。因为应用程序打开文件的描述符列表提供了大量关于这个应用程序本身的信息，因此通过lsof工具能够查看这个列表对系统监测以及排错将是很有帮助的。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/curl/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/curl/" class="post-title-link" itemprop="url">curl</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-12 02:33:00" itemprop="dateCreated datePublished" datetime="2019-12-12T02:33:00+08:00">2019-12-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/curl/" class="post-meta-item leancloud_visitors" data-flag-title="curl" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>663</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月12日 下午2:33</p>
-<p><a href="http://www.ruanyifeng.com/blog/2019/09/curl-reference.html" target="_blank" rel="noopener">curl 的用法指南 - 阮一峰的网络日志</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># get</span><br><span class="line">curl https:&#x2F;&#x2F;www.example.com</span><br><span class="line"># post</span><br><span class="line">curl -d&#39;login&#x3D;emma＆password&#x3D;123’-X POST https:&#x2F;&#x2F;google.com&#x2F;login</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -d&#39;&#123;&quot;TaskID&quot;:&quot;PLOT_RAINFALL_CHART&quot;,&quot;FilePath&quot;:&quot;nc.nc&quot;,&quot;ChartPath&quot;:&quot;.&#x2F;charPath.png&quot;,&quot;date&quot;:&quot;20190821&quot;,&quot;time&quot;:&quot;23&quot;,&quot;label&quot;:&#123;&quot;ID&quot;:&quot;label_0001&quot;,&quot;name&quot;:&quot;HengduanMountains&quot;,&quot;position&quot;:&#123;&quot;x&quot;:96.6,&quot;y&quot;:25.5,&quot;width&quot;:15,&quot;height&quot;:9&#125;&#125;&#125;&#39; -X POST 127.0.0.1:81</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/screen+tmux+iterm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/screen+tmux+iterm/" class="post-title-link" itemprop="url">screen+tmux+iterm</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-09 05:20:00" itemprop="dateCreated datePublished" datetime="2019-12-09T05:20:00+08:00">2019-12-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/screen+tmux+iterm/" class="post-meta-item leancloud_visitors" data-flag-title="screen+tmux+iterm" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>533</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月9日 下午5:20<br><a href="https://reishin.me/tmux/" target="_blank" rel="noopener">tmux 使用总结 - Field of Hope</a>高级版 还么有看</p>
-<p>2019年11月1日 下午4:05<br><a href="https://www.cnblogs.com/mchina/archive/2013/01/30/2880680.html" target="_blank" rel="noopener">linux screen 命令详解 - David_Tang - 博客园</a><br><a href="https://www.cnblogs.com/liuguanglin/p/9290345.html" target="_blank" rel="noopener">tmux基本操作 - Guanglin - 博客园</a></p>
-<ul>
-<li>这两个文章很全面、完整</li>
-</ul>
-<p><a href="https://www.jianshu.com/p/ef4e7a49537b" target="_blank" rel="noopener">Mac下iterm2 分屏技巧 - 简书</a></p>
-<ul>
-<li>⌘ + d: 垂直分屏，</li>
-<li>⌘ + shift + d: 水平分屏。</li>
-<li>⌘ + ]和⌘ + [在最近使用的分屏直接切换.</li>
-<li>⌘ + opt + 方向键切换到指定位置的分屏。</li>
-</ul>
-<p><a href="https://www.jianshu.com/p/228ce2b88570" target="_blank" rel="noopener">tmux向上滚动 - 简书</a><br><code>prefix + [</code>then you can use your normal navigation keys to scroll around (eg.<code>Up Arrow or PgDn</code>). Press <code>q</code>to quit scroll mode.</p>
-<p><a href="https://blog.csdn.net/u011487593/article/details/45056449" target="_blank" rel="noopener">linux普通模式翻屏（翻页）和tmux下翻屏（翻页）方法</a></p>
-<ul>
-<li>linux普通模式翻屏（翻页）：<code>shift+PgUp或者shift+PgDn</code></li>
-<li>tmux模型下翻屏（翻页）：<code>C-b pageup/pagedown</code></li>
-</ul>
-<p><a href="https://blog.csdn.net/qq_22194315/article/details/78857603" target="_blank" rel="noopener">screen 使用方法</a></p>
-<ol>
-<li><code>Ctrl-a &lt;Esc&gt;</code>进入选择模式<ol>
-<li><PageUp> 或 Ctrl-u 光标上移一页</PageUp></li>
-<li><PageDown> 或 Ctrl-d 光标下移一页 </PageDown></li>
-<li><Left> 或 h 光标左移一格</Left></li>
-<li><Down> 或 j 光标下移一行</Down></li>
-<li><Up> 或 k 光标上移一行</Up></li>
-<li><Right> 或 l 光标右移一格</Right></li>
-<li><Space> 选择开始，选择结束</Space></li>
-<li><Esc> 退出选择模式</Esc></li>
-<li>Ctrl-a ] 粘贴选择的内容</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/latex/LaTeX%E7%8E%AF%E5%A2%83+%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/latex/LaTeX%E7%8E%AF%E5%A2%83+%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">LaTeX环境+开源项目</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-09 04:40:00" itemprop="dateCreated datePublished" datetime="2019-12-09T04:40:00+08:00">2019-12-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AF%AD%E8%A8%80-LaTex/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_语言/LaTex</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/latex/LaTeX%E7%8E%AF%E5%A2%83+%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" class="post-meta-item leancloud_visitors" data-flag-title="LaTeX环境+开源项目" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月9日 下午4:40</p>
-<p>MacTex：安装位置<br><code>&quot;texpath&quot; : &quot;$PATH:/Library/TeX/texbin:/usr/texbin:/usr/local/bin:/opt/local/bin&quot;</code></p>
-<h2 id="latex-vim"><a href="#latex-vim" class="headerlink" title="latex+vim"></a>latex+vim</h2><p><a href="https://castel.dev/post/lecture-notes-1/" target="_blank" rel="noopener">How I’m able to take notes in mathematics lectures using LaTeX and Vim | Gilles Castel</a></p>
-<h2 id="macTex-sublime-skim-成功"><a href="#macTex-sublime-skim-成功" class="headerlink" title="macTex + sublime + skim : 成功"></a>macTex + sublime + skim : 成功</h2><p><a href="https://www.jianshu.com/p/b1e3b029ded5" target="_blank" rel="noopener">如何用 macOS 优雅的敲 LaTeX - 简书</a><br><a href="https://sspai.com/post/37281" target="_blank" rel="noopener">Mac OS 配置 LaTeX 环境 - 少数派</a><br><a href="http://blog.sciencenet.cn/blog-3362833-1113755.html" target="_blank" rel="noopener">科学网—Latex学习常见错误一 - 鄂得俊的博文</a></p>
-<h4 id="问题原因："><a href="#问题原因：" class="headerlink" title="问题原因："></a>问题原因：</h4><ul>
-<li>现在网上好多的模板或者期刊模板都是采用xeLatex进行编译的，但是sublime+Latex默认编译方式为pdfLatex,这就需要对我们的配置文件进行修改，才能使我们的文件编译通过，具体的步骤如下：<h4 id="解决方案：-学会如何改变编译器"><a href="#解决方案：-学会如何改变编译器" class="headerlink" title="解决方案： 学会如何改变编译器"></a>解决方案： 学会如何改变编译器</h4></li>
-</ul>
-<ol>
-<li>选择<code>Preferences ---&gt;Browse Packages… —&gt;LatexTools —&gt;Reset user settings to default</code></li>
-<li>选择<code>Preferences ---&gt;Browse Packages… —&gt;LatexTools —&gt;LatexTools.sublime-settings</code></li>
-<li>搜索(ctrl+F)找到”builder”:””default”,将default修改为basic,保存退出</li>
-<li>需要注意：如果我们按ctrl+B依旧会报错，需要采用<code>ctrl+shift+P —&gt;build —&gt;Build With: Latex-Basic Builder- XeLatex</code><ol>
-<li><strong>这句话最关键</strong></li>
-</ol>
-</li>
-<li><code>ctrl + b</code>进行编译，在skim中就可以显示</li>
-</ol>
-<p>测试代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">%!TEX program &#x3D; xelatex</span><br><span class="line">\documentclass&#123;article&#125;</span><br><span class="line">\usepackage&#123;fontspec, xunicode, xltxtra&#125;</span><br><span class="line">\setmainfont&#123;Hiragino Sans GB&#125;</span><br><span class="line">\title&#123;Title&#125;</span><br><span class="line">\author&#123;&#125;</span><br><span class="line">\begin&#123;document&#125;</span><br><span class="line">\maketitle&#123;&#125;</span><br><span class="line">\section&#123;Introduction&#125;</span><br><span class="line">This is where you will write your content</span><br><span class="line">\end&#123;document&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="macTex-VScode：成功——更好用一些"><a href="#macTex-VScode：成功——更好用一些" class="headerlink" title="macTex + VScode：成功——更好用一些"></a>macTex + VScode：成功——更好用一些</h2><p><a href="https://www.jianshu.com/p/dc0ffa4368e3" target="_blank" rel="noopener">配置 VSCode 作为LaTex 编辑器 - 简书</a></p>
-<ul>
-<li>注意：一开始<strong>settings.json</strong>就是空的，不要惊讶<br><a href="https://www.jianshu.com/p/78a4f1da4149" target="_blank" rel="noopener">latex-vscode环境配置, 入门及ctex中文环境 - 简书</a></li>
-</ul>
-<ol>
-<li><strong>Latex有很多编译方式</strong>, 比如pdflatex, latexmk, pdftex等等. 这里我使用的编译方式是xelatex, 它使用的是utf-8编码方式, 原生就支持中文, 只要选择好了字体, 可以直接编译中文.</li>
-<li>用<strong>宏包</strong>就像C语言这样: <code>#include &lt;stdio.h&gt;</code>, 和别的编程语言import之类的引用其他包的方式很相似.</li>
-<li><strong>ctex的使用也很简单</strong>, 直接\usepackage{ctex}就可以了. 注意这是xelatex的编译方式才可以, 其他的编译方式可能会失败. pdflatex的编译方式要这样写\documentclass[UTF8]{article}, 来表明编码方式是utf-8.</li>
-</ol>
-<h2 id="开源项目学习latex语法"><a href="#开源项目学习latex语法" class="headerlink" title="开源项目学习latex语法"></a>开源项目学习latex语法</h2><p><a href="https://zhuanlan.zhihu.com/p/88249368" target="_blank" rel="noopener">【开源项目】LaTeX速查手册.pdf - 知乎</a></p>
-<ol>
-<li>安装python依赖，用于使用代码解析模块mint<ol>
-<li><code>pip3 install pygments</code></li>
-</ol>
-</li>
-<li>代码需要修改三处：<ol>
-<li><code>usepackage[UTF8,fontset=macnew,heading=true]{ctex}</code></li>
-<li><code>\setCJKmainfont[ItalicFont=STKaiti]{STSong}</code><br><img src="/2019/12/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/latex/LaTeX%E7%8E%AF%E5%A2%83+%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/494EA5E0-6E32-4D45-888C-68E5ED00BA08.png" alt></li>
-</ol>
-</li>
-</ol>
-<p>参考文章：</p>
-<ol>
-<li><a href="https://www.cnblogs.com/ourweiguan/p/11827524.html" target="_blank" rel="noopener">LaTeX中Python代码的语法高亮 - hzworld - 博客园</a></li>
-<li><a href="https://www.latexstudio.net/archives/2594.html" target="_blank" rel="noopener">LaTeX技巧791：如何配置 MacTeX 的中文支持？</a></li>
-<li>字符集下载网站：<a href="https://fontzone.net/" target="_blank" rel="noopener">FREE Fonts To Download - Thousands of fonts to download free for windows and mac</a></li>
-<li>关于字体的依赖找不到：<ol>
-<li>latex是一门语言，但他不是跨平台的！</li>
-<li><a href="https://www.zhihu.com/question/58034159?sort=created" target="_blank" rel="noopener">mac下使用xelatex模板找不到自字体如何解决？ - 知乎</a></li>
-<li>如果模板是基于ctex的，<ol>
-<li>删去winfonts、fontset=windows之类字体选项即可；</li>
-</ol>
-</li>
-<li>如果模板是用setCJKmainfont等命令直接设置字体的<ol>
-<li>可以自己改为Mac系统预装的华文宋体、黑体、楷体、仿宋</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="vs-配置页内容："><a href="#vs-配置页内容：" class="headerlink" title="vs 配置页内容："></a>vs 配置页内容：</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  “latex-workshop.latex.recipes”: [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"xelatex"</span>,</span><br><span class="line">        <span class="attr">"tools"</span>: [</span><br><span class="line">            <span class="string">"xelatex"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        “name”: “xe-&gt;bib-&gt;xe-&gt;xe”,</span><br><span class="line">        “tools”: [</span><br><span class="line">            “xelatex”,</span><br><span class="line">            “bibtex”,</span><br><span class="line">            “xelatex”,</span><br><span class="line">            “xelatex”</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  “latex-workshop.latex.tools”: [</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 编译工具和命令</span></span><br><span class="line">        “name”: “xelatex”,</span><br><span class="line">        “command”: “xelatex”,</span><br><span class="line">        “args”: [</span><br><span class="line">            “-synctex=1”,</span><br><span class="line">            “-shell-escape”,</span><br><span class="line">            "-interaction=nonstopmode",</span><br><span class="line">            "-file-line-error",</span><br><span class="line">            "-pdf",</span><br><span class="line">            <span class="string">"%DOCFILE%"</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">"name"</span>: <span class="string">"pdflatex"</span>,</span><br><span class="line">        <span class="attr">"command"</span>: <span class="string">"pdflatex"</span>,</span><br><span class="line">        <span class="attr">"args"</span>: [</span><br><span class="line">            “-synctex=<span class="number">1</span>”,</span><br><span class="line">            “-interaction=nonstopmode”,</span><br><span class="line">            “-file-line-error”,</span><br><span class="line">            “%DOCFILE%”</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        “name”: “bibtex”,</span><br><span class="line">        “command”: “bibtex”,</span><br><span class="line">        “args”: [</span><br><span class="line">            “%DOCFILE%”</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  “latex-workshop.view.pdf.viewer”: “external”,</span><br><span class="line">  “latex-workshop.latex.clean.fileTypes”: [</span><br><span class="line">    “*.aux",</span><br><span class="line">    "*.bbl",</span><br><span class="line">    "*.blg",</span><br><span class="line">    "*.idx",</span><br><span class="line">    "*.ind",</span><br><span class="line">    "*.lof",</span><br><span class="line">    <span class="string">"*.lot”,</span></span><br><span class="line">    "*.out",</span><br><span class="line">    "*.toc",</span><br><span class="line">    "*.acn",</span><br><span class="line">    "*.acr",</span><br><span class="line">    "*.alg",</span><br><span class="line">    "*.glg",</span><br><span class="line">    “*.glo”,</span><br><span class="line">    “*.gls”,</span><br><span class="line">    “*.ist”,</span><br><span class="line">    “*.fls”,</span><br><span class="line">    “*.log”,</span><br><span class="line">    “*.fdb_latexmk”</span><br><span class="line">  ],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%A1%AC%E4%BB%B6%E7%A7%91%E6%99%AE/%E7%A1%AC%E4%BB%B6%E7%A7%91%E6%99%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%A1%AC%E4%BB%B6%E7%A7%91%E6%99%AE/%E7%A1%AC%E4%BB%B6%E7%A7%91%E6%99%AE/" class="post-title-link" itemprop="url">硬件科普</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-02 12:34:00" itemprop="dateCreated datePublished" datetime="2019-12-02T12:34:00+08:00">2019-12-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-%E7%A1%AC%E4%BB%B6%E7%A7%91%E6%99%AE/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_计算机系统/硬件科普</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%A1%AC%E4%BB%B6%E7%A7%91%E6%99%AE/%E7%A1%AC%E4%BB%B6%E7%A7%91%E6%99%AE/" class="post-meta-item leancloud_visitors" data-flag-title="硬件科普" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>436</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月2日 下午12:34</p>
-<p><a href="https://www.ixigua.com/i6762011009357087239/" target="_blank" rel="noopener">【喵喵折】你真的了解USB和雷电3吗？为什么说Type C才是未来？</a></p>
-<ol>
-<li>数据传输不在于几根线，在于传输协议</li>
-<li>Typec不是把不同协议整合到一个端口，而是把各种端口整合到了一起而已</li>
-<li>type-c只是一个优秀的物理接口。究竟能发挥多大的作用还是要看协议</li>
-</ol>
-<p><a href="https://www.ixigua.com/i6748691037218144775/" target="_blank" rel="noopener">【硬件科普】选购机械硬盘的大坑，不看就会被坑，详解SMR瓦叠盘</a><br><a href="https://www.ixigua.com/i6752097364091093512/" target="_blank" rel="noopener">【硬件科普】B365主板相对于B360主板是缩水？大错特错</a><br><a href="https://www.ixigua.com/i6745353304621974024/" target="_blank" rel="noopener">【硬件科普】一根线传输效率比多根线高？详解串并行总线工作原理</a><br><a href="https://www.ixigua.com/i6746160377563709955/" target="_blank" rel="noopener">【硬件科普】PCIe到底是个什么东西？他在电脑里是干什么的？</a><br><a href="https://www.ixigua.com/i6746145165842317832/" target="_blank" rel="noopener">【硬件科普】主板右下角散热片下隐藏着什么？详解南桥芯片组功能</a><br><a href="https://www.ixigua.com/i6746140354858189326/" target="_blank" rel="noopener">【硬件科普】PCIe3.0升4.0有什么意义？有没有必要为4.0买X570？</a><br><a href="https://www.ixigua.com/i6748723318527885836/" target="_blank" rel="noopener">【硬件科普】固态为什么比机械硬盘快？快在哪里？影响什么体验？</a><br><a href="https://www.ixigua.com/i6755474435609723406/" target="_blank" rel="noopener">【硬件科普】为什么电脑卡顿换了固态就能起飞？详解磁盘内存关系</a></p>
-<p><a href="https://www.ixigua.com/i6758076032730792451/" target="_blank" rel="noopener">【装机教程】这可能是你能在互联网上找到的最详细的电脑安装教程</a></p>
-<p><a href="https://www.ixigua.com/i6665940579026731533/" target="_blank" rel="noopener">硬盘格式与引导方式的区别 全面装系统教程进阶版</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/11/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/netstat/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/netstat/" class="post-title-link" itemprop="url">netstat</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-15 12:18:00" itemprop="dateCreated datePublished" datetime="2019-11-15T12:18:00+08:00">2019-11-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/11/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/netstat/" class="post-meta-item leancloud_visitors" data-flag-title="netstat" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>642</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年11月15日 下午12:18</p>
-<p><a href="https://www.cnblogs.com/ggjucheng/archive/2012/01/08/2316661.html" target="_blank" rel="noopener">Linux netstat命令详解 - ggjucheng - 博客园</a><br>从整体上看，netstat的输出结果可以分为两个部分：</p>
-<ol>
-<li>一个是<strong>Active Internet connections</strong>，称为有源TCP连接，其中”Recv-Q”和”Send-Q”指%0A的是接收队列和发送队列。这些数字一般都应该是0。如果不是则表示软件包正在队列中堆积。这种情况只能在非常少的情况见到。</li>
-<li>另一个是<strong>Active UNIX domain sockets</strong>，称为有源Unix域套接口(和网络套接字一样，但是只能用于本机通信，性能可以提高一倍)。<ol>
-<li>Proto显示连接使用的协议,RefCnt表示连接到本套接口上的进程号,Types显示套接口的类型,State显示套接口当前的状态,Path表示连接到套接口的其它进程使用的路径名。</li>
-</ol>
-</li>
-</ol>
-<ol>
-<li>列出所有 tcp 端口 <ul>
-<li><code>netstat -at</code></li>
-</ul>
-</li>
-<li>只显示监听端口 <ul>
-<li><code>netstat -l</code></li>
-</ul>
-</li>
-<li>只列出所有监听 tcp 端口<ul>
-<li><code>netstat -lt</code></li>
-</ul>
-</li>
-<li>netstat 将每隔一秒输出网络信息 <ul>
-<li><code>netstat -c</code></li>
-</ul>
-</li>
-<li>显示核心路由信息 <ul>
-<li><code>netstat -r</code></li>
-</ul>
-</li>
-<li>找出程序运行的端口<ul>
-<li><code>netstat -ap | grep ssh</code></li>
-</ul>
-</li>
-<li>找出运行在指定端口的进程 :<strong>判断服务有没有起来</strong><ul>
-<li><code>netstat -an | grep &#39;:80&#39;</code></li>
-<li><code>netstat -plten | grep &#39;:80&#39;</code></li>
-</ul>
-</li>
-</ol>
-<p><strong>分析access.log获得访问前10位的ip地址</strong><br><code>awk ‘{print $1}’ access.log |sort|uniq -c|sort -nr|head -10</code></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/58/">58</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1394,14 +1303,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">358</span>
+          <span class="site-state-item-count">574</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">49</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1435,12 +1344,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">391k</span>
+    <span title="站点总字数">495k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">5:55</span>
+    <span title="站点阅读时长">7:30</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
