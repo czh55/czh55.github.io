@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2017年9月4日 下午4:56 概述：封装的效果：在逻辑层中，能够通过一个简单的sql语句，就可以拿到一个list对象，这个list对象中包含了自己要查询的数据改进：在起到封装的效果之后，我们可以在对数据库连接的效率进行优化。因为，当我们每次对一条sql语句进行查询的时候，我们要新建一次与数据库的连接，然后再断开连接。这样周而复始，其实是很浪费数据库资源的，尤其是多用户同时操作数据库时。所以，我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDBC，通过属性配置文件封装DbUtiles类">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%EF%BC%8C%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B0%81%E8%A3%85DbUtiles%E7%B1%BB/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2017年9月4日 下午4:56 概述：封装的效果：在逻辑层中，能够通过一个简单的sql语句，就可以拿到一个list对象，这个list对象中包含了自己要查询的数据改进：在起到封装的效果之后，我们可以在对数据库连接的效率进行优化。因为，当我们每次对一条sql语句进行查询的时候，我们要新建一次与数据库的连接，然后再断开连接。这样周而复始，其实是很浪费数据库资源的，尤其是多用户同时操作数据库时。所以，我">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%EF%BC%8C%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B0%81%E8%A3%85DbUtiles%E7%B1%BB/00A8A935-EC5E-4791-A559-9BF4CE43EDA0.png">
+<meta property="article:published_time" content="2017-09-03T20:56:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T12:06:07.211Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%EF%BC%8C%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B0%81%E8%A3%85DbUtiles%E7%B1%BB/00A8A935-EC5E-4791-A559-9BF4CE43EDA0.png">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%EF%BC%8C%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B0%81%E8%A3%85DbUtiles%E7%B1%BB/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JDBC，通过属性配置文件封装DbUtiles类 | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%EF%BC%8C%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B0%81%E8%A3%85DbUtiles%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JDBC，通过属性配置文件封装DbUtiles类
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-04 04:56:00" itemprop="dateCreated datePublished" datetime="2017-09-04T04:56:00+08:00">2017-09-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%EF%BC%8C%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B0%81%E8%A3%85DbUtiles%E7%B1%BB/" class="post-meta-item leancloud_visitors" data-flag-title="JDBC，通过属性配置文件封装DbUtiles类" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2017年9月4日 下午4:56</p>
+<h2 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h2><p><strong>封装的效果</strong>：在逻辑层中，能够通过一个简单的sql语句，就可以拿到一个list对象，这个list对象中包含了自己要查询的数据<br><strong>改进：</strong>在起到封装的效果之后，我们可以在对数据库连接的效率进行优化。因为，当我们每次对一条sql语句进行查询的时候，我们要新建一次与数据库的连接，然后再断开连接。这样周而复始，其实是很浪费数据库资源的，尤其是多用户同时操作数据库时。所以，我们能不能这连接进行复用，而不是一次性的？<br><strong>改进参考：</strong><a href="bear://x-callback-url/open-note?id=69A28996-5973-42D6-82BA-D8D817CFE503-2779-000009EC16AF3B64">两种数据库连接池 （2017/9/5）</a></p>
+<h2 id="属性配置文件"><a href="#属性配置文件" class="headerlink" title="属性配置文件"></a>属性配置文件</h2><p>建File类型文件 最后起名的时候加上.properties<br><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%EF%BC%8C%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B0%81%E8%A3%85DbUtiles%E7%B1%BB/00A8A935-EC5E-4791-A559-9BF4CE43EDA0.png" alt></p>
+<h2 id="引用属性配置文件（static）"><a href="#引用属性配置文件（static）" class="headerlink" title="引用属性配置文件（static）"></a>引用属性配置文件（static）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 静态代码块   类加载时完成数据初始化</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		Properties p = <span class="keyword">new</span> Properties();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			p.load(DbUtils.class.getClassLoader().getResourceAsStream("com/shanxi/properties/dbUtils.properties"));</span><br><span class="line">			driverUrl = p.getProperty(<span class="string">"driverUrl"</span>);</span><br><span class="line">			url = p.getProperty(<span class="string">"url"</span>);</span><br><span class="line">			username = p.getProperty(<span class="string">"username"</span>);</span><br><span class="line">			password =  p.getProperty(<span class="string">"password"</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>注意：这里的属性文件的位置，要写全</p>
+<h2 id="完整的DbUtiles类-属性配置"><a href="#完整的DbUtiles类-属性配置" class="headerlink" title="完整的DbUtiles类 + 属性配置"></a>完整的DbUtiles类 + 属性配置</h2><h3 id="写这个封装类，学到了以下几点"><a href="#写这个封装类，学到了以下几点" class="headerlink" title="写这个封装类，学到了以下几点"></a>写这个封装类，学到了以下几点</h3><ol>
+<li>如何处理输入数据<ol>
+<li>这里要转换成数组输入</li>
+</ol>
+</li>
+<li>如何处理输出数据<ol>
+<li>这要转换成list<map>类型输出</map></li>
+</ol>
+</li>
+<li>说白了，<strong>其实就是各种类型之间的转换</strong><ol>
+<li>转成<strong>数组</strong>类型</li>
+<li>转成<strong>list</strong>类型</li>
+<li>转成<strong>map</strong>类型</li>
+<li>转成<strong>字符串</strong>类型</li>
+<li>转成其他<strong>范式集合</strong>类型</li>
+<li>常见的就以上几种</li>
+</ol>
+</li>
+</ol>
+<h2 id="附录代码"><a href="#附录代码" class="headerlink" title="附录代码"></a>附录代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.dbUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"><span class="keyword">import</span> java.sql.Types;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 数据库工具类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DbUtils</span> </span>&#123;</span><br><span class="line">	<span class="comment">//数据库连接对象  Connection</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Connection conn;</span><br><span class="line">	<span class="comment">//操作数据库对象Statement</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Statement sta;</span><br><span class="line">	<span class="comment">//操作数据库预编译对象Preparstatement</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> PreparedStatement ps;</span><br><span class="line">	<span class="comment">//驱动类地址</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String driverUrl;</span><br><span class="line">	<span class="comment">//URL数据库连接</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String url;</span><br><span class="line">	<span class="comment">//用户名</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String username;</span><br><span class="line">	<span class="comment">//密码</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String password;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 静态代码块   类加载时完成数据初始化</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		Properties p = <span class="keyword">new</span> Properties();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			p.load(DbUtils.class.getClassLoader().getResourceAsStream("com/shanxi/properties/dbUtils.properties"));</span><br><span class="line">			driverUrl = p.getProperty(<span class="string">"driverUrl"</span>);</span><br><span class="line">			url = p.getProperty(<span class="string">"url"</span>);</span><br><span class="line">			username = p.getProperty(<span class="string">"username"</span>);</span><br><span class="line">			password =  p.getProperty(<span class="string">"password"</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 获取Connection连接的方法</span></span><br><span class="line"><span class="comment">	 * @return conn</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  Connection <span class="title">getConnection</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(driverUrl);</span><br><span class="line">			conn = DriverManager.getConnection(url, username, password);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> conn;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的查询方法 </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> List&lt;Map&lt;String,Object&gt;&gt; queryForList(String sql)&#123;</span><br><span class="line">		List&lt;Map&lt;String,Object&gt;&gt; list =  <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			</span><br><span class="line">			conn = getConnection();</span><br><span class="line">			sta = conn.createStatement();</span><br><span class="line">			ResultSet rs = sta.executeQuery(sql);</span><br><span class="line">			list = rsToList(rs);</span><br><span class="line">			close();</span><br><span class="line">			</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的增删改方法</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">excuteUpdate</span><span class="params">(String sql)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 支持预编译的查询方法</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> List&lt;Map&lt;String,Object&gt;&gt; queryForList(String sql,<span class="keyword">int</span>[] type,Object[] obj)&#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			conn = getConnection();</span><br><span class="line">			ps = conn.prepareStatement(sql);</span><br><span class="line">			<span class="comment">//循环遍历参数数组 并将数组中的值设置给预编译sql</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; obj.length; i++) &#123;</span><br><span class="line">				<span class="keyword">switch</span> (type[i]) &#123;</span><br><span class="line">				<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">					ps.setInt(i+<span class="number">1</span>,Integer.parseInt(obj[i].toString()));</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			ResultSet rs = ps.executeQuery();</span><br><span class="line">			list = rsToList(rs);</span><br><span class="line">			close();</span><br><span class="line">		</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 支持预编译的增删改方法    </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">excuteUpdate</span><span class="params">(String sql,<span class="keyword">int</span>[] type,Object[] obj)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的计数查询方法    </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">queryForCount</span><span class="params">(String sql)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 支持预编译的计数查询方法</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">queryForCount</span><span class="params">(String sql,<span class="keyword">int</span>[] type,Object[] obj)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 将resultSet结果集转换为List</span></span><br><span class="line"><span class="comment">	 * @param rs    封装数据的resultSet</span></span><br><span class="line"><span class="comment">	 * @return  	数据转换后的List</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> List&lt;Map&lt;String, Object&gt;&gt; rsToList(ResultSet rs) &#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				Map&lt;String, Object&gt;  map =  <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= rs.getMetaData().getColumnCount(); i++) &#123;</span><br><span class="line">					<span class="keyword">switch</span> (rs.getMetaData().getColumnType(i)) &#123;</span><br><span class="line">					<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getInt(i));</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getString(i));</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">default</span>:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getObject(i));</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				list.add(map);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 关闭Connection连接的方法</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				conn.close();</span><br><span class="line">			&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					conn.close();</span><br><span class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">					System.gc();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list =  <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="comment">//测试非预编译方法</span></span><br><span class="line"><span class="comment">//		String sql ="select * from people";</span></span><br><span class="line"><span class="comment">//		list = DbUtils.queryForList(sql);</span></span><br><span class="line"><span class="comment">//		for (Map&lt;String, Object&gt; map : list) &#123;</span></span><br><span class="line"><span class="comment">//			System.out.println(map.get("name")+"---"+map.get("age"));</span></span><br><span class="line"><span class="comment">//		&#125;</span></span><br><span class="line">		<span class="comment">//测试预编译对象</span></span><br><span class="line">		String sql1 =<span class="string">"select * from people where age = ? and sex= ? and salary &gt;?"</span>;</span><br><span class="line">		<span class="keyword">int</span> [] type = &#123;Types.INTEGER,Types.VARCHAR,Types.FLOAT&#125;;</span><br><span class="line">		Object[] obj = &#123;<span class="number">20</span>,<span class="string">"男"</span>,<span class="number">3500</span>&#125;;</span><br><span class="line">		list = DbUtils.queryForList(sql1,type,obj);</span><br><span class="line">		<span class="keyword">for</span> (Map&lt;String, Object&gt; map : list) &#123;</span><br><span class="line">			System.out.println(map.get(<span class="string">"name"</span>)+<span class="string">"---"</span>+map.get(<span class="string">"age"</span>));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：这个没有写完</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#driverUrl&#x3D;com.mysql.jdbc.Driver</span><br><span class="line">#url &#x3D;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test4?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8</span><br><span class="line">#username&#x3D;root</span><br><span class="line">#password&#x3D;root</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">driverUrl&#x3D;oracle.jdbc.driver.OracleDriver</span><br><span class="line">url &#x3D;jdbc:oracle:thin:@192.168.42.43:1521:orcl</span><br><span class="line">username&#x3D;gao</span><br><span class="line">password&#x3D;gao</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/" rel="prev" title="JDBC常见错误">
+      <i class="fa fa-chevron-left"></i> JDBC常见错误
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/" rel="next" title="JDBC">
+      JDBC <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述："><span class="nav-number">1.</span> <span class="nav-text">概述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#属性配置文件"><span class="nav-number">2.</span> <span class="nav-text">属性配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用属性配置文件（static）"><span class="nav-number">3.</span> <span class="nav-text">引用属性配置文件（static）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整的DbUtiles类-属性配置"><span class="nav-number">4.</span> <span class="nav-text">完整的DbUtiles类 + 属性配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#写这个封装类，学到了以下几点"><span class="nav-number">4.1.</span> <span class="nav-text">写这个封装类，学到了以下几点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录代码"><span class="nav-number">5.</span> <span class="nav-text">附录代码</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">973</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:48</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : 'e2e5dd845591c82206eef3ad2550a09c',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

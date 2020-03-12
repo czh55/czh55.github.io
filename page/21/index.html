@@ -158,6 +158,239 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/07/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%B9%B6%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%B9%B6%E8%A1%8C/" class="post-title-link" itemprop="url">GPU并行</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-15 09:16:00" itemprop="dateCreated datePublished" datetime="2019-07-15T09:16:00+08:00">2019-07-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_分布式/并行计算/知识点</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/07/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%B9%B6%E8%A1%8C/" class="post-meta-item leancloud_visitors" data-flag-title="GPU并行" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>529</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年7月15日 上午9:16</p>
+<h3 id="复习方法："><a href="#复习方法：" class="headerlink" title="复习方法："></a>复习方法：</h3><ol>
+<li>学会思考方式，以矩阵相乘贯穿知识点</li>
+<li>整理出来的两个pdf要自己的看，其中还有一些笔记在pdf中</li>
+</ol>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>下面三个点，分别取自3.4.5节的GPU课件，是GPU的核心。<strong>其中难点是有两个思维角度</strong></p>
+<ol>
+<li>::<strong>线程组织成数组</strong>去理解处理，你就发现这样简单的多::<ol>
+<li>万变不离其中，还是基本的数据结构</li>
+</ol>
+</li>
+<li>了解并利用好<strong>硬件结构</strong>，从输出的存储、读取的角度去优化</li>
+</ol>
+<h3 id="课件整理："><a href="#课件整理：" class="headerlink" title="课件整理："></a>课件整理：</h3><p>其中<strong>矩阵相乘</strong>的例子贯穿着三节课件，也是这些知识最好的直观体现</p>
+<ol>
+<li>GPU的硬件结构整理.pdf</li>
+<li>GPU矩阵相乘理解GPU编程的核心[三个pdf的精华、矩阵相乘的三个阶段].pdf</li>
+<li><a href="file:///Users/czh/Documents/课件汇总/[缪青海]并行计算">[缪青海]并行计算</a></li>
+</ol>
+<h3 id="具体："><a href="#具体：" class="headerlink" title="具体："></a>具体：</h3><ol>
+<li>这里最最关键的需要关心的问题：::一个线程对应于那个(哪些)数据，所有的线程就可以将工作完成::</li>
+<li>从<strong>线程的分级</strong>去优化<ol>
+<li>用<strong>数组</strong>去组织线程这种资源<ol>
+<li>有多少线程？数组的大小</li>
+<li>我们如何取到特点的线程？数组的下标就好比线程的编号</li>
+</ol>
+</li>
+<li><strong>grid-&gt;block-&gt;warp-&gt;thread</strong></li>
+</ol>
+</li>
+<li>::都是从硬件结构角度考虑、是客观现实引起的，我们需要做的是适应，从而利用好他们::<ol>
+<li>从<strong>内存的分级</strong>去优化<ol>
+<li><strong>global-&gt;shared-&gt;register</strong></li>
+</ol>
+</li>
+<li>针对wrap，从硬件结构的角度去优化<strong>wrap的速度</strong><br><img src="/2019/07/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%B9%B6%E8%A1%8C/BBB213DF-EB53-42FE-8AB9-5ADDAB488D30.png" alt></li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/07/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/GPU%E6%89%A7%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/GPU%E6%89%A7%E8%A1%8C/" class="post-title-link" itemprop="url">GPU执行</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-04 07:55:00" itemprop="dateCreated datePublished" datetime="2019-07-04T07:55:00+08:00">2019-07-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-%E7%8E%AF%E5%A2%83/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_分布式/并行计算/环境</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/07/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/GPU%E6%89%A7%E8%A1%8C/" class="post-meta-item leancloud_visitors" data-flag-title="GPU执行" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>67</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年7月4日 下午7:55<br>首先要声明cuda/bin的位置<br><code>export PATH=$PATH:/usr/local/cuda/bin</code></p>
+<p><img src="/2019/07/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/GPU%E6%89%A7%E8%A1%8C/0FD053BE-05A4-49EE-B45B-A64BB48865EF.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/07/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1003,230 +1236,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/06/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E9%9A%94%E7%A6%BBLXD%E6%95%99%E7%A8%8B+%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E9%9A%94%E7%A6%BBLXD%E6%95%99%E7%A8%8B+%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">隔离LXD教程+服务器配置</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-06-22 11:56:00" itemprop="dateCreated datePublished" datetime="2019-06-22T11:56:00+08:00">2019-06-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-linux-%E8%A1%A5%E5%85%85/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_计算机系统/linux/补充</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/06/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E9%9A%94%E7%A6%BBLXD%E6%95%99%E7%A8%8B+%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE/" class="post-meta-item leancloud_visitors" data-flag-title="隔离LXD教程+服务器配置" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>309</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年6月22日 下午11:56</p>
-<h3 id="LXD官方："><a href="#LXD官方：" class="headerlink" title="LXD官方："></a>LXD官方：</h3><ol>
-<li><a href="https://github.com/lxc/lxd" target="_blank" rel="noopener">GitHub - lxc/lxd</a></li>
-<li><a href="https://linuxcontainers.org/lxd/try-it/" target="_blank" rel="noopener">try it online</a> <ol>
-<li><a href="https://zeroyi.com/lxdrong-qi-ru-men/" target="_blank" rel="noopener">LXD容器入门</a><ol>
-<li>这个里面有与虚拟机、docker的对比</li>
-</ol>
-</li>
-<li><a href="https://zeroyi.com/lxdrong-qi-jin-jie/" target="_blank" rel="noopener">LXD容器进阶</a></li>
-</ol>
-</li>
-<li><a href="https://linuxcontainers.org/lxd/getting-started-cli/" target="_blank" rel="noopener">Linux Containers - LXD - Getting started - command line</a></li>
-</ol>
-<h3 id="其他的一些blog"><a href="#其他的一些blog" class="headerlink" title="其他的一些blog"></a>其他的一些blog</h3><p><a href="https://zhuanlan.zhihu.com/p/25710517" target="_blank" rel="noopener">为实验室建立公用GPU服务器 - 知乎</a></p>
-<p><a href="https://shenxiaohai.me/2018/12/03/gpu-server-lab/" target="_blank" rel="noopener">搭建实验室公共GPU服务器 | SHEN’s BLOG</a></p>
-<p><a href="https://www.cnblogs.com/JimmyYe/p/7049037.html" target="_blank" rel="noopener">Linux服务器多用户隔离访问 - IT专业打杂20年 - 博客园</a></p>
-<p><a href="https://ywnz.com/linuxjc/4373.html" target="_blank" rel="noopener">在Ubuntu系统上安装及使用LXC和LXC UI的方法_Linux教程_云网牛站</a></p>
-<p><a href="http://atum.li/2017/04/25/linuxsandbox/" target="_blank" rel="noopener">linux中的容器与沙箱初探 — Atum</a></p>
-<p><a href="https://blog.yangl1996.com/post/gpu-passthrough-for-lxc/" target="_blank" rel="noopener">ZFS 与 LXC 与 GPU Passthrough，以及贵校超算队集群管理 · Lei’s Blog</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/06/21/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E6%9C%9F%E5%88%8A%E4%BC%9A%E8%AE%AE%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/21/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E6%9C%9F%E5%88%8A%E4%BC%9A%E8%AE%AE%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">计算机视觉期刊会议总结</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-06-21 07:34:00" itemprop="dateCreated datePublished" datetime="2019-06-21T07:34:00+08:00">2019-06-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:58:03" itemprop="dateModified" datetime="2020-03-12T19:58:03+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3-czh-%E7%A7%91%E7%A0%94-%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index">
-                    <span itemprop="name">d科研相关/czh_科研/经验</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/06/21/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89%E6%9C%9F%E5%88%8A%E4%BC%9A%E8%AE%AE%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="计算机视觉期刊会议总结" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>336</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年6月21日 下午7:34</p>
-<p><a href="https://www.researchgate.net/post/Which_is_the_most_appropriate_journal_for_computer_vision_publications" target="_blank" rel="noopener">Which is the most appropriate journal for computer vision publications?</a></p>
-<ol>
-<li><a href="https://www.scimagojr.com/journalrank.php?category=1707" target="_blank" rel="noopener">Journal Rankings on Computer Vision and Pattern Recognition</a></li>
-<li><a href="https://marcosnietoblog.wordpress.com/2012/01/03/top-computer-vision-journals-jcr-thomson-reuter-impact-factor-2009/" target="_blank" rel="noopener">Top computer vision journals (JCR Thomson Reuter Impact Factor 2009) | Marcos Nieto’s Blog</a></li>
-<li><a href="http://www.guide2research.com/journals/computer-vision" target="_blank" rel="noopener">Top Journals  for Image Processing &amp; Computer Vision with Impact Factor</a></li>
-</ol>
-<p><a href="https://blog.csdn.net/qq_26898461/article/details/48263051" target="_blank" rel="noopener">适合于图像处理方向的SCI期刊杂志列表 - Leo的博客 - CSDN博客</a><br><a href="https://blog.csdn.net/Julialove102123/article/details/70766754" target="_blank" rel="noopener">计算机视觉与图像处理方面的顶级期刊 - 女王の专属领地 - CSDN博客</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/20/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><span class="space">&hellip;</span><a class="page-number" href="/page/98/">98</a><a class="extend next" rel="next" href="/page/22/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1292,14 +1306,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">633</span>
+          <span class="site-state-item-count">973</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">82</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1333,12 +1347,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">551k</span>
+    <span title="站点总字数">1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">8:20</span>
+    <span title="站点阅读时长">15:48</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

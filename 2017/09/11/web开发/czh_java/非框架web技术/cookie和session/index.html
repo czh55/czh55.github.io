@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2017年9月11日 上午9:23 概述 我结合我昨天看的一个电影加勒比海盗5-死无对证来说明我对cookie和session的理解吧。 电影中的小男主角在自己还是一个小屁孩的时候，去荷兰号去找父亲，父亲当时将自己脖子中的项链给了小男主角，就是希望有一天等小男主角长大之后还可以相认。果然，那主角不负众找到了三叉戟，破除了海洋中的所有诅咒。最后，小男主角和父亲相见的时候，父亲第一眼看的是哪个项链，然">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cookie和session">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/cookie%E5%92%8Csession/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2017年9月11日 上午9:23 概述 我结合我昨天看的一个电影加勒比海盗5-死无对证来说明我对cookie和session的理解吧。 电影中的小男主角在自己还是一个小屁孩的时候，去荷兰号去找父亲，父亲当时将自己脖子中的项链给了小男主角，就是希望有一天等小男主角长大之后还可以相认。果然，那主角不负众找到了三叉戟，破除了海洋中的所有诅咒。最后，小男主角和父亲相见的时候，父亲第一眼看的是哪个项链，然">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/cookie%E5%92%8Csession/49DA034B-16DD-4417-A5F8-0F19D7872C40.png">
+<meta property="article:published_time" content="2017-09-11T01:23:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T12:06:07.269Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.chenzhiheng.cn/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/cookie%E5%92%8Csession/49DA034B-16DD-4417-A5F8-0F19D7872C40.png">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/cookie%E5%92%8Csession/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>cookie和session | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/cookie%E5%92%8Csession/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cookie和session
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-11 09:23:00" itemprop="dateCreated datePublished" datetime="2017-09-11T09:23:00+08:00">2017-09-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/cookie%E5%92%8Csession/" class="post-meta-item leancloud_visitors" data-flag-title="cookie和session" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2017年9月11日 上午9:23</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
+<li>我结合我昨天看的一个电影加勒比海盗5-死无对证来说明我对cookie和session的理解吧。</li>
+<li>电影中的小男主角在自己还是一个小屁孩的时候，去荷兰号去找父亲，父亲当时将自己脖子中的<strong>项链</strong>给了小男主角，就是希望有一天等小男主角长大之后还可以相认。果然，那主角不负众找到了三叉戟，破除了海洋中的所有诅咒。最后，小男主角和父亲相见的时候，父亲第一眼看的是哪个项链，然后确认了之后他们拥抱在一起（ps：关键是小男主角还找了一个漂亮的媳妇，bravo！）</li>
+<li>先说cookie</li>
+<li>这里的项链就是我们这里的一个cookie，<strong>cookie由服务器产生，cookie在给了客户端之后服务器就没有了</strong>（给了儿子，父亲自然就没了），由于http是无状态的，所以一旦下一次访问（男主就和父亲很难相见），服务器是不认识谁了，但是客户端有了这个cookie，服务器就根据这个cookie知道你是你是谁了，这两个人就相认了。</li>
+<li>这里有几个特殊情况，例如<strong>这个cookie让别人拿走</strong>，用在了其他的浏览器上，那么服务器也是不知道了（这样父亲就认错孩子了），但是利用这种情况，可以做多个客户端浏览器的同步。还有就是一个服务器可以为很多不同的用户服务（父亲有好多的孩子，都给了他们不同的项链），<strong>服务器在把自己的cookie给出去之后，其实对于自己产生的cookie的具体内容也不知道了</strong>，他得根据客户端给他啥，他就知道啥，认为这就是自己给客户端的，简单的说：给啥我要啥（这一点的判断是浏览器根据访问的url来划分的，浏览器访问不同的url，会把不同的url对应的cookie全都传过去），这也就解决了一个服务器多个客户端的问题，客户端给我啥我要啥，这时候可以理解成的情景是：<strong>就是两个人在普通的交流，这个交流就一个回合，但是客户端这人用本子记录内容，但是服务器这个人比较懒</strong>。</li>
+<li><strong>对于服务器来说，只要有人访问他，他就给他一个cookie，其中就是一个Jsessionid</strong>。对于双11来说，你想想他会产生多少个Jsessonid，服务器这么做的原因是想和各种来找他的人都建立起关系，维护住关系。</li>
+<li>cookie中还有一个<strong>domain</strong>的概念，<strong>我理解就是兄弟姐妹之间公用一个cookie作为信物</strong>，而不是每个人一个。</li>
+<li>还要就是session</li>
+<li><strong>Session是保存在服务端</strong>，这个可以理解成父亲在根据cookie认出自己的儿子之后，从自己的记忆中找到了很多自己和儿子相处的儿时时光，这只有父亲一个知道，其他人根本不知道，是私有的。<strong>这里的私有记忆就是session</strong>，只能让服务器自己程序执行的时候使用，作为自己一些功能实现的判断依据，<strong>用来写代码逻辑用的</strong>。</li>
+<li>这里还说明了其实<strong>session和cookie其实是完全不同的东西</strong>。他们之间的联系是当一个 Session 开始时，Servlet 容器将创建一个 HttpSession 对象，Servlet 容器为 HttpSession <strong>分配一个唯一标识符，称为 Session ID</strong>，<strong>这个sessionid是一个cookie</strong>，是为了<strong>让服务端能够区分开不同的用户</strong>，那么根据这个cookie就可以在服务端的代码逻辑中过滤一些人（eg：防止用户没登录就访问购物车界面，然后告知他没登录）。这一点也可以从javaEE手册中证明，session和cookie是没有继承和实现关系的。</li>
+<li>其他：<ol>
+<li>session服务器内存中 cookie客户端硬盘中</li>
+<li>Session的有效时间通过xml控制，而cookie直接通过代码控制<ol>
+<li>Tomcat自带一个web.xml文件，如我们在使用session中没有在自己的项目web.xml中声明有效时间，那么默认使用就是tomcat中web.xml文件的</li>
+</ol>
+</li>
+<li>在禁止使用cookie的地方使用session<ol>
+<li><a href="http://blog.csdn.net/zhaogenzi/article/details/18409951" target="_blank" rel="noopener">response.encodeURL的用法 - zhaogengzi的专栏        - CSDN博客</a></li>
+<li><a href="http://blog.csdn.net/langqiao123/article/details/48489601" target="_blank" rel="noopener">response.encodeURL的用法 - langqiao123的专栏        - CSDN博客</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/cookie%E5%92%8Csession/49DA034B-16DD-4417-A5F8-0F19D7872C40.png" alt><br>                可以从http报文头中去观察cookie的过程</p>
+<h2 id="详细的知识点"><a href="#详细的知识点" class="headerlink" title="详细的知识点"></a>详细的知识点</h2><p>直接看这个txt文档排版比较整齐，下面那个是为了方便粘贴复制<br><a href="cookie%E5%92%8Csession.txt">cookie和session.txt</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br></pre></td><td class="code"><pre><span class="line">================================</span><br><span class="line">================================</span><br><span class="line">================================</span><br><span class="line"></span><br><span class="line">会话跟踪</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 什么是会话</span><br><span class="line">  * 用户拨打<span class="number">10086</span>，从服务台接通后会话开始；</span><br><span class="line">  * 用户发出话费查询请求，服务台响应。这是该会话中的一个请求；</span><br><span class="line">  * 用户发出套餐变更请求，服务台响应。这是该会话中的又一个请求；</span><br><span class="line">  * ...</span><br><span class="line">  * 用户挂断电话，会话结束。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 会话的特性</span><br><span class="line">  * 一个会话中可能包含多个请求；</span><br><span class="line">  * 一个会话中发出请求的用户是唯一的；</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. JavaWeb会话</span><br><span class="line">  * 从用户打开本站第一个页面开始，会话也开始了；</span><br><span class="line">  * 用户会发出<span class="number">0</span>~n个请求；</span><br><span class="line">  * 用户关闭浏览器会话结束了。</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. 什么是会话跟踪技术</span><br><span class="line">  HTTP是无状态协议，也就是没有记忆力的协议，每个请求之间无法共享数据。</span><br><span class="line">  	这就无法知道会话什么时候开始，什么时候结束，也无法确定发出请求的用户身份。这说明需要使用额外的手段来跟踪会话！</span><br><span class="line">  * 在一个会话中共享数据即会话跟踪技术</span><br><span class="line"></span><br><span class="line">------------------------------------</span><br><span class="line"></span><br><span class="line">Cookie</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 什么是Cookie</span><br><span class="line"></span><br><span class="line">* Cookie是HTTP协议的规范之一，它是服务器和客户端之间传输的小数据。</span><br><span class="line">* 首先由服务器通过响应头把Cookie传输给客户端，客户端会将Cookie保存起来。</span><br><span class="line">* 当客户端再次请求同一服务器时，客户端会在请求头中添加该服务器保存的Cookie，发送给服务器。</span><br><span class="line">* Cookie就是服务器保存在客户端的数据！</span><br><span class="line">* Cookie就是一个键值对！！！</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. Cookie规范</span><br><span class="line">* Cookie通过请求头和响应头在服务器与客户端之间传输；</span><br><span class="line">* Cookie大小限制在<span class="number">4</span>KB之内；</span><br><span class="line">* 一台服务器在一个客户端最多保存<span class="number">20</span>个Cookie；</span><br><span class="line">* 一个浏览器最多可以保存<span class="number">300</span>个Cookie；</span><br><span class="line"></span><br><span class="line">	虽然Cookie规范是如此，但在今天，浏览器厂商的竞争异常激烈，所以多少会超出Cookie规则的限制。但也不会超出过多！</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. Cookie与请求头和响应头</span><br><span class="line"></span><br><span class="line">* 服务器向客户端发送Cookie的响应头为Set-Cookie，例如：Set-Cookie:cookiename=cookievalue</span><br><span class="line">* 客户端向服务器发送Cookie的请求头为Cookie，例如：Cookie:cookiename=cookievalue</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. Servlet中向客户端发送Cookie</span><br><span class="line"> Cookie cookie1 = <span class="keyword">new</span> Cookie(<span class="string">"test1"</span>, <span class="string">"abcdefg"</span>);</span><br><span class="line"> Cookie cookie2 = <span class="keyword">new</span> Cookie(<span class="string">"test2"</span>, <span class="string">"ABCDEFG"</span>);</span><br><span class="line"> response.addCookie(cookie1);</span><br><span class="line"> response.addCookie(cookie2);</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>. Servlet中获取客户端发送过来的Cookie</span><br><span class="line"></span><br><span class="line"> Cookie[] cs = request.getCookies();</span><br><span class="line"> <span class="keyword">if</span>(cs != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span>(Cookie c : cs) &#123;</span><br><span class="line">      System.out.println(c.getName() + <span class="string">"="</span> + c.getValue());</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">Cookie的细节</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. Cookie的maxAge</span><br><span class="line">  当服务器创建Cookie对象后，可以调用setMaxAge()方法设置Cookie的最大生命。</span><br><span class="line">  * maxAge &gt; <span class="number">0</span>：表示Cookie在客户端硬盘上保存的最大时间，单位为秒；</span><br><span class="line">  * maxAge &lt; <span class="number">0</span>：表示Cookie不会被浏览器保存到硬盘上，而只在浏览器内存中存活，一旦客户端关闭浏览器在，那么Cookie就消失；</span><br><span class="line">  * maxAge == <span class="number">0</span>：表示删除Cookie，例如客户端硬盘已经存在名为abc的Cookie，如果服务器再向客户端发送名为abc，并且maxAge为<span class="number">0</span>的Cookie，那么表示删除客户端上的名为abc的Cookie。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. Cookie的path</span><br><span class="line">  浏览器在访问BServlet时，是否要带上AServlet保存的Cookie呢？这要看Cookie的path了。</span><br><span class="line">  现有资源如下：</span><br><span class="line">  * http:<span class="comment">//localhost:8080/day06_2/servlet/AServlet</span></span><br><span class="line">  * http:<span class="comment">//localhost:8080/day06_2/servlet/BServlet，保存名为xxx的Cookie</span></span><br><span class="line">  * http:<span class="comment">//loclahost:8080/day06_2/servlet/CServlet，保存名为yyy的Cookie</span></span><br><span class="line">  * http:<span class="comment">//loclahost:8080/day06_2/servlet/user/DServlet, 保存名为zzz的Cookie</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 没有设置Cookie的path</span></span><br><span class="line">  AServlet &#123;</span><br><span class="line">     Cookie c = <span class="keyword">new</span> Cookie(<span class="string">"xxx"</span>, <span class="string">"XXX"</span>);</span><br><span class="line">     response.addCookie(c);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 设置了Cookie的path为/day06_2</span></span><br><span class="line">  CServlet &#123;</span><br><span class="line">     Cookie c = <span class="keyword">new</span> Cookie(<span class="string">"yyy"</span>, <span class="string">"YYY"</span>);</span><br><span class="line">     c.setPath=<span class="string">"/day06_2"</span>;</span><br><span class="line">    response.addCookie(c);</span><br><span class="line">  &#125;</span><br><span class="line">  DServlet &#123;</span><br><span class="line">    Cookie c = <span class="keyword">new</span> Cookie(<span class="string">"zzz"</span>, <span class="string">"ZZZ"</span>);</span><br><span class="line">    resposne.addCookie(c);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  在BServlet中保存的Cookie没有设置path，那么它的path默认为当前BServlet的所在路径，即“/day06_2/servlet”。</span><br><span class="line">  在CServlet中保存的Cookie设置了path为/day06_2。</span><br><span class="line">  在DServlet中保存的Cookie没有设置path，那么它的path默认为DServlet的所在路径，即“day06_2/servlet/user”</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  当访问AServlet时，是否要带上xxx这个Cookie呢？因为AServlet的访问路径为/day06_2/servlet/BServlet，它包含了xxx的path，即/day06_2/servlet，所以需要带上。</span><br><span class="line"></span><br><span class="line">  当访问AServlet时，是否要带上yyy这个Cookie呢？因为AServlet的访问路径为/day06_2/servlet/BServlet，它包含了xxx的path，即/day06_2，所以需要带上。</span><br><span class="line"></span><br><span class="line">  当访问AServlet时，是否要带上zzz这个Cookie呢？因为AServlet的访问路径为/day06_2/servlet/BServlet，它不包含zzz的path，即/day06_2/servlet/user，所以不会带上。</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"><span class="number">3</span>. Cookie的domain</span><br><span class="line">  Cookie的path是在同一主机中指定共享Cookie，如果主机不同那么就一定不能共享Cookie，无论path是什么。</span><br><span class="line">  如果希望不同的二级域名中可以共享Cookie，那么就要设置Cookie的domain了。</span><br><span class="line">  例如：news.baidu.com、tieba.baidu.com、zhidao.baidu.com，它们的域名不同，但百度希望它们之间可以共享Cookie，那么就要设置domain了。</span><br><span class="line"></span><br><span class="line">  <span class="number">1</span>). 设置Cookie的path为“/”，例如：cookie.setPath(<span class="string">"/"</span>);</span><br><span class="line">  <span class="number">2</span>). 设置Cookie的domain，例如：cookie.setDomain(<span class="string">".baidu.com"</span>)，其中domain中没有指定域名前缀！</span><br><span class="line"></span><br><span class="line">  在news.baidu.com主机中的某个项目中保存了Cookie</span><br><span class="line">  在tieba.baidu.com主机中某个项目中获取Cookie</span><br><span class="line"></span><br><span class="line">  当然这需要配置两个虚拟主机才行。</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. Cookie保存中文</span><br><span class="line">  Cookie的name和value都是不能保存中文的，但可以先把中文转换成URL编码，然后在保存到Cookie的name和value中。</span><br><span class="line">  String name = <span class="string">"姓名"</span>;</span><br><span class="line">  String value = <span class="string">"张三"</span>;</span><br><span class="line">  name = URLEncoder.encode(name, <span class="string">"utf-8"</span>);</span><br><span class="line">  value = URLEncoder.encode(value, <span class="string">"utf-8"</span>);</span><br><span class="line"></span><br><span class="line">  Cookie c = <span class="keyword">new</span> Cookie(name, value);</span><br><span class="line">  response.addCookie(c);</span><br><span class="line"></span><br><span class="line">  在获取Cookie时，再使用URL解码即可。</span><br><span class="line">  Cookie[] cs = request.getCookies();</span><br><span class="line">  <span class="keyword">if</span>(cs != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span>(Cookie c : cs) &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">byte</span>[] b=c.getName().getBytes(iso-<span class="number">8859</span>-<span class="number">1</span>);</span><br><span class="line">	String name = <span class="keyword">new</span> String(b,<span class="string">"utf-8"</span>);</span><br><span class="line">      String name = URLDecoder.decode(c.getName(), <span class="string">"utf-8"</span>);</span><br><span class="line">      String value = URLDecoder.decode(c.getValue(), <span class="string">"utf-8"</span>);</span><br><span class="line">      System.out.println(name + <span class="string">"="</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line">=============================</span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">HttpSession</span><br><span class="line"></span><br><span class="line">在JavaWeb中提供了HttpSession类，用来表示http会话。</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 获取HttpSession</span><br><span class="line">HttpSession session = request.getSession();</span><br><span class="line">HttpSession session = request.getSession(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 域功能</span><br><span class="line">  session是域对象，所以有setAttribute()和getAttribute()等方法</span><br><span class="line">  服务器会为每个会话创建一个session对象，所以session中的数据可供当前会话中所有servlet共享。</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 登录案例</span><br><span class="line">  请求功能：</span><br><span class="line">  <span class="number">1</span>. 如果登录功能，在session中保存user对象</span><br><span class="line">  <span class="number">2</span>. 访问index1.jsp，查看session中是否存在user对象，如果存在，说明已经登录过。</span><br><span class="line">  <span class="number">3</span>. 访问index2.jsp，查看session中是否存在user对象，如果存在，说明已经登录过。</span><br><span class="line">  如果关闭了浏览器，那么会话结束，再打开浏览器就开始了一个新会话，那么直接访问index1.jsp或index2.jsp时，session是新的，没有保存user对象，那么表示还没有登录。</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. session的原理</span><br><span class="line">  session是依赖Cookie实现的。</span><br><span class="line">  session是服务器端对象</span><br><span class="line">  当用户第一次使用session时（表示第一次请求服务器），服务器会创建session，并创建一个Cookie，在Cookie中保存了session的id，发送给客户端。这样客户端就有了自己session的id了。但这个Cookie只在浏览器内存中存在，也就是说，在关闭浏览器窗口后，Cookie就会丢失，也就丢失了sessionId。</span><br><span class="line">  当用户第二次访问服务器时，会在请求中把保存了sessionId的Cookie发送给服务器，服务器通过sessionId查找session对象，然后给使用。也就是说，只要浏览器容器不关闭，无论访问服务器多少次，使用的都是同一个session对象。这样也就可以让多个请求共享同一个session了。</span><br><span class="line">  当用户关闭了浏览器窗口后，再打开浏览器访问服务器，这时请求中没有了sessionId，那么服务器会创建一个session，再把sessionId通过Cookie保存到浏览器中，也是一个新的会话开始了。原来的session会因为长时间无法访问而失效。</span><br><span class="line">  当用户打开某个服务器页面长时间没动作时，这样session会超时失效，当用户再有活动时，服务器通过用户提供的sessionId已经找不到session对象了，那么服务器还是会创建一个新的session对象，再把新的sessionId保存到客户端。这也是一个新的会话开始了。</span><br><span class="line"></span><br><span class="line">　　设置session超时时间</span><br><span class="line">  web.xml文件中配置如下：</span><br><span class="line">    &lt;session-config&gt;</span><br><span class="line">        &lt;session-timeout&gt;30&lt;/session-timeout&gt;</span><br><span class="line">    &lt;/session-config&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">5</span>. session与浏览器</span><br><span class="line"> session对象是保存在服务器端的，而sessionId是通过Cookie保存在客户端的。</span><br><span class="line"> 因为Cookie不能在多个浏览器中共享，所以session也不能在多个浏览器中共享。也就是说，使用IE登录后，再使用FireFox访问服务器还是没有登录的状态。</span><br><span class="line"></span><br><span class="line"> 而且同时打开多个相同浏览器的窗口，是在使用同一session。如果你使用的是老浏览器，例如IE6，那么就会每个窗口一个session。</span><br><span class="line"></span><br><span class="line"><span class="number">6</span>. session的API</span><br><span class="line"> * <span class="function">String <span class="title">getId</span><span class="params">()</span>：获取sessionId；</span></span><br><span class="line"><span class="function"> * <span class="keyword">int</span> <span class="title">getMaxInactiveInterval</span><span class="params">()</span>：获取session可以的最大不活动时间（秒），默认为30分钟。当session在30分钟内没有使用，那么Tomcat会在session池中移除这个session；</span></span><br><span class="line"><span class="function"> * <span class="keyword">void</span> <span class="title">setMaxInactiveInterval</span><span class="params">(<span class="keyword">int</span> interval)</span>：设置session允许的最大不活动时间（秒），如果设置为1秒，那么只要session在1秒内不被使用，那么session就会被移除；</span></span><br><span class="line"><span class="function"> * <span class="keyword">long</span> <span class="title">getCreationTime</span><span class="params">()</span>：返回session的创建时间，返回值为当前时间的毫秒值；</span></span><br><span class="line"><span class="function"> * <span class="keyword">long</span> <span class="title">getLastAccessedTime</span><span class="params">()</span>：返回session的最后活动时间，返回值为当前时间的毫秒值；</span></span><br><span class="line"><span class="function"> * <span class="keyword">void</span> <span class="title">invalidate</span><span class="params">()</span>：让session失效！调用这个方法会被session失效，当session失效后，客户端再次请求，服务器会给客户端创建一个新的session，并在响应中给客户端新session的sessionId；</span></span><br><span class="line"><span class="function"> * <span class="keyword">boolean</span> <span class="title">isNew</span><span class="params">()</span>：查看session是否为新。当客户端第一次请求时，服务器为客户端创建session，但这时服务器还没有响应客户端，也就是还没有把sessionId响应给客户端时，这时session的状态为新。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">7. URL重写</span></span><br><span class="line"><span class="function"> session依赖Cookie，这是因为服务器需要把sessionId保存到客户端。如果用户的浏览器关闭了Cookie功能，那么session不能使用了！</span></span><br><span class="line"><span class="function"> 还可以在浏览器关闭了Cookie后使用URL重写的方法保存sessionId，这需要在每个URL后面都加上sessionId！这样用户的请求中就包含了sessionId，服务器就可以通过sessionId找到对应的session对象了。</span></span><br><span class="line"><span class="function">  使用response.<span class="title">encodeURL</span><span class="params">()</span>方法对URL进行编码，这样URL中会智能的添加sessionId。</span></span><br><span class="line"><span class="function">　当浏览器支持cookie时，response.<span class="title">encodeURL</span><span class="params">()</span>方法不会在URL后追加sessionId</span></span><br><span class="line"><span class="function">  当浏览器不支持cookie时，response.<span class="title">encodeURL</span><span class="params">()</span>方法会在URL后追加sessionId</span></span><br></pre></td></tr></table></figure>
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/request%E5%92%8Cresponse%E6%9C%80%E5%B8%B8%E7%94%A8%E6%89%8B%E5%86%8C/" rel="prev" title="request和response最常用手册">
+      <i class="fa fa-chevron-left"></i> request和response最常用手册
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%9C%A8servlet+jsp%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%A7%8B%E5%86%99%E9%80%BB%E8%BE%91%E4%B9%8B%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" rel="next" title="在servlet+jsp项目开始写逻辑之前的准备工作">
+      在servlet+jsp项目开始写逻辑之前的准备工作 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细的知识点"><span class="nav-number">2.</span> <span class="nav-text">详细的知识点</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">973</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:48</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '912a58c8abbd764ca2a1d98707dfc5d3',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

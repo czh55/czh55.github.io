@@ -814,6 +814,264 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/" class="post-title-link" itemprop="url">git reset</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-29 11:17:00" itemprop="dateCreated datePublished" datetime="2019-07-29T11:17:00+08:00">2019-07-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-git/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/git</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/" class="post-meta-item leancloud_visitors" data-flag-title="git reset" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>781</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年7月29日 上午11:17</p>
+<h3 id="理解方法："><a href="#理解方法：" class="headerlink" title="理解方法："></a>理解方法：</h3><ol>
+<li>理解<strong>扔掉</strong>：add 和commit我回过头去看，有些可能是多余的，我直接扔掉，对我现在的代码没有任何影响</li>
+<li>回退<strong>覆盖</strong>：我扔掉add和commit的时候，用不用把我的本地文件给覆盖了。<ol>
+<li>当我们发现，这几天的工作完全错误，以后绝对没用的时候，我们才会覆盖。</li>
+</ol>
+</li>
+<li><strong>只有-hard会覆盖，-mix -soft 就看你是扔add还是commit了</strong></li>
+</ol>
+<p><a href="https://blog.csdn.net/alphapersonality/article/details/80581730" target="_blank" rel="noopener">git reset 三种用法总结 - alphapersonality的博客 - CSDN博客</a></p>
+<ol>
+<li>git reset (–mixed) HEAD~1 <ol>
+<li>回退一个版本,且会将暂存区的内容和本地已提交的内容全部恢复到未暂存的状态,不影响原来本地文件(未提交的也不受影响) </li>
+<li>::扔掉add和commit的内容::</li>
+</ol>
+</li>
+<li>git reset –soft HEAD~1 <ol>
+<li>回退一个版本,<strong>不清空暂存区</strong>,将已提交的内容恢复到暂存区,不影响原来本地的文件(未提交的也不受影响) </li>
+<li>::只扔掉commit()的内容，不影响add(暂存区)::</li>
+</ol>
+</li>
+<li>git reset –hard HEAD~1 <ol>
+<li>回退一个版本,清空暂存区,将已提交的内容的版本恢复到本地,<strong>本地的文件也将被恢复的版本替换</strong></li>
+<li>::扔掉add和commit的内容:: + <strong>本地的文件也将被恢复的版本替换</strong></li>
+<li>git reset (–mixed) + <strong>本地的文件也将被恢复的版本替换</strong></li>
+</ol>
+</li>
+</ol>
+<h2 id="git-reset-file-README-md-：撤销对暂存区的修改"><a href="#git-reset-file-README-md-：撤销对暂存区的修改" class="headerlink" title="git reset file(README.md)：撤销对暂存区的修改"></a>git reset file(README.md)：撤销对暂存区的修改</h2><p><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/6BB31558-8D4C-4CB9-A1BB-4B3CD87BD6CC.png" alt><br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/6C513684-AA9D-4ED8-8590-1793CD333EA0.png" alt></p>
+<h2 id="git-reset-—soft"><a href="#git-reset-—soft" class="headerlink" title="git reset —soft"></a>git reset —soft</h2><p><a href="https://www.cnblogs.com/qianqiannian/p/6010238.html" target="_blank" rel="noopener">Git reset 常见用法 - 浅浅念 - 博客园</a><br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/E2825CD5-1D84-4192-A657-FD155FEFC423.png" alt><br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/9E3DDE63-7AEA-44D5-A37D-49A546939199.png" alt><br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/D055E3AA-FB58-4FA5-A40C-199221289413.png" alt></p>
+<h2 id="git-reset-—mixed"><a href="#git-reset-—mixed" class="headerlink" title="git reset —mixed"></a>git reset —mixed</h2><p><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/DEEF4368-3DC4-4479-8AC7-121AF265A8F8.png" alt><br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/B9B38496-359F-462D-A2C6-ADCA84688D1B.png" alt><br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/DB539486-3903-4106-A0DC-C346C81A3C8B.png" alt></p>
+<ol>
+<li>只要我们commit之后，<strong>commit的文件是一定不会丢失的</strong>。</li>
+<li>mixed和soft的区别：仅仅在于<strong>soft暂存区是否会保存这次提交之后的所有变更</strong></li>
+</ol>
+<h2 id="git-reset-—hard"><a href="#git-reset-—hard" class="headerlink" title="git reset —hard"></a>git reset —hard</h2><p><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/50D61756-119D-4D01-B27D-C1E9D85A0AA1.png" alt><br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/A08ACC78-131E-4173-B10F-0712B3596C3B.png" alt></p>
+<ol>
+<li><strong>这个会覆盖工作区的文件</strong>，慎用。否则新敲如的代码就丢了！！</li>
+</ol>
+<h2 id="git-reset-file-README-md"><a href="#git-reset-file-README-md" class="headerlink" title="git reset file(README.md)"></a>git reset file(README.md)</h2><p><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/90C8A035-2799-4876-BF3B-EAAAF3106AC4.png" alt><br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/git%20reset/396D6CF3-EB75-40BF-94C7-B352AED088F7.png" alt></p>
+<ol>
+<li>这说明<strong>暂存区的东西一旦撤销就丢失了</strong>。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3(%E6%9C%AC%E5%9C%B0%E5%92%8C%E7%BA%BF%E4%B8%8A%E4%B8%A4%E7%A7%8D%E6%83%85%E5%86%B5)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3(%E6%9C%AC%E5%9C%B0%E5%92%8C%E7%BA%BF%E4%B8%8A%E4%B8%A4%E7%A7%8D%E6%83%85%E5%86%B5)/" class="post-title-link" itemprop="url">冲突的解决(本地和线上两种情况)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-07-29 10:57:00" itemprop="dateCreated datePublished" datetime="2019-07-29T10:57:00+08:00">2019-07-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-git/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/git</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3(%E6%9C%AC%E5%9C%B0%E5%92%8C%E7%BA%BF%E4%B8%8A%E4%B8%A4%E7%A7%8D%E6%83%85%E5%86%B5)/" class="post-meta-item leancloud_visitors" data-flag-title="冲突的解决(本地和线上两种情况)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>682</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年7月29日 上午10:57</p>
+<h2 id="如何解决协作冲突：两个人处理同一个文件，第二个人push的时候出错。"><a href="#如何解决协作冲突：两个人处理同一个文件，第二个人push的时候出错。" class="headerlink" title="如何解决协作冲突：两个人处理同一个文件，第二个人push的时候出错。"></a>如何解决协作冲突：两个人处理同一个文件，第二个人push的时候出错。</h2><ol>
+<li><strong>涉及到pull 和 push</strong></li>
+<li>::理解：为什么pull操作之后，即使发生冲突，文件已经下载到了本地文件中::<ol>
+<li>pull操作针对的是本地仓库中的代码，而不是本地项目文件夹。<ol>
+<li>如果，我们进行pull的时候发生了conflict，也就是本地仓库中的代码和远程仓库有冲突，<strong>此时本地仓库中的代码会有pull下来的代码添加到本地项目文件夹中</strong>。<ol>
+<li>也就是说，如果我们在commit之后还对本地项目文件夹中有所更改，很有可能会导致代码丢失。</li>
+<li>解决方法：commit -&gt; pull(有差异的文件)这两步一定要连续操作<br><a href="https://blog.csdn.net/u010591939/article/details/46788641" target="_blank" rel="noopener">Git Pull Failed: CONFLICT (content): Merge conflict in camus-aggregator/camus-admin-web/src/main/web - CSDN博客</a><br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3(%E6%9C%AC%E5%9C%B0%E5%92%8C%E7%BA%BF%E4%B8%8A%E4%B8%A4%E7%A7%8D%E6%83%85%E5%86%B5)/CD4C9F52-DB74-4A18-BA09-487D816BDFB4.png" alt></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="解决本地情况下的冲突：自己的两个分支处理了同一个文件并commit，两个分支merge的时候发生"><a href="#解决本地情况下的冲突：自己的两个分支处理了同一个文件并commit，两个分支merge的时候发生" class="headerlink" title="解决本地情况下的冲突：自己的两个分支处理了同一个文件并commit，两个分支merge的时候发生"></a>解决本地情况下的冲突：自己的两个分支处理了同一个文件并commit，两个分支merge的时候发生</h2><ol>
+<li><strong>没有涉及到pull 和 push</strong></li>
+<li>进行<code>git merge dev</code>操作之后，进行的commit操作有了双重意义：<ol>
+<li>从本地项目文件夹-&gt;本地仓库</li>
+<li>::<strong>标志merge操作中的冲突已经解决好了</strong>::由于这层意义的存在，所以这时的commit要更加的谨慎<br><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840202368c74be33fbd884e71b570f2cc3c0d1dcf000" target="_blank" rel="noopener">廖雪峰 解决本地情况下的冲突</a><br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3(%E6%9C%AC%E5%9C%B0%E5%92%8C%E7%BA%BF%E4%B8%8A%E4%B8%A4%E7%A7%8D%E6%83%85%E5%86%B5)/03777276-AB75-47C2-9942-872BEE4BC294.png" alt><br>这里的关键是：我一旦git merge 即使冲突了也同样会merge，这时需要我们马上git status 找出冲突的文件，手动解决问题。<br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3(%E6%9C%AC%E5%9C%B0%E5%92%8C%E7%BA%BF%E4%B8%8A%E4%B8%A4%E7%A7%8D%E6%83%85%E5%86%B5)/1DB269FB-125D-4E8C-84B0-3C58E0EFD4E4.png" alt><br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3(%E6%9C%AC%E5%9C%B0%E5%92%8C%E7%BA%BF%E4%B8%8A%E4%B8%A4%E7%A7%8D%E6%83%85%E5%86%B5)/4396987A-D143-45A2-B2A8-453F5952FD44.png" alt><br><img src="/2019/07/29/web%E5%BC%80%E5%8F%91/czh_java/git/%E5%86%B2%E7%AA%81%E7%9A%84%E8%A7%A3%E5%86%B3(%E6%9C%AC%E5%9C%B0%E5%92%8C%E7%BA%BF%E4%B8%8A%E4%B8%A4%E7%A7%8D%E6%83%85%E5%86%B5)/451987CE-4D2E-4CDE-88AB-C42BDA977526.png" alt><br>注：<code>git log --graph --pretty=oneline --abbrev-commit</code></li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/07/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/GPU%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1020,244 +1278,11 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/07/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%B9%B6%E8%A1%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%B9%B6%E8%A1%8C/" class="post-title-link" itemprop="url">GPU并行</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-07-15 09:16:00" itemprop="dateCreated datePublished" datetime="2019-07-15T09:16:00+08:00">2019-07-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_分布式/并行计算/知识点</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/07/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%B9%B6%E8%A1%8C/" class="post-meta-item leancloud_visitors" data-flag-title="GPU并行" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>529</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年7月15日 上午9:16</p>
-<h3 id="复习方法："><a href="#复习方法：" class="headerlink" title="复习方法："></a>复习方法：</h3><ol>
-<li>学会思考方式，以矩阵相乘贯穿知识点</li>
-<li>整理出来的两个pdf要自己的看，其中还有一些笔记在pdf中</li>
-</ol>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>下面三个点，分别取自3.4.5节的GPU课件，是GPU的核心。<strong>其中难点是有两个思维角度</strong></p>
-<ol>
-<li>::<strong>线程组织成数组</strong>去理解处理，你就发现这样简单的多::<ol>
-<li>万变不离其中，还是基本的数据结构</li>
-</ol>
-</li>
-<li>了解并利用好<strong>硬件结构</strong>，从输出的存储、读取的角度去优化</li>
-</ol>
-<h3 id="课件整理："><a href="#课件整理：" class="headerlink" title="课件整理："></a>课件整理：</h3><p>其中<strong>矩阵相乘</strong>的例子贯穿着三节课件，也是这些知识最好的直观体现</p>
-<ol>
-<li>GPU的硬件结构整理.pdf</li>
-<li>GPU矩阵相乘理解GPU编程的核心[三个pdf的精华、矩阵相乘的三个阶段].pdf</li>
-<li><a href="file:///Users/czh/Documents/课件汇总/[缪青海]并行计算">[缪青海]并行计算</a></li>
-</ol>
-<h3 id="具体："><a href="#具体：" class="headerlink" title="具体："></a>具体：</h3><ol>
-<li>这里最最关键的需要关心的问题：::一个线程对应于那个(哪些)数据，所有的线程就可以将工作完成::</li>
-<li>从<strong>线程的分级</strong>去优化<ol>
-<li>用<strong>数组</strong>去组织线程这种资源<ol>
-<li>有多少线程？数组的大小</li>
-<li>我们如何取到特点的线程？数组的下标就好比线程的编号</li>
-</ol>
-</li>
-<li><strong>grid-&gt;block-&gt;warp-&gt;thread</strong></li>
-</ol>
-</li>
-<li>::都是从硬件结构角度考虑、是客观现实引起的，我们需要做的是适应，从而利用好他们::<ol>
-<li>从<strong>内存的分级</strong>去优化<ol>
-<li><strong>global-&gt;shared-&gt;register</strong></li>
-</ol>
-</li>
-<li>针对wrap，从硬件结构的角度去优化<strong>wrap的速度</strong><br><img src="/2019/07/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%B9%B6%E8%A1%8C/BBB213DF-EB53-42FE-8AB9-5ADDAB488D30.png" alt></li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/07/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/GPU%E6%89%A7%E8%A1%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/GPU%E6%89%A7%E8%A1%8C/" class="post-title-link" itemprop="url">GPU执行</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-07-04 07:55:00" itemprop="dateCreated datePublished" datetime="2019-07-04T07:55:00+08:00">2019-07-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-%E7%8E%AF%E5%A2%83/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_分布式/并行计算/环境</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/07/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/GPU%E6%89%A7%E8%A1%8C/" class="post-meta-item leancloud_visitors" data-flag-title="GPU执行" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>67</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年7月4日 下午7:55<br>首先要声明cuda/bin的位置<br><code>export PATH=$PATH:/usr/local/cuda/bin</code></p>
-<p><img src="/2019/07/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/GPU%E6%89%A7%E8%A1%8C/0FD053BE-05A4-49EE-B45B-A64BB48865EF.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/64/">64</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/19/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><span class="page-number current">20</span><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/98/">98</a><a class="extend next" rel="next" href="/page/21/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1323,14 +1348,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">633</span>
+          <span class="site-state-item-count">973</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">82</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1364,12 +1389,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">551k</span>
+    <span title="站点总字数">1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">8:20</span>
+    <span title="站点阅读时长">15:48</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

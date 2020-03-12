@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2017年9月4日 上午8:08 ORACLE MYSQL 对比 分页 ORACLE的rownum MYSQL的limit   group by ORACLE会丢失没有声明字段 MYSQL不会丢失   select 临时表 ORACLE需要使用dual临时表 MYSQL不需要使用临时表就可以直接操作select语句   时间类函数 MYSQL的时间操作函数更加方便 这可以作为选数据库的依据   事">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDBC">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2017年9月4日 上午8:08 ORACLE MYSQL 对比 分页 ORACLE的rownum MYSQL的limit   group by ORACLE会丢失没有声明字段 MYSQL不会丢失   select 临时表 ORACLE需要使用dual临时表 MYSQL不需要使用临时表就可以直接操作select语句   时间类函数 MYSQL的时间操作函数更加方便 这可以作为选数据库的依据   事">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/C4E67CA8-02F2-47E3-BC3E-7648597C6677.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/5D211FBE-E59C-4843-B8A3-3410198A7C9A.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/0060E218-A512-4F0C-BCF2-64F64AFC098A.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/CDCAE6A2-9A8E-4100-8797-24D4854C79A5.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/59B89FBA-3107-4F1A-AE8F-2E0CFD9C77E0.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/E2E762E8-3A15-4A4B-81F5-4A613591CBC5.png">
+<meta property="article:published_time" content="2017-09-04T00:08:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T12:06:07.249Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/C4E67CA8-02F2-47E3-BC3E-7648597C6677.png">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>JDBC | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JDBC
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-04 08:08:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:08:00+08:00">2017-09-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/" class="post-meta-item leancloud_visitors" data-flag-title="JDBC" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2017年9月4日 上午8:08</p>
+<h2 id="ORACLE-MYSQL-对比"><a href="#ORACLE-MYSQL-对比" class="headerlink" title="ORACLE MYSQL 对比"></a>ORACLE MYSQL 对比</h2><ol>
+<li>分页<ol>
+<li>ORACLE的rownum</li>
+<li>MYSQL的limit</li>
+</ol>
+</li>
+<li>group by<ol>
+<li>ORACLE会丢失没有声明字段</li>
+<li>MYSQL不会丢失</li>
+</ol>
+</li>
+<li>select 临时表<ol>
+<li>ORACLE需要使用dual临时表</li>
+<li>MYSQL不需要使用临时表就可以直接操作select语句</li>
+</ol>
+</li>
+<li>时间类函数<ol>
+<li>MYSQL的时间操作函数更加方便</li>
+<li>这可以作为选数据库的依据</li>
+</ol>
+</li>
+<li>事务提交<ol>
+<li>ORACLE需要手动提交</li>
+<li>MYSQL如果想自己手动提交需要些start transaction</li>
+</ol>
+</li>
+<li>主键<ol>
+<li>ORACLE主键不自增，需要使用sequence对象来是实现</li>
+<li>MYSQL声明为primary key时，自动递增</li>
+</ol>
+</li>
+</ol>
+<h2 id="JDBC-java-database-connection"><a href="#JDBC-java-database-connection" class="headerlink" title="JDBC:  java  database  connection"></a>JDBC:  java  database  connection</h2><ol>
+<li>jdbc是一门使用java后台完成数据库访问的技术。</li>
+<li>使用jdbc操作数据库需要做以下准备：<ol>
+<li>准备工作：<ol>
+<li>mysql:    mysql-connector-java-5.1.22.jar </li>
+<li>oracle:   jdbc_lib_ojdbc6.jar</li>
+<li>Oralce的架包，自己安装包中就有，路径如图1</li>
+<li>Mysql去网上找吧</li>
+</ol>
+</li>
+<li>加载驱动类</li>
+<li>获取数据库连接对象connection</li>
+<li>通过connection 获取操作数据库的对象  statement    </li>
+<li>使用statement对象操作数据库完成相应的业务          </li>
+<li>处理结果集          </li>
+<li>关闭资源，释放空间。</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/C4E67CA8-02F2-47E3-BC3E-7648597C6677.png" alt><br>                                图1</p>
+<hr>
+<h2 id="statement"><a href="#statement" class="headerlink" title="statement"></a>statement</h2><h3 id="MYSQL-statement-例子"><a href="#MYSQL-statement-例子" class="headerlink" title="MYSQL  statement 例子"></a>MYSQL  statement 例子</h3><p>例子：<a href="http://www.cnblogs.com/wuyuegb2312/p/3872607.html" target="_blank" rel="noopener">通过JDBC进行简单的增删改查（以MySQL为例） - 五岳 - 博客园</a><br>注：这里例子里面用的是<code>pstmt = (PreparedStatement) conn.prepareStatement(sql);</code>，代替了<code>Statement sta = conn.createStatement();</code>。也就是能够使用预编译来传参。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcDemo1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//1、加载驱动类</span></span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">	  		<span class="comment">//2、获取数据库连接对象connection //jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8</span></span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/wordpress"</span>,<span class="string">"root"</span>, <span class="string">""</span>);</span><br><span class="line">	  		<span class="comment">//System.out.println(conn);</span></span><br><span class="line">	  		<span class="comment">//3、通过connection 获取操作数据库的对象  statement</span></span><br><span class="line">	  		Statement sta = conn.createStatement();</span><br><span class="line">	  		<span class="comment">//4、使用statement对象操作数据库完成相应的业务</span></span><br><span class="line">	  		ResultSet rs = sta.executeQuery(<span class="string">"select * from wp_users"</span>);</span><br><span class="line">	  		<span class="comment">//5、处理结果集</span></span><br><span class="line">	  		<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">	  			System.out.println(rs.getString(<span class="string">"user_login"</span>)+<span class="string">"---"</span>+rs.getString(<span class="string">"user_pass"</span>));</span><br><span class="line">	  		&#125;</span><br><span class="line">	  		<span class="comment">//6、关闭资源，释放空间。</span></span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;</span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="ORACLE-statement-例子"><a href="#ORACLE-statement-例子" class="headerlink" title="ORACLE statement 例子"></a>ORACLE statement 例子</h3><p>注意：jdbc:oracle:thin:@192.168.42.43:1521:orcl 要写当前具体ip，不能写localhost,127.0.0.1 不知道为啥</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCDemo2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//1、加载驱动类</span></span><br><span class="line">			Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);</span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:oracle:thin:@192.168.42.43:1521:orcl"</span>,<span class="string">"gao"</span>, <span class="string">"gao"</span>);</span><br><span class="line">	  		<span class="comment">//System.out.println(conn);</span></span><br><span class="line">	  		<span class="comment">//3、通过connection 获取操作数据库的对象  statement</span></span><br><span class="line">	  		Statement sta = conn.createStatement();</span><br><span class="line">	  		<span class="comment">//4、使用statement对象操作数据库完成相应的业务</span></span><br><span class="line">	  		<span class="comment">//ResultSet rs = sta.executeQuery("select * from stu");</span></span><br><span class="line">	  		<span class="keyword">int</span> a =sta.executeUpdate(<span class="string">"delete from stu where s_id = 20"</span>);</span><br><span class="line">	  		<span class="keyword">int</span> b =sta.executeUpdate(<span class="string">"insert into stu(s_id,s_name) values(9,'aaa')"</span>);</span><br><span class="line">	  		<span class="comment">//5、处理结果集</span></span><br><span class="line"><span class="comment">//	  		while(rs.next())&#123;</span></span><br><span class="line"><span class="comment">//	  			System.out.println(rs.getString("s_name")+"---"+rs.getString("s_addr"));</span></span><br><span class="line"><span class="comment">//	  		&#125;</span></span><br><span class="line">	  		System.out.println(a + b);</span><br><span class="line">	  		<span class="comment">//6、关闭资源，释放空间。</span></span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;</span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="JDBC预编译-preparstatement"><a href="#JDBC预编译-preparstatement" class="headerlink" title="JDBC预编译 preparstatement"></a>JDBC预编译 preparstatement</h2><p>增删改</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCDemo4</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/test4?useUnicode=true&amp;characterEncoding=utf8"</span>,<span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">	  		String sql = <span class="string">"insert into people(name,age,sex) values(?,?,?)"</span>;</span><br><span class="line">	  		PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">	  		ps.setString(<span class="number">1</span>, <span class="string">"mike"</span>);</span><br><span class="line">	  		ps.setString(<span class="number">3</span>, <span class="string">"boy"</span>);</span><br><span class="line">	  		ps.setInt(<span class="number">2</span>, <span class="number">20</span>);</span><br><span class="line">	  		<span class="keyword">int</span> a = ps.executeUpdate();</span><br><span class="line">	  		System.out.println(a);</span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;</span><br><span class="line">	  		                                          </span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCDemo3</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/test4?useUnicode=true&amp;characterEncoding=utf8"</span>,<span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">	  		<span class="comment">//获取预编译对象  preparstatement</span></span><br><span class="line">	  		PreparedStatement ps = conn.prepareStatement(<span class="string">"select * from people where id = ? "</span>);</span><br><span class="line">	  		<span class="comment">//如果预编译对象绑定的sql中含有参数。那么在操作数据库之前需将参数依次传入</span></span><br><span class="line">	  		ps.setInt(<span class="number">1</span>, <span class="number">9</span>);</span><br><span class="line">	  		<span class="comment">//执行对应的操作，获得对应结果集</span></span><br><span class="line">	  		ResultSet rs = ps.executeQuery();</span><br><span class="line">	  		<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">	  			System.out.println(rs.getString(<span class="string">"name"</span>));</span><br><span class="line">	  		&#125;</span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;</span><br><span class="line">	  		</span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="JDCB批处理"><a href="#JDCB批处理" class="headerlink" title="JDCB批处理"></a>JDCB批处理</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCDemo5</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/test4?useUnicode=true&amp;characterEncoding=utf8"</span>,<span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">	  		String sql = <span class="string">"insert into people(name,age,sex) values(?,?,?)"</span>;</span><br><span class="line">	  		<span class="comment">//Statement sta = conn.createStatement();</span></span><br><span class="line">	  		</span><br><span class="line">	  		<span class="comment">//打开一个预编译对象  同时绑定sql</span></span><br><span class="line">	  		PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">	  		ps.setString(<span class="number">1</span>, <span class="string">"bob"</span>);</span><br><span class="line">	  		ps.setString(<span class="number">3</span>, <span class="string">"boy"</span>);</span><br><span class="line">	  		ps.setInt(<span class="number">2</span>, <span class="number">22</span>);</span><br><span class="line">	  		<span class="comment">//将本条sql处理 加入批处理</span></span><br><span class="line">	  		ps.addBatch();</span><br><span class="line">	  		</span><br><span class="line">	  		ps.setString(<span class="number">1</span>, <span class="string">"mary"</span>);</span><br><span class="line">	  		ps.setString(<span class="number">3</span>, <span class="string">"girl"</span>);</span><br><span class="line">	  		ps.setInt(<span class="number">2</span>, <span class="number">18</span>);</span><br><span class="line">	  		<span class="comment">//将重新设置参数后的预编译sql继续加入批处理</span></span><br><span class="line">	  		ps.addBatch();</span><br><span class="line">	  		<span class="comment">//同时也可以绑定多条静态sql</span></span><br><span class="line">	  		ps.addBatch(<span class="string">"insert into people(name,age,sex) values('rose',19,'girl')"</span>);</span><br><span class="line">	  		<span class="comment">//执行批处理任务</span></span><br><span class="line">	  		<span class="keyword">int</span>[] counts = ps.executeBatch();</span><br><span class="line">	  		ps.clearBatch();</span><br><span class="line">	  		<span class="keyword">for</span> (<span class="keyword">int</span> i : counts) &#123;</span><br><span class="line">				System.out.println(i);</span><br><span class="line">			&#125;</span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;                                      </span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="Java-project中引入架包"><a href="#Java-project中引入架包" class="headerlink" title="Java project中引入架包"></a>Java project中引入架包</h2><p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/5D211FBE-E59C-4843-B8A3-3410198A7C9A.png" alt><br>                                 图1<br><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/0060E218-A512-4F0C-BCF2-64F64AFC098A.png" alt><br>                         图2：这里要选取Add External JARS<br><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/CDCAE6A2-9A8E-4100-8797-24D4854C79A5.png" alt><br>                                 图3</p>
+<h3 id="查看架包重要引入的文件Driver-jar"><a href="#查看架包重要引入的文件Driver-jar" class="headerlink" title="查看架包重要引入的文件Driver.jar"></a>查看架包重要引入的文件Driver.jar</h3><p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/59B89FBA-3107-4F1A-AE8F-2E0CFD9C77E0.png" alt></p>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/E2E762E8-3A15-4A4B-81F5-4A613591CBC5.png" alt></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%EF%BC%8C%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B0%81%E8%A3%85DbUtiles%E7%B1%BB/" rel="prev" title="JDBC，通过属性配置文件封装DbUtiles类">
+      <i class="fa fa-chevron-left"></i> JDBC，通过属性配置文件封装DbUtiles类
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%881%EF%BC%89Mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu/" rel="next" title="（1）Mac连接腾讯云ubuntu">
+      （1）Mac连接腾讯云ubuntu <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORACLE-MYSQL-对比"><span class="nav-number">1.</span> <span class="nav-text">ORACLE MYSQL 对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC-java-database-connection"><span class="nav-number">2.</span> <span class="nav-text">JDBC:  java  database  connection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#statement"><span class="nav-number">3.</span> <span class="nav-text">statement</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MYSQL-statement-例子"><span class="nav-number">3.1.</span> <span class="nav-text">MYSQL  statement 例子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ORACLE-statement-例子"><span class="nav-number">3.2.</span> <span class="nav-text">ORACLE statement 例子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC预编译-preparstatement"><span class="nav-number">4.</span> <span class="nav-text">JDBC预编译 preparstatement</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JDCB批处理"><span class="nav-number">5.</span> <span class="nav-text">JDCB批处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-project中引入架包"><span class="nav-number">6.</span> <span class="nav-text">Java project中引入架包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看架包重要引入的文件Driver-jar"><span class="nav-number">6.1.</span> <span class="nav-text">查看架包重要引入的文件Driver.jar</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">973</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:48</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '15725bac2d43f042ae370f1a5a0c900e',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2018年2月21日 上午12:19 注：最后有课程大纲其实就是学习课程中的课堂笔记和在改进过程中的一些问题： 基础知识：重新认识java-java提高篇枚举的实现原理(三)枚举类的学习(二)枚举类的学习(一) 按课程内容顺序整理出来的知识点注：  大部分都是落实到代码层次去理解，很多都是和框架本身相关的 自己实现和学习的过程中报的编译器错误，或者自己不理解实现原理的问题。 站在了一个框架学习的角">
+<meta property="og:type" content="article">
+<meta property="og:title" content="目录（毕设）">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2018/02/21/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E7%9B%AE%E5%BD%95%EF%BC%88%E6%AF%95%E8%AE%BE%EF%BC%89/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2018年2月21日 上午12:19 注：最后有课程大纲其实就是学习课程中的课堂笔记和在改进过程中的一些问题： 基础知识：重新认识java-java提高篇枚举的实现原理(三)枚举类的学习(二)枚举类的学习(一) 按课程内容顺序整理出来的知识点注：  大部分都是落实到代码层次去理解，很多都是和框架本身相关的 自己实现和学习的过程中报的编译器错误，或者自己不理解实现原理的问题。 站在了一个框架学习的角">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-02-21T04:19:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T12:06:08.534Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2018/02/21/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E7%9B%AE%E5%BD%95%EF%BC%88%E6%AF%95%E8%AE%BE%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>目录（毕设） | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/21/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E7%9B%AE%E5%BD%95%EF%BC%88%E6%AF%95%E8%AE%BE%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          目录（毕设）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-21 12:19:00" itemprop="dateCreated datePublished" datetime="2018-02-21T12:19:00+08:00">2018-02-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/21/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E7%9B%AE%E5%BD%95%EF%BC%88%E6%AF%95%E8%AE%BE%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="目录（毕设）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2018年2月21日 上午12:19</p>
+<p>注：最后有课程大纲<br>其实就是学习课程中的<strong>课堂笔记</strong>和在<strong>改进过程</strong>中的一些问题：</p>
+<h2 id="基础知识："><a href="#基础知识：" class="headerlink" title="基础知识："></a>基础知识：</h2><p><a href="bear://x-callback-url/open-note?id=E6F4B7B2-5414-4354-A2B2-9992505E0418-699-0001F356D44F0246">重新认识java-java提高篇</a><br><a href="bear://x-callback-url/open-note?id=0EED588E-EC3B-4B5A-AAF0-DD791CBD47A3-699-0001E0354926812C">枚举的实现原理(三)</a><br><a href="bear://x-callback-url/open-note?id=479EE5B2-76BB-4058-A413-6CA0B3BA6C36-699-0001DE90D1EFB528">枚举类的学习(二)</a><br><a href="bear://x-callback-url/open-note?id=9A67FA6A-8188-4DFF-B3AD-CDC5820F948D-699-0001DC0FECF35995">枚举类的学习(一)</a></p>
+<h2 id="按课程内容顺序整理出来的知识点"><a href="#按课程内容顺序整理出来的知识点" class="headerlink" title="按课程内容顺序整理出来的知识点"></a>按课程内容顺序整理出来的知识点</h2><p>注：</p>
+<ol>
+<li>大部分都是落实到<strong>代码层次去理解</strong>，很多都是和<strong>框架本身</strong>相关的</li>
+<li>自己实现和学习的过程中报的<strong>编译器错误</strong>，或者自己不理解<strong>实现原理</strong>的问题。</li>
+<li>站在了一个<strong>框架学习的角度</strong>。<h3 id="第三部分-按时间顺序-："><a href="#第三部分-按时间顺序-：" class="headerlink" title="第三部分(按时间顺序)："></a>第三部分(按时间顺序)：</h3><a href="bear://x-callback-url/open-note?id=9E0A62B3-88A2-40BE-83A9-7F89BD1E2063-699-00017D19073892B4">修改nginx图片服务器的域名</a>修改<br><a href="bear://x-callback-url/open-note?id=0E957B53-3C32-4DB8-A1BE-386B3975D1D6-3345-000111890429F8BD">为什么是List list = new ArrayList(),而不直接用ArrayList</a><br><a href="bear://x-callback-url/open-note?id=F2659846-B089-4203-90BB-D828BEF8AA51-3345-00010F7F7877AC47">从request获取各种路径总结</a><br><a href="bear://x-callback-url/open-note?id=8737ACFE-0AD6-4E47-B097-AFBA49DC1DD9-3345-0001088B37F7CA4D">通过新建报名信息代码再次理解vo以及assemble***()</a><br><a href="bear://x-callback-url/open-note?id=EE2162F8-2530-466B-BC44-5CB301D26337-3345-000111BDB5215B6A">在FTP上传中巧用static</a><br><a href="bear://x-callback-url/open-note?id=110C5380-E64D-4EAB-8A59-26F329E03E28-680-0000943F2EF877BD">关于新增产品功能的解释：</a><br><a href="bear://x-callback-url/open-note?id=EB15AD5A-33C0-4BC8-BE67-139D7D6F4496-680-00000F1DB64755CF">数据表结构汇总</a>汇总<br><a href="bear://x-callback-url/open-note?id=55EEEC35-73B2-438A-8EBD-8C818A10439D-680-0000032EC425EADC">转：订单表如何设计的思考过程</a><br><a href="bear://x-callback-url/open-note?id=9E84DF09-8867-4AB5-9742-9A454BFA3445-66889-000316FF3DA473B1">前台获取管理员id，并进行判断</a><br><a href="bear://x-callback-url/open-note?id=7EB335A4-4685-43FB-9191-E9F0F44F2569-699-0002B5BF03653B3F">@Param()相关报错</a><br><a href="bear://x-callback-url/open-note?id=B6AC04DE-3101-4082-A24D-283E24DFBB5F-699-000249D0D7F868E0">对项目中使用的vo的解读</a><br><a href="bear://x-callback-url/open-note?id=48395F24-2E78-4A75-A665-B70507ACDA33-699-0002472225BE98A2">Spring @Autowired 注释_w3cschool</a><br><a href="bear://x-callback-url/open-note?id=EFE45C6F-A292-463D-9F5C-2DB12F20DFD5-699-000245628DCFBDA3">对ServerResponse<T>的理解</T></a><br><a href="bear://x-callback-url/open-note?id=22ACEB72-86B0-454D-88F2-FBB48870ABA2-2468-00006D2776ACC473">报错：找不到alipay包文件</a><h3 id="中期配置："><a href="#中期配置：" class="headerlink" title="中期配置："></a>中期配置：</h3><a href="bear://x-callback-url/open-note?id=1E356B8D-8322-4C58-A901-853DEF953AF8-331-0004B6E584FBA574">常用网站+密码</a><br>【<a href="bear://x-callback-url/open-note?id=39316ADD-A423-4EDC-A0DB-C1F6BF691558-86547-0004FA94420FB0B4">centos开机启动项</a>】<br><a href="bear://x-callback-url/open-note?id=292651B9-6995-493A-9AB7-C2E531CA6565-31449-0001C096BE9F5C44">idea配置2</a><h3 id="第一部分完毕-按时间顺序-："><a href="#第一部分完毕-按时间顺序-：" class="headerlink" title="第一部分完毕(按时间顺序)："></a>第一部分完毕(按时间顺序)：</h3><a href="bear://x-callback-url/open-note?id=B1976441-0653-4F74-BBD5-462FEB89C996-612-00000D656390B365">支付宝支付测试：</a><br><a href="bear://x-callback-url/open-note?id=4506968C-9E35-4CE7-A00C-0FE8EF403BD7-31449-0001C452CB6CA5B9">订单管理模块</a><br><a href="bear://x-callback-url/open-note?id=F29DB582-4C0C-4A60-9B7E-91E962019451-31449-0001C63AECA494CA">关于项目结构的思考🤔</a><br><a href="bear://x-callback-url/open-note?id=5E6BC7FA-67A4-405F-A43B-63CDA2BBE35F-31449-0001C0AC0D4A55EC">内网穿透</a><br><a href="bear://x-callback-url/open-note?id=22F8792E-13F7-4220-8401-0F2655C99D58-31449-0001C0A3FA18A347">远程debug，远程部署</a><br><a href="bear://x-callback-url/open-note?id=1107A35F-2C7C-4342-9A5D-2F5782C41751-31449-00015B71D2E2241E">支付宝模块</a><br><a href="bear://x-callback-url/open-note?id=1F8A31E2-15DC-447F-9F61-331560EBEC17-31449-00015B30898A6BA9">有一些mysql容易忽略的问题</a><br><a href="bear://x-callback-url/open-note?id=87023BF2-CC6F-4AC0-A91A-F1D0BB87391B-31449-000155D3C09334CB">收获地址管理模块</a><br><a href="bear://x-callback-url/open-note?id=E59582FD-F869-484B-9D89-14891013A813-2468-000130DE3F583219">购物车模块</a><br><a href="bear://x-callback-url/open-note?id=5B10F450-6AF6-4897-833A-D3BEEC7F3177-2468-0001296146C119D9">MyBatis语法简单说明</a><br><a href="bear://x-callback-url/open-note?id=C5973DE1-61FB-4AF2-A7C1-BDE7A761268C-2468-000128E84D123B5A">service平级调用</a><br><a href="bear://x-callback-url/open-note?id=9686490C-07C1-4895-B755-CF8539F8FBE7-2468-000128E2CDB6018F">泛型：以responseService为例子</a><br><a href="bear://x-callback-url/open-note?id=C9ED3282-07B9-41F1-8BD0-55402570887A-2468-00010D49B7B1C5A6">文件上传（文件夹上传,多文件上传）</a><br><a href="bear://x-callback-url/open-note?id=02CEFC31-9449-4543-B459-D27AC05344EF-2468-000108BC90B853E0">web请求访问过程及相关配置文件讲解</a><br><a href="bear://x-callback-url/open-note?id=AB71752D-1A53-4B77-9627-D9D41B5E0B23-2468-0000F0384C737FD5">项目配置文件详解</a><br><a href="bear://x-callback-url/open-note?id=566A310F-54D7-4750-941F-D30DD238D3BC-2468-0000ED3E24DF9C6B">从servlet演进到springMVC</a><br><a href="bear://x-callback-url/open-note?id=FA6E7124-ED01-4879-9BC9-4F46F7C4D29A-31449-0001C5AF04630BBE">page-helper</a><br><a href="bear://x-callback-url/open-note?id=537BBFE3-9E3B-4036-955C-D784D4BCEB33-31449-0001C5BCCCA82CFC">控制反转</a><br><a href="bear://x-callback-url/open-note?id=8135E0B1-1CB6-42B0-B42E-C0D0A2A0B776-2468-0000AEFB2B618AF5">商品管理</a><br><a href="bear://x-callback-url/open-note?id=386CEF93-FC8E-47B2-9C13-7ECE9A014EBA-2468-0000E70C163D2AC8">java连接数据库的演进过程</a><br><a href="bear://x-callback-url/open-note?id=68A41CA3-3AE7-4BED-B9D9-3E474A6DEF8F-699-000209831301CB42">mybatis-generator 补充</a><br><a href="bear://x-callback-url/open-note?id=5D5AD021-FC52-4E28-B7D6-F0146507F6A9-2468-0000EB5165485C54">myBatis-generator理解</a><br><a href="bear://x-callback-url/open-note?id=C8C0F720-3511-4338-AFA9-8EE2F3770BC5-2468-0000A12E7DA1B1BE">分类管理</a><br><a href="bear://x-callback-url/open-note?id=998F2415-5C6E-4975-B97F-847D0919D8C6-86547-0004F02448F5B003">用户管理</a><br><a href="bear://x-callback-url/open-note?id=33AFA633-7A32-4952-967A-DF25052D5897-2468-0000A105B97A7D96">数据库设计</a><h3 id="基本环境搭建："><a href="#基本环境搭建：" class="headerlink" title="基本环境搭建："></a>基本环境搭建：</h3><a href="bear://x-callback-url/open-note?id=F492B076-F1F3-4740-9F58-92AE6C6E33DC-2468-00003E7492C9739F">idea中配置git</a><br><a href="bear://x-callback-url/open-note?id=D57712E4-48F7-4CD8-9CFB-2BD864D03444-2468-00006B8FFD7D5DED">idea配置+项目提交+chrome插件</a><br><a href="bear://x-callback-url/open-note?id=AD2F4C7F-9B44-4538-9C23-D11508912339-612-0001036C2E747559">maven project中红线报错</a><br><a href="bear://x-callback-url/open-note?id=52A415C6-658D-4883-B590-7DA8D13D2CF3-2468-00004231FD9F8D93">mybatis 三剑客</a><br><a href="bear://x-callback-url/open-note?id=4F86565B-F035-45C6-B537-4E963F0EE7E7-2468-00002449A3A28C78">idea设置+新建maven项目</a><br><a href="bear://x-callback-url/open-note?id=A815E59B-2612-40AD-AD08-915EBC5269AB-2468-00003365958B36B6">tomcat与jdk的搭配</a><br><a href="bear://x-callback-url/open-note?id=E8DCD060-8120-47B0-A20C-106840399787-2468-000026F5D65A51C2">Mac切换JDK版本</a><br><a href="bear://x-callback-url/open-note?id=3BEA5359-FA76-44D5-A8B5-40F1EB859FAA-2468-000026379965A1C1">Mac 安装maven</a><br><a href="bear://x-callback-url/open-note?id=E23CF930-8BD4-4565-9E48-5793B3101472-331-0004ACA313743311">centos安装配置git</a><br><a href="bear://x-callback-url/open-note?id=817BDD47-8DD8-450F-82F5-1BCC1DB1FD52-331-0004A5617AE7334D">centos安装mysql</a><br><a href="bear://x-callback-url/open-note?id=4FE6BA17-41ED-45D6-9335-A994D160CBFF-331-0004AB35243310F3">mysql权限</a><br><a href="bear://x-callback-url/open-note?id=9E0A62B3-88A2-40BE-83A9-7F89BD1E2063-699-00017D19073892B4">修改nginx图片服务器的域名</a><br><a href="bear://x-callback-url/open-note?id=B915CE73-DA02-4610-ADD3-C1DF02D53D3B-331-00049B811D9A997A">centos安装nginx：在配置文件中实现反向代理</a><br><a href="bear://x-callback-url/open-note?id=BF347095-594D-44BF-8920-13BE7C8BA6E4-331-00048E49B60E7D74">centos安装vsftpd</a><br><a href="bear://x-callback-url/open-note?id=C97627BB-FF4D-4B18-99B0-DC7D0BC9C6FF-331-00048C4D8D61ED02">centos安装配置apache</a><br><a href="bear://x-callback-url/open-note?id=A65EE9D2-79E3-48E9-80A4-CA1D6275432B-331-00048D8DB051EA57">centos安装maven</a><br><a href="bear://x-callback-url/open-note?id=9E2C2E50-DD05-42EF-8417-A92E08E9D52D-331-000469CCB9A47CFA">centos安装jdk</a><br><a href="bear://x-callback-url/open-note?id=21436E15-6312-4480-AA94-132E2D1FD395-331-0004649E5F1F0067">更改centos镜像源</a></li>
+</ol>
+<h2 id="课程安排："><a href="#课程安排：" class="headerlink" title="课程安排："></a>课程安排：</h2><p>结构图<br><a href="happymmallv1.svg">happymmallv1.svg</a><br>第1章课程介绍<br>1-1 课程导学<br>1-2 项目功能与业务逻辑介绍<br>1-3 课程安排与学习收获<br>1-4 大型Java项目架构演进解析<br>第2章开发环境安装与配置讲解、实操<br>2-1 linux软件源配置与学习建议<br>2-2 linux软件源配置实操<br>2-3 jdk安装讲解(选看)<br>2-4 jdk安装实操(linux)<br>2-5 jdk安装实操(windows)<br>2-6 tomcat安装讲解(选看)<br>2-7 tomcat安装实操(linux)<br>2-8 tomcat安装实操(windows)<br>2-9 maven项目构建与管理工具安装讲解(选看)<br>2-10 maven项目构建与管理工具安装实操(linux)<br>2-11 maven项目构建与管理工具安装实操(windows)<br>2-12 vsftpd文件服务器安装与配置讲解(选看)<br>2-13 vsftpd文件服务器安装与配置实操(linux)<br>2-14 ftpserver文件服务器安装与配置实操(windows)<br>2-15 nginx反向代理服务器安装与配置讲解(选看)<br>2-16 nginx反向代理服务器安装与配置实操(linux)<br>2-17 nginx反向代理服务器域名解析配置实操(linux)<br>2-18 nginx反向代理服务器安装与配置实操(windows)<br>2-19 nginx反向代理服务器域名解析配置实操(windows…<br>2-20 nginx反向代理服务器域名解析配置细节补充-autoi…<br>2-21 文件服务器搭建及原理讲解<br>2-22 mysql数据库安装与配置讲解(选看)<br>2-23 mysql数据库安装与配置实操(linux)<br>2-24 mysql数据库安装与配置实操(windows)<br>2-25 git版本控制工具安装与配置讲解(选看)<br>2-26 9it版本控制工具安装与配置实操(linux)<br>2-27 git版本控制工具安装与配置实操(windows)<br>第3章数据表结构设计<br>3-1 数据表结构设计<br>3-2 数据表关系设计<br>3-3 数据表索引与时间戳讲解<br>第4章项目初始化<br>4-1 项目初始化概要<br>4-2 数据库初始化<br>4-3 idea项目开发工具安装实操(mac)<br>4-4 idea项目开发工具安装实操(windows)<br>4-5 jdk、tomcat、maven配置及初始化web空白项目<br>4-6 git初始化<br>4-7 maven的pom文件配置<br>4-8 项目包结构初始化<br>4-9 mybatis三剑客之mybatis-generator配置<br>4-10 mybatis三剑客之mybatis-generator生成数据对象…<br>4-11 mybatis三剑客之mybatis-plugin讲解<br>4-12 mybatis三剑客之mybatis-pagehelper分页插件讲解<br>4-13 spring官方demo指引及配置<br>4-14 spring、springmvc配置实操<br>4-15 logback配置讲解<br>4-16 ftp服务器配置讲解<br>4-17 idea的注入和自动编译配置<br>4-18 项目初始化代码提交<br>4-19 两个提高工作效率的神器-Restlet Client和fe助手<br>第5章用户模块开发<br>5-1 用户模块开发概要与接口设计讲解<br>5-2 登录功能开发<br>5-3 登出,注册,校验功能开发<br>5-4 获取用户登录信息,忘记密码,提示问题与答案,…<br>5-5 忘记密码中的重置密码功能开发<br>5-6 登录状态下重置密码功能开发<br>5-7 更新用户个人信息功能开发<br>5-8 获取用户详细信息功能开发及MD5加密补充<br>5-9 用户模块所有功能自测试<br>第6章分类管理模块开发<br>6-1 分类管理模块开发概要与接口设计讲解<br>6-2 添加分类和更新分类名字功能开发<br>6-3 查询节点和递归查找功能开发<br>6-4 分类管理模块所有功能自测<br>第7章商品管理模块开发<br>7-1 商品管理模块开发概要与接口设计讲解<br>7-2 后台商品新增,保存,更新,上下架功能开发<br>7-3 后台获取商品详情功能开发及PropertiesUtilSB置工…<br>7-4 后台商品列表动态分页功能开发<br>7-5 后台商品搜索功能开发<br>7-6 后台商品图片的springmvc上传与富文本上传ftp服务…<br>7-7 后台商品图片的springmvc上传与富文本上传ftp服务…<br>7-8 前台商品详情,列表,搜索,动态排序功能开发<br>7-9 商品管理模块所有功能自测<br>第8章购物车模块开发<br>8-1 购物车模块开发概要与接口设计讲解<br>8-2 加入购物车功能开发1<br>8-3 加入购物车功能开发2<br>8-4 更新,删除购物车商品功能开发<br>8-5 全选,全反选,单选,单反选,查询购物车商品数…<br>8-6 购物车模块所有功能自测<br>第9章收货地址管理模块开发<br>9-1 收货地址管理模块开发概要与接口设计讲解<br>9-2 收货地址增,删,改,查,分页列表,地址详情功…<br>9-3 收获地址管理模块所有功能自测<br>第10章支付模块开发<br>10-1 支付模块开发概要与接口设计讲解<br>10-2 支付宝支付功能对接要点讲解(知识点补充)<br>10-3 支付宝支付功能重要文档简介(知识点补充)<br>10-4 支付宝支付功能官方Demo调试实操1(知识点补充)<br>10-5 支付宝支付功能官方Demo调试实操2(知识点补充)<br>10-6 支付宝支付功能开发1<br>10-7 支付宝支付功能开发2<br>10-8 支付宝支付回调函数实现与支付宝SDK源码解析<br>10-9 查询订单支付状态功能开发<br>10-10 支付模块所有功能自测 第11章订单管理模块开发<br>第11章订单管开发<br>11-1 订单模块开发概要及接口设计讲解<br>11-2 创建订单,清空购物车等功能开发1<br>11-3 创建订单,清空购物车等功能开发2<br>11-4 取消订单,获取购物车中商品信息功能开发<br>11-5 前后台订单列表,订单详情,发货功能开发<br>11-6 订单管理模块所有功能自测<br>第12 章云服务器线上部署与自动化发布,验证,故障…<br>12-1 云服务器部署概要讲解<br>12-2 云服务器购买、管理、配置实操<br>12-3 线上域名购买、解析讲解<br>12-4 线上云服务器用户创建实操<br>12-5 线上环境安装配置实操(jdk-tomcat-maven-vsftpd-n…<br>12-6 线上环境安装配置实操(mysql)<br>12-7 线上环境安装配置实操(git)<br>12-8 线上防火墙配置实操<br>12-9 服务端项目自动化发布、验证、故障排查与解决<br>第13章课程回顾与下期展望<br>13-1 课程回顾与下期展望</p>
+<p>详细介绍:<a href="http://coding.imooc.com/class/chapter/96.html" target="_blank" rel="noopener">http://coding.imooc.com/class/chapter/96.html</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/02/21/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E9%A1%B9/" rel="prev" title="centos开机启动项">
+      <i class="fa fa-chevron-left"></i> centos开机启动项
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/02/21/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%B8%B8%E7%94%A8%E7%BD%91%E7%AB%99+%E5%AF%86%E7%A0%81/" rel="next" title="常用网站+密码">
+      常用网站+密码 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识："><span class="nav-number">1.</span> <span class="nav-text">基础知识：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#按课程内容顺序整理出来的知识点"><span class="nav-number">2.</span> <span class="nav-text">按课程内容顺序整理出来的知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第三部分-按时间顺序-："><span class="nav-number">2.1.</span> <span class="nav-text">第三部分(按时间顺序)：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中期配置："><span class="nav-number">2.2.</span> <span class="nav-text">中期配置：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第一部分完毕-按时间顺序-："><span class="nav-number">2.3.</span> <span class="nav-text">第一部分完毕(按时间顺序)：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本环境搭建："><span class="nav-number">2.4.</span> <span class="nav-text">基本环境搭建：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#课程安排："><span class="nav-number">3.</span> <span class="nav-text">课程安排：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">973</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:48</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '5f26412eba9010f5ba96d4e84771cb50',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
