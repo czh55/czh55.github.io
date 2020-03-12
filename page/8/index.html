@@ -158,847 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/mac%E4%B8%AD%E7%89%B9%E6%AE%8A%E7%9A%84%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/mac%E4%B8%AD%E7%89%B9%E6%AE%8A%E7%9A%84%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">mac中特殊的命令</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-26 02:40:00" itemprop="dateCreated datePublished" datetime="2019-12-26T02:40:00+08:00">2019-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/mac%E4%B8%AD%E7%89%B9%E6%AE%8A%E7%9A%84%E5%91%BD%E4%BB%A4/" class="post-meta-item leancloud_visitors" data-flag-title="mac中特殊的命令" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>272</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月26日 下午2:40</p>
-<p><a href="https://www.jianshu.com/p/da975a32a915" target="_blank" rel="noopener">MAC OS X下路由的添加和删除 - 简书</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看路由表</span></span><br><span class="line">netstat -r \ netstat -nr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 路由添加</span></span><br><span class="line">route -n add -net 192.168.0.0（需进入的网段） -netmask 255.255.255.0 （掩码）192.168.5.254 （进该网段的网关）</span><br><span class="line"></span><br><span class="line">route -n add -net 210.76.196.0 -netmask 255.255.255.0 10.8.0.1</span><br><span class="line"></span><br><span class="line"><span class="comment"># 路由删除</span></span><br><span class="line">route -v delete -net 10.10.12.0（某网段） -gateway 10.10.12.1（某网关）</span><br></pre></td></tr></table></figure>
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%8C%87%E4%BB%A4%E5%A4%AA%E5%A4%9A%EF%BC%8C%E6%95%B4%E7%90%86%E5%87%BA%E6%9D%A5%E9%9C%80%E8%A6%81%E8%83%8C%E8%AF%B5%E7%9A%84%EF%BC%81%E7%94%A8%E4%B8%80%E4%BA%9B%E5%AE%9E%E9%99%85%E7%9A%84%E4%BE%8B%E5%AD%90%EF%BC%8C%E6%9D%A5%E8%AE%B0%E5%BF%86%E5%91%BD%E4%BB%A4%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8F%82%E6%95%B0%EF%BC%8C%E4%B8%8D%E5%85%B3%E5%BF%83%E9%82%A3%E4%BA%9B%E4%B8%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E5%A4%8D%E6%9D%82%E5%8F%82%E6%95%B0%EF%BC%8C%E5%87%8F%E5%B0%91%E9%9B%B6%E6%95%A3%E8%AE%B0%E5%BF%86%E9%87%8F%E3%80%82/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%8C%87%E4%BB%A4%E5%A4%AA%E5%A4%9A%EF%BC%8C%E6%95%B4%E7%90%86%E5%87%BA%E6%9D%A5%E9%9C%80%E8%A6%81%E8%83%8C%E8%AF%B5%E7%9A%84%EF%BC%81%E7%94%A8%E4%B8%80%E4%BA%9B%E5%AE%9E%E9%99%85%E7%9A%84%E4%BE%8B%E5%AD%90%EF%BC%8C%E6%9D%A5%E8%AE%B0%E5%BF%86%E5%91%BD%E4%BB%A4%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8F%82%E6%95%B0%EF%BC%8C%E4%B8%8D%E5%85%B3%E5%BF%83%E9%82%A3%E4%BA%9B%E4%B8%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E5%A4%8D%E6%9D%82%E5%8F%82%E6%95%B0%EF%BC%8C%E5%87%8F%E5%B0%91%E9%9B%B6%E6%95%A3%E8%AE%B0%E5%BF%86%E9%87%8F%E3%80%82/" class="post-title-link" itemprop="url">指令太多，整理出来需要背诵的！用一些实际的例子，来记忆命令最常用的参数，不关心那些不常用的复杂参数，减少零散记忆量。</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-26 02:24:00" itemprop="dateCreated datePublished" datetime="2019-12-26T02:24:00+08:00">2019-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%8C%87%E4%BB%A4%E5%A4%AA%E5%A4%9A%EF%BC%8C%E6%95%B4%E7%90%86%E5%87%BA%E6%9D%A5%E9%9C%80%E8%A6%81%E8%83%8C%E8%AF%B5%E7%9A%84%EF%BC%81%E7%94%A8%E4%B8%80%E4%BA%9B%E5%AE%9E%E9%99%85%E7%9A%84%E4%BE%8B%E5%AD%90%EF%BC%8C%E6%9D%A5%E8%AE%B0%E5%BF%86%E5%91%BD%E4%BB%A4%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E5%8F%82%E6%95%B0%EF%BC%8C%E4%B8%8D%E5%85%B3%E5%BF%83%E9%82%A3%E4%BA%9B%E4%B8%8D%E5%B8%B8%E7%94%A8%E7%9A%84%E5%A4%8D%E6%9D%82%E5%8F%82%E6%95%B0%EF%BC%8C%E5%87%8F%E5%B0%91%E9%9B%B6%E6%95%A3%E8%AE%B0%E5%BF%86%E9%87%8F%E3%80%82/" class="post-meta-item leancloud_visitors" data-flag-title="指令太多，整理出来需要背诵的！用一些实际的例子，来记忆命令最常用的参数，不关心那些不常用的复杂参数，减少零散记忆量。" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>86</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月26日 下午2:24</p>
-<p><a href="bear://x-callback-url/open-note?id=479C0267-A448-49FB-91ED-E56E85DBA38D-1803-00001C4D046F8BE4">通过给防火墙iptables添加黑名单,学习sort、uniq、awk、ipset等命令</a><br><a href="bear://x-callback-url/open-note?id=1AE0674F-87BC-4321-A4C5-1494313D514D-1144-0000409B0E2245A7">批量修改文件名：for、find、变量的（%、#）</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E9%80%9A%E8%BF%87%E7%BB%99%E9%98%B2%E7%81%AB%E5%A2%99iptables%E6%B7%BB%E5%8A%A0%E9%BB%91%E5%90%8D%E5%8D%95,%E5%AD%A6%E4%B9%A0sort%E3%80%81uniq%E3%80%81awk%E3%80%81ipset%E7%AD%89%E5%91%BD%E4%BB%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E9%80%9A%E8%BF%87%E7%BB%99%E9%98%B2%E7%81%AB%E5%A2%99iptables%E6%B7%BB%E5%8A%A0%E9%BB%91%E5%90%8D%E5%8D%95,%E5%AD%A6%E4%B9%A0sort%E3%80%81uniq%E3%80%81awk%E3%80%81ipset%E7%AD%89%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">通过给防火墙iptables添加黑名单,学习sort、uniq、awk、ipset等命令</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-26 02:17:00" itemprop="dateCreated datePublished" datetime="2019-12-26T02:17:00+08:00">2019-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E9%80%9A%E8%BF%87%E7%BB%99%E9%98%B2%E7%81%AB%E5%A2%99iptables%E6%B7%BB%E5%8A%A0%E9%BB%91%E5%90%8D%E5%8D%95,%E5%AD%A6%E4%B9%A0sort%E3%80%81uniq%E3%80%81awk%E3%80%81ipset%E7%AD%89%E5%91%BD%E4%BB%A4/" class="post-meta-item leancloud_visitors" data-flag-title="通过给防火墙iptables添加黑名单,学习sort、uniq、awk、ipset等命令" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>523</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月26日 下午2:17<br><a href="https://www.jianshu.com/p/b221b790cb1e" target="_blank" rel="noopener">Linux防火墙(iptables)之黑名单 - 简书</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#存文件便于以下的操作</span></span><br><span class="line">lastb &gt;&gt; lastb.log                                                 </span><br><span class="line"><span class="comment">#过滤其它字段，只保留ip数据</span></span><br><span class="line">cat lastb.log|awk -F <span class="string">" "</span> <span class="string">'&#123;print $3&#125;'</span> &gt;&gt; ips.log  </span><br><span class="line"><span class="comment">#记录ip的出现次数</span></span><br><span class="line">cat ips.log | sort | uniq -c &gt;&gt; ip_uniq.log          </span><br><span class="line"><span class="comment">#最终形成列表</span></span><br><span class="line">cat ip_uniq.log|sort -k1,1nr  &gt;&gt; output.log</span><br></pre></td></tr></table></figure>
-
-<p><code>lastb | awk -F “ “ ‘{print $3}’ | sort | uniq -c | sort -k1,1nr &gt;&gt; output.log</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -o ‘[0-9]\&#123;1,3\&#125;\.[0-9]\&#123;1,3\&#125;\.[0-9]\&#123;1,3\&#125;\.[0-9]\&#123;1,3\&#125;&#39; output.log | awk ‘&#123;print “ipset add blacklist”,$0&#125;’|sh</span><br></pre></td></tr></table></figure>
-
-<h3 id="其中涉及到参数有"><a href="#其中涉及到参数有" class="headerlink" title="其中涉及到参数有"></a>其中涉及到参数有</h3><ol>
-<li>sort -k</li>
-<li>uniq  -c</li>
-<li>awk -F </li>
-<li>正则</li>
-<li>awk  ,拼接字符串</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/chmod%E7%AE%A1%E7%90%86%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%AE%9E%E5%AE%9E%E5%9C%A8%E5%9C%A8%E7%9A%84%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/chmod%E7%AE%A1%E7%90%86%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%AE%9E%E5%AE%9E%E5%9C%A8%E5%9C%A8%E7%9A%84%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">chmod管理的对象是实实在在的文件</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-26 01:44:00" itemprop="dateCreated datePublished" datetime="2019-12-26T01:44:00+08:00">2019-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/chmod%E7%AE%A1%E7%90%86%E7%9A%84%E5%AF%B9%E8%B1%A1%E6%98%AF%E5%AE%9E%E5%AE%9E%E5%9C%A8%E5%9C%A8%E7%9A%84%E6%96%87%E4%BB%B6/" class="post-meta-item leancloud_visitors" data-flag-title="chmod管理的对象是实实在在的文件" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月26日 下午1:44<br><a href="https://www.cnblogs.com/Agnostida-Trilobita/p/10881863.html" target="_blank" rel="noopener">Linux权限管理 - 球接子 - 博客园</a></p>
-<h4 id="drwxr-xr-x"><a href="#drwxr-xr-x" class="headerlink" title="drwxr-xr-x"></a>drwxr-xr-x</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">十位字符表示含义：</span><br><span class="line">第1位：表示文档类型，取值常见的有“d表示文件夹”、“-表示文件”、“l表示软连接”、“s表示套接字”、“c表示字符设备”、“b表示块状设备”等等；</span><br><span class="line">第2-4位：表示文档所有者的权限情况，第2位表示读权限的情况，取值有r、-；第3位表示写权限的情况，w表示可写，-表示不可写，第4位表示执行权限的情况，取值有x、-。</span><br><span class="line">第5-7位：表示与所有者同在一个组的用户的权限情况，第5位表示读权限的情况，取值有r、-；第6位表示写权限的情况，w表示可写，-表示不可写，第7位表示执行权限的情况，取值有x、-。</span><br><span class="line">第8-10位：表示除了上面的前2部分的用户之外的其他用户的权限情况，第8位表示读权限的情况，取值有r、-；第9位表示写权限的情况，w表示可写，-表示不可写，第10位表示执行权限的情况，取值有x、-。</span><br><span class="line"> </span><br><span class="line">权限分配中,均是rwx的三个参数组合，且位置顺序不会变化。没有对应权限就用 – 代替。</span><br></pre></td></tr></table></figure>
-
-<h3 id="chmod-字母形式："><a href="#chmod-字母形式：" class="headerlink" title="chmod 字母形式："></a>chmod 字母形式：</h3><h4 id="给谁设置："><a href="#给谁设置：" class="headerlink" title="给谁设置："></a>给谁设置：</h4><pre><code>* u：表示所有者身份owner（user）
-* g：表示给所有者同组用户设置（group）
-* O：表示others，给其他用户设置权限
-* A：表示all，给所有人（包含ugo部分）设置权限
-* 如果在设置权限的时候不指定给谁设置，则默认给所有用户设置</code></pre><h4 id="权限字符："><a href="#权限字符：" class="headerlink" title="权限字符："></a><em>权限字符：</em></h4><pre><code>* r：读
-* w：写
-* x：表示执行
-* -：表示没有权限</code></pre><h4 id="权限分配方式："><a href="#权限分配方式：" class="headerlink" title="权限分配方式："></a><em>权限分配方式：</em></h4><pre><code>* +：表示给具体的用户新增权限（相对当前）
-* -：表示删除用户的权限（相对当前）
-* =：表示将权限设置成具体的值（注重结果）【赋值】</code></pre><h4 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h4><p>例如：需要给_root_anaconda-ks.cfg文件（-rw——-.）设置权限，要求所有者拥有全部的权限，同组用户拥有读和写权限，其他用户只读权限。<br>答案：<br>所有者：全部权限（rwx）<br>同组用户：读写（rw）<br>其他：只读（r）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@li yum.repos.d]# chmod o&#x3D;rwx,g&#x3D;rw,o&#x3D;rw &#x2F;root&#x2F;anaconda-ks.cfg</span><br><span class="line">[root@li yum.repos.d]# ls -l &#x2F;root</span><br><span class="line">-rw-rw-rw-. 1 root root 1536 5月 16 22:41 anaconda-ks.cfg</span><br><span class="line">-rw-r--r—. 1 root root 1584 5月 16 22:43 initial-setup-ks.cfg</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="chmod-数字形式："><a href="#chmod-数字形式：" class="headerlink" title="chmod 数字形式："></a>chmod 数字形式：</h2><p>例如：需要给anaconda-ks.cfg设置权限，权限要求所有者拥有全部权限，同组用户拥有读执行权限，其他用户只读。</p>
-<ul>
-<li>所有者权限 = 全部权限 = 读 + 写 +执行 = 4 + 2 + 1 = 7</li>
-<li>同组用户权限 = 读权限 + 执行权限 = 4 + 1 = 5</li>
-<li>其他用户权限 = 读权限 = 4<br>::最终得出的结果是754::</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/sudo%20%E5%85%81%E8%AE%B8%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%9A%84%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/sudo%20%E5%85%81%E8%AE%B8%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%9A%84%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">sudo 允许普通用户使用超级用户权限的工具</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-26 01:39:00" itemprop="dateCreated datePublished" datetime="2019-12-26T01:39:00+08:00">2019-12-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/26/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/sudo%20%E5%85%81%E8%AE%B8%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7%E4%BD%BF%E7%94%A8%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7%E6%9D%83%E9%99%90%E7%9A%84%E5%B7%A5%E5%85%B7/" class="post-meta-item leancloud_visitors" data-flag-title="sudo 允许普通用户使用超级用户权限的工具" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>680</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月26日 下午1:39</p>
-<p><a href="http://chenall.net/post/linux-sudo-config/" target="_blank" rel="noopener">linux sudo 命令和配置文件/etc/sudoers介绍 | chenall’s Blog</a></p>
-<h3 id="格式："><a href="#格式：" class="headerlink" title="格式："></a>格式：</h3><p><code>&lt;user list&gt; &lt;host list&gt; = &lt;operator list&gt; &lt;tag list&gt; &lt;command list&gt;</code></p>
-<ul>
-<li><em>user list</em> 用户/组，或者已经设置的用户的别名列表, 用户名直接 username，用户组加上%，比如%admin,</li>
-<li><em>host list</em> 主机名或别名列表</li>
-<li><em>operator list</em> runas用户，即可以以哪个用户、组的权限来执行</li>
-<li><em>command list</em> 可以执行的命令或列表</li>
-<li><em>tag list</em> 这个经常用到的是 <strong>NOPASSWD:</strong> ，添加这个参数之后可以不用输入密码。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## root 用户可以在任意主机上以任意用户、组的权限执行任意命令，说明root用户具有最高级的权限。</span></span><br><span class="line">root    ALL=(ALL:ALL) ALL</span><br><span class="line"></span><br><span class="line"><span class="comment">## admin组的用户都拥有最高级权限。</span></span><br><span class="line">%admin ALL=(ALL) ALL</span><br><span class="line"></span><br><span class="line"><span class="comment">## sudo 组用户和root用户权限一样</span></span><br><span class="line">%sudo   ALL=(ALL:ALL) ALL</span><br><span class="line"></span><br><span class="line"><span class="comment">## test 用户可以不用输入密码运行 **/sbin/reboot** 命令</span></span><br><span class="line"><span class="comment">## tag list 如果是 NOPASSWD: 则运行时不需要输入密码例子:</span></span><br><span class="line"><span class="built_in">test</span> ALL=(ALL) NOPASSWD: /sbin/reboot</span><br><span class="line"></span><br><span class="line"><span class="comment">## operator list 和 tag list 都是可选的，比如下面的：</span></span><br><span class="line"><span class="built_in">test</span> ALL=/sbin/reboot</span><br><span class="line"></span><br><span class="line"><span class="comment">## 查看当前用户的sudo权限</span></span><br><span class="line">sudo -l</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E5%AE%89%E8%A3%85/pip%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE%E5%92%8C%E5%A4%B1%E8%B4%A5%E5%8E%9F%E5%9B%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E5%AE%89%E8%A3%85/pip%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE%E5%92%8C%E5%A4%B1%E8%B4%A5%E5%8E%9F%E5%9B%A0/" class="post-title-link" itemprop="url">pip安装位置和失败原因</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-25 11:00:00" itemprop="dateCreated datePublished" datetime="2019-12-25T11:00:00+08:00">2019-12-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-python-%E5%AE%89%E8%A3%85/" itemprop="url" rel="index">
-                    <span itemprop="name">c数据科学/czh_python/安装</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E5%AE%89%E8%A3%85/pip%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE%E5%92%8C%E5%A4%B1%E8%B4%A5%E5%8E%9F%E5%9B%A0/" class="post-meta-item leancloud_visitors" data-flag-title="pip安装位置和失败原因" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>228</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月25日 上午11:00</p>
-<ol>
-<li>在conda中pip install安装包，默认安装在命令行当前隔离环境中 </li>
-<li>可以使用<code>pip show 包名</code>来验证这个说法<br><img src="/2019/12/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E5%AE%89%E8%A3%85/pip%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE%E5%92%8C%E5%A4%B1%E8%B4%A5%E5%8E%9F%E5%9B%A0/437C733C-85B2-4E5D-9C26-D1DF7C88BF75.png" alt><br>从上面的安装路径来看</li>
-</ol>
-<ul>
-<li>pip要安装成opencv-python=3.4.3.18需要的前提条件是python3.5，因为在pip会根据python的版本来限定可以使用的包的版本！<ul>
-<li>这也是最常遇到的问题</li>
-</ul>
-</li>
-<li>安装路径安装在anaconda的tensor环境中，并不是系统环境中，这一点让conda和pip的混用非常方便！</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9B%AE%E5%BD%95(C)%EF%BC%9A%E4%B8%BB%E8%A6%81%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9B%AE%E5%BD%95(C)%EF%BC%9A%E4%B8%BB%E8%A6%81%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98/" class="post-title-link" itemprop="url">目录(C)：主要关于内存</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-24 11:48:00" itemprop="dateCreated datePublished" datetime="2019-12-24T11:48:00+08:00">2019-12-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-c/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_计算机系统/c</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9B%AE%E5%BD%95(C)%EF%BC%9A%E4%B8%BB%E8%A6%81%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98/" class="post-meta-item leancloud_visitors" data-flag-title="目录(C)：主要关于内存" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>216</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月24日 下午11:48</p>
-<p><a href="bear://x-callback-url/open-note?id=FBE78ED4-86D2-45EE-8679-9D498AC2A0AC-499-00005ECE7B135E7B">真正的I/O操作之原理：缓冲区(buffer)与缓存(cache)</a><br><a href="bear://x-callback-url/open-note?id=6D5B82CC-DE96-451E-BCD6-B75D58F4748A-499-00005F1172F14810">真正的I/O操作之应用：在程序中，内存中开辟的一片缓冲区域</a><br>附录：</p>
-<ol>
-<li>在学习的过程中，让我想起另一个问题：既然我们再敲键盘的时候，很多时候并没有真正的发生io过程， <em>那么显示器上是如何显示我们实时敲击的字符的</em> ？</li>
-<li>对于这个问题，我没有找到好的材料，但是间接找到了《ORANGE’S：一个操作系统的实现》 <a href="bear://x-callback-url/open-note?id=8A0C910B-7B26-499A-8CC7-019FF5A7C4F7-499-000061D972FA482D">《ORANGE’S：一个操作系统的实现》</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0/%E5%AE%9E%E8%B7%B5%EF%BC%9A%E3%80%8AORANGE%E2%80%99S%EF%BC%9A%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0%E3%80%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0/%E5%AE%9E%E8%B7%B5%EF%BC%9A%E3%80%8AORANGE%E2%80%99S%EF%BC%9A%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0%E3%80%8B/" class="post-title-link" itemprop="url">实践：《ORANGE’S：一个操作系统的实现》</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-24 11:42:00" itemprop="dateCreated datePublished" datetime="2019-12-24T11:42:00+08:00">2019-12-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_计算机系统/一个操作系统的实现</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0/%E5%AE%9E%E8%B7%B5%EF%BC%9A%E3%80%8AORANGE%E2%80%99S%EF%BC%9A%E4%B8%80%E4%B8%AA%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%AE%9E%E7%8E%B0%E3%80%8B/" class="post-meta-item leancloud_visitors" data-flag-title="实践：《ORANGE’S：一个操作系统的实现》" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>62</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月24日 下午11:42<br><a href="https://github.com/wlmnzf/oranges" target="_blank" rel="noopener">GitHub - wlmnzf/oranges: 《ORANGE’S：一个操作系统的实现》源码</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9C%9F%E6%AD%A3%E7%9A%84IO%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%BA%94%E7%94%A8%EF%BC%9A%E5%9C%A8%E7%A8%8B%E5%BA%8F%E4%B8%AD%EF%BC%8C%E5%86%85%E5%AD%98%E4%B8%AD%E5%BC%80%E8%BE%9F%E7%9A%84%E4%B8%80%E7%89%87%E7%BC%93%E5%86%B2%E5%8C%BA%E5%9F%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1236,11 +395,922 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E6%89%93%E5%8D%B0%E5%87%BA%E6%9D%A5%EF%BC%9A%E4%B8%80%E4%B8%AAc%E7%A8%8B%E5%BA%8F%E5%AD%98%E5%82%A8%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E6%B6%89%E5%8F%8A%E5%88%B0(%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90%E3%80%81linux%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E5%B8%83%E5%B1%80%E3%80%81%E7%BC%93%E5%86%B2%E5%8C%BA%E3%80%81%E5%8F%98%E9%87%8F%E7%9A%84%E5%AD%98%E5%82%A8%E5%B8%83%E5%B1%80)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E6%89%93%E5%8D%B0%E5%87%BA%E6%9D%A5%EF%BC%9A%E4%B8%80%E4%B8%AAc%E7%A8%8B%E5%BA%8F%E5%AD%98%E5%82%A8%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E6%B6%89%E5%8F%8A%E5%88%B0(%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90%E3%80%81linux%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E5%B8%83%E5%B1%80%E3%80%81%E7%BC%93%E5%86%B2%E5%8C%BA%E3%80%81%E5%8F%98%E9%87%8F%E7%9A%84%E5%AD%98%E5%82%A8%E5%B8%83%E5%B1%80)/" class="post-title-link" itemprop="url">打印出来：一个c程序存储在内存中涉及到(字节对齐、linux虚拟地址布局、缓冲区、变量的存储布局)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-23 11:17:00" itemprop="dateCreated datePublished" datetime="2019-12-23T11:17:00+08:00">2019-12-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-c/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_计算机系统/c</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E6%89%93%E5%8D%B0%E5%87%BA%E6%9D%A5%EF%BC%9A%E4%B8%80%E4%B8%AAc%E7%A8%8B%E5%BA%8F%E5%AD%98%E5%82%A8%E5%9C%A8%E5%86%85%E5%AD%98%E4%B8%AD%E6%B6%89%E5%8F%8A%E5%88%B0(%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90%E3%80%81linux%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E5%B8%83%E5%B1%80%E3%80%81%E7%BC%93%E5%86%B2%E5%8C%BA%E3%80%81%E5%8F%98%E9%87%8F%E7%9A%84%E5%AD%98%E5%82%A8%E5%B8%83%E5%B1%80)/" class="post-meta-item leancloud_visitors" data-flag-title="打印出来：一个c程序存储在内存中涉及到(字节对齐、linux虚拟地址布局、缓冲区、变量的存储布局)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>437</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月23日 下午11:17</p>
+<ol>
+<li>要学好c语言，需要你对操作系统和计算机组成有比较深刻的理解，尤其是内存相关的内容。</li>
+</ol>
+<h3 id="基础知识："><a href="#基础知识：" class="headerlink" title="基础知识："></a>基础知识：</h3><p><a href="https://www.cnblogs.com/clover-toeic/p/3737093.html" target="_blank" rel="noopener">二维数组与高级指针 - clover_toeic - 博客园</a><br><a href="https://www.cnblogs.com/clover-toeic/p/3737189.html" target="_blank" rel="noopener">C数组&amp;结构体&amp;联合体快速初始化 - clover_toeic - 博客园</a><br><a href="https://www.cnblogs.com/clover-toeic/p/3851102.html" target="_blank" rel="noopener">C语言预处理命令详解 - clover_toeic - 博客园</a></p>
+<h3 id="核心知识："><a href="#核心知识：" class="headerlink" title="核心知识："></a>核心知识：</h3><p><a href="https://www.cnblogs.com/clover-toeic/p/3853132.html" target="_blank" rel="noopener">C语言字节对齐问题详解 - clover_toeic - 博客园</a><br><a href="https://www.cnblogs.com/clover-toeic/p/3754433.html" target="_blank" rel="noopener">Linux虚拟地址空间布局 - clover_toeic - 博客园</a><br><a href="https://www.cnblogs.com/clover-toeic/p/3737011.html" target="_blank" rel="noopener">缓冲区溢出详解 - clover_toeic - 博客园</a><br><a href="https://www.cnblogs.com/clover-toeic/p/3755066.html" target="_blank" rel="noopener">C语言变量的存储布局 - clover_toeic - 博客园</a><br><a href="https://www.cnblogs.com/clover-toeic/p/3728026.html" target="_blank" rel="noopener">C语言头文件组织与包含原则 - clover_toeic - 博客园</a><br><a href="https://www.cnblogs.com/clover-toeic/p/3851102.html" target="_blank" rel="noopener">C语言预处理命令详解 - clover_toeic - 博客园</a><br><a href="https://www.cnblogs.com/clover-toeic/p/3736560.html" target="_blank" rel="noopener">已释放的栈内存 - clover_toeic - 博客园</a><br><a href="https://www.cnblogs.com/clover-toeic/p/3755401.html" target="_blank" rel="noopener">C语言函数调用栈(一) - clover_toeic - 博客园</a><br><a href="https://www.cnblogs.com/clover-toeic/p/3756668.html" target="_blank" rel="noopener">C语言函数调用栈(二) - clover_toeic - 博客园</a><br><a href="https://www.cnblogs.com/clover-toeic/p/3757091.html" target="_blank" rel="noopener">C语言函数调用栈(三) - clover_toeic - 博客园</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%BB%A5logtamper%E4%B8%BA%E4%BE%8B%E5%AD%A6%E4%B9%A0%EF%BC%9Apython+c%E7%9A%84struct/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%BB%A5logtamper%E4%B8%BA%E4%BE%8B%E5%AD%A6%E4%B9%A0%EF%BC%9Apython+c%E7%9A%84struct/" class="post-title-link" itemprop="url">以logtamper为例学习：python+c的struct</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-23 08:58:00" itemprop="dateCreated datePublished" datetime="2019-12-23T08:58:00+08:00">2019-12-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AF%AD%E8%A8%80-c/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_语言/c++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%BB%A5logtamper%E4%B8%BA%E4%BE%8B%E5%AD%A6%E4%B9%A0%EF%BC%9Apython+c%E7%9A%84struct/" class="post-meta-item leancloud_visitors" data-flag-title="以logtamper为例学习：python+c的struct" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>973</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#c数据科学/czh_python/语法<br>2019年12月23日 下午8:58</p>
+<p><a href="https://www.cnblogs.com/whatmiss/p/11895838.html" target="_blank" rel="noopener">python修改linux日志（logtamper.py） - 轻轻的烟雾 - 博客园</a><br>使用方法，总结在另一篇文章中： <a href="bear://x-callback-url/open-note?id=3B86E7C3-18F8-4A27-900D-0C16BF650B60-499-000032D131E77E85">logtamper使用</a></p>
+<p>在logtemper的源码中，我们会看到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LAST_STRUCT &#x3D; ‘I32s256s&#39;</span><br><span class="line">LAST_STRUCT_SIZE &#x3D; struct.calcsize(LAST_STRUCT)</span><br><span class="line"></span><br><span class="line">XTMP_STRUCT &#x3D; ‘hi32s4s32s256shhiii4i20x’</span><br><span class="line">XTMP_STRUCT_SIZE &#x3D; struct.calcsize(XTMP_STRUCT)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>我这里就来解释struct是什么？<ol>
+<li>python中struct 模块用于python数据结构与C结构之间的相互转换</li>
+<li>那么我们就需要学习一下c语言中的struct<ol>
+<li><a href="https://www.cnblogs.com/clover-toeic/p/3853132.html" target="_blank" rel="noopener">C语言字节对齐问题详解 - clover_toeic - 博客园</a>这篇文章讲解的十分全面</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>以及‘I32s256s’  ‘hi32s4s32s256shhiii4i20x’定义的是什么？<ol>
+<li>他们是：自定义的格式化字节的规则</li>
+<li>这里有一个对应表：<a href="https://blog.csdn.net/guoyajie1990/article/details/81044929" target="_blank" rel="noopener">struct 模块详解</a></li>
+<li>I32s256s：对应的结构体是：<ul>
+<li>I =&gt; (unsigned int) =&gt;4 =&gt;timestamp</li>
+<li>32s =&gt; char[]  =&gt; 32*1 =&gt; ttyname</li>
+<li>256s =&gt; char[]  =&gt; 256*1 =&gt;  hostname</li>
+</ul>
+</li>
+<li>hi32s4s32s256shhiii4i20x对应的结构体：<ol>
+<li>h =&gt; short =&gt; 2 </li>
+<li>i =&gt; int =&gt; 4</li>
+<li>32s =&gt; char[] =&gt; 32*1 </li>
+<li>4s =&gt; char[] =&gt; 4*1  </li>
+<li>32s =&gt; char[] =&gt; 32*1 =&gt; username</li>
+<li>256s =&gt; char[]  =&gt; 256*1 =&gt; hostname</li>
+<li>h =&gt; short =&gt; 2</li>
+<li>h =&gt; short =&gt; 2</li>
+<li>i =&gt; int =&gt; 4 =</li>
+<li>i =&gt; int =&gt; 4 =</li>
+<li>i =&gt; int =&gt; 4 =</li>
+<li>4i =&gt; int =&gt; 4 * 4 =</li>
+<li>20x =&gt; pad byte =&gt; 0 =&gt; no value</li>
+<li>注：代码只使用了5，6对应的username和hostname</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/logtamper%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/logtamper%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">logtamper使用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-23 06:12:00" itemprop="dateCreated datePublished" datetime="2019-12-23T06:12:00+08:00">2019-12-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/logtamper%E4%BD%BF%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="logtamper使用" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月23日 下午6:12</p>
+<p><a href="untitled.py">untitled.py</a><br>2019年12月25日 下午2:53<br>注：</p>
+<ol>
+<li>验证ubuntu是可以使用的，但必须要有sudo权限才可以执行</li>
+<li>由于python2-&gt;python3需要修改两处源码：<ol>
+<li>print()</li>
+</ol>
+<ul>
+<li>python3中默认的字符串为Unicode格式，而<strong>struct的函数中需要传的参数必须为“utf-8”格式</strong>，因此需要在文件开头手动声明编码格式“# coding = unf-8”</li>
+</ul>
+</li>
+<li>结合tty 或 ps命令，可得到tty这个参数的值</li>
+</ol>
+<p>2019年12月23日 下午6:12<br><a href="https://blog.csdn.net/MENGHUANBEIKE/article/details/78949483" target="_blank" rel="noopener">logtamper</a><br><a href="https://github.com/re4lity/logtamper/blob/master/logtamper.py" target="_blank" rel="noopener">logtamper/logtamper.py at master · re4lity/logtamper · GitHub</a></p>
+<p><a href="https://www.cnblogs.com/whatmiss/p/11895838.html" target="_blank" rel="noopener">python修改linux日志（logtamper.py） - 轻轻的烟雾 - 博客园</a></p>
+<h4 id="躲避管理员who查看"><a href="#躲避管理员who查看" class="headerlink" title="躲避管理员who查看"></a>躲避管理员who查看</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python logtamper.py -m 1 -u username -i 192.168.0.188</span><br></pre></td></tr></table></figure>
+<h4 id="清除指定ip的登录日志：删除全部这个ip相关的"><a href="#清除指定ip的登录日志：删除全部这个ip相关的" class="headerlink" title="清除指定ip的登录日志：删除全部这个ip相关的"></a>清除指定ip的登录日志：删除全部这个ip相关的</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python logtamper.py -m 2 -u username -i 192.168.0.188</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo python logtamper.py -m 2 -u czh -i :0</span><br></pre></td></tr></table></figure>
+<h4 id="修改上次登录时间地点"><a href="#修改上次登录时间地点" class="headerlink" title="修改上次登录时间地点"></a>修改上次登录时间地点</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python logtamper.py -m 3 -u username -i 192.168.0.188 -t tty1 -d 2014:05:28:10:11:12</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo python logtamper.py -m 3 -u czh -i 192.168.143.1 -t pts&#x2F;1 -d 2014:05:28:10:11:12</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="这里对-m参数补充说明一下："><a href="#这里对-m参数补充说明一下：" class="headerlink" title="这里对-m参数补充说明一下："></a>这里对-m参数补充说明一下：</h4><p>-m 操作的模式 固定值，3个可选【1/2/3】<br>分别是</p>
+<ul>
+<li>1：修改当前登陆用户。<ul>
+<li>日志文件：_var_log/wtmp </li>
+<li>查看命令： <code>who</code></li>
+</ul>
+</li>
+<li>2：清除登陆日志。<ul>
+<li>日志文件：_var_run/utmp </li>
+<li>查看命令：<code>last | more</code></li>
+</ul>
+</li>
+<li>3、不是清除，是修改覆盖上次的登陆信息，要修改的用户为-u后面的参数，改为后面 -i -t -d的信息。所以，例如，想改root用户，则-u root，-i -t -d随便输入。<ul>
+<li>日志文件：_var_log/lastlog </li>
+<li>查看命令：<code>lastlog</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="comment"># mail: cn.b4dboy@gmail.com</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os, struct, sys</span><br><span class="line"><span class="keyword">from</span> pwd <span class="keyword">import</span> getpwnam</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> strptime, mktime</span><br><span class="line"><span class="keyword">from</span> optparse <span class="keyword">import</span> OptionParser</span><br><span class="line"></span><br><span class="line">UTMPFILE = <span class="string">"/var/run/utmp"</span></span><br><span class="line">WTMPFILE = <span class="string">"/var/log/wtmp"</span></span><br><span class="line">LASTLOGFILE = <span class="string">"/var/log/lastlog"</span></span><br><span class="line"></span><br><span class="line">LAST_STRUCT = <span class="string">'I32s256s'</span></span><br><span class="line">LAST_STRUCT_SIZE = struct.calcsize(LAST_STRUCT)</span><br><span class="line"></span><br><span class="line">XTMP_STRUCT = <span class="string">'hi32s4s32s256shhiii4i20x'</span></span><br><span class="line">XTMP_STRUCT_SIZE = struct.calcsize(XTMP_STRUCT)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getXtmp</span><span class="params">(filename, username, hostname)</span>:</span></span><br><span class="line">    xtmp = <span class="string">''</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fp = open(filename, <span class="string">'rb'</span>)</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            bytes = fp.read(XTMP_STRUCT_SIZE)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> bytes:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            data = struct.unpack(XTMP_STRUCT, bytes)</span><br><span class="line">            record = [(<span class="keyword">lambda</span> s: str(s).split(<span class="string">"\0"</span>, <span class="number">1</span>)[<span class="number">0</span>])(i) <span class="keyword">for</span> i <span class="keyword">in</span> data]</span><br><span class="line">            <span class="keyword">if</span> (record[<span class="number">4</span>] == username <span class="keyword">and</span> record[<span class="number">5</span>] == hostname):</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            xtmp += bytes</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        showMessage(<span class="string">'Cannot open file: %s'</span> % filename)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        fp.close()</span><br><span class="line">    <span class="keyword">return</span> xtmp</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">modifyLast</span><span class="params">(filename, username, hostname, ttyname, strtime)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        p = getpwnam(username)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        showMessage(<span class="string">'No such user.'</span>)</span><br><span class="line"></span><br><span class="line">    timestamp = <span class="number">0</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        str2time = strptime(strtime, <span class="string">'%Y:%m:%d:%H:%M:%S'</span>)</span><br><span class="line">        timestamp = int(mktime(str2time))</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        showMessage(<span class="string">'Time format err.'</span>)</span><br><span class="line"></span><br><span class="line">    data = struct.pack(LAST_STRUCT, timestamp, ttyname.encode(<span class="string">"utf-8"</span>), hostname.encode(<span class="string">"utf-8"</span>))</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fp = open(filename, <span class="string">'wb'</span>)</span><br><span class="line">        fp.seek(LAST_STRUCT_SIZE * p.pw_uid)</span><br><span class="line">        fp.write(data)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        showMessage(<span class="string">'Cannot open file: %s'</span> % filename)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        fp.close()</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">showMessage</span><span class="params">(msg)</span>:</span></span><br><span class="line">    print(msg)</span><br><span class="line">    exit(<span class="number">-1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">saveFile</span><span class="params">(filename, contents)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        fp = open(filename, <span class="string">'w+b'</span>)</span><br><span class="line">        fp.write(contents)</span><br><span class="line">    <span class="keyword">except</span> IOError <span class="keyword">as</span> e:</span><br><span class="line">        showMessage(e)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        fp.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    usage = <span class="string">'usage: logtamper.py -m 2 -u b4dboy -i 192.168.0.188\n \</span></span><br><span class="line"><span class="string">                    logtamper.py -m 3 -u b4dboy -i 192.168.0.188 -t tty1 -d 2015:05:28:10:11:12'</span></span><br><span class="line">    parser = OptionParser(usage=usage)</span><br><span class="line">    parser.add_option(<span class="string">'-m'</span>, <span class="string">'--mode'</span>, dest=<span class="string">'MODE'</span>, default=<span class="string">'1'</span> , help=<span class="string">'1: utmp, 2: wtmp, 3: lastlog [default: 1]'</span>)</span><br><span class="line">    parser.add_option(<span class="string">'-t'</span>, <span class="string">'--ttyname'</span>, dest=<span class="string">'TTYNAME'</span>)</span><br><span class="line">    parser.add_option(<span class="string">'-f'</span>, <span class="string">'--filename'</span>, dest=<span class="string">'FILENAME'</span>)</span><br><span class="line">    parser.add_option(<span class="string">'-u'</span>, <span class="string">'--username'</span>, dest=<span class="string">'USERNAME'</span>)</span><br><span class="line">    parser.add_option(<span class="string">'-i'</span>, <span class="string">'--hostname'</span>, dest=<span class="string">'HOSTNAME'</span>)</span><br><span class="line">    parser.add_option(<span class="string">'-d'</span>, <span class="string">'--dateline'</span>, dest=<span class="string">'DATELINE'</span>)</span><br><span class="line">    (options, args) = parser.parse_args()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> len(args) &lt; <span class="number">3</span>:</span><br><span class="line">        <span class="keyword">if</span> options.MODE == <span class="string">'1'</span>:</span><br><span class="line">            <span class="keyword">if</span> options.USERNAME == <span class="literal">None</span> <span class="keyword">or</span> options.HOSTNAME == <span class="literal">None</span>:</span><br><span class="line">                showMessage(<span class="string">'+[Warning]: Incorrect parameter.\n'</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> options.FILENAME == <span class="literal">None</span>:</span><br><span class="line">                options.FILENAME = UTMPFILE</span><br><span class="line"></span><br><span class="line">            <span class="comment"># tamper</span></span><br><span class="line">            newData = getXtmp(options.FILENAME, options.USERNAME, options.HOSTNAME)</span><br><span class="line">            saveFile(options.FILENAME, newData)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">elif</span> options.MODE == <span class="string">'2'</span>:</span><br><span class="line">            <span class="keyword">if</span> options.USERNAME == <span class="literal">None</span> <span class="keyword">or</span> options.HOSTNAME == <span class="literal">None</span>:</span><br><span class="line">                showMessage(<span class="string">'+[Warning]: Incorrect parameter.\n'</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> options.FILENAME == <span class="literal">None</span>:</span><br><span class="line">                options.FILENAME = WTMPFILE</span><br><span class="line"></span><br><span class="line">            <span class="comment"># tamper</span></span><br><span class="line">            newData = getXtmp(options.FILENAME, options.USERNAME, options.HOSTNAME)</span><br><span class="line">            saveFile(options.FILENAME, newData)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">elif</span> options.MODE == <span class="string">'3'</span>:</span><br><span class="line">            <span class="keyword">if</span> options.USERNAME == <span class="literal">None</span> <span class="keyword">or</span> options.HOSTNAME == <span class="literal">None</span> <span class="keyword">or</span> options.TTYNAME == <span class="literal">None</span> <span class="keyword">or</span> options.DATELINE == <span class="literal">None</span>:</span><br><span class="line">                showMessage(<span class="string">'+[Warning]: Incorrect parameter.\n'</span>)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> options.FILENAME == <span class="literal">None</span>:</span><br><span class="line">                options.FILENAME = LASTLOGFILE</span><br><span class="line"></span><br><span class="line">            <span class="comment"># tamper</span></span><br><span class="line">            modifyLast(options.FILENAME, options.USERNAME, options.HOSTNAME, options.TTYNAME , options.DATELINE)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            parser.print_help()</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4%EF%BC%9Ahistory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4%EF%BC%9Ahistory/" class="post-title-link" itemprop="url">历史命令：history</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-23 04:11:00" itemprop="dateCreated datePublished" datetime="2019-12-23T04:11:00+08:00">2019-12-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4%EF%BC%9Ahistory/" class="post-meta-item leancloud_visitors" data-flag-title="历史命令：history" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>306</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月23日 下午4:11</p>
+<p><a href="https://www.cnblogs.com/wxxjianchi/p/9588916.html" target="_blank" rel="noopener">linux history（命令历史） - HowOldAreYou - 博客园</a></p>
+<ol>
+<li><code>vim ~/.bash_history</code></li>
+<li><code>history</code><ul>
+<li><code>-c</code>该命令可以清空本次登入的所有输出命令，但不清空.bash_history文件，所以下次登陆后，旧命令还将出现，历史命令是存在于当前用户根目录下的./bash_history文件。</li>
+<li><code>-w</code>将本次登录的命令写入命令历史文件中, 默认写入~/.bash_history</li>
+<li><code>-r</code>将命令历史文件中的内容读入到目前shell的history记忆中</li>
+</ul>
+</li>
+<li>使用! 执行历史命令。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">　　! number 执行第几条命令</span><br><span class="line">　　! command 从最近的命令查到以command开头的命令执行</span><br><span class="line">　　!! 执行上一条</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BB%A5%E7%94%BB%E9%99%8D%E6%B0%B4%E5%9B%BE%E4%B8%BA%E4%BE%8B%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%EF%BC%9Apython%E5%B0%B1%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%81%EF%BC%81%EF%BC%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BB%A5%E7%94%BB%E9%99%8D%E6%B0%B4%E5%9B%BE%E4%B8%BA%E4%BE%8B%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%EF%BC%9Apython%E5%B0%B1%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%81%EF%BC%81%EF%BC%81/" class="post-title-link" itemprop="url">以画降水图为例，学习线程和进程：python就不要使用多线程！！！</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-22 10:21:00" itemprop="dateCreated datePublished" datetime="2019-12-22T10:21:00+08:00">2019-12-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-python-%E8%AF%AD%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">c数据科学/czh_python/语法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BB%A5%E7%94%BB%E9%99%8D%E6%B0%B4%E5%9B%BE%E4%B8%BA%E4%BE%8B%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%EF%BC%9Apython%E5%B0%B1%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%81%EF%BC%81%EF%BC%81/" class="post-meta-item leancloud_visitors" data-flag-title="以画降水图为例，学习线程和进程：python就不要使用多线程！！！" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>929</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#b计算机基础/czh_计算机系统/整理<br>2019年12月22日 下午10:21</p>
+<p><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017631469467456" target="_blank" rel="noopener">进程 vs. 线程 - 廖雪峰的官方网站</a></p>
+<h3 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h3><ol>
+<li>稳定性：进程 &gt; 线程</li>
+<li>创建的代价：进程 &gt; 线程</li>
+<li>执行速度：要根据操作系统判断</li>
+<li>任务类型：计算密集型 vs. IO密集型<ul>
+<li>Python这样的脚本语言运行效率很低，完全不适合计算密集型任务。对于计算密集型任务，最好用C语言编写。</li>
+</ul>
+</li>
+</ol>
+<h3 id="模块实现说明："><a href="#模块实现说明：" class="headerlink" title="模块实现说明："></a>模块实现说明：</h3><ol>
+<li>整个模块输入是以python启动的一个网络服务，其中使用的接口是http，接受的对象是json字符串，来接受画图的原始数据；由于考虑到可能会出现并发访问，所以每次画图都会新建一个线程来画图</li>
+<li>出现的问题： <em>有时会出现原本画一个图只需要6s，但是偶然会出现40s的情况</em></li>
+</ol>
+<h3 id="原因分析："><a href="#原因分析：" class="headerlink" title="原因分析："></a>原因分析：</h3><ol>
+<li>多线程在Python中只能在一个核上交替执行：当发生并发访问时，此时会启动多个线程，在一个核心上不断的调度，分配时间片，这就会导致时间长很多。</li>
+<li>理论分析：<ol>
+<li><a href="https://www.liaoxuefeng.com/wiki/1016959663602400/1017629247922688" target="_blank" rel="noopener">多线程 - 廖雪峰的官方网站</a></li>
+<li>因为Python的线程虽然是真正的线程，但解释器执行代码时，有一个GIL锁：Global Interpreter Lock， <em>任何Python线程执行前，必须先获得GIL锁，然后，每执行100条字节码，解释器就自动释放GIL锁，让别的线程有机会执行。</em> 这个GIL全局锁实际上把所有线程的执行代码都给上了锁，所以，多线程在Python中只能交替执行，即使100个线程跑在100核CPU上，也只能用到1个核。</li>
+<li><a href="https://blog.csdn.net/qq_39338671/article/details/87457812" target="_blank" rel="noopener">python多线程代码运行速度更慢-原因解析</a></li>
+<li>在 <em>单核CPU机器上，多线程与单线程在本质上并无不同</em> ，因为所有线程都是轮流占用CPU。多个线程慢于一个线程，因为其他线程还要先调度出来，再等待。</li>
+<li>在 <em>多核CPU机器上，多线程代码运行性能会非常糟糕</em> ，比单核更糟糕。因为这时候多一个步骤，不同的CPU再竞争GIL，GIL只有一个。Python在多核CPU上的多核CPU也只有单线程在跑程序。</li>
+</ol>
+</li>
+</ol>
+<h3 id="解决方法：python就不要使用多线程！！！"><a href="#解决方法：python就不要使用多线程！！！" class="headerlink" title="解决方法：python就不要使用多线程！！！"></a>解决方法：python就不要使用多线程！！！</h3><ol>
+<li><strong>不使用多线程</strong>：<ol>
+<li>绕过GIL，使用进程来代替线程：因为多个Python进程有各自独立的GIL锁，互不影响。</li>
+<li>做一个队列，来获取得到的原始json数据，保存到队列中；再用一个线程/进程来循环访问队列(或者找到一种回调方式，当队列中有数据时按顺序回调画图函数)</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/algorithm/%E6%91%98%E6%8A%84%EF%BC%9A%E5%88%B7%E9%A2%98%E7%BB%8F%E9%AA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/algorithm/%E6%91%98%E6%8A%84%EF%BC%9A%E5%88%B7%E9%A2%98%E7%BB%8F%E9%AA%8C/" class="post-title-link" itemprop="url">摘抄：刷题经验</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-22 09:59:00" itemprop="dateCreated datePublished" datetime="2019-12-22T09:59:00+08:00">2019-12-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_算法/Algorithm#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/algorithm/%E6%91%98%E6%8A%84%EF%BC%9A%E5%88%B7%E9%A2%98%E7%BB%8F%E9%AA%8C/" class="post-meta-item leancloud_visitors" data-flag-title="摘抄：刷题经验" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>40</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月22日 下午9:59<br><a href="https://mp.weixin.qq.com/s?__biz=MzUyOTk5NDQwOA==&mid=2247486627&idx=2&sn=2ba819d95ae423429fadff57d4c52356&chksm=fa59cb64cd2e4272b7e90967fed62dff69e5d6bea12a4dd3decb2f92415f031cb69695b11a6e&scene=21#wechat_redirect" target="_blank" rel="noopener">leetcode 刷500道题，笔试/面试稳吗？</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E8%B7%AF%E9%9D%A2%E8%AF%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E8%B7%AF%E9%9D%A2%E8%AF%95/" class="post-title-link" itemprop="url">计算机网路面试</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-22 07:22:00" itemprop="dateCreated datePublished" datetime="2019-12-22T07:22:00+08:00">2019-12-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_计算机系统/网络/网络基础</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E8%B7%AF%E9%9D%A2%E8%AF%95/" class="post-meta-item leancloud_visitors" data-flag-title="计算机网路面试" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>33</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月22日 下午7:22<br><a href="https://mp.weixin.qq.com/s?__biz=MzUyOTk5NDQwOA==&mid=2247485219&idx=1&sn=c4b24be02bc3311fe161669555f00406&chksm=fa59c0e4cd2e49f2a7d6ab760feb3dfbba2cbc77da2a9c4ac450b9c5a78f5be8859e1aa586af&scene=21#wechat_redirect" target="_blank" rel="noopener">搞定计算机网络面试，看这篇就够了</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/" class="post-title-link" itemprop="url">IP地址分类</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-22 04:30:00" itemprop="dateCreated datePublished" datetime="2019-12-22T04:30:00+08:00">2019-12-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-%E7%BD%91%E7%BB%9C-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_计算机系统/网络/网络基础</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/" class="post-meta-item leancloud_visitors" data-flag-title="IP地址分类" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>255</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月22日 下午4:30<br><a href="https://blog.csdn.net/qq_38409944/article/details/80202160" target="_blank" rel="noopener">内网IP 外网IP 网卡 路由器通信过程（全）</a></p>
+<h4 id="IPV4"><a href="#IPV4" class="headerlink" title="IPV4"></a>IPV4</h4><ul>
+<li>IPV4就是4段，每段8位，用十进制数字表示，每段数字范围为0～255。如192.134.11.3。IP地址可以视为网络标识号码与主机标识号码两部分，因此IP地址可分两部分组成，一部分为网络地址，另一部分为主机地址。IP地址分为A、B、C、D、E5类， <em>它们适用的类型分别为：大型网络；中型网络；小型网络；多目地址；备用</em> 。常用的是B和C两类。<br><img src="/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/20180505014852409.png" alt><br>注：</li>
+<li><em>强调 ： 全0和全1都不能代表主机号 因为 全0代表自己主机 全1代表广播地址*</em></li>
+</ul>
+<h4 id="局域网IP段："><a href="#局域网IP段：" class="headerlink" title="局域网IP段："></a>局域网IP段：</h4><p><img src="/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/IP%E5%9C%B0%E5%9D%80%E5%88%86%E7%B1%BB/20180505015655805.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/98/">98</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1306,14 +1376,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">974</span>
+          <span class="site-state-item-count">358</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1347,12 +1417,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.1m</span>
+    <span title="站点总字数">391k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:58</span>
+    <span title="站点阅读时长">5:55</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
