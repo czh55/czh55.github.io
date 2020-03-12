@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2019年4月28日 下午2:12 我有一个问题理解不了？1. 为什么Hiton要使用统计力学里的”玻尔兹曼分布”的概念，这个出发点我目前还理解不了。     1. **这个理解不了说明自己还没有理解透这个模型**模型的理解:受限玻尔兹曼机 - 维基百科，自由的百科全书深度学习方法：受限玻尔兹曼机RBM（一）基本概念 - Bin 的专栏 - CSDN博客深度学习方法：受限玻尔兹曼机RBM（二）网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="受限玻尔兹曼机(RBM)">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2019/04/28/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA(RBM)/index.html">
+<meta property="og:site_name" content="Chen的博客">
+<meta property="og:description" content="2019年4月28日 下午2:12 我有一个问题理解不了？1. 为什么Hiton要使用统计力学里的”玻尔兹曼分布”的概念，这个出发点我目前还理解不了。     1. **这个理解不了说明自己还没有理解透这个模型**模型的理解:受限玻尔兹曼机 - 维基百科，自由的百科全书深度学习方法：受限玻尔兹曼机RBM（一）基本概念 - Bin 的专栏 - CSDN博客深度学习方法：受限玻尔兹曼机RBM（二）网络">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/04/28/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA(RBM)/4F9F09AC-36C8-451B-A130-BD48ADFCE988.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/04/28/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA(RBM)/B0715ACC-1EC8-4470-BECD-DDC47BFDA9AA.png">
+<meta property="article:published_time" content="2019-04-27T18:12:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T08:46:20.021Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.chenzhiheng.cn/2019/04/28/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA(RBM)/4F9F09AC-36C8-451B-A130-BD48ADFCE988.png">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2019/04/28/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA(RBM)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>受限玻尔兹曼机(RBM) | Chen的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chen的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/04/28/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA(RBM)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chen的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          受限玻尔兹曼机(RBM)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-28 02:12:00" itemprop="dateCreated datePublished" datetime="2019-04-28T02:12:00+08:00">2019-04-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-knowledge/" itemprop="url" rel="index">
+                    <span itemprop="name">c数据科学/czh_机器学习/knowledge</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/04/28/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA(RBM)/" class="post-meta-item leancloud_visitors" data-flag-title="受限玻尔兹曼机(RBM)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>716</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2019年4月28日 下午2:12</p>
+<h3 id="我有一个问题理解不了？"><a href="#我有一个问题理解不了？" class="headerlink" title="我有一个问题理解不了？"></a>我有一个问题理解不了？</h3><pre><code>1. 为什么Hiton要使用统计力学里的”玻尔兹曼分布”的概念，这个出发点我目前还理解不了。
+    1. **这个理解不了说明自己还没有理解透这个模型**</code></pre><h2 id="模型的理解"><a href="#模型的理解" class="headerlink" title="模型的理解:"></a>模型的理解:</h2><p><a href="https://zh.wikipedia.org/wiki/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA" target="_blank" rel="noopener">受限玻尔兹曼机 - 维基百科，自由的百科全书</a><br><a href="https://blog.csdn.net/xbinworld/article/details/44901865" target="_blank" rel="noopener">深度学习方法：受限玻尔兹曼机RBM（一）基本概念 - Bin 的专栏 - CSDN博客</a><br><a href="https://blog.csdn.net/xbinworld/article/details/45013825" target="_blank" rel="noopener">深度学习方法：受限玻尔兹曼机RBM（二）网络模型 - Bin 的专栏 - CSDN博客</a></p>
+<h3 id="核心出发点："><a href="#核心出发点：" class="headerlink" title="核心出发点："></a>核心出发点：</h3><ol>
+<li>是借用了统计力学里的”玻尔兹曼分布”的概念 (<strong>一个微粒在某个状态的几率和那个状态的能量的指数成反比</strong>, 和它的温度的倒数之指数成反比), 使用所谓的”限制玻尔兹曼机” (RBM)来学习.<br><img src="/2019/04/28/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA(RBM)/4F9F09AC-36C8-451B-A130-BD48ADFCE988.png" alt><br><img src="/2019/04/28/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA(RBM)/B0715ACC-1EC8-4470-BECD-DDC47BFDA9AA.png" alt></li>
+<li>RBM是一个能量模型（Energy based model, EBM），是从物理学能量模型中演变而来；<ol>
+<li>能量模型需要做的事情就是先定义一个合适的<strong>能量函数</strong>，</li>
+<li>然后基于这个能量函数得到变量的<strong>概率分布</strong>，</li>
+<li>最后基于概率分布去求解一个目标函数（如<strong>最大似然</strong>）</li>
+</ol>
+</li>
+</ol>
+<h3 id="与深度网络进行分类的区别："><a href="#与深度网络进行分类的区别：" class="headerlink" title="与深度网络进行分类的区别："></a>与深度网络进行分类的区别：</h3><ol>
+<li>目的不同：<ol>
+<li><strong>RBM目的：</strong>求出一个合适的W权重，并没有一个明确的输出的概念</li>
+</ol>
+</li>
+<li>loss function （cost function）的指代的概念不同：<ol>
+<li><strong>RBM：</strong>指的是最大似然函数</li>
+<li><strong>深度网络：</strong>与标准答案之间的距离</li>
+</ol>
+</li>
+</ol>
+<h3 id="模型的求解："><a href="#模型的求解：" class="headerlink" title="模型的求解："></a>模型的求解：</h3><p><em>我没看具体的求解</em> ：</p>
+<ol>
+<li>算法难点主要就是对W求导（当然还有bias参数），用于梯度下降的更新；</li>
+<li><strong>但是因为V和H都是二值化的，没有连续的可导函数去计算</strong>，<ol>
+<li>实际中采用的sampling的方法来计算，这里面就可以用比如<strong>gibbs sampling的方法</strong>，</li>
+<li>当然，<strong>Hinton提出了对比散度CD方法</strong>，比gibbs方法更快，已经成为求解RBM的标准解法。<br><a href="https://blog.csdn.net/xbinworld/article/month/2015/12" target="_blank" rel="noopener">【 归档 】深度学习方法：受限玻尔兹曼(三)(四)</a></li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/04/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%85%A8%E6%A6%82%E7%8E%87+%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%85%AC%E5%BC%8F%E8%AE%B2%E8%A7%A3/" rel="prev" title="全概率+贝叶斯公式讲解">
+      <i class="fa fa-chevron-left"></i> 全概率+贝叶斯公式讲解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/04/28/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E8%A1%A1%E9%87%8FGPU%E7%9A%84%E8%AE%A1%E7%AE%97%E8%83%BD%E5%8A%9B/" rel="next" title="衡量GPU的计算能力">
+      衡量GPU的计算能力 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#我有一个问题理解不了？"><span class="nav-number">1.</span> <span class="nav-text">我有一个问题理解不了？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型的理解"><span class="nav-number"></span> <span class="nav-text">模型的理解:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#核心出发点："><span class="nav-number">1.</span> <span class="nav-text">核心出发点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与深度网络进行分类的区别："><span class="nav-number">2.</span> <span class="nav-text">与深度网络进行分类的区别：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型的求解："><span class="nav-number">3.</span> <span class="nav-text">模型的求解：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">974</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:58</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : 'a570f8530660ba9e221fcfadf09c9107',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

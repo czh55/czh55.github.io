@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2017年11月4日 下午4:15 我对待这种人家的算法比自己的好的情况：我选择直接记住，简单实用的方式 3.最重要的问题：描述思路很模糊，造成写程序的时候模模糊糊，写不出来。        改进的第一步：描述的时候，对于操作对象要使用语言变量（多种）来表示，不能说这个、那个的 我对思路描述的要求：能做到一个不会的人，也能很快的理解写出程序，那么这个思路描述就成功了。说白了就是说的越详细越好。 应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构笔记提取">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2017/11/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%94%E8%AE%B0%E6%8F%90%E5%8F%96/index.html">
+<meta property="og:site_name" content="Chen的博客">
+<meta property="og:description" content="2017年11月4日 下午4:15 我对待这种人家的算法比自己的好的情况：我选择直接记住，简单实用的方式 3.最重要的问题：描述思路很模糊，造成写程序的时候模模糊糊，写不出来。        改进的第一步：描述的时候，对于操作对象要使用语言变量（多种）来表示，不能说这个、那个的 我对思路描述的要求：能做到一个不会的人，也能很快的理解写出程序，那么这个思路描述就成功了。说白了就是说的越详细越好。 应">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-11-03T20:15:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T08:46:20.354Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2017/11/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%94%E8%AE%B0%E6%8F%90%E5%8F%96/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>数据结构笔记提取 | Chen的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chen的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/11/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%94%E8%AE%B0%E6%8F%90%E5%8F%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chen的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据结构笔记提取
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-11-04 04:15:00" itemprop="dateCreated datePublished" datetime="2017-11-04T04:15:00+08:00">2017-11-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2017/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2017</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/11/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%AC%94%E8%AE%B0%E6%8F%90%E5%8F%96/" class="post-meta-item leancloud_visitors" data-flag-title="数据结构笔记提取" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2017年11月4日 下午4:15</p>
+<p>我对待这种人家的算法比自己的好的情况：我选择直接记住，简单实用的方式</p>
+<p>3.最重要的问题：描述思路很模糊，造成写程序的时候模模糊糊，写不出来。<br>        改进的第一步：描述的时候，对于操作对象要使用语言变量（多种）来表示，不能说这个、那个的</p>
+<p>我对思路描述的要求：能做到一个不会的人，也能很快的理解写出程序，那么这个思路描述就成功了。<br>说白了就是说的越详细越好。</p>
+<p>应该按这节中的带明确变量的思路描述才是重点。然后按这个思路描述写成完整程序就很简单了。</p>
+<p>总结：关于边界条件的是最容易错的，最容易少的。这道题中的关于循环条件的注意点，还是那就话，记住就行了，不要研究为啥<br>一个原则：条件能多不能少。</p>
+<p>总结：在编码阶段出现这些问题，很大程度是由于自己的思路描述没有描述清楚。<br>现在尝试一下从抽象到具体，分层次的进行描述方法。</p>
+<p>现在做一下总体的总结，因为上面的总结的小点多了之后，比较杂乱，不容易记忆。<br>总体总结：<br>分两部分：<br>第一部分：对思路描述的改进<br>第二部分：易错点的总结（以上总结那么多，其实汇总就是易错点而已。易错点是有他的标志的，抓住标志去解决问题）<br>（这章完成之后要将这些标志全部总结在一起）</p>
+<p>这节的内容默认链表是有序的，这也就是为什么最后要讲排序的原因</p>
+<p>要有的几种意识：已有资源的意识，已有资源的意识，设置初始值的意识</p>
+<p>整体总结：<br>这篇thinking的题真的需要你思考<br>这些题不仅仅需要我们有在practice中总结的思维描述+特征<br>还加上了一些在完成功能的情况下，如何将代码进行优化，多个步骤的融合（上面这道题）+ 解决问题的技巧（第一道题） + 选择递归（第二题，需要对题进行递归的概括）+不是能完成功能的就是对的（上面这道题）</p>
+<p>书中的算法：自己是肯定想不出来，我们不可能去推理证明这种算法的正确性，直接背会。<br>这些算法是其实是需要严格的理论证明，才可以使用的。<br>给我的感觉就是一道高数题，让你证明这个理论是正确的。</p>
+<p>第三章：栈和队列</p>
+<p>他们两个都是两种实现方式：顺序表+链表</p>
+<p>原则：不管是栈还是队列，能用顺序表就用顺序表，因为链表操作起来要复杂不少。特别是队列的链表，有少地方需要特殊处理。</p>
+<p>记忆的重点：他们的判空、判满条件+增加/删除的操作步骤。（这个是要直接背会的，除了队列的链表）</p>
+<p>所以：以前说的特征+思路描述 + 背算法这三个肯定是重中之重，但是，易错点也是特别需要留心的。程序这东西错一点就完蛋,这种一般都是没有专门来考虑引来的祸</p>
+<p>基本思想<br>实现步骤</p>
+<p>这些题就不要想自己能不能设计出一种算法来解决问题。<br>是要问自己，别人想好了算法，你能不能实现。<br>这里锻炼的其实不是你的创造性思维，其实是考验你的实现已知算法的基本功。<br>考验的还是基本功！！！！！<br>当然，前提是你要将这个特定的算法步骤，理解并背会！！！</p>
+<p>总结：<br>一般检查的点有：<br>    边界<br>    空<br>    只有一个时 </p>
+<p>结构体：我一开始想的是用双向链表，然后分别front[2] rear[2]，这么做是为了方便的链表的增加和删除<br>但是我一看答案，人家用的是顺序表，不是链表！！！！！<br>shit，自己给自己增加难度！！！<br>像这种没有具体场景的题，他其实是让你根据基本的数据结构，来设计更加复杂的数据结构或者操作。<br>这时最先想的是：判空+判满条件</p>
+<p>整体总结：<br>第一层：算法设计不出来。这个没办法。指的是脱离代码实现的一种算法构想。<br>第二层：事件的基本规律原则没有总结出来。这些规律原则是本事事件的属性，但是我们常常发现不了。<br>第三层：基本步骤的缺失不完整。其实就是步骤描述的注释少东西<br>第四层：语法出错。当程序不按自己的期望走时，很多时候都是自己的语法有问题，自己的意思和程序的意思是两张皮。</p>
+<p>总结:<br>当递归算法代码中只有一个递归语句，并且在程序的最后的话，可以直接改写成循环形式</p>
+<p>dp + 回溯+分治教会了我们怎样的思考问题的方式（这里我是回忆了刘汝佳的入门白皮书,因为有好几道题是用递归解决的，我的思路上有问题）<br>1.有些问题我们发现他的特点是：问题在某一个特定的情况下特别简单，特定的情况一般都是指的元素个数少（比如说两个数进行排序）等等，弱者都会的问题。但是当相同的问题，横向<br>扩充后，就会变得异常复杂。这时，我们能不能将问题在变回原来弱智的问题去解决？这就需要我们从内—&gt;外去解决，让问题变成一个个弱者的问题，然后就轻松的解决了。<br>那么，递归就给了我们一个进入到内部的方式。（新的解决问题的思路：新的分解问题的方式，这里的分解是重点，他的可行性验证就是最内部的是否可以简单求解）<br>2.而回溯，其实就是一种循环。他的步骤中每次循环（一层递归）都维持着解的一部分（这是他与1的最大的思路的不同的点），这也就是为啥我把他也称作是循环。</p>
+<p>当做一个题的时候，我们可能会因为想不出第一层的算法，而做不出题。这个是硬伤，没办法。<br>但是，又有很多时候，我们能表述出来我的的思想，但是就是没法下手，然后思想很有可能就走神了。<br>出现这种”我知道，但是我就是写不出来“的问题，我总结下来，很多时候都是自己的数据结构没有设计出来。<br>数据结构（结构体，数组，树，图，众多的变量…）这些其实是一个算法的实现起来的核心，<br>当数据结构设计出来的时候，也就是说明你的思维依托于代码已近走过一遍了，心中有谱了<br>因此，数据结构是代码实现的精髓。<br>当我们需要去记住一个算法的时候，他的数据结构设计一定是我们首先搞定的。</p>
+<p>总结：<br>1.涉及链表的操作中，malloc创建节点，初始化节点，连接节点，这三步是永远不会少的<br>2.关于malloc生产数组，可以直接通过[]来使用，和我们平常的数组使用起来一模一样。<br>3.-&gt;  . 不要混了。操作对象是指针才用-&gt;,在这里我就没有想M是个啥，下意识的使用-&gt;。以后要专门注意一下函数的参数类型是不是指针<br>4.最重要的<br>    建立十字链表最核心内容：在遍历的时候，怎么样能让新malloc出来的节点之间正确的连接？</p>
+<pre><code>这里的思路是：
+    先提出问题，能总结出自己的问题也是水平
+    这时不要想程序怎么写，依然还是在现实中寻找思路
+    找到思路之后，然后再想怎样用程序实现
+
+这个思路和我以前总结的四层的关系？
+    当我们在第三层写完注释，开始遍码的时候，就会觉得那里难住了，无法下手
+    这时我们就需要上面的思路，走出编码，先去寻找思路
+    也就是说，这个思路是我们遇到问题，解决问题的方法。
+    而四层，是我们所有题的基本方法，这个思路是我们在进行四层时遇到问题的解决方案</code></pre><p>递归：<br>新的解决问题的范式：新的分解问题的方式，他的可行性验证就是最内部的是否可以简单求解</p>
+<p>注意：这道题虽然是两层循环，但是实际上仅对数组进行了一次遍历，此时时间复杂度为o(n)</p>
+<p>递归：<br>新的解决问题的方式：新的分解问题的方式，他的可行性验证就是最内部的是否可以简单求解</p>
+<p>总结：<br>解决不了这个问题的按照我的“一个方法”，其实是我的算法有问题，不是简简单单的打点补丁就可以了。也就是说，需要我返回最开始的第一层去完全重新开始<br>明白，有些问题就是需要我们从头开始，不要怕浪费时间，大家都是这样</p>
+<p>总结：<br>我一开始读完题，错误的以为是要在本身数组上进行操作，那么必定涉及到顺序表位置的大量移动<br>我这就是自己给自己添加难度，有病<br>还有，我有一个特殊情况没有考虑进去，就是连个表数据相加可能为0</p>
+<p>再次递归总结：<br>1.将整个问题分成两部分：当前位置元素（1个）+后面所有元素（n-1个)———-整体的思想<br>2.尾部中解决一个就删除一个———–简化思想，处理的问题规模越来越小<br>3.永远解决的都是最后一个相同的问题————最终的目的</p>
+<p> (6-1) p139<br>作为程序的编写者，我们要按着程序运行的步骤去想问题</p>
+<p>原则：程序是我们表达思想的一种方式。先有思想，然后才有程序。递归依然也要遵从这样的步骤。<br>容易犯的毛病是：我要套用哪个程序模板，比如说这里的三种遍历树的方式。这种顺序就是反的</p>
+<p>拿这个例子来说：<br>脱离程序，我解决问题的思路是：从左下角开始，我们先站在”+”的位置上，计算”b”+”c”。计算结果之后我将结果保存在”+”所在的位置，然后”b”和”c”删掉。<br>第一个问题就解决了。由于每回都删掉最后一个，所以每回的操作其实是一样的。</p>
+<p>写这个函数的时候我提醒自己要站在图中”+”的位置去想如何去操作，<br>其实我说的就是废话：一个函数，首先要确定的是：输入参数有啥，输出参数最后是啥。<br>这里的参数是BTNode *p，这个参数就限定了我要处理问题的要站的位置。<br>输出参数是输入参数位置下所代表的值</p>
+<p>么这个函数的完成内容也就知道了：求当前位置下的最后结果值。<br>当明确我们的需求的时候写起来也就快的多了。</p>
+<p>总结：<br>将上面所说的全部连起来的以后，就会发现：<br>1.如何判断可否使用递归？<br>    1.将整个问题分成两部分：当前位置元素（1个）+后面所有元素（n-1个)———-整体的思想<br>    2.尾部中解决一个就删除一个———–简化思想，处理的问题规模越来越小<br>    3.永远解决的都是最后一个相同的问题————最终的目的<br>2.在能使用递归之后，如何真正的去写这个递归函数具体内容？<br>    1.其实我说的就是废话：一个函数，首先要确定的是：输入参数有啥，输出参数最后是啥。<br>    2.有哪些并列的情况，这个问题的答案就是函数的主体算法</p>
+<p>总结：<br>与前几个题比较：这个题的特点是他的问题与二叉树的遍历是互不影响的，也就是说，在完成功能的时候可以先完成遍历，然后在遍历的基础上去添加上这个计数的功能。<br>而前几个呢？他提出的问题，让解决的问题，都是不能独立在遍历的基础上添加的，这时就需要我们利用完全理解遍历的知识点，然后去完全依据现实的思路去完成功能<br>最简单的办法是：先试试遍历上加能不能行，不行在就算，能行最好</p>
+<p>我对层次遍历的思路总结：<br>1.这里不是用递归！<br>2.如何解决他们遍历的顺序问题？<br>    1.我们要求的是每一层从左到右<br>    2.在某一层中，当我们从左向右遍历这一层时，每遍历一个我就将这个节点的左右子节点依次放入到队列中，方便下次使用<br>    3.那第一层从哪里来呢？<br>        1.我们手工设置第一层，后面就是自动得了<br>    注意：这点是最重要的难点，最常见的问题就是你不知道怎样开始，然后就卡住不动了。因此：我们有时别太注意一个一个的步骤，就像纠结第一步做啥。这时我们要提高一个高度，从众多的步骤抽离出来，得到一个看似“笼统”方案。</p>
+<p>出现这个问题是因为从抽象–&gt;具体的过程中，跳跃性有点强，导致思维的混乱。<br>一个规律：出现这种情况时，很多都是如果是当做数学题的做，很简单，但是转换成程序的时候，</p>
+<p>假如让你发明一个算法，该如何发明呢？就像线索二叉树一样。<br>首先你要提出一个设想，我希望改进成什么样子，eg：线索二叉树中希望将二叉树更改成类似链表一样，直接就能够找到前驱和后继节点。<br>然后，我们去尝试，这里的尝试可以吸取其他算法的经验，去达到我们想要的目标。eg：线索二叉树中就首先更改了节点的内部结构。<br>然后最重要的一步是：用你改进之后的结构，去尝试解决问题，判断是否可以走通。<br>最难的一步：将能走通的结构和想法，将这种想法汇总总结成步骤，最后写成程序</p>
+<p>总结：<br>如何去解决我上面提出“解决将能够走通的想法，转换成代码实现很困难（尤其在树中）”<br>在书中p146-149就给出了很好的示范！！<br>在整理思路的时候，他举一个具体的例子，并且画了图。在这基础上他还1.2.3…具体的描述了在图中分析问题思路的步骤。<br>这里的问题是：这是一个具体的例子，而我们需要的是一个通用的程序。<br>这是我们就需去将1.2.3…这样的步骤抽象：将1.2.3..中的每一步当做一个单位，去‘对比’出一个单位分为哪些步骤，这些单位有哪些异同，结果合并和一个交集。记住：我们要的是一个通式！！</p>
+<p><strong>两个不管：</strong><br>    <strong>前驱从哪来的不管</strong><br>    <strong>左右子树怎样操作的我不管</strong></p>
+<p>总结：<br>在1-5章，他的操作题就两种顺序表和链表这两大类，求解的问题一般都是空间移动，统计，增删改查啥的，难题集中在算法你不知道，你设计不出来一套合适的算法<br>而在第六章，求解的问题很多都设计到记录的保存，和递归，他的题的共性是：给你当做数学题做太简单，当成程序题太难。原因就是前面说的转换能力不行。<br>好在我已经总结写出了解决的方法。</p>
+<p>求解过程就是仿照p147页的过程：举例，画图，写步骤，抽象总结。</p>
+<p>总结:<br>我这这里就没有想到用递归去解决，使用递归这种思考方式，可以省去很多细节上的考虑。<br>先总结一下这个递归的思路：站在一个节点的角度，去给这个节点赋值，最后返回一下</p>
+<p>做事总是一步一步的，缺少整体的宏观的思维，是我想不到递归的本质原因。</p>
+<p>递归的难点：在于如何去分割这两个数组<br>循环的难点：在于如何记录他们之间的关系，保证正确的链接。</p>
+<p>我要将当前节点（AGraph *G,int v）的相连的所有边都要遍历（p = p-&gt;nextarc）<br>树的当前节点（BTNode *bt） 遍历的是（bt-&gt;lchild  bt-&gt;rchild）<br>对比总结：<br>这一对比就体现出了树和图在struct类型定义时最大的不同：如何去找节点？<br>图中的节点是放在数组中的，我们想拿就必须通过数组下标。数组下标是int类型，所以我们在DFS函数传参只能是int类型。<br>如果一个图不是用int类型的数字去标识一个节点的话，例如使用A,B,C等，这些不能直接转换成图。或者说要在生成树的时候就必须人为的给他们编号。<br>总之，图中的每个节点必须从0开始编号！！！</p>
+<p>总结树和图的不同（链式存储）：<br>树是以节点为单位的，图是以边为单位的<br>树可以直接寻找下一个节点，图必须以数组下标去寻找下一个节点，但图也可以直接通过当前边寻找下一条边。</p>
+<p>有向图和无向图，他们的遍历方式一样吗？<br>一样！<br>是否有向，只影响图的建立过程，不影响遍历过程。</p>
+<p>1+1+1 = 3</p>
+<p>重要总结：<br>我以前总结的（4+1） +  递归  +  想法转换成步骤<br>首先强调：要将思路和编程实现分开来思考<br>1.“想法转换成步骤”属于思路上的，他的目的是通过不断地测试，普通取样，特殊取样等等，最后找到所谓的“思路上的通解步骤”<br>2.“1”同样也是属于思路上的，他作为“想法转换成步骤”补充，因为：“1”是当出现问题难点的时候，解决问题的技巧，同样强调这是思路上的解决，尽量的联系上已知学过的简单知识点，<strong>把难点编程知识点的拼凑或者简单变形</strong>。<br>3.最后编码时才会去落实“4”，“4”能很大程度上减少我们的错误。这时出现问题，要跳出代码，返回1，2 去重新思考。</p>
+<p>我现在对“把思路转换成步骤”，这一步比较有经验了，主要有以下几点<br>1.要特意的去考虑特殊情况<br>2.先找见一个的比较大众，包含性强的情况去解决，然后在加上其他的特殊情况。（这样就条例很多了）</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/11/03/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/eclipse%20Mac%20%E4%B8%AD%E6%96%87%E4%B8%8B%E8%BD%BD/" rel="prev" title="eclipse Mac 中文下载">
+      <i class="fa fa-chevron-left"></i> eclipse Mac 中文下载
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/11/07/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6T(n)/" rel="next" title="算法时间复杂度T(n)">
+      算法时间复杂度T(n) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">974</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:58</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '7b0658c8faa58632234002494be4b0f2',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

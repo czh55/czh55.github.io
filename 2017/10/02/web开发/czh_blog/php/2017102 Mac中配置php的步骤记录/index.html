@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2017年10月2日 下午8:39 概述：主要内容在MAC下的java环境 安装brew12345678910111213141516171819202122232425262728localhost:~ czh$ ruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.github.com&#x2F;mxcl&#x2F;homebrew&#x2F;go&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017&#x2F;10&#x2F;2 Mac中配置php的步骤记录">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2017/10/02/web%E5%BC%80%E5%8F%91/czh_blog/php/2017102%20Mac%E4%B8%AD%E9%85%8D%E7%BD%AEphp%E7%9A%84%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Chen的博客">
+<meta property="og:description" content="2017年10月2日 下午8:39 概述：主要内容在MAC下的java环境 安装brew12345678910111213141516171819202122232425262728localhost:~ czh$ ruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.github.com&#x2F;mxcl&#x2F;homebrew&#x2F;go&amp;">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-10-02T00:39:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T08:46:16.234Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2017/10/02/web%E5%BC%80%E5%8F%91/czh_blog/php/2017102%20Mac%E4%B8%AD%E9%85%8D%E7%BD%AEphp%E7%9A%84%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>2017/10/2 Mac中配置php的步骤记录 | Chen的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chen的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/10/02/web%E5%BC%80%E5%8F%91/czh_blog/php/2017102%20Mac%E4%B8%AD%E9%85%8D%E7%BD%AEphp%E7%9A%84%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chen的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2017/10/2 Mac中配置php的步骤记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-10-02 08:39:00" itemprop="dateCreated datePublished" datetime="2017-10-02T08:39:00+08:00">2017-10-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:16" itemprop="dateModified" datetime="2020-03-12T16:46:16+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_blog/PHP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/10/02/web%E5%BC%80%E5%8F%91/czh_blog/php/2017102%20Mac%E4%B8%AD%E9%85%8D%E7%BD%AEphp%E7%9A%84%E6%AD%A5%E9%AA%A4%E8%AE%B0%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="2017/10/2 Mac中配置php的步骤记录" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>24k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>22 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2017年10月2日 下午8:39</p>
+<h2 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h2><p>主要内容在<br><a href="bear://x-callback-url/open-note?id=03C78BF2-3E2F-4C6A-95A2-A0C4CCD4CFCB-1586-0000085D832A2253">MAC下的java环境</a></p>
+<h2 id="安装brew"><a href="#安装brew" class="headerlink" title="安装brew"></a>安装brew</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ czh$ ruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.github.com&#x2F;mxcl&#x2F;homebrew&#x2F;go&#x2F;install)&quot;</span><br><span class="line">curl: (22) The requested URL returned error: 404 Not Found</span><br><span class="line">localhost:~ czh$ brew doctor</span><br><span class="line">-bash: brew: command not found</span><br><span class="line">localhost:~ czh$ ruby -e &quot;$(curl -fsSL https:&#x2F;&#x2F;raw.github.com&#x2F;mxcl&#x2F;homebrew&#x2F;go&#x2F;install)&quot;</span><br><span class="line">curl: (22) The requested URL returned error: 404 Not Found</span><br><span class="line">localhost:~ czh$ ruby -e &quot;$(curl --insecure -fsSL https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;Homebrew&#x2F;install&#x2F;master&#x2F;install)&quot;</span><br><span class="line">&#x3D;&#x3D;&gt; This script will install:</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;bin&#x2F;brew</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;share&#x2F;doc&#x2F;homebrew</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;share&#x2F;man&#x2F;man1&#x2F;brew.1</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;share&#x2F;zsh&#x2F;site-functions&#x2F;_brew</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;etc&#x2F;bash_completion.d&#x2F;brew</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;Homebrew</span><br><span class="line">&#x3D;&#x3D;&gt; The following new directories will be created:</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;Cellar</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;Homebrew</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;Frameworks</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;bin</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;etc</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;include</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;lib</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;opt</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;sbin</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;share</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;share&#x2F;zsh</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;share&#x2F;zsh&#x2F;site-functions</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;var</span><br></pre></td></tr></table></figure>
+
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ czh$ brew doctor</span><br><span class="line">Your system is ready to brew.</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ czh$ brew install brew-cask-completion</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a>安装mysql</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">Last login: Sun Oct  1 23:33:35 on ttys001</span><br><span class="line">localhost:~ czh$ brew install mysql</span><br><span class="line">Updating Homebrew...</span><br><span class="line">&#x3D;&#x3D;&gt; Auto-updated Homebrew!</span><br><span class="line">Updated 1 tap (homebrew&#x2F;core).</span><br><span class="line">&#x3D;&#x3D;&gt; Updated Formulae</span><br><span class="line">youtube-dl</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;homebrew.bintray.com&#x2F;bottles&#x2F;mysql-5.7.19.sierra.bottle.</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">&#x3D;&#x3D;&gt; Pouring mysql-5.7.19.sierra.bottle.tar.gz</span><br><span class="line">&#x3D;&#x3D;&gt; &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;mysql&#x2F;5.7.19&#x2F;bin&#x2F;mysqld --initialize-insecure --user&#x3D;czh -</span><br><span class="line">&#x3D;&#x3D;&gt; Caveats</span><br><span class="line">We&#39;ve installed your MySQL database without a root password. To secure it run:</span><br><span class="line">    mysql_secure_installation</span><br><span class="line"></span><br><span class="line">MySQL is configured to only allow connections from localhost by default</span><br><span class="line"></span><br><span class="line">To connect run:</span><br><span class="line">    mysql -uroot</span><br><span class="line"></span><br><span class="line">To have launchd start mysql now and restart at login:</span><br><span class="line">  brew services start mysql</span><br><span class="line">Or, if you don&#39;t want&#x2F;need a background service you can just run:</span><br><span class="line">  mysql.server start</span><br><span class="line">&#x3D;&#x3D;&gt; Summary</span><br><span class="line">🍺  &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;mysql&#x2F;5.7.19: 322 files, 233MB</span><br><span class="line">localhost:~ czh$ ln -sfv &#x2F;usr&#x2F;local&#x2F;opt&#x2F;mysql&#x2F;*.plist ~&#x2F;Library&#x2F;LaunchAgents</span><br><span class="line">&#x2F;Users&#x2F;czh&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.mysql.plist -&gt; &#x2F;usr&#x2F;local&#x2F;opt&#x2F;mysql&#x2F;homebrew.mxcl.mysql.plist</span><br><span class="line">localhost:~ czh$ launchctl load ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.mysql.plist</span><br><span class="line">localhost:~ czh$ &#x2F;usr&#x2F;local&#x2F;opt&#x2F;mysql&#x2F;bin&#x2F;mysql_secure_installation</span><br><span class="line"></span><br><span class="line">Securing the MySQL server deployment.</span><br><span class="line"></span><br><span class="line">Connecting to MySQL using a blank password.</span><br><span class="line"></span><br><span class="line">VALIDATE PASSWORD PLUGIN can be used to test passwords</span><br><span class="line">and improve security. It checks the strength of password</span><br><span class="line">and allows the users to set only those passwords which are</span><br><span class="line">secure enough. Would you like to setup VALIDATE PASSWORD plugin?</span><br><span class="line"></span><br><span class="line">Press y|Y for Yes, any other key for No: Y</span><br><span class="line"></span><br><span class="line">There are three levels of password validation policy:</span><br><span class="line"></span><br><span class="line">LOW    Length &gt;&#x3D; 8</span><br><span class="line">MEDIUM Length &gt;&#x3D; 8, numeric, mixed case, and special characters</span><br><span class="line">STRONG Length &gt;&#x3D; 8, numeric, mixed case, special characters and dictionary                  file</span><br><span class="line"></span><br><span class="line">Please enter 0 &#x3D; LOW, 1 &#x3D; MEDIUM and 2 &#x3D; STRONG: 0</span><br><span class="line">Please set the password for root here.</span><br><span class="line"></span><br><span class="line">New password:</span><br><span class="line"></span><br><span class="line">Re-enter new password:</span><br><span class="line"></span><br><span class="line">Estimated strength of the password: 50</span><br><span class="line">Do you wish to continue with the password provided?(Press y|Y for Yes, any other key for No) : Y</span><br><span class="line">By default, a MySQL installation has an anonymous user,</span><br><span class="line">allowing anyone to log into MySQL without having to have</span><br><span class="line">a user account created for them. This is intended only for</span><br><span class="line">testing, and to make the installation go a bit smoother.</span><br><span class="line">You should remove them before moving into a production</span><br><span class="line">environment.</span><br><span class="line"></span><br><span class="line">Remove anonymous users? (Press y|Y for Yes, any other key for No) : Y</span><br><span class="line">Success.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Normally, root should only be allowed to connect from</span><br><span class="line">&#39;localhost&#39;. This ensures that someone cannot guess at</span><br><span class="line">the root password from the network.</span><br><span class="line"></span><br><span class="line">Disallow root login remotely? (Press y|Y for Yes, any other key for No) : n</span><br><span class="line"></span><br><span class="line"> ... skipping.</span><br><span class="line">By default, MySQL comes with a database named &#39;test&#39; that</span><br><span class="line">anyone can access. This is also intended only for testing,</span><br><span class="line">and should be removed before moving into a production</span><br><span class="line">environment.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Remove test database and access to it? (Press y|Y for Yes, any other key for No) : n</span><br><span class="line"></span><br><span class="line"> ... skipping.</span><br><span class="line">Reloading the privilege tables will ensure that all changes</span><br><span class="line">made so far will take effect immediately.</span><br><span class="line"></span><br><span class="line">Reload privilege tables now? (Press y|Y for Yes, any other key for No) : Y</span><br><span class="line">Success.</span><br><span class="line"></span><br><span class="line">All done!</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a>安装php</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br></pre></td><td class="code"><pre><span class="line">Last login: Mon Oct  2 08:25:24 on ttys000</span><br><span class="line">localhost:~ czh$ brew install php70 --with-fpm --with-gmp --with-imap --with-tidy --with-debug --with-mysql --with-libmysql</span><br><span class="line">Updating Homebrew...</span><br><span class="line">&#x3D;&#x3D;&gt; Installing php70 from josegonzalez&#x2F;php</span><br><span class="line">&#x3D;&#x3D;&gt; Installing dependencies for josegonzalez&#x2F;php&#x2F;php70: gmp, icu4c, imap-uw, libxml2, unixodbc</span><br><span class="line">&#x3D;&#x3D;&gt; Installing josegonzalez&#x2F;php&#x2F;php70 dependency: gmp</span><br><span class="line">&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;homebrew.bintray.com&#x2F;bottles&#x2F;gmp-6.1.2.sierra.bottle.1.t</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">&#x3D;&#x3D;&gt; Pouring gmp-6.1.2.sierra.bottle.1.tar.gz</span><br><span class="line">🍺  &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;gmp&#x2F;6.1.2: 18 files, 3.1MB</span><br><span class="line">&#x3D;&#x3D;&gt; Installing josegonzalez&#x2F;php&#x2F;php70 dependency: icu4c</span><br><span class="line">&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;homebrew.bintray.com&#x2F;bottles&#x2F;icu4c-59.1.sierra.bottle.ta</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">&#x3D;&#x3D;&gt; Pouring icu4c-59.1.sierra.bottle.tar.gz</span><br><span class="line">&#x3D;&#x3D;&gt; Caveats</span><br><span class="line">This formula is keg-only, which means it was not symlinked into &#x2F;usr&#x2F;local,</span><br><span class="line">because macOS provides libicucore.dylib (but nothing else).</span><br><span class="line"></span><br><span class="line">If you need to have this software first in your PATH run:</span><br><span class="line">  echo &#39;export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;opt&#x2F;icu4c&#x2F;bin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile</span><br><span class="line">  echo &#39;export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;opt&#x2F;icu4c&#x2F;sbin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile</span><br><span class="line"></span><br><span class="line">For compilers to find this software you may need to set:</span><br><span class="line">    LDFLAGS:  -L&#x2F;usr&#x2F;local&#x2F;opt&#x2F;icu4c&#x2F;lib</span><br><span class="line">    CPPFLAGS: -I&#x2F;usr&#x2F;local&#x2F;opt&#x2F;icu4c&#x2F;include</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D;&gt; Summary</span><br><span class="line">🍺  &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;icu4c&#x2F;59.1: 246 files, 65.4MB</span><br><span class="line">&#x3D;&#x3D;&gt; Installing josegonzalez&#x2F;php&#x2F;php70 dependency: imap-uw</span><br><span class="line">&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;homebrew.bintray.com&#x2F;bottles&#x2F;imap-uw-2007f.sierra.bottle</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">&#x3D;&#x3D;&gt; Pouring imap-uw-2007f.sierra.bottle.tar.gz</span><br><span class="line">🍺  &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;imap-uw&#x2F;2007f: 151 files, 9.0MB</span><br><span class="line">&#x3D;&#x3D;&gt; Installing josegonzalez&#x2F;php&#x2F;php70 dependency: libxml2</span><br><span class="line">&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;homebrew.bintray.com&#x2F;bottles&#x2F;libxml2-2.9.5.sierra.bottle</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">&#x3D;&#x3D;&gt; Pouring libxml2-2.9.5.sierra.bottle.tar.gz</span><br><span class="line">&#x3D;&#x3D;&gt; Caveats</span><br><span class="line">This formula is keg-only, which means it was not symlinked into &#x2F;usr&#x2F;local,</span><br><span class="line">because macOS already provides this software and installing another version in</span><br><span class="line">parallel can cause all kinds of trouble.</span><br><span class="line"></span><br><span class="line">If you need to have this software first in your PATH run:</span><br><span class="line">  echo &#39;export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;opt&#x2F;libxml2&#x2F;bin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile</span><br><span class="line"></span><br><span class="line">For compilers to find this software you may need to set:</span><br><span class="line">    LDFLAGS:  -L&#x2F;usr&#x2F;local&#x2F;opt&#x2F;libxml2&#x2F;lib</span><br><span class="line">    CPPFLAGS: -I&#x2F;usr&#x2F;local&#x2F;opt&#x2F;libxml2&#x2F;include</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">If you need Python to find bindings for this keg-only formula, run:</span><br><span class="line">  echo &#x2F;usr&#x2F;local&#x2F;opt&#x2F;libxml2&#x2F;lib&#x2F;python2.7&#x2F;site-packages &gt;&gt; &#x2F;usr&#x2F;local&#x2F;lib&#x2F;python2.7&#x2F;site-packages&#x2F;libxml2.pth</span><br><span class="line">  mkdir -p &#x2F;Users&#x2F;czh&#x2F;Library&#x2F;Python&#x2F;2.7&#x2F;lib&#x2F;python&#x2F;site-packages</span><br><span class="line">  echo &#39;import site; site.addsitedir(&quot;&#x2F;usr&#x2F;local&#x2F;lib&#x2F;python2.7&#x2F;site-packages&quot;)&#39; &gt;&gt; &#x2F;Users&#x2F;czh&#x2F;Library&#x2F;Python&#x2F;2.7&#x2F;lib&#x2F;python&#x2F;site-packages&#x2F;homebrew.pth</span><br><span class="line">&#x3D;&#x3D;&gt; Summary</span><br><span class="line">🍺  &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;libxml2&#x2F;2.9.5: 281 files, 10.4MB</span><br><span class="line">&#x3D;&#x3D;&gt; Installing josegonzalez&#x2F;php&#x2F;php70 dependency: unixodbc</span><br><span class="line">&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;homebrew.bintray.com&#x2F;bottles&#x2F;unixodbc-2.3.4.sierra.bottl</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">&#x3D;&#x3D;&gt; Pouring unixodbc-2.3.4.sierra.bottle.2.tar.gz</span><br><span class="line">🍺  &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;unixodbc&#x2F;2.3.4: 43 files, 1.8MB</span><br><span class="line">Warning: josegonzalez&#x2F;php&#x2F;php70: this formula has no --with-fpm option so it will be ignored!</span><br><span class="line">Warning: josegonzalez&#x2F;php&#x2F;php70: this formula has no --with-mysql option so it will be ignored!</span><br><span class="line">Warning: josegonzalez&#x2F;php&#x2F;php70: this formula has no --with-tidy option so it will be ignored!</span><br><span class="line">&#x3D;&#x3D;&gt; Installing josegonzalez&#x2F;php&#x2F;php70 --with-gmp --with-debug --with-i</span><br><span class="line">&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;php.net&#x2F;get&#x2F;php-7.0.23.tar.bz2&#x2F;from&#x2F;this&#x2F;mirror</span><br><span class="line">&#x3D;&#x3D;&gt; Downloading from https:&#x2F;&#x2F;secure.php.net&#x2F;get&#x2F;php-7.0.23.tar.bz2&#x2F;from&#x2F;this&#x2F;mir</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">&#x3D;&#x3D;&gt; .&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;php70&#x2F;7.0.23_15 --localstatedir&#x3D;&#x2F;usr&#x2F;</span><br><span class="line">&#x3D;&#x3D;&gt; make</span><br><span class="line">&#x3D;&#x3D;&gt; make install</span><br><span class="line">&#x3D;&#x3D;&gt; Caveats</span><br><span class="line">The php.ini file can be found in:</span><br><span class="line">    &#x2F;usr&#x2F;local&#x2F;etc&#x2F;php&#x2F;7.0&#x2F;php.ini</span><br><span class="line"></span><br><span class="line">✩✩✩✩ Extensions ✩✩✩✩</span><br><span class="line"></span><br><span class="line">If you are having issues with custom extension compiling, ensure that you are using the brew version, by placing &#x2F;usr&#x2F;local&#x2F;bin before &#x2F;usr&#x2F;sbin in your PATH:</span><br><span class="line"></span><br><span class="line">      PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;bin:$PATH&quot;</span><br><span class="line"></span><br><span class="line">PHP70 Extensions will always be compiled against this PHP. Please install them using --without-homebrew-php to enable compiling against system PHP.</span><br><span class="line"></span><br><span class="line">✩✩✩✩ PHP CLI ✩✩✩✩</span><br><span class="line"></span><br><span class="line">If you wish to swap the PHP you use on the command line, you should add the following to ~&#x2F;.bashrc, ~&#x2F;.zshrc, ~&#x2F;.profile or your shell&#39;s equivalent configuration file:</span><br><span class="line">  export PATH&#x3D;&quot;$(brew --prefix homebrew&#x2F;php&#x2F;php70)&#x2F;bin:$PATH&quot;</span><br><span class="line"></span><br><span class="line">GMP has moved to its own formula, please install it by running: brew install php70-gmp</span><br><span class="line"></span><br><span class="line">✩✩✩✩ FPM ✩✩✩✩</span><br><span class="line"></span><br><span class="line">To launch php-fpm on startup:</span><br><span class="line">    mkdir -p ~&#x2F;Library&#x2F;LaunchAgents</span><br><span class="line">    cp &#x2F;usr&#x2F;local&#x2F;opt&#x2F;php70&#x2F;homebrew.mxcl.php70.plist ~&#x2F;Library&#x2F;LaunchAgents&#x2F;</span><br><span class="line">    launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist</span><br><span class="line"></span><br><span class="line">The control script is located at &#x2F;usr&#x2F;local&#x2F;opt&#x2F;php70&#x2F;sbin&#x2F;php70-fpm</span><br><span class="line"></span><br><span class="line">OS X 10.8 and newer come with php-fpm pre-installed, to ensure you are using the brew version you need to make sure &#x2F;usr&#x2F;local&#x2F;sbin is before &#x2F;usr&#x2F;sbin in your PATH:</span><br><span class="line"></span><br><span class="line">  PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;sbin:$PATH&quot;</span><br><span class="line"></span><br><span class="line">You may also need to edit the plist to use the correct &quot;UserName&quot;.</span><br><span class="line"></span><br><span class="line">Please note that the plist was called &#39;homebrew-php.josegonzalez.php70.plist&#39; in old versions of this formula.</span><br><span class="line"></span><br><span class="line">With the release of macOS Sierra the Apache module is now not built by default. If you want to build it on your system you have to install php with the --with-httpd24 option. See  brew options php70 for more details.</span><br><span class="line"></span><br><span class="line">To have launchd start josegonzalez&#x2F;php&#x2F;php70 now and restart at login:</span><br><span class="line">  brew services start josegonzalez&#x2F;php&#x2F;php70</span><br><span class="line">&#x3D;&#x3D;&gt; Summary</span><br><span class="line">🍺  &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;php70&#x2F;7.0.23_15: 313 files, 42.1MB, built in 6 minutes 36 seconds</span><br><span class="line">localhost:~ czh$ echo &#39;export PATH&#x3D;&quot;$(brew --prefix php70)&#x2F;bin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile  #for php</span><br><span class="line">localhost:~ czh$ echo &#39;export PATH&#x3D;&quot;$(brew --prefix php70)&#x2F;sbin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile  #for php-fpm</span><br><span class="line">localhost:~ czh$ echo &#39;export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;sbib:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile #for other brew install soft</span><br><span class="line">localhost:~ czh$ source ~&#x2F;.bash_profile</span><br><span class="line">localhost:~ czh$ php -v</span><br><span class="line">PHP 7.0.23 (cli) (built: Oct  2 2017 08:35:23) ( NTS DEBUG )</span><br><span class="line">Copyright (c) 1997-2017 The PHP Group</span><br><span class="line">Zend Engine v3.0.0, Copyright (c) 1998-2017 Zend Technologies</span><br><span class="line">localhost:~ czh$</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="php简单配置"><a href="#php简单配置" class="headerlink" title="php简单配置"></a>php简单配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ czh$ brew services restart php70</span><br><span class="line">&#x3D;&#x3D;&gt; Tapping homebrew&#x2F;services</span><br><span class="line">Cloning into &#39;&#x2F;usr&#x2F;local&#x2F;Homebrew&#x2F;Library&#x2F;Taps&#x2F;homebrew&#x2F;homebrew-services&#39;...</span><br><span class="line">remote: Counting objects: 12, done.</span><br><span class="line">remote: Compressing objects: 100% (8&#x2F;8), done.</span><br><span class="line">remote: Total 12 (delta 0), reused 7 (delta 0), pack-reused 0</span><br><span class="line">Unpacking objects: 100% (12&#x2F;12), done.</span><br><span class="line">Tapped 0 formulae (40 files, 54.0KB)</span><br><span class="line">&#x3D;&#x3D;&gt; Successfully started &#96;php70&#96; (label: homebrew.mxcl.php70)</span><br><span class="line">localhost:~ czh$ lsof -Pni4 | grep LISTEN | grep php</span><br><span class="line">php-fpm   62115  czh    8u  IPv4 0x95bccd2b0d57769      0t0  TCP 127.0.0.1:9000 (LISTEN)</span><br><span class="line">php-fpm   62118  czh    0u  IPv4 0x95bccd2b0d57769      0t0  TCP 127.0.0.1:9000 (LISTEN)</span><br><span class="line">php-fpm   62119  czh    0u  IPv4 0x95bccd2b0d57769      0t0  TCP 127.0.0.1:9000 (LISTEN)</span><br><span class="line">localhost:~ czh$ ln -sfv &#x2F;usr&#x2F;local&#x2F;opt&#x2F;php70&#x2F;*.plist ~&#x2F;Library&#x2F;LaunchAgents</span><br><span class="line">&#x2F;Users&#x2F;czh&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist -&gt; &#x2F;usr&#x2F;local&#x2F;opt&#x2F;php70&#x2F;homebrew.mxcl.php70.plist</span><br><span class="line">localhost:~ czh$ launchctl load ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;php70&#x2F;7.0.23_15&#x2F;homebrew.mxcl.php70.plist: service already loaded</span><br><span class="line">localhost:~ czh$ brew install composer</span><br><span class="line">Updating Homebrew...</span><br><span class="line">&#x3D;&#x3D;&gt; Installing composer from josegonzalez&#x2F;php</span><br><span class="line">&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;homebrew.bintray.com&#x2F;bottles-php&#x2F;composer-1.5.2.sierra.b</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">&#x3D;&#x3D;&gt; Pouring composer-1.5.2.sierra.bottle.tar.gz</span><br><span class="line">&#x3D;&#x3D;&gt; Caveats</span><br><span class="line">      composer no longer depends on the homebrew php Formulas since the last couple of macOS releases</span><br><span class="line">      contains a php version compatible with composer. If this has been part of your workflow</span><br><span class="line">      previously then please make the appropriate changes and &#96;brew install php71&#96; or other appropriate</span><br><span class="line">      Homebrew PHP version.</span><br><span class="line">&#x3D;&#x3D;&gt; Summary</span><br><span class="line">🍺  &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;composer&#x2F;1.5.2: 5 files, 1.8MB</span><br></pre></td></tr></table></figure>
+
+<h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ czh$ composer --version</span><br><span class="line">Composer version 1.5.2 2017-09-11 16:59:25</span><br><span class="line">localhost:~ czh$ brew install nginx --with-http_geoip_module</span><br><span class="line">&#x3D;&#x3D;&gt; Installing dependencies for nginx: pcre</span><br><span class="line">&#x3D;&#x3D;&gt; Installing nginx dependency: pcre</span><br><span class="line">&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;homebrew.bintray.com&#x2F;bottles&#x2F;pcre-8.41.sierra.bottle.tar</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">&#x3D;&#x3D;&gt; Pouring pcre-8.41.sierra.bottle.tar.gz</span><br><span class="line">🍺  &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;pcre&#x2F;8.41: 204 files, 5.3MB</span><br><span class="line">Warning: nginx: this formula has no --with-http_geoip_module option so it will be ignored!</span><br><span class="line">&#x3D;&#x3D;&gt; Installing nginx</span><br><span class="line">&#x3D;&#x3D;&gt; Downloading https:&#x2F;&#x2F;homebrew.bintray.com&#x2F;bottles&#x2F;nginx-1.12.1.sierra.bottle.</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">&#x3D;&#x3D;&gt; Pouring nginx-1.12.1.sierra.bottle.tar.gz</span><br><span class="line">&#x3D;&#x3D;&gt; Caveats</span><br><span class="line">Docroot is: &#x2F;usr&#x2F;local&#x2F;var&#x2F;www</span><br><span class="line"></span><br><span class="line">The default port has been set in &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf to 8080 so that</span><br><span class="line">nginx can run without sudo.</span><br><span class="line"></span><br><span class="line">nginx will load all files in &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;servers&#x2F;.</span><br><span class="line"></span><br><span class="line">To have launchd start nginx now and restart at login:</span><br><span class="line">  brew services start nginx</span><br><span class="line">Or, if you don&#39;t want&#x2F;need a background service you can just run:</span><br><span class="line">  nginx</span><br><span class="line">&#x3D;&#x3D;&gt; Summary</span><br><span class="line">🍺  &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;nginx&#x2F;1.12.1: 23 files, 1MB</span><br><span class="line">localhost:~ czh$ nginx -t</span><br><span class="line">nginx: the configuration file &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf test is successful</span><br><span class="line">localhost:~ czh$ ln -sfv &#x2F;usr&#x2F;local&#x2F;opt&#x2F;nginx&#x2F;*.plist ~&#x2F;Library&#x2F;LaunchAgents</span><br><span class="line">&#x2F;Users&#x2F;czh&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.nginx.plist -&gt; &#x2F;usr&#x2F;local&#x2F;opt&#x2F;nginx&#x2F;homebrew.mxcl.nginx.plist</span><br><span class="line">localhost:~ czh$ launchctl load ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.nginx.plist</span><br><span class="line">localhost:~ czh$ sudo chown root:wheel &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;nginx&#x2F;1.12.1&#x2F;bin&#x2F;nginx</span><br><span class="line">Password:</span><br><span class="line">Sorry, try again.</span><br><span class="line">Password:</span><br><span class="line">localhost:~ czh$</span><br></pre></td></tr></table></figure>
+
+<h2 id="nginx的配置"><a href="#nginx的配置" class="headerlink" title="nginx的配置"></a>nginx的配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ czh$ vim &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default-ssl</span><br><span class="line">localhost:~ czh$ vim &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;phpmyadmin</span><br><span class="line">localhost:~ czh$ mkdir -p &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;ssl</span><br><span class="line">localhost:~ czh$ openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj &quot;&#x2F;C&#x3D;US&#x2F;ST&#x3D;State&#x2F;L&#x3D;Town&#x2F;O&#x3D;Office&#x2F;CN&#x3D;localhost&quot; -keyout &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;localhost.key -out &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;localhost.crt</span><br><span class="line">Generating a 4096 bit RSA private key</span><br><span class="line">.....................................................................................................................................................................++</span><br><span class="line">.....................................................................++</span><br><span class="line">writing new private key to &#39;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;localhost.key&#39;</span><br><span class="line">-----</span><br><span class="line">localhost:~ czh$ openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj &quot;&#x2F;C&#x3D;US&#x2F;ST&#x3D;State&#x2F;L&#x3D;Town&#x2F;O&#x3D;Office&#x2F;CN&#x3D;phpmyadmin&quot; -keyout &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;phpmyadmin.key -out &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;phpmyadmin.crt</span><br><span class="line">Generating a 4096 bit RSA private key</span><br><span class="line">.........................................++</span><br><span class="line">.....................................................................++</span><br><span class="line">writing new private key to &#39;&#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;phpmyadmin.key&#39;</span><br><span class="line">-----</span><br><span class="line">localhost:~ czh$ ln -sfv &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default -&gt; &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default</span><br><span class="line">localhost:~ czh$ ln -sfv &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default-ssl &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default-ssl</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default-ssl -&gt; &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default-ssl</span><br><span class="line">localhost:~ czh$ ln -sfv &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;phpmyadmin &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;phpmyadmin</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;phpmyadmin -&gt; &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;phpmyadmin</span><br><span class="line">localhost:~ czh$ launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.nginx.plist</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;nginx&#x2F;1.12.1&#x2F;homebrew.mxcl.nginx.plist: service already loaded</span><br><span class="line">localhost:~ czh$ php -v</span><br><span class="line">PHP 7.0.23 (cli) (built: Oct  2 2017 08:35:23) ( NTS DEBUG )</span><br><span class="line">Copyright (c) 1997-2017 The PHP Group</span><br><span class="line">Zend Engine v3.0.0, Copyright (c) 1998-2017 Zend Technologies</span><br><span class="line">localhost:~ czh$ nginx.start</span><br><span class="line">-bash: nginx.start: command not found</span><br><span class="line">localhost:~ czh$ launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.nginx.plist</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;nginx&#x2F;1.12.1&#x2F;homebrew.mxcl.nginx.plist: service already loaded</span><br><span class="line">localhost:~ czh$ launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;php70&#x2F;7.0.23_15&#x2F;homebrew.mxcl.php70.plist: service already loaded</span><br><span class="line">localhost:~ czh$</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="nginx排错"><a href="#nginx排错" class="headerlink" title="nginx排错"></a>nginx排错</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ czh$ nginx -t</span><br><span class="line">nginx: [emerg] unknown directive &quot;erver&quot; in &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:1</span><br><span class="line">nginx: configuration file &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf test failed</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="报错-emerg-bind-to-0-0-0-0-80-failed-13-Permission-denied"><a href="#报错-emerg-bind-to-0-0-0-0-80-failed-13-Permission-denied" class="headerlink" title="报错[emerg] bind() to 0.0.0.0:80 failed (13: Permission denied)"></a>报错[emerg] bind() to 0.0.0.0:80 failed (13: Permission denied)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">czhdeMacBook-Pro:~ czh$ nginx -t</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br><span class="line">nginx: the configuration file &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf syntax is ok</span><br><span class="line">nginx: [emerg] bind() to 0.0.0.0:80 failed (13: Permission denied)</span><br><span class="line">nginx: configuration file &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf test failed</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo nginx -t</span><br><span class="line">Password:</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br><span class="line">nginx: the configuration file &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf test is successful</span><br><span class="line">czhdeMacBook-Pro:~ czh$</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="修改nginx配置文件"><a href="#修改nginx配置文件" class="headerlink" title="修改nginx配置文件"></a>修改nginx配置文件</h2><p><a href="http://www.thinkphp.cn/topic/26657.html" target="_blank" rel="noopener">nginx完美支持thinkphp3.2.2(需配置URL_MODEL=&gt;1pathinfo模式） - ThinkPHP框架</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">zhdeMacBook-Pro:~ czh$ sudo nginx -s reload</span><br><span class="line">Password:</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo nginx -s reload</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo nginx -s reload</span><br><span class="line">nginx: [emerg] directive &quot;root&quot; is not terminated by &quot;;&quot; in &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:5</span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo nginx -s reload</span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo nginx -s reload</span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo nginx -s reload</span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo nginx -s reload</span><br><span class="line">Password:</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo nginx -s reload</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo nginx -s reload</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo nginx -s reload</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="mac系统升级之后-出现错误-并排错"><a href="#mac系统升级之后-出现错误-并排错" class="headerlink" title="mac系统升级之后,出现错误,并排错"></a>mac系统升级之后,出现错误,并排错</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">Last login: Sat Oct  7 10:09:27 on ttys000</span><br><span class="line">localhost:~ czh$ sudo nginx -s reload</span><br><span class="line">Password:</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br><span class="line">nginx: [error] open() &quot;&#x2F;usr&#x2F;local&#x2F;var&#x2F;run&#x2F;nginx.pid&quot; failed (2: No such file or directory)</span><br><span class="line">localhost:~ czh$ sudo nginx -t</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br><span class="line">nginx: the configuration file &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf test is successful</span><br><span class="line">localhost:~ czh$ sudo nginx -s reload</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br><span class="line">nginx: [error] invalid PID number &quot;&quot; in &quot;&#x2F;usr&#x2F;local&#x2F;var&#x2F;run&#x2F;nginx.pid&quot;</span><br><span class="line">localhost:~ czh$ sudo nginx -c &#x2F;usr&#x2F;local&#x2F;etc&#x2F;nginx&#x2F;nginx.conf</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br><span class="line">localhost:~ czh$ $ sudo nginx -s reload</span><br><span class="line">-bash: $: command not found</span><br><span class="line">localhost:~ czh$ sudo nginx -s reload</span><br><span class="line">nginx: [warn] conflicting server name &quot;localhost&quot; on 0.0.0.0:80, ignored</span><br><span class="line">localhost:~ czh$ ln -sfv &#x2F;usr&#x2F;local&#x2F;opt&#x2F;nginx&#x2F;*.plist ~&#x2F;Library&#x2F;LaunchAgents</span><br><span class="line">&#x2F;Users&#x2F;czh&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.nginx.plist -&gt; &#x2F;usr&#x2F;local&#x2F;opt&#x2F;nginx&#x2F;homebrew.mxcl.nginx.plist</span><br><span class="line">localhost:~ czh$ launchctl load ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.nginx.plist</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;nginx&#x2F;1.12.1&#x2F;homebrew.mxcl.nginx.plist: service already loaded</span><br><span class="line">localhost:~ czh$</span><br></pre></td></tr></table></figure>
+<p>注：最后两句是设置开机启动</p>
+<h2 id="sudo-nginx-s-reload报错的原因"><a href="#sudo-nginx-s-reload报错的原因" class="headerlink" title="sudo nginx -s reload报错的原因"></a>sudo nginx -s reload报错的原因</h2><p>提问：<br>issued a nginx -s stop and after that I got this error when trying to reload it.<br>[error]: invalid PID number “” in “_var_run/nginx.pid”<br>That _var_run_nginx_pid file is empty atm.<br>What do I need to do to fix it?<br>回答:<br>nginx -s reload is only used to tell a running nginx process to reload its config. After a stop, you don’t have a running nginx process to send a signal to. Just run nginx (possibly with a -c _path_to_config_file)</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/10/02/web%E5%BC%80%E5%8F%91/czh_blog/php/%E6%96%B0Mac%E7%9A%84php%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0%20201710/" rel="prev" title="新Mac的php环境配置笔记 2017/10">
+      <i class="fa fa-chevron-left"></i> 新Mac的php环境配置笔记 2017/10
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/10/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E5%86%99%E7%AE%97%E6%B3%95%E7%9A%84%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93%EF%BC%88%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E5%90%8E%EF%BC%89/" rel="next" title="写算法的思路总结（数据结构之后）">
+      写算法的思路总结（数据结构之后） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述："><span class="nav-number">1.</span> <span class="nav-text">概述：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装brew"><span class="nav-number">2.</span> <span class="nav-text">安装brew</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装mysql"><span class="nav-number">3.</span> <span class="nav-text">安装mysql</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装php"><span class="nav-number">4.</span> <span class="nav-text">安装php</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#php简单配置"><span class="nav-number">5.</span> <span class="nav-text">php简单配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装nginx"><span class="nav-number">6.</span> <span class="nav-text">安装nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx的配置"><span class="nav-number">7.</span> <span class="nav-text">nginx的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx排错"><span class="nav-number">8.</span> <span class="nav-text">nginx排错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#报错-emerg-bind-to-0-0-0-0-80-failed-13-Permission-denied"><span class="nav-number">9.</span> <span class="nav-text">报错[emerg] bind() to 0.0.0.0:80 failed (13: Permission denied)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改nginx配置文件"><span class="nav-number">10.</span> <span class="nav-text">修改nginx配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mac系统升级之后-出现错误-并排错"><span class="nav-number">11.</span> <span class="nav-text">mac系统升级之后,出现错误,并排错</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sudo-nginx-s-reload报错的原因"><span class="nav-number">12.</span> <span class="nav-text">sudo nginx -s reload报错的原因</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">974</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:58</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '2ed501efad3cc45c7174ce3df47b6a65',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

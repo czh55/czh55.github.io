@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2019年2月28日 下午12:27 [2017 PAMI]A Stable Analytical Framework for Isometric Shape-from-Template by Surface Integration 2019年2月28日 下午2:12  这篇文章也就是在改进SFT，改进的方向是：  大的噪点 object is small or viewed from large">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2017NRSFM+isometric SfT">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/[2017]NRSFM+isometric%20SfT/index.html">
+<meta property="og:site_name" content="Chen的博客">
+<meta property="og:description" content="2019年2月28日 下午12:27 [2017 PAMI]A Stable Analytical Framework for Isometric Shape-from-Template by Surface Integration 2019年2月28日 下午2:12  这篇文章也就是在改进SFT，改进的方向是：  大的噪点 object is small or viewed from large">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-02-28T04:27:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T08:46:16.116Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/[2017]NRSFM+isometric%20SfT/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>2017NRSFM+isometric SfT | Chen的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chen的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/[2017]NRSFM+isometric%20SfT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chen的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          2017NRSFM+isometric SfT
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-02-28 12:27:00" itemprop="dateCreated datePublished" datetime="2019-02-28T12:27:00+08:00">2019-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:16" itemprop="dateModified" datetime="2020-03-12T16:46:16+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3-czh-%E8%AE%BA%E6%96%87-%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6-%E7%B4%A2%E5%BC%95/" itemprop="url" rel="index">
+                    <span itemprop="name">d科研相关/czh_论文/视频求速度_索引</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2017%5DNRSFM+isometric%20SfT/" class="post-meta-item leancloud_visitors" data-flag-title="2017NRSFM+isometric SfT" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2019年2月28日 下午12:27</p>
+<p>[2017 PAMI]A Stable Analytical Framework for Isometric Shape-from-Template by Surface Integration</p>
+<p>2019年2月28日 下午2:12</p>
+<ol>
+<li><p>这篇文章也就是在<strong>改进SFT</strong>，改进的方向是：</p>
+<ol>
+<li>大的噪点</li>
+<li>object is small or viewed from larger distances</li>
+<li>提出：ﬁrst-order quantities: the depth-gradient or the surface normal</li>
+</ol>
+</li>
+<li><p>Non-Rigid Shape-from-Motion (<strong>NRSfM</strong>)</p>
+<ol>
+<li><strong>3.</strong>C. Bregler, A. Hertzmann, H. Biermann, “Recovering non-rigid 3D shape from image streams”,<em>Proc. IEEE Int. Conf. Comput. Vis. Pattern Recog.</em>, pp. 690-696, 2000.</li>
+<li><strong>4.</strong>L. Torresani, A. Hertzmann, C. Bregler, “Nonrigid structure-from-motion: Estimating shape and motion with hierarchical priors”,<em>IEEE Trans. Pattern Anal. Mach. Intell.</em>, vol. 30, no. 5, pp. 878-892, May 2008.</li>
+<li><strong>5.</strong>A. Del Bue, “A factorization approach to structure from motion with shape priors”,<em>Proc. IEEE Int. Conf. Comput. Vis. Pattern Recog.</em>, pp. 1-8, 2008.</li>
+<li><strong>6.</strong>J. Taylor, A. D. Jepson, K. N. Kutulakos, “Non-rigid structure from locally-rigid motion”,<em>Proc. IEEE Int. Conf. Comput. Vis. Pattern Recog.</em>, pp. 2761-2768, 2010.</li>
+<li><strong>7.</strong>S. Vicente, L. Agapito, “Soft inextensibility constraints for template-free non-rigid reconstruction”,<em>Proc. 12th Eur. Conf. Computer Vision</em>, pp. 426-440, 2012.</li>
+<li><strong>8.</strong>T. Collins, A. Bartoli, “Locally affine and planar deformable surface reconstruction from video”,<em>Proc. Int. Workshop Vis. Model. Vis.</em>, pp. 339-346, 2010.</li>
+<li><strong>9.</strong>A. Chhatkuli, D. Pizarro, A. Bartoli, “Non-rigid shape-from-motion for isometric surfaces using infinitesimal planarity”,<em>Proc. Brit. Mach. Vision Conf.</em>, 2014.</li>
+</ol>
+</li>
+<li><p><strong>isometric SfT(Shape-from-Template)</strong></p>
+<ol>
+<li>论文发展：<ol>
+<li><strong>14.</strong>A. Bartoli, T. Collins, “Template-based isometric deformable 3D reconstruction with sampling-based focal length self-calibration”,<em>Proc. IEEE Int. Conf. Comput. Vis. Pattern Recog.</em>, pp. 1514-1521, 2013.</li>
+<li><strong>18.</strong>F. Brunet, A. Bartoli, 照亮. Hartley, “Monocular template-based 3D surface reconstruction: Convex inextensible and nonconvex isometric methods”,<em>Comput. Vis. Image Understanding</em>, vol. 125, pp. 138-154, 2014.</li>
+<li><strong>12.</strong>A. Bartoli, Y. Gérard, F. Chadebecq, T. Collins, D. Pizarro, “Shape-from-template”,<em>IEEE Trans. Pattern Anal. Mach. Intell.</em>, vol. 37, no. 10, pp. 2099-2118, Oct. 2015.</li>
+<li><strong>19.</strong>T. Collins, A. Bartoli, “Realtime shape-from-template: System and applications”,<em>Proc. IEEE Int. Symp. Mixed Augmented Reality</em>, pp. 116-119, 2015.</li>
+</ol>
+</li>
+<li>relaxes isometry with <strong>inextensibility</strong>.Inextensibility means the distance between the neighboring points remain inferior to their geodesic distance in the template<ol>
+<li>论文发展：<ol>
+<li><strong>10.</strong>M. Perriollat, R. Hartley, A. Bartoli, “Monocular template-based reconstruction of inextensible surfaces”,<em>Int. J. Comput. Vis.</em>, vol. 95, no. 2, pp. 124-137, 2011.</li>
+<li><strong>11.</strong> <em>M. Salzmann, P. Fua, “Linear local models for monocular reconstruction of deformable surfaces”,_IEEE Trans. Pattern Anal. Mach. Intell.</em>, vol. 33, no. 5, pp. 931-944, May 2011._</li>
+<li><strong>13.</strong>T. D. Ngo, J. O. stlund, P. Fua, “Template-based monocular 3D shape recovery using Laplacian meshes”,<em>IEEE Trans. Pattern Anal. Mach. Intell.</em>, vol. 38, no. 1, pp. 172-187, Jan. 2016.</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>解决问题：<ol>
+<li><strong>registration</strong> between the template and image is solved using, for example, point correspondences </li>
+<li><strong>remove outliers</strong> during registration[15],[16],[17]while <strong>small noise</strong> in correspondences has to be dealt with in the reconstruction step<ol>
+<li><strong>15.</strong>J. Pilet, V. Lepetit, P. Fua, “Fast non-rigid surface detection registration and realistic augmentation”,<em>Int. J. Comput. Vis.</em>, vol. 76, no. 2, pp. 109-122, 2008.</li>
+<li><strong>16.</strong>D. Pizarro, A. Bartoli, “Feature-based deformable surface detection with self-occlusion reasoning”,<em>Int. J. Comput. Vis.</em>, vol. 97, no. 1, pp. 54-70, 2012.</li>
+<li><strong>17.</strong>T. Collins, A. Bartoli, “Using isometry to classify correct_incorrect 3D-2D correspondences”,_Proc. 13th Eur. Conf. Comput. Vision/, pp. 325-340, 2014.</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="另一种分类："><a href="#另一种分类：" class="headerlink" title="另一种分类："></a>另一种分类：</h2><p>In order to organize the discussion on previous works in <strong>isometric SfT,</strong> we classify the methods based on their <em>final constraints and the way they are optimized</em>:</p>
+<ol>
+<li>_i)_zeroth-order methods based on inextensibility[11],[13],</li>
+<li>_ii)_statistically optimal cost refinement[18],[19]and</li>
+<li><em>iii)_analytical solutions from quadratic PDEs[12],[14]. The MDH-based methods in_i)</em>[10],[11]solve the SfT problem by maximizing depth while putting an upper bound on the distance between neighboring points.</li>
+</ol>
+<p><strong>1.</strong> R. I. Hartley, A. Zisserman, Multiple View Geometry in Computer Vision, Cambridge, U.K.:Cambridge Univ. Press, 2004.<br>Show Context <a href="https://doi.org/10.1017/CBO9780511811685" target="_blank" rel="noopener">CrossRef</a>  <a href="https://scholar.google.com/scholar?as_q=Multiple+View+Geometry+in+Computer+Vision&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>2.</strong>L. Maier-Hein, A. Groch, A. Bartoli, S. Bodenstedt, G. Boissonnat, P. Chang et al., “Comparative validation of single-shot optical techniques for laparoscopic 3D surface reconstruction”,<em>IEEE Trans. Med. Imag.</em>, vol. 33, no. 10, pp. 1913-1930, May 2014.<br> <a href="https://ieeexplore.ieee.org/document/6820756" target="_blank" rel="noopener">View Article</a>  <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6820756" target="_blank" rel="noopener">Full Text: PDF </a> (1540KB) <a href="https://scholar.google.com/scholar?as_q=Comparative+validation+of+single-shot+optical+techniques+for+laparoscopic+3D%0A+surface+reconstruction&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a> </p>
+<p><strong>20.</strong>T. Collins, P. Mesejo, A. Bartoli, “An analysis of errors in graph-based keypoint matching and proposed solutions”,<em>Proc. 13th Eur. Conf. Comput. Vision</em>, pp. 138-153, 2014.<br><strong>21.</strong>T. Collins, A. Bartoli, “Infinitesimal plane-based pose estimation”,<em>Int. J. Comput. Vis.</em>, vol. 109, no. 3, pp. 252-286, 2014.<br><strong>22.</strong>A. Chhatkuli, D. Pizarro, A. Bartoli, “Stable template-based isometric 3D reconstruction in all imaging conditions by linear least-squares”,<em>Proc. IEEE Conf. Comput. Vis. Pattern Recog.</em>, pp. 708-715, 2014.<br><strong>23.</strong>照亮. W. Sumner, J. Popović, “Deformation transfer for triangle meshes”,<em>ACM Trans. Graph.</em>, vol. 23, no. 3, pp. 399-405, 2004.<br><strong>24.</strong>O. Sorkine, D. Cohen-Or, Y. Lipman, M. Alexa, C. Rössl, H.-P. Seidel, “Laplacian surface editing”,<em>Proc. Eurographics_ACM SIGGRAPH Symp. Geom. Process./, pp. 175-184, 2004.<br><strong>25.</strong>A. Bartoli, D. Pizarro, T. Collins, “A robust analytical solution to isometric shape-from-template with focal length calibration”,_Proc. IEEE Int. Conf. Comput. Vision</em>, pp. 961-968, 2013.<br><strong>26.</strong>D. Pizarro, A. Bartoli, T. Collins, “Isowarp and conwarp: Warps that exactly comply with weak-perspective projection of deforming objects”,<em>Proc. Brit. Mach. Vision Conf.</em>, pp. 104.1-104.11, 2013.<br>Show Context <a href="https://doi.org/10.5244/C.27.104" target="_blank" rel="noopener">CrossRef</a>  <a href="https://scholar.google.com/scholar?as_q=Isowarp%0A+and+conwarp%3A+Warps+that+exactly+comply+with+weak-perspective+projection+of+deforming+objects&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>27.</strong>P. Dierckx, Curve Surface Fitting Splines, London, U.K.:Oxford Univ. Press, 1993.<br>Show Context <a href="https://scholar.google.com/scholar?as_q=Curve+Surface+Fitting+Splines&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>28.</strong>D. G. Lowe, “Distinctive image features from scale-invariant keypoints”,<em>Int. J. Comput. Vis.</em>, vol. 60, no. 2, pp. 91-110, 2004.<br>Show Context <a href="https://doi.org/10.1023/B:VISI.0000029664.99615.94" target="_blank" rel="noopener">CrossRef</a>  <a href="https://scholar.google.com/scholar?as_q=Distinctive+image+features+from+scale-invariant+keypoints%2C&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>29.</strong>P. F. Alcantarilla, A. Bartoli, A. J. Davison, “KAZE features”,<em>Proc. 12th Eur. Conf. Comput. Vis.</em>, pp. 214-227, 2012.<br>Show Context <a href="https://scholar.google.com/scholar?as_q=KAZE%0A+features&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>30.</strong>G. A. Puerto, G. L. Mariottini,<em>IEEE Trans. Med. Imag.</em>, vol. 32, no. 7, pp. 1201-1214, Jul. 2013.<br>Show Context <a href="https://ieeexplore.ieee.org/document/6410427" target="_blank" rel="noopener">View Article</a>  <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6410427" target="_blank" rel="noopener">Full Text: PDF </a> (1989KB) <a href="https://scholar.google.com/scholar?as_q=IEEE+Trans.+Med.+Imag.&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>31.</strong>M. Perriollat, A. Bartoli, “A computational model of bounded developable surfaces with application to image-based three-dimensional reconstruction.”,<em>J. Vis. Comput. Animation</em>, vol. 24, no. 5, pp. 459-476, 2013.<br>Show Context <a href="https://doi.org/10.1002/cav.1478" target="_blank" rel="noopener">CrossRef</a>  <a href="https://scholar.google.com/scholar?as_q=A+computational+model+of+bounded+developable+surfaces+with+application+to+image-based%0A+three-dimensional+reconstruction.&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>32.</strong>A. Varol, M. Salzmann, P. Fua, 照亮. Urtasun, “A constrained latent variable model”,<em>Proc. IEEE Int. Conf. Comput. Vis. Pattern Recog.</em>, pp. 2248-2255, 2012.<br>Show Context <a href="https://scholar.google.com/scholar?as_q=A+constrained+latent+variable+model&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a> </p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2018%5DSFM+3Dshape(NRSFM)+isometric%20SfT+calibrated%20camera/" rel="prev" title="2018SFM+3Dshape(NRSFM)+isometric SfT+calibrated camera">
+      <i class="fa fa-chevron-left"></i> 2018SFM+3Dshape(NRSFM)+isometric SfT+calibrated camera
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/04/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2017%5DSFM+PE+CL/" rel="next" title="2017SFM+PE+CL">
+      2017SFM+PE+CL <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#另一种分类："><span class="nav-number">1.</span> <span class="nav-text">另一种分类：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">974</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:58</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : 'a2746a9fb80b3e0d2e315cde613c0e86',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

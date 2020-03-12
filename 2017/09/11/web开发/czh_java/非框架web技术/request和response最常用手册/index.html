@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2017年9月11日 上午8:23 概述 这篇文章是老师给的笔记 前面的几篇文章，可以把它们理解成使用servlet的前期环境配置，配置就基本上不动了，此时还没有真正的根据业务来写代码，而这篇文章其实是做项目期间最有常用的一些内容，称之为我的编码手册，写逻辑的时候忘了，来这里找，复制过去就好了。 servlet三个作用域 Servlet上下文对象 Servlet实现类HttpServlet的使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="request和response最常用手册">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/request%E5%92%8Cresponse%E6%9C%80%E5%B8%B8%E7%94%A8%E6%89%8B%E5%86%8C/index.html">
+<meta property="og:site_name" content="Chen的博客">
+<meta property="og:description" content="2017年9月11日 上午8:23 概述 这篇文章是老师给的笔记 前面的几篇文章，可以把它们理解成使用servlet的前期环境配置，配置就基本上不动了，此时还没有真正的根据业务来写代码，而这篇文章其实是做项目期间最有常用的一些内容，称之为我的编码手册，写逻辑的时候忘了，来这里找，复制过去就好了。 servlet三个作用域 Servlet上下文对象 Servlet实现类HttpServlet的使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-09-11T00:23:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T08:46:16.402Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/request%E5%92%8Cresponse%E6%9C%80%E5%B8%B8%E7%94%A8%E6%89%8B%E5%86%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>request和response最常用手册 | Chen的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chen的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/request%E5%92%8Cresponse%E6%9C%80%E5%B8%B8%E7%94%A8%E6%89%8B%E5%86%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chen的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          request和response最常用手册
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-11 08:23:00" itemprop="dateCreated datePublished" datetime="2017-09-11T08:23:00+08:00">2017-09-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:16" itemprop="dateModified" datetime="2020-03-12T16:46:16+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/request%E5%92%8Cresponse%E6%9C%80%E5%B8%B8%E7%94%A8%E6%89%8B%E5%86%8C/" class="post-meta-item leancloud_visitors" data-flag-title="request和response最常用手册" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2017年9月11日 上午8:23</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
+<li>这篇文章是老师给的笔记</li>
+<li>前面的几篇文章，可以把它们理解成使用<strong>servlet的前期环境配置</strong>，配置就基本上不动了，此时还没有真正的根据业务来写代码，而这篇文章其实是做<strong>项目期间最有常用的一些内容</strong>，称之为我的编码手册，写逻辑的时候忘了，来这里找，复制过去就好了。<ol>
+<li><a href="bear://x-callback-url/open-note?id=01B9FDBA-1DE0-4A12-A2AB-6D22BA7AF9BC-2779-000009EC028CE566">servlet三个作用域</a></li>
+<li><a href="bear://x-callback-url/open-note?id=21E0058F-7EF2-4E56-8027-7C089A08810F-2779-000009EC02BF2C8F">Servlet上下文对象</a></li>
+<li><a href="bear://x-callback-url/open-note?id=DCF45331-DEB2-46C0-81DF-EADD124D68BA-2779-000009EC0444DFC1">Servlet实现类HttpServlet的使用</a></li>
+<li><a href="bear://x-callback-url/open-note?id=65FFB9B6-8A1C-4A0F-A067-B363E86EBAD2-2779-000009EC06AF54C5">servlet简介 + 项目配置步骤</a></li>
+</ol>
+</li>
+<li>其中包括了最常用给的request和response，除了这两个外还有解决乱码，以及路径上的一些理解总结</li>
+<li>附录中有原稿</li>
+</ol>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">请求响应对象</span><br><span class="line"></span><br><span class="line">request和response</span><br><span class="line">  * 当服务器接收到请求后，服务器会创建request和response对象，把请求数据封装到request对象中；</span><br><span class="line">  * 然后调用Servlet的service()方法时把这两个对象传递给service()方法；</span><br><span class="line">  * 在service()方法中可以通过request对象获取请求数据，可以使用response对象向客户端完成响应；</span><br><span class="line">  </span><br><span class="line">  * 每次请求服务器都会创建新的request和response对象，即每个请求有自己独自的request和response对象。</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="response对象"><a href="#response对象" class="headerlink" title="response对象"></a>response对象</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line">response对象</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. response简介</span><br><span class="line">  response是响应对象，用来在Servlet的service()方法中向客户端响应数据。</span><br><span class="line">  response的功能如下：</span><br><span class="line">  * 设置响应头</span><br><span class="line">  * 发送状态码</span><br><span class="line">  * 设置响应正文</span><br><span class="line">  * 重定向</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. response响应正文</span><br><span class="line">  * <span class="function">ServletOutputStream <span class="title">getOutputStream</span><span class="params">()</span>：用来向客户端响应字节数据；</span></span><br><span class="line"><span class="function">  * PrintWriter <span class="title">getWriter</span><span class="params">()</span>：用来向客户端响应字符数据；</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">  response.<span class="title">getWriter</span><span class="params">()</span>.<span class="title">print</span><span class="params">(<span class="string">"你好"</span>)</span></span>;<span class="comment">//向客户端响应字符数据</span></span><br><span class="line">  <span class="keyword">byte</span>[] bytes = ...;</span><br><span class="line">  response.getOutputStream().write(bytes);<span class="comment">//向客户端响应字节数据</span></span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. response字符编码</span><br><span class="line">  * Tomcat响应数据默认使用ISO-<span class="number">8859</span>-<span class="number">1</span></span><br><span class="line">  * 通常浏览器默认使用GBK编码</span><br><span class="line">  * response.setCharacterEncoding(<span class="string">"utf-8"</span>);<span class="comment">//设置response.getWriter()的字符编码</span></span><br><span class="line"></span><br><span class="line">  <span class="number">1</span>)</span><br><span class="line">  response.getWriter().print(<span class="string">"大家好"</span>);</span><br><span class="line">  因为Tomcat默认使用的是ISO-<span class="number">8859</span>-<span class="number">1</span>编码，不支持中文。所以一定编码！</span><br><span class="line"></span><br><span class="line">  <span class="number">2</span>)</span><br><span class="line">  response.setCharacterEncoding(<span class="string">"utf-8"</span>);</span><br><span class="line">  response.getWriter().print(<span class="string">"大家好"</span>);</span><br><span class="line">  因为已经设置了字符流编码为utf-<span class="number">8</span>，所以响应给客户端的数据为utf-<span class="number">8</span>编码！</span><br><span class="line">  但因为浏览器默认使用的是gbk来解析响应数据，所以乱码！如果浏览器使用utf-<span class="number">8</span>编码，那么就不会乱码了。</span><br><span class="line"></span><br><span class="line">  <span class="number">3</span>)</span><br><span class="line">  response.setCharacterEncoding(<span class="string">"gbk"</span>);</span><br><span class="line">  response.getWriter().print(<span class="string">"大家好"</span>);</span><br><span class="line">  因为设置了字符流编码为gbk，所以响应给客户端的数据为gbk编码！</span><br><span class="line">  因为浏览器默认使用gbk来解析数据，所以不会出现乱码！如果浏览器使用utf-<span class="number">8</span>编码，那么就会出现乱码！</span><br><span class="line"></span><br><span class="line">  <span class="number">4</span>)</span><br><span class="line">  response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line">  response.getWriter().print(<span class="string">"大家好"</span>);</span><br><span class="line">  setContentType()方法有两个作用：</span><br><span class="line">  * 设置字符流编码。等同与调用了response.setCharacterEncoding(<span class="string">"utf-8"</span>)；</span><br><span class="line">  * 设置Content-type响应头，即通知浏览器响应数据的编码为utf-<span class="number">8</span>。</span><br><span class="line">  因为设置字符流的编码为utf-<span class="number">8</span>，所以响应给客户端数据为utf-<span class="number">8</span>编码</span><br><span class="line">  因为设置了Content-type头为utf-<span class="number">8</span>，所以浏览器会使用utf-<span class="number">8</span>来解析响应数据</span><br><span class="line">  没有乱码！</span><br><span class="line"></span><br><span class="line">  <span class="number">5</span>)</span><br><span class="line">  response.setContentType(<span class="string">"text/html;charset=gbk"</span>);</span><br><span class="line">  response.getWriter().print(<span class="string">"大家好"</span>);</span><br><span class="line">  * 设置了字符流为gbk，所以响应给客户端的数据为gbk</span><br><span class="line">  * 设置了Content-type头为gbk，所以通知浏览器响应数据为gbk编码</span><br><span class="line">  没有乱码！</span><br><span class="line"></span><br><span class="line">  <span class="number">6</span>)</span><br><span class="line">  response.setHeader(<span class="string">"Content-type"</span>, <span class="string">"text/html;charset=utf-8"</span>)</span><br><span class="line">  等同于</span><br><span class="line">  repsonse.setContentType(<span class="string">"text/html;charset=utf-8"</span>)</span><br><span class="line"></span><br><span class="line">  <span class="number">7</span>)</span><br><span class="line">  response.getOutputStream().write(<span class="string">"大家好"</span>.getBytes(<span class="string">"gbk"</span>));</span><br><span class="line">  响应的数据是gbk编码</span><br><span class="line">  客户端浏览器默认使用gbk编码</span><br><span class="line">  所以没有乱码</span><br><span class="line"></span><br><span class="line">======================</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. response字符流缓冲区</span><br><span class="line">  response字符流缓冲区大小为<span class="number">8</span>KB，当向字符流中写入数据后，数据可能只在缓冲区中，而没有发送到浏览器。</span><br><span class="line">  可以调用response.flushBuffer()或response.getWriter().flush()方法刷新缓冲区，把数据发送到浏览器。</span><br><span class="line"></span><br><span class="line">======================</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>. 设置响应头</span><br><span class="line"></span><br><span class="line">  response.setHeader(<span class="string">"Content-type"</span>, <span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line">  等同与</span><br><span class="line">  response.setContentType(<span class="string">"text/html;charset=utf-8"</span>);</span><br><span class="line"></span><br><span class="line">  response.setHeader(<span class="string">"Refresh"</span>, <span class="string">"5; URL=http://www.baidu.com"</span>);</span><br><span class="line"></span><br><span class="line">======================</span><br><span class="line"></span><br><span class="line"><span class="number">6</span>. 指定状态码</span><br><span class="line"></span><br><span class="line">response.setStatus(<span class="number">200</span>)：设置状态码为<span class="number">200</span></span><br><span class="line">response.sendError(<span class="number">404</span>, “您要查找的资源不存在”)：设置状态码为<span class="number">404</span></span><br><span class="line">repsonse.sendError(<span class="number">500</span>, “服务器出氏了”)：设置状态码为<span class="number">500</span></span><br><span class="line"></span><br><span class="line">在调用sendError()方法时，不只是设置了状态码，而且还会给浏览器一个显示错误的页面。</span><br><span class="line"></span><br><span class="line">======================</span><br><span class="line"></span><br><span class="line"><span class="number">7</span>. 重定向</span><br><span class="line"></span><br><span class="line">response.sendStatus(<span class="number">302</span>);</span><br><span class="line">repsonse.setHeader(<span class="string">"Location"</span>, <span class="string">"http://www.baidu.com"</span>);</span><br><span class="line"></span><br><span class="line">快捷的方法重定向：</span><br><span class="line"></span><br><span class="line">response.sendRedirect(<span class="string">"http://www.baidu.com"</span>);</span><br><span class="line"></span><br><span class="line">* 重定向是两次请求</span><br><span class="line">* 重定向不局限与当前应用，也可以是其他应用，例如重定向到百度</span><br><span class="line">* 重定向响应码为<span class="number">302</span>，而且必须有Location响应头</span><br><span class="line">* 重定向与response响应流同时使用。</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="request"><a href="#request" class="headerlink" title="request"></a>request</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">request</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. request功能介绍</span><br><span class="line"> * 获取请求头</span><br><span class="line"> * 获取请求参数</span><br><span class="line"> * Servlet三大域对象之一</span><br><span class="line"> * 请求包含和请求转发</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. request域方法</span><br><span class="line"> * <span class="function"><span class="keyword">void</span> <span class="title">setAttribute</span><span class="params">(String name, Object value)</span>：添加或替换request域属性</span></span><br><span class="line"><span class="function"> * Object <span class="title">getAttribute</span><span class="params">(String name)</span>：获取request域指定名称的域属性</span></span><br><span class="line"><span class="function"> * <span class="keyword">void</span> <span class="title">removeAttribute</span><span class="params">(String name)</span>：移除request域指定名称的域属性</span></span><br><span class="line"><span class="function"> * Enumeration <span class="title">getAttributeNames</span><span class="params">()</span>：获取所有request域的属性名称</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">3. request获取请求头</span></span><br><span class="line"><span class="function"> * String <span class="title">getHeader</span><span class="params">(String name)</span>：获取指定名称的请求头</span></span><br><span class="line"><span class="function"> * <span class="keyword">int</span> <span class="title">getIntHeader</span><span class="params">(String name)</span>：获取指定名称的请求头，把值转换成<span class="keyword">int</span>类型。</span></span><br><span class="line"><span class="function"> * Enumeration <span class="title">getHeaderNames</span><span class="params">()</span>：获取所有请求头名称</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">4. request获取请求数据相关其他方法</span></span><br><span class="line"><span class="function"> 重点：</span></span><br><span class="line"><span class="function"> * String <span class="title">getMethod</span><span class="params">()</span>：获取请求方式</span></span><br><span class="line"><span class="function"> * String <span class="title">getContextPath</span><span class="params">()</span>：获取上下文路径，即“/” + 应用名称，例如：/day05_1</span></span><br><span class="line"><span class="function"> * <span class="keyword">void</span> <span class="title">setCharacterEncoding</span><span class="params">(String)</span>：设置请求体的编码</span></span><br><span class="line"><span class="function"> * String <span class="title">getRemoteAddr</span><span class="params">()</span>：获取客户端IP地址</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"> 非重点：</span></span><br><span class="line"><span class="function"> * <span class="keyword">int</span> <span class="title">getContentLength</span><span class="params">()</span>：获取请求体字节数</span></span><br><span class="line"><span class="function"> * Locale <span class="title">getLocale</span><span class="params">()</span>：获取请求Locale，例如zh_CN表示中文，中国</span></span><br><span class="line"><span class="function"> * String <span class="title">getCharacterEncoding</span><span class="params">()</span>：获取请求体编码，在没有调用<span class="title">setCharacterEncoding</span><span class="params">()</span>之前该方法返回<span class="keyword">null</span></span></span><br><span class="line"><span class="function"> * String <span class="title">getQueryString</span><span class="params">()</span>：获取参数列表，例如：username</span>=zhangSan&amp;password=<span class="number">123</span></span><br><span class="line"> * <span class="function">String <span class="title">getRequestURI</span><span class="params">()</span>：返回请求URI路径，从应用名称开始，到参数之前这一段，例如：/day05_1/AServlet</span></span><br><span class="line"><span class="function"> * StringBuffer <span class="title">getRequestURL</span><span class="params">()</span>：整个请求URL，不包含参数部分</span></span><br><span class="line"><span class="function"> * String <span class="title">getServletPath</span><span class="params">()</span>：返回Servlet路径，从应用名称后开始，到参数之前这一段，不包含应用名称。</span></span><br><span class="line"><span class="function"> * String <span class="title">getServerName</span><span class="params">()</span>：返回主机名，例如：localhost</span></span><br><span class="line"><span class="function"> * <span class="keyword">int</span> <span class="title">getServerPort</span><span class="params">()</span>：返回服务器端口号，例如：8080</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">5. 获取请求参数</span></span><br><span class="line"><span class="function"> 获取请求参数，即获取超链接上的参数和表单中的参数</span></span><br><span class="line"><span class="function"> * String <span class="title">getParameter</span><span class="params">(String name)</span>：获取指定名称的参数，如果存在同名参数，那么该方法只获取第一个参数值</span></span><br><span class="line"><span class="function"> * String[] <span class="title">getParameterValues</span><span class="params">(String name)</span>：获取指定名称的参数，因为同名参数的存在，所以返回值为String[]</span></span><br><span class="line"><span class="function"> * Enumeration <span class="title">getParameterNames</span><span class="params">()</span>:获取所有参数名称</span></span><br><span class="line"><span class="function"> * Map <span class="title">getParameterMap</span><span class="params">()</span>：获取所有参数，封装到Map中，key为参数名称，value为参数值。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">6. 请求包含和请求转发</span></span><br><span class="line"><span class="function"> * 请求包含和请求转发都是在一个请求中，访问两个Servlet。</span></span><br><span class="line"><span class="function"> * 请求包含和请求转发都是有一个Servlet去调用执行另一个Servlet</span></span><br><span class="line"><span class="function"> * 请求包含和请求转发都可以共享request中的数据，因为都是一个请求。</span></span><br><span class="line"><span class="function"> </span></span><br><span class="line"><span class="function"> * 从AServlet请求转发到BServlet</span></span><br><span class="line"><span class="function">   &gt; 在AServlet中可以设置响应头</span></span><br><span class="line"><span class="function">   &gt; 在AServlet中不能使用响应流输出</span></span><br><span class="line"><span class="function"> </span></span><br><span class="line"><span class="function"> 如果在AServlet中执行了响应操作，那么有两种可能：</span></span><br><span class="line"><span class="function"> * 如果在AServlet中响应的数据导致response提交，那么在转发时抛出异常；</span></span><br><span class="line"><span class="function"> * 如果在AServlet中响应的数据没有导致response提交，那么response中的数据会被清空。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"> * 从AServlet请求包含BServlet</span></span><br><span class="line"><span class="function">   &gt; 在AServlet可以设置响应头</span></span><br><span class="line"><span class="function">   &gt; 在AServlet可以使用响应流输出</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"> * 请求转发和请求包含都要使用RequestDispatcher对象：RequestDispatcher rd </span>= request.getRequestDispatcher(<span class="string">"/BServlet"</span>);</span><br><span class="line"> * 请求转发执行RequestDispatcher的forward()方法：rd.forward(request,response);</span><br><span class="line"> * 请求包含执行RequestDispatcher的include()方法：rd.include(request,response);</span><br><span class="line"> * 请求转发和请求包含的路径都是服务器端路径，相对当前应用</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">7</span>. 请求转发与重定向</span><br><span class="line"> * 请求转发是一个请求，而重定向是两个请求</span><br><span class="line"> * 请求转发，是使用RequestDispatcher来完成，重定向使用response对象来完成</span><br><span class="line"> * 请求转发的路径都是服务器端路径，而重定向是客户端路径，需要给出应用名称</span><br><span class="line"> * 请求转发在浏览器地址栏中的地址是第一个Servlet的路径，而重定向在地址栏中的地址是第二个请求的Servlet的路径</span><br><span class="line"> * 请求转发中的两个Servlet是可以共享request数据的，而重定向因为是两个请求，所以不能共享request数据</span><br><span class="line"> * 请求转发只能转发到本应用的其他Servlet，而重定向可以重定向到其他应用中。</span><br><span class="line"></span><br><span class="line"><span class="number">8</span>. request.getParameter()和request.getAttribute()</span><br><span class="line"> * getParameter()是获取客户端参数，它是从客户端传递给服务器的数据。</span><br><span class="line"> * getAttribute()是获取服务器端自己设置的数据，而不是客户端的数据。</span><br><span class="line"> * request没有setParameter()方法，不能自己设置参数，参数都由客户端传递</span><br><span class="line"> * request有setAttribute()方法，在getAttribute()之前，需要先setAttribute()才能获取到。</span><br><span class="line"> * getAttribute()和setAttribute()是用来在请求转发和请求包含中的多个Servlet中共享数据。</span><br></pre></td></tr></table></figure>
+
+<h2 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">路径</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 客户端路径和服务器端路径</span><br><span class="line"> * 客户端路径需要给出应用名称，例如：/day05_1/AServlet</span><br><span class="line"> * 服务器端路径无需给出应用名称，例如：/AServlet</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 客户端路径</span><br><span class="line"> <span class="number">1</span>). 页面中都是客户端路径：</span><br><span class="line"> * 超链接的href</span><br><span class="line"> * 表单的action</span><br><span class="line"> * &lt;img&gt;的src</span><br><span class="line"> <span class="number">2</span>). 重定向也是客户端路径：response.sendRedirect(<span class="string">"/day05_1/BServlet"</span>);</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 服务器端路径</span><br><span class="line"> * &lt;url-pattern&gt;</span><br><span class="line"> * 请求转发和请求包含</span><br><span class="line"> * ServletContext获取资源等</span><br></pre></td></tr></table></figure>
+
+<h2 id="乱码"><a href="#乱码" class="headerlink" title="乱码"></a>乱码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">乱码</span><br><span class="line"><span class="number">1</span>. 请求编码</span><br><span class="line"> * 客户端发送的数据编码：由浏览器来决定：</span><br><span class="line">  <span class="number">1</span>). 如果是在地址栏中直接给出url，那么一般都是默认为GBK，但这个可能不太大。</span><br><span class="line">  <span class="number">2</span>). 如果是通过页面上的表单或超链接发出请求，那么由当前页面的编码来决定发送的参数的编码。</span><br><span class="line"></span><br><span class="line"> * 无论浏览器发送过来的是什么编码的数据，Tomcat都默认使用ISO-<span class="number">8859</span>-<span class="number">1</span>来解码</span><br><span class="line">  <span class="number">1</span>). POST：可以使用request.setCharacterEncoding()方法来设置请求体数据的编码，因为POST请求参数在请求体中，所以是可以设置编码的。在使用request.getParameter()方法获取参数之前，先使用request.setCharacterEncoding()方法来设置编码即可。</span><br><span class="line">  <span class="number">2</span>). GET：没有方法可以设置它，因为参数在url中。所以使用request.getParameter()获取到的数据一定是错误的使用了iso-<span class="number">8859</span>-<span class="number">1</span>解码的。可以再使用iso-<span class="number">8859</span>-<span class="number">1</span>把字符串转回到<span class="keyword">byte</span>[]，再重新使用正确的编码来解码即可。</span><br><span class="line">  String s = request.getParameter(<span class="string">"s"</span>);<span class="comment">//使用iso-8859-1错误的解码了</span></span><br><span class="line">  <span class="keyword">byte</span>[] bytes = s.getBytes(<span class="string">"iso-8859-1"</span>);<span class="comment">//退回错误的解码，让字符串通过iso-8859-1返回到字节数据，即还原字节数据</span></span><br><span class="line">  s = <span class="keyword">new</span> String(bytes, <span class="string">"utf-8"</span>);<span class="comment">//重新使用正确的utf-8来解码。</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h2><p><a href="request%E5%92%8Cresponse.txt">request和response.txt</a><br><a href="servlet.txt">servlet.txt</a><br><a href="tomcat%E5%8F%8Aweb%E5%85%A5%E9%97%A8.txt">tomcat及web入门.txt</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/EL%E8%A1%A8%E8%BE%BE%E5%BC%8F+JSTL/" rel="prev" title="EL表达式+JSTL">
+      <i class="fa fa-chevron-left"></i> EL表达式+JSTL
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/cookie%E5%92%8Csession/" rel="next" title="cookie和session">
+      cookie和session <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#response对象"><span class="nav-number">2.</span> <span class="nav-text">response对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#request"><span class="nav-number">3.</span> <span class="nav-text">request</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路径"><span class="nav-number">4.</span> <span class="nav-text">路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#乱码"><span class="nav-number">5.</span> <span class="nav-text">乱码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#附录："><span class="nav-number">6.</span> <span class="nav-text">附录：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">974</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:58</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : 'f553f48dc9d846e95bbabcd1ff6acf4d',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

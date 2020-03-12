@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2019年4月8日 上午11:30 数学是一种思考方式_程序员数学_酷勤网这几天有个读者来来去去给我写了几封 email ，问起我的观点：数学和编程是什么关系？学编程需要多深的数学基础？到底需要掌握哪些数学知识，对编程能力的提高有帮助。 这个还真不好说。 如果说起课堂上我们学到的知识。除了初等代数，在编程中我还真没碰到多少依赖数学技能来解决的问题。当年我学 C 语言的时候很小，甚至不知道数学中函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数学是一种思考方式：数学与编程">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2019/04/08/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E8%AE%A4%E8%AF%86%E8%A7%92%E5%BA%A6/%E6%95%B0%E5%AD%A6%E6%98%AF%E4%B8%80%E7%A7%8D%E6%80%9D%E8%80%83%E6%96%B9%E5%BC%8F%EF%BC%9A%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Chen的博客">
+<meta property="og:description" content="2019年4月8日 上午11:30 数学是一种思考方式_程序员数学_酷勤网这几天有个读者来来去去给我写了几封 email ，问起我的观点：数学和编程是什么关系？学编程需要多深的数学基础？到底需要掌握哪些数学知识，对编程能力的提高有帮助。 这个还真不好说。 如果说起课堂上我们学到的知识。除了初等代数，在编程中我还真没碰到多少依赖数学技能来解决的问题。当年我学 C 语言的时候很小，甚至不知道数学中函数">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-04-08T03:30:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T08:46:16.164Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2019/04/08/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E8%AE%A4%E8%AF%86%E8%A7%92%E5%BA%A6/%E6%95%B0%E5%AD%A6%E6%98%AF%E4%B8%80%E7%A7%8D%E6%80%9D%E8%80%83%E6%96%B9%E5%BC%8F%EF%BC%9A%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BC%96%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>数学是一种思考方式：数学与编程 | Chen的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chen的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/04/08/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E8%AE%A4%E8%AF%86%E8%A7%92%E5%BA%A6/%E6%95%B0%E5%AD%A6%E6%98%AF%E4%B8%80%E7%A7%8D%E6%80%9D%E8%80%83%E6%96%B9%E5%BC%8F%EF%BC%9A%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BC%96%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chen的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数学是一种思考方式：数学与编程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-08 11:30:00" itemprop="dateCreated datePublished" datetime="2019-04-08T11:30:00+08:00">2019-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:16" itemprop="dateModified" datetime="2020-03-12T16:46:16+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3-czh-%E6%95%B0%E5%AD%A6-%E8%AE%A4%E8%AF%86%E8%A7%92%E5%BA%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">f数学相关/czh_数学/认识角度</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/04/08/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E8%AE%A4%E8%AF%86%E8%A7%92%E5%BA%A6/%E6%95%B0%E5%AD%A6%E6%98%AF%E4%B8%80%E7%A7%8D%E6%80%9D%E8%80%83%E6%96%B9%E5%BC%8F%EF%BC%9A%E6%95%B0%E5%AD%A6%E4%B8%8E%E7%BC%96%E7%A8%8B/" class="post-meta-item leancloud_visitors" data-flag-title="数学是一种思考方式：数学与编程" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2019年4月8日 上午11:30</p>
+<p><a href="http://www.kuqin.com/math/20071126/2658.html" target="_blank" rel="noopener">数学是一种思考方式_程序员数学_酷勤网</a><br>这几天有个读者来来去去给我写了几封 email ，<strong>问起我的观点：数学和编程是什么关系？学编程需要多深的数学基础？到底需要掌握哪些数学知识，对编程能力的提高有帮助。</strong></p>
+<p>这个还真不好说。</p>
+<p>如果说起课堂上我们学到的知识。除了初等代数，在编程中我还真没碰到多少依赖数学技能来解决的问题。当年我学 C 语言的时候很小，甚至不知道数学中函数这个概念，还不一样把 C 语言学完了。虽然过了些年，我才把数学中的函数和程序中的函数联系起来。</p>
+<p>做 3d 游戏编程，大学里的线性代数可能还用的到一点。至少得知道矩阵运算吧。但是大部分程序员并不需要接触这些东西。除此之外，如果说程序员必须精通微积分才能编程，那绝对是鬼扯。</p>
+<p>如果对用编程的手段解决各种问题感兴趣，或许相关领域的数学知识有些用。比如我时常由于兴趣，做一些数据统计分析工作，这时概率统计的知识就少不了。但是解决问题，编程和数学一样，都只是工具。他们的地位是平等的，并非编程的技能依赖数学技能。</p>
+<p>那么，<strong>学习数学有用吗？当然有必要。因为数学是一种思考方式，编程需要这样的思考方式</strong>。</p>
+<p>我有个朋友，十年前认识他的时候，他说他在学佛。有一个问题没弄明白：佛说，不要执着。那么执着于不要执着是不是一种执着。</p>
+<p>过了好些年，他还没弄明白这个问题。</p>
+<ul>
+<li><strong>学佛怎可以执着于这样的语言逻辑呢？光读佛经是没有用的，道理有时候需要顿悟。数学也如此。</strong></li>
+</ul>
+<ol>
+<li>学习数学绝对不是无休止的解题训练，我们需要悟到其中的思考方法。<strong>那种逻辑严密的推理，对完美境界的构建</strong>。发现理论上的缺陷，并对其分析，重新构作。当然，这个过程，又需要我们做大量的练习，借此领悟其中的道理。</li>
+<li>编程也一样，不断的编写代码本身并不能直接提高编程能力。<strong>我们需要的是对问题的洞察力，构建系统的能力，理解机器运行时来龙去脉的能力</strong>，等等。而这些能力又是在不断编程实践中顿悟出来的。</li>
+</ol>
+<ul>
+<li><strong>编程和数学中的逻辑和直觉：</strong></li>
+</ul>
+<ol>
+<li>编程和数学一样，是绝对严谨的。程序有特定的输入，经过特定的流程，一定有特定的输出。对于程序中的 bug ，我们不能抱有神秘论。它们不会没来由的出现，没来由的消逝。这就跟数学证明一样，逻辑或概念的缺陷不会随着时间消失，总等待后人来修补。</li>
+<li>另一方面，在数学中，直觉也是很重要的。直觉可以帮助我们快速理解问题，解决问题。对数学了解的越多，数学的直觉就越准。很多数学知识，不需要太多研究学习，靠直觉就可以理解了。程序写多了的人通常也会有这种感觉 :D</li>
+</ol>
+<p>只是有时候，数学中有些命题很直观，但是证明过程却非常繁杂。</p>
+<p>比如拓扑学中的若当曲线定理：平面上一条简单闭曲线 C 恰好可以把平面分成两个区域，一个是内部，一个是外部。换句话说，平面上的点被分为了两类：在曲线外部的点集 A，和在曲线内部的点集 B 。在同一点集中的任意两点都可以用一条不与 C 相交的曲线相连，而连接一对不属于同一点集的两点的连线必然和 C 相交。</p>
+<p>这个定理看起来很直观，显然是对的。但是一般人很难做出严格的数学证明，甚至很难看懂其证明。</p>
+<p>现代编程我们经常会遇到类似的东西。尤其在现在系统越来越复杂的情况下，一段很简单的应用程序代码，你可以很显然的知道它能做什么，但是很少有人可以完全解释清楚它是怎样一步步做到的。比如一段很简单的 Windows 程序代码就是这样。只有拥有追根问底的数学精神，才会刨进操作系统底层，去搞明白系统到底怎样工作。这些不是一日之功，甚至不是三五年就够了的。而许多庸庸碌碌的程序员，满足于拖两个控件，粘合一下代码。最终只会感叹，程序只能写到三十岁。要我说，平庸资质如我，三十岁能入门就不错啦。</p>
+<p>数学的发展历史中，又包含了许多人无穷的创造力。光靠逻辑推理来一步步解决问题显然是不够的。很多数学问题的解决，都起源于某种直觉，某种创造性构建，甚至把许多表面不相关的东西牵连在一起思考。然后再通过逻辑严密的推导过程来完善它。</p>
+<p>例如，费马大定理的最终证明。首先找到了关于费马方程的解所在的费马曲线和椭圆曲线的联系，然后构造出一种特殊的椭圆曲线，当且仅当费马大定理不成立时，该曲线才存在。最后，通过证明这种曲线有一些极端奇怪和不可信的性质，决定了曲线不可能存在，从而反证了费马大定理成立。这之中虽然用到了许多前沿的高深数学理论成果才得以证明，但整个思路框架之巧妙，也是让人佩服之至。</p>
+<p>编程也是如此，我们首先需要对各种编程方法，编程语言的特性得心应手；而后，编程绝对不是简单的堆砌代码，它需要我们巧妙的构建系统，在合适的地方用合适的方式来解决问题。最终还需要让每个部分都严格正确。</p>
+<p><strong>最后，对于那位朋友的问题，我只能给出我的个人建议。学习编程的确需要学习数学。但学习数学，不必列出书目，一本本去啃那些枯燥的教科书。只需要从数学史读起，弄清人类是怎样一步步理解数学的，学习其中的思想，最后用自己的兴趣去研究其中感到有趣的部分。</strong></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/04/07/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/leetcode/%E9%A2%98%E7%9B%AE/%E7%AC%AC%E4%B8%89%E5%91%A8%EF%BC%9A%E9%9A%BE%E5%9C%A8%E5%88%86%E6%9E%90%E9%A2%98%E7%9B%AE%E4%B8%8A/" rel="prev" title="第三周：难在分析题目上">
+      <i class="fa fa-chevron-left"></i> 第三周：难在分析题目上
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/04/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86-%E5%93%88%E5%B7%A5%E5%A4%A7-%E5%88%98%E5%AE%8F%E4%BC%9F/" rel="next" title="计算机组成原理-哈工大-刘宏伟">
+      计算机组成原理-哈工大-刘宏伟 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">974</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:58</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : 'f7c0b40b894937b7d0b20f99ccf92899',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

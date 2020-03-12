@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="#web开发&#x2F;czh_blog&#x2F;数据库2017年8月30日 上午7:00 用sublime打开，手机上bear打不开常用sql终极版.sql 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ORCALE SQL语法总结">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/ORCALE%20SQL%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Chen的博客">
+<meta property="og:description" content="#web开发&#x2F;czh_blog&#x2F;数据库2017年8月30日 上午7:00 用sublime打开，手机上bear打不开常用sql终极版.sql 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-08-29T23:00:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T08:46:16.205Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/ORCALE%20SQL%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>ORCALE SQL语法总结 | Chen的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chen的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/ORCALE%20SQL%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chen的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ORCALE SQL语法总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-30 07:00:00" itemprop="dateCreated datePublished" datetime="2017-08-30T07:00:00+08:00">2017-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:16" itemprop="dateModified" datetime="2020-03-12T16:46:16+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/ORCALE%20SQL%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="ORCALE SQL语法总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>#web开发/czh_blog/数据库<br>2017年8月30日 上午7:00</p>
+<p>用sublime打开，手机上bear打不开<br><a href="%E5%B8%B8%E7%94%A8sql%E7%BB%88%E6%9E%81%E7%89%88.sql">常用sql终极版.sql</a></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--修改表结构  为表中添加一个ssex字段  默认追加在表的最尾部</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> (ssex <span class="built_in">varchar2</span>(<span class="number">2</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> stel <span class="built_in">varchar2</span>(<span class="number">11</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> saddr <span class="built_in">integer</span>;</span><br><span class="line"><span class="comment">--修改表结构  将saddr字段的数据类型改为varchar2</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">modify</span> saddr <span class="built_in">varchar2</span>(<span class="number">255</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">add</span> saddre <span class="built_in">integer</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--alter table student change column saddre to sidcard varchar2(18);</span></span><br><span class="line"><span class="comment">--修改表结构  删除表中saddre字段</span></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student <span class="keyword">drop</span> <span class="keyword">column</span> saddre;</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> student  <span class="keyword">add</span> sidcard <span class="built_in">varchar2</span>(<span class="number">18</span>);</span><br><span class="line"><span class="comment">--将student表重命名为stu</span></span><br><span class="line"><span class="keyword">rename</span> student <span class="keyword">to</span> stu </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--常见约束：</span></span><br><span class="line"><span class="comment">--1、主键约束：保证该列数据不能为空，切不能重复  primary key</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--2、非空约束 not null    ：保证了该列不能存储null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--3、默认值约束  default   ：如果用户不为此列添加数据  那么数据字典会为行的该列添加默认值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--4、check约束  check   ：  为某一列增加条件约束   如果用户不满足条件，那么操作将被驳回</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--5、唯一约束  unique     ：保证该列数据唯一性</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--6、外键约束  foreign key  ：存在于两张表中   由其中一张表的某个字段指向另一张表的主键  </span></span><br><span class="line"><span class="comment">--                                从而让两张表产生关系</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> stu(</span><br><span class="line">       s_id <span class="built_in">number</span>(<span class="number">10</span>) primary <span class="keyword">key</span>,</span><br><span class="line">       s_name <span class="built_in">varchar2</span>(<span class="number">255</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">       s_sex <span class="built_in">varchar2</span>(<span class="number">2</span>) <span class="keyword">check</span>(s_sex=<span class="string">'男'</span> <span class="keyword">or</span> s_sex=<span class="string">'女'</span>),</span><br><span class="line">       s_addr <span class="built_in">varchar2</span>(<span class="number">255</span>) <span class="keyword">default</span> <span class="string">'山西省太原市'</span>,</span><br><span class="line">       s_idcard <span class="built_in">varchar2</span>(<span class="number">18</span>) <span class="keyword">unique</span>    </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> stu1(</span><br><span class="line">       s_id <span class="built_in">number</span>(<span class="number">10</span>),</span><br><span class="line">       s_name <span class="built_in">varchar2</span>(<span class="number">255</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">       s_sex <span class="built_in">varchar2</span>(<span class="number">2</span>),</span><br><span class="line">       s_addr <span class="built_in">varchar2</span>(<span class="number">255</span>) <span class="keyword">default</span> <span class="string">'山西省太原市'</span>,</span><br><span class="line">       s_idcard <span class="built_in">varchar2</span>(<span class="number">18</span>) ,</span><br><span class="line">       <span class="keyword">constraint</span> pri_sid primary <span class="keyword">key</span>(s_id),</span><br><span class="line">       <span class="keyword">constraint</span> unique_idcard <span class="keyword">unique</span>(s_idcard),</span><br><span class="line">       <span class="keyword">constraint</span> check_sex <span class="keyword">check</span>(s_sex=<span class="string">'男'</span> <span class="keyword">or</span> s_sex=<span class="string">'女'</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> stu;</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'rose'</span>,<span class="string">'女'</span>,<span class="string">'北京市朝阳区'</span>,<span class="string">'000001'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu(s_id,s_name) <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'mary'</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> stu (s_id <span class="built_in">number</span>(<span class="number">10</span>) primary <span class="keyword">key</span>,</span><br><span class="line">       s_name <span class="built_in">varchar2</span>(<span class="number">255</span>));</span><br><span class="line">       </span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> student(</span><br><span class="line">       s_id <span class="built_in">number</span>(<span class="number">10</span>),</span><br><span class="line">       s_name <span class="built_in">varchar2</span>(<span class="number">255</span>),</span><br><span class="line">       <span class="keyword">constraint</span> primary_sid primary <span class="keyword">key</span>(s_id)</span><br><span class="line">       );</span><br><span class="line">       </span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> stu;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'mike'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'rose'</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--6、外键约束  foreign key  ：存在于两张表中   由其中一张表的某个字段指向另一张表的主键  </span></span><br><span class="line"><span class="comment">--                                从而让两张表产生关系</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--禁用约束</span></span><br><span class="line">   <span class="keyword">alter</span> <span class="keyword">table</span> stu  <span class="keyword">disable</span> <span class="keyword">constraint</span> stu_clazz_fk</span><br><span class="line"><span class="comment">--激活约束</span></span><br><span class="line">   <span class="keyword">alter</span> <span class="keyword">table</span> stu  <span class="keyword">enable</span> <span class="keyword">constraint</span> stu_clazz_fk</span><br><span class="line"></span><br><span class="line">   <span class="keyword">alter</span> <span class="keyword">table</span> stu <span class="keyword">drop</span> <span class="keyword">constraint</span> stu_clazz_fk</span><br><span class="line">   </span><br><span class="line">   <span class="keyword">alter</span> <span class="keyword">table</span> clazz <span class="keyword">drop</span> <span class="keyword">constraint</span> SYS_C009658 <span class="keyword">cascade</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> clazz <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'软件开发与测试'</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'mary'</span>,<span class="number">1</span>)</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'mary'</span>,<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> stu <span class="keyword">where</span> s_id = <span class="number">3</span></span><br><span class="line"><span class="keyword">delete</span> <span class="keyword">from</span> clazz <span class="keyword">where</span> c_id=<span class="number">1</span> </span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> clazz</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> stu</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> stu(s_id <span class="built_in">number</span>(<span class="number">10</span>) primary <span class="keyword">key</span></span><br><span class="line">             ,s_name <span class="built_in">varchar2</span>(<span class="number">255</span>),</span><br><span class="line">             c_id <span class="built_in">number</span>(<span class="number">20</span>),</span><br><span class="line">             <span class="keyword">constraint</span> stu_clazz_fk <span class="keyword">foreign</span> <span class="keyword">key</span>(c_id) <span class="keyword">references</span> clazz(c_id) <span class="keyword">on</span> <span class="keyword">delete</span> <span class="keyword">cascade</span></span><br><span class="line">             );</span><br><span class="line">             </span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> stu(s_id <span class="built_in">number</span>(<span class="number">10</span>)</span><br><span class="line">             ,s_name <span class="built_in">varchar2</span>(<span class="number">255</span>),</span><br><span class="line">             c_id <span class="built_in">number</span>(<span class="number">20</span>) <span class="keyword">references</span> clazz(c_id)</span><br><span class="line">             );</span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> stu <span class="keyword">add</span> c_id <span class="built_in">number</span>(<span class="number">20</span>) ;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> stu <span class="keyword">add</span> <span class="keyword">constraint</span> stu_clazz_fk <span class="keyword">foreign</span> <span class="keyword">key</span>  (c_id) <span class="keyword">references</span> clazz(c_id);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> clazz(c_id <span class="built_in">number</span>(<span class="number">10</span>) primary <span class="keyword">key</span>,c_name <span class="built_in">varchar2</span>(<span class="number">255</span>));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--常用的DML语句：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--查询表中所有数据</span></span><br><span class="line">  <span class="keyword">select</span> * <span class="keyword">from</span> stu;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">select</span> <span class="keyword">sid</span>,sname <span class="keyword">from</span> stu;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">select</span> s.sid 编号,s.sname 名字 <span class="keyword">from</span> stu s</span><br><span class="line"></span><br><span class="line"><span class="comment">--向表中添加一行数据</span></span><br><span class="line">  <span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'mike'</span>,<span class="string">'男'</span>,<span class="string">'13888888888'</span>,<span class="string">'山西省太原市'</span>,<span class="string">'00001'</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">insert</span> <span class="keyword">into</span> stu(<span class="keyword">sid</span>,sname) <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'rose'</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">--insert into stu values(3,'john','男','13845678912','北京市朝阳区','00003'),</span></span><br><span class="line">  <span class="comment">--(4,'mary','女','13001234567','北京市石景山区','00004');</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">--insert into student select * from stu;</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">-- 修改表内数据</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">update</span> stu <span class="keyword">set</span> ssex=<span class="string">'女'</span>;</span><br><span class="line">   </span><br><span class="line">    <span class="keyword">update</span> stu <span class="keyword">set</span> ssex=<span class="string">'男'</span>  <span class="keyword">where</span> <span class="keyword">sid</span>=<span class="number">1</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">update</span> stu <span class="keyword">set</span> stel=<span class="string">'13001234567'</span>,saddr=<span class="string">'北京市朝阳区'</span>  <span class="keyword">where</span> <span class="keyword">sid</span>=<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">--删除表中数据</span></span><br><span class="line">    </span><br><span class="line">   <span class="keyword">delete</span> <span class="keyword">from</span> stu <span class="keyword">where</span> <span class="keyword">sid</span>=<span class="number">3</span>;</span><br><span class="line">   <span class="comment">--清空表内数据</span></span><br><span class="line">   <span class="keyword">delete</span> <span class="keyword">from</span> stu;</span><br><span class="line"></span><br><span class="line"><span class="comment">--摧毁表    将要摧毁的表摧毁，但是保留原有字段（将表删除，按照原表的数据格式进行重建）</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">truncate</span> <span class="keyword">table</span> stu;</span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'mike'</span>,<span class="string">'男'</span>,<span class="string">'山西省太原市'</span>,<span class="string">'13888888888'</span>,<span class="number">20</span>,<span class="string">'00001'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'mary'</span>,<span class="string">'女'</span>,<span class="string">'山西省太原市'</span>,<span class="string">'13000000000'</span>,<span class="number">18</span>,<span class="string">'00002'</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'rose'</span>,<span class="string">'女'</span>,<span class="string">'山西省太原市'</span>,<span class="string">'13111111111'</span>,<span class="number">28</span>,<span class="string">'00003'</span>,<span class="number">3</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">4</span>,<span class="string">'john'</span>,<span class="string">'男'</span>,<span class="string">'山西省太原市'</span>,<span class="string">'13546354321'</span>,<span class="number">30</span>,<span class="string">'00004'</span>,<span class="number">3</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">5</span>,<span class="string">'alin'</span>,<span class="string">'女'</span>,<span class="string">'山西省太原市'</span>,<span class="string">'13789312381'</span>,<span class="number">16</span>,<span class="string">'00005'</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">6</span>,<span class="string">'keven'</span>,<span class="string">'男'</span>,<span class="string">'山西省太原市'</span>,<span class="string">'13324432544'</span>,<span class="number">25</span>,<span class="string">'00006'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">7</span>,<span class="string">'张三'</span>,<span class="string">'男'</span>,<span class="string">'山西省太原市'</span>,<span class="string">'13813128312'</span>,<span class="number">40</span>,<span class="string">'00007'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">8</span>,<span class="string">'李四'</span>,<span class="string">'男'</span>,<span class="string">'山西省太原市'</span>,<span class="string">'13857123574'</span>,<span class="number">53</span>,<span class="string">'00008'</span>,<span class="number">1</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">9</span>,<span class="string">'王五'</span>,<span class="string">'男'</span>,<span class="string">'山西省太原市'</span>,<span class="string">'13898411624'</span>,<span class="number">30</span>,<span class="string">'00009'</span>,<span class="number">3</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">10</span>,<span class="string">'貂蝉'</span>,<span class="string">'女'</span>,<span class="string">'山西省太原市'</span>,<span class="string">'13854101464'</span>,<span class="number">19</span>,<span class="string">'00010'</span>,<span class="number">2</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> stu <span class="keyword">values</span>(<span class="number">11</span>,<span class="string">'王昭君'</span>,<span class="string">'女'</span>,<span class="string">'山西省太原市'</span>,<span class="string">'13016779414'</span>,<span class="number">16</span>,<span class="string">'00011'</span>,<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> clazz <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">'java'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> clazz <span class="keyword">values</span>(<span class="number">2</span>,<span class="string">'UI'</span>);</span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> clazz <span class="keyword">values</span>(<span class="number">3</span>,<span class="string">'测试'</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--常用函数</span></span><br><span class="line"><span class="comment">--1、字符函数</span></span><br><span class="line"><span class="comment">--LOWER  UPPER  LENGTH  SUBSTR   INSTR</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> stu</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> clazz</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> STU <span class="keyword">WHERE</span> S_NAME = <span class="keyword">upper</span>(<span class="string">'keven'</span>)</span><br><span class="line"><span class="keyword">select</span> s_name,<span class="keyword">length</span>(s_name) <span class="keyword">from</span> stu</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> stu <span class="keyword">where</span> <span class="keyword">length</span>(s_name)=<span class="number">2</span></span><br><span class="line"><span class="keyword">select</span> s_name,<span class="keyword">substr</span>(s_addr,<span class="number">1</span>,<span class="number">3</span>) <span class="keyword">from</span> stu</span><br><span class="line"><span class="keyword">select</span> s_name,<span class="keyword">instr</span>(s_name,<span class="string">'e'</span>) <span class="keyword">from</span> stu</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">concat</span>(<span class="number">111</span>,<span class="number">222</span>) <span class="keyword">from</span> dual</span><br><span class="line"><span class="comment">--------------------------------------------</span></span><br><span class="line"><span class="comment">--2、数学函数  ABS CEIL  FLOOR   ROUND TRUNC  MOD</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> stu</span><br><span class="line"><span class="keyword">select</span> s_id,s_name,s_sex,s_addr,s_tel,s_age,s_idcard,c_id <span class="keyword">from</span> stu</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> clazz</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> trunc(<span class="number">3.67</span>,<span class="number">1</span>) <span class="keyword">from</span> dual</span><br><span class="line"><span class="keyword">select</span> <span class="keyword">MOD</span>(<span class="number">10</span> , <span class="number">3</span>) <span class="keyword">from</span> dual</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--------------------------------------------</span></span><br><span class="line"><span class="comment">--3、日期函数    sysdate  </span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">last_day</span>(<span class="keyword">sysdate</span>+<span class="number">4</span>) <span class="keyword">from</span> dual</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">sysdate</span>+<span class="number">7</span> <span class="keyword">from</span> dual </span><br><span class="line"></span><br><span class="line"><span class="comment">--4、转换函数  to_number  to_char   to_date   nvl(n1,n2)   nvl2(n1,n2,n3)    null   </span></span><br><span class="line"><span class="comment">--        case      case ... when ... then ... when ... then ... else ...end   </span></span><br><span class="line"><span class="comment">--        decode </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> stu <span class="keyword">where</span> s_addr <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">null</span></span><br><span class="line"><span class="keyword">select</span> to_number(s_tel) <span class="keyword">from</span> stu </span><br><span class="line"><span class="keyword">select</span> to_char(<span class="keyword">sysdate</span>,<span class="string">'yyyy-MM-dd'</span>) <span class="keyword">from</span> dual</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">replace</span>(<span class="keyword">to_date</span>(<span class="string">'20170829'</span>,<span class="string">'yyyy/MM/dd'</span>),<span class="string">'/'</span>,<span class="string">'-'</span>) <span class="keyword">from</span> dual</span><br><span class="line"><span class="keyword">select</span> s_name,nvl(s_addr,<span class="string">'暂未登记地址'</span>) <span class="keyword">from</span> stu</span><br><span class="line"><span class="keyword">select</span> s_name,nvl2(s_addr,<span class="string">'已登记地址'</span>,<span class="string">'未登记地址'</span>) <span class="keyword">from</span> stu </span><br><span class="line"><span class="keyword">select</span> s_name,s_age,(<span class="keyword">case</span> <span class="keyword">when</span> s_age &lt;<span class="number">18</span> <span class="keyword">then</span> <span class="string">'未成年'</span> <span class="keyword">when</span> s_age &lt;<span class="number">30</span> <span class="keyword">and</span> s_age&gt;<span class="number">20</span> <span class="keyword">then</span> <span class="string">'青年'</span> <span class="keyword">else</span> <span class="string">'不合法的年龄'</span> <span class="keyword">end</span>) 区间  <span class="keyword">from</span> stu</span><br><span class="line"><span class="keyword">select</span> s_name,s_age,(<span class="keyword">case</span> s_age <span class="keyword">when</span> <span class="number">18</span> <span class="keyword">then</span> <span class="string">'成年'</span> <span class="keyword">when</span> <span class="number">30</span>  <span class="keyword">then</span> <span class="string">'而立'</span> <span class="keyword">else</span> <span class="string">'不合法的年龄'</span> <span class="keyword">end</span>) 区间  <span class="keyword">from</span> stu</span><br><span class="line"><span class="keyword">select</span> s_name,s_age,<span class="keyword">decode</span>(s_age ,<span class="number">20</span>,<span class="string">'加冠'</span>,<span class="number">30</span>,<span class="string">'而立'</span>) <span class="keyword">from</span> stu</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">trim</span>(<span class="keyword">leading</span> <span class="string">'H'</span> <span class="keyword">from</span> <span class="string">'Hello World'</span>) <span class="keyword">from</span> dual</span><br><span class="line"></span><br><span class="line"><span class="comment">--5、连接函数   union   union all     这些函数可以将N个不同的视图做纵向拼接。拼接时列数需一致。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> s_id <span class="keyword">from</span> stu</span><br><span class="line"><span class="keyword">minus</span>  </span><br><span class="line"><span class="keyword">select</span> c_id <span class="keyword">from</span> clazz</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="number">1</span>,<span class="number">1</span> <span class="keyword">from</span> dual</span><br><span class="line"><span class="keyword">union</span></span><br><span class="line"><span class="keyword">select</span> <span class="number">1</span>,<span class="number">1</span> <span class="keyword">from</span> dual</span><br><span class="line"><span class="keyword">union</span></span><br><span class="line"><span class="keyword">select</span> <span class="number">1</span>,<span class="number">1</span> <span class="keyword">from</span> dual</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">--  6、伪列  rowid   rownum      rownum只能使用&lt; 来做条件判断而不能用&gt; 连接</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> s.rowid,s.* <span class="keyword">from</span> stu s <span class="keyword">where</span> s.rowid = <span class="string">'AAARVcAAGAAAADMAAG'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">rownum</span>,s.* <span class="keyword">from</span> stu s <span class="keyword">where</span> <span class="keyword">rownum</span>&gt;<span class="number">5</span> <span class="keyword">and</span> <span class="keyword">rownum</span> &lt;=<span class="number">10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 7、连接查询    作用就是将N张表连接在一起做查询处理操作</span></span><br><span class="line"><span class="comment">-- 等值连接   通过,连接N张表  再通过where条件为表和表之间两两建立连接条件</span></span><br><span class="line">   <span class="keyword">select</span> * <span class="keyword">from</span> stu s,clazz c <span class="keyword">where</span> s.c_id = c.c_id ;</span><br><span class="line"><span class="comment">-- 内连接    inner join ... on ..</span></span><br><span class="line">   <span class="keyword">select</span> * <span class="keyword">from</span> stu s <span class="keyword">inner</span> <span class="keyword">join</span> clazz c <span class="keyword">on</span> s.c_id=c.c_id ;</span><br><span class="line"><span class="comment">--外连接  左外连接   left [outer] join ... on ...   右外连接  right [outer] join ... on ...</span></span><br><span class="line"><span class="comment">--  以主表为标准查询  满足连接条件内容按连接条件显示，但是主表中数据即使不满足条件依然显示，子表中以null字段补齐</span></span><br><span class="line">   <span class="keyword">select</span> * <span class="keyword">from</span> stu s <span class="keyword">left</span> <span class="keyword">join</span> clazz c <span class="keyword">on</span> s.c_id = c.c_id </span><br><span class="line"><span class="comment">--全连接   full join ... on ...</span></span><br><span class="line">   <span class="keyword">select</span> * <span class="keyword">from</span> stu s <span class="keyword">full</span> <span class="keyword">join</span> clazz c <span class="keyword">on</span> s.c_id = c.c_id</span><br><span class="line"></span><br><span class="line"><span class="comment">--8、分组函数  聚合函数     group by...分组依据   having 子句为分组后的数据增加约束条件</span></span><br><span class="line"><span class="comment">--   常用组函数  AVG   SUM   COUNT</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> stu</span><br><span class="line">   <span class="keyword">select</span> s.s_sex,s.s_age,<span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> stu s <span class="keyword">where</span> s.s_age&lt;&gt;<span class="number">20</span> </span><br><span class="line">          <span class="keyword">group</span> <span class="keyword">by</span> s.s_sex,s.s_age <span class="keyword">having</span> <span class="keyword">count</span>(<span class="number">1</span>)&gt;<span class="number">1</span> </span><br><span class="line">                    </span><br><span class="line"></span><br><span class="line"><span class="comment">--9、排序函数  order by ...  desc是倒叙排序  asc是升序排序 默认可以省略</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">select</span> * <span class="keyword">from</span> stu s <span class="keyword">order</span> <span class="keyword">by</span> s.s_age <span class="keyword">desc</span>,s.s_id <span class="keyword">desc</span></span><br><span class="line"></span><br><span class="line"><span class="comment">--10、模糊查询  like  %  _</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">select</span> * <span class="keyword">from</span> stu s <span class="keyword">where</span> s.s_name <span class="keyword">like</span> <span class="string">'_o%'</span></span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"><span class="comment">--11、子查询   一个主select语句中嵌套子select语句   用在条件判断中作为条件的值传入  用作临时视图存在    用作创建伪列存在</span></span><br><span class="line"><span class="comment">--  子查询从外往里一层层写   排错时 从内到外一层层排</span></span><br><span class="line">           <span class="keyword">select</span> * <span class="keyword">from</span> stu</span><br><span class="line">           <span class="keyword">select</span> * <span class="keyword">from</span> clazz</span><br><span class="line">           <span class="comment">--select s.* from stu s left join clazz c on s.c_id=c.c_id where c.c_name='UI'</span></span><br><span class="line">           <span class="keyword">select</span> s.* <span class="keyword">from</span> stu s <span class="keyword">where</span> s.c_id=(<span class="keyword">select</span> c.c_id <span class="keyword">from</span> clazz c <span class="keyword">where</span> c.c_name=<span class="string">'UI'</span>)</span><br><span class="line">           </span><br><span class="line">           <span class="keyword">select</span> * <span class="keyword">from</span> stu s <span class="keyword">where</span> s.c_id <span class="keyword">in</span> (<span class="keyword">select</span> c.c_id <span class="keyword">from</span> clazz c <span class="keyword">where</span> c.sch_id = </span><br><span class="line">           (<span class="keyword">select</span> sch.sch_id <span class="keyword">from</span> school sch <span class="keyword">where</span> sch.sch_name=<span class="string">'中北大学'</span>))</span><br><span class="line">           </span><br><span class="line">           </span><br><span class="line">           <span class="keyword">select</span> a.s_name,a.c_name,a.a,a.b <span class="keyword">from</span> (</span><br><span class="line">                  <span class="keyword">select</span> s.s_name,s.s_sex,s.s_age,s.c_id a,c.c_id b,c.c_name <span class="keyword">from</span> stu s,clazz c <span class="keyword">where</span> s.c_id=c.c_id</span><br><span class="line">           ) a</span><br><span class="line">           </span><br><span class="line"><span class="comment">--  视图 view</span></span><br><span class="line">           </span><br><span class="line">           <span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">view</span> v1 <span class="keyword">as</span>( <span class="keyword">select</span> s.s_name,s.s_sex,s.s_age,s.c_id a,c.c_id b,c.c_name <span class="keyword">from</span> stu s,clazz c <span class="keyword">where</span> s.c_id=c.c_id)</span><br><span class="line">           </span><br><span class="line">           <span class="keyword">select</span> * <span class="keyword">from</span> v1 </span><br><span class="line"></span><br><span class="line">          <span class="keyword">select</span> s1.s_name,s1.s_age,(<span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> stu s2 <span class="keyword">where</span> s2.s_age&lt;s1.s_age)+<span class="number">1</span> a </span><br><span class="line">          <span class="keyword">from</span> stu s1 <span class="keyword">order</span> <span class="keyword">by</span> a</span><br><span class="line">           </span><br><span class="line">          <span class="comment">--select rownum,a.s_name,a.s_age from stu s left join (select * from stu s1 order by s1.s_age) a on s.s_id=a.s_id</span></span><br><span class="line">           </span><br><span class="line"><span class="comment">--12、去除重复          distinct</span></span><br><span class="line">       <span class="keyword">select</span> <span class="keyword">distinct</span> s.s_age <span class="keyword">from</span> stu s </span><br><span class="line">       </span><br><span class="line">       <span class="keyword">insert</span> <span class="keyword">into</span> a </span><br><span class="line">       <span class="keyword">select</span> <span class="keyword">distinct</span> * <span class="keyword">from</span> stu</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORCALE%20SQL%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/" rel="prev" title="ORCALE SQL语法总结">
+      <i class="fa fa-chevron-left"></i> ORCALE SQL语法总结
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" rel="next" title="SQL的执行顺序">
+      SQL的执行顺序 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">974</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:58</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : 'f9979ab3af01d58d38cae29b817b1310',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

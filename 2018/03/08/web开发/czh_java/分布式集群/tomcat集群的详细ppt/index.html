@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2018年3月8日 下午12:44 注：下文中提到配置文件可到：Learning.happymmall.com 下载   热部署http线程池   登录信息session的共享    架构的演进和代码的演进过程             注：我们这里要重新解压缩新的tomcat，使webapps得ROOT也藐视tomcat的默认首页">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tomcat集群的详细ppt">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/index.html">
+<meta property="og:site_name" content="Chen的博客">
+<meta property="og:description" content="2018年3月8日 下午12:44 注：下文中提到配置文件可到：Learning.happymmall.com 下载   热部署http线程池   登录信息session的共享    架构的演进和代码的演进过程             注：我们这里要重新解压缩新的tomcat，使webapps得ROOT也藐视tomcat的默认首页">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/1CE708D0-E392-435F-889A-90F418EF52C4.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/010FA111-C72F-4314-B42C-F6CDC8AF9526.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/7BC5D2FF-4D62-455B-9710-522351A78AA2.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/2C974738-7400-4C1B-B620-5FC02B1D5D27.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/E2DF7029-2B55-472D-B28D-0EB7B92BDFEC.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/E8165B6F-12B0-449F-B58D-0672AA290B2B.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/1E2A9B3D-4A27-4DED-8D02-C9BCFA55914B.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/D2F013E5-742E-4578-9FBB-AA4158FFFFA4.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/C9CFEBB0-691D-4C06-92A3-F4E9352E1DD4.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0FD20018-6843-49AC-AB27-3A81407226D0.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0AD00977-7C4E-4DC4-BDD4-D2D23BDD65C7.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/31469F92-2561-47CD-99BE-754223411547.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/5648F2FF-1A83-4FEE-8CE0-4F2835C8204D.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/AE6EE694-09A0-4592-9974-A47BECCB24D3.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/7C40D036-742D-4A61-BBEC-8677788329A1.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/84D17559-D370-4624-81BE-D4923D215E21.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/9DA7469C-2723-4BB7-9BA1-B7C85028D77A.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/40EEFE76-3DCA-41B2-B491-D829971A689A.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/B394C158-5092-40B9-A971-0EBADC26E438.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/CA406914-B615-4DC7-9709-363A9C0B9E43.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/C6EBB7A4-409F-4CA0-B91C-3439AF3F50E1.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/789CBDB0-F182-4951-A88C-B59896CB1BAF.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/AAC9EBD5-227F-4A9B-8759-438FF1FC42DD.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/6B77C30E-BB5D-4F79-A78A-FE200C7789E5.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/1B227F9C-897A-4C12-9C72-3FA1E391C1BC.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/B77DC72F-132D-49C6-B360-730744A1F910.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/66719A73-A9E8-4EB4-85FD-3239D2C9D9B7.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/16126E37-2690-4127-B170-E1B729FA3F49.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/E320C762-9B6E-4CCD-996E-0EADB6A8A34E.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/A50F47C5-9BF6-4E72-A3C5-2C5644D82CD2.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/93B3AAAC-6334-4876-A482-A50E13B584EF.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/5D0A5977-E808-4434-A623-C070D3B6A16B.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/C2808A3A-2217-4FED-9883-ECD09103DD7A.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/C10FC0E5-172F-4CA9-B2F0-6E97A4740876.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/885B0A3F-7651-4066-B760-5448AFA3689E.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/08A0D949-11A2-4C24-9A2A-C4B8268A8284.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/774EEE36-3C9F-4B0C-9AFD-86A8507BF3E2.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/14801C59-4139-4633-8A6A-BF6A0A72D907.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0D58665F-B67F-4E4E-AC38-41AE48179E4C.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/E7AC7811-8D41-41D8-B4B2-AE05587D1AE7.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/2CF6F3F5-8237-4F23-94C9-4BC830903261.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0DE2A0E1-D1E4-4DF7-91E1-911CA9E9621E.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/07DC0904-2995-453A-A170-807E02A3BF57.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/4E320866-DAE6-42D0-8578-3A7EBAE6C438.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/7E7806C4-B1C2-4428-81D1-D96EFF566616.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/DACECD2A-71A8-4AE9-87B8-FAE153C058F7.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/407B3A0B-5BD5-4414-8766-30D7BCC6D144.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/6686B22F-DDEB-4CD3-A424-82B8DEC7CA92.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/DE0F8FA3-5E2A-4ECE-A0A4-8AC7D2D69A11.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0C71110E-F4F3-4F8D-8DE8-8F525E42EDC3.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0AFD748B-12DD-4AED-91AF-61634C6785D6.png">
+<meta property="article:published_time" content="2018-03-08T04:44:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T08:46:16.954Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/1CE708D0-E392-435F-889A-90F418EF52C4.png">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>tomcat集群的详细ppt | Chen的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chen的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chen的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          tomcat集群的详细ppt
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-08 12:44:00" itemprop="dateCreated datePublished" datetime="2018-03-08T12:44:00+08:00">2018-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:16" itemprop="dateModified" datetime="2020-03-12T16:46:16+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/分布式集群</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/" class="post-meta-item leancloud_visitors" data-flag-title="tomcat集群的详细ppt" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>140</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2018年3月8日 下午12:44</p>
+<p>注：下文中提到配置文件可到：Learning.happymmall.com 下载</p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/1CE708D0-E392-435F-889A-90F418EF52C4.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/010FA111-C72F-4314-B42C-F6CDC8AF9526.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/7BC5D2FF-4D62-455B-9710-522351A78AA2.png" alt><br>热部署<br>http线程池</p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/2C974738-7400-4C1B-B620-5FC02B1D5D27.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/E2DF7029-2B55-472D-B28D-0EB7B92BDFEC.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/E8165B6F-12B0-449F-B58D-0672AA290B2B.png" alt><br>登录信息session的共享</p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/1E2A9B3D-4A27-4DED-8D02-C9BCFA55914B.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/D2F013E5-742E-4578-9FBB-AA4158FFFFA4.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/C9CFEBB0-691D-4C06-92A3-F4E9352E1DD4.png" alt></p>
+<p>架构的演进和代码的演进过程</p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0FD20018-6843-49AC-AB27-3A81407226D0.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0AD00977-7C4E-4DC4-BDD4-D2D23BDD65C7.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/31469F92-2561-47CD-99BE-754223411547.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/5648F2FF-1A83-4FEE-8CE0-4F2835C8204D.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/AE6EE694-09A0-4592-9974-A47BECCB24D3.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/7C40D036-742D-4A61-BBEC-8677788329A1.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/84D17559-D370-4624-81BE-D4923D215E21.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/9DA7469C-2723-4BB7-9BA1-B7C85028D77A.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/40EEFE76-3DCA-41B2-B491-D829971A689A.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/B394C158-5092-40B9-A971-0EBADC26E438.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/CA406914-B615-4DC7-9709-363A9C0B9E43.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/C6EBB7A4-409F-4CA0-B91C-3439AF3F50E1.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/789CBDB0-F182-4951-A88C-B59896CB1BAF.png" alt><br>注：我们这里要重新解压缩新的tomcat，使webapps得ROOT也藐视tomcat的默认首页</p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/AAC9EBD5-227F-4A9B-8759-438FF1FC42DD.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/6B77C30E-BB5D-4F79-A78A-FE200C7789E5.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/1B227F9C-897A-4C12-9C72-3FA1E391C1BC.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/B77DC72F-132D-49C6-B360-730744A1F910.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/66719A73-A9E8-4EB4-85FD-3239D2C9D9B7.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/16126E37-2690-4127-B170-E1B729FA3F49.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/E320C762-9B6E-4CCD-996E-0EADB6A8A34E.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/A50F47C5-9BF6-4E72-A3C5-2C5644D82CD2.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/93B3AAAC-6334-4876-A482-A50E13B584EF.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/5D0A5977-E808-4434-A623-C070D3B6A16B.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/C2808A3A-2217-4FED-9883-ECD09103DD7A.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/C10FC0E5-172F-4CA9-B2F0-6E97A4740876.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/885B0A3F-7651-4066-B760-5448AFA3689E.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/08A0D949-11A2-4C24-9A2A-C4B8268A8284.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/774EEE36-3C9F-4B0C-9AFD-86A8507BF3E2.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/14801C59-4139-4633-8A6A-BF6A0A72D907.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0D58665F-B67F-4E4E-AC38-41AE48179E4C.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/E7AC7811-8D41-41D8-B4B2-AE05587D1AE7.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/2CF6F3F5-8237-4F23-94C9-4BC830903261.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0DE2A0E1-D1E4-4DF7-91E1-911CA9E9621E.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/07DC0904-2995-453A-A170-807E02A3BF57.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/4E320866-DAE6-42D0-8578-3A7EBAE6C438.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/7E7806C4-B1C2-4428-81D1-D96EFF566616.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/DACECD2A-71A8-4AE9-87B8-FAE153C058F7.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/407B3A0B-5BD5-4414-8766-30D7BCC6D144.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/6686B22F-DDEB-4CD3-A424-82B8DEC7CA92.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/DE0F8FA3-5E2A-4ECE-A0A4-8AC7D2D69A11.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0C71110E-F4F3-4F8D-8DE8-8F525E42EDC3.png" alt></p>
+<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0AFD748B-12DD-4AED-91AF-61634C6785D6.png" alt></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/maven%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB/" rel="prev" title="maven环境隔离">
+      <i class="fa fa-chevron-left"></i> maven环境隔离
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%A7%A3%E5%86%B3session%E5%85%B1%E4%BA%AB%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/" rel="next" title="解决session共享，实现单点登录">
+      解决session共享，实现单点登录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">974</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:58</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '68b7d41f0e585f825f451c88a5e3b1d4',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

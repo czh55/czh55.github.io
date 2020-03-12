@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2018年4月8日 下午12:33 参考：版本管理工具Git入门 –留下学习生活中的点点滴滴 在master分支edit+add，在dev分支commit原始的状态是：  master分支index.jsp有“master”字符 dev分支index.jsp有“dev”字符 这种操作是无用的，那要分支干啥呀！！！！ 关键就是要明白两个分支commit节点图，脑子重要时刻留意！  我本地是maste">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git操作总结">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="Chen的博客">
+<meta property="og:description" content="2018年4月8日 下午12:33 参考：版本管理工具Git入门 –留下学习生活中的点点滴滴 在master分支edit+add，在dev分支commit原始的状态是：  master分支index.jsp有“master”字符 dev分支index.jsp有“dev”字符 这种操作是无用的，那要分支干啥呀！！！！ 关键就是要明白两个分支commit节点图，脑子重要时刻留意！  我本地是maste">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/85E99EAB-1EAB-4FF8-BEB9-CA52B58B1806.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/9840A58A-BAE9-4AB8-82FD-D912AE066C28.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/24B0D810-C0D6-4A2B-908A-049752611CE8.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/E1DF62E0-896F-436F-9A56-867873621CD8.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/B701B121-F365-41E3-A6AE-372C7642BE5E.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/FA71C1E8-2699-43C9-B74C-5A0518041E48.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/ED2EB09C-BA39-455E-AE39-2CE5F97A62E4.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/2D110108-41B8-473E-916E-CFE67D90B17D.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/A9E4E528-1F49-4E33-9BB9-2736638E139A.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/E67D17EB-57B4-4D43-926E-B52F270EDFC9.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/BB86B057-0F0C-49A1-8B55-2969C455E609.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/4037E3FB-3128-4F25-AA68-2BD9455B5AA1.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/6BB31558-8D4C-4CB9-A1BB-4B3CD87BD6CC.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/6C513684-AA9D-4ED8-8590-1793CD333EA0.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/E2825CD5-1D84-4192-A657-FD155FEFC423.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/9E3DDE63-7AEA-44D5-A37D-49A546939199.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/D055E3AA-FB58-4FA5-A40C-199221289413.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/DEEF4368-3DC4-4479-8AC7-121AF265A8F8.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/B9B38496-359F-462D-A2C6-ADCA84688D1B.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/DB539486-3903-4106-A0DC-C346C81A3C8B.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/50D61756-119D-4D01-B27D-C1E9D85A0AA1.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/A08ACC78-131E-4173-B10F-0712B3596C3B.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/90C8A035-2799-4876-BF3B-EAAAF3106AC4.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/396D6CF3-EB75-40BF-94C7-B352AED088F7.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/B1960894-3A83-402D-A7E8-254191F9F40C.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/8AD8139B-F124-42D6-8DFD-3763C1718466.png">
+<meta property="article:published_time" content="2018-04-08T04:33:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T08:46:17.389Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/85E99EAB-1EAB-4FF8-BEB9-CA52B58B1806.png">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>git操作总结 | Chen的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chen的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chen的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git操作总结
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-04-08 12:33:00" itemprop="dateCreated datePublished" datetime="2018-04-08T12:33:00+08:00">2018-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:17" itemprop="dateModified" datetime="2020-03-12T16:46:17+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-git/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/git</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="git操作总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>737</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2018年4月8日 下午12:33</p>
+<p>参考：<br><a href="https://logan70.github.io/2017/09/23/learn-git/" target="_blank" rel="noopener">版本管理工具Git入门 –留下学习生活中的点点滴滴</a></p>
+<h2 id="在master分支edit-add，在dev分支commit"><a href="#在master分支edit-add，在dev分支commit" class="headerlink" title="在master分支edit+add，在dev分支commit"></a>在master分支edit+add，在dev分支commit</h2><p>原始的状态是：</p>
+<ol>
+<li>master分支index.jsp有“master”字符</li>
+<li>dev分支index.jsp有“dev”字符<br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/85E99EAB-1EAB-4FF8-BEB9-CA52B58B1806.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/9840A58A-BAE9-4AB8-82FD-D912AE066C28.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/24B0D810-C0D6-4A2B-908A-049752611CE8.png" alt></li>
+<li><strong>这种操作是无用的，那要分支干啥呀！！！！</strong></li>
+<li>关键就是要明白两个<strong>分支commit节点图</strong>，脑子重要时刻留意！</li>
+</ol>
+<h2 id="我本地是master、dev分支，远程也是master和dev分支，他们会自动匹配，不用专门设置"><a href="#我本地是master、dev分支，远程也是master和dev分支，他们会自动匹配，不用专门设置" class="headerlink" title="我本地是master、dev分支，远程也是master和dev分支，他们会自动匹配，不用专门设置"></a>我本地是master、dev分支，远程也是master和dev分支，他们会自动匹配，不用专门设置</h2><p><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/E1DF62E0-896F-436F-9A56-867873621CD8.png" alt></p>
+<h2 id="分支的原理和本质"><a href="#分支的原理和本质" class="headerlink" title="分支的原理和本质"></a>分支的原理和本质</h2><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001375840038939c291467cc7c747b1810aab2fb8863508000" target="_blank" rel="noopener">廖海峰 分支实现原理和本质</a></p>
+<ol>
+<li>HEAD指向的是当前分支，而不是一直指向的master分支</li>
+<li>Git<strong>创建一个分支</strong>很快，因为除了增加一个dev指针，改改HEAD的指向，工作区的文件都没有任何变化！<br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/B701B121-F365-41E3-A6AE-372C7642BE5E.png" alt></li>
+<li>只在<strong>一个分支</strong>dev上修改代码，Git合并分支也很快！就改改指针，工作区内容也不变<br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/FA71C1E8-2699-43C9-B74C-5A0518041E48.png" alt></li>
+<li>在<strong>多个分支</strong>上都修改代码，每个分支有不同的代码，<strong>切换分支idea会自动切换代码</strong></li>
+</ol>
+<h2 id="git-checkout-—-README-md"><a href="#git-checkout-—-README-md" class="headerlink" title="git checkout — README.md"></a>git checkout — README.md</h2><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/001374831943254ee90db11b13d4ba9a73b9047f4fb968d000" target="_blank" rel="noopener">廖雪峰 撤销修改</a><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/ED2EB09C-BA39-455E-AE39-2CE5F97A62E4.png" alt></p>
+<h2 id="git-status-git-diff"><a href="#git-status-git-diff" class="headerlink" title="git status / git diff"></a>git status / git diff</h2><p><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/2D110108-41B8-473E-916E-CFE67D90B17D.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/A9E4E528-1F49-4E33-9BB9-2736638E139A.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/E67D17EB-57B4-4D43-926E-B52F270EDFC9.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/BB86B057-0F0C-49A1-8B55-2969C455E609.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/4037E3FB-3128-4F25-AA68-2BD9455B5AA1.png" alt></p>
+<h2 id="git-reset-file-README-md"><a href="#git-reset-file-README-md" class="headerlink" title="git reset file(README.md)"></a>git reset file(README.md)</h2><p><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/6BB31558-8D4C-4CB9-A1BB-4B3CD87BD6CC.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/6C513684-AA9D-4ED8-8590-1793CD333EA0.png" alt></p>
+<h2 id="git-reset-—soft"><a href="#git-reset-—soft" class="headerlink" title="git reset —soft"></a>git reset —soft</h2><p><a href="https://www.cnblogs.com/qianqiannian/p/6010238.html" target="_blank" rel="noopener">Git reset 常见用法 - 浅浅念 - 博客园</a><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/E2825CD5-1D84-4192-A657-FD155FEFC423.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/9E3DDE63-7AEA-44D5-A37D-49A546939199.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/D055E3AA-FB58-4FA5-A40C-199221289413.png" alt></p>
+<h2 id="git-reset-—mixed"><a href="#git-reset-—mixed" class="headerlink" title="git reset —mixed"></a>git reset —mixed</h2><p><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/DEEF4368-3DC4-4479-8AC7-121AF265A8F8.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/B9B38496-359F-462D-A2C6-ADCA84688D1B.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/DB539486-3903-4106-A0DC-C346C81A3C8B.png" alt></p>
+<ol>
+<li>只要我们commit之后，<strong>commit的文件是一定不会丢失的</strong>。</li>
+<li>mixed和soft的区别：仅仅在于<strong>soft暂存区是否会保存这次提交之后的所有变更</strong></li>
+</ol>
+<h2 id="git-reset-—hard"><a href="#git-reset-—hard" class="headerlink" title="git reset —hard"></a>git reset —hard</h2><p><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/50D61756-119D-4D01-B27D-C1E9D85A0AA1.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/A08ACC78-131E-4173-B10F-0712B3596C3B.png" alt></p>
+<ol>
+<li><strong>这个会覆盖工作区的文件</strong>，慎用。否则新敲如的代码就丢了！！</li>
+</ol>
+<h2 id="git-reset-file-README-md-1"><a href="#git-reset-file-README-md-1" class="headerlink" title="git reset file(README.md)"></a>git reset file(README.md)</h2><p><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/90C8A035-2799-4876-BF3B-EAAAF3106AC4.png" alt><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/396D6CF3-EB75-40BF-94C7-B352AED088F7.png" alt></p>
+<ol>
+<li>这说明<strong>暂存区的东西一旦撤销就丢失了</strong>。</li>
+</ol>
+<h2 id="删除github上的文件夹"><a href="#删除github上的文件夹" class="headerlink" title="删除github上的文件夹"></a>删除github上的文件夹</h2><p><a href="https://www.zhihu.com/question/20418177" target="_blank" rel="noopener">如何在 GitHub.com 上删除某个 Repository 中的某个文件夹？ - 知乎</a><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/B1960894-3A83-402D-A7E8-254191F9F40C.png" alt></p>
+<h2 id="分支策略"><a href="#分支策略" class="headerlink" title="分支策略"></a>分支策略</h2><p><a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013758410364457b9e3d821f4244beb0fd69c61a185ae0000" target="_blank" rel="noopener">廖雪峰 分支策略</a><br><img src="/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/8AD8139B-F124-42D6-8DFD-3763C1718466.png" alt></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/04/07/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E6%9B%B4%E6%94%B9%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%8D%E5%92%8C%E6%95%B0%E6%8D%AE%E8%A1%A8%E5%90%8D/" rel="prev" title="更改数据库名和数据表名">
+      <i class="fa fa-chevron-left"></i> 更改数据库名和数据表名
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/cookie%E5%9C%A8%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/" rel="next" title="cookie在单点登录中的作用">
+      cookie在单点登录中的作用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在master分支edit-add，在dev分支commit"><span class="nav-number">1.</span> <span class="nav-text">在master分支edit+add，在dev分支commit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我本地是master、dev分支，远程也是master和dev分支，他们会自动匹配，不用专门设置"><span class="nav-number">2.</span> <span class="nav-text">我本地是master、dev分支，远程也是master和dev分支，他们会自动匹配，不用专门设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支的原理和本质"><span class="nav-number">3.</span> <span class="nav-text">分支的原理和本质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-checkout-—-README-md"><span class="nav-number">4.</span> <span class="nav-text">git checkout — README.md</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-status-git-diff"><span class="nav-number">5.</span> <span class="nav-text">git status &#x2F; git diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-reset-file-README-md"><span class="nav-number">6.</span> <span class="nav-text">git reset file(README.md)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-reset-—soft"><span class="nav-number">7.</span> <span class="nav-text">git reset —soft</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-reset-—mixed"><span class="nav-number">8.</span> <span class="nav-text">git reset —mixed</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-reset-—hard"><span class="nav-number">9.</span> <span class="nav-text">git reset —hard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-reset-file-README-md-1"><span class="nav-number">10.</span> <span class="nav-text">git reset file(README.md)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除github上的文件夹"><span class="nav-number">11.</span> <span class="nav-text">删除github上的文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分支策略"><span class="nav-number">12.</span> <span class="nav-text">分支策略</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">974</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:58</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '5f71d4a75fede80c23d01d8c66ba216e',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

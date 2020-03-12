@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2018年2月9日 下午8:36 注：代码是009_div_017_010这节的内容 回答几个关键问题： 这个问题由几个部分组成？ 第一部分：给lcd控制器中的寄存器初始化 Lcd.c团体 lcd_controller.c团体   第二部分：从配置好的寄存器中查出LCD屏的性质，然后编程实现具体内容的输出到LCD屏幕上。   当前情况的特点？ lcd.c团体代表的是值，lcd_controller">
+<meta property="og:type" content="article">
+<meta property="og:title" content="arm面向对象设计（代码组织）">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/arm%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87%EF%BC%89/index.html">
+<meta property="og:site_name" content="Chen的博客">
+<meta property="og:description" content="2018年2月9日 下午8:36 注：代码是009_div_017_010这节的内容 回答几个关键问题： 这个问题由几个部分组成？ 第一部分：给lcd控制器中的寄存器初始化 Lcd.c团体 lcd_controller.c团体   第二部分：从配置好的寄存器中查出LCD屏的性质，然后编程实现具体内容的输出到LCD屏幕上。   当前情况的特点？ lcd.c团体代表的是值，lcd_controller">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/arm%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87%EF%BC%89/BAFA71B1-E8A0-435D-B229-41127D6B1062.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/arm%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87%EF%BC%89/A0E73E89-64B2-4D75-BEE2-81518836BD3F.png">
+<meta property="article:published_time" content="2018-02-09T00:36:00.000Z">
+<meta property="article:modified_time" content="2020-03-12T08:46:20.930Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/arm%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87%EF%BC%89/BAFA71B1-E8A0-435D-B229-41127D6B1062.png">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/arm%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>arm面向对象设计（代码组织） | Chen的博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Chen的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/arm%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chen的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          arm面向对象设计（代码组织）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-09 08:36:00" itemprop="dateCreated datePublished" datetime="2018-02-09T08:36:00+08:00">2018-02-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_arm</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/arm%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="arm面向对象设计（代码组织）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2018年2月9日 下午8:36</p>
+<p>注：代码是009_div_017_010这节的内容</p>
+<h2 id="回答几个关键问题："><a href="#回答几个关键问题：" class="headerlink" title="回答几个关键问题："></a>回答几个关键问题：</h2><ol>
+<li>这个问题由几个部分组成？<ol>
+<li>第一部分：给lcd控制器中的寄存器初始化<ol>
+<li>Lcd.c团体</li>
+<li>lcd_controller.c团体</li>
+</ol>
+</li>
+<li>第二部分：从配置好的寄存器中查出LCD屏的性质，然后编程实现具体内容的输出到LCD屏幕上。</li>
+</ol>
+</li>
+<li>当前情况的特点？<ol>
+<li>lcd.c团体代表的是<strong>值</strong>，lcd_controller.c团体代表是<strong>方法</strong></li>
+<li>lcd.c团体有点像是javaEE中的<strong>实体</strong>这个概念</li>
+</ol>
+</li>
+<li>需要的角色，以及各个角色的作用<ol>
+<li>【程序的最终目的】：用<strong>具体的数值</strong>去赋值给<strong>lcd控制器的寄存器</strong></li>
+<li>【采用面向对象设计模式的作用目的】：两个团体最主要的目的是<strong>实现扩展性</strong>，将<strong>值</strong>与<strong>赋值给寄存器</strong>两个部分分开，否则根本分不需要分两个团体</li>
+<li><strong>由扩展性带来的问题</strong>：<ol>
+<li>如何能让多个lcd屏幕（参数），多个lcd控制器（寄存器）有统一的接口<ol>
+<li><strong>.h文件</strong>用来限制。类似于javaEE中的<strong>抽象类和接口</strong>的作用。</li>
+<li>区别是：一个用<strong>结构体</strong>保存变量，一个用<strong>结构体</strong>保存函数指针</li>
+</ol>
+</li>
+<li>必然每个有各自的<strong>管理者</strong>，各自管理者要有怎样的功能？。在这里我们分别是lcd.c和lcd_controller.c。<ol>
+<li>lcd.c<br><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/arm%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87%EF%BC%89/BAFA71B1-E8A0-435D-B229-41127D6B1062.png" alt></li>
+<li>lcd_controller.c<br><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/arm%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87%EF%BC%89/A0E73E89-64B2-4D75-BEE2-81518836BD3F.png" alt></li>
+<li>注：上面的两幅图可以说是整体的一个<strong>精华</strong>。我一开始就不太理解<ol>
+<li>这其中蕴含着一种思考方法🤔：<strong>从上层和下层两个方面来思考。</strong></li>
+<li>这种类似于<strong>提供接口式</strong>的思考方式，可以说是<strong>面向对象设计的一个关键点</strong></li>
+<li>在这种<strong>注册机制</strong>中，有一点要注意：管理者提供了注册方法，这个方法是小弟去调用完成注册的，而不是管理者进行注册！<strong>这个问题容易忽略</strong></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><p>lcd_test.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line">lcd_test.c</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"geometry.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"font.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lcd_test</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> fb_base;</span><br><span class="line">	<span class="keyword">int</span> xres, yres, bpp;</span><br><span class="line">	<span class="keyword">int</span> x, y;</span><br><span class="line">	<span class="keyword">unsigned</span> short *p;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> *p2;</span><br><span class="line">		</span><br><span class="line">	<span class="comment">/* 初始化LCD */</span></span><br><span class="line">	lcd_init();</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 使能LCD */</span></span><br><span class="line">	lcd_enable();</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 获得LCD的参数: fb_base, xres, yres, bpp */</span></span><br><span class="line">	get_lcd_params(&amp;fb_base, &amp;xres, &amp;yres, &amp;bpp);</span><br><span class="line">	fb_get_lcd_params();</span><br><span class="line">	font_init();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 往framebuffer中写数据 */</span></span><br><span class="line">	<span class="keyword">if</span> (bpp == <span class="number">16</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">/* 让LCD输出整屏的红色 */</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">/* 565: 0xf800 */</span></span><br><span class="line"></span><br><span class="line">		p = (<span class="keyword">unsigned</span> short *)fb_base;</span><br><span class="line">		<span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; xres; x++)</span><br><span class="line">			<span class="keyword">for</span> (y = <span class="number">0</span>; y &lt; yres; y++)</span><br><span class="line">				*p++ = <span class="number">0xf800</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* green */</span></span><br><span class="line">		p = (<span class="keyword">unsigned</span> short *)fb_base;</span><br><span class="line">		<span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; xres; x++)</span><br><span class="line">			<span class="keyword">for</span> (y = <span class="number">0</span>; y &lt; yres; y++)</span><br><span class="line">				*p++ = <span class="number">0x7e0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* blue */</span></span><br><span class="line">		p = (<span class="keyword">unsigned</span> short *)fb_base;</span><br><span class="line">		<span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; xres; x++)</span><br><span class="line">			<span class="keyword">for</span> (y = <span class="number">0</span>; y &lt; yres; y++)</span><br><span class="line">				*p++ = <span class="number">0x1f</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* black */</span></span><br><span class="line">		p = (<span class="keyword">unsigned</span> short *)fb_base;</span><br><span class="line">		<span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; xres; x++)</span><br><span class="line">			<span class="keyword">for</span> (y = <span class="number">0</span>; y &lt; yres; y++)</span><br><span class="line">				*p++ = <span class="number">0</span>;</span><br><span class="line">			</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (bpp == <span class="number">32</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">/* 让LCD输出整屏的红色 */</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">/* 0xRRGGBB */</span></span><br><span class="line"></span><br><span class="line">		p2 = (<span class="keyword">unsigned</span> <span class="keyword">int</span> *)fb_base;</span><br><span class="line">		<span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; xres; x++)</span><br><span class="line">			<span class="keyword">for</span> (y = <span class="number">0</span>; y &lt; yres; y++)</span><br><span class="line">				*p2++ = <span class="number">0xff0000</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* green */</span></span><br><span class="line">		p2 = (<span class="keyword">unsigned</span> <span class="keyword">int</span> *)fb_base;</span><br><span class="line">		<span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; xres; x++)</span><br><span class="line">			<span class="keyword">for</span> (y = <span class="number">0</span>; y &lt; yres; y++)</span><br><span class="line">				*p2++ = <span class="number">0x00ff00</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* blue */</span></span><br><span class="line">		p2 = (<span class="keyword">unsigned</span> <span class="keyword">int</span> *)fb_base;</span><br><span class="line">		<span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; xres; x++)</span><br><span class="line">			<span class="keyword">for</span> (y = <span class="number">0</span>; y &lt; yres; y++)</span><br><span class="line">				*p2++ = <span class="number">0x0000ff</span>;</span><br><span class="line"></span><br><span class="line">		<span class="comment">/* black */</span></span><br><span class="line">		p2 = (<span class="keyword">unsigned</span> <span class="keyword">int</span> *)fb_base;</span><br><span class="line">		<span class="keyword">for</span> (x = <span class="number">0</span>; x &lt; xres; x++)</span><br><span class="line">			<span class="keyword">for</span> (y = <span class="number">0</span>; y &lt; yres; y++)</span><br><span class="line">				*p2++ = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">delay</span>(<span class="number">1000000</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 画线 */</span></span><br><span class="line">	draw_line(<span class="number">0</span>, <span class="number">0</span>, xres - <span class="number">1</span>, <span class="number">0</span>, <span class="number">0xff0000</span>);</span><br><span class="line">	draw_line(xres - <span class="number">1</span>, <span class="number">0</span>, xres - <span class="number">1</span>, yres - <span class="number">1</span>, <span class="number">0xffff00</span>);</span><br><span class="line">	draw_line(<span class="number">0</span>, yres - <span class="number">1</span>, xres - <span class="number">1</span>, yres - <span class="number">1</span>, <span class="number">0xff00aa</span>);</span><br><span class="line">	draw_line(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, yres - <span class="number">1</span>, <span class="number">0xff00ef</span>);</span><br><span class="line">	draw_line(<span class="number">0</span>, <span class="number">0</span>, xres - <span class="number">1</span>, yres - <span class="number">1</span>, <span class="number">0xff4500</span>);</span><br><span class="line">	draw_line(xres - <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, yres - <span class="number">1</span>, <span class="number">0xff0780</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">delay</span>(<span class="number">1000000</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 画圆 */</span></span><br><span class="line">	draw_circle(xres/<span class="number">2</span>, yres/<span class="number">2</span>, yres/<span class="number">4</span>, <span class="number">0xff00</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 输出文字 */</span></span><br><span class="line">	fb_print_string(<span class="number">10</span>, <span class="number">10</span>, <span class="string">"www.100ask.net\n\r100ask.taobao.com"</span>, <span class="number">0xff00</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>lcd.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">lcd.c</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lcd.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lcd_controller.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_NUM 10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> p_lcd_params p_array_lcd[LCD_NUM];</span><br><span class="line"><span class="keyword">static</span> p_lcd_params g_p_lcd_selected;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">register_lcd</span><span class="params">(p_lcd_params plcd)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; LCD_NUM; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (!p_array_lcd[i])</span><br><span class="line">		&#123;</span><br><span class="line">			p_array_lcd[i] = plcd;</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select_lcd</span><span class="params">(<span class="keyword">char</span> *name)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; LCD_NUM; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (p_array_lcd[i] &amp;&amp; !<span class="built_in">strcmp</span>(p_array_lcd[i]-&gt;name, name))</span><br><span class="line">		&#123;</span><br><span class="line">			g_p_lcd_selected = p_array_lcd[i];</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_lcd_params</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> *fb_base, <span class="keyword">int</span> *xres, <span class="keyword">int</span> *yres, <span class="keyword">int</span> *bpp)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	*fb_base = g_p_lcd_selected-&gt;fb_base;</span><br><span class="line">	*xres = g_p_lcd_selected-&gt;xres;</span><br><span class="line">	*yres = g_p_lcd_selected-&gt;yres;</span><br><span class="line">	*bpp = g_p_lcd_selected-&gt;bpp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lcd_enable</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	lcd_controller_enable();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lcd_disable</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	lcd_controller_disable();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcd_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/* 注册LCD */</span></span><br><span class="line">	lcd_4_3_add();</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 注册LCD控制器 */</span></span><br><span class="line">	lcd_contoller_add();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 选择某款LCD */</span></span><br><span class="line">	select_lcd(<span class="string">"lcd_4.3"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 选择某款LCD控制器 */</span></span><br><span class="line">	select_lcd_controller(<span class="string">"s3c2440"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 使用LCD的参数, 初始化LCD控制器 */</span></span><br><span class="line">	lcd_controller_init(g_p_lcd_selected);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Lcd.h</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">lcd.h</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _LCD_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _LCD_H</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> &#123;</span><br><span class="line">	NORMAL = <span class="number">0</span>,</span><br><span class="line">	INVERT = <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* NORMAL : 正常极性</span></span><br><span class="line"><span class="comment"> * INVERT : 反转极性</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">pins_polarity</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> de;    <span class="comment">/* normal: 高电平时可以传输数据 */</span></span><br><span class="line">	<span class="keyword">int</span> pwren; <span class="comment">/* normal: 高电平有效 */</span></span><br><span class="line">	<span class="keyword">int</span> vclk;  <span class="comment">/* normal: 在下降沿获取数据 */</span></span><br><span class="line">	<span class="keyword">int</span> rgb;   <span class="comment">/* normal: 高电平表示1 */</span></span><br><span class="line">	<span class="keyword">int</span> hsync; <span class="comment">/* normal: 高脉冲 */</span></span><br><span class="line">	<span class="keyword">int</span> vsync; <span class="comment">/* normal: 高脉冲 */</span></span><br><span class="line">&#125;pins_polarity, *p_pins_polarity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">time_sequence</span> &#123;</span></span><br><span class="line">	<span class="comment">/* 垂直方向 */</span></span><br><span class="line">	<span class="keyword">int</span> tvp; <span class="comment">/* vysnc脉冲宽度 */</span></span><br><span class="line">	<span class="keyword">int</span> tvb; <span class="comment">/* 上边黑框, Vertical Back porch */</span></span><br><span class="line">	<span class="keyword">int</span> tvf; <span class="comment">/* 下边黑框, Vertical Front porch */</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 水平方向 */</span></span><br><span class="line">	<span class="keyword">int</span> thp; <span class="comment">/* hsync脉冲宽度 */</span></span><br><span class="line">	<span class="keyword">int</span> thb; <span class="comment">/* 左边黑框, Horizontal Back porch */</span></span><br><span class="line">	<span class="keyword">int</span> thf; <span class="comment">/* 右边黑框, Horizontal Front porch */</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> vclk;</span><br><span class="line">&#125;time_sequence, *p_time_sequence;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">lcd_params</span> &#123;</span></span><br><span class="line">	<span class="keyword">char</span> *name;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 引脚极性 */</span></span><br><span class="line">	pins_polarity pins_pol;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 时序 */</span></span><br><span class="line">	time_sequence time_seq;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 分辨率, bpp */</span></span><br><span class="line">	<span class="keyword">int</span> xres;</span><br><span class="line">	<span class="keyword">int</span> yres;</span><br><span class="line">	<span class="keyword">int</span> bpp;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* framebuffer的地址 */</span></span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> fb_base;</span><br><span class="line">&#125;lcd_params, *p_lcd_params;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_lcd_params</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> *fb_base, <span class="keyword">int</span> *xres, <span class="keyword">int</span> *yres, <span class="keyword">int</span> *bpp)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* _LCD_H */</span></span></span><br></pre></td></tr></table></figure>
+
+<p>lcd_4.3.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">lcd_4<span class="number">.3</span>.c</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lcd.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_FB_BASE 0x33c00000</span></span><br><span class="line"></span><br><span class="line">lcd_params lcd_4_3_params = &#123;</span><br><span class="line">	.name = <span class="string">"lcd_4.3"</span>,</span><br><span class="line">	.pins_pol = &#123;</span><br><span class="line">		.de    = NORMAL,	<span class="comment">/* normal: 高电平时可以传输数据 */</span></span><br><span class="line">		.pwren = NORMAL,    <span class="comment">/* normal: 高电平有效 */</span></span><br><span class="line">		.vclk  = NORMAL,	<span class="comment">/* normal: 在下降沿获取数据 */</span></span><br><span class="line">		.rgb   = NORMAL,	<span class="comment">/* normal: 高电平表示1 */</span></span><br><span class="line">		.hsync = INVERT,    <span class="comment">/* normal: 高脉冲 */</span></span><br><span class="line">		.vsync = INVERT, 	<span class="comment">/* normal: 高脉冲 */</span></span><br><span class="line">	&#125;,</span><br><span class="line">	.time_seq = &#123;</span><br><span class="line">		<span class="comment">/* 垂直方向 */</span></span><br><span class="line">		.tvp=	<span class="number">10</span>, <span class="comment">/* vysnc脉冲宽度 */</span></span><br><span class="line">		.tvb=	<span class="number">2</span>,  <span class="comment">/* 上边黑框, Vertical Back porch */</span></span><br><span class="line">		.tvf=	<span class="number">2</span>,  <span class="comment">/* 下边黑框, Vertical Front porch */</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">/* 水平方向 */</span></span><br><span class="line">		.thp=	<span class="number">41</span>, <span class="comment">/* hsync脉冲宽度 */</span></span><br><span class="line">		.thb=	<span class="number">2</span>,  <span class="comment">/* 左边黑框, Horizontal Back porch */</span></span><br><span class="line">		.thf=	<span class="number">2</span>,  <span class="comment">/* 右边黑框, Horizontal Front porch */</span></span><br><span class="line"></span><br><span class="line">		.vclk=	<span class="number">9</span>,  <span class="comment">/* MHz */</span></span><br><span class="line">	&#125;,</span><br><span class="line">	.xres = <span class="number">480</span>,</span><br><span class="line">	.yres = <span class="number">272</span>,</span><br><span class="line">	.bpp  = <span class="number">32</span>,  <span class="comment">/* 16, no 24bpp */</span></span><br><span class="line">	.fb_base = LCD_FB_BASE,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lcd_4_3_add</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	register_lcd(&amp;lcd_4_3_params);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Lcd_controller.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">lcd_controller.c</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lcd_controller.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> LCD_CONTROLLER_NUM 10</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> p_lcd_controller p_array_lcd_controller[LCD_CONTROLLER_NUM];</span><br><span class="line"><span class="keyword">static</span> p_lcd_controller g_p_lcd_controller_selected;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">register_lcd_controller</span><span class="params">(p_lcd_controller plcdcon)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; LCD_CONTROLLER_NUM; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (!p_array_lcd_controller[i])</span><br><span class="line">		&#123;</span><br><span class="line">			p_array_lcd_controller[i] = plcdcon;</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">select_lcd_controller</span><span class="params">(<span class="keyword">char</span> *name)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; LCD_CONTROLLER_NUM; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (p_array_lcd_controller[i] &amp;&amp; !<span class="built_in">strcmp</span>(p_array_lcd_controller[i]-&gt;name, name))</span><br><span class="line">		&#123;</span><br><span class="line">			g_p_lcd_controller_selected = p_array_lcd_controller[i];</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 向上: 接收不同LCD的参数</span></span><br><span class="line"><span class="comment"> * 向下: 使用这些参数设置对应的LCD控制器</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lcd_controller_init</span><span class="params">(p_lcd_params plcdparams)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/* 调用所选择的LCD控制器的初始化函数 */</span></span><br><span class="line">	<span class="keyword">if</span> (g_p_lcd_controller_selected)</span><br><span class="line">	&#123;</span><br><span class="line">		g_p_lcd_controller_selected-&gt;init(plcdparams);</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lcd_controller_enable</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (g_p_lcd_controller_selected)</span><br><span class="line">	&#123;</span><br><span class="line">		g_p_lcd_controller_selected-&gt;enable();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lcd_controller_disable</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (g_p_lcd_controller_selected)</span><br><span class="line">	&#123;</span><br><span class="line">		g_p_lcd_controller_selected-&gt;disable();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lcd_contoller_add</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	s3c2440_lcd_contoller_add();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Lcd_controller.h</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Lcd_controller.h</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _LCD_CONTROLLER_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _LCD_CONTROLLER_H</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lcd.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">lcd_controller</span> &#123;</span></span><br><span class="line">	<span class="keyword">char</span> *name;</span><br><span class="line">	<span class="keyword">void</span> (*init)(p_lcd_params plcdparams);</span><br><span class="line">	<span class="keyword">void</span> (*enable)(<span class="keyword">void</span>);</span><br><span class="line">	<span class="keyword">void</span> (*disable)(<span class="keyword">void</span>);</span><br><span class="line">&#125;lcd_controller, *p_lcd_controller;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* _LCD_CONTROLLER_H */</span></span></span><br></pre></td></tr></table></figure>
+
+
+<p>s3c2440_lcd_controller.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br></pre></td><td class="code"><pre><span class="line">s3c2440_lcd_controller.c</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lcd.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"lcd_controller.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"../s3c2440_soc.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HCLK 100</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">jz2440_lcd_pin_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/* 初始化引脚 : 背光引脚 */</span></span><br><span class="line">	GPBCON &amp;= ~<span class="number">0x3</span>;</span><br><span class="line">	GPBCON |= <span class="number">0x01</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* LCD专用引脚 */</span></span><br><span class="line">	GPCCON = <span class="number">0xaaaaaaaa</span>;</span><br><span class="line">	GPDCON = <span class="number">0xaaaaaaaa</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* PWREN */</span></span><br><span class="line">	GPGCON |= (<span class="number">3</span>&lt;&lt;<span class="number">8</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 根据传入的LCD参数设置LCD控制器 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">s3c2440_lcd_controller_init</span><span class="params">(p_lcd_params plcdparams)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> pixelplace;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> addr;</span><br><span class="line"></span><br><span class="line">	jz2440_lcd_pin_init();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* [17:8]: clkval, vclk = HCLK / [(CLKVAL+1) x 2]</span></span><br><span class="line"><span class="comment">	 *                   9   = 100M /[(CLKVAL+1) x 2], clkval = 4.5 = 5</span></span><br><span class="line"><span class="comment">	 *                 CLKVAL = 100/vclk/2-1</span></span><br><span class="line"><span class="comment">	 * [6:5]: 0b11, tft lcd</span></span><br><span class="line"><span class="comment">	 * [4:1]: bpp mode</span></span><br><span class="line"><span class="comment">	 * [0]  : LCD video output and the logic enable/disable</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">int</span> clkval = (<span class="keyword">float</span>)HCLK/plcdparams-&gt;time_seq.vclk/<span class="number">2</span><span class="number">-1</span>+<span class="number">0.5</span>;</span><br><span class="line">	<span class="comment">//int clkval = 5;</span></span><br><span class="line">	<span class="keyword">int</span> bppmode = plcdparams-&gt;bpp == <span class="number">8</span>  ? <span class="number">0xb</span> :\</span><br><span class="line">				  plcdparams-&gt;bpp == <span class="number">16</span> ? <span class="number">0xc</span> :\</span><br><span class="line">				  <span class="number">0xd</span>;  <span class="comment">/* 0xd: 24,32bpp */</span></span><br><span class="line">	LCDCON1 = (clkval&lt;&lt;<span class="number">8</span>) | (<span class="number">3</span>&lt;&lt;<span class="number">5</span>) | (bppmode&lt;&lt;<span class="number">1</span>) ;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* [31:24] : VBPD    = tvb - 1</span></span><br><span class="line"><span class="comment">	 * [23:14] : LINEVAL = line - 1</span></span><br><span class="line"><span class="comment">	 * [13:6]  : VFPD    = tvf - 1</span></span><br><span class="line"><span class="comment">	 * [5:0]   : VSPW    = tvp - 1</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	LCDCON2 = 	((plcdparams-&gt;time_seq.tvb - <span class="number">1</span>)&lt;&lt;<span class="number">24</span>) | \</span><br><span class="line">	            ((plcdparams-&gt;yres - <span class="number">1</span>)&lt;&lt;<span class="number">14</span>)         | \</span><br><span class="line">				((plcdparams-&gt;time_seq.tvf - <span class="number">1</span>)&lt;&lt;<span class="number">6</span>)  | \</span><br><span class="line">				((plcdparams-&gt;time_seq.tvp - <span class="number">1</span>)&lt;&lt;<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* [25:19] : HBPD	 = thb - 1</span></span><br><span class="line"><span class="comment">	 * [18:8]  : HOZVAL  = 列 - 1</span></span><br><span class="line"><span class="comment">	 * [7:0]   : HFPD	 = thf - 1</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	LCDCON3 =	((plcdparams-&gt;time_seq.thb - <span class="number">1</span>)&lt;&lt;<span class="number">19</span>) | \</span><br><span class="line">				((plcdparams-&gt;xres - <span class="number">1</span>)&lt;&lt;<span class="number">8</span>)		      | \</span><br><span class="line">				((plcdparams-&gt;time_seq.thf - <span class="number">1</span>)&lt;&lt;<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * [7:0]   : HSPW	 = thp - 1</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	LCDCON4 =	((plcdparams-&gt;time_seq.thp - <span class="number">1</span>)&lt;&lt;<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 用来设置引脚极性, 设置16bpp, 设置内存中象素存放的格式</span></span><br><span class="line"><span class="comment">     * [12] : BPP24BL</span></span><br><span class="line"><span class="comment">	 * [11] : FRM565, 1-565</span></span><br><span class="line"><span class="comment">	 * [10] : INVVCLK, 0 = The video data is fetched at VCLK falling edge</span></span><br><span class="line"><span class="comment">	 * [9]  : HSYNC是否反转</span></span><br><span class="line"><span class="comment">	 * [8]  : VSYNC是否反转</span></span><br><span class="line"><span class="comment">	 * [7]  : INVVD, rgb是否反转</span></span><br><span class="line"><span class="comment">	 * [6]  : INVVDEN</span></span><br><span class="line"><span class="comment">	 * [5]  : INVPWREN</span></span><br><span class="line"><span class="comment">	 * [4]  : INVLEND</span></span><br><span class="line"><span class="comment">	 * [3]  : PWREN, LCD_PWREN output signal enable/disable</span></span><br><span class="line"><span class="comment">	 * [2]  : ENLEND</span></span><br><span class="line"><span class="comment">	 * [1]  : BSWP</span></span><br><span class="line"><span class="comment">	 * [0]  : HWSWP</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line"></span><br><span class="line">	pixelplace = plcdparams-&gt;bpp == <span class="number">32</span> ? (<span class="number">0</span>) : \</span><br><span class="line">	             plcdparams-&gt;bpp == <span class="number">16</span> ? (<span class="number">1</span>) : \</span><br><span class="line">	             (<span class="number">1</span>&lt;&lt;<span class="number">1</span>);  <span class="comment">/* 8bpp */</span></span><br><span class="line">	</span><br><span class="line">	LCDCON5 = (plcdparams-&gt;pins_pol.vclk&lt;&lt;<span class="number">10</span>) |\</span><br><span class="line">	          (plcdparams-&gt;pins_pol.rgb&lt;&lt;<span class="number">7</span>)   |\</span><br><span class="line">	          (plcdparams-&gt;pins_pol.hsync&lt;&lt;<span class="number">9</span>) |\</span><br><span class="line">	          (plcdparams-&gt;pins_pol.vsync&lt;&lt;<span class="number">8</span>) |\</span><br><span class="line"> 			  (plcdparams-&gt;pins_pol.de&lt;&lt;<span class="number">6</span>)    |\</span><br><span class="line">			  (plcdparams-&gt;pins_pol.pwren&lt;&lt;<span class="number">5</span>) |\</span><br><span class="line">			  (<span class="number">1</span>&lt;&lt;<span class="number">11</span>) | pixelplace;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* framebuffer地址 */</span></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * [29:21] : LCDBANK, A[30:22] of fb</span></span><br><span class="line"><span class="comment">	 * [20:0]  : LCDBASEU, A[21:1] of fb</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	addr = plcdparams-&gt;fb_base &amp; ~(<span class="number">1</span>&lt;&lt;<span class="number">31</span>);</span><br><span class="line">	LCDSADDR1 = (addr &gt;&gt; <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* </span></span><br><span class="line"><span class="comment">	 * [20:0] : LCDBASEL, A[21:1] of end addr</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	addr = plcdparams-&gt;fb_base + plcdparams-&gt;xres*plcdparams-&gt;yres*plcdparams-&gt;bpp/<span class="number">8</span>;</span><br><span class="line">	addr &gt;&gt;=<span class="number">1</span>;</span><br><span class="line">	addr &amp;= <span class="number">0x1fffff</span>;</span><br><span class="line">	LCDSADDR2 = addr;<span class="comment">//	</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">s3c2440_lcd_controller_enalbe</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/* 背光引脚 : GPB0 */</span></span><br><span class="line">	GPBDAT |= (<span class="number">1</span>&lt;&lt;<span class="number">0</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* pwren    : 给LCD提供AVDD  */</span></span><br><span class="line">	LCDCON5 |= (<span class="number">1</span>&lt;&lt;<span class="number">3</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* LCDCON1'BIT 0 : 设置LCD控制器是否输出信号 */</span></span><br><span class="line">	LCDCON1 |= (<span class="number">1</span>&lt;&lt;<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">s3c2440_lcd_controller_disable</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/* 背光引脚 : GPB0 */</span></span><br><span class="line">	GPBDAT &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* pwren	: 给LCD提供AVDD  */</span></span><br><span class="line">	LCDCON5 &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* LCDCON1'BIT 0 : 设置LCD控制器是否输出信号 */</span></span><br><span class="line">	LCDCON1 &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">lcd_controller</span> <span class="title">s3c2440_lcd_controller</span> = &#123;</span></span><br><span class="line">	.name    = <span class="string">"s3c2440"</span>,</span><br><span class="line">	.init    = s3c2440_lcd_controller_init,</span><br><span class="line">	.enable  = s3c2440_lcd_controller_enalbe,</span><br><span class="line">	.disable = s3c2440_lcd_controller_disable,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">s3c2440_lcd_contoller_add</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	register_lcd_controller(&amp;s3c2440_lcd_controller);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%92%8C%E5%88%86%E6%B2%BB%E7%9A%84%E5%8C%BA%E5%88%86/" rel="prev" title="动态规划和分治的区分">
+      <i class="fa fa-chevron-left"></i> 动态规划和分治的区分
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/" rel="next" title="LCD + ADC + 触摸屏 +I2C原理">
+      LCD + ADC + 触摸屏 +I2C原理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#回答几个关键问题："><span class="nav-number">1.</span> <span class="nav-text">回答几个关键问题：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码："><span class="nav-number">2.</span> <span class="nav-text">代码：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">974</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">15:58</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : 'd8451751beefa345cb90f397801332a1',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
