@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9Aeth0%EF%BC%8Ceth1%EF%BC%8Ceth2%20+%20lo%E7%9A%84%E6%84%8F%E6%80%9D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +172,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">中期对并发的整理总结</a>
+            <a href="/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9Aeth0%EF%BC%8Ceth1%EF%BC%8Ceth2%20+%20lo%E7%9A%84%E6%84%8F%E6%80%9D/" class="post-title-link" itemprop="url">虚拟机：eth0，eth1，eth2 + lo的意思</a>
         </h1>
 
         <div class="post-meta">
@@ -182,7 +182,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-05-04 09:19:00" itemprop="dateCreated datePublished" datetime="2018-05-04T09:19:00+08:00">2018-05-04</time>
+              <time title="创建时间：2018-05-23 10:44:00" itemprop="dateCreated datePublished" datetime="2018-05-23T10:44:00+08:00">2018-05-23</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -197,1004 +197,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/java并发</span>
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/分布式集群</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="中期对并发的整理总结" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>770</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年5月4日 上午9:19</p>
-<ol>
-<li><p>我一直想尝试把并发的知识有一个简单的认识，做个总结。</p>
-<ol>
-<li>我们可以想象一下，为啥硬件和java的创造者要创建出线程不安全的情况</li>
-<li>对于<strong>硬件</strong>来说，就想缓存的出现一下，<strong>他是被现实所打败</strong></li>
-<li>对于<strong>java语言</strong>来说，<ol>
-<li>整体上去看，他既提供了各种底层的准则去保证一定的顺序性，但是远远是不够的，并不能保证并发的安全。</li>
-<li>并且，他还设计出了类似指令重排，这样就会更加引起线程的不安全</li>
-<li><strong>他这么做的原因是在速度和线程安全的一种相互的博弈</strong></li>
-<li>为了弥补缺陷，他设计出个各种关键字让程序员自己实现线程安全，</li>
-<li><strong>同时他也提供了自己的一些线程安全和线程不安全的类，</strong>stringBuilder等，是因为线程安全会消耗一定的时间，这能让程序员更加灵活的选择。</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>首先提出了两个问题：</p>
-<ol>
-<li>线程不安全的原因<br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/80A5595E-7BBF-453B-B0DE-3955F1BA3CB5.png" alt></li>
-<li>如何让线程安全的方法 <a href="bear://x-callback-url/open-note?id=C059DA71-C50E-48D6-A01D-F2C7A43913DC-699-0000BB15FF1A8239">线程安全的策略</a></li>
-</ol>
-</li>
-<li><p>发现：三性（原子性、可见性、有序性）其实就是回答了这两个问题。<strong>下面我从java、硬件的设计者角度去尝试理解并解决这两个问题。</strong><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/910F8129-D02D-418F-AF9C-960E4FCB99B6.png" alt><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/8955390F-13A9-4E66-9BAA-264CAF58D6F4.png" alt><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/62F7A339-E2D2-4E2A-9E44-C7059609DE4C.png" alt></p>
-</li>
-<li><p>【JVM】：规定了线程基本的<strong>有序性</strong>规则，可以理解成java语言默认的东西。<br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/1E8C7BE1-95DF-4BA5-9609-4D81E6FCA45B.png" alt></p>
-</li>
-<li><p>【JMM】：规定了哪些“最废话”的规则，是人的都知道的。<br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/B3F9F68A-DD93-4326-AD1B-1370FB777A97.png" alt></p>
-<ol>
-<li><strong>或者换种说法：JMM就是为了规定哪些最废话的规则而产生的</strong></li>
-<li>他定义的是一个基本的框架，这个框架本身就有很多的不足</li>
-<li>JMM管理JVM和内存之间的协同工作方式</li>
-<li><strong>本地内存</strong>的理解很关键：<ol>
-<li>是针对每个线程的</li>
-<li>是抽象的概念，可以理解成主内存之外各种小的内存都可称之某个线程的本地内存</li>
-<li><strong>作用：其实就是主内存数据的副本</strong></li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>【 硬件】：</p>
-<ol>
-<li>cpu缓存<strong>局部性</strong>原理<br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/FCA2808C-694B-4759-AB6B-458CFD01CFD9.png" alt></li>
-<li><strong>缓存一致性</strong>原理：MESI<ol>
-<li>理解：因为要解决cpu和内存速度不匹配的问题，引入缓存之后而带来的本来内存中的一份数据 ，现在变成了多份，因为缓存中会出现对内存数据的拷贝和加工</li>
-<li><strong>这时候就需要一个准则来表名各个数据的状态，那么我们就可以根据数据的状态进行判断和处理，区分、处理各种情况</strong>。</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%B9%B6%E8%BF%90%E8%A1%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%B9%B6%E8%BF%90%E8%A1%8C/" class="post-title-link" itemprop="url">前端项目代码环境搭建并运行</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-04 04:18:00" itemprop="dateCreated datePublished" datetime="2018-05-04T04:18:00+08:00">2018-05-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/前端</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E5%B9%B6%E8%BF%90%E8%A1%8C/" class="post-meta-item leancloud_visitors" data-flag-title="前端项目代码环境搭建并运行" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年5月4日 下午4:18</p>
-<h2 id="前提："><a href="#前提：" class="headerlink" title="前提："></a>前提：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ czh$ webpack -v</span><br><span class="line">2.6.1</span><br><span class="line"></span><br><span class="line">localhost:~ czh$ node -v</span><br><span class="line">v4.4.7</span><br><span class="line"></span><br><span class="line">localhost:Front-end czh$ webpack -v</span><br><span class="line">webpack 1.15.0</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="安装过程："><a href="#安装过程：" class="headerlink" title="安装过程："></a>安装过程：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -rf &#x2F;usr&#x2F;local&#x2F;&#123;bin&#x2F;&#123;node,npm&#125;,lib&#x2F;node_modules&#x2F;npm,lib&#x2F;node,share&#x2F;man&#x2F;*&#x2F;node.*&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">localhost:Front-end czh$ node -v</span><br><span class="line">v4.9.1</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">localhost:Front-end czh$ webpack -v</span><br><span class="line">webpack 1.15.0</span><br></pre></td></tr></table></figure>
-
-<p><code>npm init</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localhost:Front-end czh$ npm install css-loader style-loader --save-dev</span><br></pre></td></tr></table></figure>
-<p>注：这里只要不报err就行，WARN不用管它。解决的方式就是像下面一样指定版本号。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">npm install file-loader@0.11.1 --save-dev</span><br><span class="line"></span><br><span class="line">npm install html-loader@0.4.5 --save-dev</span><br><span class="line"></span><br><span class="line">npm install url-loader@0.5.8 --save-dev</span><br><span class="line"></span><br><span class="line">npm uninstall style-loader --save-dev</span><br><span class="line"></span><br><span class="line">npm install style-loader@0.17.0 --save-dev</span><br><span class="line"></span><br><span class="line">npm install css-loader@0.28.1 --save-dev</span><br><span class="line"></span><br><span class="line">npm install extract-text-webpack-plugin@1.0.1 --save-dev</span><br><span class="line"></span><br><span class="line">npm install html-webpack-plugin@2.28.0 --save-dev</span><br><span class="line"></span><br><span class="line">npm install webpack-dev-server@1.16.5 --save-dev</span><br></pre></td></tr></table></figure>
-<p>这里不报错的关键是：指定版本号</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install hogan@1.0.2 --save</span><br><span class="line"></span><br><span class="line">npm install font-awesome@4.7.0 --save</span><br><span class="line"></span><br><span class="line">npm install hogan.js@3.0.2 --save</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;dev&quot;: &quot;WEBPACK_ENV&#x3D;dev webpack-dev-server --inline --port 8088&quot;,</span><br><span class="line">    &quot;dev_win&quot;: &quot;set WEBPACK_ENV&#x3D;dev &amp;&amp; webpack-dev-server --inline --port 8088&quot;,</span><br><span class="line">    &quot;dist&quot;: &quot;WEBPACK_ENV&#x3D;online webpack -p&quot;,</span><br><span class="line">    &quot;dist_win&quot;: &quot;set WEBPACK_ENV&#x3D;online &amp;&amp; webpack -p&quot;</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/" class="post-title-link" itemprop="url">在sublime中简单使用webpack</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-04 04:01:00" itemprop="dateCreated datePublished" datetime="2018-05-04T04:01:00+08:00">2018-05-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/前端</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/" class="post-meta-item leancloud_visitors" data-flag-title="在sublime中简单使用webpack" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>95</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年5月4日 下午4:01</p>
-<ol>
-<li><strong>这里是通过webpack.config.js，这个文件来管理webpack的如何工作的。</strong></li>
-<li>而不是使用webpack原始的<code>webpack 待处理文件名  处理完后的文件名</code><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/466436B6-7364-4B39-86FA-DB329263597E.png" alt><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/25EFA746-B415-49E8-8894-8B76F7181446.png" alt><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/E2C97D1B-825E-40E5-8B16-B9DA46AA4DF3.png" alt><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/6F9EDA7C-2413-4F0D-BA7C-BD3B74258C8C.png" alt><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/EA61E60D-3A63-4D8D-B87D-0FA829B38C32.png" alt><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/A4FE7DBB-70DD-4B18-AAE1-185C8AA0C71E.png" alt><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/EAEA0E8E-148A-47C9-90DE-4F81308EEB20.png" alt><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/6B45C74B-5E4F-4285-B9BB-2887F27C6578.png" alt><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/B7F09043-99CD-4602-A589-6C563066161B.png" alt><br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%9C%A8sublime%E4%B8%AD%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8webpack/B7A9B5BA-1F8B-452F-B2B6-579412B553FB.png" alt></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/webpack%E5%AE%89%E8%A3%85(own)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/webpack%E5%AE%89%E8%A3%85(own)/" class="post-title-link" itemprop="url">webpack安装(own)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-04 03:49:00" itemprop="dateCreated datePublished" datetime="2018-05-04T03:49:00+08:00">2018-05-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/前端</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/webpack%E5%AE%89%E8%A3%85(own)/" class="post-meta-item leancloud_visitors" data-flag-title="webpack安装(own)" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年5月4日 下午3:49</p>
-<figure class="highlight plain"><figcaption><span>init过程</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">localhost:Front-end czh$ npm init</span><br><span class="line">This utility will walk you through creating a package.json file.</span><br><span class="line">It only covers the most common items, and tries to guess sensible defaults.</span><br><span class="line"></span><br><span class="line">See &#96;npm help json&#96; for definitive documentation on these fields</span><br><span class="line">and exactly what they do.</span><br><span class="line"></span><br><span class="line">Use &#96;npm install &lt;pkg&gt; --save&#96; afterwards to install a package and</span><br><span class="line">save it as a dependency in the package.json file.</span><br><span class="line"></span><br><span class="line">Press ^C at any time to quit.</span><br><span class="line">name: (Front-end)</span><br><span class="line">Sorry, name can no longer contain capital letters.</span><br><span class="line">name: (Front-end) front-end</span><br><span class="line">version: (1.0.0)</span><br><span class="line">description: programing前端代码</span><br><span class="line">entry point: (index.js)</span><br><span class="line">test command:</span><br><span class="line">git repository: (https:&#x2F;&#x2F;github.com&#x2F;czh55&#x2F;Front-end.git)</span><br><span class="line">keywords:</span><br><span class="line">author: czh</span><br><span class="line">license: (ISC)</span><br><span class="line">About to write to &#x2F;Users&#x2F;czh&#x2F;front-end&#x2F;Front-end&#x2F;package.json:</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;front-end&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;1.0.0&quot;,</span><br><span class="line">  &quot;description&quot;: &quot;programing前端代码&quot;,</span><br><span class="line">  &quot;main&quot;: &quot;index.js&quot;,</span><br><span class="line">  &quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;test&quot;: &quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;repository&quot;: &#123;</span><br><span class="line">    &quot;type&quot;: &quot;git&quot;,</span><br><span class="line">    &quot;url&quot;: &quot;git+https:&#x2F;&#x2F;github.com&#x2F;czh55&#x2F;Front-end.git&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;author&quot;: &quot;czh&quot;,</span><br><span class="line">  &quot;license&quot;: &quot;ISC&quot;,</span><br><span class="line">  &quot;bugs&quot;: &#123;</span><br><span class="line">    &quot;url&quot;: &quot;https:&#x2F;&#x2F;github.com&#x2F;czh55&#x2F;Front-end&#x2F;issues&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;homepage&quot;: &quot;https:&#x2F;&#x2F;github.com&#x2F;czh55&#x2F;Front-end#readme&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Is this ok? (yes)</span><br></pre></td></tr></table></figure>
-
-<h2 id="安装webpack过程"><a href="#安装webpack过程" class="headerlink" title="安装webpack过程"></a>安装webpack过程</h2><ol>
-<li>全局安装webpack<ol>
-<li><code>npm install webpack -g</code></li>
-</ol>
-</li>
-<li>生产环境安装webpack<ol>
-<li><code>npm install webpack@1.15.0 --save-dev</code></li>
-</ol>
-</li>
-<li>报错<br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/webpack%E5%AE%89%E8%A3%85(own)/160D5365-CC8B-4D25-801A-A9DFB502FCA3.png" alt></li>
-</ol>
-<h2 id="解决报错问题"><a href="#解决报错问题" class="headerlink" title="解决报错问题"></a>解决报错问题</h2><ol>
-<li>全局安装的webpack默认安装版本是4.6.0，版本太高，要卸载</li>
-<li>我们要指定全局安装为2.6.1</li>
-<li>参考<a href="http://blog.51cto.com/zero01/2092705" target="_blank" rel="noopener">安装webpack后，执行webpack -v命令时报错：SyntaxError: Block-sc-zero-51CTO博客</a></li>
-<li><code>npm uninstall webpack -g</code></li>
-<li><code>npm install webpack@2.6.1 -g --registry=https://registry.npm.taobao.org</code></li>
-<li><code>webpack -v</code></li>
-</ol>
-<h2 id="最后的结果"><a href="#最后的结果" class="headerlink" title="最后的结果"></a>最后的结果</h2><p><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/webpack%E5%AE%89%E8%A3%85(own)/21D66862-E4E7-4146-8F1F-08F3C2F11441.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/03/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/%E5%9C%B0%E7%89%A2%E6%B8%B8%E6%88%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/03/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/%E5%9C%B0%E7%89%A2%E6%B8%B8%E6%88%8F/" class="post-title-link" itemprop="url">地牢游戏</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-03 03:54:00" itemprop="dateCreated datePublished" datetime="2018-05-03T03:54:00+08:00">2018-05-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/关键题目</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/05/03/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/%E5%9C%B0%E7%89%A2%E6%B8%B8%E6%88%8F/" class="post-meta-item leancloud_visitors" data-flag-title="地牢游戏" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>15</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年5月3日 下午3:54<br><img src="/2018/05/03/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/%E5%9C%B0%E7%89%A2%E6%B8%B8%E6%88%8F/Document-page-064.jpg" alt><br><img src="/2018/05/03/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/%E5%9C%B0%E7%89%A2%E6%B8%B8%E6%88%8F/Document-page-066.jpg" alt><br><img src="/2018/05/03/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/%E5%9C%B0%E7%89%A2%E6%B8%B8%E6%88%8F/Document-page-068.jpg" alt><br><img src="/2018/05/03/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/%E5%9C%B0%E7%89%A2%E6%B8%B8%E6%88%8F/Document-page-069.jpg" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/03/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/%E6%B2%A1%E8%A7%A3%E5%86%B3%E7%9A%84%E9%A2%98%E7%9B%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/03/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/%E6%B2%A1%E8%A7%A3%E5%86%B3%E7%9A%84%E9%A2%98%E7%9B%AE/" class="post-title-link" itemprop="url">没解决的题目</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-03 03:11:00" itemprop="dateCreated datePublished" datetime="2018-05-03T03:11:00+08:00">2018-05-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/关键题目</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/05/03/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/%E6%B2%A1%E8%A7%A3%E5%86%B3%E7%9A%84%E9%A2%98%E7%9B%AE/" class="post-meta-item leancloud_visitors" data-flag-title="没解决的题目" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>15</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年5月3日 下午3:11</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/198.%20House%20Robber/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/198.%20House%20Robber/" class="post-title-link" itemprop="url">198. House Robber</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-02 03:54:00" itemprop="dateCreated datePublished" datetime="2018-05-02T03:54:00+08:00">2018-05-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/关键题目</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/05/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/198.%20House%20Robber/" class="post-meta-item leancloud_visitors" data-flag-title="198. House Robber" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>437</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年5月2日 下午3:54<br><a href="https://leetcode.com/problems/house-robber/description/" target="_blank" rel="noopener">House Robber - LeetCode</a></p>
-<p><strong>从这道题可以看出动态规划也是可以用遍历去解释的。</strong></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">rob</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="function"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(nums.<span class="built_in">size</span>()+<span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        </span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = nums[<span class="number">1</span>] &gt; nums[<span class="number">0</span>] ? nums[<span class="number">1</span>]:nums[<span class="number">0</span>];</span><br><span class="line">        <span class="comment">//这里的遍历对象是：0~1 0~2 0~3 0~4 .... 0~(n-1)</span></span><br><span class="line">        <span class="comment">//这里的数字是只下标！</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            dp[i] = <span class="built_in">max</span>((dp[i<span class="number">-2</span>]+nums[i]), dp[i<span class="number">-1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> dp[nums.<span class="built_in">size</span>()<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/322.%20Coin%20Change/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/322.%20Coin%20Change/" class="post-title-link" itemprop="url">322. Coin Change</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-02 03:54:00" itemprop="dateCreated datePublished" datetime="2018-05-02T03:54:00+08:00">2018-05-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/关键题目</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/05/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/322.%20Coin%20Change/" class="post-meta-item leancloud_visitors" data-flag-title="322. Coin Change" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年5月2日 下午3:54<br><a href="https://leetcode.com/problems/coin-change/description/" target="_blank" rel="noopener">Coin Change - LeetCode</a></p>
-<ol>
-<li>现在特殊情况是面值只有2。那么如果我们要求dp[1]，一元面值对应的张数，我们应该怎么给dp[1]赋值。那么对应的dp[3]用2，又应该怎么复制，这是最不可到达的。一种问题的第一个问题。</li>
-<li>第二个问题，假如我们有两种处理方法，第一种是把它设成无限大。然后。这才这样的好处是我们使用递推公式的时候。因为递推公式要求最小值，那么我们就可以直接把这个最大值过滤掉，但是这个最大值不一定特别保险。这是他的缺点和他优点。然后第二个办法就是把它设成-1表示不可达。</li>
-<li>现在我们考虑第二种情况，就是把这个不可达的值表示为-1，就比如说dp[3]等于-1表示dp[3]可达。那么。当dp[3]入到递推公式，求最小值之后一定就求出来就是-1。所以我们会对递推公式产生影响。</li>
-<li>面对这个问题，我们解决方法是将递推公式拆开变成一个循环。</li>
-<li>在每次循环中遍历各个面值，然后把一个递推公式多次执行，也就多次给dp[i]进行赋值。</li>
-<li>在这个过程中要比大小，最终取出的跟直接求最小值递推公式是一样的。</li>
-<li>下一个问题是你如何，何时给这个不可达设置-1的值。</li>
-<li>我当初的想法是。找见不可到达和可到达之间的区分点。就比如说用判断啊什么的区分开。就是上面写if，下面是else句分别去执行。</li>
-<li>老师的方法是一开始就将所有的面值对应的数量设置为-1，全部识别不可达的</li>
-</ol>
-<p><img src="/2018/05/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/322.%20Coin%20Change/47FF855D-F9BB-4914-A4A2-972D3092E38A.png" alt></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//这道题就是特殊情况比较难考虑：</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">coinChange</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; coins, <span class="keyword">int</span> amount)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//初始化dp数组,初始值为-1</span></span><br><span class="line">        <span class="function"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(coins.<span class="built_in">size</span>()+<span class="number">1</span>, <span class="number">-1</span>)</span></span>;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//金额0，最优解为0</span></span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= amount; i++)&#123;</span><br><span class="line">            <span class="comment">//循环遍历各个面值，找到dp[i]最优解</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; coins.<span class="built_in">size</span>(); j++)&#123;</span><br><span class="line">                <span class="comment">//i-coins[j]&gt;=0:特殊情况面值只有2，我们要给1元赋值</span></span><br><span class="line">                <span class="comment">//dp[i-coins[j]]!=-1:如果前面的面值是不可到达的，那么我们不能使用它进行更新dp[i]</span></span><br><span class="line">                <span class="keyword">if</span>(i-coins[j]&gt;=<span class="number">0</span> &amp;&amp; dp[i-coins[j]]!=<span class="number">-1</span>)&#123;</span><br><span class="line">                    <span class="comment">//dp[i] == -1:是dp[i]的首次赋值，dp[i] &gt; dp[i-coins[j]] + 1：是dp[i]的寻找最优解的过程</span></span><br><span class="line">                    <span class="keyword">if</span>(dp[i] == <span class="number">-1</span> || dp[i] &gt; dp[i-coins[j]] + <span class="number">1</span>)&#123;</span><br><span class="line">                        dp[i] = dp[i-coins[j]] + <span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[amount];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/53.%20Maximum%20Subarray/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/53.%20Maximum%20Subarray/" class="post-title-link" itemprop="url">53. Maximum Subarray</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-02 03:54:00" itemprop="dateCreated datePublished" datetime="2018-05-02T03:54:00+08:00">2018-05-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/关键题目</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/05/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E5%85%B3%E9%94%AE%E9%A2%98%E7%9B%AE/53.%20Maximum%20Subarray/" class="post-meta-item leancloud_visitors" data-flag-title="53. Maximum Subarray" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>829</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年5月2日 下午3:54<br><a href="https://leetcode.com/problems/maximum-subarray/description/" target="_blank" rel="noopener">Maximum Subarray - LeetCode</a></p>
-<ol>
-<li>这道题可以说是的升级版</li>
-<li>这次遍历的对象是0<del>1 0</del>2….0~(n-1),但是加上一个条件：最右边的单个元素的一定要！</li>
-<li><strong>直接0~(n-1)不对的原因是：找不到前后的关系</strong></li>
-</ol>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//这次遍历的对象是0~1 0~2....0~(n-1),但是加上一个条件：最右边的单个元素的一定要！</span></span><br><span class="line">    <span class="comment">//也就是说，这回的dp表示的是：包含最后一个元素的最大值。有可能不包含最后一个时的值更大，所以需要我们再加一步：和max比较大小</span></span><br><span class="line">    <span class="comment">//这道题这么绕一下，不向上一题一样，直接一个递推式子就完成了的原因是：在这道题中找不大合适的递推公式</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxSubArray</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>() == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(nums.<span class="built_in">size</span>() == <span class="number">1</span>) <span class="keyword">return</span> nums[<span class="number">0</span>];</span><br><span class="line">        <span class="function"><span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">dp</span><span class="params">(nums.<span class="built_in">size</span>()+<span class="number">1</span>, <span class="number">0</span>)</span></span>;</span><br><span class="line">        </span><br><span class="line">        dp[<span class="number">0</span>] = nums[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = nums[<span class="number">1</span>]+nums[<span class="number">0</span>] &gt; nums[<span class="number">1</span>] ? nums[<span class="number">1</span>]+nums[<span class="number">0</span>] : nums[<span class="number">1</span>];</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> <span class="built_in">max</span> = dp[<span class="number">0</span>] &gt; dp[<span class="number">1</span>] ? dp[<span class="number">0</span>]: dp[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; nums.<span class="built_in">size</span>(); i++)&#123;</span><br><span class="line">            <span class="comment">// 这里的if-else就是递推式子</span></span><br><span class="line">            <span class="keyword">if</span>(dp[i<span class="number">-1</span>] &gt; <span class="number">0</span>)&#123;</span><br><span class="line">                dp[i] = dp[i<span class="number">-1</span>] + nums[i];</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                dp[i] = nums[i];</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">max</span> &lt; dp[i]) <span class="built_in">max</span> = dp[i];</span><br><span class="line">            <span class="comment">// printf("%d- ",dp[i]);</span></span><br><span class="line">        &#125;</span><br><span class="line">       </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/04/21/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/URL%E8%B7%AF%E5%BE%84%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/04/21/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/URL%E8%B7%AF%E5%BE%84%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">URL路径工具</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-04-21 12:58:00" itemprop="dateCreated datePublished" datetime="2018-04-21T12:58:00+08:00">2018-04-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/前端</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/04/21/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/URL%E8%B7%AF%E5%BE%84%E5%B7%A5%E5%85%B7/" class="post-meta-item leancloud_visitors" data-flag-title="URL路径工具" title="阅读次数">
+            <span id="/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9Aeth0%EF%BC%8Ceth1%EF%BC%8Ceth2%20+%20lo%E7%9A%84%E6%84%8F%E6%80%9D/" class="post-meta-item leancloud_visitors" data-flag-title="虚拟机：eth0，eth1，eth2 + lo的意思" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1225,8 +235,910 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2018年4月21日 下午12:58</p>
-<p><img src="/2018/04/21/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/URL%E8%B7%AF%E5%BE%84%E5%B7%A5%E5%85%B7/D0D32D84-A24B-4355-847A-3D09F676C747.png" alt><br><img src="/2018/04/21/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/URL%E8%B7%AF%E5%BE%84%E5%B7%A5%E5%85%B7/6EE526A2-1AD7-4A88-8E13-4FD752AD78FF.png" alt><br><img src="/2018/04/21/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/URL%E8%B7%AF%E5%BE%84%E5%B7%A5%E5%85%B7/BE43F634-ED7C-4AB7-B68B-9A830C23A69B.png" alt></p>
+          <p>2018年5月23日 上午10:44</p>
+<p><img src="/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9Aeth0%EF%BC%8Ceth1%EF%BC%8Ceth2%20+%20lo%E7%9A%84%E6%84%8F%E6%80%9D/8EC70507-965A-4665-8254-253F3D695BDA.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9A%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C,host-only,NAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9A%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C,host-only,NAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">虚拟机：桥接网络,host-only,NAT模式的理解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-23 10:19:00" itemprop="dateCreated datePublished" datetime="2018-05-23T10:19:00+08:00">2018-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/分布式集群</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9A%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C,host-only,NAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%90%86%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="虚拟机：桥接网络,host-only,NAT模式的理解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>90</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年5月23日 上午10:19</p>
+<p><a href="https://zhidao.baidu.com/question/1766612426583194180.html" target="_blank" rel="noopener">桥接网络是怎么回事？_百度知道</a><br><img src="/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9A%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C,host-only,NAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%90%86%E8%A7%A3/B889B099-4E41-44AF-8E6D-1A89BC114CD7.png" alt></p>
+<p><a href="https://www.cnblogs.com/hanqing/p/5479527.html" target="_blank" rel="noopener">桥接网络配置 - 博雅塔之子 - 博客园</a><br><img src="/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9A%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C,host-only,NAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%90%86%E8%A7%A3/DD2C97B6-EFBF-4A98-BC49-C49F055AC2D8.png" alt></p>
+<p><a href="https://www.cnblogs.com/CloudMan6/p/5308071.html" target="_blank" rel="noopener">理解 virbr0 - 每天5分钟玩转 OpenStack（11） - CloudMan - 博客园</a><br><img src="/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%9A%E6%A1%A5%E6%8E%A5%E7%BD%91%E7%BB%9C,host-only,NAT%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%90%86%E8%A7%A3/6932362C-A081-4115-9D3B-45F3387AF6DD.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/react%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E6%88%B3%E8%BD%AC%E6%8D%A2%E6%88%90%E5%B9%B4-%E6%9C%88-%E6%97%A5%20%E6%97%B6%EF%BC%9A%E5%88%86%EF%BC%9A%E7%A7%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/react%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E6%88%B3%E8%BD%AC%E6%8D%A2%E6%88%90%E5%B9%B4-%E6%9C%88-%E6%97%A5%20%E6%97%B6%EF%BC%9A%E5%88%86%EF%BC%9A%E7%A7%92/" class="post-title-link" itemprop="url">react中的时间戳转换成年-月-日 时：分：秒</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-23 04:16:00" itemprop="dateCreated datePublished" datetime="2018-05-23T04:16:00+08:00">2018-05-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/前端</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/react%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E6%88%B3%E8%BD%AC%E6%8D%A2%E6%88%90%E5%B9%B4-%E6%9C%88-%E6%97%A5%20%E6%97%B6%EF%BC%9A%E5%88%86%EF%BC%9A%E7%A7%92/" class="post-meta-item leancloud_visitors" data-flag-title="react中的时间戳转换成年-月-日 时：分：秒" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>39</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年5月23日 下午4:16</p>
+<p><a href="https://blog.csdn.net/qq5833547/article/details/79206346" target="_blank" rel="noopener">react中的时间戳转换成年-月-日 时：分：秒</a><br><img src="/2018/05/23/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/react%E4%B8%AD%E7%9A%84%E6%97%B6%E9%97%B4%E6%88%B3%E8%BD%AC%E6%8D%A2%E6%88%90%E5%B9%B4-%E6%9C%88-%E6%97%A5%20%E6%97%B6%EF%BC%9A%E5%88%86%EF%BC%9A%E7%A7%92/4BD10CD1-A535-47FF-80BC-35D528C79739.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/22/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/FormData%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E6%8A%A5%E9%94%99%22Uncaught%20TypeError%20Illegal%20invocation%22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/22/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/FormData%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E6%8A%A5%E9%94%99%22Uncaught%20TypeError%20Illegal%20invocation%22/" class="post-title-link" itemprop="url">FormData上传文件报错"Uncaught TypeError Illegal invocation"</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-22 10:12:00" itemprop="dateCreated datePublished" datetime="2018-05-22T10:12:00+08:00">2018-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/前端</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/05/22/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/FormData%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E6%8A%A5%E9%94%99%22Uncaught%20TypeError%20Illegal%20invocation%22/" class="post-meta-item leancloud_visitors" data-flag-title="FormData上传文件报错"Uncaught TypeError Illegal invocation"" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>17</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年5月22日 上午10:12</p>
+<p><img src="/2018/05/22/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/FormData%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E6%8A%A5%E9%94%99%22Uncaught%20TypeError%20Illegal%20invocation%22/E8A05673-1D6D-4C3C-AD59-FAC18E44E221.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">面包屑🍞的实现原理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-20 05:29:00" itemprop="dateCreated datePublished" datetime="2018-05-20T05:29:00+08:00">2018-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/前端</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="面包屑🍞的实现原理" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>44</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年5月20日 下午5:29</p>
+<h2 id="面包屑🍞的实现原理："><a href="#面包屑🍞的实现原理：" class="headerlink" title="面包屑🍞的实现原理："></a>面包屑🍞的实现原理：</h2><p><img src="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/085EDCF3-D745-4B64-95AF-D59ACF5D7436.png" alt><br><img src="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/1D2D7C2B-1EDF-4C7F-9EB2-D9BB6B0A6224.png" alt></p>
+<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><p><img src="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/334D96B6-AFE8-4AE0-BEFA-D5387B04FF3E.png" alt><br><img src="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/4357B998-AFF8-4035-89E5-D3BB7ED196C2.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/Html-webpack-plugin%E7%9A%84%E4%BD%9C%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/Html-webpack-plugin%E7%9A%84%E4%BD%9C%E7%94%A8/" class="post-title-link" itemprop="url">Html-webpack-plugin的作用</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-20 05:21:00" itemprop="dateCreated datePublished" datetime="2018-05-20T05:21:00+08:00">2018-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/前端</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/Html-webpack-plugin%E7%9A%84%E4%BD%9C%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="Html-webpack-plugin的作用" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>75</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年5月20日 下午5:21</p>
+<p><a href="https://www.cnblogs.com/wonyun/p/6030090.html" target="_blank" rel="noopener">html-webpack-plugin详解 - wonyun - 博客园</a></p>
+<h2 id="Html-webpack-plugin的作用："><a href="#Html-webpack-plugin的作用：" class="headerlink" title="Html-webpack-plugin的作用："></a>Html-webpack-plugin的作用：</h2><p><img src="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/Html-webpack-plugin%E7%9A%84%E4%BD%9C%E7%94%A8/46DED5B0-810B-481F-98EF-E1AAA0A8436D.png" alt></p>
+<h2 id="文章内容"><a href="#文章内容" class="headerlink" title="文章内容"></a>文章内容</h2><p><img src="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/Html-webpack-plugin%E7%9A%84%E4%BD%9C%E7%94%A8/Screenshot-2018-5-20%20html-webpack-plugin%E8%AF%A6%E8%A7%A3%20-%20wonyun%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%AD%A6%E4%BC%9AHogan%EF%BC%8C%E5%B0%B1%E9%82%A3%E4%B9%88%E5%87%A0%E5%8F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%AD%A6%E4%BC%9AHogan%EF%BC%8C%E5%B0%B1%E9%82%A3%E4%B9%88%E5%87%A0%E5%8F%A5/" class="post-title-link" itemprop="url">学会Hogan，就那么几句</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-20 05:08:00" itemprop="dateCreated datePublished" datetime="2018-05-20T05:08:00+08:00">2018-05-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/前端</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%AD%A6%E4%BC%9AHogan%EF%BC%8C%E5%B0%B1%E9%82%A3%E4%B9%88%E5%87%A0%E5%8F%A5/" class="post-meta-item leancloud_visitors" data-flag-title="学会Hogan，就那么几句" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>35</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年5月20日 下午5:08</p>
+<p><a href="http://www.imooc.com/article/18493" target="_blank" rel="noopener">学会Hogan，就那么几句！_慕课手记</a><br><img src="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%AD%A6%E4%BC%9AHogan%EF%BC%8C%E5%B0%B1%E9%82%A3%E4%B9%88%E5%87%A0%E5%8F%A5/Screenshot-2018-5-20%20%E5%AD%A6%E4%BC%9AHogan%EF%BC%8C%E5%B0%B1%E9%82%A3%E4%B9%88%E5%87%A0%E5%8F%A5%EF%BC%81_%E6%85%95%E8%AF%BE%E6%89%8B%E8%AE%B0.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/simditor%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/simditor%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A/" class="post-title-link" itemprop="url">simditor组件的使用方法：</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-19 05:10:00" itemprop="dateCreated datePublished" datetime="2018-05-19T05:10:00+08:00">2018-05-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/前端</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/simditor%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A/" class="post-meta-item leancloud_visitors" data-flag-title="simditor组件的使用方法：" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>34</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年5月19日 下午5:10</p>
+<p>先看看这个：<a href="bear://x-callback-url/open-note?id=E087F479-08FF-4345-B6DD-2B63B8ABCADD-680-00009776B1963C50">对于React的简单学习</a></p>
+<p><img src="/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/simditor%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A/1347049A-D4C2-4BBD-90E8-79759649254A.png" alt><br><img src="/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/simditor%E7%BB%84%E4%BB%B6%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%EF%BC%9A/CE566649-EEC6-47DD-96D9-A95DFDBDBE74.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%AF%B9%E4%BA%8EReact%E7%9A%84%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%AF%B9%E4%BA%8EReact%E7%9A%84%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">对于React的简单学习</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-19 04:49:00" itemprop="dateCreated datePublished" datetime="2018-05-19T04:49:00+08:00">2018-05-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/前端</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%AF%B9%E4%BA%8EReact%E7%9A%84%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="对于React的简单学习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>48</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年5月19日 下午4:49</p>
+<p><a href="http://www.ruanyifeng.com/blog/2015/03/react.html" target="_blank" rel="noopener">React 入门实例教程 - 阮一峰的网络日志</a><br><a href="http://www.runoob.com/react/" target="_blank" rel="noopener">React 教程 | 菜鸟教程</a></p>
+<p><img src="/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%AF%B9%E4%BA%8EReact%E7%9A%84%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/77F09515-0775-4931-B279-A8C737773C20.png" alt></p>
+<p><img src="/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E5%AF%B9%E4%BA%8EReact%E7%9A%84%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/331F57A5-C803-4F8B-A7F2-0889721ABFE9.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%85%B3%E4%BA%8E%E6%96%B0%E5%A2%9E%E4%BA%A7%E5%93%81%E5%8A%9F%E8%83%BD%E7%9A%84%E8%A7%A3%E9%87%8A%EF%BC%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%85%B3%E4%BA%8E%E6%96%B0%E5%A2%9E%E4%BA%A7%E5%93%81%E5%8A%9F%E8%83%BD%E7%9A%84%E8%A7%A3%E9%87%8A%EF%BC%9A/" class="post-title-link" itemprop="url">关于新增产品功能的解释：</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-19 03:50:00" itemprop="dateCreated datePublished" datetime="2018-05-19T03:50:00+08:00">2018-05-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/05/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%85%B3%E4%BA%8E%E6%96%B0%E5%A2%9E%E4%BA%A7%E5%93%81%E5%8A%9F%E8%83%BD%E7%9A%84%E8%A7%A3%E9%87%8A%EF%BC%9A/" class="post-meta-item leancloud_visitors" data-flag-title="关于新增产品功能的解释：" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>411</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年5月19日 下午3:50</p>
+<ol>
+<li>新增产品页<a href="http://localhost:8086/dist/view#/product/save，对应的后台接口有三个save.do,upload.do,richtext_img_upload.do" target="_blank" rel="noopener">http://localhost:8086/dist/view#/product/save，对应的后台接口有三个save.do,upload.do,richtext_img_upload.do</a></li>
+<li>save.do用来将新增页的信息填写如数据库表。<ol>
+<li>update和save都是对应的save.do这个接口，这里是在service层进行区分的，根据<code>if(product.getId() != null)</code></li>
+</ol>
+</li>
+<li>upload.do用来上传商品图片到ftp服务器，最后返回的格式是ServiceResponse</li>
+<li>richtext_img_upload.do用来上传商品详情中的图片到ftp服务器</li>
+<li>upload.do和richtext_img_upload.do的区别?<ol>
+<li>其实他们的功能本身是一样的，但是由于我们前台使用了simditor这个组件，他要求的返回格式必须是Map，而不能是ServiceResponse</li>
+</ol>
+</li>
+</ol>
 
       
     </div>
@@ -1246,7 +1158,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/59/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><span class="page-number current">60</span><a class="page-number" href="/page/61/">61</a><span class="space">&hellip;</span><a class="page-number" href="/page/98/">98</a><a class="extend next" rel="next" href="/page/61/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/59/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/59/">59</a><span class="page-number current">60</span><a class="page-number" href="/page/61/">61</a><span class="space">&hellip;</span><a class="page-number" href="/page/101/">101</a><a class="extend next" rel="next" href="/page/61/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1312,14 +1224,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">973</span>
+          <span class="site-state-item-count">1007</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">86</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1353,12 +1265,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1m</span>
+    <span title="站点总字数">1.1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:48</span>
+    <span title="站点阅读时长">16:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

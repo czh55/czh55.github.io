@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="2018年5月4日 上午9:19  我一直想尝试把并发的知识有一个简单的认识，做个总结。  我们可以想象一下，为啥硬件和java的创造者要创建出线程不安全的情况 对于硬件来说，就想缓存的出现一下，他是被现实所打败 对于java语言来说， 整体上去看，他既提供了各种底层的准则去保证一定的顺序性，但是远远是不够的，并不能保证并发的安全。 并且，他还设计出了类似指令重排，这样就会更加引起线程的不安全 他">
+  <meta name="description" content="2018年5月4日 上午9:19  我一直想尝试把并发的知识有一个简单的认识，做个总结。  我们可以想象一下，为啥硬件和java的创造者要创建出线程不安全的情况 对于硬件来说，就像缓存的出现一样，他是被现实所打败 对于java语言来说， 整体上去看，他提供了各种底层的准则去保证一定的顺序性，但是远远是不够的，并不能保证并发的安全。 并且，他还设计出了类似指令重排，这样就会更加引起线程的不安全 他这">
 <meta property="og:type" content="article">
 <meta property="og:title" content="中期对并发的整理总结">
 <meta property="og:url" content="http://www.chenzhiheng.cn/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
-<meta property="og:description" content="2018年5月4日 上午9:19  我一直想尝试把并发的知识有一个简单的认识，做个总结。  我们可以想象一下，为啥硬件和java的创造者要创建出线程不安全的情况 对于硬件来说，就想缓存的出现一下，他是被现实所打败 对于java语言来说， 整体上去看，他既提供了各种底层的准则去保证一定的顺序性，但是远远是不够的，并不能保证并发的安全。 并且，他还设计出了类似指令重排，这样就会更加引起线程的不安全 他">
+<meta property="og:description" content="2018年5月4日 上午9:19  我一直想尝试把并发的知识有一个简单的认识，做个总结。  我们可以想象一下，为啥硬件和java的创造者要创建出线程不安全的情况 对于硬件来说，就像缓存的出现一样，他是被现实所打败 对于java语言来说， 整体上去看，他提供了各种底层的准则去保证一定的顺序性，但是远远是不够的，并不能保证并发的安全。 并且，他还设计出了类似指令重排，这样就会更加引起线程的不安全 他这">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://www.chenzhiheng.cn/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/80A5595E-7BBF-453B-B0DE-3955F1BA3CB5.png">
 <meta property="og:image" content="http://www.chenzhiheng.cn/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/910F8129-D02D-418F-AF9C-960E4FCB99B6.png">
@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://www.chenzhiheng.cn/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/B3F9F68A-DD93-4326-AD1B-1370FB777A97.png">
 <meta property="og:image" content="http://www.chenzhiheng.cn/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/FCA2808C-694B-4759-AB6B-458CFD01CFD9.png">
 <meta property="article:published_time" content="2018-05-04T01:19:00.000Z">
-<meta property="article:modified_time" content="2020-03-12T12:06:07.412Z">
+<meta property="article:modified_time" content="2020-04-01T06:55:21.064Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/80A5595E-7BBF-453B-B0DE-3955F1BA3CB5.png">
@@ -200,7 +200,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+                <time title="修改时间：2020-04-01 14:55:21" itemprop="dateModified" datetime="2020-04-01T14:55:21+08:00">2020-04-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -227,7 +227,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>770</span>
+              <span>769</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -251,9 +251,9 @@
 <li><p>我一直想尝试把并发的知识有一个简单的认识，做个总结。</p>
 <ol>
 <li>我们可以想象一下，为啥硬件和java的创造者要创建出线程不安全的情况</li>
-<li>对于<strong>硬件</strong>来说，就想缓存的出现一下，<strong>他是被现实所打败</strong></li>
+<li>对于<strong>硬件</strong>来说，就像缓存的出现一样，<strong>他是被现实所打败</strong></li>
 <li>对于<strong>java语言</strong>来说，<ol>
-<li>整体上去看，他既提供了各种底层的准则去保证一定的顺序性，但是远远是不够的，并不能保证并发的安全。</li>
+<li>整体上去看，他提供了各种底层的准则去保证一定的顺序性，但是远远是不够的，并不能保证并发的安全。</li>
 <li>并且，他还设计出了类似指令重排，这样就会更加引起线程的不安全</li>
 <li><strong>他这么做的原因是在速度和线程安全的一种相互的博弈</strong></li>
 <li>为了弥补缺陷，他设计出个各种关键字让程序员自己实现线程安全，</li>
@@ -272,7 +272,7 @@
 </li>
 <li><p>【JVM】：规定了线程基本的<strong>有序性</strong>规则，可以理解成java语言默认的东西。<br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/1E8C7BE1-95DF-4BA5-9609-4D81E6FCA45B.png" alt></p>
 </li>
-<li><p>【JMM】：规定了哪些“最废话”的规则，是人的都知道的。<br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/B3F9F68A-DD93-4326-AD1B-1370FB777A97.png" alt></p>
+<li><p>【JMM】：规定了那些“最废话”的规则，是人的都知道的。<br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/B3F9F68A-DD93-4326-AD1B-1370FB777A97.png" alt></p>
 <ol>
 <li><strong>或者换种说法：JMM就是为了规定哪些最废话的规则而产生的</strong></li>
 <li>他定义的是一个基本的框架，这个框架本身就有很多的不足</li>
@@ -290,7 +290,7 @@
 <li>cpu缓存<strong>局部性</strong>原理<br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E4%B8%AD%E6%9C%9F%E5%AF%B9%E5%B9%B6%E5%8F%91%E7%9A%84%E6%95%B4%E7%90%86%E6%80%BB%E7%BB%93/FCA2808C-694B-4759-AB6B-458CFD01CFD9.png" alt></li>
 <li><strong>缓存一致性</strong>原理：MESI<ol>
 <li>理解：因为要解决cpu和内存速度不匹配的问题，引入缓存之后而带来的本来内存中的一份数据 ，现在变成了多份，因为缓存中会出现对内存数据的拷贝和加工</li>
-<li><strong>这时候就需要一个准则来表名各个数据的状态，那么我们就可以根据数据的状态进行判断和处理，区分、处理各种情况</strong>。</li>
+<li><strong>这时候就需要一个准则来表明各个数据的状态，那么我们就可以根据数据的状态进行判断和处理，区分、处理各种情况</strong>。</li>
 </ol>
 </li>
 </ol>
@@ -391,14 +391,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">973</span>
+          <span class="site-state-item-count">1007</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">86</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -432,12 +432,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1m</span>
+    <span title="站点总字数">1.1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:48</span>
+    <span title="站点阅读时长">16:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

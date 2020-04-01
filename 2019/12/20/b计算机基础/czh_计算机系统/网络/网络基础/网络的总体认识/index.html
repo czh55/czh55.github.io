@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="2019年12月20日 下午11:27 一些没来的及整理的文章计算机网络总结 - architect刘源源 - 开源中国面试带你飞：这是一份全面的 计算机网络基础 总结攻略 - 掘金计算机网络知识点总结 - 王小东大将军的博客 - CSDN博客计算机网络总结计算机网络基础知识总结 - ranyonsue - 博客园计算机网络知识点总结 - 程序园无线网络（3） 无线网络结构-技术成就梦想-51CT">
+  <meta name="description" content="2019年12月20日 下午11:27 2020年3月31日 下午10:35今天在 10道大厂面试必考题之后，有了一点新的认识：  网络中的各种协议，其实可以当做是一个框架来认识，因为一个框架可以从 框架手册中规定的接口的使用方式(对应协议头中的字段) 框架本身对用户透明的算法，可以通过参数接口的方式来进行挑选、调试   一个具体的协议，eg：TCP，其实就可以理解成一个框架，他就实现了以下提到的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络的总体认识">
 <meta property="og:url" content="http://www.chenzhiheng.cn/2019/12/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E7%9A%84%E6%80%BB%E4%BD%93%E8%AE%A4%E8%AF%86/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
-<meta property="og:description" content="2019年12月20日 下午11:27 一些没来的及整理的文章计算机网络总结 - architect刘源源 - 开源中国面试带你飞：这是一份全面的 计算机网络基础 总结攻略 - 掘金计算机网络知识点总结 - 王小东大将军的博客 - CSDN博客计算机网络总结计算机网络基础知识总结 - ranyonsue - 博客园计算机网络知识点总结 - 程序园无线网络（3） 无线网络结构-技术成就梦想-51CT">
+<meta property="og:description" content="2019年12月20日 下午11:27 2020年3月31日 下午10:35今天在 10道大厂面试必考题之后，有了一点新的认识：  网络中的各种协议，其实可以当做是一个框架来认识，因为一个框架可以从 框架手册中规定的接口的使用方式(对应协议头中的字段) 框架本身对用户透明的算法，可以通过参数接口的方式来进行挑选、调试   一个具体的协议，eg：TCP，其实就可以理解成一个框架，他就实现了以下提到的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-12-20T03:27:00.000Z">
-<meta property="article:modified_time" content="2020-03-12T08:46:20.543Z">
+<meta property="article:modified_time" content="2020-04-01T06:54:31.615Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
@@ -192,7 +192,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+                <time title="修改时间：2020-04-01 14:54:31" itemprop="dateModified" datetime="2020-04-01T14:54:31+08:00">2020-04-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -219,7 +219,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>524</span>
+              <span>728</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -239,6 +239,20 @@
 
       
         <p>2019年12月20日 下午11:27</p>
+<p>2020年3月31日 下午10:35<br>今天在 <a href="bear://x-callback-url/open-note?id=640BBF64-8E1E-4C58-B790-FC89B675EAE8-1248-0000037CF422AF79">10道大厂面试必考题</a>之后，有了一点新的认识：</p>
+<ul>
+<li>网络中的各种协议，其实可以当做是一个框架来认识，因为一个框架可以从<ul>
+<li>框架手册中规定的接口的使用方式(对应协议头中的字段)</li>
+<li>框架本身对用户透明的算法，可以通过参数接口的方式来进行挑选、调试</li>
+</ul>
+</li>
+<li>一个具体的协议，eg：TCP，其实就可以理解成一个框架，他就实现了以下提到的算法，而UDP这个框架就没有实现。<ul>
+<li>传递任意长度消息</li>
+<li>流量控制</li>
+<li>拥塞控制</li>
+</ul>
+</li>
+</ul>
 <p>一些没来的及整理的文章<br><a href="https://my.oschina.net/architectliuyuanyuan/blog/1614800" target="_blank" rel="noopener">计算机网络总结 - architect刘源源 - 开源中国</a><br><a href="https://juejin.im/post/5ad7e6c35188252ebd06acfa" target="_blank" rel="noopener">面试带你飞：这是一份全面的 计算机网络基础 总结攻略 - 掘金</a><br><a href="https://blog.csdn.net/wangdd_199326/article/details/77540143" target="_blank" rel="noopener">计算机网络知识点总结 - 王小东大将军的博客 - CSDN博客</a><br><a href="https://mubu.com/doc/4tIRFfdSO" target="_blank" rel="noopener">计算机网络总结</a><br><a href="https://www.cnblogs.com/ranyonsue/p/9724987.html" target="_blank" rel="noopener">计算机网络基础知识总结 - ranyonsue - 博客园</a><br><a href="http://www.voidcn.com/article/p-xcqzecre-bmu.html" target="_blank" rel="noopener">计算机网络知识点总结 - 程序园</a><br><a href="http://blog.51cto.com/iwantfly/393395" target="_blank" rel="noopener">无线网络（3） 无线网络结构-技术成就梦想-51CTO博客</a></p>
 <p><a href="https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C" target="_blank" rel="noopener">计算机网络 - 维基百科，自由的百科全书</a></p>
 <ol>
@@ -350,14 +364,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">973</span>
+          <span class="site-state-item-count">1007</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">86</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -391,12 +405,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1m</span>
+    <span title="站点总字数">1.1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:48</span>
+    <span title="站点阅读时长">16:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

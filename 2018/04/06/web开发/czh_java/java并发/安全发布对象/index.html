@@ -20,16 +20,16 @@
     var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="2018年4月6日 下午4:08 2018年11月19日这篇文章的知识点与其他文章知识点的不同是：这篇文章是站在对象的角度去分析的，教我们如何使用java书写一个好的类和对象。其他文章更多的是站在线程的角度去分析问题的。 如何判断在多线程下是否会出问题？ 线程安全性看当前方法、属性是否使用这节的内容进行处理 假设，两个线程执行到统一类的同一个方法的同一行语句，看这时是否会出问题！！  总结： 慕课">
+  <meta name="description" content="2018年4月6日 下午4:08 2018年11月19日这篇文章的知识点与其他文章知识点的不同是：这篇文章是站在对象的角度去分析的，教我们如何使用java书写一个好的类和对象。其他文章更多的是站在线程的角度去分析问题的。 如何判断在多线程下是否会出问题？ 线程安全性看当前方法、属性是否使用这节的内容进行处理 假设，两个线程执行到同一类的同一个方法的同一行语句，看这时是否会出问题！！  总结： 慕课">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安全发布对象">
 <meta property="og:url" content="http://www.chenzhiheng.cn/2018/04/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%AE%89%E5%85%A8%E5%8F%91%E5%B8%83%E5%AF%B9%E8%B1%A1/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
-<meta property="og:description" content="2018年4月6日 下午4:08 2018年11月19日这篇文章的知识点与其他文章知识点的不同是：这篇文章是站在对象的角度去分析的，教我们如何使用java书写一个好的类和对象。其他文章更多的是站在线程的角度去分析问题的。 如何判断在多线程下是否会出问题？ 线程安全性看当前方法、属性是否使用这节的内容进行处理 假设，两个线程执行到统一类的同一个方法的同一行语句，看这时是否会出问题！！  总结： 慕课">
+<meta property="og:description" content="2018年4月6日 下午4:08 2018年11月19日这篇文章的知识点与其他文章知识点的不同是：这篇文章是站在对象的角度去分析的，教我们如何使用java书写一个好的类和对象。其他文章更多的是站在线程的角度去分析问题的。 如何判断在多线程下是否会出问题？ 线程安全性看当前方法、属性是否使用这节的内容进行处理 假设，两个线程执行到同一类的同一个方法的同一行语句，看这时是否会出问题！！  总结： 慕课">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%AE%89%E5%85%A8%E5%8F%91%E5%B8%83%E5%AF%B9%E8%B1%A1/37D2A65B-4E88-419C-99F8-4840E210A867.png">
 <meta property="article:published_time" content="2018-04-05T20:08:00.000Z">
-<meta property="article:modified_time" content="2020-03-12T12:06:07.357Z">
+<meta property="article:modified_time" content="2020-04-01T06:55:21.070Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/04/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%AE%89%E5%85%A8%E5%8F%91%E5%B8%83%E5%AF%B9%E8%B1%A1/37D2A65B-4E88-419C-99F8-4840E210A867.png">
@@ -194,7 +194,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+                <time title="修改时间：2020-04-01 14:55:21" itemprop="dateModified" datetime="2020-04-01T14:55:21+08:00">2020-04-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,7 +244,7 @@
 <p>2018年11月19日<br>这篇文章的知识点与其他文章知识点的不同是：这篇文章是站在<strong>对象</strong>的角度去分析的，教我们如何使用java书写一个好的类和对象。其他文章更多的是站在<strong>线程</strong>的角度去分析问题的。</p>
 <h2 id="如何判断在多线程下是否会出问题？"><a href="#如何判断在多线程下是否会出问题？" class="headerlink" title="如何判断在多线程下是否会出问题？"></a>如何判断在多线程下是否会出问题？</h2><ol>
 <li><a href="bear://x-callback-url/open-note?id=C177DF8A-D609-4006-9049-7B1CCA66840E-722-00009C52C6D0D38E">线程安全性</a>看当前方法、属性是否使用这节的内容进行处理</li>
-<li>假设，两个线程执行到统一类的同一个方法的<strong>同一行语句</strong>，看这时是否会出问题！！</li>
+<li>假设，两个线程执行到同一类的同一个方法的<strong>同一行语句</strong>，看这时是否会出问题！！</li>
 </ol>
 <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ol>
 <li><a href="https://www.jianshu.com/p/c26791dbba90" target="_blank" rel="noopener">慕课网高并发实战（五）- 安全发布对象 - 简书</a>这篇文章写得不全</li>
@@ -373,14 +373,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">973</span>
+          <span class="site-state-item-count">1007</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">82</span>
+        <span class="site-state-item-count">86</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -414,12 +414,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1m</span>
+    <span title="站点总字数">1.1m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">15:48</span>
+    <span title="站点阅读时长">16:14</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
