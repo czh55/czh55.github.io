@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2018年12月24日 下午12:05 数字图像相关（DIC）测量方法在材料变形研究中的应用_百度学术数字图像相关(Digital Image Correlation)测量技术是应用计算机视觉技术的一种图像测量方法,是一种非接触的、用于全场形状、变形、运动测量的方法。它直接处理的对象是具有一定灰度分布的数字图像(散斑图),通过对比材料或者结构表面在变形前后的散斑图运用相关算法得到全场位移和应变。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字图像相关(中文论文)">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2018/12/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E7%9B%B8%E5%85%B3(%E4%B8%AD%E6%96%87%E8%AE%BA%E6%96%87)/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2018年12月24日 下午12:05 数字图像相关（DIC）测量方法在材料变形研究中的应用_百度学术数字图像相关(Digital Image Correlation)测量技术是应用计算机视觉技术的一种图像测量方法,是一种非接触的、用于全场形状、变形、运动测量的方法。它直接处理的对象是具有一定灰度分布的数字图像(散斑图),通过对比材料或者结构表面在变形前后的散斑图运用相关算法得到全场位移和应变。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-12-24T04:05:00.000Z">
+<meta property="article:modified_time" content="2020-04-01T07:27:51.435Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2018/12/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E7%9B%B8%E5%85%B3(%E4%B8%AD%E6%96%87%E8%AE%BA%E6%96%87)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>数字图像相关(中文论文) | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/12/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E7%9B%B8%E5%85%B3(%E4%B8%AD%E6%96%87%E8%AE%BA%E6%96%87)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数字图像相关(中文论文)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-24 12:05:00" itemprop="dateCreated datePublished" datetime="2018-12-24T12:05:00+08:00">2018-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:27:51" itemprop="dateModified" datetime="2020-04-01T15:27:51+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-DIC/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/DIC#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/12/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E7%9B%B8%E5%85%B3(%E4%B8%AD%E6%96%87%E8%AE%BA%E6%96%87)/" class="post-meta-item leancloud_visitors" data-flag-title="数字图像相关(中文论文)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2018年12月24日 下午12:05</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=f225384ba25bb4711b8855d9f6c48979&site=xueshu_se" target="_blank" rel="noopener">数字图像相关（DIC）测量方法在材料变形研究中的应用_百度学术</a><br>数字图像相关(Digital Image Correlation)测量技术是应用计算机视觉技术的一种图像测量方法,是一种非接触的、用于全场形状、变形、运动测量的方法。它直接处理的对象是具有一定灰度分布的数字图像(散斑图),通过对比材料或者结构表面在变形前后的散斑图运用相关算法得到全场位移和应变。</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=d1790beb43297d39d233ae7c13cf9f7e" target="_blank" rel="noopener">三维数字图像相关法及其在水泥基材料变形研究中的应用_百度学术</a></p>
+<ol>
+<li>三维数字图像相关法(three-dimensional digital image correlation,3D-DIC)又称三维数字散斑相关法(threedimensional digital speckle correlation method,3D-DSCM),是一种新型的非接触式全场光学测量方法。</li>
+<li>数字图像相关法是一种通过记录和分析物体表面随机分布的散斑在物体变形前后的系统相关性，来计算物体表面形变的一种光学测量技术</li>
+<li>与比长仪等传统方法相比,三维数字图像相关法具有测量精度高,可准确测量物体表面的三维形貌和变形等优点。</li>
+<li>本文介绍了三维数字图像相关法的基本原理、关键技术和精度分析等,并结合水泥基材料的特点,讨论了三维数字图像相关法在水泥基材料变形研究中的应用。</li>
+</ol>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=f6e7f05856c07ecdc97c9c6430f8af48" target="_blank" rel="noopener">三维数字图像相关技术(3D DIC)在材料形变研究中的应用进展_百度学术</a><br>指出在散斑对测量精度影响、微应变尺度测量、环境因素对测量效果干扰</p>
+<p>散斑图像：<br><a href="http://www.wanfangdata.com.cn/details/detail.do?_type=degree&id=D01087430#" target="_blank" rel="noopener">基于激光散斑图像的目标识别研究</a><br>介绍了散斑的成像原理，特性<br><a href="http://www.wanfangdata.com.cn/details/detail.do?_type=perio&id=sylx200303022" target="_blank" rel="noopener">散斑图像相关数字技术原理及应用</a><br>散斑图是通过CCD照相机生成的</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=6884e3f2b87c10b16ffc896a263515a5&site=xueshu_se" target="_blank" rel="noopener">激光测量目标角振动的研究_百度学术</a></p>
+<h2 id="基本方法流程："><a href="#基本方法流程：" class="headerlink" title="基本方法流程："></a>基本方法流程：</h2><ol>
+<li>利用线阵CCD具有实时传输光电变换信号和自扫描速度快、频率响应高、能够实现动态测量以及价格低廉等特点，选择线阵CCD采集散斑图像；利用FPGA并行处理数据速度快这一优势，CCD输出信号通过信号调理电路后经A/D转换送入FPGA进行相关运算，最终通过散斑图像的位移量来获得目标角振动信息；用MATLAB软件编程来实现对测量系统的理论仿真及结果验证。<h2 id="散斑："><a href="#散斑：" class="headerlink" title="散斑："></a>散斑：</h2></li>
+<li>散斑的形成的物理原理</li>
+<li>数字散斑相关方法（DSCM）的基本原理<h2 id="CCD简介："><a href="#CCD简介：" class="headerlink" title="CCD简介："></a>CCD简介：</h2></li>
+<li>CCD 的工作原理是将目标或光源入射到 CCD 光敏面上的光强分布信息通过光电转换原理转变为电荷量信息，并且按照一定的时序（脉冲信号）将临时存放在寄存器中的电荷量信号移位串行输出，输出的电信号再经过信号调理电路和相关软件的处理后就可再现被测物体的原始信息。</li>
+<li>从 CCD 器件的结构上来看，可以分为线阵 CCD 和面阵 CCD 两种。 </li>
+<li>CCD 器件普遍具有高解析度、低噪声、高灵敏度、动态范围大、线性特性好、转换效率高、光谱响应宽以及体积小、重量轻等优点。<h2 id="FPGA"><a href="#FPGA" class="headerlink" title="FPGA"></a>FPGA</h2></li>
+<li>传统的数字散斑相关方法使用图像采集卡采集散斑图像，并输送至计算机采用 MATLAB 或 C 语言编程进行相关搜索和相关运算，具有运算大、运算速度慢、无法实时动态测量等缺点。</li>
+<li>本论文提出测量方案选用现场可编程逻辑门阵<br>列（FPGA）实现相关搜索和相关运算。FPGA 最大的优点在于并行计算特性以及灵活的可重构特性，还可根据具体算法来实现特定的并行处理结构或流水线结构，有更多的处理单元来执行运算，这就极大提高了算法运算速度和处理系统的吞吐量。</li>
+</ol>
+<p><a href="https://s.1688.com/kq/-C3E6D5F3636364.html" target="_blank" rel="noopener">【面阵ccd】_面阵ccd品牌/图片/价格_面阵ccd批发_阿里巴巴</a><br><a href="http://www.siaon.com/pdf/camera.pdf" target="_blank" rel="noopener">http://www.siaon.com/pdf/camera.pdf</a></p>
+<p>视觉测量</p>
+<p>标定板</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=d52b595de9ffa769c5c6498a73fe3f6f" target="_blank" rel="noopener">图像式远程目标微小位移监测系统的设计与实现_百度学术</a><br>该系统设计的基本思路是使用CCD摄取目标图像，通过监控目标中心在图像中的位置变化实现对远程目标微小位移的准确监测。</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=1e940e5f36e0cc23b6fafdee49751417&site=xueshu_se" target="_blank" rel="noopener">地质灾害监测新仪器—激光微小位移监测系统_百度学术</a><br>本项研究成果采用了先进的激光技术、CCD摄像技术和微机数字处理技术，对滑坡体的水平位移、垂直位移和轴向位移实现远距离、非接触、全天候、全自动监测，</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=ef903bc66991a7c8852eb5fddcb95170" target="_blank" rel="noopener">图像处理技术在地质灾害监测中的应用_百度学术</a><br>三维激光微位移监测技术是一种对地质灾害进行长期监测的新方法.该技术用激光作为光源,用CCD摄像器作为镜头,通过图象采集卡把视频信号采入计算机中,用与该仪器配套的专门软件对采集到的光斑图像进行处理,计算出光斑的三维中心坐标值,把该值和原点坐标值进行比较,就可以算出灾害体滑动的距离.该系统可以对灾害体进行长期、非接触监测,监测时间、监测频率可以任意设定.</p>
+<p><a href="https://www.jianshu.com/p/558aa39049b4" target="_blank" rel="noopener">机器视觉基础知识详解 - 简书</a><br><a href="https://zhuanlan.zhihu.com/p/30267599" target="_blank" rel="noopener">科研相机选择：sCMOS还是CCD？ - 知乎</a><br><a href="https://baike.baidu.com/item/CCD%20%E7%85%A7%E7%9B%B8%E6%9C%BA" target="_blank" rel="noopener">CCD 照相机_百度百科</a><br>机器视觉就是用机器代替人眼来做测量和判断。机器视觉系统是通过机器视觉产品（即图像摄取装置，分CMOS和CCD两种）将被摄取目标转换成图像信号，传送给专用的图像处理系统，得到被摄目标的形态信息，根据像素分布和亮度、颜色等信息，转变成数字化信号;图像系统对这些信号进行各种运算来抽取目标的特征，进而根据判别的结果来控制现场的设备动作。</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=58a7271c8cc12651c75dd66c87183cfd" target="_blank" rel="noopener">激光三维位移监测装置的研究_百度学术</a></p>
+<ol>
+<li>基于机器视觉和激光技术的相对位移测量装置有效克服了位移非直线变形的弊病，利用激光成像技术实现了相对位置变形的确定，可以测量灾害体在三维空间上的位移变化量 </li>
+<li>反射后激光光线的接收和对比，以确定位移变化量。激光三维位移测量装置由发射模块和接收模块两部分组成，发射模块主要为带有两个有一定夹角的点激光发射管，在测量时发射两条激光线。接收模块由一块白色PVC板和摄像镜头组成，用来实现</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E7%8E%AF%E5%A2%83/%E7%A8%8B%E5%BA%8F%E5%8D%95%E8%AF%8D%E5%85%B1%E7%8E%B0%E7%9F%A9%E9%98%B5/" rel="prev" title="程序单词共现矩阵">
+      <i class="fa fa-chevron-left"></i> 程序单词共现矩阵
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/" rel="next" title="3D DIC">
+      3D DIC <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本方法流程："><span class="nav-number">1.</span> <span class="nav-text">基本方法流程：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#散斑："><span class="nav-number">2.</span> <span class="nav-text">散斑：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CCD简介："><span class="nav-number">3.</span> <span class="nav-text">CCD简介：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FPGA"><span class="nav-number">4.</span> <span class="nav-text">FPGA</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '2e576de234bcb16ff980918edce56a2e',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

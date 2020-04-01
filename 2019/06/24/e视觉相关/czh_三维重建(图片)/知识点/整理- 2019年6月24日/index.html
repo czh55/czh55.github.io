@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2019年6月24日 下午8:48 粗浅的三维重建核心的总体理解： 三维重建核心：一共有两个，十分简单 用数学描述现实几何关系。用等式、等式组就可以表示这种关系。—-&gt; 已经研究透的东西 等式组求解。——&gt;已经研究透的东西 这里又将等数组用矩阵表示，也就是将几何关系用带未知参数的矩阵来表示。 最后就变成了矩阵的求解。 换个角度说：如果我们知道了矩阵(本质矩阵 基本矩阵 H矩阵)，那么说">
+<meta property="og:type" content="article">
+<meta property="og:title" content="整理- 2019年6月24日">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2019/06/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B4%E7%90%86-%202019%E5%B9%B46%E6%9C%8824%E6%97%A5/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2019年6月24日 下午8:48 粗浅的三维重建核心的总体理解： 三维重建核心：一共有两个，十分简单 用数学描述现实几何关系。用等式、等式组就可以表示这种关系。—-&gt; 已经研究透的东西 等式组求解。——&gt;已经研究透的东西 这里又将等数组用矩阵表示，也就是将几何关系用带未知参数的矩阵来表示。 最后就变成了矩阵的求解。 换个角度说：如果我们知道了矩阵(本质矩阵 基本矩阵 H矩阵)，那么说">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-06-24T00:48:00.000Z">
+<meta property="article:modified_time" content="2020-04-01T07:27:51.533Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2019/06/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B4%E7%90%86-%202019%E5%B9%B46%E6%9C%8824%E6%97%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>整理- 2019年6月24日 | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/06/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B4%E7%90%86-%202019%E5%B9%B46%E6%9C%8824%E6%97%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          整理- 2019年6月24日
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-24 08:48:00" itemprop="dateCreated datePublished" datetime="2019-06-24T08:48:00+08:00">2019-06-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:27:51" itemprop="dateModified" datetime="2020-04-01T15:27:51+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/知识点#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/06/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B4%E7%90%86-%202019%E5%B9%B46%E6%9C%8824%E6%97%A5/" class="post-meta-item leancloud_visitors" data-flag-title="整理- 2019年6月24日" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>875</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2019年6月24日 下午8:48</p>
+<h3 id="粗浅的三维重建核心的总体理解："><a href="#粗浅的三维重建核心的总体理解：" class="headerlink" title="粗浅的三维重建核心的总体理解："></a>粗浅的三维重建核心的总体理解：</h3><ol>
+<li>三维重建核心：一共有两个，十分简单<ol>
+<li>用数学描述现实几何关系。用等式、等式组就可以表示这种关系。—-&gt; 已经研究透的东西</li>
+<li>等式组求解。——&gt;已经研究透的东西<ol>
+<li>这里又将等数组用矩阵表示，也就是将几何关系用带未知参数的矩阵来表示。</li>
+<li>最后就变成了矩阵的求解。</li>
+<li>换个角度说：如果我们知道了矩阵(本质矩阵 基本矩阵 H矩阵)，那么说明我们已经求出了各种点(二维点&lt;-&gt;三维点)之间的转换方式，选取合适的矩阵乘就行了。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>为什么效果不好的原因是：<ol>
+<li>在解不等式时，<strong>输入</strong>的数据不好：错误匹配点。<ol>
+<li>计算机视觉很多问题，原因都是因为输入不够好，其实视觉本身的模型早就研究透了</li>
+<li>现在的计算机视觉研究，真的就像是给不好的输入擦屁股，并不是从模型上改进。</li>
+</ol>
+</li>
+<li>为了弥补这些问题，我们才有了我们常用的算法：RANSAC，Bundle Adjustment。<strong>这些算法并不是三维重建的本质，一开始我就拘泥于这些算法中，导致没有看透知识！</strong></li>
+</ol>
+</li>
+<li>ps:视觉几何真心水深，没有理论积累，没有前人指点，坑是填不完的，祝好(对大家，也是对自己)—白巧克力亦维心</li>
+</ol>
+<h3 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h3><p><a href="bear://x-callback-url/open-note?id=DFC8A4DC-00E5-4B72-AB00-EBF5AA2F0099-29975-0000F289624F344B">单目和多目的对比</a><br>【<a href="bear://x-callback-url/open-note?id=8A5763B6-3CB9-48D3-AF9E-9B6475C94A2C-1592-0001B5D757769B7D">SFM整体流程的讲解</a>】<br><a href="bear://x-callback-url/open-note?id=D041D1E3-357A-4E21-81B2-A4D569210F4A-2877-000013A8F4DFCEDE">单相机和多相机的ba的不同</a><br><a href="bear://x-callback-url/open-note?id=A9E60A5B-DD72-4043-A7FA-B8B14C3C776E-2877-00001084F2B8946E">三维几何视觉的核心问题</a></p>
+<h3 id="数学："><a href="#数学：" class="headerlink" title="数学："></a>数学：</h3><p><a href="bear://x-callback-url/open-note?id=CBA9E854-CFE5-497F-8B2C-A43588A938C3-4005-00005F7CAF41353C">向量点乘（内积）和叉乘（外积、向量积）</a><br>【<a href="bear://x-callback-url/open-note?id=5B225919-6741-4612-B398-7B8B6B0A321F-2564-00003AC8429D3AF7">关于齐次坐标的五个问题</a>】<br>【<a href="bear://x-callback-url/open-note?id=A688C12A-2574-4C0F-8CAE-52E0D659C94C-1592-0001B23A40686EF6">本质矩阵，基本矩阵的区别</a>】<br><a href="bear://x-callback-url/open-note?id=870FCD81-76FE-4B60-BEEA-BC89B81D0CC6-1023-000063F1AD61C6BB">卡尔曼滤波器推导与解析</a><br><a href="bear://x-callback-url/open-note?id=CA4BE1C7-D533-4BD0-A3E3-6A745FF2425A-1023-000062B9C896B036">非线性优化</a><br>【<a href="bear://x-callback-url/open-note?id=6E87970C-FC13-48D9-9C21-64C659F9DEC2-682-00001218AA374FC7">RANSAC-随机一致性采样</a>】<br><a href="bear://x-callback-url/open-note?id=545A5FAB-679F-4F7A-A182-8EB71640C9CC-725-000101A0AD517276">协方差</a></p>
+<h3 id="空间-几何-模型："><a href="#空间-几何-模型：" class="headerlink" title="空间(几何)模型："></a>空间(几何)模型：</h3><p>【<a href="bear://x-callback-url/open-note?id=F6B650E4-4579-4F59-9EB9-103C48CCD770-1592-0001AADC2BD5782D">对极几何</a>】<br><a href="bear://x-callback-url/open-note?id=1FF36CC3-B495-4852-BBA7-800874C22F12-682-0000122CFDE0F170">Homography</a><a href="https://blog.csdn.net/heyijia0327/article/details/53782094" target="_blank" rel="noopener">Homography 知多少？ - 知行合一 - CSDN博客</a><br><a href="bear://x-callback-url/open-note?id=8578A640-5406-4568-AB2B-C60E59D3ED33-682-000011AABB7A28BD">三角量测-2</a><br><a href="bear://x-callback-url/open-note?id=39BEABB5-5BAD-43AE-B87D-347D8C59C3FA-1592-0001B6CE4F474539">三角量测-1：已知相机参数 + 匹配点 恢复 三维点坐标</a><br><a href="bear://x-callback-url/open-note?id=AC8A9360-23E9-4B11-8F48-0F66DBE24441-1592-0001B82EDBCB7E62">SFM算法的影响因素</a><br>【<a href="bear://x-callback-url/open-note?id=D29E1AF8-ACA1-4A6B-B700-690007A44F98-641-000077A5ED44355A">当物体移动小于一个像素的视差</a>】</p>
+<h3 id="坐标变换："><a href="#坐标变换：" class="headerlink" title="坐标变换："></a>坐标变换：</h3><p>【<a href="bear://x-callback-url/open-note?id=A8518991-9EE8-4A6E-8DCF-148714C8B5B8-2564-000039445194E43C">图像转换过程中的第4+1个坐标变换（畸变）</a>】<br>【<a href="bear://x-callback-url/open-note?id=037F5141-5ECF-42FA-9616-25D9F539656E-1908-00001CC7E7D51B42">坐标系「内外参」的详细转换推导</a>】<br>【<a href="bear://x-callback-url/open-note?id=B420F370-98F8-4FF7-8CA0-C646F4B2A7B3-1592-0001B380F4497943">外参矩阵的现实含义：相机坐标为啥是-R’*T</a>】</p>
+<h3 id="相机参数："><a href="#相机参数：" class="headerlink" title="相机参数："></a>相机参数：</h3><p>【<a href="bear://x-callback-url/open-note?id=57669546-7665-4BD7-80A4-7FF279A7F205-1592-0001B712B524CFE4">焦距f的再sfm中的作用</a>】<br>【<a href="bear://x-callback-url/open-note?id=73BABF45-4592-49B3-B4BF-EFA38B16333C-1592-0001B285E010E204">各个内参的解释</a>】</p>
+<h3 id="标定-畸变："><a href="#标定-畸变：" class="headerlink" title="标定-畸变："></a>标定-畸变：</h3><p><a href="bear://x-callback-url/open-note?id=C7BCECB0-209E-4537-9A41-7415A533A22C-2564-000040433789A9B0">matlab进行相机标定</a><br><a href="bear://x-callback-url/open-note?id=09C66456-ECD9-4079-96D9-E18536C095FE-1592-0001077FC74EB49D">相机标定(写的好)</a><br><a href="bear://x-callback-url/open-note?id=7A3822B0-7CE0-42BF-84D3-2BE30E8E6F72-2564-00003AD15E7EF9E5">OpenCV畸变校正原理以及损失有效像素原理分析</a></p>
+<h3 id="特征："><a href="#特征：" class="headerlink" title="特征："></a>特征：</h3><p><a href="bear://x-callback-url/open-note?id=4EA151A3-EC56-4B48-9D95-AC2992C610F6-682-00001310E6403884">sift</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/06/24/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/sc231nSVM%20&%20Softmax%20%E5%85%AC%E5%BC%8F%E6%A2%AF%E5%BA%A6%E6%8E%A8%E5%AF%BC/" rel="prev" title="sc231nSVM  Softmax 公式梯度推导">
+      <i class="fa fa-chevron-left"></i> sc231nSVM  Softmax 公式梯度推导
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E4%BA%91%E8%AE%A1%E7%AE%97/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" rel="next" title="linux服务器常用指令">
+      linux服务器常用指令 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#粗浅的三维重建核心的总体理解："><span class="nav-number">1.</span> <span class="nav-text">粗浅的三维重建核心的总体理解：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结对比"><span class="nav-number">2.</span> <span class="nav-text">总结对比</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数学："><span class="nav-number">3.</span> <span class="nav-text">数学：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间-几何-模型："><span class="nav-number">4.</span> <span class="nav-text">空间(几何)模型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#坐标变换："><span class="nav-number">5.</span> <span class="nav-text">坐标变换：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相机参数："><span class="nav-number">6.</span> <span class="nav-text">相机参数：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标定-畸变："><span class="nav-number">7.</span> <span class="nav-text">标定-畸变：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特征："><span class="nav-number">8.</span> <span class="nav-text">特征：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '4265f98569afcff4fddf05e76560cac5',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

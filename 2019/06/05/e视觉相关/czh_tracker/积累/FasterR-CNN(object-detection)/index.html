@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2019年6月5日 下午12:16 2019年10月20日 下午9:48faster R-CNN中anchors 的生成过程（generate_anchors源码解析） 重要知识点中的[R-CNN]cs231n_2019_lecture12.pdf  这里面有两个重要的知识点，重点讲解其中的Anchor的概念，另一个Roi(regin object interest) 应为在tracker中， S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FasterR-CNN(object-detection)">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2019年6月5日 下午12:16 2019年10月20日 下午9:48faster R-CNN中anchors 的生成过程（generate_anchors源码解析） 重要知识点中的[R-CNN]cs231n_2019_lecture12.pdf  这里面有两个重要的知识点，重点讲解其中的Anchor的概念，另一个Roi(regin object interest) 应为在tracker中， S">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/D6532830-D32E-417F-A60E-DB40A0B698B9.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/08F33A4A-51F8-4E5E-8AF4-DC7473FDA9C4.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/60BE1904-6F80-4EEC-A755-407B731A2300.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/9B29BD2A-06A1-455E-8358-91FE7132DDA3.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/492FBD4B-30D5-4E73-BABB-92353F4FD08A.png">
+<meta property="article:published_time" content="2019-06-05T04:16:00.000Z">
+<meta property="article:modified_time" content="2020-04-01T07:28:29.757Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.chenzhiheng.cn/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/D6532830-D32E-417F-A60E-DB40A0B698B9.png">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>FasterR-CNN(object-detection) | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FasterR-CNN(object-detection)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-05 12:16:00" itemprop="dateCreated datePublished" datetime="2019-06-05T12:16:00+08:00">2019-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:28:29" itemprop="dateModified" datetime="2020-04-01T15:28:29+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-tracker-%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_tracker/积累</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/" class="post-meta-item leancloud_visitors" data-flag-title="FasterR-CNN(object-detection)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>830</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2019年6月5日 下午12:16</p>
+<p>2019年10月20日 下午9:48<br><a href="https://blog.csdn.net/sinat_33486980/article/details/81099093" target="_blank" rel="noopener">faster R-CNN中anchors 的生成过程（generate_anchors源码解析）</a><br><img src="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/D6532830-D32E-417F-A60E-DB40A0B698B9.png" alt><br><img src="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/08F33A4A-51F8-4E5E-8AF4-DC7473FDA9C4.png" alt></p>
+<p><a href="file:///Users/czh/Documents/课件汇总/[艾云峰]计算机视觉/重要知识点">重要知识点</a>中的<strong>[R-CNN]</strong>cs231n_2019_lecture12.pdf</p>
+<ol>
+<li>这里面有两个重要的知识点，重点讲解其中的<strong>Anchor的概念</strong>，另一个Roi(regin object interest)<ol>
+<li>应为在tracker中， <a href="bear://x-callback-url/open-note?id=22BE9091-7C9A-4BBC-9028-F697C56EF56C-1203-000007F526F049A4">SiamRPN系列文章</a>可以说是来源与R-CNN，其中的这个Anchor更是一提再提</li>
+</ol>
+</li>
+<li>Anchor<ol>
+<li>这个概念来源于：Insert Region Proposal Network (<strong>RPN</strong>) to predict <strong>proposals</strong> from features，目的是使用CNN来预测proposal，来提高速度和准确率</li>
+<li>定义：<ol>
+<li>Imagine an <strong>anchor box</strong> of <strong>fixed size</strong> at <strong>each point</strong> in the feature map<ol>
+<li>他就是一个矩形框</li>
+<li>并且长宽是超参数，不能改</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>Box transforms<ol>
+<li>是一个与<strong>每一个anchor</strong>对应的概念</li>
+<li>定义：<ol>
+<li>For <strong>positive boxes</strong>, also predict a transformation from the anchor to the <strong>ground-truth box</strong> (<strong>regress 4 numbers per pixel</strong>)</li>
+<li>这里一定要注意是针对 <strong>positive boxes</strong>，也就是只有被判断为正样本的anchor才有Box transforms</li>
+<li><strong>这样做原因</strong>：我们现在通过anchor这个矩形区域可以大致判断是可以选为proposel，但是这个<strong>anchor并不是最准确的</strong>，那么我们就要<strong>学习一下在已知anchor对应的point是positive之后，周围哪些transforms是更好的</strong>。<br><img src="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/60BE1904-6F80-4EEC-A755-407B731A2300.png" alt></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>为了考虑更多的情况，我们一般选取多个(K个) anchor，当然就会导致更多的Box transforms<br><img src="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/9B29BD2A-06A1-455E-8358-91FE7132DDA3.png" alt></li>
+<li><strong>Anchor可以为Box transforms的种子</strong></li>
+</ol>
+</li>
+<li>最后结果：<ol>
+<li>整体上看FasterR-CNN:就有4个loss<br><img src="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/492FBD4B-30D5-4E73-BABB-92353F4FD08A.png" alt></li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/%E7%9B%AE%E5%BD%95(tracker%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE)/" rel="prev" title="目录(tracker开源项目)">
+      <i class="fa fa-chevron-left"></i> 目录(tracker开源项目)
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/06/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/Bounding%20box%20regression/" rel="next" title="Bounding box regression">
+      Bounding box regression <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : 'c3c7b4ff61dd4b8f6340d1d76e248c19',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

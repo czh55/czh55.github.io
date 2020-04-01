@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2019年11月9日 下午3:45视觉目标跟踪DaSiamRPN - 简书DASiamRPN阅读笔记：Distractor-aware Siamese Networks for Visual Object Tracking 2019年7月29日 下午12:17SiamRPN系列文章串讲  我的想法就是：还是由于深度学习的不可解释性，导致在训练的过程中，会学习到一些我们不想要的关系 物体一般在搜索框">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SiamRPN系列文章">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2019/11/09/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/SiamRPN%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2019年11月9日 下午3:45视觉目标跟踪DaSiamRPN - 简书DASiamRPN阅读笔记：Distractor-aware Siamese Networks for Visual Object Tracking 2019年7月29日 下午12:17SiamRPN系列文章串讲  我的想法就是：还是由于深度学习的不可解释性，导致在训练的过程中，会学习到一些我们不想要的关系 物体一般在搜索框">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/11/09/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/SiamRPN%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/97CE95E3-0A75-453F-8A80-8F59E692E507.png">
+<meta property="article:published_time" content="2019-11-08T19:45:00.000Z">
+<meta property="article:modified_time" content="2020-04-01T07:28:29.751Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.chenzhiheng.cn/2019/11/09/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/SiamRPN%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/97CE95E3-0A75-453F-8A80-8F59E692E507.png">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2019/11/09/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/SiamRPN%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>SiamRPN系列文章 | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/11/09/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/SiamRPN%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SiamRPN系列文章
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-09 03:45:00" itemprop="dateCreated datePublished" datetime="2019-11-09T03:45:00+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:28:29" itemprop="dateModified" datetime="2020-04-01T15:28:29+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-tracker-%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_tracker/积累</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/11/09/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/SiamRPN%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/" class="post-meta-item leancloud_visitors" data-flag-title="SiamRPN系列文章" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2019年11月9日 下午3:45<br><a href="https://www.jianshu.com/p/88424485d5b5" target="_blank" rel="noopener">视觉目标跟踪DaSiamRPN - 简书</a><br><a href="https://blog.csdn.net/fzp95/article/details/82380261" target="_blank" rel="noopener">DASiamRPN阅读笔记：Distractor-aware Siamese Networks for Visual Object Tracking</a></p>
+<p>2019年7月29日 下午12:17<br><a href="https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247521718&idx=3&sn=974a4a11f54f805caab2dc37ee3989af" target="_blank" rel="noopener">SiamRPN系列文章串讲</a></p>
+<ol>
+<li>我的想法就是：还是由于深度学习的不可解释性，导致在训练的过程中，会学习到一些我们不想要的关系<ol>
+<li>物体一般在搜索框的中间</li>
+<li>对有语义的物体响应值大</li>
+</ol>
+</li>
+<li>我们在使用深度学习的时候<ol>
+<li>学习到我们想要的目的</li>
+<li><strong>同时，减小学习到一些人都没有意识到的一些关系</strong>，::这也是很多深度学习论文在干的事情::</li>
+</ol>
+</li>
+<li>::修改网络的角度：::<ol>
+<li>算法：<strong>SiamRPN</strong></li>
+<li>训练集：<strong>DaSiamRPN</strong></li>
+<li>孪生网络本身：<strong>SiamRPN++</strong></li>
+</ol>
+</li>
+</ol>
+<p>2019年6月5日 上午12:27<br><a href="https://worldhellooo.github.io/2017/03/22/SiamFC%E6%94%B9%E8%BF%9B%E6%80%9D%E8%B7%AF/" target="_blank" rel="noopener">SiamFC算法改进思路 | WorldHellooo’s Blog</a></p>
+<p>自动化所：朱政，<strong>DaSiamRPN</strong>一作<br><a href="https://zhuanlan.zhihu.com/p/55843219" target="_blank" rel="noopener">SiamRPN系列文章 - 知乎</a><br><a href="http://www.zhengzhu.net/" target="_blank" rel="noopener">Zheng Zhu (朱政)</a></p>
+<h3 id="论文题目：Fully-convolutional-siamese-networks-for-object-tracking"><a href="#论文题目：Fully-convolutional-siamese-networks-for-object-tracking" class="headerlink" title="论文题目：Fully-convolutional siamese networks for object tracking"></a>论文题目：Fully-convolutional siamese networks for object tracking</h3><p>论文地址： <a href="https://link.zhihu.com/?target=https%3A//arxiv.org/abs/1606.09549">https://arxiv.org/abs/1606.09549</a><br>项目地址： <a href="https://link.zhihu.com/?target=https%3A//www.robots.ox.ac.uk/~luca/siamese-fc.html">https://www.robots.ox.ac.uk/~luca/siamese-fc.html</a><br>tf实现： <a href="https://link.zhihu.com/?target=https%3A//github.com/torrvision/siamfc-tf">https://github.com/torrvision/siamfc-tf</a><br>pytorch实现： <a href="https://link.zhihu.com/?target=https%3A//github.com/rafellerc/Pytorch-SiamFC">https://github.com/rafellerc/Pytorch-SiamFC</a><br>朱政分析：SiamFC文章，对SINT（Siamese Instance Search for Tracking，in CVPR2016）改进，第一个提出用<strong>全卷积孪生网络</strong>结构来解决tracking问题的paper，<strong>可以视为只有一个anchor的SiamRPN</strong></p>
+<ol>
+<li>::学的是什么？::<ol>
+<li>condition和exampler之间的相似度</li>
+</ol>
+</li>
+<li>学习到的东西如何解决你的问题？<ol>
+<li>在测试的时候，如果相似性高，那么这个condition输出高分</li>
+</ol>
+</li>
+</ol>
+<p>重点描述：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Learning to track arbitrary objects can be addressed using similarity learning. We propose to learn a function f(z, x) that compares an exemplar image z to a candidate image x of the 【same size】 and returns a high score if the two images depict the same object and a low score otherwise. To find the position of the object in a new image, we can then exhaustively test 【all possible locations】 and choose the candidate with the maximum similarity to the past appearance of the object. In experiments, we will simply use the 【initial appearance】 of the object as the exemplar. The function f will be learnt from a dataset of videos with labelled object trajectories</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="论文题目：High-Performance-Visual-Tracking-with-Siamese-Region-Proposal-Network"><a href="#论文题目：High-Performance-Visual-Tracking-with-Siamese-Region-Proposal-Network" class="headerlink" title="论文题目：High Performance Visual Tracking with Siamese Region Proposal Network"></a>论文题目：High Performance Visual Tracking with Siamese Region Proposal Network</h3><p>论文地址： <a href="https://link.zhihu.com/?target=http%3A//openaccess.thecvf.com/content_cvpr_2018/papers/Li_High_Performance_Visual_CVPR_2018_paper.pdf">http://openaccess.thecvf.com/content_cvpr_2018/papers/Li_High_Performance_Visual_CVPR_2018_paper.pdf</a><br>项目地址： <a href="https://link.zhihu.com/?target=http%3A//bo-li.info/SiamRPN/">http://bo-li.info/SiamRPN/</a><br>朱政分析： SiamRPN文章，<strong>将anchor应用在候选区域的每个位置</strong>，同时进行分类和回归，one-shot local detection。<br>::我分析：这篇论文把FastR-CC中的RPN和SiamFC中的孪生相似性度量网络放在了一起::，<strong>这么一分析顶会的思想简单的要死</strong><br>    * 现在反过头来看这句话，当时真实天真！<br><img src="/2019/11/09/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/SiamRPN%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/97CE95E3-0A75-453F-8A80-8F59E692E507.png" alt></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/08/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E7%AC%AC%E5%85%AB%E8%AF%BE%EF%BC%9Apandas/" rel="prev" title="第八课：pandas">
+      <i class="fa fa-chevron-left"></i> 第八课：pandas
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/11/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E7%A1%AC%E7%9B%98/" rel="next" title="硬盘">
+      硬盘 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#论文题目：Fully-convolutional-siamese-networks-for-object-tracking"><span class="nav-number">1.</span> <span class="nav-text">论文题目：Fully-convolutional siamese networks for object tracking</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#论文题目：High-Performance-Visual-Tracking-with-Siamese-Region-Proposal-Network"><span class="nav-number">2.</span> <span class="nav-text">论文题目：High Performance Visual Tracking with Siamese Region Proposal Network</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '3e253f0e6da1c12d738416c24c9cab30',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

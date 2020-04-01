@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2019年3月18日 下午3:25 补充：2019年6月27日 上午9:44  归一化图像坐标： 整体上来理解，一共有三个物理几何模型 相机(不是观测点)的旋转平移 投影变换，其实就是相似三角形 物理坐标与像素坐标之间的转换，其实就是一个仿射变换   归一化图像坐标发生在投影变换中。 在投影变换中，就如我所有一共涉及到两个量Z和f(焦距) 归一化中的’一‘代表：把模型进行微缩，所有的坐标变量(x,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="坐标系「内外参」的详细转换推导">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2019年3月18日 下午3:25 补充：2019年6月27日 上午9:44  归一化图像坐标： 整体上来理解，一共有三个物理几何模型 相机(不是观测点)的旋转平移 投影变换，其实就是相似三角形 物理坐标与像素坐标之间的转换，其实就是一个仿射变换   归一化图像坐标发生在投影变换中。 在投影变换中，就如我所有一共涉及到两个量Z和f(焦距) 归一化中的’一‘代表：把模型进行微缩，所有的坐标变量(x,">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/7CF3A90E-502D-4581-B8BE-8552D200EC95.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/211EA450-533A-4F92-9B82-53A62D384A3B.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/%E6%9C%AA%E7%9F%A5.png">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/20160126193223989.jpg">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/20160126193236692.jpg">
+<meta property="og:image" content="http://www.chenzhiheng.cn/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/3E379E03-785E-4B82-9076-0667B2C2101D.png">
+<meta property="article:published_time" content="2019-03-17T19:25:00.000Z">
+<meta property="article:modified_time" content="2020-04-01T07:28:29.808Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.chenzhiheng.cn/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/7CF3A90E-502D-4581-B8BE-8552D200EC95.png">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>坐标系「内外参」的详细转换推导 | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          坐标系「内外参」的详细转换推导
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-18 03:25:00" itemprop="dateCreated datePublished" datetime="2019-03-18T03:25:00+08:00">2019-03-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:28:29" itemprop="dateModified" datetime="2020-04-01T15:28:29+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/知识点#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/" class="post-meta-item leancloud_visitors" data-flag-title="坐标系「内外参」的详细转换推导" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2019年3月18日 下午3:25</p>
+<h3 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h3><p>2019年6月27日 上午9:44</p>
+<ol>
+<li>归一化图像坐标：<ol>
+<li>整体上来理解，<strong>一共有三个物理几何模型</strong><ol>
+<li><strong>相机</strong>(不是观测点)的<strong>旋转平移</strong></li>
+<li>投影变换，其实就是<strong>相似三角形</strong></li>
+<li>物理坐标与像素坐标之间的转换，其实就是一个<strong>仿射变换</strong></li>
+</ol>
+</li>
+<li>归一化图像坐标发生在投影变换中。<ol>
+<li>在投影变换中，就如我所有一共涉及到两个量Z和f(焦距)</li>
+<li>归一化中的’一‘代表：把<strong>模型进行微缩</strong>，所有的坐标变量(x,y, z,f)这些值都保持在0~1之间。这就叫做归<strong>一</strong>化</li>
+<li>这样做的好处：你能够提高模型的准确率，具体我也说不清楚，感觉和机器学习中的归一化有类似的功能。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>2019年3月18日 下午3:34</p>
+<h3 id="明确几个概念："><a href="#明确几个概念：" class="headerlink" title="明确几个概念："></a>明确几个概念：</h3><ol>
+<li><strong>图像像素坐标系</strong>是一个二维平面，又称为像平面，实际上就是摄像头的<strong>CCD传感器的表面</strong>。<ol>
+<li>每个CCD传感器都有一定的尺寸，也有一定的分辨率，这个就确定了毫米与像素点之间的转换关系。举个例子，<strong>CCD的尺寸是8mm X 6mm，帧画面的分辨率设置为640X480，那么毫米与像素点之间的转换关系就是80pixel/mm</strong>。”设CCD传感器每个像素点的物理大小为dx*dy，相应地，就有dx=dy=1/80。</li>
+<li>CCD的长宽比例和图像分辨率的长宽比例相等</li>
+<li><a href="https://my.oschina.net/makeit/blog/314446" target="_blank" rel="noopener">单目相机标定原理 - Make It - 开源中国</a></li>
+</ol>
+</li>
+<li>畸变的产生原因：<ol>
+<li><a href="https://blog.csdn.net/yangdashi888/article/details/51356385" target="_blank" rel="noopener">内参、外参、畸变参数三种参数与相机的标定方法与相机坐标系的理解</a></li>
+<li><strong>径向畸变：</strong><ol>
+<li>产生原因是光线在远离透镜中心的地方比靠近中心的地方更加弯曲径向畸变主要包含桶形畸变和枕形畸变两种</li>
+</ol>
+</li>
+<li><strong>切向畸变：</strong><ol>
+<li>产生的原因透镜不完全平行于图像平面，这种现象发生于成像仪被粘贴在摄像机的时候<br><img src="/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/7CF3A90E-502D-4581-B8BE-8552D200EC95.png" alt></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="这个过程涉及到4个坐标系，而不是原来以为的三个"><a href="#这个过程涉及到4个坐标系，而不是原来以为的三个" class="headerlink" title="这个过程涉及到4个坐标系，而不是原来以为的三个"></a>这个过程涉及到4个坐标系，而不是原来以为的三个</h3><ol>
+<li>世界坐标系(3维)</li>
+<li>相机坐标系(3维)<ol>
+<li>两个三维坐标系<strong>分别对x,y,z单独进行转换</strong>形成的坐标系</li>
+</ol>
+</li>
+<li>图像物理坐标系(2维)<ol>
+<li><strong>投影关系</strong>形成的投影坐标系</li>
+</ol>
+</li>
+<li>图像像素坐标系(2维)<ol>
+<li><strong>图像数字化</strong>形成的坐标系</li>
+</ol>
+</li>
+<li><a href="https://blog.csdn.net/waeceo/article/details/50580607" target="_blank" rel="noopener">世界坐标系和相机坐标系,图像坐标系的关系 - waeceo的专栏 - CSDN博客</a></li>
+</ol>
+<h3 id="分别对x-y-z单独进行转换：外参数（R-T）"><a href="#分别对x-y-z单独进行转换：外参数（R-T）" class="headerlink" title="分别对x,y,z单独进行转换：外参数（R,T）"></a>分别对x,y,z单独进行转换：外参数（R,T）</h3><p>注：这里只说明了R旋转 ，没有说T平移<br><img src="/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/211EA450-533A-4F92-9B82-53A62D384A3B.png" alt></p>
+<h3 id="投影关系：从三维转化为二维的关键步骤"><a href="#投影关系：从三维转化为二维的关键步骤" class="headerlink" title="投影关系：从三维转化为二维的关键步骤"></a>投影关系：从三维转化为二维的关键步骤</h3><ol>
+<li>图中x与X之间的关系有两个参数：Z，f。我总是一般下意识的只有一个。</li>
+<li><strong>数学如何表示几何关系</strong><ol>
+<li>几何关系—》比例关系表示—》等式组表示—》矩阵表示</li>
+</ol>
+</li>
+<li>矩阵表示时就需要变成齐次形式<br><img src="/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/%E6%9C%AA%E7%9F%A5.png" alt></li>
+</ol>
+<h3 id="图像数字化"><a href="#图像数字化" class="headerlink" title="图像数字化"></a>图像数字化</h3><p><img src="/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/20160126193223989.jpg" alt></p>
+<ul>
+<li>上图表示的只表示旋转，加上缩放以后就有1/dx 1/dy了</li>
+<li>注：一般情况下是有角度“sita”，在重建中我们理解“sita = 0” -&gt; cos = 1 -&gt;sin = 0<br><img src="/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/20160126193236692.jpg" alt><br>重要变量意义：</li>
+</ul>
+<ol>
+<li>(u0,v0)表示：O1在u，v 中的坐标</li>
+<li>dx dy表示：像素在轴上的物理尺寸。其实就是一个比例关系，当我们需要换算为物理尺寸为单位时，就需要：像素尺寸/物理尺寸比例 = 物理尺寸中的大小表示</li>
+</ol>
+<h2 id="合集："><a href="#合集：" class="headerlink" title="合集："></a>合集：</h2><p><img src="/2019/03/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%9D%90%E6%A0%87%E7%B3%BB%E3%80%8C%E5%86%85%E5%A4%96%E5%8F%82%E3%80%8D%E7%9A%84%E8%AF%A6%E7%BB%86%E8%BD%AC%E6%8D%A2%E6%8E%A8%E5%AF%BC/3E379E03-785E-4B82-9076-0667B2C2101D.png" alt></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/03/16/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%9A%84%E6%96%B9%E6%B3%95%E5%92%8C%E6%AD%A5%E9%AA%A4/" rel="prev" title="数学建模的方法和步骤">
+      <i class="fa fa-chevron-left"></i> 数学建模的方法和步骤
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/03/18/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E5%AF%B9%E5%88%9B%E6%96%B0%E8%AF%84%E5%88%A4%E7%9A%84%E6%A0%87%E5%87%86/" rel="next" title="对创新评判的标准">
+      对创新评判的标准 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#补充："><span class="nav-number">1.</span> <span class="nav-text">补充：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#明确几个概念："><span class="nav-number">2.</span> <span class="nav-text">明确几个概念：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#这个过程涉及到4个坐标系，而不是原来以为的三个"><span class="nav-number">3.</span> <span class="nav-text">这个过程涉及到4个坐标系，而不是原来以为的三个</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分别对x-y-z单独进行转换：外参数（R-T）"><span class="nav-number">4.</span> <span class="nav-text">分别对x,y,z单独进行转换：外参数（R,T）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#投影关系：从三维转化为二维的关键步骤"><span class="nav-number">5.</span> <span class="nav-text">投影关系：从三维转化为二维的关键步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图像数字化"><span class="nav-number">6.</span> <span class="nav-text">图像数字化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合集："><span class="nav-number"></span> <span class="nav-text">合集：</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : 'f7fc94e7cb3fba7e083ddba703c5e471',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2018年8月27日 下午12:53 点云配准原理简介坐标系旋转变换公式图解+矩阵形式推导三维坐标系下坐标系的平移和旋转变换吴军：数学之美梯度、Hessian矩阵、平面方程的法线以及函数导数的含义图像处理之特征值和特征向量的意义如何理解矩阵特征值？矩阵特征值和椭圆长短轴的关系奇异值分解(SVD)PMVS算法雅可比矩阵plane-sweep Algorithm视差和深度的直观理解深度图像理解线性代数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="目录(原理)：这样零散的学习，学了就忘！而且我学的时候，并没有深刻的总结分析，直接拿来主义！">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2018/08/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E7%9B%AE%E5%BD%95(%E5%8E%9F%E7%90%86)%EF%BC%9A%E8%BF%99%E6%A0%B7%E9%9B%B6%E6%95%A3%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%AD%A6%E4%BA%86%E5%B0%B1%E5%BF%98%EF%BC%81%E8%80%8C%E4%B8%94%E6%88%91%E5%AD%A6%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%B9%B6%E6%B2%A1%E6%9C%89%E6%B7%B1%E5%88%BB%E7%9A%84%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90%EF%BC%8C%E7%9B%B4%E6%8E%A5%E6%8B%BF%E6%9D%A5%E4%B8%BB%E4%B9%89%EF%BC%81/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2018年8月27日 下午12:53 点云配准原理简介坐标系旋转变换公式图解+矩阵形式推导三维坐标系下坐标系的平移和旋转变换吴军：数学之美梯度、Hessian矩阵、平面方程的法线以及函数导数的含义图像处理之特征值和特征向量的意义如何理解矩阵特征值？矩阵特征值和椭圆长短轴的关系奇异值分解(SVD)PMVS算法雅可比矩阵plane-sweep Algorithm视差和深度的直观理解深度图像理解线性代数">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-08-27T04:53:00.000Z">
+<meta property="article:modified_time" content="2020-04-01T07:27:51.291Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2018/08/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E7%9B%AE%E5%BD%95(%E5%8E%9F%E7%90%86)%EF%BC%9A%E8%BF%99%E6%A0%B7%E9%9B%B6%E6%95%A3%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%AD%A6%E4%BA%86%E5%B0%B1%E5%BF%98%EF%BC%81%E8%80%8C%E4%B8%94%E6%88%91%E5%AD%A6%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%B9%B6%E6%B2%A1%E6%9C%89%E6%B7%B1%E5%88%BB%E7%9A%84%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90%EF%BC%8C%E7%9B%B4%E6%8E%A5%E6%8B%BF%E6%9D%A5%E4%B8%BB%E4%B9%89%EF%BC%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>目录(原理)：这样零散的学习，学了就忘！而且我学的时候，并没有深刻的总结分析，直接拿来主义！ | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/08/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E7%9B%AE%E5%BD%95(%E5%8E%9F%E7%90%86)%EF%BC%9A%E8%BF%99%E6%A0%B7%E9%9B%B6%E6%95%A3%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%AD%A6%E4%BA%86%E5%B0%B1%E5%BF%98%EF%BC%81%E8%80%8C%E4%B8%94%E6%88%91%E5%AD%A6%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%B9%B6%E6%B2%A1%E6%9C%89%E6%B7%B1%E5%88%BB%E7%9A%84%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90%EF%BC%8C%E7%9B%B4%E6%8E%A5%E6%8B%BF%E6%9D%A5%E4%B8%BB%E4%B9%89%EF%BC%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          目录(原理)：这样零散的学习，学了就忘！而且我学的时候，并没有深刻的总结分析，直接拿来主义！
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-08-27 12:53:00" itemprop="dateCreated datePublished" datetime="2018-08-27T12:53:00+08:00">2018-08-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:27:51" itemprop="dateModified" datetime="2020-04-01T15:27:51+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1-%E7%82%B9%E4%BA%91-%E5%8E%9F%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维建模(点云)/原理#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/08/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E7%9B%AE%E5%BD%95(%E5%8E%9F%E7%90%86)%EF%BC%9A%E8%BF%99%E6%A0%B7%E9%9B%B6%E6%95%A3%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%AD%A6%E4%BA%86%E5%B0%B1%E5%BF%98%EF%BC%81%E8%80%8C%E4%B8%94%E6%88%91%E5%AD%A6%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E5%B9%B6%E6%B2%A1%E6%9C%89%E6%B7%B1%E5%88%BB%E7%9A%84%E6%80%BB%E7%BB%93%E5%88%86%E6%9E%90%EF%BC%8C%E7%9B%B4%E6%8E%A5%E6%8B%BF%E6%9D%A5%E4%B8%BB%E4%B9%89%EF%BC%81/" class="post-meta-item leancloud_visitors" data-flag-title="目录(原理)：这样零散的学习，学了就忘！而且我学的时候，并没有深刻的总结分析，直接拿来主义！" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>203</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2018年8月27日 下午12:53</p>
+<p><a href="bear://x-callback-url/open-note?id=B5A9EA5C-5CDA-4950-A110-B09317984106-327-0003951E79602785">点云配准原理简介</a><br><a href="bear://x-callback-url/open-note?id=D0674D91-DC48-4EAB-9602-9C5CA598D2EA-327-00040C35017ED85A">坐标系旋转变换公式图解+矩阵形式推导</a><br><a href="bear://x-callback-url/open-note?id=7FAB7443-9BAF-44E8-BD7C-A0438C98BDFB-327-00039C375AAAB68D">三维坐标系下坐标系的平移和旋转变换</a><br><a href="bear://x-callback-url/open-note?id=C2915077-5102-4182-B8B1-18F93BD1CFF5-327-00038E55F0CF4C66">吴军：数学之美</a><br><a href="bear://x-callback-url/open-note?id=BCB65687-6893-4A6F-B98D-71FB99C326C0-327-00038F5EF888A7A5">梯度、Hessian矩阵、平面方程的法线以及函数导数的含义</a><br><a href="bear://x-callback-url/open-note?id=A436EB13-D68E-4213-BF22-17CD6038C1DC-327-000326383BC4BBF9">图像处理之特征值和特征向量的意义</a><br><a href="bear://x-callback-url/open-note?id=4F41C4B6-4592-45CE-B591-63B561114AC8-327-0003235FE49BFD49">如何理解矩阵特征值？</a><br><a href="bear://x-callback-url/open-note?id=51CDD9CC-A096-4853-A5CD-BFB86FA824B1-327-00031F02D0FE0535">矩阵特征值和椭圆长短轴的关系</a><br><a href="bear://x-callback-url/open-note?id=5BF43BE5-8FAF-4A7B-93E6-1BBC193509EE-327-00031767282361FD">奇异值分解(SVD)</a><br><a href="bear://x-callback-url/open-note?id=75BC114F-8E96-4AA0-B8D8-5096C384E36A-327-0000C4591E9F3A64">PMVS算法</a><br><a href="bear://x-callback-url/open-note?id=EB7A195A-44B3-44D7-806D-E873BA1BC326-327-0000F7D8A7579E0E">雅可比矩阵</a><br><a href="bear://x-callback-url/open-note?id=E637DE42-1C8F-4A95-8438-BF1F7A167CAF-327-0000AF4D590CDFE9">plane-sweep Algorithm</a><br><a href="bear://x-callback-url/open-note?id=BBAA2408-2B19-4CE6-BCDB-A204A0B22DF4-327-0000AF7D2AFBEF17">视差和深度的直观理解</a><br><a href="bear://x-callback-url/open-note?id=85D1138A-8CDF-4B1A-B451-8E814862712B-327-0000AF5590854762">深度图像</a><br><a href="bear://x-callback-url/open-note?id=68965ADC-5AC7-4B83-927A-32C6961149E1-327-00038C616B862446">理解线性代数的一个新角度</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/08/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%B7%A5%E7%A8%8B/%E7%9B%AE%E5%BD%95(%E5%B7%A5%E7%A8%8B)%20vs+cmake+%E6%8A%A5%E9%94%99/" rel="prev" title="目录(工程) vs+cmake+报错">
+      <i class="fa fa-chevron-left"></i> 目录(工程) vs+cmake+报错
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/08/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E5%B7%A5%E5%85%B7/%E5%B0%8F%E8%B1%A1%E6%B2%99%E9%BE%99-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="next" title="小象沙龙-深度学习">
+      小象沙龙-深度学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.1m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:15</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '6d56f94acc01d4c2c33a15ce7d2c24c0',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
