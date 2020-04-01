@@ -158,367 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/07/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JSP%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/07/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JSP%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">JSP基本语法</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-07 03:47:00" itemprop="dateCreated datePublished" datetime="2017-09-07T03:47:00+08:00">2017-09-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/07/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JSP%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="JSP基本语法" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月7日 下午3:47</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>Jsp就是在html中添加java语言的一种技术，和php一样，但是我感觉php一个include 一个echo就搞定的全部的事情，而这里的jsp像下面弄出那么多东西，真是麻烦的要死，而且其中的jsp语法基本上用java语言就能够代替，jsp只是给了另一种实现方式，既然这样，能用java就不用用jsp，能减轻自己得去记忆那么多jsp标签的作用，这下只记得&lt;%%&gt;中可以写java语法就行了<br>注：jsp最后会被tomcat编译成servlet文件（.java），然后在编译成.class文件让tomcat执行</p>
-<hr>
-<h2 id="jsp"><a href="#jsp" class="headerlink" title="jsp"></a>jsp</h2><ol>
-<li>两种注释</li>
-<li>三种脚本元素</li>
-<li>三种指令</li>
-<li>七个动作<ol>
-<li>forward：请求转发</li>
-<li>getProperty :直接就输出了</li>
-<li>Include：过滤多余的page命令   包含内容一般都是纯文本</li>
-</ol>
-</li>
-<li>九个内置对象<ol>
-<li>page：相当于this  当前页面的引用</li>
-<li>out：<ol>
-<li>out.println(“<font size="7">abc&lt;./font&gt;”);这引号中的内容是会被解析的</font></li>
-</ol>
-</li>
-<li>pageContent :<ol>
-<li>可以获取其他八个page对象</li>
-<li>是一个页面的池子</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<hr>
-<h2 id="javaBean"><a href="#javaBean" class="headerlink" title="javaBean:"></a>javaBean:</h2><ol>
-<li><p>基础的作用就是导入外部类进入jsp中</p>
-</li>
-<li><p>Javabean对外部类有严格的要求</p>
-</li>
-<li><p>有两种引入和使用方法</p>
-</li>
-<li><p>.class 文件名不能跟class后缀，但是默认的就是导入.class文件</p>
-</li>
-<li><p>参考:<a href="http://blog.csdn.net/joywy/article/details/7773503" target="_blank" rel="noopener">JavaBean简介及使用 - Joywy的专栏        - CSDN博客</a></p>
-</li>
-</ol>
-<hr>
-<h2 id="exception对象的使用"><a href="#exception对象的使用" class="headerlink" title="exception对象的使用"></a>exception对象的使用</h2><ol>
-<li>工作过程<ol>
-<li>不用写重定向或者请求转发的跳转语句，他会直接找到当前页面&lt;%page errorPage=“errrorpage路径”%&gt;中声明的文件，并且这个路径对应的错误页面设置了&lt;%page isErrorPage=true”%&gt;，那么，在错误页面就可以使用exception对象方法来输出</li>
-<li>这个跳转的过程是自动的请求转发实现的</li>
-</ol>
-</li>
-<li>完整的例子<ol>
-<li><a href="http://blog.csdn.net/u010142437/article/details/56670616" target="_blank" rel="noopener">JSP获取异常信息的exception对象 - 孤云博客</a></li>
-</ol>
-</li>
-<li>限制：<ol>
-<li>只能对于500的错误进行自动的处理，其他额4是没有办法处理的</li>
-</ol>
-</li>
-<li>解决方式：web.xml <ol>
-<li>这时就不用在引起异常的页面中添加&lt;%page errorPage=“errrorpage路径”%&gt;，</li>
-<li>特别的，当用IE打开错误页面时，是不会跳到对应的错误页面</li>
-<li><a href="http://blog.csdn.net/bao19901210/article/details/23370407" target="_blank" rel="noopener">web.xml配置错误页面，及输出错误信息</a></li>
-</ol>
-</li>
-</ol>
-<hr>
-<h2 id="tomcat将jsp编译成servlet"><a href="#tomcat将jsp编译成servlet" class="headerlink" title="tomcat将jsp编译成servlet"></a>tomcat将jsp编译成servlet</h2><p><img src="/2017/09/07/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JSP%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/B48A34DC-1F5A-48CD-A7ED-1B5676DD815E.png" alt><br>Work_Catalina_localhost 路径下就是编译产生的文件<br><img src="/2017/09/07/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JSP%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/B0569245-53D0-46FA-B5C8-842472EB0763.png" alt><br>这里的demo_jsp.java 就是jsp编译产生的java文件，然后java文件再产生demo.jsp.class二进制文件。<br>用这个二进制文件进行执行<br><img src="/2017/09/07/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JSP%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/8489F656-0900-4A87-B77F-E89626A69667.png" alt><br>编译jsp产生的demo_jsp.java中可以看到实现了HttpJspPage接口，而这个HttpJspPage接口的超级接口有servlet接口，这就说明了demo_jsp.java其实就是一个servlet（jsp就是一个servlet）<br><a href="http://lixh1986.iteye.com/blog/1757126" target="_blank" rel="noopener">out.print和out.write -  - ITeye博客</a></p>
-<p>返回是object对象，要.toString()进行类型转换<br>null.toString()错<br>多了一个当前页面</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E7%9B%AE%E5%BD%95%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E7%9B%AE%E5%BD%95%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/" class="post-title-link" itemprop="url">目录（基础）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-06 06:43:00" itemprop="dateCreated datePublished" datetime="2017-09-06T06:43:00+08:00">2017-09-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/java基础</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E7%9B%AE%E5%BD%95%EF%BC%88%E5%9F%BA%E7%A1%80%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="目录（基础）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>189</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月6日 下午6:43</p>
-<p><a href="bear://x-callback-url/open-note?id=BABB5431-4411-4DCA-83EF-18250A1B1F3C-2779-000009EBD6FD1940">6.15~6.27</a><br><a href="bear://x-callback-url/open-note?id=E75C7A7A-8789-4208-B01B-2EC92C1B79B4-2779-000009EBD759CAF3">6.27~6.27继承  -&gt;  多态  -&gt;  抽象  -&gt; 接口 -&gt; 异常</a><br><a href="bear://x-callback-url/open-note?id=D48FCF9B-8C38-4700-8F31-6552879FD434-2779-000009EBD798AEAA">6.28 集合泛型 + 文件操作</a><br> <a href="bear://x-callback-url/open-note?id=8B9D8A47-4A32-4612-83B5-6EE6537BB29D-2779-000009EBD7D965D5">6.29 常用类</a><br><a href="bear://x-callback-url/open-note?id=E7C658F6-15E3-4DA2-9666-52A74717DB68-2779-000009EBD8820513">6.29数组</a><br><a href="bear://x-callback-url/open-note?id=460CD919-49BA-4454-8E4B-084C0A757115-2779-000009EBDC7A0F75">6.30生产者消费者</a><br><a href="bear://x-callback-url/open-note?id=C32D133D-CD4A-4BAC-9D8F-26E0B2D1FFF4-2779-000009EBDB0AF729">6.30 线程</a><br><a href="bear://x-callback-url/open-note?id=4CBD263B-5933-44B6-BC24-653CF94AF3D3-2779-000009EBE07AD2C8">706内部类+反射</a><br><a href="bear://x-callback-url/open-note?id=7D7A8E6F-1630-4261-9B1E-318C96EA59E7-2779-000009EBDFBBFA91">706Swing</a><br><a href="bear://x-callback-url/open-note?id=15F5E435-4D5F-41B1-802D-0D3068FFF728-2779-000009EC9647704C">项目结构总结</a><br><a href="bear://x-callback-url/open-note?id=D238AB1A-FEBA-47B1-ACE5-77333B988163-2779-000009EBEE4A84E1">java用文件实现类似数据库的增删改查</a><br><a href="bear://x-callback-url/open-note?id=2A5808C2-6E48-4462-9FE3-1837DCFC6825-2779-000009EBEDB5F527">java基础阶段图书管理系统项目需求分析过程</a><br><a href="bear://x-callback-url/open-note?id=17A24715-C6F9-4FFF-B08D-6962813D6D90-2779-000009EC51632713">图书管理系统项目中遇见的问题</a><br><a href="bear://x-callback-url/open-note?id=A8369EC1-A401-40CA-9A24-32A51EAFA580-2779-000009EBEE846100">java错题</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/06/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%9B%AE%E5%BD%95%EF%BC%88%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/06/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%9B%AE%E5%BD%95%EF%BC%88%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF%EF%BC%89/" class="post-title-link" itemprop="url">目录（非框架web技术）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-06 06:38:00" itemprop="dateCreated datePublished" datetime="2017-09-06T06:38:00+08:00">2017-09-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/06/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%9B%AE%E5%BD%95%EF%BC%88%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="目录（非框架web技术）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>754</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月6日 下午6:38</p>
-<p><strong>涉及到的技术：Servlet_JSP_js_JDBC_SQ</strong></p>
-<p><a href="bear://x-callback-url/open-note?id=14385D82-514E-44F1-841B-508CAD36972F-679-00001FA35EB0C0B9">eclipse Mac 中文下载</a><br><a href="bear://x-callback-url/open-note?id=04F7D46B-A83D-43BB-86B4-4FC3908B15F4-287-000064136DC32EEE">中级的最后</a><br><a href="bear://x-callback-url/open-note?id=FEE04269-10CC-44FA-83E2-DD932A152A17-287-000002A375AC6185">学生表.sql</a><br><a href="bear://x-callback-url/open-note?id=4D952118-1DF5-443B-BE0D-8148FAFCD5BE-287-000001293242A707">MacOS升级10.13系统eclipse菜单灰色</a><br><a href="bear://x-callback-url/open-note?id=5DE025C6-54C0-446D-ABE2-A40E51E6829C-2779-000009EBBE1D9758">SVN</a><br><a href="bear://x-callback-url/open-note?id=EE8B7398-C8BC-429D-A267-884FB2109C7A-2779-000009EC4E5BE1B2">关于数据库中date类型时间处理</a><br><a href="bear://x-callback-url/open-note?id=B79A7F0A-63D3-4802-B252-714F8748F713-2779-000009EC1805D010">中期练习总结</a><br><a href="bear://x-callback-url/open-note?id=B435489E-6E64-4A03-8B3B-FC1151032C0B-2779-000009EC19686186">中级项目出现的问题</a><br><a href="bear://x-callback-url/open-note?id=AD8F2A4D-64F5-43F2-985F-B97224D38CEE-2779-000009EC02F16778">servlet中filter组件</a><br><a href="bear://x-callback-url/open-note?id=53BBE6FA-B866-4779-A27C-78F21E9B8E53-2779-000009EBE9B59DA7">EL表达式+JSTL</a><br><a href="bear://x-callback-url/open-note?id=383726C3-36CB-4139-87AE-29997AA2CB99-2779-000009EC51978CDC">在servlet+jsp项目开始写逻辑之前的准备工作</a><br><a href="bear://x-callback-url/open-note?id=E1775CD3-B2AD-4AD3-A62C-AB1D5376D5B9-2779-000009EBE3D90FEC">cookie和session</a><br><a href="bear://x-callback-url/open-note?id=B2C4CB54-F31B-4F68-BDB7-0C4EF3437EDB-2779-000009EC021B7D54">request和response最常用手册</a><br><a href="bear://x-callback-url/open-note?id=6BB28C81-CFF7-4CB7-8C0B-B8CB33F049DB-2779-000009EC54A6F8F2">导入别人的项目注意事项</a><br><a href="bear://x-callback-url/open-note?id=391620CC-FE63-49FA-B92C-DA57FFD7F889-2779-000009EBF318953A">JSP基本语法</a><br><a href="bear://x-callback-url/open-note?id=01B9FDBA-1DE0-4A12-A2AB-6D22BA7AF9BC-2779-000009EC028CE566">servlet三个作用域</a><br><a href="bear://x-callback-url/open-note?id=21E0058F-7EF2-4E56-8027-7C089A08810F-2779-000009EC02BF2C8F">Servlet上下文对象</a><br><a href="bear://x-callback-url/open-note?id=DCF45331-DEB2-46C0-81DF-EADD124D68BA-2779-000009EC0444DFC1">Servlet实现类HttpServlet的使用</a><br><a href="bear://x-callback-url/open-note?id=65FFB9B6-8A1C-4A0F-A067-B363E86EBAD2-2779-000009EC06AF54C5">servlet简介 + 项目配置步骤</a><br><a href="bear://x-callback-url/open-note?id=EE67DE50-4C36-4E41-8E51-C444D26F19D1-2779-000009EC12C7011C">Tomcat的在eclipse中配置</a><br><a href="bear://x-callback-url/open-note?id=1005974D-C1E9-433B-A6BD-74400F8CFEFA-2779-000009EC13D7089D">tomcat简介</a><br><a href="bear://x-callback-url/open-note?id=FE8D544A-023F-495F-8E5F-70F0BCD2AFF1-2779-000009EBF9A1308D">Mac中安装tomcat9</a></p>
-<p><a href="bear://x-callback-url/open-note?id=FF535511-B145-45AA-B618-37ED03C2E105-2779-000009EBEB99C32F">HOSTS文件</a><br><a href="bear://x-callback-url/open-note?id=5D1FCD22-8600-44C0-8C64-A49E4366BACB-2779-000009EBF10FD869">JDBC常见错误</a><br><a href="bear://x-callback-url/open-note?id=DF3ED59C-9092-4C27-A8F6-E2D78E2884CF-2779-000009EBF01FFABA">JDBC</a><br><a href="bear://x-callback-url/open-note?id=B094A53F-2D90-4505-B3DD-F12662FAEF51-2779-000009EBF1507757">JDBC批处理</a><br><a href="bear://x-callback-url/open-note?id=865C7186-9D45-4C15-BCDE-4010DA280E45-2779-000009EBF1B371D7">JDBC调用存储过程和函数</a><br><a href="bear://x-callback-url/open-note?id=685E3B88-BB6F-430B-8082-24A7BD7473EF-2779-000009EBF22633BB">JDBC，通过属性配置文件封装DbUtiles类</a><br><a href="bear://x-callback-url/open-note?id=69A28996-5973-42D6-82BA-D8D817CFE503-2779-000009EC16AF3B64">两种数据库连接池 （2017/9/5）</a><br><a href="bear://x-callback-url/open-note?id=10C7B0A3-FE0D-4CC6-8EB9-BA01BE9D0FC8-2779-000009EBE93B6378">DAO层</a><br><a href="bear://x-callback-url/open-note?id=BE14A342-D80B-4490-AC54-E11307BE4945-2779-000009EBF1804613">JDBC提交事务</a><br><a href="bear://x-callback-url/open-note?id=58E3140A-1BF5-4FB9-9143-C60682858B67-2779-000009EBFD318303">ORACLE 11g 的了解</a><br><a href="bear://x-callback-url/open-note?id=9F94B515-CAA1-4740-A8C1-225A3AA2CBD0-2779-000009EC85E1CE0A">用Navicat premium连接win7虚拟机中的ORACLE11g（附账户密码）</a><br><a href="bear://x-callback-url/open-note?id=D0AF10B2-F948-4B8D-A82A-C4F25540638F-2779-000009EC4BE94E52">关于ORACLE配置文件和连接的问题总结</a><br><a href="bear://x-callback-url/open-note?id=B619BFF7-DEB9-4F42-B53E-F688D9B2F950-2779-000009EC087A7F08">SQL的执行顺序</a><br><a href="bear://x-callback-url/open-note?id=966ACD87-A8E3-43BA-9230-2D23CF8DBE70-2779-000009EC08A64596">SQL相关子查询的补充</a><br><a href="bear://x-callback-url/open-note?id=E9A7C8E0-4F61-46B2-AD0A-9B1E3D94ED0D-2779-000009EC4FE50D8B">关于聚合函数注意事项</a><br><a href="bear://x-callback-url/open-note?id=0B6BB8FD-4231-4B0F-86F9-4EBF81832E2C-2779-000009EC08D84AF5">SQL表连接</a><br><a href="bear://x-callback-url/open-note?id=23FBCD70-169B-4F22-935C-E84125527F51-2779-000009EC5B068260">数据库中索引+事务+sequence</a><br><a href="bear://x-callback-url/open-note?id=185A4DA0-3389-4E44-BF76-CEFC3D445A1F-2779-000009EBFDC9AA7D">ORACLE的三个客户端工具</a><br><a href="bear://x-callback-url/open-note?id=413E23B0-737E-42EF-A182-D4042D99B449-2779-000009EC8CFCDD86">表复制（根据一个表创建另一个表）</a><br><a href="bear://x-callback-url/open-note?id=2883AAB7-585A-4600-9365-E16FF3515EA6-2779-000009EC01871CBD">PLSQL（PLSQL语法+存储过程+触发器）</a><br><a href="bear://x-callback-url/open-note?id=E6A77FAA-D33B-4B25-9278-574D0525862B-2779-000009EC08234BC3">SQL如何分析（SQL测试题）</a><br><a href="bear://x-callback-url/open-note?id=B16B7BB9-121A-4CDF-84DC-43735C1AA525-2779-000009EBFE374762">ORCALE SQL语法总结</a></p>
-<p><a href="bear://x-callback-url/open-note?id=FC4DA725-E6D1-4A37-977B-B013677EF9B6-2779-000009EBF43A7594">js的面向对象总结</a><br><a href="bear://x-callback-url/open-note?id=63795361-B482-4A61-809E-4FF9C53C476A-2779-000009EBF3EB361E">js的细小知识点总结(恶心)</a><br> <a href="bear://x-callback-url/open-note?id=A1E1EE58-4E06-48F3-AADA-29DA03C9449A-2779-000009EBF4AF9B85">js知识体系的梳理</a><br><a href="bear://x-callback-url/open-note?id=E64BC0A9-8DEB-47C9-B006-3E09A042CE15-2779-000009EBF38566B4">js实现各种动画的经验</a></p>
-<p><a href="bear://x-callback-url/open-note?id=0C1D7E71-1FB8-47CF-BA17-7EF4240654A8-2779-000009EBEC72B4A7">HTML一些常见标签</a><br><a href="bear://x-callback-url/open-note?id=22750A7A-3C96-429B-B2BD-8B1E5A2BAFDB-2779-000009EBEC2DA49A">HTML5总结</a><br> <a href="bear://x-callback-url/open-note?id=9F77CED8-C135-4D10-B2EF-7DCE01DC9A1E-2779-000009EBE8A7EC32">CSS选择器总结</a><br><a href="bear://x-callback-url/open-note?id=2A1DC171-BB0D-4959-8A52-20B3909DED9F-2779-000009EBE6B86130">CSS3中以前不知道的特性</a><br><a href="bear://x-callback-url/open-note?id=30488B1B-B275-4348-AEF2-84B13ADC1A9D-2779-000009EBE73425B7">CSS常用元素和常见错误</a><br> <a href="bear://x-callback-url/open-note?id=1D1B8728-3199-4096-9F05-382A34DA4794-2779-000009EBE5579F6B">CSS 定位 (Positioning)/浮动 总结</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/06/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/tomcat%E7%AE%80%E4%BB%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1348,6 +987,328 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/" class="post-title-link" itemprop="url">Mac中安装tomcat9</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-05 05:14:00" itemprop="dateCreated datePublished" datetime="2017-09-05T05:14:00+08:00">2017-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/" class="post-meta-item leancloud_visitors" data-flag-title="Mac中安装tomcat9" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>614</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月5日 下午5:14</p>
+<h2 id="tomcat启动常用指令"><a href="#tomcat启动常用指令" class="headerlink" title="tomcat启动常用指令"></a>tomcat启动常用指令</h2><p>cd  _usr_local_tomcat9_bin<br>./startup.sh<br>./shutdown.sh</p>
+<p>注:Mac中调出 前往文件夹 的快捷键command + shift + g</p>
+<h2 id="tomcat类别："><a href="#tomcat类别：" class="headerlink" title="tomcat类别："></a>tomcat类别：</h2><ol>
+<li>第一种：安装版，一个电脑只能安装一个</li>
+<li>第二种：绿色版，一个电脑可以安装多个，但是需要不同的端口</li>
+</ol>
+<h2 id="下载地址：（绿色版）"><a href="#下载地址：（绿色版）" class="headerlink" title="下载地址：（绿色版）"></a>下载地址：（绿色版）</h2><p><a href="http://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener">Apache Tomcat® - Apache Tomcat 9 Software Downloads</a><br><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/F8E72105-6EE0-49E0-B6DC-70670AA7609D.png" alt></p>
+<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><p><strong>注：nginx的端口是80，而tomcat的端口是8080，不冲突</strong><br><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/CB0E00CE-5BC0-40D1-9A75-A60F74ABED2F.png" alt><br>我的安装路径_usr_local_tomcat9_bin</p>
+<p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/linux-comm-pico.html" alt><br><strong>在默认的~路径下配置没有用，我也不知道为啥</strong><br>我现在还是得<code>cd  /usr/local/tomcat9/bin</code>，然后<code>./startup.sh</code>才能启动,用完后<code>./shutdown.sh</code></p>
+<p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/2FA71387-E032-4C8C-814E-C99D69B5AB2D.png" alt><br>在iterm中对路径下的tomcat进行权限配置</p>
+<p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/7D4153F8-C594-4BBC-BA1F-DB30513D9455.png" alt><br>在给startup.sh配置权限的时候，提示也要对catalina.sh文件权限配置</p>
+<p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/2977A8CE-DC0F-475B-91B3-308A0950E424.png" alt><br>我在第二次启动tomcat的时候，会提示logs/catalina.out：permissin denied<br>这时切到logs目录下，chmod 777 catalina.out就行了<br>注：我试过给整个文件夹777权限，但是依然报错</p>
+<p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/D0C5140C-D282-4BCE-97DD-BFEE4E6B1B09.png" alt><br>这样就开启了</p>
+<p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/88C04260-5ACD-4AF0-9495-6996266F519E.png" alt><br><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/CE6B85CA-5C64-4B99-9D1B-BFD6429BE22A.png" alt><br>创建站点目录到主目录，方便快捷访问<br><a href="http://www.runoob.com/linux/linux-comm-ln.html" target="_blank" rel="noopener">Linux ln命令 | 菜鸟教程</a></p>
+<h3 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h3><p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/EC474FDB-5D5E-49DC-8956-92FDF79CC3F2.png" alt><br>发现不同的路径下，有不同的.bash_profile文件</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/DAO%E5%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/DAO%E5%B1%82/" class="post-title-link" itemprop="url">DAO层</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-05 04:10:00" itemprop="dateCreated datePublished" datetime="2017-09-05T04:10:00+08:00">2017-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/DAO%E5%B1%82/" class="post-meta-item leancloud_visitors" data-flag-title="DAO层" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月5日 下午4:10</p>
+<p>先看：<br><a href="bear://x-callback-url/open-note?id=685E3B88-BB6F-430B-8082-24A7BD7473EF-2779-000009EBF22633BB">JDBC，通过属性配置文件封装DbUtiles类</a><br><a href="bear://x-callback-url/open-note?id=69A28996-5973-42D6-82BA-D8D817CFE503-2779-000009EC16AF3B64">两种数据库连接池 （2017/9/5）</a></p>
+<h2 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h2><p>Dao（持久层）是与改进的DbUtiles层同时使用的，可以参考<a href="bear://x-callback-url/open-note?id=69A28996-5973-42D6-82BA-D8D817CFE503-2779-000009EC16AF3B64">两种数据库连接池 （2017/9/5）</a>，这篇文件中就详细介绍了dao层和DbUtils的关系</p>
+<p>附录代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"><span class="keyword">import</span> java.sql.Types;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.shanxi.weixin.dbUtils.DbUtils;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * superDao实现类   </span></span><br><span class="line"><span class="comment"> * 本类提供了  查询多条数据  查询单条数据 查询数量 对数据增删改的基本实现 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SuperDaoImpl</span> <span class="keyword">implements</span> <span class="title">SuperDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的查询多条数据方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql    需要执行的sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> list  执行查询sql后返回的结果视图集合</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> List&lt;Map&lt;String, Object&gt;&gt; queryForList(String sql) &#123;</span><br><span class="line">		List&lt;Map&lt;String,Object&gt;&gt; list =  <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			Statement sta = conn.createStatement();</span><br><span class="line">			ResultSet rs = sta.executeQuery(sql);</span><br><span class="line">			list = rsToList(rs);</span><br><span class="line">			DbUtils.close();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 支持预编译的查询多条数据方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql 	需要执行的预编译sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> types	预编译sql中参数的类型数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> obj	预编译sql中参数的值数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		执行查询sql后返回的结果视图集合</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> List&lt;Map&lt;String, Object&gt;&gt; queryForList(String sql, <span class="keyword">int</span>[] types, Object[] obj) &#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">			<span class="comment">//循环遍历参数数组 并将数组中的值设置给预编译sql</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; obj.length; i++) &#123;</span><br><span class="line">				<span class="keyword">switch</span> (types[i]) &#123;</span><br><span class="line">				<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">					ps.setInt(i+<span class="number">1</span>,Integer.parseInt(obj[i].toString()));</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			ResultSet rs = ps.executeQuery();</span><br><span class="line">			list = rsToList(rs);</span><br><span class="line">			DbUtils.close();</span><br><span class="line">		</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的查询单条数据方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql	需要执行的sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		执行查询sql后返回的单条数据</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">queryForMap</span><span class="params">(String sql)</span> </span>&#123;</span><br><span class="line">		List&lt;Map&lt;String,Object&gt;&gt; list =  <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			Statement sta = conn.createStatement();</span><br><span class="line">			ResultSet rs = sta.executeQuery(sql);</span><br><span class="line">			list = rsToList(rs);</span><br><span class="line">			DbUtils.close();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(!list.isEmpty())&#123;</span><br><span class="line">			<span class="keyword">return</span> list.get(<span class="number">0</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 支持预编译的查询单条数据方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql	需要执行的预编译sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> types 预编译sql中参数的类型数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> obj	预编译sql中参数的值数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		执行查询sql后返回的单条数据</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">queryForMap</span><span class="params">(String sql, <span class="keyword">int</span>[] types, Object[] obj)</span> </span>&#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">			<span class="comment">//循环遍历参数数组 并将数组中的值设置给预编译sql</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; obj.length; i++) &#123;</span><br><span class="line">				<span class="keyword">switch</span> (types[i]) &#123;</span><br><span class="line">				<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">					ps.setInt(i+<span class="number">1</span>,Integer.parseInt(obj[i].toString()));</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			ResultSet rs = ps.executeQuery();</span><br><span class="line">			list = rsToList(rs);</span><br><span class="line">			DbUtils.close();</span><br><span class="line">		</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(!list.isEmpty())&#123;</span><br><span class="line">			<span class="keyword">return</span> list.get(<span class="number">0</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的增删改方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql	需要执行的sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		对数据库操作后发生变化的数据条数</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">excuteUpdate</span><span class="params">(String sql)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			Statement sta = conn.createStatement();</span><br><span class="line">			<span class="keyword">int</span> count = sta.executeUpdate(sql);</span><br><span class="line">			DbUtils.close();</span><br><span class="line">			<span class="keyword">return</span> count;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 支持预编译的增删改方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql	需要执行的预编译sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> types 预编译sql中参数的类型数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> obj	预编译sql中参数的值数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		对数据库操作后发生变化的数据条数</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">excuteUpdate</span><span class="params">(String sql, <span class="keyword">int</span>[] types, Object[] obj)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">			<span class="comment">//循环遍历参数数组 并将数组中的值设置给预编译sql</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; obj.length; i++) &#123;</span><br><span class="line">				<span class="keyword">switch</span> (types[i]) &#123;</span><br><span class="line">				<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">					ps.setInt(i+<span class="number">1</span>,Integer.parseInt(obj[i].toString()));</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">int</span> count = ps.executeUpdate();</span><br><span class="line">			DbUtils.close();</span><br><span class="line">			<span class="keyword">return</span> count;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的统计数据条数方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql	需要执行的sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		查询sql执行后返回的条目数量结果</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">queryForCount</span><span class="params">(String sql)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			Statement sta = conn.createStatement();</span><br><span class="line">			ResultSet rs = sta.executeQuery(sql);</span><br><span class="line">			<span class="keyword">int</span> count = <span class="number">0</span> ;</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				count = rs.getInt(<span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			DbUtils.close();</span><br><span class="line">			<span class="keyword">return</span> count;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 支持预编译的统计数据条数方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql	需要执行的预编译sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> types 预编译sql中参数的类型数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> obj	预编译sql中参数的值数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		查询sql执行后返回的条目数量结果</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">queryForCount</span><span class="params">(String sql, <span class="keyword">int</span>[] types, Object[] obj)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">			<span class="comment">//循环遍历参数数组 并将数组中的值设置给预编译sql</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; obj.length; i++) &#123;</span><br><span class="line">				<span class="keyword">switch</span> (types[i]) &#123;</span><br><span class="line">				<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">					ps.setInt(i+<span class="number">1</span>,Integer.parseInt(obj[i].toString()));</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			ResultSet rs = ps.executeQuery();</span><br><span class="line">			<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				count = rs.getInt(<span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			DbUtils.close();</span><br><span class="line">			<span class="keyword">return</span> count;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 提供将ResultSet结果集转换为list集合的实现</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span>  rs 	需要转换的结果集视图</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> list	转换后封装数据的集合 </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> List&lt;Map&lt;String, Object&gt;&gt; rsToList(ResultSet rs) &#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				Map&lt;String, Object&gt;  map =  <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= rs.getMetaData().getColumnCount(); i++) &#123;</span><br><span class="line">					<span class="keyword">switch</span> (rs.getMetaData().getColumnType(i)) &#123;</span><br><span class="line">					<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getInt(i));</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getString(i));</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">default</span>:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getObject(i));</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				list.add(map);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//查询多条数据</span></span><br><span class="line">		SuperDao dao =  <span class="keyword">new</span> SuperDaoImpl();</span><br><span class="line">		String sql = <span class="string">"select * from people"</span>;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = dao.queryForList(sql);</span><br><span class="line">		System.out.println(list);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">HOSTS文件</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-04 11:32:00" itemprop="dateCreated datePublished" datetime="2017-09-04T11:32:00+08:00">2017-09-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/" class="post-meta-item leancloud_visitors" data-flag-title="HOSTS文件" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>832</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月4日 上午11:32</p>
+<h2 id="理解hosts文件"><a href="#理解hosts文件" class="headerlink" title="理解hosts文件"></a>理解hosts文件</h2><p>作者：Wildog<br>链接：<a href="https://www.zhihu.com/question/19782572/answer/12946786" target="_blank" rel="noopener">https://www.zhihu.com/question/19782572/answer/12946786</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<ol>
+<li>为了方便用户记忆，我们将IP变成一个个的域名来输入到浏览器进行访问。而这使得访问网站时要先将其域名解析成 IP 。DNS (Domain Name Server) 的作用就是进行 IP 解析，把域名对应到 IP。在 Great FireWall 的 5 种封锁方法中，有一种简单而效果很好的方法是 DNS 污染。GFW 会对 DNS 的解析过程进行干扰，这会使对某些被干扰的域名返回一个错误的 IP 地址给你的主机，使你无法正确连接到你要的服务器上读取正确的信息。Hosts 文件本来是用来提高解析效率。</li>
+<li>在进行 DNS 请求以前，系统会先检查自己的 Hosts 文件中是否有这个地址映射关系，如果有则调用这个 IP 地址映射，如果没有再向已知的 DNS 服务器提出域名解析。也就是说 Hosts 的请求级别比 DNS 高。<strong>当你的 Hosts 文件里面有对应的 IP 时，它就会直接访问那个 IP，而不用通过 DNS。</strong></li>
+<li>所以，当我们直接将 Google、Twitter、Facebook 之类的 IP 放入 Hosts 文件后，就可以跳过 DNS 的解析这一步，直接就行 IP 访问，不受 GFW 的 DNS 污染干扰了。补充一条，就是为什么 Hosts 的 IP 要时不时更改，为什么 FB、Twitter 会仍旧上不去。是因为 GFW 的第二个大招，IP 封锁。比如访问国外一个 IP 无法访问，Ping 不通，tracert 这个 IP 后发现，全部在边缘路由器 (GFW) 附近被拦截。换言之，GFW 直接拦截带有这个 IP 头的数据包。所以，如果你更改的 IP 被封锁了，就算你过了 DNS 这一关，也仍旧不能翻过 GFW。</li>
+</ol>
+<h2 id="window7下hosts文件位置"><a href="#window7下hosts文件位置" class="headerlink" title="window7下hosts文件位置"></a>window7下hosts文件位置</h2><p>C:\Windows\System32\drivers\etc</p>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/03D6A282-F78E-4B08-84D2-267810CD5693.png" alt></p>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/F2963AF9-7F70-4B8F-BD1E-2AFC0877F880.png" alt></p>
+<p>可以看出，hosts文件默认是空的</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1418,7 +1379,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-count">1157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -158,349 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/07/08/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%85%B3%E4%BA%8EJDK%E5%B1%82%E4%B8%AD%E4%BB%A3%E7%A0%81%E7%9A%84%E4%B8%80%E7%82%B9%E8%AE%A4%E8%AF%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/07/08/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%85%B3%E4%BA%8EJDK%E5%B1%82%E4%B8%AD%E4%BB%A3%E7%A0%81%E7%9A%84%E4%B8%80%E7%82%B9%E8%AE%A4%E8%AF%86/" class="post-title-link" itemprop="url">关于JDK层中代码的一点认识</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-07-08 09:20:00" itemprop="dateCreated datePublished" datetime="2018-07-08T09:20:00+08:00">2018-07-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/java并发</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/07/08/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%85%B3%E4%BA%8EJDK%E5%B1%82%E4%B8%AD%E4%BB%A3%E7%A0%81%E7%9A%84%E4%B8%80%E7%82%B9%E8%AE%A4%E8%AF%86/" class="post-meta-item leancloud_visitors" data-flag-title="关于JDK层中代码的一点认识" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>233</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年7月8日 下午9:20</p>
-<p><a href="https://blog.csdn.net/jesonjoke/article/details/79978855" target="_blank" rel="noopener">慕课网实战·高并发探索（十）：HashMap与ConcurrentHashMap - CSDN博客</a></p>
-<ol>
-<li>这篇文章中讲了HashMap与ConcurrentHashMap在JDK中实现的原理，我觉得我理解起来有困难</li>
-<li>困难的原因是JDK中实现的原理就像是我学某个算法原理一样，算法就有好多技巧，尤其是数学技巧，它并不是指啥高等数学的知识，就是初中高中的那些数学中也产生出了很多运算的技巧。</li>
-</ol>
-<p><a href="https://www.cnblogs.com/andy-zhou/p/5402984.html" target="_blank" rel="noopener">HashMap多线程并发问题分析 - Andrew.Zhou - 博客园</a><br><img src="/2018/07/08/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%85%B3%E4%BA%8EJDK%E5%B1%82%E4%B8%AD%E4%BB%A3%E7%A0%81%E7%9A%84%E4%B8%80%E7%82%B9%E8%AE%A4%E8%AF%86/778B1681-64B8-4017-B1B2-E798A936CDE0.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/07/08/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/J.U.C%E7%9F%A5%E8%AF%86%E7%82%B9%E8%84%89%E7%BB%9C%E5%9B%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/07/08/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/J.U.C%E7%9F%A5%E8%AF%86%E7%82%B9%E8%84%89%E7%BB%9C%E5%9B%BE/" class="post-title-link" itemprop="url">J.U.C知识点脉络图</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-07-08 09:19:00" itemprop="dateCreated datePublished" datetime="2018-07-08T09:19:00+08:00">2018-07-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/java并发</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/07/08/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/J.U.C%E7%9F%A5%E8%AF%86%E7%82%B9%E8%84%89%E7%BB%9C%E5%9B%BE/" class="post-meta-item leancloud_visitors" data-flag-title="J.U.C知识点脉络图" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>15</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年7月8日 下午9:19</p>
-<p><img src="/2018/07/08/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/J.U.C%E7%9F%A5%E8%AF%86%E7%82%B9%E8%84%89%E7%BB%9C%E5%9B%BE/0CC8069E-9A27-4E52-BD75-801C5C3C1E38.jpg" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/07/08/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E6%B1%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/07/08/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="post-title-link" itemprop="url">线程池</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-07-08 09:08:00" itemprop="dateCreated datePublished" datetime="2018-07-08T09:08:00+08:00">2018-07-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/java并发</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/07/08/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E6%B1%A0/" class="post-meta-item leancloud_visitors" data-flag-title="线程池" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>995</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年7月8日 下午9:08</p>
-<p><a href="https://blog.csdn.net/jesonjoke/article/details/80202114" target="_blank" rel="noopener">慕课网实战·高并发探索（十四）：线程池 Executor - CSDN博客</a></p>
-<ol>
-<li>使用起来那么简单，<strong>学习线程池主要是学啥</strong>？<ol>
-<li>用是可以用，关键是根据具体的实际情况调配不同的参数</li>
-<li>就像是不同的病人，即使是相同的病症，我们医生也要根据病人来配不同的药，因人而异</li>
-<li>我只是知道这个方向，但是我还是一个医生学徒，<strong>这个需要经验的积累</strong>。</li>
-</ol>
-</li>
-<li><strong>线程池的好处</strong>？<ol>
-<li>重用存在的线程，减少对象创建、消亡的开销，性能好</li>
-<li>可有效控制最大并发线程数，提高系统资源利用率，同时可以避免过多资源竞争，避免阻塞。</li>
-<li><strong>提供定时执行、定期执行、单线程、并发数控制等功</strong>能。</li>
-</ol>
-</li>
-<li>ThreadPoolExecutor的七个参数<ol>
-<li><strong>corePoolSize</strong>：核心线程数量</li>
-<li><strong>maximumPoolSize</strong>：线程最大线程数</li>
-<li><strong>workQueue</strong>：阻塞队列，存储等待执行的任务，很重要，会对线程池运行过程产生重大影响</li>
-<li><strong>keepAliveTime</strong>：线程没有任务执行时最多保持多久时间终止（当线程中的线程数量大于corePoolSize的时候，如果这时没有新的任务提交核心线程外的线程不会立即销毁，而是等待，直到超过keepAliveTime）</li>
-<li><strong>unit：keepAliveTime</strong>的时间单位</li>
-<li><strong>threadFactory</strong>：线程工厂，用来创建线程，有一个默认的工场来创建线程，这样新创建出来的线程有相同的优先级，是非守护线程、设置好了名称）</li>
-<li><strong>rejectHandler</strong>：当拒绝处理任务时(阻塞队列满)的策略（AbortPolicy默认策略直接抛出异常、CallerRunsPolicy用调用者所在的线程执行任务、DiscardOldestPolicy丢弃队列中最靠前的任务并执行当前任务、DiscardPolicy直接丢弃当前任务）</li>
-</ol>
-</li>
-<li>Executor可以创建四种线程池<ol>
-<li>分别对应上边提到的四种线程池初始化方法 </li>
-<li><strong>Executors.newCachedThreadPool</strong> <ol>
-<li>创建一个可缓存的线程池，如果线程池的长度超过了处理的需要，<strong>可以灵活回收空闲线程。如果没有可回收的就新建线程。</strong></li>
-</ol>
-</li>
-<li><strong>newFixedThreadPool</strong> <ol>
-<li>定长线程池，可以线程现成的最大并发数，<strong>超出在队列等待</strong></li>
-</ol>
-</li>
-<li><strong>newSingleThreadExecutor</strong> <ol>
-<li>单线程化的线程池，<strong>用唯一的一个共用线程执行任务</strong>，保证所有任务按指定顺序执行（FIFO、优先级…）</li>
-</ol>
-</li>
-<li><strong>newScheduledThreadPool</strong> <ol>
-<li>定长线程池，支持<strong>定时和周期任务执行</strong></li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/07/08/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%BB%84%E4%BB%B6FutureTask%E3%80%81ForkJoin%E3%80%81BlockingQueue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1249,6 +906,449 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%BF%83%E6%80%81%E7%9A%84%E8%B0%83%E8%8A%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%BF%83%E6%80%81%E7%9A%84%E8%B0%83%E8%8A%82/" class="post-title-link" itemprop="url">心态的调节</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-07 09:10:00" itemprop="dateCreated datePublished" datetime="2018-07-07T09:10:00+08:00">2018-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java并发</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%BF%83%E6%80%81%E7%9A%84%E8%B0%83%E8%8A%82/" class="post-meta-item leancloud_visitors" data-flag-title="心态的调节" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>135</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年7月7日 下午9:10</p>
+<p>我们的目标：就是学会怎样会不安全，如何写线程安全的代码</p>
+<p>就是讲了几个技巧的实现原理<br>解释几个概念</p>
+<p>挑理解不了的内容看视频，其他的看文字</p>
+<p>不可变对象为啥是线程安全的？<br>线程不安全的表现就是类全局变量被不同的线程修改，不可变对象不可修改全局变量，自然安全</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%89%8D%E9%9D%A2%E7%9A%84%E9%87%8D%E8%A6%81%E9%97%AE%E9%A2%98%E6%8F%90%E7%82%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%89%8D%E9%9D%A2%E7%9A%84%E9%87%8D%E8%A6%81%E9%97%AE%E9%A2%98%E6%8F%90%E7%82%BC/" class="post-title-link" itemprop="url">前面的重要问题提炼</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-07 04:23:00" itemprop="dateCreated datePublished" datetime="2018-07-07T04:23:00+08:00">2018-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java并发</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%89%8D%E9%9D%A2%E7%9A%84%E9%87%8D%E8%A6%81%E9%97%AE%E9%A2%98%E6%8F%90%E7%82%BC/" class="post-meta-item leancloud_visitors" data-flag-title="前面的重要问题提炼" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年7月7日 下午4:23</p>
+<p><a href="https://blog.csdn.net/jesonjoke/article/details/79837508" target="_blank" rel="noopener">慕课网实战·高并发探索（三）：线程安全性-原子性-CAS（CAS的ABA问题） - CSDN博客</a></p>
+<ol>
+<li>什么是CAS？<br><img src="/2018/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%89%8D%E9%9D%A2%E7%9A%84%E9%87%8D%E8%A6%81%E9%97%AE%E9%A2%98%E6%8F%90%E7%82%BC/941BCDDB-C443-40F1-8734-E028C5FD858B.png" alt></li>
+<li>为什么有了AtomicLong还要新增一个LongAdder呢？ <ol>
+<li>CAS底层实现是在一个死循环中不断地尝试修改目标值，直到修改成功。如果竞争不激烈的时候，修改成功率很高，否则失败率很高。在失败的时候，这些重复的原子性操作会耗费性能。</li>
+</ol>
+</li>
+<li>LongAdder类的实现原理？<br><img src="/2018/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%89%8D%E9%9D%A2%E7%9A%84%E9%87%8D%E8%A6%81%E9%97%AE%E9%A2%98%E6%8F%90%E7%82%BC/FD1BC19E-C2EE-44D4-AC7C-DFC810671BA7.png" alt></li>
+<li>AtomicBoolean中的<strong>compareAndSet</strong>方法作用？<ol>
+<li>这个方法可以做到的是控制一个boolean变量在一件事情执行之前为false，事情执行之后变为true。</li>
+<li><strong>或者也可以理解为可以控制某一件事只让一个线程执行，并仅能执行一次</strong>。 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (isHappened.compareAndSet(<span class="keyword">false</span>, <span class="keyword">true</span>)) &#123;<span class="comment">//控制某有一段代码只执行一次</span></span><br><span class="line">           log.info(<span class="string">"execute"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li>AtomicIntegerFieldUpdater类的用途？<ol>
+<li>这个类的核心作用是要<strong>更新</strong>一个指定的类的某一个<strong>字段的值</strong>。</li>
+<li>并且这个字段<strong>一定要用volatile修饰</strong>同时还不能是static的。</li>
+</ol>
+</li>
+<li>什么是ABA问题？ <ol>
+<li>CAS操作的时候，其他线程将变量的值A改成了B，<strong>但是随后又改成了A</strong>，本线程在CAS方法中使用期望值A与当前变量进行比较的时候，发现变量的值未发生改变，于是CAS就将变量的值进行了交换操作。但是实际上变量的值已经被其他的变量改变过，这与设计思想是不符合的。</li>
+</ol>
+</li>
+<li>AtomicStampReference的处理思想？<ol>
+<li>每次变量更新的时候，将变量的<strong>版本号+1</strong>，之前的ABA问题中，变量经过两次操作以后，变量的版本号就会由1变成3，也就是说只要线程对变量进行过操作，变量的版本号就会发生更改。</li>
+<li>从而解决了ABA问题。</li>
+</ol>
+</li>
+<li>使用synchronized之后不同对象之间操作是互不补影响？<ol>
+<li>当synchronized修饰静态方法和类时，作用的对象是这个类的所有对象。 </li>
+<li>也就是说：这个类的所有实例是不能争抢的，必须一个个按顺序来。</li>
+</ol>
+</li>
+</ol>
+<p><a href="https://blog.csdn.net/jesonjoke/article/details/79848032" target="_blank" rel="noopener">慕课网实战·高并发探索（四）：线程安全性-可见性-有序性 - CSDN博客</a></p>
+<ol>
+<li>线程可见性的定义？<ol>
+<li>一个线程对主内存的修改可以及时的被其他线程观察到</li>
+</ol>
+</li>
+<li>导致共享变量在线程间不可见的原因？<ol>
+<li>线程交叉执行</li>
+<li>重排序结合线程交叉执行</li>
+<li>共享变量更新后的值没有在工作内存与主存间及时更新</li>
+</ol>
+</li>
+<li>JMM关于<strong>synchronized</strong>的两条规定？<ol>
+<li><strong>线程解锁前</strong>，必须把共享变量的最新值刷新到主内存</li>
+<li><strong>线程加锁时</strong>，将清空工作内存中共享变量的值，从而使用共享变量时需要从主内存中重新读取最新的值（注意：加锁与解锁是同一把锁）</li>
+</ol>
+</li>
+<li>Volatile的作用？<ol>
+<li>对volatile变量<strong>写操作</strong>时，会在写操作<strong>后</strong>加入一条store屏障指令，将本地内存中的共享变量值刷新到主内存。</li>
+<li>对volatile变量<strong>读操作</strong>时，会在读操作<strong>前</strong>加入一条load屏障指令，从主内存中读取共享变量。</li>
+<li>方式重排序</li>
+</ol>
+</li>
+<li>Volatitle可以解决并发问题吗？<ol>
+<li><strong>volatile不会让你的程序变得更好</strong>，仅仅是通过防止指令重排，以免让程序因为重排序变得更坏。</li>
+<li>所以，它不可以直接解决并发问题。</li>
+</ol>
+</li>
+<li>volatile适合做什么呢？<ol>
+<li>比较适合做状态标记量（不会涉及到多线程同时读写的操作）</li>
+</ol>
+</li>
+</ol>
+<p><a href="https://blog.csdn.net/jesonjoke/article/details/79897550" target="_blank" rel="noopener">慕课网实战·高并发探索（六）：不可变对象 -final -ImmutableX -unmodifiableX - CSDN博客</a></p>
+<ol>
+<li>一个不可变对象需要满足的条件？<ol>
+<li>对象创建一个其状态不能修改</li>
+<li>对象所有域都是final类型</li>
+<li>对象是正确创建的(在对象创建期间，this引用没有逸出)</li>
+</ol>
+</li>
+<li>创建一个不可变对象的方法？<ol>
+<li>将<strong>类声明为final</strong>，这样它就<strong>不能被继承</strong>。 </li>
+<li>将所有的<strong>成员声明为私有</strong>的，这样就不允许直接访问这些成员。 </li>
+<li>对变量<strong>不提供set方法</strong>，将所有可变的<strong>成员声明为final</strong>，这样就<strong>只能赋值一次</strong>。通过构造器初始化所有成员进行深度拷贝。 </li>
+<li>在<strong>get方法</strong>中不直接返回对象的本身，而是<strong>克隆对象</strong>，返回对象的拷贝。</li>
+</ol>
+</li>
+<li>unmodifiable相关类的实现原理是什么呢？<br><img src="/2018/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%89%8D%E9%9D%A2%E7%9A%84%E9%87%8D%E8%A6%81%E9%97%AE%E9%A2%98%E6%8F%90%E7%82%BC/391DFB9B-9C7E-4A0B-A36C-29DCFA367D7B.png" alt></li>
+</ol>
+<p><a href="https://blog.csdn.net/jesonjoke/article/details/79902773" target="_blank" rel="noopener">慕课网实战·高并发探索（七）：线程封闭 - ThreadLocal - CSDN博客</a></p>
+<ol>
+<li><strong>什么是线程封闭</strong>？<ol>
+<li>它其实就是把对象封装到一个线程里，只有一个线程能看到这个对象</li>
+</ol>
+</li>
+<li><strong>堆栈封闭</strong>？<ol>
+<li>就是将变量尽量放在方法中，而不是全局变量</li>
+</ol>
+</li>
+<li>ThreadLocal线程封闭？<ol>
+<li>其实ThreadLocal内部维护了一个map,map的key是每个线程的名称，<strong>而map的value就是我们要封闭的对象</strong>。</li>
+<li>ThreadLocal就像一个安全屋一样，可以保护放入的线程对象只归自己(当前线程)所有。</li>
+<li><strong>多个线程共有一个ThreadLocal，ThreadLocal会自动的分辨出当前线程是谁，以及对应的对象</strong>。</li>
+<li><code>ThreadLocal用于保存某个线程共享变量：对于同一个static ThreadLocal，不同线程只能从中get，set，remove自己的变量，而不会影响其他线程的变量。</code></li>
+</ol>
+</li>
+<li>工作内存的拷贝 与 并发问题的关系？<ol>
+<li>由于工作内存的拷贝，避免并发问题——实例：堆栈封闭</li>
+<li>由于工作内存的拷贝，引起并发问题——实例：两个线程操作同一个全局变量</li>
+</ol>
+</li>
+</ol>
+<p><a href="https://blog.csdn.net/jesonjoke/article/details/79923837" target="_blank" rel="noopener">慕课网实战·高并发探索（八）：线程不安全类、同步容器 - CSDN博客</a></p>
+<ol>
+<li>Vector也不是完全的线程安全的？<ol>
+<li>synchronized关键字可以保证同一时间只有一个线程执行该方法，但是多个线程同时分别执行remove、add、get操作的时候就无法控制了。</li>
+</ol>
+</li>
+<li>同步容器和并发容器的区别？<ol>
+<li><strong>同步容器将所有对容器的访问都串行化—每次只能有一个线程能访问它</strong>，以实现他们的线程安全性，这种方法的代价是严重降低并发性，当多个线程竞争访问容器的锁时，吞吐量将会严重减低。</li>
+<li><strong>并发容器</strong>：针对多个线程设计的，用并发容器来代替同步容器，可以极大地提高伸缩性并降低风险。</li>
+<li><strong>并发容器使用了与同步容器完全不同的加锁策略来提供更高的并发性和伸缩性</strong>，例如在ConcurrentHashMap中采用了一种粒度更细的加锁机制，可以称为分段锁，在这种锁机制下，允许任意数量的读线程并发地访问map，并且执行读操作的线程和写操作的线程也可以并发的访问map，同时允许一定数量的写操作线程并发地修改map，所以它可以在并发环境下实现更高的吞吐量。</li>
+<li><a href="https://blog.csdn.net/see__you__again/article/details/50884032" target="_blank" rel="noopener">同步容器和并发容器的区别 - CSDN博客</a><ol>
+<li>这个里面有具体的代码例子，来说明同步容器的缺点，以及使用方法。</li>
+<li><a href="bear://x-callback-url/open-note?id=D90C2D8B-1D36-4C78-BD52-4DE464AD587F-699-0000BBAC66E066DA">同步容器也会线程不安全</a></li>
+</ol>
+</li>
+<li><a href="https://www.cnblogs.com/shijiaqi1066/p/3412275.html" target="_blank" rel="noopener">Java并发——同步容器与并发容器 - LaplaceDemon - 博客园</a><ol>
+<li>这个里面讲的并发容器种类非常多。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E4%B8%80%E4%B8%8Bjava%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B(JMM)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E4%B8%80%E4%B8%8Bjava%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B(JMM)/" class="post-title-link" itemprop="url">重新理解一下java内存模型(JMM)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-07 02:53:00" itemprop="dateCreated datePublished" datetime="2018-07-07T02:53:00+08:00">2018-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java并发</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E4%B8%80%E4%B8%8Bjava%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B(JMM)/" class="post-meta-item leancloud_visitors" data-flag-title="重新理解一下java内存模型(JMM)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>343</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年7月7日 下午2:53</p>
+<h3 id="Java内存模型，先从这几个字开始理解："><a href="#Java内存模型，先从这几个字开始理解：" class="headerlink" title="Java内存模型，先从这几个字开始理解："></a>Java内存模型，先从这几个字开始理解：</h3><ol>
+<li><strong>Java内存模型</strong>指内存是如何在java程序运行的过程中使用的？<ol>
+<li>这类的内存，不能狭义的理解成主内存，也要包括缓存，工作内存，本地内存等这些抽象的概念内存。</li>
+</ol>
+</li>
+<li>围绕内存，java做了哪些特殊的功能？<ol>
+<li>这里的java功能，对于使用的人来说可以说是使用java的默认规定。</li>
+</ol>
+</li>
+</ol>
+<h3 id="在java中我们总是讨论高并发，多线程等知识，但是产生的源头在哪里？"><a href="#在java中我们总是讨论高并发，多线程等知识，但是产生的源头在哪里？" class="headerlink" title="在java中我们总是讨论高并发，多线程等知识，但是产生的源头在哪里？"></a>在java中我们总是讨论高并发，多线程等知识，但是产生的源头在哪里？</h3><ol>
+<li>源头就存在于JMM中，由于JMM中就<strong>规定了</strong><ol>
+<li>栈：用于程序运行的关键</li>
+<li>堆：数据的存储</li>
+<li>一个线程对应于一个栈</li>
+<li>多个线程共享同一个堆</li>
+<li>定义本地内存，<strong>本地内存</strong>是主内存的私有拷贝，每个<strong>线程有自己的本地内存，那么就会有同一个数据的多个私有拷贝</strong>，这就是产生多线程知识的，并发难题的本质原因——JMM中就是根本原因。</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1319,7 +1419,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-count">1157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

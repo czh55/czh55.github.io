@@ -158,340 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HBase/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HBase/" class="post-title-link" itemprop="url">HBase</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-12-29 03:48:00" itemprop="dateCreated datePublished" datetime="2018-12-29T03:48:00+08:00">2018-12-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%A4%A7%E6%95%B0%E6%8D%AE-%E6%9D%8E%E6%99%BA%E6%85%A7/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_分布式/大数据/李智慧</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HBase/" class="post-meta-item leancloud_visitors" data-flag-title="HBase" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>292</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年12月29日 下午3:48</p>
-<ol>
-<li>学到这里我突然意识到，其实分布式如果要从硬件角度去思考的话只有一种架构：<strong>一主多从</strong>。不论是HDFS，还是Hbase都是这样的原理，<strong>MapReduce</strong>不是因为它不是属于<strong>分布式架构</strong>，而是属于<strong>计算架构、编程模型</strong>。</li>
-<li>在学习分布式架构时，有几个重要的分析角度：<ol>
-<li>【顶层】从硬件(client使用)的角度<ol>
-<li>基本上全是<strong>一主多从</strong></li>
-</ol>
-</li>
-<li>【中间层】从任务的角度</li>
-<li>【底层】从数据的角度<ol>
-<li>数据层是要结合<strong>具体的算法</strong>来体现数据的流动和变化的</li>
-<li><strong>底层的算法和顶层的架构是无关的</strong></li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="HBase-可伸缩架构"><a href="#HBase-可伸缩架构" class="headerlink" title="HBase 可伸缩架构"></a>HBase 可伸缩架构</h3><p><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HBase/444DAA5A-3858-476D-81BE-21E6AB02A86B.png" alt></p>
-<h3 id="一些基本的概念："><a href="#一些基本的概念：" class="headerlink" title="一些基本的概念："></a>一些基本的概念：</h3><p><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HBase/B82953EC-D8F8-459F-80CA-FFE42B257A92.png" alt></p>
-<h3 id="数据的读取："><a href="#数据的读取：" class="headerlink" title="数据的读取："></a>数据的读取：</h3><p><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HBase/7B8FE26C-72DF-4348-80FA-FDF62928A6EB.png" alt></p>
-<h3 id="数据的写入-描述的是一个扩展的过程-："><a href="#数据的写入-描述的是一个扩展的过程-：" class="headerlink" title="数据的写入(描述的是一个扩展的过程)："></a>数据的写入(描述的是一个扩展的过程)：</h3><p><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HBase/F73D114A-D543-4929-8450-AF405DA96933.png" alt></p>
-<h3 id="HBase数据模型："><a href="#HBase数据模型：" class="headerlink" title="HBase数据模型："></a>HBase数据模型：</h3><p><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HBase/842A3D0E-2672-4043-8D74-E649CB8BC3B1.png" alt></p>
-<h3 id="HBase高性能存储"><a href="#HBase高性能存储" class="headerlink" title="HBase高性能存储"></a>HBase高性能存储</h3><p><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HBase/E608167D-3070-4FB4-967F-A1805982B541.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/" class="post-title-link" itemprop="url">HDFS</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-12-29 03:48:00" itemprop="dateCreated datePublished" datetime="2018-12-29T03:48:00+08:00">2018-12-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%A4%A7%E6%95%B0%E6%8D%AE-%E6%9D%8E%E6%99%BA%E6%85%A7/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_分布式/大数据/李智慧</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/" class="post-meta-item leancloud_visitors" data-flag-title="HDFS" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>381</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年12月29日 下午3:48<br>HDFS我认为他最核心的作用是：作为底层，<strong>完成了对硬件层的抽象</strong>，有点类似于网络中数据链路层的感觉(只是感觉像，作用和原理完全不同)</p>
-<h3 id="大规模数据存储都需要解决几个核心问题"><a href="#大规模数据存储都需要解决几个核心问题" class="headerlink" title="大规模数据存储都需要解决几个核心问题"></a>大规模数据存储都需要解决几个核心问题</h3><p><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/D741C0C7-7549-4B49-BF34-00AD5133ACB5.png" alt></p>
-<h3 id="大规模数据存储方式的演化过程"><a href="#大规模数据存储方式的演化过程" class="headerlink" title="大规模数据存储方式的演化过程"></a>大规模数据存储方式的演化过程</h3><p><strong>核心方法就是考虑并行、备份，并且考虑容错</strong><br>最后的表格中也能看出RAID的本质是啥。<br><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/E2D8F994-5FE2-4675-AD9D-8C06ABCB864B.png" alt><br><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/18A184C0-20F8-4604-9F60-F51962E0FC17.png" alt><br><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/767C9A28-C900-4F25-A95D-67EA9B786BC5.png" alt></p>
-<h3 id="RAID和HDFS的联系"><a href="#RAID和HDFS的联系" class="headerlink" title="RAID和HDFS的联系"></a>RAID和HDFS的联系</h3><p><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/FF4B967F-E1C6-4D9E-A97B-527BCAAA9E71.png" alt></p>
-<h3 id="为什么HDFS的地位如何稳固？"><a href="#为什么HDFS的地位如何稳固？" class="headerlink" title="为什么HDFS的地位如何稳固？"></a>为什么HDFS的地位如何稳固？</h3><p><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/AC01723F-092B-42AD-8478-50024B27DE83.png" alt></p>
-<h3 id="HDFS架构图"><a href="#HDFS架构图" class="headerlink" title="HDFS架构图:"></a>HDFS架构图:</h3><p>我认为就是一个普通的普通的文件系统罢了，概念是不变的，只不过是这些概念的参数大大小小的区别。<br><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/76D74DBF-BDBE-40FB-9012-E8B555713A2D.png" alt></p>
-<h3 id="DataNode的作用"><a href="#DataNode的作用" class="headerlink" title="DataNode的作用"></a>DataNode的作用</h3><p><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/C958012E-D3A4-40EF-86AB-34399A967F56.png" alt></p>
-<h3 id="NameNode作用"><a href="#NameNode作用" class="headerlink" title="NameNode作用"></a>NameNode作用</h3><p><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/6DF01321-491C-4D21-ABC4-65D7779D744D.png" alt></p>
-<h3 id="NadeNode容错"><a href="#NadeNode容错" class="headerlink" title="NadeNode容错"></a>NadeNode容错</h3><p><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/A054DA65-00A9-414B-AFD9-C071A61A1F20.png" alt><br><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/D3D4EA64-BB93-49F4-A2CB-0CB78A57D105.png" alt></p>
-<p>几个重要的概念：</p>
-<ol>
-<li>冗余备份</li>
-<li>失效转移</li>
-<li>用户请求量大时：<ol>
-<li>限流：拒绝部分请求</li>
-<li>降级：关闭部分功能</li>
-</ol>
-</li>
-</ol>
-<h3 id="HDFS如何通过大规模分布式服务器集群实现大容量、高速、可靠访问的？"><a href="#HDFS如何通过大规模分布式服务器集群实现大容量、高速、可靠访问的？" class="headerlink" title="HDFS如何通过大规模分布式服务器集群实现大容量、高速、可靠访问的？"></a>HDFS如何通过大规模分布式服务器集群实现大容量、高速、可靠访问的？</h3><p>注：HDFS并不是可以防止各种异常的发生，而是在它身上集成了各种异常发生的<strong>策略</strong><br><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/HDFS/4046E0AF-C1F3-4048-81B2-E8DA8B5F87F4.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/Hive/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/Hive/" class="post-title-link" itemprop="url">Hive</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-12-29 03:48:00" itemprop="dateCreated datePublished" datetime="2018-12-29T03:48:00+08:00">2018-12-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%A4%A7%E6%95%B0%E6%8D%AE-%E6%9D%8E%E6%99%BA%E6%85%A7/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_分布式/大数据/李智慧</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/Hive/" class="post-meta-item leancloud_visitors" data-flag-title="Hive" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>37</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年12月29日 下午3:48</p>
-<p>Hive架构<br><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/Hive/5BF70A03-C2F5-416E-A931-1870C5BF5793.png" alt></p>
-<p>Hive 如何实现 join 操作<br><img src="/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/Hive/3FF62860-B75A-4E10-948B-2DF753DE434E.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/12/29/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E6%9D%8E%E6%99%BA%E6%85%A7/MapReduce/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1207,6 +873,352 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/" class="post-title-link" itemprop="url">3D DIC</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-27 09:45:00" itemprop="dateCreated datePublished" datetime="2018-12-27T09:45:00+08:00">2018-12-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:28:29" itemprop="dateModified" datetime="2020-04-01T15:28:29+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-DIC/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/DIC#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/" class="post-meta-item leancloud_visitors" data-flag-title="3D DIC" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年12月27日 上午9:45</p>
+<p><a href="%E6%97%A0%E6%8E%A5%E8%A7%A6%E5%BC%8F%E7%9B%91%E6%B5%8B.pdf">无接触式监测.pdf</a><br><a href="https://baike.baidu.com/item/%E8%A7%86%E5%9C%BA" target="_blank" rel="noopener">视场_百度百科</a><br>三维位移<br><a href="https://www.youtube.com/watch?v=6MdJJBd0fjw" target="_blank" rel="noopener">摄影基础教学——光圈快门ISO - YouTube</a><br><a href="https://www.youtube.com/watch?v=QRT0LCN4BSs" target="_blank" rel="noopener">光圈、快門、ISO 基本概念(上篇) - YouTube</a><br>控制照片的曝光(亮暗)<br><a href="https://www.youtube.com/watch?v=XL8202-rv5o" target="_blank" rel="noopener">摄影世界入门 - YouTube</a></p>
+<p><a href="http://www.acqtec.com/article/PrincipleofDIC" target="_blank" rel="noopener">DIC 数字图像相关原理 - ACQTEC 研索仪器 VIC-3D vic3d DIC 数字图像相关 非接触全场 Psylotech µTS 介观尺度 shearography 复合材料缺陷检测</a></p>
+<p><a href="http://www.wanfangdata.com.cn/details/detail.do?_type=perio&id=gxjmgc201010018" target="_blank" rel="noopener">用于三维变形测量的数字图像相关系统</a></p>
+<ol>
+<li>三维重建涉及的是变形过程中的多个状态，每个状态包含左右2幅图像。如图5所示，整个相关<strong>匹配过程</strong>中，所有状态的左图像都以状态1(未变形状态)的左图像为参考图像进行相关匹配，所有状态的右图像都以该状态的左图像为参考图像进行相关匹配。<strong>匹配完毕</strong>后，对于任意一个状态的左右两幅图像，利用标定得到的摄像机内、外参数，按照三角测量原理就可以重建对应的三维点坐标。</li>
+<li><strong>摄像机的标定</strong>是指确定其内、外方位参数的过程。如前所述，传统的像机标定通常都需要利用<strong>高精度的标定板</strong>， <em>通过标定块已知的三维点的坐标与对应的图像点坐标的关系来计算像机的内、外参数</em> ，因此标定块的制作误差会导致标定精度的下降。<strong>基于摄影测量方法</strong>的摄像机标定方法不需要高精度的标定板，只需要将标定板上任意一对标识点的<strong>准确距离作为比例尺</strong>就可以准确地计算出摄像机的内、外方位参数。</li>
+<li>2按照5．1节的方法将所有状态进行三维重建后，以状态1作为参考状态，<strong>变形过程中任意一个状态的三维点坐标减去参考状态的三维点坐标就得到该状态的三维位移</strong>。<br><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/D56BCD02-878E-4220-879E-58091075762F.png" alt></li>
+</ol>
+<p><a href="http://www.wanfangdata.com.cn/details/detail.do?_type=perio&id=yygx201604013#" target="_blank" rel="noopener">地震振动台实验三维全场位移测量的研究</a><br><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/8380FB5E-B2C3-4854-A106-37C5D74513CB.png" alt><br>本文的实验系统硬件主要由高性能电脑、测头、强光源、三脚架、1．5 m×1．5 m标定十字架组成。测头(如图3)由Basler工业相机、焦距为351Tlnl的施耐德镜头以及横梁组成。相机芯片像素分辨率为2 048 pixel*1 088 pixel，模型具体尺寸3 000 mm×I 500 mm×1 300 mm。<br><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/F924C105-2941-45C1-A42C-1819BB8A6F95.png" alt></p>
+<p><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/D7DF47A5-A799-4986-8E39-CC73456FF476.png" alt><br><strong>VDI/VDE 2634</strong> 是德国联邦物理研究院于2002年制定的关于<strong>工业测量领域的规范</strong><a href="http://www.chinamtt.cn/Upload/2015-07/20150703.pdf" target="_blank" rel="noopener">http://www.chinamtt.cn/Upload/2015-07/20150703.pdf</a></p>
+<p>Two-dimensional digital image correlation for in-plane displacement and strain measurement: a review：2009<br><a href="http://apps.webofknowledge.com/full_record.do?product=UA&search_mode=GeneralSearch&qid=1&SID=8AaQN6vlG9sEA9SCvnH&page=1&doc=1" target="_blank" rel="noopener">Web of Science v.5.31  -     所有数据库 全记录</a><br>Color Stereo-Digital Image Correlation Method Using a Single 3CCD Color Camera：2017<br><a href="http://apps.webofknowledge.com/full_record.do?product=UA&search_mode=GeneralSearch&qid=9&SID=8AaQN6vlG9sEA9SCvnH&page=1&doc=2&cacheurlFromRightClick=no" target="_blank" rel="noopener">Web of Science v.5.31  -     所有数据库 全记录</a></p>
+<ol>
+<li>Stereo-digital image correlation (stereo-DIC, also termed as 3D–DIC)</li>
+<li>random speckle patterns<br><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/27C204FD-3E2B-4EBA-A2BE-8880338D4279.png" alt><br><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/9FD8A135-40F6-47D7-A6B3-B4A0014BDAC4.png" alt><br><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/B3ADC158-7D70-40CA-A092-9C4A8CD233C4.png" alt><br><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/31A41868-9CDA-4B71-8F31-5D278794C0F5.png" alt></li>
+</ol>
+<p><a href="https://www.sciencedirect.com/science/article/pii/S0143816613000869" target="_blank" rel="noopener">Full-field 3D measurement using multi-camera digital image correlation system - ScienceDirect</a><br><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/3F8959DB-18CB-4713-8D28-D08FFBC89897.png" alt><br><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/B969865C-10F0-462F-92A2-FC256A6870F0.png" alt><br><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/FF362AB1-152D-46AE-8F1F-6A0C1CB68E13.png" alt><br><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/FB83C379-58D5-476E-91CD-10AD3864A173.png" alt><br><img src="/2018/12/27/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/3D%20DIC/544C2756-F591-42E1-A3DF-855CA4120A8A.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/12/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E7%9B%B8%E5%85%B3(%E4%B8%AD%E6%96%87%E8%AE%BA%E6%96%87)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E7%9B%B8%E5%85%B3(%E4%B8%AD%E6%96%87%E8%AE%BA%E6%96%87)/" class="post-title-link" itemprop="url">数字图像相关(中文论文)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-24 12:05:00" itemprop="dateCreated datePublished" datetime="2018-12-24T12:05:00+08:00">2018-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:27:51" itemprop="dateModified" datetime="2020-04-01T15:27:51+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-DIC/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/DIC#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/12/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/dic/%E6%95%B0%E5%AD%97%E5%9B%BE%E5%83%8F%E7%9B%B8%E5%85%B3(%E4%B8%AD%E6%96%87%E8%AE%BA%E6%96%87)/" class="post-meta-item leancloud_visitors" data-flag-title="数字图像相关(中文论文)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年12月24日 下午12:05</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=f225384ba25bb4711b8855d9f6c48979&site=xueshu_se" target="_blank" rel="noopener">数字图像相关（DIC）测量方法在材料变形研究中的应用_百度学术</a><br>数字图像相关(Digital Image Correlation)测量技术是应用计算机视觉技术的一种图像测量方法,是一种非接触的、用于全场形状、变形、运动测量的方法。它直接处理的对象是具有一定灰度分布的数字图像(散斑图),通过对比材料或者结构表面在变形前后的散斑图运用相关算法得到全场位移和应变。</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=d1790beb43297d39d233ae7c13cf9f7e" target="_blank" rel="noopener">三维数字图像相关法及其在水泥基材料变形研究中的应用_百度学术</a></p>
+<ol>
+<li>三维数字图像相关法(three-dimensional digital image correlation,3D-DIC)又称三维数字散斑相关法(threedimensional digital speckle correlation method,3D-DSCM),是一种新型的非接触式全场光学测量方法。</li>
+<li>数字图像相关法是一种通过记录和分析物体表面随机分布的散斑在物体变形前后的系统相关性，来计算物体表面形变的一种光学测量技术</li>
+<li>与比长仪等传统方法相比,三维数字图像相关法具有测量精度高,可准确测量物体表面的三维形貌和变形等优点。</li>
+<li>本文介绍了三维数字图像相关法的基本原理、关键技术和精度分析等,并结合水泥基材料的特点,讨论了三维数字图像相关法在水泥基材料变形研究中的应用。</li>
+</ol>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=f6e7f05856c07ecdc97c9c6430f8af48" target="_blank" rel="noopener">三维数字图像相关技术(3D DIC)在材料形变研究中的应用进展_百度学术</a><br>指出在散斑对测量精度影响、微应变尺度测量、环境因素对测量效果干扰</p>
+<p>散斑图像：<br><a href="http://www.wanfangdata.com.cn/details/detail.do?_type=degree&id=D01087430#" target="_blank" rel="noopener">基于激光散斑图像的目标识别研究</a><br>介绍了散斑的成像原理，特性<br><a href="http://www.wanfangdata.com.cn/details/detail.do?_type=perio&id=sylx200303022" target="_blank" rel="noopener">散斑图像相关数字技术原理及应用</a><br>散斑图是通过CCD照相机生成的</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=6884e3f2b87c10b16ffc896a263515a5&site=xueshu_se" target="_blank" rel="noopener">激光测量目标角振动的研究_百度学术</a></p>
+<h2 id="基本方法流程："><a href="#基本方法流程：" class="headerlink" title="基本方法流程："></a>基本方法流程：</h2><ol>
+<li>利用线阵CCD具有实时传输光电变换信号和自扫描速度快、频率响应高、能够实现动态测量以及价格低廉等特点，选择线阵CCD采集散斑图像；利用FPGA并行处理数据速度快这一优势，CCD输出信号通过信号调理电路后经A/D转换送入FPGA进行相关运算，最终通过散斑图像的位移量来获得目标角振动信息；用MATLAB软件编程来实现对测量系统的理论仿真及结果验证。<h2 id="散斑："><a href="#散斑：" class="headerlink" title="散斑："></a>散斑：</h2></li>
+<li>散斑的形成的物理原理</li>
+<li>数字散斑相关方法（DSCM）的基本原理<h2 id="CCD简介："><a href="#CCD简介：" class="headerlink" title="CCD简介："></a>CCD简介：</h2></li>
+<li>CCD 的工作原理是将目标或光源入射到 CCD 光敏面上的光强分布信息通过光电转换原理转变为电荷量信息，并且按照一定的时序（脉冲信号）将临时存放在寄存器中的电荷量信号移位串行输出，输出的电信号再经过信号调理电路和相关软件的处理后就可再现被测物体的原始信息。</li>
+<li>从 CCD 器件的结构上来看，可以分为线阵 CCD 和面阵 CCD 两种。 </li>
+<li>CCD 器件普遍具有高解析度、低噪声、高灵敏度、动态范围大、线性特性好、转换效率高、光谱响应宽以及体积小、重量轻等优点。<h2 id="FPGA"><a href="#FPGA" class="headerlink" title="FPGA"></a>FPGA</h2></li>
+<li>传统的数字散斑相关方法使用图像采集卡采集散斑图像，并输送至计算机采用 MATLAB 或 C 语言编程进行相关搜索和相关运算，具有运算大、运算速度慢、无法实时动态测量等缺点。</li>
+<li>本论文提出测量方案选用现场可编程逻辑门阵<br>列（FPGA）实现相关搜索和相关运算。FPGA 最大的优点在于并行计算特性以及灵活的可重构特性，还可根据具体算法来实现特定的并行处理结构或流水线结构，有更多的处理单元来执行运算，这就极大提高了算法运算速度和处理系统的吞吐量。</li>
+</ol>
+<p><a href="https://s.1688.com/kq/-C3E6D5F3636364.html" target="_blank" rel="noopener">【面阵ccd】_面阵ccd品牌/图片/价格_面阵ccd批发_阿里巴巴</a><br><a href="http://www.siaon.com/pdf/camera.pdf" target="_blank" rel="noopener">http://www.siaon.com/pdf/camera.pdf</a></p>
+<p>视觉测量</p>
+<p>标定板</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=d52b595de9ffa769c5c6498a73fe3f6f" target="_blank" rel="noopener">图像式远程目标微小位移监测系统的设计与实现_百度学术</a><br>该系统设计的基本思路是使用CCD摄取目标图像，通过监控目标中心在图像中的位置变化实现对远程目标微小位移的准确监测。</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=1e940e5f36e0cc23b6fafdee49751417&site=xueshu_se" target="_blank" rel="noopener">地质灾害监测新仪器—激光微小位移监测系统_百度学术</a><br>本项研究成果采用了先进的激光技术、CCD摄像技术和微机数字处理技术，对滑坡体的水平位移、垂直位移和轴向位移实现远距离、非接触、全天候、全自动监测，</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=ef903bc66991a7c8852eb5fddcb95170" target="_blank" rel="noopener">图像处理技术在地质灾害监测中的应用_百度学术</a><br>三维激光微位移监测技术是一种对地质灾害进行长期监测的新方法.该技术用激光作为光源,用CCD摄像器作为镜头,通过图象采集卡把视频信号采入计算机中,用与该仪器配套的专门软件对采集到的光斑图像进行处理,计算出光斑的三维中心坐标值,把该值和原点坐标值进行比较,就可以算出灾害体滑动的距离.该系统可以对灾害体进行长期、非接触监测,监测时间、监测频率可以任意设定.</p>
+<p><a href="https://www.jianshu.com/p/558aa39049b4" target="_blank" rel="noopener">机器视觉基础知识详解 - 简书</a><br><a href="https://zhuanlan.zhihu.com/p/30267599" target="_blank" rel="noopener">科研相机选择：sCMOS还是CCD？ - 知乎</a><br><a href="https://baike.baidu.com/item/CCD%20%E7%85%A7%E7%9B%B8%E6%9C%BA" target="_blank" rel="noopener">CCD 照相机_百度百科</a><br>机器视觉就是用机器代替人眼来做测量和判断。机器视觉系统是通过机器视觉产品（即图像摄取装置，分CMOS和CCD两种）将被摄取目标转换成图像信号，传送给专用的图像处理系统，得到被摄目标的形态信息，根据像素分布和亮度、颜色等信息，转变成数字化信号;图像系统对这些信号进行各种运算来抽取目标的特征，进而根据判别的结果来控制现场的设备动作。</p>
+<p><a href="http://xueshu.baidu.com/usercenter/paper/show?paperid=58a7271c8cc12651c75dd66c87183cfd" target="_blank" rel="noopener">激光三维位移监测装置的研究_百度学术</a></p>
+<ol>
+<li>基于机器视觉和激光技术的相对位移测量装置有效克服了位移非直线变形的弊病，利用激光成像技术实现了相对位置变形的确定，可以测量灾害体在三维空间上的位移变化量 </li>
+<li>反射后激光光线的接收和对比，以确定位移变化量。激光三维位移测量装置由发射模块和接收模块两部分组成，发射模块主要为带有两个有一定夹角的点激光发射管，在测量时发射两条激光线。接收模块由一块白色PVC板和摄像镜头组成，用来实现</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E7%8E%AF%E5%A2%83/%E7%A8%8B%E5%BA%8F%E5%8D%95%E8%AF%8D%E5%85%B1%E7%8E%B0%E7%9F%A9%E9%98%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E7%8E%AF%E5%A2%83/%E7%A8%8B%E5%BA%8F%E5%8D%95%E8%AF%8D%E5%85%B1%E7%8E%B0%E7%9F%A9%E9%98%B5/" class="post-title-link" itemprop="url">程序单词共现矩阵</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-12-24 03:54:00" itemprop="dateCreated datePublished" datetime="2018-12-24T03:54:00+08:00">2018-12-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%A4%A7%E6%95%B0%E6%8D%AE-%E7%8E%AF%E5%A2%83/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_分布式/大数据/环境</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E7%8E%AF%E5%A2%83/%E7%A8%8B%E5%BA%8F%E5%8D%95%E8%AF%8D%E5%85%B1%E7%8E%B0%E7%9F%A9%E9%98%B5/" class="post-meta-item leancloud_visitors" data-flag-title="程序单词共现矩阵" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>255</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年12月24日 下午3:54</p>
+<ol>
+<li>wordCount,矩阵乘法：<a href="http://www.aboutyun.com/thread-11770-1-1.html" target="_blank" rel="noopener">MapReduce 基础算法程序设计(1)-Mapreduce-about云开发</a></li>
+<li>关系代数运算：<a href="http://www.aboutyun.com/thread-11832-1-1.html" target="_blank" rel="noopener">MapReduce 基础算法程序设计(2)-Mapreduce-about云开发</a></li>
+<li>单词共现：<a href="http://www.aboutyun.com/thread-12225-1-1.html" target="_blank" rel="noopener">MapReduce 基础算法程序设计(3)：单词共现算法-Mapreduce-about云开发</a></li>
+</ol>
+<p>参考的文章：<br><a href="https://blog.csdn.net/nianyuweiwei/article/details/50491806" target="_blank" rel="noopener">MapReduce算法设计－计算单词共现矩阵 - nianyuweiwei的专栏 - CSDN博客</a><br>讲原理的文章：<br><a href="https://cloud.tencent.com/developer/article/1085508" target="_blank" rel="noopener">每周学点大数据 | No.39单词共现矩阵计 - 云+社区 - 腾讯云</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1277,7 +1289,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-count">1157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

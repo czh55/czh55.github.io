@@ -158,356 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%94%B6%E8%8E%B7%E5%9C%B0%E5%9D%80%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%94%B6%E8%8E%B7%E5%9C%B0%E5%9D%80%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/" class="post-title-link" itemprop="url">收获地址管理模块</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-27 07:57:00" itemprop="dateCreated datePublished" datetime="2018-02-27T07:57:00+08:00">2018-02-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%94%B6%E8%8E%B7%E5%9C%B0%E5%9D%80%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/" class="post-meta-item leancloud_visitors" data-flag-title="收获地址管理模块" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>382</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月27日 下午7:57</p>
-<h2 id="学习目标："><a href="#学习目标：" class="headerlink" title="学习目标："></a>学习目标：</h2><ol>
-<li><p>SpringMVC数据绑定中对象的绑定</p>
-<ol>
-<li><strong>解析：</strong>我们一般从URL映射到controller之后，controller拿到的参数就是我们URL中的名字，但是我们却又办法能让URL中传来的多个参数，最后然controller通过一个<strong>合体的对象</strong>来获取</li>
-<li>不用问为啥，这就是框架的作用！<br><img src="/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%94%B6%E8%8E%B7%E5%9C%B0%E5%9D%80%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/43F5DAE9-D632-409A-B553-4E44261F9258.png" alt></li>
-</ol>
-</li>
-<li><p>mybatis自动生成主键，配置和使用</p>
-<ol>
-<li><strong>解析：</strong>本身我们在insert动作的时候是不知道id的值得，这个值是mysql自动递增配置的，那么，现在的问题是:我们如何拿到这个mysql自动生成的id？</li>
-<li><strong>方法：</strong>在shippingMapper.xml中配置。不要问为啥，就是这么神奇！<br><img src="/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%94%B6%E8%8E%B7%E5%9C%B0%E5%9D%80%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/6B82D8BD-5333-4366-816B-C82EC5B105DB.png" alt></li>
-<li><strong>使用：</strong>shippingServiceImpl.java<br><img src="/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%94%B6%E8%8E%B7%E5%9C%B0%E5%9D%80%E7%AE%A1%E7%90%86%E6%A8%A1%E5%9D%97/43EBDBCF-B2D6-48BC-94EA-D171CFC95420.png" alt></li>
-</ol>
-</li>
-<li><p>如何避免横向越权漏洞的巩固</p>
-<ol>
-<li><strong>原则：</strong>一定要保证userid是从session中获取及一定没有问题，不要使用URL中传来的userid</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/" class="post-title-link" itemprop="url">文件上传（文件夹上传,多文件上传）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-26 11:25:00" itemprop="dateCreated datePublished" datetime="2018-02-26T11:25:00+08:00">2018-02-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="文件上传（文件夹上传,多文件上传）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月26日 上午11:25</p>
-<h2 id="配置："><a href="#配置：" class="headerlink" title="配置："></a>配置：</h2><p>Dispatcher-servlet.xml<br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/7913EA67-913C-41BB-8A25-A2F3A340B730.png" alt></p>
-<p>ProductManageController.java<br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/FF9A8E2E-906B-4314-AEFC-9C4082EE5B29.png" alt></p>
-<p>inidex.jsp<br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/852183B6-3E7B-4FF7-9A8E-0CD32FA65AFB.png" alt></p>
-<h2 id="具体实现代码："><a href="#具体实现代码：" class="headerlink" title="具体实现代码："></a>具体实现代码：</h2><h3 id="Service"><a href="#Service" class="headerlink" title="Service:"></a>Service:</h3><p>FileServiceImpl.java<br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/F44A9618-3CDC-449D-9E4A-D45626E7D917.png" alt><br>具体代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mmall.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.google.common.collect.Lists;</span><br><span class="line"><span class="keyword">import</span> com.mmall.service.IFileService;</span><br><span class="line"><span class="keyword">import</span> com.mmall.util.FTPUtil;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.multipart.MultipartFile;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.UUID;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by geely</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Service</span>(<span class="string">"iFileService"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FileServiceImpl</span> <span class="keyword">implements</span> <span class="title">IFileService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Logger logger = LoggerFactory.getLogger(FileServiceImpl<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">upload</span><span class="params">(MultipartFile file,String path)</span></span>&#123;</span><br><span class="line">        String fileName = file.getOriginalFilename();</span><br><span class="line">        <span class="comment">//扩展名</span></span><br><span class="line">        <span class="comment">//abc.jpg</span></span><br><span class="line">        String fileExtensionName = fileName.substring(fileName.lastIndexOf(<span class="string">"."</span>)+<span class="number">1</span>);</span><br><span class="line">        String uploadFileName = UUID.randomUUID().toString()+<span class="string">"."</span>+fileExtensionName;</span><br><span class="line">        logger.info(<span class="string">"开始上传文件,上传文件的文件名:&#123;&#125;,上传的路径:&#123;&#125;,新文件名:&#123;&#125;"</span>,fileName,path,uploadFileName);</span><br><span class="line"></span><br><span class="line">        File fileDir = <span class="keyword">new</span> File(path);</span><br><span class="line">        <span class="keyword">if</span>(!fileDir.exists())&#123;</span><br><span class="line">            fileDir.setWritable(<span class="keyword">true</span>);</span><br><span class="line">            fileDir.mkdirs();</span><br><span class="line">        &#125;</span><br><span class="line">        File targetFile = <span class="keyword">new</span> File(path,uploadFileName);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            file.transferTo(targetFile);</span><br><span class="line">            <span class="comment">//文件已经上传成功了</span></span><br><span class="line">            FTPUtil.uploadFile(Lists.newArrayList(targetFile));</span><br><span class="line">            <span class="comment">//已经上传到ftp服务器上</span></span><br><span class="line"></span><br><span class="line">            targetFile.delete();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            logger.error(<span class="string">"上传文件异常"</span>,e);</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//A:abc.jpg</span></span><br><span class="line">        <span class="comment">//B:abc.jpg</span></span><br><span class="line">        <span class="keyword">return</span> targetFile.getName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注：<a href="http://blog.csdn.net/jaryle/article/details/72822667" target="_blank" rel="noopener">transferto()方法，是springmvc封装的方法，用于图片上传时，把内存中图片写入磁盘 - CSDN博客</a></p>
-<h3 id="Util"><a href="#Util" class="headerlink" title="Util:"></a>Util:</h3><p>FTPUtil.java<br>四部分组成：<br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/DFE3AB2A-2617-46DB-BAF8-1E46B0A385BF.png" alt><br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/8D8D7F8B-0DDD-4CE0-B510-7CE9C0B30C2A.png" alt><br>具体代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mmall.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.net.ftp.FTPClient;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by geely</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FTPUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span>  <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(FTPUtil<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String ftpIp = PropertiesUtil.getProperty(<span class="string">"ftp.server.ip"</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String ftpUser = PropertiesUtil.getProperty(<span class="string">"ftp.user"</span>);</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> String ftpPass = PropertiesUtil.getProperty(<span class="string">"ftp.pass"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FTPUtil</span><span class="params">(String ip,<span class="keyword">int</span> port,String user,String pwd)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ip = ip;</span><br><span class="line">        <span class="keyword">this</span>.port = port;</span><br><span class="line">        <span class="keyword">this</span>.user = user;</span><br><span class="line">        <span class="keyword">this</span>.pwd = pwd;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">uploadFile</span><span class="params">(List&lt;File&gt; fileList)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        FTPUtil ftpUtil = <span class="keyword">new</span> FTPUtil(ftpIp,<span class="number">21</span>,ftpUser,ftpPass);</span><br><span class="line">        logger.info(<span class="string">"开始连接ftp服务器"</span>);</span><br><span class="line">        <span class="keyword">boolean</span> result = ftpUtil.uploadFile(<span class="string">"img"</span>,fileList);</span><br><span class="line">        logger.info(<span class="string">"开始连接ftp服务器,结束上传,上传结果:&#123;&#125;"</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">uploadFile</span><span class="params">(String remotePath,List&lt;File&gt; fileList)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> uploaded = <span class="keyword">true</span>;</span><br><span class="line">        FileInputStream fis = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//连接FTP服务器</span></span><br><span class="line">        <span class="keyword">if</span>(connectServer(<span class="keyword">this</span>.ip,<span class="keyword">this</span>.port,<span class="keyword">this</span>.user,<span class="keyword">this</span>.pwd))&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                ftpClient.changeWorkingDirectory(remotePath);</span><br><span class="line">                ftpClient.setBufferSize(<span class="number">1024</span>);</span><br><span class="line">                ftpClient.setControlEncoding(<span class="string">"UTF-8"</span>);</span><br><span class="line">                ftpClient.setFileType(FTPClient.BINARY_FILE_TYPE);</span><br><span class="line">                ftpClient.enterLocalPassiveMode();</span><br><span class="line">                <span class="keyword">for</span>(File fileItem : fileList)&#123;</span><br><span class="line">                    fis = <span class="keyword">new</span> FileInputStream(fileItem);</span><br><span class="line">                    ftpClient.storeFile(fileItem.getName(),fis);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">                logger.error(<span class="string">"上传文件异常"</span>,e);</span><br><span class="line">                uploaded = <span class="keyword">false</span>;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                fis.close();</span><br><span class="line">                ftpClient.disconnect();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> uploaded;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">connectServer</span><span class="params">(String ip,<span class="keyword">int</span> port,String user,String pwd)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">boolean</span> isSuccess = <span class="keyword">false</span>;</span><br><span class="line">        ftpClient = <span class="keyword">new</span> FTPClient();</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ftpClient.connect(ip);</span><br><span class="line">            isSuccess = ftpClient.login(user,pwd);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">            logger.error(<span class="string">"连接FTP服务器异常"</span>,e);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> isSuccess;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String ip;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> port;</span><br><span class="line">    <span class="keyword">private</span> String user;</span><br><span class="line">    <span class="keyword">private</span> String pwd;</span><br><span class="line">    <span class="keyword">private</span> FTPClient ftpClient;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getIp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ip;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setIp</span><span class="params">(String ip)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ip = ip;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPort</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> port;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPort</span><span class="params">(<span class="keyword">int</span> port)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.port = port;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUser</span><span class="params">(String user)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.user = user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getPwd</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pwd;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPwd</span><span class="params">(String pwd)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pwd = pwd;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> FTPClient <span class="title">getFtpClient</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> ftpClient;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFtpClient</span><span class="params">(FTPClient ftpClient)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.ftpClient = ftpClient;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E8%B4%AD%E7%89%A9%E8%BD%A6%E6%A8%A1%E5%9D%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E8%B4%AD%E7%89%A9%E8%BD%A6%E6%A8%A1%E5%9D%97/" class="post-title-link" itemprop="url">购物车模块</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-26 11:18:00" itemprop="dateCreated datePublished" datetime="2018-02-26T11:18:00+08:00">2018-02-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E8%B4%AD%E7%89%A9%E8%BD%A6%E6%A8%A1%E5%9D%97/" class="post-meta-item leancloud_visitors" data-flag-title="购物车模块" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月26日 下午11:18</p>
-<ol>
-<li>购物车模块的设计思想<ol>
-<li><strong>核心就是利用vo</strong>，vo可以理解成是对Pojo的根据实际需要的再次封装，vo可能比pojo变量多，或者少，但是他们俩的本质是一样的，<strong>都是实体</strong></li>
-<li>在购物车中vo中使用了<strong>组合</strong>关系。一个vo(CarVo)包含另一个vo(carProductVo)作为变量</li>
-<li>最后返回的responseService中的data就是CarVo对象<br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E8%B4%AD%E7%89%A9%E8%BD%A6%E6%A8%A1%E5%9D%97/D3160812-ED89-4312-9A34-75B765291A70.png" alt></li>
-</ol>
-</li>
-<li>如何封装一个高复用的购物车核心方法<ol>
-<li>重要的原因：<ol>
-<li>因为所有的操作都要返回数据库的情况，所以特别重要</li>
-</ol>
-</li>
-<li><strong>具体的解释直接看代码中的注释：</strong><br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E8%B4%AD%E7%89%A9%E8%BD%A6%E6%A8%A1%E5%9D%97/33EFEA0C-D109-4A04-91A8-267A9FD18FB8.png" alt><br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E8%B4%AD%E7%89%A9%E8%BD%A6%E6%A8%A1%E5%9D%97/B318C753-BBBA-4EF9-89B7-2DC95D9C3446.png" alt><br>注:代码在附录中1</li>
-</ol>
-</li>
-<li>解决浮点型商业运算中丢失精度的问题<ol>
-<li>问题是：<br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E8%B4%AD%E7%89%A9%E8%BD%A6%E6%A8%A1%E5%9D%97/52D4E702-3720-4A3E-8C2A-FB8A567D9031.png" alt></li>
-<li>解决方法：<ol>
-<li>使用BigDecimal的String构造器。</li>
-<li><strong>一定是String构造器</strong></li>
-<li>具体看附录中的代码2</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h2><p>代码1：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//概述：将cartList加工到cartProductVoList。从cartProductVoList.add(cartProductVo);这话就可以看出来</span></span><br><span class="line">      <span class="keyword">if</span>(CollectionUtils.isNotEmpty(cartList))&#123;</span><br><span class="line">          <span class="keyword">for</span>(Cart cartItem : cartList)&#123;</span><br><span class="line">              CartProductVo cartProductVo = <span class="keyword">new</span> CartProductVo();</span><br><span class="line">              cartProductVo.setId(cartItem.getId());</span><br><span class="line">              cartProductVo.setUserId(userId);</span><br><span class="line">              cartProductVo.setProductId(cartItem.getProductId());</span><br><span class="line"></span><br><span class="line">              Product product = productMapper.selectByPrimaryKey(cartItem.getProductId());</span><br><span class="line">              <span class="keyword">if</span>(product != <span class="keyword">null</span>)&#123;</span><br><span class="line">                  cartProductVo.setProductMainImage(product.getMainImage());</span><br><span class="line">                  cartProductVo.setProductName(product.getName());</span><br><span class="line">                  cartProductVo.setProductSubtitle(product.getSubtitle());</span><br><span class="line">                  cartProductVo.setProductStatus(product.getStatus());</span><br><span class="line">                  cartProductVo.setProductPrice(product.getPrice());</span><br><span class="line">                  cartProductVo.setProductStock(product.getStock());</span><br><span class="line">                  <span class="comment">//判断库存</span></span><br><span class="line">                  <span class="keyword">int</span> buyLimitCount = <span class="number">0</span>;</span><br><span class="line">                  <span class="keyword">if</span>(product.getStock() &gt;= cartItem.getQuantity())&#123;</span><br><span class="line">                      <span class="comment">//库存充足的时候</span></span><br><span class="line">                      buyLimitCount = cartItem.getQuantity();</span><br><span class="line">                      cartProductVo.setLimitQuantity(Const.Cart.LIMIT_NUM_SUCCESS);</span><br><span class="line">                  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                      buyLimitCount = product.getStock();</span><br><span class="line">                      cartProductVo.setLimitQuantity(Const.Cart.LIMIT_NUM_FAIL);</span><br><span class="line">                      <span class="comment">//购物车中更新有效库存</span></span><br><span class="line">                      Cart cartForQuantity = <span class="keyword">new</span> Cart();</span><br><span class="line">                      cartForQuantity.setId(cartItem.getId());</span><br><span class="line">                      cartForQuantity.setQuantity(buyLimitCount);</span><br><span class="line">                      cartMapper.updateByPrimaryKeySelective(cartForQuantity);</span><br><span class="line">                  &#125;</span><br><span class="line">                  cartProductVo.setQuantity(buyLimitCount);</span><br><span class="line">                  <span class="comment">//计算总价</span></span><br><span class="line">                  cartProductVo.setProductTotalPrice(BigDecimalUtil.mul(product.getPrice().doubleValue(),cartProductVo.getQuantity()));</span><br><span class="line">                  cartProductVo.setProductChecked(cartItem.getChecked());</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="keyword">if</span>(cartItem.getChecked() == Const.Cart.CHECKED)&#123;</span><br><span class="line">                  <span class="comment">//如果已经勾选,增加到整个的购物车总价中</span></span><br><span class="line">                  cartTotalPrice = BigDecimalUtil.add(cartTotalPrice.doubleValue(),cartProductVo.getProductTotalPrice().doubleValue());</span><br><span class="line">              &#125;</span><br><span class="line">              <span class="comment">//这句话说明了这个段代码的最终目的</span></span><br><span class="line">              cartProductVoList.add(cartProductVo);</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//我们上面生成的cartTotalPrice对象是cartVo对象其中的一个变量。并且我们还要在carVo设置一些特有的属性eg总价，是否全选，imagehost的文件名</span></span><br><span class="line">      cartVo.setCartTotalPrice(cartTotalPrice);</span><br><span class="line">      cartVo.setCartProductVoList(cartProductVoList);</span><br><span class="line">      cartVo.setAllChecked(<span class="keyword">this</span>.getAllCheckedStatus(userId));</span><br><span class="line">      cartVo.setImageHost(PropertiesUtil.getProperty(<span class="string">"ftp.server.http.prefix"</span>));</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> cartVo;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">getAllCheckedStatus</span><span class="params">(Integer userId)</span></span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(userId == <span class="keyword">null</span>)&#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> cartMapper.selectCartProductCheckedStatusByUserId(userId) == <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-<p>代码二：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mmall.util;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.math.BigDecimal;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by geely</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BigDecimalUtil</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">BigDecimalUtil</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BigDecimal <span class="title">add</span><span class="params">(<span class="keyword">double</span> v1,<span class="keyword">double</span> v2)</span></span>&#123;</span><br><span class="line">        BigDecimal b1 = <span class="keyword">new</span> BigDecimal(Double.toString(v1));</span><br><span class="line">        BigDecimal b2 = <span class="keyword">new</span> BigDecimal(Double.toString(v2));</span><br><span class="line">        <span class="keyword">return</span> b1.add(b2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BigDecimal <span class="title">sub</span><span class="params">(<span class="keyword">double</span> v1,<span class="keyword">double</span> v2)</span></span>&#123;</span><br><span class="line">        BigDecimal b1 = <span class="keyword">new</span> BigDecimal(Double.toString(v1));</span><br><span class="line">        BigDecimal b2 = <span class="keyword">new</span> BigDecimal(Double.toString(v2));</span><br><span class="line">        <span class="keyword">return</span> b1.subtract(b2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BigDecimal <span class="title">mul</span><span class="params">(<span class="keyword">double</span> v1,<span class="keyword">double</span> v2)</span></span>&#123;</span><br><span class="line">        BigDecimal b1 = <span class="keyword">new</span> BigDecimal(Double.toString(v1));</span><br><span class="line">        BigDecimal b2 = <span class="keyword">new</span> BigDecimal(Double.toString(v2));</span><br><span class="line">        <span class="keyword">return</span> b1.multiply(b2);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> BigDecimal <span class="title">div</span><span class="params">(<span class="keyword">double</span> v1,<span class="keyword">double</span> v2)</span></span>&#123;</span><br><span class="line">        BigDecimal b1 = <span class="keyword">new</span> BigDecimal(Double.toString(v1));</span><br><span class="line">        BigDecimal b2 = <span class="keyword">new</span> BigDecimal(Double.toString(v2));</span><br><span class="line">        <span class="keyword">return</span> b1.divide(b2,<span class="number">2</span>,BigDecimal.ROUND_HALF_UP);<span class="comment">//四舍五入,保留2位小数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//除不尽的情况</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/web%E8%AF%B7%E6%B1%82%E8%AE%BF%E9%97%AE%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AE%B2%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1257,6 +907,344 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/myBatis-generator%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/myBatis-generator%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">myBatis-generator理解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-25 07:28:00" itemprop="dateCreated datePublished" datetime="2018-02-25T07:28:00+08:00">2018-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/myBatis-generator%E7%90%86%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="myBatis-generator理解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>445</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月25日 下午7:28</p>
+<ol>
+<li>首先，需要说明的是：myBatis-generator只是再mybatis的基础上使之<strong>自动化</strong>。</li>
+<li>自动化的内容有：<ol>
+<li>自动生成resource_mappers_*Mapper.xml</li>
+<li>自动生成pojo/下各种与数据表直接对应的java实体类</li>
+<li>自动生成dao/*Mapper.java接口类，用于执行sql语句<ol>
+<li><strong>这点可以说是myBatis-generator最新颖的地方</strong></li>
+<li>我们最原始的mybatis方式是使用sqlSession对象去执行具体的sql语句</li>
+<li>但在myBatis-generator中sqlSession就像不存在一样，对于用户来说就暴露了一个dao/<strong>Mapper.java接口类，</strong>通过接口类去执行需要的sql语句*</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p>这里可以参考<a href="bear://x-callback-url/open-note?id=52A415C6-658D-4883-B590-7DA8D13D2CF3-2468-00004231FD9F8D93">mybatis 三剑客</a></p>
+<h2 id="使用SpringMVC之后，融合myBatis-generator的方式"><a href="#使用SpringMVC之后，融合myBatis-generator的方式" class="headerlink" title="使用SpringMVC之后，融合myBatis-generator的方式"></a>使用SpringMVC之后，融合myBatis-generator的方式</h2><p>在<a href="bear://x-callback-url/open-note?id=55CC692B-9A3F-4AC2-9EC2-A9D1E7E5BF9F-2468-0000E99ACBAF2004">MyBatis使用和配置详解</a>中我们知道，sqlSession这个对象是用是最终要用于执行sql语句的对象，但在myBatis-generator<br><img src="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/myBatis-generator%E7%90%86%E8%A7%A3/2FC31AB6-CC46-4A34-A077-99E0C3283629.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">MyBatis使用和配置详解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-25 06:57:00" itemprop="dateCreated datePublished" datetime="2018-02-25T06:57:00+08:00">2018-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%AB%98%E7%BA%A7/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/高级</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="MyBatis使用和配置详解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月25日 下午6:57</p>
+<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p>MyBatis的重要依赖包</p>
+<ol>
+<li>myBatis-3.2.3.jar</li>
+<li>Mysql-connector-java-5.1.34.jar<br>配置文件(xml)</li>
+<li>TeacherMapper.xml</li>
+<li>StudentMapper.xml</li>
+<li>Reource.xml<br><img src="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/F8FAA557-903C-425D-A1BB-ED2ADE8CCAF5.png" alt></li>
+</ol>
+<h2 id="配置文件详解："><a href="#配置文件详解：" class="headerlink" title="配置文件详解："></a>配置文件详解：</h2><h3 id="TeacherMapper-xml"><a href="#TeacherMapper-xml" class="headerlink" title="TeacherMapper.xml"></a>TeacherMapper.xml</h3><p><img src="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/A127B611-1B38-4B40-9F20-935EDA4327D7.png" alt><br>解析：</p>
+<ol>
+<li><strong>本质：将sql语句与代码进行分离，方便管理</strong></li>
+<li>绿色：是命名空间，<strong>是找到TeacherMapper.xml的关键标识</strong>，对应于测试代码<code>TeacherEntity teacherEntity=sqlSession.selectOne(&quot;teacher.selectTeacherOne&quot;, &quot;804”);</code>中的teacher</li>
+<li>红色<resultMap>：是一个对应于*Entity.java实体的xml表示</resultMap></li>
+<li>红色<select>：是具体的sql的xml表示<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">PUBLIC <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- namespace空间名称 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"teacher"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">cache</span>&gt;</span><span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- resultMap表示结果集 ，type表示对应的类，id表示当前标签的名称--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"com.pan.teacher.TeacherEntity"</span> <span class="attr">id</span>=<span class="string">"teacher"</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- id标签表示当前要对应的表的主键 --&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- column表示表中的列(字段)， property表示类中的属性--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"t_id"</span> <span class="attr">property</span>=<span class="string">"t_id"</span> /&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- result表示当前表中除主键外的其他列 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"t_name"</span> <span class="attr">property</span>=<span class="string">"t_name"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"t_sex"</span> <span class="attr">property</span>=<span class="string">"t_sex"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"t_birthday"</span> <span class="attr">property</span>=<span class="string">"t_birthday"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"prof"</span> <span class="attr">property</span>=<span class="string">"prof"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"depart"</span> <span class="attr">property</span>=<span class="string">"depart"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"studentList"</span> <span class="attr">column</span>=<span class="string">"t_id"</span> <span class="attr">select</span>=<span class="string">"com.pan.test.StudentEntity.selectByT_id"</span>&gt;</span><span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectTeacherOne"</span> <span class="attr">parameterType</span>=<span class="string">"string"</span> <span class="attr">resultMap</span>=<span class="string">"teacher"</span>&gt;</span></span><br><span class="line">		select * from teacher where t_id=#&#123;t_id&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</select></li>
+</ol>
+<h3 id="source-xml"><a href="#source-xml" class="headerlink" title="source.xml"></a>source.xml</h3><p><img src="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/193B2971-DC24-410C-97EA-9FBA1C0A3A78.png" alt><br>解析：</p>
+<ol>
+<li>红色：是连接数据库的各种配置信息，用于登录数据库</li>
+<li><strong>绿色<mapper>：是用于声明项目中实体类对应的xml配置文件有哪些</mapper></strong>。</li>
+</ol>
+<h2 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h2><p>本质就是对应于数据库表字段的get，set方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pan.teacher;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pan.test.StudentEntity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherEntity</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line">	<span class="keyword">private</span> String t_id;</span><br><span class="line">	<span class="keyword">private</span> String t_name;</span><br><span class="line">	<span class="keyword">private</span> String t_sex;</span><br><span class="line">	<span class="keyword">private</span> String t_birthday;</span><br><span class="line">	<span class="keyword">private</span> String prof;</span><br><span class="line">	<span class="keyword">private</span> String depart;</span><br><span class="line">	<span class="keyword">private</span> List&lt;StudentEntity&gt; studentList;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getT_id</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> t_id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setT_id</span><span class="params">(String t_id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.t_id = t_id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getT_name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> t_name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setT_name</span><span class="params">(String t_name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.t_name = t_name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getT_sex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> t_sex;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setT_sex</span><span class="params">(String t_sex)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.t_sex = t_sex;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getT_birthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> t_birthday;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setT_birthday</span><span class="params">(String t_birthday)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.t_birthday = t_birthday;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getProf</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> prof;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setProf</span><span class="params">(String prof)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.prof = prof;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getDepart</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> depart;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDepart</span><span class="params">(String depart)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.depart = depart;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;StudentEntity&gt; <span class="title">getStudentList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> studentList;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStudentList</span><span class="params">(List&lt;StudentEntity&gt; studentList)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.studentList = studentList;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p><img src="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/43272A96-0882-4A56-826C-D5D23F8AA973.png" alt></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pan.teacher;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.Reader;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.io.Resources;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSession;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pan.test.StudentEntity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//读取myBatis的核心配置文件</span></span><br><span class="line">		Reader reader=Resources.getResourceAsReader(<span class="string">"reource.xml"</span>);</span><br><span class="line">		<span class="comment">//创建二级缓存</span></span><br><span class="line">		SqlSessionFactory sessionFactory=<span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">		<span class="comment">//创建一级缓存</span></span><br><span class="line">		SqlSession sqlSession=sessionFactory.openSession();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//-------------------级联查询----------------</span></span><br><span class="line">		<span class="comment">//注意：在myBatis中只有级联查询，没有级联增删改</span></span><br><span class="line">		TeacherEntity teacherEntity=sqlSession.selectOne(<span class="string">"teacher.selectTeacherOne"</span>, <span class="string">"804"</span>);</span><br><span class="line">		System.out.println(teacherEntity.getT_name());</span><br><span class="line">		List&lt;StudentEntity&gt; list=teacherEntity.getStudentList();</span><br><span class="line">		System.out.println(list.size());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/java%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%BC%94%E8%BF%9B%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/java%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%BC%94%E8%BF%9B%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">java连接数据库的演进过程</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-25 06:10:00" itemprop="dateCreated datePublished" datetime="2018-02-25T06:10:00+08:00">2018-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/java%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%BC%94%E8%BF%9B%E8%BF%87%E7%A8%8B/" class="post-meta-item leancloud_visitors" data-flag-title="java连接数据库的演进过程" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>185</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月25日 下午6:10</p>
+<p>JDBC：<br><a href="bear://x-callback-url/open-note?id=685E3B88-BB6F-430B-8082-24A7BD7473EF-2779-000009EBF22633BB">JDBC，通过属性配置文件封装DbUtiles类</a></p>
+<p>连接池：<br><a href="bear://x-callback-url/open-note?id=69A28996-5973-42D6-82BA-D8D817CFE503-2779-000009EC16AF3B64">两种数据库连接池 （2017/9/5）</a><br><a href="http://blog.csdn.net/yegshun/article/details/78139411" target="_blank" rel="noopener">C3P0连接池配置和实现详解 - CSDN博客</a><br><a href="http://www.cnblogs.com/sunseine/p/5947448.html" target="_blank" rel="noopener">DBCP数据库连接池的简单使用 - sunseine - 博客园</a></p>
+<p>mybatis:<br><a href="bear://x-callback-url/open-note?id=55CC692B-9A3F-4AC2-9EC2-A9D1E7E5BF9F-2468-0000E99ACBAF2004">MyBatis使用和配置详解</a></p>
+<p>mybatis-generator：<br><a href="bear://x-callback-url/open-note?id=5D5AD021-FC52-4E28-B7D6-F0146507F6A9-2468-0000EB5165485C54">myBatis-generator理解</a><br><a href="bear://x-callback-url/open-note?id=52A415C6-658D-4883-B590-7DA8D13D2CF3-2468-00004231FD9F8D93">mybatis 三剑客</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1327,7 +1315,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-count">1157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

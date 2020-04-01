@@ -158,463 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Linux%E4%B8%AD%E7%9A%84%E5%AE%9A%E6%97%B6%E8%87%AA%E5%8A%A8%E6%89%A7%E8%A1%8C%E5%8A%9F%E8%83%BD%EF%BC%88at,crontab%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Linux%E4%B8%AD%E7%9A%84%E5%AE%9A%E6%97%B6%E8%87%AA%E5%8A%A8%E6%89%A7%E8%A1%8C%E5%8A%9F%E8%83%BD%EF%BC%88at,crontab%EF%BC%89/" class="post-title-link" itemprop="url">Linux中的定时自动执行功能（at,crontab）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-01 06:27:00" itemprop="dateCreated datePublished" datetime="2019-11-01T06:27:00+08:00">2019-11-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Linux%E4%B8%AD%E7%9A%84%E5%AE%9A%E6%97%B6%E8%87%AA%E5%8A%A8%E6%89%A7%E8%A1%8C%E5%8A%9F%E8%83%BD%EF%BC%88at,crontab%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="Linux中的定时自动执行功能（at,crontab）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>146</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年11月1日 下午6:27</p>
-<p><a href="https://www.cnblogs.com/telwanggs/p/11547398.html" target="_blank" rel="noopener">Linux中的定时自动执行功能（at,crontab） - 疯子110 - 博客园</a></p>
-<p><img src="/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Linux%E4%B8%AD%E7%9A%84%E5%AE%9A%E6%97%B6%E8%87%AA%E5%8A%A8%E6%89%A7%E8%A1%8C%E5%8A%9F%E8%83%BD%EF%BC%88at,crontab%EF%BC%89/91AFE597-B6A6-4484-9FC2-CDD7BB36BEF8.png" alt></p>
-<ol>
-<li>对于shell记得修改777权限</li>
-<li>使用at命令，注意以Ctrl+d结束</li>
-<li>查看当前at命令：<code>atq</code></li>
-<li>取消命令 <code>atrm 堆栈号</code></li>
-</ol>
-<h4 id="example"><a href="#example" class="headerlink" title="example"></a>example</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">at now+3minutes</span><br><span class="line">.&#x2F;run.sh</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/shell(%E5%AE%9E%E4%BE%8B%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96dl%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/shell(%E5%AE%9E%E4%BE%8B%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96dl%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95)/" class="post-title-link" itemprop="url">shell(实例完成自动化dl模型测试)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-01 05:39:00" itemprop="dateCreated datePublished" datetime="2019-11-01T05:39:00+08:00">2019-11-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/shell(%E5%AE%9E%E4%BE%8B%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96dl%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95)/" class="post-meta-item leancloud_visitors" data-flag-title="shell(实例完成自动化dl模型测试)" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年11月1日 下午5:39</p>
-<h3 id="目标："><a href="#目标：" class="headerlink" title="目标："></a>目标：</h3><p>实现自动化测试深度学习训练出来的模型</p>
-<h3 id="实现方式："><a href="#实现方式：" class="headerlink" title="实现方式："></a>实现方式：</h3><ol>
-<li>这其中涉及到expect的安装和使用：用来<strong>自动化交互过程</strong><ol>
-<li><a href="https://blog.csdn.net/XIANZHIXIANZHIXIAN/article/details/79414094" target="_blank" rel="noopener">shell脚本传参实现scp命令无需输入密码和别的参数</a></li>
-<li><a href="https://www.cnblogs.com/saneri/p/10819348.html" target="_blank" rel="noopener">Linux expect 介绍和用法 - 梦徒 - 博客园</a></li>
-<li><a href="https://www.cnblogs.com/f-ck-need-u/p/7542210.html" target="_blank" rel="noopener">expect实现scp/ssh-copy-id非交互 - 骏马金龙 - 博客园</a></li>
-</ol>
-</li>
-<li>其中的代码主要是使用shell语言写<ol>
-<li><a href="https://blog.csdn.net/qq_36743482/article/details/78266308" target="_blank" rel="noopener">scp 文件 : /目录: Permission denied</a> 要记得给.sh文件777的权限<ol>
-<li><code>chmod 777 *.sh</code></li>
-</ol>
-</li>
-<li><a href="https://www.cnblogs.com/dylancao/p/9516462.html" target="_blank" rel="noopener">Shell中for循环的几个常用写法 - 虚生 - 博客园</a> for循环</li>
-<li><a href="https://www.cnblogs.com/weijiangbao/p/7862278.html" target="_blank" rel="noopener">判断文件是否存在的shell脚本代码！ - 孤舟点点 - 博客园</a> if 文件判断</li>
-</ol>
-</li>
-</ol>
-<h5 id="auto-test-sh"><a href="#auto-test-sh" class="headerlink" title="auto_test.sh"></a>auto_test.sh</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 定义</span></span><br><span class="line">port=22778</span><br><span class="line">user_ip="zhiheng_chen@210.76.196.61"</span><br><span class="line">dataset="OTB100"</span><br><span class="line">src_path="/data/zhiheng_chen/"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 无限循环</span></span><br><span class="line">while ((1 &gt; 0))</span><br><span class="line">do</span><br><span class="line">        # 循环1~20 的checkpoint</span><br><span class="line">        for i in $(seq 1 20)</span><br><span class="line">        do</span><br><span class="line">                checkpoint_file="checkpoint_e"$i".pth"</span><br><span class="line">                snapshot_checkpoint_file="./snapshot/"$checkpoint_file</span><br><span class="line">                src_file=$src_path$checkpoint_file</span><br><span class="line">                # 如果本地没有这个模型，才执行scp.sh</span><br><span class="line">                if [ ! -f $snapshot_checkpoint_file ]; then</span><br><span class="line">                        # 执行下载和模型检测</span><br><span class="line">                        ./scp.sh $port $user_ip $src_file  $snapshot_checkpoint_file $dataset</span><br><span class="line">                fi</span><br><span class="line">        done</span><br><span class="line">        sleep 3</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<h5 id="scp-sh"><a href="#scp-sh" class="headerlink" title="scp.sh"></a>scp.sh</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/home/chenzhiheng18/installed/bin/expect</span></span><br><span class="line"></span><br><span class="line">set port [lindex $argv 0]</span><br><span class="line">set user_ip [lindex $argv 1]</span><br><span class="line">set src_file [lindex $argv 2]</span><br><span class="line">set snapshot [lindex $argv 3]</span><br><span class="line">set dataset [lindex $argv 4]</span><br><span class="line"></span><br><span class="line">set timeout -1</span><br><span class="line"><span class="meta">#</span><span class="bash"> 打印信息</span></span><br><span class="line">spawn echo "src_file: $src_file"</span><br><span class="line">spawn echo "snapshot: $snapshot"</span><br><span class="line">spawn echo "dataset: $dataset"</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 执行scp</span></span><br><span class="line">spawn scp -P $port -r $user_ip:$src_file ./snapshot/</span><br><span class="line">expect &#123;</span><br><span class="line">        "(yes/no)?" &#123;</span><br><span class="line">                send "yes\n"</span><br><span class="line">                expect "*assword:" &#123;</span><br><span class="line">                        send "chen_gpu\n"</span><br><span class="line">                        # 如果不存在，则直接结束当前bash</span><br><span class="line">                        expect "No such file or directory" &#123;</span><br><span class="line">                                exit</span><br><span class="line">                        &#125;</span><br><span class="line">                        # 执行测试</span><br><span class="line">                        spawn python -u ../../tools/test.py --snapshot $snapshot --dataset $dataset --config config.yaml</span><br><span class="line">                &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        "*assword:" &#123;</span><br><span class="line">                send "chen_gpu\n"</span><br><span class="line">                # 如果不存在，则直接结束当前bash</span><br><span class="line">                expect "No such file or directory" &#123;</span><br><span class="line">                        exit</span><br><span class="line">                &#125;</span><br><span class="line">                # 执行测试</span><br><span class="line">                spawn python -u ../../tools/test.py --snapshot $snapshot --dataset $dataset --config config.yaml</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">expect eof</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/vim%E6%96%B0%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/vim%E6%96%B0%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">vim新学习</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-01 05:38:00" itemprop="dateCreated datePublished" datetime="2019-11-01T05:38:00+08:00">2019-11-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/vim%E6%96%B0%E5%AD%A6%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="vim新学习" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年11月1日 下午5:38</p>
-<p><a href="https://www.cnblogs.com/webStyle/p/4354464.html" target="_blank" rel="noopener">vim全选，全部复制，全部删除 - 星草感觉 - 博客园</a></p>
-<ul>
-<li>“+y  复制选中内容到＋寄存器，也就是系统的剪贴板，供其他程序用</li>
-<li><strong>全部复制：</strong>按esc后，然后ggyG</li>
-<li><strong>全部删除：</strong>按esc后，然后dG</li>
-</ul>
-<p><a href="https://blog.csdn.net/oppo62258801/article/details/79075410" target="_blank" rel="noopener">linux   vi &amp; vim 插入 删除 修改 文本 - 数据之美的博客 - CSDN博客</a></p>
-<h4 id="修改文本字母"><a href="#修改文本字母" class="headerlink" title="修改文本字母"></a>修改文本字母</h4><ol>
-<li>r+字母</li>
-<li>s+n字母</li>
-<li><strong>n+s+n字母</strong><ul>
-<li>替换光标所在位置后面数字指定数量的文本为任意输入文本，与前面一个命令的区别就是替换指定数量的字母</li>
-</ul>
-</li>
-<li>R+n字母<h4 id="修改文本块"><a href="#修改文本块" class="headerlink" title="修改文本块"></a>修改文本块</h4></li>
-<li>c+w</li>
-<li><strong>c+2w</strong></li>
-<li>c+b<ul>
-<li>往前修改一个文本单词，此命令会从光标位置往前删除一个单词，并使 vi 进入插入编辑模式进行文本插入</li>
-</ul>
-</li>
-<li>c+2b<ul>
-<li>往前修改数字指定数量的文本单词，并使 vi 进入插入编辑模式进行文本插入</li>
-</ul>
-</li>
-<li>c+0<ul>
-<li>删除光标位置到行首的所有文本，并使 vi 进入插入编辑模式进行文本插入</li>
-</ul>
-</li>
-<li><strong>c+$</strong>  <ul>
-<li>删除光标位置到行末的所有文本，并使 vi 进入插入编辑模式进行文本插入</li>
-</ul>
-</li>
-</ol>
-<p><a href="https://www.cnblogs.com/laizhenghong2012/p/8964455.html" target="_blank" rel="noopener">Vim使用技巧：撤销与恢复撤销 - wallace-lai - 博客园</a><br>撤销：<code>u</code><br>恢复撤销：<code>Ctrl + r</code></p>
-<p><a href="https://www.cnblogs.com/hangaozu/p/7544325.html" target="_blank" rel="noopener">vim选中字符复制/剪切/粘贴 - 飞雪安能住酒中 - 博客园</a><br><code>ctrl + v</code> + <code>hjkl</code></p>
-<p><a href="https://blog.csdn.net/mokill0911/article/details/27753785" target="_blank" rel="noopener">将vim中内容复制到系统剪贴板</a></p>
-<ul>
-<li>:reg 查看寄存器，可以看到vim自带的剪贴板里的内容， 在安装了gnome后能看到里面新增了一个 + 寄存器，这就是和系统同步的寄存器。</li>
-<li><code>Shift+ v</code> 使用可视化模式，也可以配合光标移动键选择文本。</li>
-</ul>
-<h4 id="全局操作："><a href="#全局操作：" class="headerlink" title="全局操作："></a>全局操作：</h4><ol>
-<li>缩进</li>
-<li>字符串替换：<ul>
-<li><code>:%s/XXX/YYY/g</code> 全局替换</li>
-<li><code>:s/p1/p2/g</code>: 将当前行中所有p1均用p2替代 </li>
-<li><code>:n1,n2s/p1/p2/g</code>: 将第n1至n2行中所有p1均用p2替代</li>
-<li><a href="https://blog.csdn.net/lucyxu107/article/details/84316375" target="_blank" rel="noopener">vim批量替换</a></li>
-</ul>
-</li>
-<li>复制：不是ctr+v<ol>
-<li><code>Shift+ v</code> 使用可视化模式，也可以配合光标移动键选择文本。 </li>
-</ol>
-</li>
-</ol>
-<p><a href="http://www.ruanyifeng.com/blog/2018/09/vimrc.html" target="_blank" rel="noopener">Vim 配置入门 - 阮一峰的网络日志</a></p>
-<ol>
-<li>其实就是在将vim中的set命令，我经常使用的有<code>set nu</code></li>
-<li>还有一些其他的：<ol>
-<li><code>syntax on</code>打开语法高亮。</li>
-<li><code>set encoding=utf-8</code> 设置编码</li>
-<li><strong>缩进</strong><ol>
-<li><code>set autoindent</code><ul>
-<li>按下回车键后，下一行的缩进会自动跟上一行的缩进保持一致。</li>
-</ul>
-</li>
-<li><code>set shiftwidth=4</code><ul>
-<li>在文本上按下&gt;&gt;（增加一级缩进）、&lt;&lt;（取消一级缩进）或者==（取消全部缩进）时，每一级的字符数。</li>
-</ul>
-</li>
-<li><code>set expandtab</code><ul>
-<li>由于 Tab 键在不同的编辑器缩进不一致，该设置自动将 Tab 转为空格。</li>
-</ul>
-</li>
-<li><code>set softtabstop=2</code>Tab 转为多少个空格</li>
-</ol>
-</li>
-<li>外观<ol>
-<li><code>set relativenumber</code><ul>
-<li>显示光标所在的当前行的行号，其他行都为相对于该行的相对行号。</li>
-</ul>
-</li>
-<li><code>set cursorline</code>光标所在的当前行高亮。</li>
-<li><code>set textwidth=80</code> 设置行宽，即一行显示多少个字符。</li>
-<li><code>set  ruler</code>在状态栏显示光标的当前位置（位于哪一行哪一列）</li>
-</ol>
-</li>
-<li>搜索<ol>
-<li><code>set showmatch</code> <ol>
-<li>光标遇到圆括号、方括号、大括号时，自动高亮对应的另一个圆括号、方括号和大括号</li>
-</ol>
-</li>
-<li><code>set hlsearch</code>搜索时，高亮显示匹配结果。</li>
-<li><code>set incsearch</code><ul>
-<li>输入搜索模式时，每输入一个字符，就自动跳到第一个匹配的结果。</li>
-</ul>
-</li>
-<li><code>set ignorecase</code><ul>
-<li>搜索时忽略大小写。</li>
-</ul>
-</li>
-<li><code>set smartcase</code><ul>
-<li>如果同时打开了ignorecase，那么对于只有一个大写字母的搜索词，将大小写敏感；其他情况都是大小写不敏感。比如，搜索Test时，将不匹配test；搜索test时，将匹配Test。</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>编辑<ol>
-<li><code>set spell spelllang=en_us</code>打开英语单词的拼写检查。</li>
-<li><code>set nobackup</code><ol>
-<li>不创建备份文件。默认情况下，文件保存时，会额外创建一个备份文件，它的文件名是在原文件名的末尾，再添加一个波浪号（〜）。</li>
-</ol>
-</li>
-<li><code>set noswapfile</code><ol>
-<li>不创建交换文件。交换文件主要用于系统崩溃时恢复文件，文件名的开头是.、结尾是.swp。</li>
-</ol>
-</li>
-<li><code>set undofile</code><ol>
-<li>保留撤销历史。</li>
-<li>Vim 会在编辑时保存操作历史，用来供用户撤消更改。默认情况下，操作记录只在本次编辑时有效，一旦编辑结束、文件关闭，操作历史就消失了。</li>
-<li>打开这个设置，可以在文件关闭后，操作记录保留在一个文件里面，继续存在。这意味着，重新打开一个文件，可以撤销上一次编辑时的操作。撤消文件是跟原文件保存在一起的隐藏文件，文件名以.un~开头。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set backupdir&#x3D;~&#x2F;.vim&#x2F;.backup&#x2F;&#x2F;  </span><br><span class="line">set directory&#x3D;~&#x2F;.vim&#x2F;.swp&#x2F;&#x2F;</span><br><span class="line">set undodir&#x3D;~&#x2F;.vim&#x2F;.undo&#x2F;&#x2F; </span><br><span class="line">设置备份文件、交换文件、操作历史文件的保存位置。</span><br><span class="line">结尾的&#x2F;&#x2F;表示生成的文件名带有绝对路径，路径中用%替换目录分隔符，这样可以防止文件重名</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-<li><code>set autoread</code><ol>
-<li>打开文件监视。如果在编辑过程中文件发生外部改变（比如被别的编辑器编辑了），就会发出提示。</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/11/01/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/pysot%E4%B8%AD%E6%AF%94%E8%BE%83%E6%9C%89%E4%BB%B7%E5%80%BC%E7%9A%84issue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1482,6 +1025,325 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/10/09/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%B7%A5%E7%A8%8B/vs2015%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/09/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%B7%A5%E7%A8%8B/vs2015%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/" class="post-title-link" itemprop="url">vs2015生成静态库和动态库</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-09 03:55:00" itemprop="dateCreated datePublished" datetime="2019-10-09T03:55:00+08:00">2019-10-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:27:50" itemprop="dateModified" datetime="2020-04-01T15:27:50+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1-%E7%82%B9%E4%BA%91-%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维建模(点云)/工程#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/10/09/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%B7%A5%E7%A8%8B/vs2015%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E5%BA%93%E5%92%8C%E5%8A%A8%E6%80%81%E5%BA%93/" class="post-meta-item leancloud_visitors" data-flag-title="vs2015生成静态库和动态库" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>61</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年10月9日 下午3:55</p>
+<p><a href="https://blog.csdn.net/meccaendless/article/details/80682447" target="_blank" rel="noopener">vs2015+opencv生成DLL并分别静态和动态调用 - 一江明澈的水的专栏 - CSDN博客</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/10/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B%E7%9B%AE%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B%E7%9B%AE%E5%BD%95/" class="post-title-link" itemprop="url">课程目录</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-08 08:56:00" itemprop="dateCreated datePublished" datetime="2019-10-08T08:56:00+08:00">2019-10-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-linux-%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_计算机系统/linux/系统</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/10/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B%E7%9B%AE%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="课程目录" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>16</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年10月8日 下午8:56</p>
+<p><img src="/2019/10/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B%E7%9B%AE%E5%BD%95/7d7b2f705d4877bb331b4ea3ff3450a5.jpg" alt></p>
+<p><img src="/2019/10/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E8%AF%BE%E7%A8%8B%E7%9B%AE%E5%BD%95/%E7%85%A7%E7%89%87%202019%E5%B9%B411%E6%9C%8812%E6%97%A5%20004214.jpg" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/10/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E7%9B%AE%E5%BD%95(linux)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/10/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E7%9B%AE%E5%BD%95(linux)/" class="post-title-link" itemprop="url">目录(linux)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-10-08 08:56:00" itemprop="dateCreated datePublished" datetime="2019-10-08T08:56:00+08:00">2019-10-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 14:54:31" itemprop="dateModified" datetime="2020-04-01T14:54:31+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-linux-%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_计算机系统/linux/系统</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/10/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E7%9B%AE%E5%BD%95(linux)/" class="post-meta-item leancloud_visitors" data-flag-title="目录(linux)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>618</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年10月8日 下午8:56</p>
+<p>2020年3月15日 下午10:58<br><a href="bear://x-callback-url/open-note?id=B7804DAD-9967-4CB1-A270-6B4B61548DC4-14547-0001078F8634B75B">总结复习： 2020年3月15日</a><br><a href="bear://x-callback-url/open-note?id=43F1C31E-F505-41CE-9EF9-1749299944A7-14547-0001083AA6AE2B25">总结操作系统学习步骤</a></p>
+<p>2019年10月8日 下午8:57<br><a href="bear://x-callback-url/open-note?id=7C205ED9-7EFE-4435-A2E5-DFFED4E68EDE-8605-000086902AEBFFAB">课程目录</a></p>
+<p>2020年1月16日 上午11:37</p>
+<h4 id="我觉得这里面最最关键的两个问题是："><a href="#我觉得这里面最最关键的两个问题是：" class="headerlink" title="我觉得这里面最最关键的两个问题是："></a>我觉得这里面最最关键的两个问题是：</h4><ol>
+<li>进程的创建过程</li>
+<li>文件的打开过程(在文件系统中和输入输出系统中各是什么流程)<ul>
+<li>::注：这两个都是自顶向下的流程分析套路，关键就是谁知道的更加详细。比如说落实到数据结构之间的指向关系，落实到函数名之间的调用关系等等::</li>
+<li>要想脑子里记住这些作者总结下的图，想死背是肯定不行的，<strong>一定要理解linux的设计哲学</strong>，如：自顶向下对复杂问题的分多步骤解决的思想，自底向上的层层抽象封装的思想。</li>
+<li>作者这里将设计的哲学与管理公司的思想融合在了一起，让人有一个大致的感觉。</li>
+</ul>
+</li>
+</ol>
+<p><a href="bear://x-callback-url/open-note?id=9F874552-7E94-47C5-BAEE-3CA6F29E01D3-8605-0000869B12187390">整体结构入门</a><br><a href="bear://x-callback-url/open-note?id=7B504BF2-6E75-4B48-AFCB-18217519208C-8605-0000868B626CDAD7">系统初始化</a><br><a href="bear://x-callback-url/open-note?id=3AF0D67C-CE61-4628-A991-7AA6C11F53A7-8605-000085B05849884B">进程管理</a> </p>
+<ul>
+<li>进程的产生、运行、销毁的自顶向下的思路流程讲解。</li>
+<li>流程中的每一步骤，不断展开每一步骤，最后的结果会落实到代码上<br><a href="bear://x-callback-url/open-note?id=F7A5215B-212B-4E22-BCD6-65D71A359106-8605-000086A37B60F6AF">内存管理</a></li>
+<li>创建一个进程涉及到的数据结构</li>
+<li>如何分配和管理一片区域<br><a href="bear://x-callback-url/open-note?id=B6676969-A64B-444A-90C7-31AC03FB3DC1-8605-000086FF06C2A214">文件系统</a></li>
+<li>打开一个文件涉及到的数据结构。这里的数据结构也体现除了自顶向下的流程。</li>
+<li>打开文件，自顶向下的操作步骤<br><a href="bear://x-callback-url/open-note?id=D3E0BAFC-B05A-45A3-B986-9412239A8737-8605-0000872D5A800584">输入输出系统</a></li>
+<li>自底向上的抽象、屏蔽不同硬件的区别</li>
+<li>自顶向下的流程，在字符设备上加载驱动、挂在、打开文件的流程</li>
+<li>自顶向下的流程，在块设备上加载驱动、挂在、打开文件的流程</li>
+<li>::注：这里的每一个步骤都可以展开成一幅流程图，除了流程，还涉及到大量数据结构。eg：打开文件::<br><a href="bear://x-callback-url/open-note?id=50D56874-8739-4AC6-A52A-B7FD6537599F-8605-0000875FF45DE6BA">进程间通信</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1552,7 +1414,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-count">1157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

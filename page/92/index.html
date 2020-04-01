@@ -158,344 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/myBatis-generator%E7%90%86%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/myBatis-generator%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">myBatis-generator理解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-25 07:28:00" itemprop="dateCreated datePublished" datetime="2018-02-25T07:28:00+08:00">2018-02-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/myBatis-generator%E7%90%86%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="myBatis-generator理解" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>445</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月25日 下午7:28</p>
-<ol>
-<li>首先，需要说明的是：myBatis-generator只是再mybatis的基础上使之<strong>自动化</strong>。</li>
-<li>自动化的内容有：<ol>
-<li>自动生成resource_mappers_*Mapper.xml</li>
-<li>自动生成pojo/下各种与数据表直接对应的java实体类</li>
-<li>自动生成dao/*Mapper.java接口类，用于执行sql语句<ol>
-<li><strong>这点可以说是myBatis-generator最新颖的地方</strong></li>
-<li>我们最原始的mybatis方式是使用sqlSession对象去执行具体的sql语句</li>
-<li>但在myBatis-generator中sqlSession就像不存在一样，对于用户来说就暴露了一个dao/<strong>Mapper.java接口类，</strong>通过接口类去执行需要的sql语句*</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<p>这里可以参考<a href="bear://x-callback-url/open-note?id=52A415C6-658D-4883-B590-7DA8D13D2CF3-2468-00004231FD9F8D93">mybatis 三剑客</a></p>
-<h2 id="使用SpringMVC之后，融合myBatis-generator的方式"><a href="#使用SpringMVC之后，融合myBatis-generator的方式" class="headerlink" title="使用SpringMVC之后，融合myBatis-generator的方式"></a>使用SpringMVC之后，融合myBatis-generator的方式</h2><p>在<a href="bear://x-callback-url/open-note?id=55CC692B-9A3F-4AC2-9EC2-A9D1E7E5BF9F-2468-0000E99ACBAF2004">MyBatis使用和配置详解</a>中我们知道，sqlSession这个对象是用是最终要用于执行sql语句的对象，但在myBatis-generator<br><img src="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/myBatis-generator%E7%90%86%E8%A7%A3/2FC31AB6-CC46-4A34-A077-99E0C3283629.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">MyBatis使用和配置详解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-25 06:57:00" itemprop="dateCreated datePublished" datetime="2018-02-25T06:57:00+08:00">2018-02-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%AB%98%E7%BA%A7/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/高级</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="MyBatis使用和配置详解" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月25日 下午6:57</p>
-<h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><p>MyBatis的重要依赖包</p>
-<ol>
-<li>myBatis-3.2.3.jar</li>
-<li>Mysql-connector-java-5.1.34.jar<br>配置文件(xml)</li>
-<li>TeacherMapper.xml</li>
-<li>StudentMapper.xml</li>
-<li>Reource.xml<br><img src="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/F8FAA557-903C-425D-A1BB-ED2ADE8CCAF5.png" alt></li>
-</ol>
-<h2 id="配置文件详解："><a href="#配置文件详解：" class="headerlink" title="配置文件详解："></a>配置文件详解：</h2><h3 id="TeacherMapper-xml"><a href="#TeacherMapper-xml" class="headerlink" title="TeacherMapper.xml"></a>TeacherMapper.xml</h3><p><img src="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/A127B611-1B38-4B40-9F20-935EDA4327D7.png" alt><br>解析：</p>
-<ol>
-<li><strong>本质：将sql语句与代码进行分离，方便管理</strong></li>
-<li>绿色：是命名空间，<strong>是找到TeacherMapper.xml的关键标识</strong>，对应于测试代码<code>TeacherEntity teacherEntity=sqlSession.selectOne(&quot;teacher.selectTeacherOne&quot;, &quot;804”);</code>中的teacher</li>
-<li>红色<resultMap>：是一个对应于*Entity.java实体的xml表示</resultMap></li>
-<li>红色<select>：是具体的sql的xml表示<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">mapper</span></span></span><br><span class="line"><span class="meta">PUBLIC <span class="meta-string">"-//mybatis.org//DTD Mapper 3.0//EN"</span></span></span><br><span class="line"><span class="meta"><span class="meta-string">"http://mybatis.org/dtd/mybatis-3-mapper.dtd"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- namespace空间名称 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">"teacher"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">cache</span>&gt;</span><span class="tag">&lt;/<span class="name">cache</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- resultMap表示结果集 ，type表示对应的类，id表示当前标签的名称--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"com.pan.teacher.TeacherEntity"</span> <span class="attr">id</span>=<span class="string">"teacher"</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- id标签表示当前要对应的表的主键 --&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- column表示表中的列(字段)， property表示类中的属性--&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"t_id"</span> <span class="attr">property</span>=<span class="string">"t_id"</span> /&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- result表示当前表中除主键外的其他列 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"t_name"</span> <span class="attr">property</span>=<span class="string">"t_name"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"t_sex"</span> <span class="attr">property</span>=<span class="string">"t_sex"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"t_birthday"</span> <span class="attr">property</span>=<span class="string">"t_birthday"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"prof"</span> <span class="attr">property</span>=<span class="string">"prof"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"depart"</span> <span class="attr">property</span>=<span class="string">"depart"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">"studentList"</span> <span class="attr">column</span>=<span class="string">"t_id"</span> <span class="attr">select</span>=<span class="string">"com.pan.test.StudentEntity.selectByT_id"</span>&gt;</span><span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectTeacherOne"</span> <span class="attr">parameterType</span>=<span class="string">"string"</span> <span class="attr">resultMap</span>=<span class="string">"teacher"</span>&gt;</span></span><br><span class="line">		select * from teacher where t_id=#&#123;t_id&#125;</span><br><span class="line">	<span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-</select></li>
-</ol>
-<h3 id="source-xml"><a href="#source-xml" class="headerlink" title="source.xml"></a>source.xml</h3><p><img src="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/193B2971-DC24-410C-97EA-9FBA1C0A3A78.png" alt><br>解析：</p>
-<ol>
-<li>红色：是连接数据库的各种配置信息，用于登录数据库</li>
-<li><strong>绿色<mapper>：是用于声明项目中实体类对应的xml配置文件有哪些</mapper></strong>。</li>
-</ol>
-<h2 id="实体类"><a href="#实体类" class="headerlink" title="实体类"></a>实体类</h2><p>本质就是对应于数据库表字段的get，set方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pan.teacher;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pan.test.StudentEntity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherEntity</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line">	<span class="keyword">private</span> String t_id;</span><br><span class="line">	<span class="keyword">private</span> String t_name;</span><br><span class="line">	<span class="keyword">private</span> String t_sex;</span><br><span class="line">	<span class="keyword">private</span> String t_birthday;</span><br><span class="line">	<span class="keyword">private</span> String prof;</span><br><span class="line">	<span class="keyword">private</span> String depart;</span><br><span class="line">	<span class="keyword">private</span> List&lt;StudentEntity&gt; studentList;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getT_id</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> t_id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setT_id</span><span class="params">(String t_id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.t_id = t_id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getT_name</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> t_name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setT_name</span><span class="params">(String t_name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.t_name = t_name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getT_sex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> t_sex;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setT_sex</span><span class="params">(String t_sex)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.t_sex = t_sex;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getT_birthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> t_birthday;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setT_birthday</span><span class="params">(String t_birthday)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.t_birthday = t_birthday;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getProf</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> prof;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setProf</span><span class="params">(String prof)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.prof = prof;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getDepart</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> depart;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDepart</span><span class="params">(String depart)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.depart = depart;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> List&lt;StudentEntity&gt; <span class="title">getStudentList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> studentList;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setStudentList</span><span class="params">(List&lt;StudentEntity&gt; studentList)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.studentList = studentList;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p><img src="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/MyBatis%E4%BD%BF%E7%94%A8%E5%92%8C%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/43272A96-0882-4A56-826C-D5D23F8AA973.png" alt></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.pan.teacher;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.Reader;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.io.Resources;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSession;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactory;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.session.SqlSessionFactoryBuilder;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.pan.test.StudentEntity;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TeacherTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//读取myBatis的核心配置文件</span></span><br><span class="line">		Reader reader=Resources.getResourceAsReader(<span class="string">"reource.xml"</span>);</span><br><span class="line">		<span class="comment">//创建二级缓存</span></span><br><span class="line">		SqlSessionFactory sessionFactory=<span class="keyword">new</span> SqlSessionFactoryBuilder().build(reader);</span><br><span class="line">		<span class="comment">//创建一级缓存</span></span><br><span class="line">		SqlSession sqlSession=sessionFactory.openSession();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//-------------------级联查询----------------</span></span><br><span class="line">		<span class="comment">//注意：在myBatis中只有级联查询，没有级联增删改</span></span><br><span class="line">		TeacherEntity teacherEntity=sqlSession.selectOne(<span class="string">"teacher.selectTeacherOne"</span>, <span class="string">"804"</span>);</span><br><span class="line">		System.out.println(teacherEntity.getT_name());</span><br><span class="line">		List&lt;StudentEntity&gt; list=teacherEntity.getStudentList();</span><br><span class="line">		System.out.println(list.size());</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/java%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%BC%94%E8%BF%9B%E8%BF%87%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/java%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%BC%94%E8%BF%9B%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">java连接数据库的演进过程</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-25 06:10:00" itemprop="dateCreated datePublished" datetime="2018-02-25T06:10:00+08:00">2018-02-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/25/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/java%E8%BF%9E%E6%8E%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%BC%94%E8%BF%9B%E8%BF%87%E7%A8%8B/" class="post-meta-item leancloud_visitors" data-flag-title="java连接数据库的演进过程" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>185</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月25日 下午6:10</p>
-<p>JDBC：<br><a href="bear://x-callback-url/open-note?id=685E3B88-BB6F-430B-8082-24A7BD7473EF-2779-000009EBF22633BB">JDBC，通过属性配置文件封装DbUtiles类</a></p>
-<p>连接池：<br><a href="bear://x-callback-url/open-note?id=69A28996-5973-42D6-82BA-D8D817CFE503-2779-000009EC16AF3B64">两种数据库连接池 （2017/9/5）</a><br><a href="http://blog.csdn.net/yegshun/article/details/78139411" target="_blank" rel="noopener">C3P0连接池配置和实现详解 - CSDN博客</a><br><a href="http://www.cnblogs.com/sunseine/p/5947448.html" target="_blank" rel="noopener">DBCP数据库连接池的简单使用 - sunseine - 博客园</a></p>
-<p>mybatis:<br><a href="bear://x-callback-url/open-note?id=55CC692B-9A3F-4AC2-9EC2-A9D1E7E5BF9F-2468-0000E99ACBAF2004">MyBatis使用和配置详解</a></p>
-<p>mybatis-generator：<br><a href="bear://x-callback-url/open-note?id=5D5AD021-FC52-4E28-B7D6-F0146507F6A9-2468-0000EB5165485C54">myBatis-generator理解</a><br><a href="bear://x-callback-url/open-note?id=52A415C6-658D-4883-B590-7DA8D13D2CF3-2468-00004231FD9F8D93">mybatis 三剑客</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1298,6 +960,321 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mac%20%E5%AE%89%E8%A3%85maven/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mac%20%E5%AE%89%E8%A3%85maven/" class="post-title-link" itemprop="url">mac 安装maven</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-22 11:43:00" itemprop="dateCreated datePublished" datetime="2018-02-22T11:43:00+08:00">2018-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mac%20%E5%AE%89%E8%A3%85maven/" class="post-meta-item leancloud_visitors" data-flag-title="mac 安装maven" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>724</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月22日 上午11:43</p>
+<h3 id="理解maven"><a href="#理解maven" class="headerlink" title="理解maven"></a>理解maven</h3><p><a href="http://www.trinea.cn/android/maven/" target="_blank" rel="noopener">介绍maven的作用、核心概念(Pom、Repositories、Artifact、Goal)、用法、常用参数和命令以及简单故障排除、扩展及配置</a></p>
+<h3 id="下载："><a href="#下载：" class="headerlink" title="下载："></a>下载：</h3><p><a href="https://segmentfault.com/a/1190000004673927" target="_blank" rel="noopener">Mac下安装配置maven的问题小记 - yangbai - SegmentFault 思否</a></p>
+<h3 id="安装maven的位置："><a href="#安装maven的位置：" class="headerlink" title="安装maven的位置："></a>安装maven的位置：</h3><p><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mac%20%E5%AE%89%E8%A3%85maven/CA53A57B-A405-4094-B2E9-3557305693CC.png" alt></p>
+<h3 id="更改环境变量-bash-profile："><a href="#更改环境变量-bash-profile：" class="headerlink" title="更改环境变量.bash_profile："></a>更改环境变量.bash_profile：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ czh$ sudo open -e .bash_profile</span><br><span class="line">Password:</span><br><span class="line">localhost:~ czh$ source ~&#x2F;.bash_profile</span><br><span class="line">localhost:~ czh$  mvn -version</span><br><span class="line">Apache Maven 3.0.5 (r01de14724cdef164cd33c7c8c2fe155faf9602da; 2013-02-19 21:51:28+0800)</span><br><span class="line">Maven home: &#x2F;Library&#x2F;apache-maven-3.0.5</span><br><span class="line">Java version: 1.7.0_80, vendor: Oracle Corporation</span><br><span class="line">Java home: &#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines&#x2F;jdk1.7.0_80.jdk&#x2F;Contents&#x2F;Home&#x2F;jre</span><br><span class="line">Default locale: zh_CN, platform encoding: UTF-8</span><br><span class="line">OS name: &quot;mac os x&quot;, version: &quot;10.13.3&quot;, arch: &quot;x86_64&quot;, family: &quot;mac&quot;</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mac%20%E5%AE%89%E8%A3%85maven/8C434371-9B48-4328-88FB-50C13765E1D9.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">idea设置+新建maven项目</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-22 11:08:00" itemprop="dateCreated datePublished" datetime="2018-02-22T11:08:00+08:00">2018-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/" class="post-meta-item leancloud_visitors" data-flag-title="idea设置+新建maven项目" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>976</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月22日 上午11:08</p>
+<p>idea中配置jdk：<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/49CF45A9-51AF-49A8-869B-A37DD891BF93.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/C7F2D3F4-65EB-4A49-A7ED-3C5B1CA75E17.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/038B5F17-FF1C-4420-B7C7-21026828ED27.png" alt></p>
+<p>idea配置maven路径：<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/E60FEF41-D81C-44F3-A272-A0FB1F5D1FB0.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/4A677F79-4BF4-4C68-B5CD-C12F6009452D.png" alt></p>
+<p>创建项目：<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/26DC133E-24FE-4BA0-BAFF-9B066518BCDC.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/644A2CD8-DBFB-47F9-987A-DBE0F51BC278.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/151DEE5A-E63A-4696-A33A-1D0ED3EFE9A0.png" alt><br>排错：<br><a href="https://www.cnblogs.com/wardensky/p/4513372.html" target="_blank" rel="noopener">maven “Generating project in Batch mode”问题的解决 - wardensky - 博客园</a><br><a href="http://www.imooc.com/wenda/detail/348288" target="_blank" rel="noopener">IDEA生成MAVEN项目报错_慕课猿问</a><br><a href="https://stackoverflow.com/questions/17223536/failed-to-execute-goal-org-apache-maven-pluginsmaven-compiler-plugin2-3-2comp" target="_blank" rel="noopener">java - Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile (default-compile) - Stack Overflow</a><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/87B792EE-A20A-4363-B0A0-EF6DABC552CF.png" alt></p>
+<p>新建文件夹：注意mark成不同的颜色来区分功能<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/15AED8A5-0504-46AC-9471-09064C7F9B48.png" alt></p>
+<p>添加服务器：Run-&gt;Edit configurations<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/AC4EECFE-DB98-4B70-98C1-4B54C13357E6.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/0FF656DA-F194-434B-A03F-B1DDB0BDD0F3.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/28304532-F26B-4E06-B794-655C05A0562E.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/74F5DC4F-44B1-41EB-AFAC-1FA204D1E91A.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/679262E4-27F9-48D4-B1DE-56D432CE463E.png" alt><br>注：后来我又配置上了使用8088端口</p>
+<p>启动运行时报错：<br><a href="https://stackoverflow.com/questions/5698802/apache-tomcat-java-net-connectexception-connection-refused" target="_blank" rel="noopener">Apache Tomcat :java.net.ConnectException: Connection refused - Stack Overflow</a><br><a href="http://blog.csdn.net/qq_35246620/article/details/70213246" target="_blank" rel="noopener">出现 java.net.ConnectException: Connection refused 异常的原因及解决方法 - 维C果糖的博客 - CSDN博客</a><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/3DCAF9FB-A3EB-42C7-AB8B-9D90A350BAB8.png" alt></p>
+<p>我的处理办法：关闭我手动打开的tomcat7</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">localhost:tomcat7 czh$ cd bin&#x2F;</span><br><span class="line">localhost:bin czh$ .&#x2F;shutdown.sh</span><br><span class="line">Using CATALINA_BASE:   &#x2F;usr&#x2F;local&#x2F;tomcat7</span><br><span class="line">Using CATALINA_HOME:   &#x2F;usr&#x2F;local&#x2F;tomcat7</span><br><span class="line">Using CATALINA_TMPDIR: &#x2F;usr&#x2F;local&#x2F;tomcat7&#x2F;temp</span><br><span class="line">Using JRE_HOME:        &#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines&#x2F;jdk1.7.0_80.jdk&#x2F;Contents&#x2F;Home</span><br><span class="line">Using CLASSPATH:       &#x2F;usr&#x2F;local&#x2F;tomcat7&#x2F;bin&#x2F;bootstrap.jar:&#x2F;usr&#x2F;local&#x2F;tomcat7&#x2F;bin&#x2F;tomcat-juli.jar</span><br></pre></td></tr></table></figure>
+
+<p>成功运行：<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/A4A0BAB5-3983-4AAC-A7BE-070E3DAE9C79.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/" class="post-title-link" itemprop="url">mybatis 三剑客</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-22 09:44:00" itemprop="dateCreated datePublished" datetime="2018-02-22T09:44:00+08:00">2018-02-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/" class="post-meta-item leancloud_visitors" data-flag-title="mybatis 三剑客" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>306</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月22日 下午9:44</p>
+<p>找到maven中pom的配置写法：<br><a href="http://search.maven.org/" target="_blank" rel="noopener">The Central Repository Search Engine</a></p>
+<p>从分解 解耦的角度去理解就十分的简单</p>
+<p><a href="http://blog.csdn.net/matthew_zhang/article/details/50757251" target="_blank" rel="noopener">URI Is Not Registered - CSDN博客</a></p>
+<h2 id="剑客一：使用mybatis-generator-generate生成xml，dao-pojo"><a href="#剑客一：使用mybatis-generator-generate生成xml，dao-pojo" class="headerlink" title="剑客一：使用mybatis-generator:generate生成xml，dao,pojo"></a>剑客一：使用mybatis-generator:generate生成xml，dao,pojo</h2><p><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/88034C1A-7567-4832-9BC8-9CD6F30B8E9E.png" alt></p>
+<p>生成的xml,dao,pojo<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/5F47D430-123C-43AC-9C0B-A55040A90A55.png" alt></p>
+<p>数据库字段createtime,updatetime由mysql自动生成、更新<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/DC2B8462-E287-44E1-A755-A642C60FB0BE.png" alt></p>
+<h2 id="剑客二：试用期7天"><a href="#剑客二：试用期7天" class="headerlink" title="剑客二：试用期7天"></a>剑客二：试用期7天</h2><p><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/E2581892-F543-42EC-A191-EB6094843B39.png" alt></p>
+<h2 id="剑客三：分页"><a href="#剑客三：分页" class="headerlink" title="剑客三：分页"></a>剑客三：分页</h2><p><a href="https://github.com/pagehelper/Mybatis-PageHelper" target="_blank" rel="noopener">GitHub - pagehelper/Mybatis-PageHelper: Mybatis通用分页插件</a><br><strong>这里只是提一下，具体的使用在项目开发中说</strong></p>
+<p>Pom.xml中对应的配置：<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/38FA2AC4-C3DA-4C3B-A896-D34954A3FE36.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1368,7 +1345,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-count">1157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

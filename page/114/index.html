@@ -158,373 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/07/17/web%E5%BC%80%E5%8F%91/czh_blog/%E6%9C%8D%E5%8A%A1%E5%99%A8/nginx%E9%85%8D%E7%BD%AElocation%E6%80%BB%E7%BB%93%E5%8F%8Arewrite%E8%A7%84%E5%88%99%E5%86%99%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/07/17/web%E5%BC%80%E5%8F%91/czh_blog/%E6%9C%8D%E5%8A%A1%E5%99%A8/nginx%E9%85%8D%E7%BD%AElocation%E6%80%BB%E7%BB%93%E5%8F%8Arewrite%E8%A7%84%E5%88%99%E5%86%99%E6%B3%95/" class="post-title-link" itemprop="url">nginx配置location总结及rewrite规则写法</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-07-17 10:01:00" itemprop="dateCreated datePublished" datetime="2017-07-17T10:01:00+08:00">2017-07-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/服务器</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/07/17/web%E5%BC%80%E5%8F%91/czh_blog/%E6%9C%8D%E5%8A%A1%E5%99%A8/nginx%E9%85%8D%E7%BD%AElocation%E6%80%BB%E7%BB%93%E5%8F%8Arewrite%E8%A7%84%E5%88%99%E5%86%99%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="nginx配置location总结及rewrite规则写法" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年7月17日 上午10:01</p>
-<p>来源：<a href="https://segmentfault.com/a/1190000002797606" target="_blank" rel="noopener">nginx配置location总结及rewrite规则写法 - Sean’s Notes - SegmentFault</a></p>
-<p>总结：</p>
-<ol>
-<li>这篇文章主要的作用:<strong>nginx是如何处理得到的URL地址的？</strong></li>
-<li>对这篇文章需要了解正则表达式。</li>
-<li>其他的我总结不出来啥了，一是我对这个不熟悉，而是这篇文章说的的确很清晰！</li>
-<li><strong>文中有🌰，能很大的帮助理解</strong></li>
-</ol>
-<p>摘抄：</p>
-<ol>
-<li>已=开头表示精确匹配<br>如 A 中只匹配根目录结尾的请求，后面不能带任何字符串。<br>^~ 开头表示uri以某个常规字符串开头，不是正则匹配<br>~ 开头表示区分大小写的正则匹配;<br>~* 开头表示不区分大小写的正则匹配<br>/ 通用匹配, 如果没有其它匹配,任何请求都会匹配到</li>
-<li><strong>rewrite功能</strong>就是，使用nginx提供的全局变量或自己设置的变量，结合正则表达式和标志位<strong>实现url重写以及重定向</strong>。rewrite<strong>只能放在server{},location{},if{}中</strong>，并且<strong>只能对域名后边的除去传递的参数外的字符串起作用</strong>，例如 <a href="http://seanlook.com/a/we/index.php?id=1&amp;u=str" target="_blank" rel="noopener">http://seanlook.com/a/we/index.php?id=1&amp;u=str</a> 只对<em>a</em>we/index.php重写。</li>
-<li>表明看rewrite和location功能有点像，都能实现跳转，主要区别在于rewrite是在同一域名内更改获取资源的路径，而location是对一类路径做控制访问或反向代理，可以proxy_pass到其他机器</li>
-<li><strong>if判断指令</strong><br>语法为if(condition){…}，对给定的条件condition进行判断。如果为真，大括号内的rewrite指令将被执行，if条件(conditon)可以是如下任何内容：<br>当表达式只是一个变量时，如果值为空或任何以0开头的字符串都会当做false<br>直接比较变量和内容时，使用=或!=<br><del>正则表达式匹配，</del>*不区分大小写的匹配，!~区分大小写的不匹配</li>
-<li>-f和!-f用来判断是否存在文件</li>
-</ol>
-<p>-d和!-d用来判断是否存在目录<br>-e和!-e用来判断是否存在文件或目录<br>-x和!-x用来判断文件是否可执行<br>6. 全局变量<br>下面是可以用作if判断的全局变量</p>
-<p>$args ： 这个变量等于请求行中的参数，同$query_string<br>$content_length ： 请求头中的Content-length字段。<br>$content_type ： 请求头中的Content-Type字段。<br>$document_root ： 当前请求在root指令中指定的值。<br>$host ： 请求主机头字段，否则为服务器名称。<br>$http_user_agent ： 客户端agent信息<br>$http_cookie ： 客户端cookie信息<br>$limit_rate ： 这个变量可以限制连接速率。<br>$request_method ： 客户端请求的动作，通常为GET或POST。<br>$remote_addr ： 客户端的IP地址。<br>$remote_port ： 客户端的端口。<br>$remote_user ： 已经经过Auth Basic Module验证的用户名。<br>$request_filename ： 当前请求的文件路径，由root或alias指令与URI请求生成。<br>$scheme ： HTTP方法（如http，https）。<br>$server_protocol ： 请求使用的协议，通常是HTTP/1.0或HTTP/1.1。<br>$server_addr ： 服务器地址，在完成一次系统调用后可以确定这个值。<br>$server_name ： 服务器名称。<br>$server_port ： 请求到达服务器的端口号。<br>$request_uri ： 包含请求参数的原始URI，不包含主机名，如：”_foo_bar.php?arg=baz”。<br>$uri ： 不带请求参数的当前URI，$uri不包含主机名，如”_foo_bar.html”。<br>$document_uri ： 与$uri相同。 </p>
-<p><img src="/2017/07/17/web%E5%BC%80%E5%8F%91/czh_blog/%E6%9C%8D%E5%8A%A1%E5%99%A8/nginx%E9%85%8D%E7%BD%AElocation%E6%80%BB%E7%BB%93%E5%8F%8Arewrite%E8%A7%84%E5%88%99%E5%86%99%E6%B3%95/nginx%E9%85%8D%E7%BD%AElocation%E6%80%BB%E7%BB%93%E5%8F%8Arewrite%E8%A7%84%E5%88%99%E5%86%99%E6%B3%95%20-%20Sean%27s%20Notes%20-%20SegmentFault%20Safari,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%8810.03.40.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/07/17/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AD%A3%E5%88%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/07/17/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AD%A3%E5%88%99/" class="post-title-link" itemprop="url">正则</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-07-17 08:31:00" itemprop="dateCreated datePublished" datetime="2017-07-17T08:31:00+08:00">2017-07-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/通用知识点</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/07/17/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%AD%A3%E5%88%99/" class="post-meta-item leancloud_visitors" data-flag-title="正则" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年7月17日 上午8:31</p>
-<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p>　　在对正则表达式的功能和作用有了初步的了解之后，我们就来具体看一下正则表达式的语法格式。<br>　　正则表达式的形式一般如下：<br>　　<em>love</em><br>　　其中位于<strong>“<em>”定界符</em></strong><em>之间的部分就是将要在目标对象中进行匹配的模式。用户只要把希望查找匹配对象的模式内容放入“_”定界符之间即可。为了能够使用户更加灵活的<strong>定制模式内容</strong>，正则表达式提供了专门的<strong>“元字符”</strong>。所谓元字符就是指那些在正则表达式中具有<strong>特殊意义的专用字符</strong>，可以用来<strong>规定其前导字符（即位于元字符前面的字符）在目标对象中的出现模式</strong>。<br>　　<strong>较为常用的元字符包括： “+”， “</strong>”，以及 “?”<strong>。其中，“+”元字符规定其前导字符必须在目标对象中连续出现一次或多次，“</strong>”元字符规定其前导字符必须在目标对象中出现零次或连续多次，而“?”元字符规定其前导对象必须在目标对象中连续出现零次或一次。<br>　　下面，就让我们来看一下正则表达式元字符的具体应用。<br>　　_fo+</em><br>　　因为上述正则表达式中包含“+”元字符，表示可以与目标对象中的 “fool”, “fo”, 或者 “football”等在字母f后面连续出现一个或多个字母o的字符串相匹配。<br>　　<em>eg*</em><br>　　因为上述正则表达式中包含“<em>”元字符，表示可以与目标对象中的 “easy”, “ego”, 或者 “egg”等在字母e后面连续出现零个或多个字母g的字符串相匹配。<br>　　<em>Wil?</em><br>　　因为上述正则表达式中包含“？”元字符，表示可以与目标对象中的 “Win”, 或者 “Wilson”,等在字母i后面连续出现零个或一个字母l的字符串相匹配。<br>　　除了元字符之外，用户还可以<strong>精确指定模式在匹配对象中出现的频率</strong>。例如，<br>　　<em>jim{2,6}</em><br>　　上述正则表达式规定字符m可以在匹配对象中连续出现2-6次，因此，上述正则表达式可以同jimmy或jimmmmmy等字符串相匹配。<br>　　在对如何使用正则表达式有了初步了解之后，我们来看一下<strong>其它几个重要的元字符</strong>的使用方式。<br>　　\s：用于匹配单个空格符，包括tab键和换行符；<br>　　\S：用于匹配除单个空格符之外的所有字符；<br>　　\d：用于匹配从0到9的数字；<br>　　\w：用于匹配字母，数字或下划线字符；<br>　　\W：用于匹配所有与\w不匹配的字符；<br>　　. ：用于匹配除换行符之外的所有字符。<br>　　（<strong>说明：我们可以把\s和\S以及\w和\W看作互为逆运算</strong>）<br>　　下面，我们就通过实例看一下如何在正则表达式中使用上述元字符。<br>　　<em>\s+</em><br>　　上述正则表达式可以用于匹配目标对象中的一个或多个空格字符。<br>　　<em>\d000</em><br>　　如果我们手中有一份复杂的财务报表，那么我们可以通过上述正则表达式轻而易举的查找到所有总额达千元的款项。<br>　　除了我们以上所介绍的元字符之外，正则表达式中还具有另外一种较为独特的专用字符，即<strong>定位符</strong>。<strong>定位符用于规定匹配模式在目标对象中的出现位置。</strong><br>　　较为常用的定位符包括： <strong>“^”, “$”, “\b” 以及 “\B”</strong>。其中，“^”定位符规定匹配模式必须出现在目标字符串的开头，“$”定位符规定匹配模式必须出现在目标对象的结尾，\b定位符规定匹配模式必须出现在目标字符串的开头或结尾的两个边界之一，而“\B”定位符则规定匹配对象必须位于目标字符串的开头和结尾两个边界之内，即匹配对象既不能作为目标字符串的开头，也不能作为目标字符串的结尾。同样，<strong>我们也可以把“^”和“$”以及“\b”和“\B”看作是互为逆运算的两组定位符</strong>。举例来说：<br>　　<em>^hell</em><br>　　因为上述正则表达式中包含“^”定位符，所以可以与目标对象中以 “hell”, “hello”或 “hellhound”开头的字符串相匹配。<br>　　<em>ar$</em><br>　　因为上述正则表达式中包含“$”定位符，所以可以与目标对象中以 “car”, “bar”或 “ar” 结尾的字符串相匹配。<br>　　<em>\bbom</em><br>　　因为上述正则表达式模式以“\b”定位符开头，所以可以与目标对象中以 “bomb”, 或 “bom”开头的字符串相匹配。<br>　　<em>man\b</em><br>　　因为上述正则表达式模式以“\b”定位符结尾，所以可以与目标对象中以 “human”, “woman”或 “man”结尾的字符串相匹配。<br>　　为了能够方便用户更加灵活的设定匹配模式，正则表达式允许使用者在<strong>匹配模式中指定某一个范围而不局限于具体的字符</strong>。例如：<br>　　<em>[A-Z]</em><br>　　上述正则表达式将会与从A到Z范围内任何一个大写字母相匹配。<br>　　<em>[a-z]</em><br>　　上述正则表达式将会与从a到z范围内任何一个小写字母相匹配。<br>　　<em>[0-9]</em><br>　　上述正则表达式将会与从0到9范围内任何一个数字相匹配。<br>　　<em>([a-z][A-Z][0-9])+</em><br>　　上述正则表达式将会与任何由字母和数字组成的字符串，如 “aB0” 等相匹配。这里需要提醒用户注意的一点就是可以在正则表达式中使用 “()” 把字符串组合在一起。<strong>“()”符号包含的内容必须同时出现在目标对象中</strong>。因此，上述正则表达式将无法与诸如 “abc”等的字符串匹配，因为“abc”中的最后一个字符为字母而非数字。<br>　　如果我们希望在正则表达式中实现类似编程逻辑中的“或”运算，<strong>在多个不同的模式中任选一个进行匹配的话</strong>，可以使用管道符 “|”。例如：<br>　　<em>to|too|2</em><br>　　上述正则表达式将会与目标对象中的 “to”, “too”, 或 “2” 相匹配。<br>　　正则表达式中还有一个较为常用的运算符，即否定符 “[^]”。与我们前文所介绍的定位符 “^” 不同，<strong>否定符 “[^]”规定目标对象中不能存在模式中所规定的字符串</strong>。例如：<br>　　<em>[^A-C]</em><br>　　上述字符串将会与目标对象中除A，B，和C之外的任何字符相匹配。<strong>一般来说，当“^”出现在 “[]”内时就被视做否定运算符；而当“^”位于“[]”之外，或没有“[]”时，则应当被视做定位符。</strong><br>　　最后，当用户需要在正则表达式的模式中加入元字符，并查找其匹配对象时，可以使用<strong>转义符“\”</strong>。例如：<br>　　_Th\</em>_<br>　　上述正则表达式将会与目标对象中的“Th*”而非“The”等相匹配。</p>
-<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><h2 id="正则表达式由两部分组成"><a href="#正则表达式由两部分组成" class="headerlink" title="正则表达式由两部分组成"></a>正则表达式由两部分组成</h2><ol>
-<li>范围：这些范围就是实现<strong>一对多</strong>的关键(这里指的是内容长短)</li>
-<li>限定：<ol>
-<li>字符串位置限定</li>
-<li>字符串组合关系限定</li>
-</ol>
-</li>
-</ol>
-<p>正则中的“<strong>单个字符</strong>”——&gt; 表达式中的“<strong>一些字符或字符串</strong>”</p>
-<h2 id="范围有以下几种："><a href="#范围有以下几种：" class="headerlink" title="范围有以下几种："></a>范围有以下几种：</h2><ol>
-<li>单个字符的重复次数构成的范围</li>
-<li>一些小的常用的集合构成的范围<ol>
-<li>空白符/非空白符 </li>
-<li>字母,数字,下划线/非 字母,数字,下划线 </li>
-<li>数字<ol>
-<li>两种</li>
-</ol>
-</li>
-<li>大写字母</li>
-<li>小写字母</li>
-</ol>
-</li>
-</ol>
-<p>注：<strong>这里的范围本身都是针对单个字符</strong>，但是可以根据重复的次数，来构成字符串。</p>
-<h2 id="字符串的限定"><a href="#字符串的限定" class="headerlink" title="字符串的限定"></a>字符串的限定</h2><ol>
-<li>位置限定<ol>
-<li>开头</li>
-<li>结尾</li>
-<li>中间</li>
-</ol>
-</li>
-<li>组合关系的限定<ol>
-<li>And 同时满足</li>
-<li>or     满足其中之一</li>
-<li>非     相反</li>
-</ol>
-</li>
-</ol>
-<p>注：<strong>这里的限定针对的是字符串</strong>，而不是单个字符<br>eg:<em>to|too|2</em>     这里的对象是 to  too  2 这三个，而不是于“|”相邻的单个字符 </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/07/17/web%E5%BC%80%E5%8F%91/czh_blog/php/%E8%A7%A3%E5%86%B3wordpress%E7%9A%84%E4%B8%A4%E4%B8%AA%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/07/17/web%E5%BC%80%E5%8F%91/czh_blog/php/%E8%A7%A3%E5%86%B3wordpress%E7%9A%84%E4%B8%A4%E4%B8%AA%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">解决wordpress的两个问题</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-07-17 05:19:00" itemprop="dateCreated datePublished" datetime="2017-07-17T05:19:00+08:00">2017-07-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/07/17/web%E5%BC%80%E5%8F%91/czh_blog/php/%E8%A7%A3%E5%86%B3wordpress%E7%9A%84%E4%B8%A4%E4%B8%AA%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="解决wordpress的两个问题" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年7月17日 下午5:19</p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><ol>
-<li>WordPress提示“在裁剪您的图像时发生了错误”</li>
-<li>解决wordpress修改固定连接后不能正常访问（404 or 有点尴尬诶!该页无法显示。）</li>
-</ol>
-<h3 id="问题1解决方法"><a href="#问题1解决方法" class="headerlink" title="问题1解决方法"></a>问题1解决方法</h3><ol>
-<li><a href="http://blog.moemiku.com/2015/07/wordpress提示在裁剪您的图像时发生了错误的解决方/" target="_blank" rel="noopener">WordPress提示“在裁剪您的图像时发生了错误”的解决方法</a></li>
-<li>以上的这篇文章用的是php5，而我用的是php7</li>
-<li>我试了试<code>sudo apt-get install php7-gd</code>,但是会提示<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Reading package lists... Done</span><br><span class="line">Building dependency tree</span><br><span class="line">Reading state information... Done</span><br><span class="line">E: Unable to locate package php7-gd</span><br></pre></td></tr></table></figure></li>
-<li>于是我直接省了，用<code>sudo apt-get install php-gd</code>，成功了</li>
-<li>然后<code>sudo systemctl reload nginx</code>，重启服务器</li>
-</ol>
-<h3 id="问题2的解决方法"><a href="#问题2的解决方法" class="headerlink" title="问题2的解决方法"></a>问题2的解决方法</h3><ol>
-<li>修改nginx配置文件</li>
-<li>在原来的基础上加上<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">location &#x2F;wordpress &#123;</span><br><span class="line">       try_files $uri $uri&#x2F; &#x2F;wordpress&#x2F;index.php?$args;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
-<li>最后变成了<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80 default_server;</span><br><span class="line">    listen [::]:80 default_server ipv6only&#x3D;on;</span><br><span class="line"></span><br><span class="line">    root &#x2F;var&#x2F;www;</span><br><span class="line">    index index.html index.htm index.php;</span><br><span class="line"></span><br><span class="line">    # Make site accessible from http:&#x2F;&#x2F;localhost&#x2F;</span><br><span class="line">    server_name localhost;</span><br><span class="line"></span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">            # First attempt to serve request as file, then</span><br><span class="line">            # as directory, then fall back to displaying a 404.</span><br><span class="line">            try_files $uri $uri&#x2F; &#x3D;404;</span><br><span class="line">            # Uncomment to enable naxsi on this location</span><br><span class="line">            # include &#x2F;etc&#x2F;nginx&#x2F;naxsi.rules</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     location ~ \.php&#x2F; &#123;</span><br><span class="line">       if ($request_uri ~ ^(.+\.php)(&#x2F;.+?)($|\?)) &#123; &#125;</span><br><span class="line">       fastcgi_pass unix:&#x2F;run&#x2F;php&#x2F;php7.0-fpm.sock;</span><br><span class="line">       include snippets&#x2F;fastcgi-php.conf;</span><br><span class="line">       fastcgi_param SCRIPT_NAME     $1;</span><br><span class="line">       fastcgi_param PATH_INFO       $2;</span><br><span class="line">       fastcgi_param SCRIPT_FILENAME $document_root$1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        include snippets&#x2F;fastcgi-php.conf;</span><br><span class="line">        fastcgi_pass unix:&#x2F;run&#x2F;php&#x2F;php7.0-fpm.sock;</span><br><span class="line">        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location &#x2F;wordpress &#123;</span><br><span class="line">        try_files $uri $uri&#x2F; &#x2F;wordpress&#x2F;index.php?$args;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><a href="https://www.nginx.com/resources/wiki/start/topics/recipes/wordpress/" target="_blank" rel="noopener">我参考的文章是nginx官方的针对wordpress的处理方法文章</a>。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/07/17/web%E5%BC%80%E5%8F%91/czh_blog/php/nginx%20%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%9B%B4%E6%96%B03/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1437,6 +1070,552 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/07/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/706Swing/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/07/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/706Swing/" class="post-title-link" itemprop="url">706Swing</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-06 03:16:00" itemprop="dateCreated datePublished" datetime="2017-07-06T03:16:00+08:00">2017-07-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java基础</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/07/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/706Swing/" class="post-meta-item leancloud_visitors" data-flag-title="706Swing" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年7月6日 下午3:16</p>
+<h2 id="首先了解一下Swing的模式"><a href="#首先了解一下Swing的模式" class="headerlink" title="首先了解一下Swing的模式"></a>首先了解一下Swing的模式</h2><p><img src="/2017/07/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/706Swing/%E2%80%A2%20StarUML%20StarUML,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%884.32.09.png" alt><br>            图1 Swing的基本结构（<strong>对应着Eclipse的图形界面</strong>）</p>
+<h3 id="注意点："><a href="#注意点：" class="headerlink" title="注意点："></a>注意点：</h3><pre><code>1. **这个结果图也就说明了操作的步骤**
+    1. 首先创建一个Container
+    2. 然后给Container添加一个Layout
+    3. 然后给Container中添加各种Componet
+    4. 给Component添加监听
+    5. 写监听处理
+注： 在刚刚创建的JFrame中已经有一个Panel容器，并且设置为BorderLayout
+2. **规律总结：**
+    1. 这就像html一层一层的铺
+    2. 动手之前就要从底层一直考虑到顶层，想好了再动手
+    3. 要起好变量名字</code></pre><h2 id="具体知识点"><a href="#具体知识点" class="headerlink" title="具体知识点"></a>具体知识点</h2><pre><code>1. 布局管理器（Layout）的理解
+    1. 为了使我们生成的图形用户界面具有良好的**平台无关性**
+    2. Java 语言中，提供了布局管理器这个工具来管理组件在容器中的布局
+    3. 而**不使用直接**设置组件**位置**和**大小**的方式。
+    4. **每个容器**都有一个布局管理器
+    5. 当容器需要对某个组件迚行定 位戒判断其大小尺寸时，就会调用其对应的布局管理器。
+2. 组件定位的两种方式
+    1. 通过**布局管理器**自动
+    2. 也可以取消布局管理器的作用，收到设置componet
+        1. setLocation()
+        2. setSize()
+        3. setBounds()
+3. 认识几个重要的方法
+    1. f.setLayout(null);  取消布局管理器
+    2. f.setVisible(true);默认为不可见的
+4. 容器的分类
+    1. 顶级容器
+        1. JFrame此窗口带有边框、 标题、用于关闭和最小化窗口的图标等
+        2. JDialog:用于对话框的类。
+        3. JApplet:用于使用 Swing 组件的 Java Applet 的类。
+    2. 中间容器
+        1. JPanel:最灵活、最常用的中间容器。
+        2. JScrollPane:与 JPanel 类似，但还可在大的组件或可扩展组件周围提供滚动条。
+        3. JTabbedPane:包含多个组件，但一次只显示一个组 件。用户可在组件之间方便地切换。
+        4. JToolBar:按行或列排列一组组件(通常是按钮)。
+5. panel容器
+    1. **Panel无法单独显示**，必须添加到某个容器中
+    2.  Panel的缺省布局管理器为**FlowLayout**。
+    3. 当把Panel作为一个组件添加到某个容器中后，该Panel仍然可以有自己 的布局管理器。因此，可以利用Panel使得BorderLayout中某个区域显 示多个组件。
+6. frame容器
+    1. Frame是一个顶级窗口
+    2. Frame的缺省布局管理器为**BorderLayout**
+7. JLable
+    1. JLabel(Icon icon):icon表示使用的图标
+    2. JLabel(String text,Icon icon,int align):text表 示使用的字符串; icon表示使用的图标;align表示水平 对齐方式，其值可以为:LEFT、RIGHT、CENTER。</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ImageIcon icon = <span class="keyword">new</span> ImageIcon(<span class="string">"Calv.gif"</span>);</span><br><span class="line">JLabel calv_label=newJLabel(<span class="string">"这是 Calvin"</span>, icon, SwingConstants.LEFT);</span><br></pre></td></tr></table></figure>
+
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><h3 id="写监听的三种方式："><a href="#写监听的三种方式：" class="headerlink" title="写监听的三种方式："></a>写监听的三种方式：</h3><ol>
+<li>第一种：<ol>
+<li>Jframe子类实现ActionListener接口</li>
+<li>注册监听</li>
+<li>实现actionPerformed()方法，</li>
+</ol>
+</li>
+<li>第二种<ol>
+<li>在注册监听的时候，写内部类（new ActionListener(){}）</li>
+<li>实现内部类中actionPerformed()方法。</li>
+</ol>
+</li>
+<li>第三种<ol>
+<li>单独写一个继承自ActionListener的内部类<ol>
+<li>class Monitor implements ActionListener{}</li>
+</ol>
+</li>
+<li>主方法中声明对象<ol>
+<li>Monitor bh = new Monitor();</li>
+</ol>
+</li>
+<li>注册监听<ol>
+<li>b.addActionListener(bh);注册监听器</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="有哪些监听接口和接口对应的方法"><a href="#有哪些监听接口和接口对应的方法" class="headerlink" title="有哪些监听接口和接口对应的方法"></a>有哪些监听接口和接口对应的方法</h3><p><img src="/2017/07/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/706Swing/%E7%AC%AC20%E8%AE%B2%20Swing-%E2%85%A1.pdf%EF%BC%88%E7%AC%AC%2013%20%E9%A1%B5%EF%BC%8C%E5%85%B1%2018%20%E9%A1%B5%EF%BC%89%20%E9%A2%84%E8%A7%88,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%885.25.21.png" alt><br>                            图2<br><img src="/2017/07/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/706Swing/%E7%AC%AC20%E8%AE%B2%20Swing-%E2%85%A1.pdf%EF%BC%88%E7%AC%AC%2014%20%E9%A1%B5%EF%BC%8C%E5%85%B1%2018%20%E9%A1%B5%EF%BC%89%20%E9%A2%84%E8%A7%88,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%885.25.32.png" alt><br>                            图3</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><h3 id="卡片切换"><a href="#卡片切换" class="headerlink" title="卡片切换"></a>卡片切换</h3><p><img src="/2017/07/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/706Swing/workspace%20-%20Java%20-%20MyFrame-src-package1-JframeTest.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%885.27.05.png" alt><br>                            图4 效果图</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.awt.BorderLayout;</span><br><span class="line"><span class="keyword">import</span> java.awt.EventQueue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.swing.JFrame;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JPanel;</span><br><span class="line"><span class="keyword">import</span> javax.swing.border.EmptyBorder;</span><br><span class="line"><span class="keyword">import</span> java.awt.CardLayout;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JLabel;</span><br><span class="line"><span class="keyword">import</span> javax.swing.SwingConstants;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JTabbedPane;</span><br><span class="line"><span class="keyword">import</span> java.awt.FlowLayout;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JButton;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JTextField;</span><br><span class="line"><span class="keyword">import</span> java.awt.GridLayout;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionListener;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JframeTest</span> <span class="keyword">extends</span> <span class="title">JFrame</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> JTextField textField;</span><br><span class="line">	<span class="keyword">private</span> CardLayout card = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Launch the application.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		EventQueue.invokeLater(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					JframeTest frame = <span class="keyword">new</span> JframeTest();</span><br><span class="line">					frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Create the frame.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">JframeTest</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span><br><span class="line">		setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">450</span>, <span class="number">300</span>);</span><br><span class="line">		</span><br><span class="line">		JPanel panel = <span class="keyword">new</span> JPanel();</span><br><span class="line">		getContentPane().add(panel, BorderLayout.NORTH);</span><br><span class="line">		</span><br><span class="line">		JButton btnNewButton = <span class="keyword">new</span> JButton(<span class="string">"New button"</span>);</span><br><span class="line">		panel.add(btnNewButton);</span><br><span class="line">		</span><br><span class="line">		JButton btnNewButton_1 = <span class="keyword">new</span> JButton(<span class="string">"New button"</span>);</span><br><span class="line">		panel.add(btnNewButton_1);</span><br><span class="line">		</span><br><span class="line">		JPanel panel_1 = <span class="keyword">new</span> JPanel();</span><br><span class="line">		getContentPane().add(panel_1, BorderLayout.CENTER);</span><br><span class="line">		</span><br><span class="line">		card=<span class="keyword">new</span> CardLayout(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">		panel_1.setLayout(card);</span><br><span class="line">		</span><br><span class="line">		JLabel lblCard = <span class="keyword">new</span> JLabel(<span class="string">"Card2"</span>);</span><br><span class="line">		lblCard.setHorizontalAlignment(SwingConstants.CENTER);</span><br><span class="line">		panel_1.add(lblCard, <span class="string">"name_2407873724218434"</span>);</span><br><span class="line">		</span><br><span class="line">		JLabel lblNewLabel = <span class="keyword">new</span> JLabel(<span class="string">"card1"</span>);</span><br><span class="line">		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);</span><br><span class="line">		panel_1.add(lblNewLabel, <span class="string">"name_2407873736860429"</span>);</span><br><span class="line">		</span><br><span class="line"></span><br><span class="line">		btnNewButton.addActionListener(<span class="keyword">new</span> ActionListener() &#123;</span><br><span class="line">			</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">				<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">				card.first(panel_1);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		</span><br><span class="line">		btnNewButton_1.addActionListener(<span class="keyword">new</span> ActionListener() &#123;</span><br><span class="line">			</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">				<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">				card.last(panel_1);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="菜单栏"><a href="#菜单栏" class="headerlink" title="菜单栏"></a>菜单栏</h3><p><img src="/2017/07/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/706Swing/workspace%20-%20Java%20-%20MyFrame-src-package1-Frame1.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%885.28.58.png" alt><br>                            效果图5<br><img src="/2017/07/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/706Swing/Bear%20Bear,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%885.29.43.png" alt><br>                            效果图6</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.awt.BorderLayout;</span><br><span class="line"><span class="keyword">import</span> java.awt.EventQueue;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionEvent;</span><br><span class="line"><span class="keyword">import</span> java.awt.event.ActionListener;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> javax.swing.JFrame;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JPanel;</span><br><span class="line"><span class="keyword">import</span> javax.swing.border.EmptyBorder;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JMenuBar;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JMenu;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JMenuItem;</span><br><span class="line"><span class="keyword">import</span> javax.swing.JOptionPane;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Frame1</span> <span class="keyword">extends</span> <span class="title">JFrame</span> <span class="keyword">implements</span> <span class="title">ActionListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> JPanel contentPane;</span><br><span class="line">	<span class="keyword">private</span> JMenuItem mntmOpen; </span><br><span class="line">	<span class="keyword">private</span> JMenuItem mntmSave; </span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Launch the application.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		EventQueue.invokeLater(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">			<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					Frame1 frame = <span class="keyword">new</span> Frame1();</span><br><span class="line">					frame.setVisible(<span class="keyword">true</span>);</span><br><span class="line">				&#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * Create the frame.</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Frame1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span><br><span class="line">		setBounds(<span class="number">100</span>, <span class="number">100</span>, <span class="number">450</span>, <span class="number">300</span>);</span><br><span class="line">		</span><br><span class="line">		JMenuBar menuBar = <span class="keyword">new</span> JMenuBar();</span><br><span class="line">		setJMenuBar(menuBar);</span><br><span class="line">		</span><br><span class="line">		JMenu menu = <span class="keyword">new</span> JMenu(<span class="string">"\u6587\u4EF6"</span>);</span><br><span class="line">		menuBar.add(menu);</span><br><span class="line">		</span><br><span class="line">		mntmOpen = <span class="keyword">new</span> JMenuItem(<span class="string">"open"</span>);</span><br><span class="line">		menu.add(mntmOpen);</span><br><span class="line">		</span><br><span class="line">		mntmSave = <span class="keyword">new</span> JMenuItem(<span class="string">"save"</span>);</span><br><span class="line">		menu.add(mntmSave);</span><br><span class="line">		</span><br><span class="line">		mntmOpen.addActionListener(<span class="keyword">this</span>);</span><br><span class="line">		mntmSave.addActionListener(<span class="keyword">this</span>);</span><br><span class="line">		</span><br><span class="line">		contentPane = <span class="keyword">new</span> JPanel();</span><br><span class="line">		contentPane.setBorder(<span class="keyword">new</span> EmptyBorder(<span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>));</span><br><span class="line">		contentPane.setLayout(<span class="keyword">new</span> BorderLayout(<span class="number">0</span>, <span class="number">0</span>));</span><br><span class="line">		setContentPane(contentPane);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(e.getSource() == mntmOpen)&#123;</span><br><span class="line">			JOptionPane.showConfirmDialog(<span class="keyword">null</span>, <span class="string">"Open?"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(e.getSource() == mntmSave)&#123;</span><br><span class="line">			JOptionPane.showConfirmDialog(<span class="keyword">null</span>, <span class="string">"Save?"</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>附：eclipse的插件截图</p>
+<p><img src="/2017/07/06/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/706Swing/workspace%20-%20Java%20-%20MyFrame-src-package1-Frame1.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%885.33.19.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/07/05/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/07/05/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89/" class="post-title-link" itemprop="url">设计模式（补充）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-05 02:38:00" itemprop="dateCreated datePublished" datetime="2017-07-05T02:38:00+08:00">2017-07-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_blog/设计模式</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/07/05/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="设计模式（补充）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年7月5日 下午2:38</p>
+<p>2019年3月29日 下午2:04 复习</p>
+<h2 id="三种分类"><a href="#三种分类" class="headerlink" title="三种分类"></a>三种分类</h2><p>创建型：创建类和对象<br>结构模式：有利于在原先的程序基础上进行改进<br>行为模式：模拟人类世界的各种复杂的关系</p>
+<h2 id="六个原则"><a href="#六个原则" class="headerlink" title="六个原则"></a>六个原则</h2><p><a href="http://blog.csdn.net/odeviloo/article/details/52382338" target="_blank" rel="noopener">一天一个设计模式—分类与六大原则 - Devil的技术小屋        - 博客频道 - CSDN.NET</a><br>开闭原则：<br>    1. 对扩展开放，对修改关闭<br>    2. 为了达到这样的效果，我们需要使用接口和抽象类</p>
+<p>里氏代换原则：LSP</p>
+<p>依赖倒转：<br>    1. 针对接口编程，依赖于抽象不依赖于具体</p>
+<p>接口隔离原则：<br>    1. 使用多个隔离的接口，比使用单个接口要好。还可以降低类之间的耦合度的意思</p>
+<p>吉米特法则：（最少知道原则）<br>    1. 一个实体应当尽量减少和其他实体放生相互作用</p>
+<p>合成复用原则：<br>    1. 使用合成/聚合模式</p>
+<h2 id="单例模式："><a href="#单例模式：" class="headerlink" title="单例模式："></a>单例模式：</h2><ol>
+<li>一个类有且仅有一个实例，并且自行实例化向整个系统提供</li>
+<li>多线程不能访问</li>
+</ol>
+<h3 id="两种写法："><a href="#两种写法：" class="headerlink" title="两种写法："></a>两种写法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"> * 懒汉式</span><br><span class="line"> * @author czh</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class SingleClass &#123;</span><br><span class="line">	private static SingleClass single &#x3D; null;</span><br><span class="line">	&#x2F;&#x2F;私有构造方法</span><br><span class="line">	private SingleClass()&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;静态方法生成对象</span><br><span class="line">	public static SingleClass getInstance()&#123;</span><br><span class="line">		if(single &#x3D;&#x3D; null)&#123;</span><br><span class="line">			single &#x3D; new SingleClass();</span><br><span class="line">		&#125;</span><br><span class="line">		return single;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"> * 饿汉式</span><br><span class="line"> * @author czh</span><br><span class="line"> *</span><br><span class="line"> *&#x2F;</span><br><span class="line">public class SingleClass &#123;</span><br><span class="line">	&#x2F;&#x2F;这里直接声明对象</span><br><span class="line">	private static SingleClass single &#x3D; new SingleClass();</span><br><span class="line">	&#x2F;&#x2F;私有构造方法</span><br><span class="line">	private SingleClass()&#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;静态方法生成对象</span><br><span class="line">	public static SingleClass getInstance()&#123;</span><br><span class="line">		return single;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="代理模式"><a href="#代理模式" class="headerlink" title="代理模式"></a>代理模式</h2><p>使用场景：<br>    1. 修改原有的的方法来适应。这样违反了“开闭”原则<br>    2. 就是采用一个代理类调用原有的方法，且对产生的结果进行控制。这种方法就是代理模式。<br>    3. <strong>估计将来要对方法进行改写，那么就提前使用代理模式</strong><br>    4. <strong>用接口的原因</strong>：<br>        1. 为了保证方法的相同，方便客户端更方便的切换到代理类中<br>    5. 与<strong>装饰模式的区别</strong>：<br>        1. 装饰类是对<strong>类</strong>的扩展<br>        2. 代理模式是对<strong>方法</strong>的扩展<br><img src="/2017/07/05/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89/%E2%80%A2%20StarUML%20StarUML,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%885.11.53.png" alt><br>                    图1     代理模式<br><strong>代码在后</strong></p>
+<h2 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h2><pre><code>1. 主要分为三类：
+    1. 类的适配器模式、
+    2. 对象的适配器模式、
+    3. 接口的适配器模式。
+2. **对类的扩充**：当一个类需要满足是一个新的接口
+3. **对对象的扩充**：当一个对象需要满足一个新的接口
+4. **对接口的缩小**：当一个类需要满足部分当前接口的方法</code></pre><p><img src="/2017/07/05/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%20%5B%E5%85%BC%E5%AE%B9%E6%A8%A1%E5%BC%8F" alt><br>                    图2    对类的扩充<br>注：<br>    1. 这里是继承。<br>    2. method1()继承自Source，method2()继承与Targetble接口<br>    3. <strong>Adapter继承来的method1()，可以充当接口中的method1()</strong><br><img src="/2017/07/05/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%20%5B%E5%85%BC%E5%AE%B9%E6%A8%A1%E5%BC%8F" alt><br>注：<br>    1. 这里是依赖。<br>    2. adapter中的Method1()调用source的method1()<br><img src="/2017/07/05/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89/Java%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%20%5B%E5%85%BC%E5%AE%B9%E6%A8%A1%E5%BC%8F" alt><br>注：<br>    1. 这里是有一个抽象类Wrapper,<strong>起一个过滤作用</strong></p>
+<p><strong>代码在后</strong></p>
+<h2 id="几个问题"><a href="#几个问题" class="headerlink" title="几个问题"></a>几个问题</h2><h3 id="为啥组合优于继承"><a href="#为啥组合优于继承" class="headerlink" title="为啥组合优于继承"></a>为啥组合优于继承</h3><ol>
+<li>首先要确认，组合可以完成继承的任务</li>
+<li>但是组合可以通过包含多个对象扩充自己的功能</li>
+<li>而继承，只能获得父类的功能，要想扩充得自己写</li>
+</ol>
+<h3 id="怎样面向接口编程"><a href="#怎样面向接口编程" class="headerlink" title="怎样面向接口编程"></a>怎样面向接口编程</h3><ol>
+<li>接口可以理解成<strong>规则</strong></li>
+<li>一个公司有了规则，大家才能按一致的目标前进</li>
+<li>试想没有<strong>规则</strong>，按大家的<strong>默契</strong>，也可以完成同样的目的</li>
+<li>但是，<strong>默契</strong>容易忘，公司有了新的员工，或者我离开公司久了（我代码好久没有看了）</li>
+<li>那么我一看<strong>规则</strong>（接口），那么就可以很快的学会。</li>
+</ol>
+<h3 id="站在扩充的角度去分类设计模式"><a href="#站在扩充的角度去分类设计模式" class="headerlink" title="站在扩充的角度去分类设计模式"></a>站在扩充的角度去分类设计模式</h3><ol>
+<li>适配器模式+代理模式+装饰模式</li>
+<li>这三种都是可以在代码本身的基础进行扩充的</li>
+<li>所以：<strong>当当前代码需要扩种的时候要从这三种里选</strong></li>
+</ol>
+<p><strong>注：其他模式的分类，我依然是按上一篇文章给开头的分类表分的</strong>，网上的好多分类方法我现在还理解不了，只能按自己的来了。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><h3 id="代理模式-1"><a href="#代理模式-1" class="headerlink" title="代理模式"></a>代理模式</h3><p>Proxy.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Proxy</span> <span class="keyword">implements</span> <span class="title">Sourceable</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Source source;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Proxy</span><span class="params">(Source source)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.source = source;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		before();</span><br><span class="line">		source.method();</span><br><span class="line">		after();</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"前面的准备"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">after</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"后面的处理"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Source.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Source</span> <span class="keyword">implements</span> <span class="title">Sourceable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">"Source 的方法执行"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Sourceable.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package4;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Sourceable</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="适配器模式-1"><a href="#适配器模式-1" class="headerlink" title="适配器模式"></a>适配器模式</h3><ol>
+<li>对类的扩充+对对象的扩充<br>Source.java<strong>(adapt1.java+adapt2.java公用)</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package5;</span><br><span class="line"><span class="comment">//原类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Source</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"method1"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+TargetInterface.java<strong>(adapt1.java+adapt2.java公用)</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package5;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TargetInterface</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">mehtod2</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>Adapt1.java：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package5;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapt1</span> <span class="keyword">extends</span> <span class="title">Source</span> <span class="keyword">implements</span> <span class="title">TargetInterface</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mehtod2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		System.out.println(<span class="string">"method2"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Adapt2.java:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package5;</span><br><span class="line"><span class="comment">//第二种适配器</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapt2</span> <span class="keyword">implements</span> <span class="title">TargetInterface</span> </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Source source;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Adapt2</span><span class="params">(Source source)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		source = source;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">mehtod2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		source.method1();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>2019年3月29日 下午2:02 添加</p>
+<ol>
+<li><p>模式1和模式2最大的不同在于adapt2.java有：</p>
+<ol>
+<li><code>private Source Source;//这句是最大的不同</code></li>
+</ol>
+</li>
+<li><p>但是目的是相同是：用新建的adapt类来代替原先的soures原始类，给source类添加一个method2()的方法。</p>
+<ol>
+<li>注意：已经写死的类source本身不论如何都无法添加method2()了，我们只能让他的适配器adapt去实现这个愿望了</li>
+</ol>
+</li>
+<li><p>对接口方法的过滤<br>代码顺序按照UML图<br>SourceInterface.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package5;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SourceInterface</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">method3</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>AbstractSource.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package5;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractSource</span> <span class="keyword">implements</span> <span class="title">SourceInterface</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"method1"</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"method2"</span>);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method3</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"method3"</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Source1.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package5;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 我需要那个方法，我就实现那个方法</span></span><br><span class="line"><span class="comment"> * 原来直接implement接口，三个方法我必须都实现。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Source1</span> <span class="keyword">extends</span> <span class="title">AbstractSource</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">()</span></span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"改写method1方法"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_java/7.03%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/07/03/web%E5%BC%80%E5%8F%91/czh_java/7.03%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">7.03网络编程</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-03 08:00:00" itemprop="dateCreated datePublished" datetime="2017-07-03T08:00:00+08:00">2017-07-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/07/03/web%E5%BC%80%E5%8F%91/czh_java/7.03%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="post-meta-item leancloud_visitors" data-flag-title="7.03网络编程" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>10 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年7月3日 上午8:00</p>
+<p>TCP：传输控制协议<br>UDP：数据报文协议</p>
+<h2 id="端口-：16位"><a href="#端口-：16位" class="headerlink" title="端口 ：16位"></a>端口 ：16位</h2><p>三类</p>
+<ol>
+<li>公认端口：0~1023</li>
+<li>注册端口：1024-49151</li>
+<li>动态和、私有端口：49151~65535</li>
+</ol>
+<h2 id="常用端口："><a href="#常用端口：" class="headerlink" title="常用端口："></a>常用端口：</h2><p>Telent:23<br>Stmp:25<br>Ftp:21<br>Http:80</p>
+<h2 id="常用对象："><a href="#常用对象：" class="headerlink" title="常用对象："></a>常用对象：</h2><p>ServerSocket</p>
+<ol>
+<li>ServerSocket(port):创想serverSocket实例</li>
+<li>accept()等待客户端连接</li>
+<li>Public InetAddress getInetAddress()返回服务器的Ip地址</li>
+<li>Public boolean isCloseed();赶回ServerSocket的关闭状态</li>
+<li>Public void close();关闭ServerSockets</li>
+</ol>
+<p>Socket</p>
+<ol>
+<li>Socket(String host,int port):构造socket对象，同时，指定要连接服务器的主机名和端口号</li>
+<li>public inputStream getInputStream:返回套接字的输入流</li>
+<li>pubilc OutputStream .getOutputStream()返回套接字的输入流</li>
+<li>Public boolean isClosed()判断套接字是否关闭</li>
+<li>Public void close()：关闭socket</li>
+</ol>
+<p>InetAddress</p>
+<ol>
+<li>public static InetAddress(String host):通过主机名或IP地址得到一个InetAddress对象</li>
+<li>String getHostName();获取ip地址对应的主机名</li>
+<li>String getHostAddress();返回ip地址字符串</li>
+</ol>
+<p><strong>注：他们处理的都是字节流</strong></p>
+<h2 id="使用PrintWriter的例程"><a href="#使用PrintWriter的例程" class="headerlink" title="使用PrintWriter的例程"></a>使用PrintWriter的例程</h2><p>网络编程的<strong>服务端</strong>步骤比较单一：<br>    1. ServerSocket对象<br>    2. 创建Socket对象<br>    3. inputStream对象<br>    4. BufferedReader对象<br>    5. outputStream对象<br>    6. printWriter对象<br>    7. 读<br>    8. 写<br>注：<strong>他们都是一条流水线，前一个对象产生下一个对象</strong><br>例程： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Server1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">	</span><br><span class="line">		<span class="comment">//创建服务端实例对象，需要指定端口</span></span><br><span class="line">		</span><br><span class="line">		ServerSocket ss = <span class="keyword">new</span> ServerSocket(<span class="number">7799</span>);</span><br><span class="line">	</span><br><span class="line">		<span class="comment">//接受客户端连接，创建socket对象</span></span><br><span class="line"></span><br><span class="line">		Socket socket= ss.accept();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//获取输入流，读取客户端传过来的数据</span></span><br><span class="line">		InputStream is = socket.getInputStream();</span><br><span class="line">		BufferedReader br  = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is));</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//输出流 ，向客户端返回数据 </span></span><br><span class="line">		PrintWriter pw= <span class="keyword">new</span> PrintWriter(socket.getOutputStream());</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//服务端读</span></span><br><span class="line">		String content = br.readLine();</span><br><span class="line">		<span class="keyword">if</span>(content != <span class="keyword">null</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"获取到的数据是："</span>+content);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//服务端写</span></span><br><span class="line">		pw.write(<span class="string">"服务端收到数据"</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//倒序关闭</span></span><br><span class="line">		pw.close();</span><br><span class="line">		br.close();</span><br><span class="line">		is.close();</span><br><span class="line">		socket.close();</span><br><span class="line">		ss.close();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>网络编程的<strong>客户端</strong>步骤比较单一：<br>    1. 创建Socket对象<br>    2. outputStream对象<br>    3. printWriter对象<br>    4. inputStream对象<br>    5. BufferedReader对象<br>    6. 写<br>    7. 读<br>例程：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.net.UnknownHostException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> UnknownHostException, IOException </span>&#123;</span><br><span class="line">		<span class="comment">//创建socket对象，连接服务端</span></span><br><span class="line">		Socket socket = <span class="keyword">new</span> Socket(<span class="string">"127.0.0.1"</span>,<span class="number">7799</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//写对象</span></span><br><span class="line">		OutputStream os = socket.getOutputStream();</span><br><span class="line">		PrintWriter pw = <span class="keyword">new</span> PrintWriter(os);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//读对象</span></span><br><span class="line">		InputStream is = socket.getInputStream();</span><br><span class="line">		BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is));</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//客户端写</span></span><br><span class="line">		pw.write(<span class="string">"我要访问服务端"</span>);</span><br><span class="line">		pw.flush();</span><br><span class="line">		socket.shutdownOutput();<span class="comment">//确保数据传输到服务端</span></span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//客户端读</span></span><br><span class="line">		String result = br.readLine();</span><br><span class="line">		<span class="keyword">if</span>(result != <span class="keyword">null</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"获取到的数据是："</span>+result);</span><br><span class="line">		&#125;</span><br><span class="line">		br.close();</span><br><span class="line">		socket.close();</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：</p>
+<ol>
+<li><strong>他们都是一条流水线，前一个对象产生下一个对象</strong></li>
+<li><strong>客户端和服务的不能同时创建输入流</strong></li>
+<li><strong>这里socket.shutdownOutput的作用</strong><ol>
+<li><a href="http://blog.csdn.net/wanwanjava/article/details/20848889" target="_blank" rel="noopener">【TCP】s.shutdownOutput();这行代码的牛逼之处 - 闲着没事_玩玩JAVA的专栏        - 博客频道 - CSDN.NET</a></li>
+<li>第一种方法close流，相当于给流中加入一个结束标记-1</li>
+<li>第二种方法：s.shutdownOutput();关闭客户端的输出流。相当于给流中加入一个结束标记-1.</li>
+<li>就像字符串的结尾一样</li>
+<li>服务端没写socket.shutdownOutput，用pw.close代替了</li>
+</ol>
+</li>
+</ol>
+<p>错误：没有打开服务端就开启客户端<br><img src="/2017/07/03/web%E5%BC%80%E5%8F%91/czh_java/7.03%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/workspace%20-%20Java%20-%20Class703-src-Client.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%889.31.47.png" alt></p>
+<p>扩展：<br>以上代码使用<br>DateOutputStream 和 DateInputStream也可以</p>
+<h2 id="使用对象流的例程："><a href="#使用对象流的例程：" class="headerlink" title="使用对象流的例程："></a>使用对象流的例程：</h2><p>客户端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.net.UnknownHostException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> UnknownHostException, IOException </span>&#123;</span><br><span class="line">		Socket socket = <span class="keyword">new</span> Socket(<span class="string">"127.0.0.1"</span>,<span class="number">7799</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//pet对象</span></span><br><span class="line">		Pet pet  = <span class="keyword">new</span> Pet(<span class="string">"狗"</span>,<span class="number">1</span>);</span><br><span class="line">		<span class="comment">//写对象</span></span><br><span class="line">		OutputStream os = socket.getOutputStream();</span><br><span class="line">		ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(os);</span><br><span class="line">		<span class="comment">//读对象</span></span><br><span class="line">		InputStream is = socket.getInputStream();</span><br><span class="line">		BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is));</span><br><span class="line">		<span class="comment">//写(对象流不用shutdown，不知道为啥)</span></span><br><span class="line">		oos.writeObject(pet);</span><br><span class="line">		oos.flush();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//读</span></span><br><span class="line">		String string = br.readLine();</span><br><span class="line">		<span class="keyword">if</span>(string != <span class="keyword">null</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"接收到的信息是："</span>+string);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		br.close();</span><br><span class="line">		is.close();</span><br><span class="line">		oos.close();</span><br><span class="line">		os.close();</span><br><span class="line">		socket.close();</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;	</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>服务端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.net.UnknownHostException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> UnknownHostException, IOException </span>&#123;</span><br><span class="line">		Socket socket = <span class="keyword">new</span> Socket(<span class="string">"127.0.0.1"</span>,<span class="number">7799</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//pet对象</span></span><br><span class="line">		Pet pet  = <span class="keyword">new</span> Pet(<span class="string">"狗"</span>,<span class="number">1</span>);</span><br><span class="line">		<span class="comment">//写对象</span></span><br><span class="line">		OutputStream os = socket.getOutputStream();</span><br><span class="line">		ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(os);</span><br><span class="line">		<span class="comment">//读对象</span></span><br><span class="line">		InputStream is = socket.getInputStream();</span><br><span class="line">		BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is));</span><br><span class="line">		<span class="comment">//写(对象流不用shutdown，不知道为啥)</span></span><br><span class="line">		oos.writeObject(pet);</span><br><span class="line">		oos.flush();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//读</span></span><br><span class="line">		String string = br.readLine();</span><br><span class="line">		<span class="keyword">if</span>(string != <span class="keyword">null</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"接收到的信息是："</span>+string);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		br.close();</span><br><span class="line">		is.close();</span><br><span class="line">		oos.close();</span><br><span class="line">		os.close();</span><br><span class="line">		socket.close();		</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Pet类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package1;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pet</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">int</span> id;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Pet</span><span class="params">(String name, <span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getId</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> id;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setId</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.id = id;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>错误：Pet类没有序列号接口： implements Serializable<br><img src="/2017/07/03/web%E5%BC%80%E5%8F%91/czh_java/7.03%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/workspace%20-%20Java%20-%20Class703-src-package1-Client.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%8810.24.16.png" alt></p>
+<h2 id="服务器常开例程（死循环方式）"><a href="#服务器常开例程（死循环方式）" class="headerlink" title="服务器常开例程（死循环方式）"></a>服务器常开例程（死循环方式）</h2><p>客户端</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"><span class="keyword">import</span> java.net.UnknownHostException;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> UnknownHostException, IOException </span>&#123;</span><br><span class="line"><span class="comment">//		Socket socket = new Socket("192.168.12.35",8800);</span></span><br><span class="line">		Socket socket = <span class="keyword">new</span> Socket(<span class="string">"127.0.0.1"</span>,<span class="number">7799</span>);</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//pet对象</span></span><br><span class="line">		Pet pet  = <span class="keyword">new</span> Pet(<span class="string">"狗"</span>,<span class="string">"狗"</span>,<span class="string">"男"</span>);</span><br><span class="line">		<span class="comment">//写对象</span></span><br><span class="line">		OutputStream os = socket.getOutputStream();</span><br><span class="line">		ObjectOutputStream oos = <span class="keyword">new</span> ObjectOutputStream(os);</span><br><span class="line">		<span class="comment">//读对象</span></span><br><span class="line">		InputStream is = socket.getInputStream();</span><br><span class="line">		BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(is));</span><br><span class="line">		<span class="comment">//写(对象流不用shutdown，不知道为啥)</span></span><br><span class="line">		oos.writeObject(pet);</span><br><span class="line">		oos.flush();</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//读</span></span><br><span class="line">		String string = br.readLine();</span><br><span class="line">		<span class="keyword">if</span>(string != <span class="keyword">null</span>)&#123;</span><br><span class="line">			System.out.println(<span class="string">"接收到的信息是："</span>+string);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		br.close();</span><br><span class="line">		is.close();</span><br><span class="line">		oos.close();</span><br><span class="line">		os.close();</span><br><span class="line">		socket.close();</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">	&#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>pet类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pet</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1L</span>;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> String type;</span><br><span class="line">	<span class="keyword">private</span> String sex;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Pet</span><span class="params">(String name, String type, String sex)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">super</span>();</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">		<span class="keyword">this</span>.type = type;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> type;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setType</span><span class="params">(String type)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.type = type;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> String <span class="title">getSex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> sex;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSex</span><span class="params">(String sex)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.sex = sex;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>服务端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> package2;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.FileWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Server</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException </span>&#123;</span><br><span class="line">		 </span><br><span class="line">		</span><br><span class="line">		<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">			ServerSocket ss = <span class="keyword">new</span> ServerSocket(<span class="number">7799</span>);</span><br><span class="line">			Socket socket = ss.accept();</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//输入流</span></span><br><span class="line">			InputStream is = socket.getInputStream();</span><br><span class="line">			ObjectInputStream br = <span class="keyword">new</span> ObjectInputStream(is);</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//输出流</span></span><br><span class="line">			OutputStream os = socket.getOutputStream();</span><br><span class="line">			PrintWriter pw = <span class="keyword">new</span> PrintWriter(os);</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//输入</span></span><br><span class="line">			Pet pet = (Pet) br.readObject();</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">if</span>(pet != <span class="keyword">null</span>)&#123;</span><br><span class="line">				System.out.println(<span class="string">"name : "</span>+pet.getName()+<span class="string">"id :"</span>+pet.getSex());</span><br><span class="line">				<span class="comment">//文件写入</span></span><br><span class="line">				FileWriter fw = <span class="keyword">new</span> FileWriter(<span class="string">"hello_pet.txt"</span>);</span><br><span class="line">				BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(fw);</span><br><span class="line">				bw.write(<span class="string">"name : "</span>+pet.getName()+<span class="string">"id :"</span>+pet.getSex());</span><br><span class="line">				bw.flush();</span><br><span class="line">				bw.close();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">//输出</span></span><br><span class="line">			pw.write(<span class="string">"客户端已得到pet对象"</span>);</span><br><span class="line">			</span><br><span class="line">			</span><br><span class="line">			pw.close();</span><br><span class="line">			os.close();</span><br><span class="line">			br.close();</span><br><span class="line">			is.close();</span><br><span class="line">			socket.close();</span><br><span class="line">			ss.close();</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注：<br>    1. 通过换host可以实现局域网下访问，要有以下两个条件<br>        1. 但是需要有相同的序列号这里使用的是IL<br>        2. Pet所在的包要相同</p>
+<h2 id="服务器常开例程2（死循环方式-Thread）"><a href="#服务器常开例程2（死循环方式-Thread）" class="headerlink" title="服务器常开例程2（死循环方式+Thread）"></a>服务器常开例程2（死循环方式+Thread）</h2><p>服务端：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.net.InetAddress;</span><br><span class="line"><span class="keyword">import</span> java.net.ServerSocket;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 宠物店 服务器端 </span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PetServer</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//1.建立一个服务器Socket（ServerSocket）绑定指定端口并开始监听</span></span><br><span class="line">			ServerSocket serverSocket=<span class="keyword">new</span> ServerSocket(<span class="number">8800</span>);</span><br><span class="line">			<span class="comment">//2.使用accept()方法阻塞等待监听，获得新的连接</span></span><br><span class="line">			Socket socket=<span class="keyword">null</span>;</span><br><span class="line">			<span class="comment">//记录注册宠物的数量</span></span><br><span class="line">			<span class="keyword">int</span> num=<span class="number">0</span>;</span><br><span class="line">			<span class="comment">//一直处于监听状态</span></span><br><span class="line">			<span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</span><br><span class="line">				socket=serverSocket.accept();</span><br><span class="line">				ServerThread serverThread=<span class="keyword">new</span> ServerThread(socket);</span><br><span class="line">				serverThread.start();</span><br><span class="line">				num++;</span><br><span class="line">				System.out.println(<span class="string">"有"</span>+num+<span class="string">"只宠物在本店注册!\n"</span>);</span><br><span class="line">				</span><br><span class="line">				<span class="comment">//获得客户（宠物主人）的IP信息</span></span><br><span class="line">				InetAddress ia=socket.getInetAddress();</span><br><span class="line">				<span class="comment">//获得ip</span></span><br><span class="line">				String ip=ia.getHostAddress();</span><br><span class="line">				System.out.println(<span class="string">"本宠物主人的IP地址为："</span>+ip);</span><br><span class="line">				<span class="comment">//获得主机名</span></span><br><span class="line">				String name=ia.getHostName();</span><br><span class="line">				System.out.println(<span class="string">"本宠物主人的主机名为："</span>+name);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Thread类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.File;</span><br><span class="line"><span class="keyword">import</span> java.io.FileWriter;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.PrintWriter;</span><br><span class="line"><span class="keyword">import</span> java.net.Socket;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 专门的线程类</span></span><br><span class="line"><span class="comment"> * */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line">	<span class="comment">//和本线程相关的Socket</span></span><br><span class="line">	Socket socket=<span class="keyword">null</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">ServerThread</span><span class="params">(Socket socket)</span></span>&#123;</span><br><span class="line">		<span class="keyword">this</span>.socket=socket;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//线程启动:响应客户请求</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//获得输入流</span></span><br><span class="line">			InputStream is=socket.getInputStream();</span><br><span class="line">			<span class="comment">//获得流：可以对对象进行反序列化</span></span><br><span class="line">			ObjectInputStream ois=<span class="keyword">new</span> ObjectInputStream(is);</span><br><span class="line">			<span class="comment">//获得输出流</span></span><br><span class="line">			OutputStream os=socket.getOutputStream();</span><br><span class="line">			PrintWriter pw=<span class="keyword">new</span> PrintWriter(os);</span><br><span class="line">			BufferedWriter writer = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> FileWriter(<span class="keyword">new</span> File(<span class="string">"pet.txt"</span>), <span class="keyword">true</span>));</span><br><span class="line">			<span class="comment">//4.读取宠物信息,将宠物信息保存到文件中去</span></span><br><span class="line">			Pet pet=(Pet)ois.readObject();</span><br><span class="line">			writer.write(<span class="string">"----宠物注册信息----"</span>);</span><br><span class="line">			writer.write(<span class="string">"姓名:"</span>+pet.getName());</span><br><span class="line">			writer.write(<span class="string">"品种："</span>+pet.getType());</span><br><span class="line">			writer.write(<span class="string">"性别："</span>+pet.getGender());</span><br><span class="line">			writer.flush();</span><br><span class="line">			</span><br><span class="line">			<span class="comment">//给宠物主人一个响应</span></span><br><span class="line">			String reply=<span class="string">"恭喜，您的宠物已经在本店注册成功!"</span>;</span><br><span class="line">			pw.write(reply);</span><br><span class="line">			pw.flush();</span><br><span class="line">			<span class="comment">//关闭资源</span></span><br><span class="line">			pw.close();</span><br><span class="line">			os.close();</span><br><span class="line">			ois.close();</span><br><span class="line">			is.close();</span><br><span class="line">			socket.close();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			<span class="comment">// TODO Auto-generated catch block</span></span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="比较两种服务器常开的："><a href="#比较两种服务器常开的：" class="headerlink" title="比较两种服务器常开的："></a>比较两种服务器常开的：</h3><pre><code>1.     第一种的思路是：
+    1. 服务器整体写一个循环，这个循环中包含全部的内容，ServerSocket对象和以及想的close()
+    2. 这个种方法操作流程是：一个客户端访问完，这个循环走到accept()方法处，等待下一次客户端的访问（server就是一个苦力，真可怜个）。
+2. 第二种的思路是：
+    1. 首先是写一个循环，循环的作用是让服务器不停止运行，然后，写一个Thread类
+    2. 这个类的入口是:accpet()方法产生的socket对象
+    3. 执行的内容是：获取客户端内容，然后给一个回馈    
+    4. Thread类写完之后，最后在while()循环中开启Thread的一个线程，并计数
+    5. 这种方法执行的流程是：整个过程可以看成是一个生活场景。Server.class就像一个前台人员，她的主要任务有两个：一个是迎接来宾(client.class的访问)，一个是命令他的小弟Thread的对象去完成当前用户的要求，然后她接着笑脸迎接下一个用户（boss就是boss，美女会笑就行，她其实也没干啥）</code></pre><p><img src="/2017/07/03/web%E5%BC%80%E5%8F%91/czh_java/7.03%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/%E2%80%A2%20StarUML%20StarUML,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%882.52.11.png" alt></p>
+<pre><code>3. 区别：
+    1. 在每次一个client访问模式下，这两种是没有区别的
+    2. 但是，当多个client并行访问时，第一种是无法实现的，因为所有的任务都是他一个人来执行，干完一个才能干下一个。第二种是可以实现的，在这种情况下有一个团伙，美女boss管理者一堆小弟</code></pre><h2 id="两种客户端和服务端交互方式，其实都行，不过习惯使用第二种："><a href="#两种客户端和服务端交互方式，其实都行，不过习惯使用第二种：" class="headerlink" title="两种客户端和服务端交互方式，其实都行，不过习惯使用第二种："></a>两种客户端和服务端交互方式，其实都行，不过习惯使用第二种：</h2><p>第一种：BufferedWriter</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">OutputStream  is2 = socket.getOutputStream();</span><br><span class="line">BufferedWriter bw = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(is2));</span><br><span class="line"></span><br><span class="line">bw.write(<span class="string">"name : "</span>+pet.getName()+<span class="string">"id :"</span>+pet.getSex());</span><br><span class="line">bw.flush();</span><br><span class="line">bw.close();</span><br></pre></td></tr></table></figure>
+<p>第二种：使用PrintWriter</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OutputStream os = socket.getOutputStream();</span><br><span class="line">PrintWriter pw = <span class="keyword">new</span> PrintWriter(os);</span><br><span class="line"></span><br><span class="line">pw.write(<span class="string">"客户端已得到pet对象"</span>);</span><br><span class="line">pw.close();</span><br></pre></td></tr></table></figure>
+<p><strong>注：细节中应该还是有区别的，没有仔细的测试！</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1507,7 +1686,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-count">1157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

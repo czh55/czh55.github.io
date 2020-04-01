@@ -158,321 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mac%20%E5%AE%89%E8%A3%85maven/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mac%20%E5%AE%89%E8%A3%85maven/" class="post-title-link" itemprop="url">mac 安装maven</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-22 11:43:00" itemprop="dateCreated datePublished" datetime="2018-02-22T11:43:00+08:00">2018-02-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mac%20%E5%AE%89%E8%A3%85maven/" class="post-meta-item leancloud_visitors" data-flag-title="mac 安装maven" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>724</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月22日 上午11:43</p>
-<h3 id="理解maven"><a href="#理解maven" class="headerlink" title="理解maven"></a>理解maven</h3><p><a href="http://www.trinea.cn/android/maven/" target="_blank" rel="noopener">介绍maven的作用、核心概念(Pom、Repositories、Artifact、Goal)、用法、常用参数和命令以及简单故障排除、扩展及配置</a></p>
-<h3 id="下载："><a href="#下载：" class="headerlink" title="下载："></a>下载：</h3><p><a href="https://segmentfault.com/a/1190000004673927" target="_blank" rel="noopener">Mac下安装配置maven的问题小记 - yangbai - SegmentFault 思否</a></p>
-<h3 id="安装maven的位置："><a href="#安装maven的位置：" class="headerlink" title="安装maven的位置："></a>安装maven的位置：</h3><p><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mac%20%E5%AE%89%E8%A3%85maven/CA53A57B-A405-4094-B2E9-3557305693CC.png" alt></p>
-<h3 id="更改环境变量-bash-profile："><a href="#更改环境变量-bash-profile：" class="headerlink" title="更改环境变量.bash_profile："></a>更改环境变量.bash_profile：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ czh$ sudo open -e .bash_profile</span><br><span class="line">Password:</span><br><span class="line">localhost:~ czh$ source ~&#x2F;.bash_profile</span><br><span class="line">localhost:~ czh$  mvn -version</span><br><span class="line">Apache Maven 3.0.5 (r01de14724cdef164cd33c7c8c2fe155faf9602da; 2013-02-19 21:51:28+0800)</span><br><span class="line">Maven home: &#x2F;Library&#x2F;apache-maven-3.0.5</span><br><span class="line">Java version: 1.7.0_80, vendor: Oracle Corporation</span><br><span class="line">Java home: &#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines&#x2F;jdk1.7.0_80.jdk&#x2F;Contents&#x2F;Home&#x2F;jre</span><br><span class="line">Default locale: zh_CN, platform encoding: UTF-8</span><br><span class="line">OS name: &quot;mac os x&quot;, version: &quot;10.13.3&quot;, arch: &quot;x86_64&quot;, family: &quot;mac&quot;</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mac%20%E5%AE%89%E8%A3%85maven/8C434371-9B48-4328-88FB-50C13765E1D9.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">idea设置+新建maven项目</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-22 11:08:00" itemprop="dateCreated datePublished" datetime="2018-02-22T11:08:00+08:00">2018-02-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/" class="post-meta-item leancloud_visitors" data-flag-title="idea设置+新建maven项目" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>976</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月22日 上午11:08</p>
-<p>idea中配置jdk：<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/49CF45A9-51AF-49A8-869B-A37DD891BF93.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/C7F2D3F4-65EB-4A49-A7ED-3C5B1CA75E17.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/038B5F17-FF1C-4420-B7C7-21026828ED27.png" alt></p>
-<p>idea配置maven路径：<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/E60FEF41-D81C-44F3-A272-A0FB1F5D1FB0.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/4A677F79-4BF4-4C68-B5CD-C12F6009452D.png" alt></p>
-<p>创建项目：<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/26DC133E-24FE-4BA0-BAFF-9B066518BCDC.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/644A2CD8-DBFB-47F9-987A-DBE0F51BC278.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/151DEE5A-E63A-4696-A33A-1D0ED3EFE9A0.png" alt><br>排错：<br><a href="https://www.cnblogs.com/wardensky/p/4513372.html" target="_blank" rel="noopener">maven “Generating project in Batch mode”问题的解决 - wardensky - 博客园</a><br><a href="http://www.imooc.com/wenda/detail/348288" target="_blank" rel="noopener">IDEA生成MAVEN项目报错_慕课猿问</a><br><a href="https://stackoverflow.com/questions/17223536/failed-to-execute-goal-org-apache-maven-pluginsmaven-compiler-plugin2-3-2comp" target="_blank" rel="noopener">java - Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile (default-compile) - Stack Overflow</a><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/87B792EE-A20A-4363-B0A0-EF6DABC552CF.png" alt></p>
-<p>新建文件夹：注意mark成不同的颜色来区分功能<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/15AED8A5-0504-46AC-9471-09064C7F9B48.png" alt></p>
-<p>添加服务器：Run-&gt;Edit configurations<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/AC4EECFE-DB98-4B70-98C1-4B54C13357E6.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/0FF656DA-F194-434B-A03F-B1DDB0BDD0F3.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/28304532-F26B-4E06-B794-655C05A0562E.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/74F5DC4F-44B1-41EB-AFAC-1FA204D1E91A.png" alt><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/679262E4-27F9-48D4-B1DE-56D432CE463E.png" alt><br>注：后来我又配置上了使用8088端口</p>
-<p>启动运行时报错：<br><a href="https://stackoverflow.com/questions/5698802/apache-tomcat-java-net-connectexception-connection-refused" target="_blank" rel="noopener">Apache Tomcat :java.net.ConnectException: Connection refused - Stack Overflow</a><br><a href="http://blog.csdn.net/qq_35246620/article/details/70213246" target="_blank" rel="noopener">出现 java.net.ConnectException: Connection refused 异常的原因及解决方法 - 维C果糖的博客 - CSDN博客</a><br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/3DCAF9FB-A3EB-42C7-AB8B-9D90A350BAB8.png" alt></p>
-<p>我的处理办法：关闭我手动打开的tomcat7</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">localhost:tomcat7 czh$ cd bin&#x2F;</span><br><span class="line">localhost:bin czh$ .&#x2F;shutdown.sh</span><br><span class="line">Using CATALINA_BASE:   &#x2F;usr&#x2F;local&#x2F;tomcat7</span><br><span class="line">Using CATALINA_HOME:   &#x2F;usr&#x2F;local&#x2F;tomcat7</span><br><span class="line">Using CATALINA_TMPDIR: &#x2F;usr&#x2F;local&#x2F;tomcat7&#x2F;temp</span><br><span class="line">Using JRE_HOME:        &#x2F;Library&#x2F;Java&#x2F;JavaVirtualMachines&#x2F;jdk1.7.0_80.jdk&#x2F;Contents&#x2F;Home</span><br><span class="line">Using CLASSPATH:       &#x2F;usr&#x2F;local&#x2F;tomcat7&#x2F;bin&#x2F;bootstrap.jar:&#x2F;usr&#x2F;local&#x2F;tomcat7&#x2F;bin&#x2F;tomcat-juli.jar</span><br></pre></td></tr></table></figure>
-
-<p>成功运行：<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E8%AE%BE%E7%BD%AE+%E6%96%B0%E5%BB%BAmaven%E9%A1%B9%E7%9B%AE/A4A0BAB5-3983-4AAC-A7BE-070E3DAE9C79.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/" class="post-title-link" itemprop="url">mybatis 三剑客</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-22 09:44:00" itemprop="dateCreated datePublished" datetime="2018-02-22T09:44:00+08:00">2018-02-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/" class="post-meta-item leancloud_visitors" data-flag-title="mybatis 三剑客" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>306</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月22日 下午9:44</p>
-<p>找到maven中pom的配置写法：<br><a href="http://search.maven.org/" target="_blank" rel="noopener">The Central Repository Search Engine</a></p>
-<p>从分解 解耦的角度去理解就十分的简单</p>
-<p><a href="http://blog.csdn.net/matthew_zhang/article/details/50757251" target="_blank" rel="noopener">URI Is Not Registered - CSDN博客</a></p>
-<h2 id="剑客一：使用mybatis-generator-generate生成xml，dao-pojo"><a href="#剑客一：使用mybatis-generator-generate生成xml，dao-pojo" class="headerlink" title="剑客一：使用mybatis-generator:generate生成xml，dao,pojo"></a>剑客一：使用mybatis-generator:generate生成xml，dao,pojo</h2><p><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/88034C1A-7567-4832-9BC8-9CD6F30B8E9E.png" alt></p>
-<p>生成的xml,dao,pojo<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/5F47D430-123C-43AC-9C0B-A55040A90A55.png" alt></p>
-<p>数据库字段createtime,updatetime由mysql自动生成、更新<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/DC2B8462-E287-44E1-A755-A642C60FB0BE.png" alt></p>
-<h2 id="剑客二：试用期7天"><a href="#剑客二：试用期7天" class="headerlink" title="剑客二：试用期7天"></a>剑客二：试用期7天</h2><p><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/E2581892-F543-42EC-A191-EB6094843B39.png" alt></p>
-<h2 id="剑客三：分页"><a href="#剑客三：分页" class="headerlink" title="剑客三：分页"></a>剑客三：分页</h2><p><a href="https://github.com/pagehelper/Mybatis-PageHelper" target="_blank" rel="noopener">GitHub - pagehelper/Mybatis-PageHelper: Mybatis通用分页插件</a><br><strong>这里只是提一下，具体的使用在项目开发中说</strong></p>
-<p>Pom.xml中对应的配置：<br><img src="/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/mybatis%20%E4%B8%89%E5%89%91%E5%AE%A2/38FA2AC4-C3DA-4C3B-A896-D34954A3FE36.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/22/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/idea%E4%B8%AD%E9%85%8D%E7%BD%AEgit/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1360,6 +1045,350 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/20/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85maven/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/20/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85maven/" class="post-title-link" itemprop="url">centos安装maven</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-20 11:16:00" itemprop="dateCreated datePublished" datetime="2018-02-20T11:16:00+08:00">2018-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/20/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85maven/" class="post-meta-item leancloud_visitors" data-flag-title="centos安装maven" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月20日 上午11:16</p>
+<p>下载maven：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 bin]$ cd ~&#x2F;developer&#x2F;</span><br><span class="line">[czh@centos6 developer]$ wget http:&#x2F;&#x2F;learning.happymmall.com&#x2F;maven&#x2F;apache-maven-3.0.5-bin.tar.gz</span><br><span class="line">--2018-02-20 11:18:02--  http:&#x2F;&#x2F;learning.happymmall.com&#x2F;maven&#x2F;apache-maven-3.0.5-bin.tar.gz</span><br><span class="line">正在解析主机 learning.happymmall.com... 182.92.82.103</span><br><span class="line">正在连接 learning.happymmall.com|182.92.82.103|:80... 已连接。</span><br><span class="line">已发出 HTTP 请求，正在等待回应... 200 OK</span><br><span class="line">长度：5144659 (4.9M) [text&#x2F;html]</span><br><span class="line">正在保存至: “apache-maven-3.0.5-bin.tar.gz”</span><br></pre></td></tr></table></figure>
+
+<p>解压</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 developer]$ tar -zxvf apache-maven-3.0.5-bin.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+<p>确定maven地址，修改环境变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 developer]$ cd apache-maven-3.0.5</span><br><span class="line">[czh@centos6 apache-maven-3.0.5]$ cd bin&#x2F;</span><br><span class="line">[czh@centos6 bin]$ pwd</span><br><span class="line">&#x2F;home&#x2F;czh&#x2F;developer&#x2F;apache-maven-3.0.5&#x2F;bin</span><br><span class="line">[czh@centos6 bin]$  sudo vim &#x2F;etc&#x2F;profile</span><br><span class="line">[czh@centos6 bin]$ source &#x2F;etc&#x2F;profile</span><br><span class="line">[czh@centos6 bin]$ mvn -version</span><br><span class="line">Apache Maven 3.0.5 (r01de14724cdef164cd33c7c8c2fe155faf9602da; 2013-02-19 21:51:28+0800)</span><br><span class="line">Maven home: &#x2F;home&#x2F;czh&#x2F;developer&#x2F;apache-maven-3.0.5</span><br><span class="line">Java version: 1.7.0_80, vendor: Oracle Corporation</span><br><span class="line">Java home: &#x2F;usr&#x2F;java&#x2F;jdk1.7.0_80&#x2F;jre</span><br><span class="line">Default locale: zh_CN, platform encoding: UTF-8</span><br><span class="line">OS name: &quot;linux&quot;, version: &quot;2.6.32-642.el6.x86_64&quot;, arch: &quot;amd64&quot;, family: &quot;unix&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.7.0_80</span><br><span class="line">export MAVEN_HOME&#x3D;&#x2F;home&#x2F;czh&#x2F;developer&#x2F;apache-maven-3.0.5</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;jre&#x2F;lib&#x2F;rt.jar:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br><span class="line">export PATH&#x3D;$JAVA_HOME&#x2F;bin:$MAVEN_HOME&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/20/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEapache/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/20/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEapache/" class="post-title-link" itemprop="url">centos安装配置apache</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-20 10:53:00" itemprop="dateCreated datePublished" datetime="2018-02-20T10:53:00+08:00">2018-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/20/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEapache/" class="post-meta-item leancloud_visitors" data-flag-title="centos安装配置apache" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月20日 上午10:53</p>
+<p>centos下载软件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 developer]$ wget http:&#x2F;&#x2F;learning.happymmall.com&#x2F;tomcat&#x2F;apache-tomcat-7.0.73.tar.gz</span><br><span class="line">--2018-02-20 10:53:07--  http:&#x2F;&#x2F;learning.happymmall.com&#x2F;tomcat&#x2F;apache-tomcat-7.0.73.tar.gz</span><br><span class="line">正在解析主机 learning.happymmall.com... 182.92.82.103</span><br><span class="line">正在连接 learning.happymmall.com|182.92.82.103|:80... 已连接。</span><br><span class="line">已发出 HTTP 请求，正在等待回应... 200 OK</span><br><span class="line">长度：8938514 (8.5M) [text&#x2F;html]</span><br><span class="line">正在保存至: “apache-tomcat-7.0.73.tar.gz”</span><br></pre></td></tr></table></figure>
+
+<p>解压apache</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 developer]$ tar -zxvf apache-tomcat-7.0.73.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+<p>配置启动apache</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 developer]$ cd apache-tomcat-7.0.73</span><br><span class="line">[czh@centos6 apache-tomcat-7.0.73]$ ll</span><br><span class="line">总用量 116</span><br><span class="line">drwxr-xr-x. 2 czh czh  4096 2月  20 10:56 bin</span><br><span class="line">drwxr-xr-x. 2 czh czh  4096 11月  8 2016 conf</span><br><span class="line">drwxr-xr-x. 2 czh czh  4096 2月  20 10:56 lib</span><br><span class="line">-rw-r--r--. 1 czh czh 56846 11月  8 2016 LICENSE</span><br><span class="line">drwxr-xr-x. 2 czh czh  4096 11月  8 2016 logs</span><br><span class="line">-rw-r--r--. 1 czh czh  1239 11月  8 2016 NOTICE</span><br><span class="line">-rw-r--r--. 1 czh czh  8965 11月  8 2016 RELEASE-NOTES</span><br><span class="line">-rw-r--r--. 1 czh czh 16195 11月  8 2016 RUNNING.txt</span><br><span class="line">drwxr-xr-x. 2 czh czh  4096 2月  20 10:56 temp</span><br><span class="line">drwxr-xr-x. 7 czh czh  4096 11月  8 2016 webapps</span><br><span class="line">drwxr-xr-x. 2 czh czh  4096 11月  8 2016 work</span><br><span class="line">[czh@centos6 apache-tomcat-7.0.73]$ vim conf&#x2F;server.xml</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2018/02/20/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEapache/188B1F74-FA9B-4054-A845-D33371E476F5.png" alt></p>
+<p>启动apache</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 ftpfile]$ cd ~&#x2F;developer&#x2F;apache-tomcat-7.0.73&#x2F;bin&#x2F;</span><br><span class="line">[czh@centos6 bin]$ .&#x2F;startup.sh</span><br><span class="line">Using CATALINA_BASE:   &#x2F;home&#x2F;czh&#x2F;developer&#x2F;apache-tomcat-7.0.73</span><br><span class="line">Using CATALINA_HOME:   &#x2F;home&#x2F;czh&#x2F;developer&#x2F;apache-tomcat-7.0.73</span><br><span class="line">Using CATALINA_TMPDIR: &#x2F;home&#x2F;czh&#x2F;developer&#x2F;apache-tomcat-7.0.73&#x2F;temp</span><br><span class="line">Using JRE_HOME:        &#x2F;usr&#x2F;java&#x2F;jdk1.7.0_80</span><br><span class="line">Using CLASSPATH:       &#x2F;home&#x2F;czh&#x2F;developer&#x2F;apache-tomcat-7.0.73&#x2F;bin&#x2F;bootstrap.jar:&#x2F;home&#x2F;czh&#x2F;developer&#x2F;apache-tomcat-7.0.73&#x2F;bin&#x2F;tomcat-juli.jar</span><br><span class="line">Tomcat started.</span><br></pre></td></tr></table></figure>
+
+<p>关闭防火墙在主机URL访问<br><a href="http://blog.csdn.net/u010485134/article/details/54318872" target="_blank" rel="noopener">centos防火墙开启、关闭、查看状态 - CSDN博客</a><br>注：这里通过修改iptables防火墙配置就可以，看后面文章的配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 bin]$ ifconfig</span><br><span class="line">eth0      Link encap:Ethernet  HWaddr 00:1C:42:2C:1D:A1</span><br><span class="line">          inet addr:192.168.16.111  Bcast:192.168.16.255  Mask:255.255.255.0</span><br><span class="line">          inet6 addr: fe80::21c:42ff:fe2c:1da1&#x2F;64 Scope:Link</span><br><span class="line">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1</span><br><span class="line">          RX packets:283454 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:169731 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:1000</span><br><span class="line">          RX bytes:288476450 (275.1 MiB)  TX bytes:12797131 (12.2 MiB)</span><br><span class="line"></span><br><span class="line">lo        Link encap:Local Loopback</span><br><span class="line">          inet addr:127.0.0.1  Mask:255.0.0.0</span><br><span class="line">          inet6 addr: ::1&#x2F;128 Scope:Host</span><br><span class="line">          UP LOOPBACK RUNNING  MTU:65536  Metric:1</span><br><span class="line">          RX packets:2429 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:2429 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:0</span><br><span class="line">          RX bytes:210544 (205.6 KiB)  TX bytes:210544 (205.6 KiB)</span><br><span class="line"></span><br><span class="line">virbr0    Link encap:Ethernet  HWaddr 52:54:00:26:39:37</span><br><span class="line">          inet addr:192.168.122.1  Bcast:192.168.122.255  Mask:255.255.255.0</span><br><span class="line">          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1</span><br><span class="line">          RX packets:0 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">          collisions:0 txqueuelen:0</span><br><span class="line">          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)</span><br><span class="line"></span><br><span class="line">[czh@centos6 bin]$ service iptables stop</span><br><span class="line">iptables: Only usable by root.                             [WARNING]</span><br><span class="line">[czh@centos6 bin]$ sudo service iptables stop</span><br><span class="line">[sudo] password for czh:</span><br><span class="line">iptables: Setting chains to policy ACCEPT: filter          [  OK  ]</span><br><span class="line">iptables: Flushing firewall rules:                         [  OK  ]</span><br><span class="line">iptables: Unloading modules:                               [  OK  ]</span><br><span class="line">[czh@centos6 bin]$</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/20/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEgit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/20/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEgit/" class="post-title-link" itemprop="url">centos安装配置git</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-20 09:18:00" itemprop="dateCreated datePublished" datetime="2018-02-20T09:18:00+08:00">2018-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/20/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEgit/" class="post-meta-item leancloud_visitors" data-flag-title="centos安装配置git" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月20日 下午9:18</p>
+<p>下载git2.8</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 developer]$ sudo wget http:&#x2F;&#x2F;learning.happymmall.com&#x2F;git&#x2F;git-v2.8.0.tar.gz</span><br><span class="line">--2018-02-20 21:34:58--  http:&#x2F;&#x2F;learning.happymmall.com&#x2F;git&#x2F;git-v2.8.0.tar.gz</span><br><span class="line">正在解析主机 learning.happymmall.com... 182.92.82.103</span><br><span class="line">正在连接 learning.happymmall.com|182.92.82.103|:80... 已连接。</span><br><span class="line">已发出 HTTP 请求，正在等待回应... 200 OK</span><br><span class="line">长度：5825295 (5.6M) [text&#x2F;html]</span><br><span class="line">正在保存至: “git-v2.8.0.tar.gz”</span><br></pre></td></tr></table></figure>
+
+<p>安装依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install zlib-devel openssl-devel cpio expat-devel gettext-devel curl-devel  perl-ExtUtils-CBuilder perl-ExtUtils-MakeMaker</span><br></pre></td></tr></table></figure>
+
+<p>编译git</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 developer]$ cd git-2.8.0&#x2F;</span><br><span class="line">[czh@centos6 git-2.8.0]$ sudo make prefix&#x3D;&#x2F;user&#x2F;local all</span><br></pre></td></tr></table></figure>
+
+<p>安装git</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo make prefix&#x3D;&#x2F;usr&#x2F;local install</span><br></pre></td></tr></table></figure>
+
+<p>查看git版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 git-2.8.0]$ git --version</span><br><span class="line">git version 2.8.0</span><br></pre></td></tr></table></figure>
+
+<p>新建一个文件夹gitdownload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 git-2.8.0]$  cd ~&#x2F;developer&#x2F;</span><br><span class="line">[czh@centos6 developer]$ mkdir gitdownload</span><br></pre></td></tr></table></figure>
+
+<p>生成秘钥：<br><a href="https://zhidao.baidu.com/question/712206549106448205.html" target="_blank" rel="noopener">如何建立linux ssh信任的方法与常见问题_百度知道</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 .ssh]$ ssh-keygen -t rsa -C &quot;czh55@qq.com&quot;</span><br><span class="line">Generating public&#x2F;private rsa key pair.</span><br><span class="line">Enter file in which to save the key (&#x2F;home&#x2F;czh&#x2F;.ssh&#x2F;id_rsa):</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in &#x2F;home&#x2F;czh&#x2F;.ssh&#x2F;id_rsa.</span><br><span class="line">Your public key has been saved in &#x2F;home&#x2F;czh&#x2F;.ssh&#x2F;id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">31:a1:b2:53:f8:da:40:05:60:15:60:d8:34:80:f5:c9 czh55@qq.com</span><br><span class="line">The key&#39;s randomart image is:</span><br><span class="line">+--[ RSA 2048]----+</span><br><span class="line">|o*O++o. .        |</span><br><span class="line">|oo.+ + . .       |</span><br><span class="line">|    E o o        |</span><br><span class="line">|   . &#x3D;   o       |</span><br><span class="line">|    + . S        |</span><br><span class="line">|     &#x3D;           |</span><br><span class="line">|    . .          |</span><br><span class="line">|                 |</span><br><span class="line">|                 |</span><br><span class="line">+-----------------+</span><br><span class="line">[czh@centos6 .ssh]$ ssh-add ~&#x2F;.ssh&#x2F;id_rsa</span><br><span class="line">Identity added: &#x2F;home&#x2F;czh&#x2F;.ssh&#x2F;id_rsa (&#x2F;home&#x2F;czh&#x2F;.ssh&#x2F;id_rsa)</span><br><span class="line">[czh@centos6 .ssh]$ ll</span><br><span class="line">总用量 8</span><br><span class="line">-rw-------. 1 czh czh 1675 2月  21 00:11 id_rsa</span><br><span class="line">-rw-r--r--. 1 czh czh  394 2月  21 00:11 id_rsa.pub</span><br><span class="line">[czh@centos6 .ssh]$ cat ~&#x2F;.ssh&#x2F;id_rsa.pub</span><br><span class="line">ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAx3IlwhJZNJXM4BeYPmdrdURMAZxd&#x2F;2k6ePmcJnddS20R4Y13N4dsqkGiK2qaQIJmHv07O5&#x2F;hiaUztq&#x2F;HHFj9bhNCxvNVjFZq6k6IWfNYj6eUuSc&#x2F;5wtdsoGRkVKjxxW&#x2F;Cxw21SmwM7d8ax7&#x2F;4QTJTLM2&#x2F;EcOBtA+v6QZ1++2Khj0slhhxIixxyccxV0NG0SvLo3oKG4alfUU43Pt7+a1BL7jUXdnUzr5GTpF6Z2XgBjn3NkSjQZb5EYcI14UzwldR7H6JBIqQySG1VAEIitasJFLEMRKVyhnyOdR+p6jkX7WNYerP&#x2F;BB9OtqUg7OSFlkk7OXM1D49i+83pr00YDiFQ&#x3D;&#x3D; czh55@qq.com</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/02/20/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEgit/1ED19F82-9184-413B-A19F-2CEE1BE18ED7.png" alt></p>
+<p>编码配置：<br><img src="/2018/02/20/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AEgit/1A98B398-1398-4906-A59E-056638189A80.png" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 gitdownload]$ git config --global gui.encoding utf-8</span><br><span class="line">[czh@centos6 gitdownload]$ git config --global core.quotepath off</span><br></pre></td></tr></table></figure>
+
+<p>克隆：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 developer]$ cd gitdownload&#x2F;</span><br><span class="line">[czh@centos6 gitdownload]$ git clone git@github.com:czh55&#x2F;imooc.git</span><br><span class="line">正克隆到 &#39;imooc&#39;...</span><br><span class="line">The authenticity of host &#39;github.com (192.30.255.112)&#39; can&#39;t be established.</span><br><span class="line">RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.</span><br><span class="line">Are you sure you want to continue connecting (yes&#x2F;no)? yea</span><br><span class="line">Please type &#39;yes&#39; or &#39;no&#39;: yes</span><br><span class="line">Warning: Permanently added &#39;github.com,192.30.255.112&#39; (RSA) to the list of known hosts.</span><br><span class="line">remote: Counting objects: 3, done.</span><br><span class="line">remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0</span><br><span class="line">接收对象中: 100% (3&#x2F;3), 完成.</span><br><span class="line">检查连接... 完成。</span><br><span class="line">[czh@centos6 gitdownload]$ ll</span><br><span class="line">总用量 4</span><br><span class="line">drwxrwxr-x. 3 czh czh 4096 2月  21 00:17 imooc</span><br><span class="line">[czh@centos6 gitdownload]$</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1430,7 +1459,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-count">1157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

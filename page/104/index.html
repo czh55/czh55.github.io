@@ -158,319 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/2_4thinking.cpp%20%E7%BA%BF%E6%80%A7%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/2_4thinking.cpp%20%E7%BA%BF%E6%80%A7%E8%A1%A8/" class="post-title-link" itemprop="url">2_4thinking.cpp 线性表</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-24 04:15:00" itemprop="dateCreated datePublished" datetime="2017-09-24T04:15:00+08:00">2017-09-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2017/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2017</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/2_4thinking.cpp%20%E7%BA%BF%E6%80%A7%E8%A1%A8/" class="post-meta-item leancloud_visitors" data-flag-title="2_4thinking.cpp 线性表" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月24日 下午4:15</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>)</span><br><span class="line">思路描述：</span><br><span class="line">使用冒泡法。但是会交换变量，一个变量i不够用。这种方式不行；</span><br><span class="line">i%<span class="number">10</span></span><br><span class="line">i/<span class="number">10</span></span><br><span class="line"></span><br><span class="line">i = <span class="number">0</span>*<span class="number">10</span> + <span class="number">0</span> ;</span><br><span class="line"><span class="keyword">while</span>(i/<span class="number">10</span> &lt; N<span class="number">-1</span>)&#123;</span><br><span class="line">	<span class="keyword">if</span>(A[i/<span class="number">10</span>] &lt; A[i/<span class="number">10</span> + <span class="number">1</span>])&#123;</span><br><span class="line">		i = i/<span class="number">10</span> * <span class="number">10</span> + A[i/<span class="number">10</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	i = (i/<span class="number">10</span> +<span class="number">1</span>) * <span class="number">10</span> + A[i/<span class="number">10</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;(i%<span class="number">10</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N  9</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> A[N] = &#123;<span class="number">8</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">9</span>&#125;;</span><br><span class="line">    i = <span class="number">0</span> * <span class="number">10</span> + A[<span class="number">0</span>];<span class="comment">//这里不能写成i = 0*10 + 0，否则0会作为比较的对象；这里用A中的谁都行</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(i/<span class="number">10</span> &lt; N<span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(A[i/<span class="number">10</span>] &lt; i%<span class="number">10</span>)&#123;<span class="comment">//A[i/10] &lt; A[i/10 + 1] 这里的比较对象错了。</span></span><br><span class="line">            i = i/<span class="number">10</span> * <span class="number">10</span> + A[i/<span class="number">10</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        i = (i/<span class="number">10</span> +<span class="number">1</span>) * <span class="number">10</span> + i%<span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;(i%<span class="number">10</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// (2)</span></span><br><span class="line"><span class="comment">// 思路描述:</span></span><br><span class="line"><span class="comment">// 这要求L指向开始节点。</span></span><br><span class="line"><span class="comment">// 先统计一下一共有i个节点</span></span><br><span class="line"><span class="comment">// 然后统计每次i--;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reprint</span><span class="params">(LNode *&amp;L)</span></span>&#123;</span><br><span class="line">	LNode *</span><br><span class="line">	<span class="keyword">while</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 书本解释：在表不为空的情况下先递归的逆序打印表中的第一个数据之后的数据</span></span><br><span class="line">我的解释：题可以这样理解：先打印出当前节点后面的data值，然后再打印当前节点的data值。</span><br><span class="line">如果这么理解，把这句话翻译成程序的时候，不就自然使用递归了吗。</span><br><span class="line">关键是你不会这么想</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rePrint</span><span class="params">(LNode *&amp;L)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(L! = <span class="literal">NULL</span>)&#123;</span><br><span class="line">		rePrint(L-&gt;next);</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;L-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// (3)</span></span><br><span class="line"><span class="comment">// 这道题中的一个条件3n/2这个条件，</span></span><br><span class="line"><span class="comment">// 我认为需要两个变量max min ，每次循环到一个A[i]的时候，就要比较两次，那么一共就要比较2n次</span></span><br><span class="line"><span class="comment">// 但是我忽略了min 和 max是相互矛盾的，所以比较一次就行了</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 其实也可以这样理解：书中的这种解法，就是抓住了矛盾，然后将我的算法优化了。</span></span><br><span class="line"><span class="comment">// 所以，优化的时候抓住矛盾对立面也是一种优化方式</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">FindMaxMin</span><span class="params">(<span class="keyword">int</span> A[],<span class="keyword">int</span> n,<span class="keyword">int</span> &amp;<span class="built_in">max</span>,<span class="keyword">int</span> &amp;<span class="built_in">min</span>)</span></span>&#123;</span><br><span class="line">	<span class="built_in">max</span> = <span class="built_in">min</span> = A[<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n;++i)&#123;</span><br><span class="line">		<span class="keyword">if</span>(A[i] &gt; <span class="built_in">max</span>)&#123;</span><br><span class="line">			<span class="built_in">max</span> = A[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(A[i] &lt; <span class="built_in">min</span> )&#123;</span><br><span class="line">			<span class="built_in">min</span> = A[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 综合应用题</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// (1)</span></span><br><span class="line">思路描述：</span><br><span class="line">每个递归传入的都是i= <span class="number">0</span>；</span><br><span class="line">先查询出当前节点后面的节点的个数，</span><br><span class="line">然后自己本节点再i++;</span><br><span class="line">判断自己是不是i==<span class="number">5</span></span><br><span class="line">如果是则输出，并<span class="keyword">break</span></span><br><span class="line">最后返回i，给上一个层</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> findElem(LNode *&amp;L,<span class="keyword">int</span> i)&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(L! = <span class="literal">NULL</span>)&#123;</span><br><span class="line">		i = rePrint(L-&gt;next,i);</span><br><span class="line">		i++;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(i==<span class="number">5</span>)&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;L-&gt;data&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> i;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;LNode;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findElem</span><span class="params">(LNode *&amp;L)</span></span>&#123;<span class="comment">//由于这里每次都是传入i=0，所以可以直接写在程序里，不用作为参数。</span></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(L != <span class="literal">NULL</span>)&#123;</span><br><span class="line">        i = rePrint(L-&gt;next);</span><br><span class="line">        i++;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(i==<span class="number">5</span>)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;L-&gt;data&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> i;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    LNode *L = (LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));</span><br><span class="line">    L-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    LNode *r;</span><br><span class="line">    r = L;</span><br><span class="line">    </span><br><span class="line">    LNode *p;<span class="comment">//新产生的</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">7</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>&#125;;</span><br><span class="line">    <span class="keyword">int</span> n = <span class="number">7</span>;<span class="comment">//数组长度</span></span><br><span class="line">    <span class="keyword">int</span> i ;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n ;i++)&#123;</span><br><span class="line">        p = (LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode));</span><br><span class="line">        p-&gt;data=a[i];</span><br><span class="line">        p-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        r-&gt;next =  p ;</span><br><span class="line">        </span><br><span class="line">        r = p;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    findElem(L);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 总结：我的这种使用递归的解法启发来源于上面的题，我在原来的基础上添加了返回值，也按上面说的把题概括成了能用递归来实现的语言。</span></span><br><span class="line"><span class="comment">// 但是我忽略了，题中要求返回值=1 代表成功，=0代表失败，这就说明我不能用返回值来表示层数，这就混乱了。</span></span><br><span class="line"><span class="comment">// 因此，我的解法是错的。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findElem</span><span class="params">(LNode *&amp;L)</span></span>&#123;</span><br><span class="line">	LNode *p = L-&gt;next;</span><br><span class="line">	LNode *q = L;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(p!= <span class="literal">NULL</span>)&#123;</span><br><span class="line"></span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">		i++;</span><br><span class="line">		<span class="keyword">if</span>(i&gt;=<span class="number">5</span>)&#123; <span class="comment">//这里不能写等于，大于5之后还有继续后移呢。</span></span><br><span class="line">			q = q-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(q == L )&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;q-&gt;data&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 总结：</span></span><br><span class="line"><span class="comment">// 我一开始的分析思路是：</span></span><br><span class="line"><span class="comment">// 第一步先循环到第5个</span></span><br><span class="line"><span class="comment">// 第二步判断是否有五个，如果有才开始从这里q才开始q = q-&gt;next;</span></span><br><span class="line"><span class="comment">// 如果没有5个直接return 0；</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 其实上面这的写程序也没问题。但是像书中的程序，他将第一步和第二步进行的融合，最后对于有没有5个，融合之后也有了统一的判断标准。</span></span><br><span class="line"></span><br><span class="line">整体总结：</span><br><span class="line">这篇thinking的题真的需要你思考</span><br><span class="line">这些题不仅仅需要我们有在practice中总结的思维描述+特征</span><br><span class="line">还加上了一些在完成功能的情况下，如何将代码进行优化，多个步骤的融合（上面这道题）+ 解决问题的技巧（第一道题） + 选择递归（第二题，需要对题进行递归的概括）+不是能完成功能的就是对的（上面这道题）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">prictice :保证不要在思考算法过程中，还在为操作发愁。即便有了思维还担心自己写不出来，或者写的过程中被打断</span><br><span class="line">thinking :需要一些思考，设计一些算法了。不是那种一看题就会的了。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如何提高自己设计算法的效率。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// （2）</span></span><br><span class="line"><span class="comment">// 基本思想：利用模n，比如说R[i]--&gt; R[n-(k-i)] R[n-(k-i)]--&gt;R[n-(k-i)]</span></span><br><span class="line"><span class="comment">// 实现步骤：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这道题我不会做！我知道最笨的方法。一个个移动。</span></span><br><span class="line"><span class="comment">// 问题出现哪里？：找不到其中的特点，不会使用其中的技巧。</span></span><br><span class="line">这些题不是不会做，是找不到更好的方法。</span><br><span class="line">好方法来源于哪呢？</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Reverse</span><span class="params">(<span class="keyword">int</span> R[],<span class="keyword">int</span> l ,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">int</span> temp;</span><br><span class="line">	<span class="keyword">for</span>(i = l,j = r;i&lt;j;++i,++j)&#123;</span><br><span class="line">		temp = R[i];</span><br><span class="line">		R[i] = R[j];</span><br><span class="line">		R[j] = temp;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RCR</span><span class="params">(<span class="keyword">int</span> R[],<span class="keyword">int</span> n,<span class="keyword">int</span> p)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(p&lt;<span class="number">0</span>||p&gt;n)&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"ERROR"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		Reverse(R,<span class="number">0</span>,p<span class="number">-1</span>);</span><br><span class="line">		Reverse(R,p,n<span class="number">-1</span>);</span><br><span class="line">		Reverse(R,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// （3）</span></span><br><span class="line">基本思想：计算全部元素出现的次数，直达一个元素个数过半。</span><br><span class="line">优化：添加一个数组，标志每个元素是否已被查询过</span><br><span class="line">实现步骤：双层循环遍历，复杂度（n方）</span><br><span class="line"></span><br><span class="line">书中的算法：自己是肯定想不出来，我们不可能去推理证明这种算法的正确性，直接背会。</span><br><span class="line">这些算法是其实是需要严格的理论证明，才可以使用的。</span><br><span class="line">给我的感觉就是一道高数题，让你证明这个理论是正确的。</span><br><span class="line"></span><br><span class="line">这么做的目的：将复杂度降为n（n)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">majority</span><span class="params">(<span class="keyword">int</span> A[],<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i ,c ,count=<span class="number">1</span>;</span><br><span class="line">	c = A[<span class="number">0</span>];</span><br><span class="line">	<span class="keyword">for</span>(i= <span class="number">1</span>; i&lt;n;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(A[i]==c)&#123;</span><br><span class="line">			count++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">if</span>(count &gt; <span class="number">0</span>)&#123;</span><br><span class="line">				count--;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span>&#123;</span><br><span class="line">				<span class="keyword">if</span>(<span class="built_in">cout</span>&gt;<span class="number">0</span>)&#123;</span><br><span class="line">					count--;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span>&#123;</span><br><span class="line">					c= A[i];</span><br><span class="line">					count= <span class="number">1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(count &gt; <span class="number">0</span> )&#123;</span><br><span class="line">		<span class="keyword">for</span>(i = count = <span class="number">0</span> ; i &lt; n ;i++)&#123;<span class="comment">//将count的清零，放在了for中</span></span><br><span class="line">			<span class="keyword">if</span>(A[i] == c)&#123;</span><br><span class="line">				count++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(count&gt;n/<span class="number">2</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> c;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%BA%90%E7%A0%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%BA%90%E7%A0%81/" class="post-title-link" itemprop="url">数据结构源码</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-24 04:15:00" itemprop="dateCreated datePublished" datetime="2017-09-24T04:15:00+08:00">2017-09-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2017/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2017</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%BA%90%E7%A0%81/" class="post-meta-item leancloud_visitors" data-flag-title="数据结构源码" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>184</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月24日 下午4:15</p>
-<p><a href="2_1.cpp">2_1.cpp</a><a href="2_2.cpp">2_2.cpp</a><br><a href="wrong.cpp">wrong.cpp</a><br><a href="2_3practice.cpp">2_3practice.cpp</a><a href="2_4thinking.cpp">2_4thinking.cpp</a></p>
-<p><a href="3_1base.cpp">3_1base.cpp</a><a href="3_2thinking.cpp">3_2thinking.cpp</a></p>
-<p><a href="5_1base.cpp">5_1base.cpp</a></p>
-<p><a href="6_1base.cpp">6_1base.cpp</a><a href="6_2practice.cpp">6_2practice.cpp</a></p>
-<p><a href="7_1base.cpp">7_1base.cpp</a><a href="7_2practice.cpp">7_2practice.cpp</a></p>
-<p><a href="8_1base.cpp">8_1base.cpp</a><a href="8_2practice.cpp">8_2practice.cpp</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/" class="post-title-link" itemprop="url">SVN</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-18 11:08:00" itemprop="dateCreated datePublished" datetime="2017-09-18T11:08:00+08:00">2017-09-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/" class="post-meta-item leancloud_visitors" data-flag-title="SVN" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>730</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月18日 上午11:08</p>
-<ol>
-<li>下载myeclipse的svn插件,拷贝里面的内容到myeclipse的安装位置,<br>我的安装位置是: D:\myEclipse\MyEclipse 10\dropins,拷贝到这里就可以了<br><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/D9E0167F-1BFA-4514-8B05-DC25097E9101.png" alt></li>
-<li>安装服务器,很简单的一直下一步就可以了</li>
-<li>在服务器上指定项目的存储位置,在红圈里右键选择第一个,新建数据仓库,名称随便写.然后在user里面创建一个用户,用户名和密码你也随便写<br>在你新创建的仓库上,右键选择属性properties设置,选择你刚才创建的用户,add进来就可以了.服务器部分就已经搞定了!!!!<br><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/4A6E84C2-1A4C-466A-9A1B-A3924D7E21B6.png" alt><br><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/041E6C53-D600-4D4A-A510-4877E41584D8.png" alt></li>
-<li>打开你的myeclipse,开始创建一个要共享的项目吧,项目叫什么都可以,没有要求.创建好项目以后,在项目上右键选择Team选项,仔细找找,选择share project选项<br><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/34998A2D-E541-4277-AD73-A72B88D8E307.png" alt><br><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/78F83084-410B-4CB6-B6BF-5F90AABC0B09.png" alt><br>出现一个url地址,打开你的svn服务器,选择你的项目,然后右键选择拷贝当前的项目地址,然后粘贴过来<br><a href="https://Nis-PC/svn/cctv/这个地址就是你拷贝过来的,把里面的那个Nis-pc的主机名称改成你电脑的ip地址,我的是192.168.0.104" target="_blank" rel="noopener">https://Nis-PC/svn/cctv/这个地址就是你拷贝过来的,把里面的那个Nis-pc的主机名称改成你电脑的ip地址,我的是192.168.0.104</a><br><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/9E0BEC02-B6E8-4682-8B3F-9953CF33438E.png" alt><br>红圈圈就是你要分享的地址和项目了,一会给你的团队成员看看,别整差了<br><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/D328BB59-74C8-4C88-A822-C281DADF05F5.png" alt><br><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/B8735906-C691-424A-8CA1-8679939F308C.png" alt><br><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/FC32D74F-566F-4E30-821C-7EAB3ED4227A.png" alt></li>
-<li>都整完了就开始分享项目,作为团队大哥的你责任当然要大一些,分享吧,骚年!在你的项目上,右键选择”提交”按钮,你的项目就可以了<br>温馨提示,需要输入用户名和密码的时候,选择你刚才在svn服务器上创建的用户名和密码就可以<br><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/43F18DD8-3E98-4929-8C14-0B6743FB238A.png" alt></li>
-</ol>
-<hr>
-<ol start="6">
-<li>作为腿毛的我,想要看看大哥的项目怎么办?在浏览框里,右键选择import,导入项目,请选择svn检出项目</li>
-</ol>
-<p><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/455A21CA-4AF0-47C8-B017-67CA7AD6B55A.png" alt><br><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/72DC43C5-B40B-4026-A0E7-A2A95095AAD7.png" alt></p>
-<p>刚才大哥给你发过那个服务器地址吧,现在可以拷贝上了<br><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/C4F27BB4-F4B4-4A12-B9B0-6B430370D65C.png" alt><br>大功告成!!!</p>
-<p><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/9A3F6EB5-537C-49A5-A138-BE26335A1C01.png" alt></p>
-<p><img src="/2017/09/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SVN/665FAC24-9CDF-4FA4-BE27-E3CE7B5AAC99.png" alt><br><a href="http://blog.csdn.net/u014771464/article/details/52769000" target="_blank" rel="noopener">svn中 更新，提交，与资源库同步分别会有什么效果 - CSDN博客</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E7%9B%AE%E5%BD%95%EF%BC%88%E7%AE%97%E6%B3%952017%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1203,6 +890,348 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/" class="post-title-link" itemprop="url">android中对代理模式的优化+两个类的封装</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-15 08:59:00" itemprop="dateCreated datePublished" datetime="2017-09-15T08:59:00+08:00">2017-09-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-Android/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_blog/Android</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/" class="post-meta-item leancloud_visitors" data-flag-title="android中对代理模式的优化+两个类的封装" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>219</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月15日 上午8:59</p>
+<h2 id="android的两个封装"><a href="#android的两个封装" class="headerlink" title="android的两个封装"></a>android的两个封装</h2><h3 id="adapter系统原始封装"><a href="#adapter系统原始封装" class="headerlink" title="adapter系统原始封装"></a>adapter系统原始封装</h3><ol>
+<li>使用默认的视图</li>
+<li>隐藏的内容<ol>
+<li>Holder的视图（这里用传参的方式传入了）</li>
+<li>数据与视图的对应（以前通过视图set方法来手动设值）<ol>
+<li>这种方式需要严格的遵守人家的编码格式</li>
+<li>如果人家有格式转换类，使用格式转换类进行转换<br><img src="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/5BE484E8-F78B-4704-8E89-CEDF3358E45B.png" alt></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="AsyncTask封装"><a href="#AsyncTask封装" class="headerlink" title="AsyncTask封装"></a>AsyncTask封装</h3><p>从整体上看两个步骤</p>
+<ol>
+<li>获取数据</li>
+<li>处理数据</li>
+<li>他隐藏的内容<ol>
+<li>与主线程进行通信你都看不见<br><img src="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/EB24D69E-1F6C-46A9-8558-F1A12F6DB02F.png" alt></li>
+</ol>
+</li>
+</ol>
+<hr>
+<h2 id="对代理模式的改进"><a href="#对代理模式的改进" class="headerlink" title="对代理模式的改进"></a>对代理模式的改进</h2><ol>
+<li>加方法<br><img src="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/1D6DA168-21D8-442F-9884-5E60D0281B35.png" alt></li>
+<li>加缓存<br><img src="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/E46D9E05-7824-47DE-8BB1-0669C758DF9B.png" alt><br><img src="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/46FD0710-9553-4213-A701-FE536F2AD0C9.png" alt></li>
+</ol>
+<p>其他：<br><a href="http://www.apkbus.com/forum.php?mod=viewthread&tid=18204&highlight=%E5%8F%8B%E7%9B%9F%E6%9D%AF&page=1" target="_blank" rel="noopener">android四大组件 友盟杯</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/14/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E4%B8%AD%E7%BA%A7%E9%A1%B9%E7%9B%AE%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/14/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E4%B8%AD%E7%BA%A7%E9%A1%B9%E7%9B%AE%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">中级项目出现的问题</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-14 08:24:00" itemprop="dateCreated datePublished" datetime="2017-09-14T08:24:00+08:00">2017-09-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/14/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E4%B8%AD%E7%BA%A7%E9%A1%B9%E7%9B%AE%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="中级项目出现的问题" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月14日 上午8:24</p>
+<h3 id="错误一"><a href="#错误一" class="headerlink" title="错误一"></a>错误一</h3><p>The absolute uri: <a href="http://java.sun.com/jsp/jstl/core" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/core</a> cannot be resolved in either web.xml or the jar files deployed with this app</p>
+<ol>
+<li>关于包路径的：<ol>
+<li>在我使用jstl-1.2.jar这个包时，从build path上选中我在桌面上的jar包。同时我在jsp页面也添加了下面两句话。在eclipse中没有提示我报错。但是当我放在服务器上运行的时候，出现了这个错误。<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%@taglib</span> <span class="attr">prefix</span>=<span class="string">"c"</span>  <span class="attr">uri</span>=<span class="string">"http://java.sun.com/jsp/jstl/core"</span>%&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">%@taglib</span> <span class="attr">prefix</span>=<span class="string">"fmt"</span>  <span class="attr">uri</span>=<span class="string">"http://java.sun.com/jsp/jstl/fmt"</span>%&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>原因我不知道，网上说是没有导包，但我的确是导入了。我现在猜测是由于这个包eclipse没有把我从桌面上导入的包加入到项目中</li>
+<li>解决<ol>
+<li>我将 jstl-1.2.jar拷到web-inf_lib_中，这样就能保证一定会部署到服务器上</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="错误二"><a href="#错误二" class="headerlink" title="错误二"></a>错误二</h3><ol>
+<li>我在添加记住账户名功能时，功能逻辑上没啥问题，但是在最后一步中，我通过getCookies获取的cookies，取到后将cookie中包含的账户名输出出来，但是结果始终是不对。</li>
+<li>我当时的解决方式是：从网上重找了一个代码，不去琢磨我哪错了</li>
+<li>现在意识到了我哪错了：我和人家的代码对比，少了一个判断<code>if(c[i].getName().equals(&quot;manager&quot;))</code>。错误的原因是我认为浏览器中就一个cookie，因为我就给他设置了一个，但是我忘记了还有其它一个cookie会自动，或者框架中会设置。少了这个判断，永远取到的都是最后一个cookie。</li>
+<li>参考：<a href="http://www.cnblogs.com/thrilling/p/4924077.html" target="_blank" rel="noopener">servlet方式通过Cookie记住登录时的用户名和密码 - 映日残阳 - 博客园</a></li>
+<li>完整代码<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//el表达式</span></span><br><span class="line">	String names=<span class="string">""</span>;</span><br><span class="line">	String pwd=<span class="string">""</span>;</span><br><span class="line">	<span class="comment">//取出Cookie</span></span><br><span class="line">	Cookie [] c=request.getCookies();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;c.length;i++)&#123;</span><br><span class="line">	  <span class="keyword">if</span>(c[i].getName().equals(<span class="string">"manager"</span>))&#123;</span><br><span class="line">	      <span class="comment">//存着数据</span></span><br><span class="line">	      names=c[i].getValue();</span><br><span class="line">	      </span><br><span class="line">	      <span class="comment">//再一次的存起来（备用）</span></span><br><span class="line">	      request.setAttribute(<span class="string">"xingming"</span>,names);</span><br><span class="line">	  &#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h3 id="错误三："><a href="#错误三：" class="headerlink" title="错误三："></a>错误三：</h3><p>出现这个错误真的是该打，<strong>有脑子没脑子</strong>。<br>连servlet的基本执行过程都反应不过来。<br>下面是错误的：<br><img src="/2017/09/14/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E4%B8%AD%E7%BA%A7%E9%A1%B9%E7%9B%AE%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/911BA120-193C-40E1-9208-A70F34A1C9B6.png" alt><br>下面是正确的：<br><img src="/2017/09/14/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E4%B8%AD%E7%BA%A7%E9%A1%B9%E7%9B%AE%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/D5772390-CC1F-4E72-A02E-B6BD3D50294B.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">笔记</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-13 04:15:00" itemprop="dateCreated datePublished" datetime="2017-09-13T04:15:00+08:00">2017-09-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2017/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2017</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="笔记" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>86</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月13日 下午4:15</p>
+<p>先确定存储结构然后搭配相应的算法<br>前面的第一章就是我们要考虑的知识点，这个是死的<br>基础知识点是重点，掌握之后算法其实是很好写的，正如我以前所说的</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1273,7 +1302,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-count">1157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

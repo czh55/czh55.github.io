@@ -158,318 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">并发和高并发的基本概念</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-04-01 11:18:00" itemprop="dateCreated datePublished" datetime="2018-04-01T11:18:00+08:00">2018-04-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/java并发</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-meta-item leancloud_visitors" data-flag-title="并发和高并发的基本概念" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>16</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年4月1日 上午11:18</p>
-<p><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/5AF173AF-94C3-431A-A0C1-95B050430F9C.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/1FBE2CDA-E22A-4B48-BF09-B13637B26AD5.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/153C9BC1-FF59-4B7D-AD78-9A28D438EE3F.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/082B530F-4F42-47E5-A315-13F2355CAE69.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">课程介绍</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-04-01 10:07:00" itemprop="dateCreated datePublished" datetime="2018-04-01T10:07:00+08:00">2018-04-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/java并发</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/" class="post-meta-item leancloud_visitors" data-flag-title="课程介绍" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>16</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年4月1日 上午10:07</p>
-<p><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/B2F89A44-5859-4C0D-9D7D-26532339DAEA.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/282A6856-7A3C-483D-8537-0B53045F6213.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/3DE01A5B-15F9-4904-9044-FF0B1945345B.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/91E66EC3-C8B7-4D34-91AF-BC39AB974D2B.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/23C9CEC0-FC0C-444F-A2CA-1C6265655BE5.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/" class="post-title-link" itemprop="url">SpringMVC_RESTful</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-31 11:41:00" itemprop="dateCreated datePublished" datetime="2018-03-31T11:41:00+08:00">2018-03-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/分布式集群</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/" class="post-meta-item leancloud_visitors" data-flag-title="SpringMVC_RESTful" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年3月31日 上午11:41</p>
-<h2 id="对RESTful的理解："><a href="#对RESTful的理解：" class="headerlink" title="对RESTful的理解："></a>对RESTful的理解：</h2><ol>
-<li>其实就是要创建一种RESTful风格的URL</li>
-<li>参数全部暴露出来，通过斜杠<em>的方式。</em><strong>_斜杠_就是RESTful的主要表现方式</strong></li>
-<li><strong>原先URL通过.do的方式，URL指向的是一个方法，而RESTful风格的URL指向的是一个资源。</strong></li>
-<li><strong>我理解RESTful就是一种定位到方法的新的方式</strong>，这种方式是springMVC本身就支持的。而我们最先使用的detail.do?productId=26这种.do的方式，也是springMVC自带的其中一种而已。</li>
-</ol>
-<h2 id="不适合用RESTful的情况："><a href="#不适合用RESTful的情况：" class="headerlink" title="不适合用RESTful的情况："></a>不适合用RESTful的情况：</h2><ol>
-<li>当<strong>方法需要的参数过多</strong>的时候，我们就必须在URL中写那么多的参数，看见就不舒服。</li>
-<li>RESTful中声明的<strong>参数是不可以为空的</strong>，<br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/8DE7FF3C-A2ED-43ED-B3F9-0708D4AC0BC0.png" alt></li>
-</ol>
-<h2 id="SpringMVC-RESTful配置"><a href="#SpringMVC-RESTful配置" class="headerlink" title="SpringMVC_RESTful配置"></a>SpringMVC_RESTful配置</h2><p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/0D9A9A28-EECB-4DC3-9965-3A788E5209AC.png" alt></p>
-<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/5B956C91-FFE5-46FB-8919-580FDF60DA01.png" alt></p>
-<h2 id="一些例子："><a href="#一些例子：" class="headerlink" title="一些例子："></a>一些例子：</h2><p>下面的代码中有两个是bad例子，作为对比，很好理解，我就不带了写了，关键是理解清楚RESTful是干啥的就行了。<br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/B8079A54-0368-452F-BA37-6939268F2530.png" alt></p>
-<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/030DC169-2919-4734-B42D-D78B3F6348EF.png" alt></p>
-<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/BB0EF55F-3355-419E-BEC4-F3F2E57C7351.png" alt></p>
-<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/47FF3431-6BE9-4199-BA58-BAD1CE90D122.png" alt><br>资源定位不准确，restfull不予许为空</p>
-<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/655EF386-B3DB-48F4-A9EB-EBF3E99B2EF4.png" alt></p>
-<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/A6FE4209-8005-4B2D-9646-A98C47A3F391.png" alt></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mmall.controller.portal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.github.pagehelper.PageInfo;</span><br><span class="line"><span class="keyword">import</span> com.mmall.common.ServerResponse;</span><br><span class="line"><span class="keyword">import</span> com.mmall.service.IProductService;</span><br><span class="line"><span class="keyword">import</span> com.mmall.vo.ProductDetailVo;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang.StringUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by geely</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/product/"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> IProductService iProductService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"detail.do"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;ProductDetailVo&gt; <span class="title">detail</span><span class="params">(Integer productId)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductDetail(productId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/&#123;productId&#125;"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;ProductDetailVo&gt; <span class="title">detailRESTful</span><span class="params">(@PathVariable Integer productId)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductDetail(productId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"list.do"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;PageInfo&gt; <span class="title">list</span><span class="params">(@RequestParam(value = <span class="string">"keyword"</span>,required = <span class="keyword">false</span>)</span>String keyword,</span></span><br><span class="line"><span class="function">                                         @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"categoryId"</span>,required = <span class="keyword">false</span>)</span>Integer categoryId,</span></span><br><span class="line"><span class="function">                                         @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"pageNum"</span>,defaultValue = <span class="string">"1"</span>)</span> <span class="keyword">int</span> pageNum,</span></span><br><span class="line"><span class="function">                                         @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"pageSize"</span>,defaultValue = <span class="string">"10"</span>)</span> <span class="keyword">int</span> pageSize,</span></span><br><span class="line"><span class="function">                                         @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"orderBy"</span>,defaultValue = <span class="string">""</span>)</span> String orderBy)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//http://www.happymmall.com/product/手机/100012/1/10/price_asc</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/&#123;keyword&#125;/&#123;categoryId&#125;/&#123;pageNum&#125;/&#123;pageSize&#125;/&#123;orderBy&#125;"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;PageInfo&gt; <span class="title">listRESTful</span><span class="params">(@PathVariable(value = <span class="string">"keyword"</span>)</span>String keyword,</span></span><br><span class="line"><span class="function">                                         @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"categoryId"</span>)</span>Integer categoryId,</span></span><br><span class="line"><span class="function">                                         @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageNum"</span>)</span> Integer pageNum,</span></span><br><span class="line"><span class="function">                                         @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageSize"</span>)</span> Integer pageSize,</span></span><br><span class="line"><span class="function">                                         @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"orderBy"</span>)</span> String orderBy)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pageNum == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageNum = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pageSize == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageSize = <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isBlank(orderBy))&#123;</span><br><span class="line">            orderBy = <span class="string">"price_asc"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//    http://www.happymmall.com/product/100012/1/10/price_asc</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/&#123;categoryId&#125;/&#123;pageNum&#125;/&#123;pageSize&#125;/&#123;orderBy&#125;"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;PageInfo&gt; <span class="title">listRESTfulBadcase</span><span class="params">(@PathVariable(value = <span class="string">"categoryId"</span>)</span>Integer categoryId,</span></span><br><span class="line"><span class="function">                                                @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageNum"</span>)</span> Integer pageNum,</span></span><br><span class="line"><span class="function">                                                @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageSize"</span>)</span> Integer pageSize,</span></span><br><span class="line"><span class="function">                                                @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"orderBy"</span>)</span> String orderBy)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pageNum == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageNum = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pageSize == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageSize = <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isBlank(orderBy))&#123;</span><br><span class="line">            orderBy = <span class="string">"price_asc"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductByKeywordCategory(<span class="string">""</span>,categoryId,pageNum,pageSize,orderBy);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/&#123;keyword&#125;/&#123;pageNum&#125;/&#123;pageSize&#125;/&#123;orderBy&#125;"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;PageInfo&gt; <span class="title">listRESTfulBadcase</span><span class="params">(@PathVariable(value = <span class="string">"keyword"</span>)</span>String keyword,</span></span><br><span class="line"><span class="function">                                                @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageNum"</span>)</span> Integer pageNum,</span></span><br><span class="line"><span class="function">                                                @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageSize"</span>)</span> Integer pageSize,</span></span><br><span class="line"><span class="function">                                                @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"orderBy"</span>)</span> String orderBy)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pageNum == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageNum = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pageSize == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageSize = <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isBlank(orderBy))&#123;</span><br><span class="line">            orderBy = <span class="string">"price_asc"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductByKeywordCategory(keyword,<span class="keyword">null</span>,pageNum,pageSize,orderBy);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//http://www.happymmall.com/product/keyword/手机/1/10/price_asc</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/keyword/&#123;keyword&#125;/&#123;pageNum&#125;/&#123;pageSize&#125;/&#123;orderBy&#125;"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;PageInfo&gt; <span class="title">listRESTful</span><span class="params">(@PathVariable(value = <span class="string">"keyword"</span>)</span>String keyword,</span></span><br><span class="line"><span class="function">                                                       @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageNum"</span>)</span> Integer pageNum,</span></span><br><span class="line"><span class="function">                                                       @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageSize"</span>)</span> Integer pageSize,</span></span><br><span class="line"><span class="function">                                                       @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"orderBy"</span>)</span> String orderBy)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pageNum == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageNum = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pageSize == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageSize = <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isBlank(orderBy))&#123;</span><br><span class="line">            orderBy = <span class="string">"price_asc"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductByKeywordCategory(keyword,<span class="keyword">null</span>,pageNum,pageSize,orderBy);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//http://www.happymmall.com/product/category/100012/1/10/price_asc</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/category/&#123;categoryId&#125;/&#123;pageNum&#125;/&#123;pageSize&#125;/&#123;orderBy&#125;"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;PageInfo&gt; <span class="title">listRESTful</span><span class="params">(@PathVariable(value = <span class="string">"categoryId"</span>)</span>Integer categoryId,</span></span><br><span class="line"><span class="function">                                                       @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageNum"</span>)</span> Integer pageNum,</span></span><br><span class="line"><span class="function">                                                       @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageSize"</span>)</span> Integer pageSize,</span></span><br><span class="line"><span class="function">                                                       @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"orderBy"</span>)</span> String orderBy)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pageNum == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageNum = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pageSize == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageSize = <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isBlank(orderBy))&#123;</span><br><span class="line">            orderBy = <span class="string">"price_asc"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductByKeywordCategory(<span class="string">""</span>,categoryId,pageNum,pageSize,orderBy);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1210,6 +898,374 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/03/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2018/%E6%80%BB%E7%9A%84%E6%80%81%E5%BA%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2018/%E6%80%BB%E7%9A%84%E6%80%81%E5%BA%A6/" class="post-title-link" itemprop="url">总的态度</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-20 04:22:00" itemprop="dateCreated datePublished" datetime="2018-03-20T04:22:00+08:00">2018-03-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2018/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2018</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/03/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2018/%E6%80%BB%E7%9A%84%E6%80%81%E5%BA%A6/" class="post-meta-item leancloud_visitors" data-flag-title="总的态度" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>518</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年3月20日 下午4:22</p>
+<h2 id="最关键："><a href="#最关键：" class="headerlink" title="最关键："></a>最关键：</h2><p>自己提出问题，并且提出问题的质量。</p>
+<h2 id="前序"><a href="#前序" class="headerlink" title="前序"></a>前序</h2><p><strong>做算法题的思路和做项目的思路是不同的，首先要找两个题热身，将思维转过去</strong></p>
+<h2 id="正文："><a href="#正文：" class="headerlink" title="正文："></a>正文：</h2><ol>
+<li>算法其实并不是啥高端的东西，就像我们生活中各种各样小的技巧一样，对待这些小的技巧的态度应该是好玩。</li>
+<li>难是因为你要从0开始想问题，所以，我们一定<strong>不要</strong>从0开始思考算法，而是借助所有的知识、方法作为工具</li>
+<li>并且，设计算法我们不要从创建数据开始思考，我们完成的就是一个<strong>已经给定参数</strong>，然后给出特定的返回就行。 </li>
+<li>其实算法的这些题，知道<strong>方法</strong>之后也就不难了。关键是你要<strong>积累</strong>这些方法</li>
+</ol>
+<p><strong>【思考】</strong>，其实就是<strong>问自己问题</strong>。但是问题的好坏就决定了你的思路，<strong>最关键</strong><br><strong>【分析】</strong>，先从<strong>简单</strong>的一个两个开始<strong>具体</strong>的思考，发现规律，人的脑子大家都一样，直接来个复杂的谁都受不了。分析出<strong>唯一</strong>的一个核心<strong>规律/总结</strong><br><strong>【算法思路】</strong>，要画出<strong>具体</strong>的程序运行<strong>一连窜步骤图</strong>，在每一步的图中都标明<strong>变量的值</strong>。</p>
+<p>前两节重点是连接链表和堆栈的<strong>属性</strong>，他们的属性是帮助我们解决特定问题的工具</p>
+<p>递归是一种函数代码格式，回溯是一种算法/思维。但是，他们都可以看成我们解决问题的tool之一，和链表栈等都是工具而已，<strong>我们做的事情就是在分析清楚问题之后，拿上合适的工具，然后干活</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/03/11/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/debug%E6%93%8D%E4%BD%9C%EF%BC%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/11/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/debug%E6%93%8D%E4%BD%9C%EF%BC%9A/" class="post-title-link" itemprop="url">debug操作：</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-11 11:18:00" itemprop="dateCreated datePublished" datetime="2018-03-11T11:18:00+08:00">2018-03-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/分布式集群</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/03/11/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/debug%E6%93%8D%E4%BD%9C%EF%BC%9A/" class="post-meta-item leancloud_visitors" data-flag-title="debug操作：" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>250</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年3月11日 上午11:18</p>
+<ol>
+<li>注意这时<strong>要用debug模式运行</strong>，而不是run，因为我们要打断点进行联调<ol>
+<li>在debug模式，我们的<strong>断点在更改</strong>之后，立即在下一次访问生效，不用重新启动tomcat</li>
+<li>在debug模式，即使<strong>断点已经到来</strong>，我们依然可以在当前断点的后面增加断点，同样也是立即生效</li>
+<li>debug 放慢程序执行速度，<strong>观察瞬间的操作</strong></li>
+<li>Debug <strong>临时设置变量的值</strong>，而不是修改之后重启动tomcat</li>
+<li>Debug 在tomcat集群中，我们可以只留一个tomcat执行，其他的全部打断点停止，<strong>观察单个tomcat的执行情况</strong></li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" class="post-title-link" itemprop="url">redis分布式锁</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-10 12:10:00" itemprop="dateCreated datePublished" datetime="2018-03-10T12:10:00+08:00">2018-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/分布式集群</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/" class="post-meta-item leancloud_visitors" data-flag-title="redis分布式锁" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年3月10日 下午12:10</p>
+<p><strong>这个代码对应于tack/CloseOrderTask.java类，我这里就先不分析代码了！</strong></p>
+<ol>
+<li><strong>我的通俗理解：</strong>小明和小王逛街累了抢一个椅子，当然是谁先抢上谁坐，说明椅子有主了。但是如果一个人坐在那里好多个小时，他始终不离开椅子，自己玩手机，另一个人就得一直等着他。等上一个小时，站着的哪个就火了，直接踹开那家伙，自己就坐了上去。<ol>
+<li>离开椅子的标志是：在redis中删除了CLOSE_ORDER_TASK_LOCK这个变量。</li>
+<li>抢上椅子的标志为：在redis中设置了CLOSE_ORDER_TASK_LOCK这个变量</li>
+</ol>
+</li>
+<li>其实expire就可以起到防止死锁的作用，让50秒以后redis就会自动删除这个键。我理解这是一个双重保险。</li>
+</ol>
+<h2 id="版本一："><a href="#版本一：" class="headerlink" title="版本一："></a>版本一：</h2><ol>
+<li>第一个版本：不使用redis，只是使用Spring Schedule使关单程序周期执行。但是由于我们是tomcat集群，<strong>这个关单程序会在两个tomcat同时执行</strong>，并且同时操作数据库。</li>
+<li>一定会带来的问题：定时任务同时执行，对数据库的访问造成数据混乱</li>
+</ol>
+<h2 id="版本二："><a href="#版本二：" class="headerlink" title="版本二："></a>版本二：</h2><ol>
+<li>第二个版本：使用redis做为分布式的锁，即使这个关单程序会在两个tomcat同时执行，但是会由于有这个锁的存在，使他们走不同的分支，<strong>只有其中一个分支可以执行关单程序业务流程，去操作数据库</strong>。如下图，这样就不会造成数据库的访问造成数据混乱。</li>
+<li>极端条件下可能出现的问题：当我们setnx将“锁”放入redis之后，此时停止tomcat，那么原先放入的“锁”就会一直存在reids中，不会删除，以后由于这个“锁”的存在，永远不会执行真正的业务。<strong>最终造成死锁</strong>。</li>
+<li>关键：<ol>
+<li>使用了<strong>setnx这个原子性的操作</strong>，这就保证了即使同时执行，也会有一个先来后到，一个走左分支，一个走右分支<br><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/0E0D08EA-7483-4B92-BB05-FA795922D7A0.png" alt></li>
+</ol>
+</li>
+</ol>
+<h2 id="版本三："><a href="#版本三：" class="headerlink" title="版本三："></a>版本三：</h2><ol>
+<li>第三个版本：假设，当我们setnx将“锁”放入redis之后，此时停止tomcat。那么此时两个tomcat中的同时执行的程序，永远都会走到“获取锁失败”的分支。<strong>那么我们就需要在执行了“获取锁失败”的分支中解决这个问题，在redis中这个“死锁”条件存在的情况下，也可以执行相关业务</strong></li>
+<li>关键：<ol>
+<li>在setnx时，我们的的“锁”key-value值要设置这个锁的超时时间，当然这个只是一个字符串的类型，是看的，而不是他自动会起作用的。</li>
+<li>第一种情况：<ol>
+<li>还没有超过了这个“死锁”的超时时间</li>
+<li>我们规定此时已然不能执行业务，必须等待这个“死锁”的时间到了</li>
+</ol>
+</li>
+<li>第二种情况：<ol>
+<li>已经超过了这个“死锁”的超时时间，我们此时就可以进行业务操作了，<strong>但是此时同样还是两个tomcat都要请求执行</strong>，那给谁呢？<strong>这不是回到了一开始的情况了吗</strong></li>
+<li>关键：<ol>
+<li>在第二个版本中我们使用原子操作setnx，来确定到底是哪个tomcat执行业务，在这里我们使用另一<strong>原子操作getset来区分。</strong></li>
+</ol>
+</li>
+<li>总结：<ol>
+<li>对于判断一来说，两个tomcat要true都true，要false都false</li>
+<li>对于判断二来说，一个tomcat是true一个tomcat是false<br><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/BEDD52BE-6C59-4165-9470-81B643C093DE.png" alt></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ol>
+<li>redis 两个原子性操作是实现的关键</li>
+<li>Redis的中setnx的值，就是”锁”</li>
+<li>一个锁，有两个时间<ol>
+<li>一个是setnx时的字符串value</li>
+<li>一个是redis本身可以对单个数据设置的超时时间</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/906A5B33-741E-4AFC-8F6E-DF3D92BB3F66.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1280,7 +1336,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-count">1157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

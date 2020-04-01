@@ -158,316 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E7%84%A6%E8%B7%9Df%E7%9A%84%E5%86%8Dsfm%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E7%84%A6%E8%B7%9Df%E7%9A%84%E5%86%8Dsfm%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/" class="post-title-link" itemprop="url">焦距f的再sfm中的作用</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-06 09:21:00" itemprop="dateCreated datePublished" datetime="2019-03-06T09:21:00+08:00">2019-03-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 15:27:51" itemprop="dateModified" datetime="2020-04-01T15:27:51+08:00">2020-04-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/知识点#</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E7%84%A6%E8%B7%9Df%E7%9A%84%E5%86%8Dsfm%E4%B8%AD%E7%9A%84%E4%BD%9C%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="焦距f的再sfm中的作用" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>99</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年3月6日 上午9:21</p>
-<ol>
-<li>在 <a href="bear://x-callback-url/open-note?id=39BEABB5-5BAD-43AE-B87D-347D8C59C3FA-1592-0001B6CE4F474539">三角量测</a>中，我们求<strong>匹配点对应的三维坐标</strong>的时候，就需要K矩阵，<strong>K矩阵中包含着焦距f</strong>，所以是需要一个准确的焦距f的</li>
-<li>如果焦距不准：<ol>
-<li>那么估计出来的<strong>匹配点对应的三维坐标</strong>就会不准</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E4%B8%89%E8%A7%92%E9%87%8F%E6%B5%8B-1%EF%BC%9A%E5%B7%B2%E7%9F%A5%E7%9B%B8%E6%9C%BA%E5%8F%82%E6%95%B0%20+%20%E5%8C%B9%E9%85%8D%E7%82%B9%20%E6%81%A2%E5%A4%8D%20%E4%B8%89%E7%BB%B4%E7%82%B9%E5%9D%90%E6%A0%87/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E4%B8%89%E8%A7%92%E9%87%8F%E6%B5%8B-1%EF%BC%9A%E5%B7%B2%E7%9F%A5%E7%9B%B8%E6%9C%BA%E5%8F%82%E6%95%B0%20+%20%E5%8C%B9%E9%85%8D%E7%82%B9%20%E6%81%A2%E5%A4%8D%20%E4%B8%89%E7%BB%B4%E7%82%B9%E5%9D%90%E6%A0%87/" class="post-title-link" itemprop="url">三角量测-1：已知相机参数 + 匹配点 恢复 三维点坐标</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-06 09:16:00" itemprop="dateCreated datePublished" datetime="2019-03-06T09:16:00+08:00">2019-03-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 15:28:29" itemprop="dateModified" datetime="2020-04-01T15:28:29+08:00">2020-04-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/知识点#</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E4%B8%89%E8%A7%92%E9%87%8F%E6%B5%8B-1%EF%BC%9A%E5%B7%B2%E7%9F%A5%E7%9B%B8%E6%9C%BA%E5%8F%82%E6%95%B0%20+%20%E5%8C%B9%E9%85%8D%E7%82%B9%20%E6%81%A2%E5%A4%8D%20%E4%B8%89%E7%BB%B4%E7%82%B9%E5%9D%90%E6%A0%87/" class="post-meta-item leancloud_visitors" data-flag-title="三角量测-1：已知相机参数 + 匹配点 恢复 三维点坐标" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>85</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年3月6日 上午9:16</p>
-<ol>
-<li>预备知识：<br><img src="/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E4%B8%89%E8%A7%92%E9%87%8F%E6%B5%8B-1%EF%BC%9A%E5%B7%B2%E7%9F%A5%E7%9B%B8%E6%9C%BA%E5%8F%82%E6%95%B0%20+%20%E5%8C%B9%E9%85%8D%E7%82%B9%20%E6%81%A2%E5%A4%8D%20%E4%B8%89%E7%BB%B4%E7%82%B9%E5%9D%90%E6%A0%87/83CA6228-A9E5-4F9A-828D-AD77A0C78AB4.png" alt><ol start="2">
-<li><strong>这句话的理解</strong>：将空间坐标系(<strong>是唯一的</strong>)下的三维点，可以通过第 i 相机投影矩阵，投影到<strong>第 i 相机的图像坐标系</strong>下。</li>
-<li>其实也是也是一个坐标变换<br><img src="/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E4%B8%89%E8%A7%92%E9%87%8F%E6%B5%8B-1%EF%BC%9A%E5%B7%B2%E7%9F%A5%E7%9B%B8%E6%9C%BA%E5%8F%82%E6%95%B0%20+%20%E5%8C%B9%E9%85%8D%E7%82%B9%20%E6%81%A2%E5%A4%8D%20%E4%B8%89%E7%BB%B4%E7%82%B9%E5%9D%90%E6%A0%87/105D670E-6ABC-4DD4-84FD-AE6821329F52.png" alt><br><img src="/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E4%B8%89%E8%A7%92%E9%87%8F%E6%B5%8B-1%EF%BC%9A%E5%B7%B2%E7%9F%A5%E7%9B%B8%E6%9C%BA%E5%8F%82%E6%95%B0%20+%20%E5%8C%B9%E9%85%8D%E7%82%B9%20%E6%81%A2%E5%A4%8D%20%E4%B8%89%E7%BB%B4%E7%82%B9%E5%9D%90%E6%A0%87/A745270D-FCEF-4E55-9548-F82444FF99B0.png" alt><br><img src="/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E4%B8%89%E8%A7%92%E9%87%8F%E6%B5%8B-1%EF%BC%9A%E5%B7%B2%E7%9F%A5%E7%9B%B8%E6%9C%BA%E5%8F%82%E6%95%B0%20+%20%E5%8C%B9%E9%85%8D%E7%82%B9%20%E6%81%A2%E5%A4%8D%20%E4%B8%89%E7%BB%B4%E7%82%B9%E5%9D%90%E6%A0%87/F3D60A6E-8E85-4406-AF54-379552DBD778.png" alt></li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/SFM%E7%AE%97%E6%B3%95%E7%9A%84%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/SFM%E7%AE%97%E6%B3%95%E7%9A%84%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0/" class="post-title-link" itemprop="url">SFM算法的影响因素</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-06 09:09:00" itemprop="dateCreated datePublished" datetime="2019-03-06T09:09:00+08:00">2019-03-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 15:28:29" itemprop="dateModified" datetime="2020-04-01T15:28:29+08:00">2020-04-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/知识点#</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/SFM%E7%AE%97%E6%B3%95%E7%9A%84%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0/" class="post-meta-item leancloud_visitors" data-flag-title="SFM算法的影响因素" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>225</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年3月6日 下午9:09</p>
-<p><img src="/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/SFM%E7%AE%97%E6%B3%95%E7%9A%84%E5%BD%B1%E5%93%8D%E5%9B%A0%E7%B4%A0/C55FD4D1-745B-4C74-B825-41BAD005E5E0.png" alt></p>
-<ol>
-<li>Hyun soo 在论文3D Trajectory Reconstruction under Perspective Projection中刚提到：<strong>The stability of classic triangulation is known to depend on the baseline between camera centers (Hartley and Zisserman 2004).</strong></li>
-<li>并且，Hyun也是根据这个创造出的<strong>reconstructability</strong></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/03/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/SFM%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B%E7%9A%84%E8%AE%B2%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1254,6 +944,346 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/ubuntu16%E5%AE%89%E8%A3%85Parallels-Tool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/ubuntu16%E5%AE%89%E8%A3%85Parallels-Tool/" class="post-title-link" itemprop="url">ubuntu16安装Parallels-Tool</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-05 08:22:00" itemprop="dateCreated datePublished" datetime="2019-03-05T08:22:00+08:00">2019-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:27:51" itemprop="dateModified" datetime="2020-04-01T15:27:51+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/工具#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/ubuntu16%E5%AE%89%E8%A3%85Parallels-Tool/" class="post-meta-item leancloud_visitors" data-flag-title="ubuntu16安装Parallels-Tool" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>111</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年3月5日 下午8:22</p>
+<p><a href="https://github.com/zxxf18/fix-Parallels-Tools-for-Ubuntu" target="_blank" rel="noopener">GitHub - zxxf18/fix-Parallels-Tools-for-Ubuntu: modified Parallels Tools for Ubuntu （modify install error）</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Clion%E8%BF%9B%E8%A1%8Cdebug%E7%9A%84%E8%AE%BE%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Clion%E8%BF%9B%E8%A1%8Cdebug%E7%9A%84%E8%AE%BE%E7%BD%AE/" class="post-title-link" itemprop="url">Clion进行debug的设置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-05 08:21:00" itemprop="dateCreated datePublished" datetime="2019-03-05T08:21:00+08:00">2019-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:28:29" itemprop="dateModified" datetime="2020-04-01T15:28:29+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/工具#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Clion%E8%BF%9B%E8%A1%8Cdebug%E7%9A%84%E8%AE%BE%E7%BD%AE/" class="post-meta-item leancloud_visitors" data-flag-title="Clion进行debug的设置" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>30</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年3月5日 下午8:21</p>
+<h2 id="Clion进行debug的设置"><a href="#Clion进行debug的设置" class="headerlink" title="Clion进行debug的设置"></a>Clion进行debug的设置</h2><p><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Clion%E8%BF%9B%E8%A1%8Cdebug%E7%9A%84%E8%AE%BE%E7%BD%AE/904D910F-95D2-43B3-8D33-2FB5821B1F93.png" alt></p>
+<p><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Clion%E8%BF%9B%E8%A1%8Cdebug%E7%9A%84%E8%AE%BE%E7%BD%AE/6CA9D700-FBB4-4FCB-B7A8-80183F567939.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/" class="post-title-link" itemprop="url">对极几何</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-05 08:21:00" itemprop="dateCreated datePublished" datetime="2019-03-05T08:21:00+08:00">2019-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:28:29" itemprop="dateModified" datetime="2020-04-01T15:28:29+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/知识点#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="对极几何" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>826</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年3月5日 下午8:21<br><a href="https://zhuanlan.zhihu.com/p/33458436" target="_blank" rel="noopener">对极几何与基本矩阵 - 知乎</a></p>
+<ol>
+<li>解释清楚了对极几何</li>
+<li>对极几何是几何关系，我们要<strong>转换成代数形式</strong>，让计算机求解</li>
+<li>根据我们建立的<strong>三维转换模型</strong>(世界坐标系、相机坐标系、图像坐标系)，我们可以推导出有以下两个关系成立：<br><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/CBC6CDCB-A7FB-4FC9-A6C3-555652E28C3A.png" alt><pre><code>1. 这里的**观测点**：指的是在相机坐标系下</code></pre><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/340CFB45-684E-4BD9-8582-2DF97FA971BB.png" alt></li>
+<li>根据以上<strong>两个初始模型</strong>，我们可以可以联立，不断简化<ol>
+<li><strong>简化的目标</strong>：将未知参数\R T尽肯能的放在一起，最后从结果上看看要求解这两个参数，我们需要哪些条件。</li>
+</ol>
+</li>
+<li><strong>这篇文章没有讲解求解的过程</strong></li>
+</ol>
+<h2 id="对极点可以在图像外"><a href="#对极点可以在图像外" class="headerlink" title="对极点可以在图像外"></a>对极点可以在图像外</h2><p><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/6D2C36E4-ECD9-4F4E-8699-5C5CFACE597C.png" alt></p>
+<ol>
+<li>对极点，对极线<ol>
+<li>我们可以看到在左图对极平面旋转时<strong>对极点</strong>是不变的，而在相机图像上所有<strong>对极线</strong>都会交于对极点</li>
+<li>这个对极点就是另一个相机中心在其图像上的像，*当然正如右图所示， <em>对极点可以在图像外</em> *。</li>
+<li>一种极端的情况就是：<strong>立体匹配</strong>，也就是相机标定之后，尽可能的要<strong>基线与相机平面平行</strong></li>
+</ol>
+</li>
+<li>理解这里的<strong>“对”</strong><ol>
+<li>需要理解这里的场景：两个相机面对着现实中的一根棍子</li>
+<li>这根棍子，会在两个相机中都成像，也就是<strong>一对像</strong></li>
+</ol>
+</li>
+</ol>
+<h3 id="我们知道由相机1到相机2是刚体运动，那么观测点P在相机1坐标系的坐标就可以通过刚体转换变成相机2坐标系下"><a href="#我们知道由相机1到相机2是刚体运动，那么观测点P在相机1坐标系的坐标就可以通过刚体转换变成相机2坐标系下" class="headerlink" title="我们知道由相机1到相机2是刚体运动，那么观测点P在相机1坐标系的坐标就可以通过刚体转换变成相机2坐标系下"></a>我们知道由相机1到相机2是刚体运动，那么<em>观测点P</em>在相机1坐标系的坐标就可以通过刚体转换变成相机2坐标系下</h3><p>这句话的理解：</p>
+<ol>
+<li><strong>空间中一个坐标系，总可以通过刚体变换转换到另外一个个坐标系的</strong><ol>
+<li>相机坐标系的X轴和Y轴分别平行于图像的x轴和y轴，z轴垂直与成像平面并且z轴的方向的设置将使摄像机前的所有的z坐标为正数。</li>
+<li><strong>两个视角都按上面的方法各自建立一套坐标系</strong></li>
+</ol>
+</li>
+<li>有这么一个问题：<ol>
+<li>一个不动的物体，我们用同一个相机从两个角度去照下两张照片。问题：这两张照片假设放在拍摄地点不动，<strong>照片中的所有点</strong>是否可以按照<strong>同一个旋转平移矩阵</strong>直接转换得到？<ol>
+<li>这个问题，<strong>我们通过生活经验就可以知道是可以的</strong>，但是具体的转换关系可能我们并不知道。<ol>
+<li><strong>说明这个问题就是一个建模求解的问题</strong><br><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/CBC6CDCB-A7FB-4FC9-A6C3-555652E28C3A%202.png" alt></li>
+</ol>
+</li>
+<li>这里的P‘和P其实是整张图片的二维坐标(z=0)，根据这个公式，我们<strong>一次性</strong>就可以得到另一位置的图像(也是二维的)。<ol>
+<li>这个转换的过程我们要从三维空间想象，但是转换的结果P’我们可以理解成二维的。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1324,7 +1354,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1160</span>
+          <span class="site-state-item-count">1157</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
