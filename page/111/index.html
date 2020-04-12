@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E8%A1%A5%E5%85%85/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +172,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E8%A1%A5%E5%85%85/" class="post-title-link" itemprop="url">SQL相关子查询的补充</a>
+            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">PLSQL（PLSQL语法+存储过程+触发器）</a>
         </h1>
 
         <div class="post-meta">
@@ -182,7 +182,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-08-30 02:39:00" itemprop="dateCreated datePublished" datetime="2017-08-30T02:39:00+08:00">2017-08-30</time>
+              <time title="创建时间：2017-09-01 10:36:00" itemprop="dateCreated datePublished" datetime="2017-09-01T10:36:00+08:00">2017-09-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -204,7 +204,7 @@
             </span>
 
           
-            <span id="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E8%A1%A5%E5%85%85/" class="post-meta-item leancloud_visitors" data-flag-title="SQL相关子查询的补充" title="阅读次数">
+            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="PLSQL（PLSQL语法+存储过程+触发器）" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -216,7 +216,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>972</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -235,430 +235,114 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>#web开发/czh_blog/数据库<br>2017年8月30日 下午2:39</p>
-<p><strong>相关子查询：子查询中会使用外部表</strong></p>
-<h2 id="两种情况会出现先查询外部产生表的第一条信息，用这条信息中的内容在内部表中匹配查询信息"><a href="#两种情况会出现先查询外部产生表的第一条信息，用这条信息中的内容在内部表中匹配查询信息" class="headerlink" title="两种情况会出现先查询外部产生表的第一条信息，用这条信息中的内容在内部表中匹配查询信息"></a>两种情况会出现先查询<em>外部产生表的第一条信息</em>，用这条信息中的内容在内部表中匹配查询信息</h2><ol>
-<li>这个可以作为我原先总结的<strong>第三种写sql思维的补充</strong></li>
-<li><strong>select</strong><ol>
-<li>使用情形：当我们的需要对<strong>中间表（视图）</strong>中的<strong>每一条数据进行处理</strong>时</li>
-<li>例子<ol>
-<li>这里可以很容的查出来每个学生的总分zcj对应的表</li>
-<li><code>select sc.s,sum(sc.score) zcj from sc group by sc.s</code></li>
-<li>然后，在这个表的基础上进行查询，查询出来的内容中的<strong>具体某个人的信息中的总分</strong>都要和整个表中的<strong>所有人的总分</strong>进行比较，然后看看<strong>有几个</strong>人比他大。</li>
-<li>最后的数值，就是他的排名<ol>
-<li>这里的关键是：<strong>select到from之间的语句是</strong>：<strong>可以进行单独的sql语句执行的</strong>。这条是这种写法成立的本质原因</li>
-<li>执行的时候，<strong>a.zcj就是一个具体的数值</strong>。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--18、查询学生的总成绩并进行排名</span></span><br><span class="line"><span class="keyword">select</span> a.s,a.zcj,</span><br><span class="line">(<span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> </span><br><span class="line">        (<span class="keyword">select</span> sc.s,<span class="keyword">sum</span>(sc.score) zcj <span class="keyword">from</span> sc <span class="keyword">group</span> <span class="keyword">by</span> sc.s) b <span class="keyword">where</span> b.zcj&gt;a.zcj</span><br><span class="line">)+<span class="number">1</span> mc</span><br><span class="line"> <span class="keyword">from</span> </span><br><span class="line">        (</span><br><span class="line">        <span class="keyword">select</span> sc.s,<span class="keyword">sum</span>(sc.score) zcj <span class="keyword">from</span> sc <span class="keyword">group</span> <span class="keyword">by</span> sc.s</span><br><span class="line">        ) a </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> mc;</span><br></pre></td></tr></table></figure></li>
+          <p>#web开发/czh_blog/数据库<br>2017年9月1日 上午10:36</p>
+<p>这里知识理解一些概念，有一个基本的认识<br>知道ORACLE支持哪些功能，以后一个功能呢不好做的时候，来这里瞧瞧，看有没有正好能用上额特性</p>
+<h2 id="PLSQL中语法特别的地方"><a href="#PLSQL中语法特别的地方" class="headerlink" title="PLSQL中语法特别的地方"></a>PLSQL中语法特别的地方</h2><p>没有逻辑修饰符：|| &amp;&amp;<br>用这些代替：And or between<br>等号：是:= 不是=<br>没有：++ — —<br>|| 内容拼接 隐式转换成字符串连接</p>
+<h2 id="SQL的高级语言特性PLSQL"><a href="#SQL的高级语言特性PLSQL" class="headerlink" title="SQL的高级语言特性PLSQL"></a>SQL的高级语言特性PLSQL</h2><ol>
+<li>所谓的plsql其实就是：sql编程语言一样编程，有高级语言的特性</li>
+<li>If  switch for loop</li>
+<li>Cursor游标 是专门用来解决表中多条数据的情况<ol>
+<li>这个高级语言中没有，是数据库语言中特有的</li>
+<li>和loop连用</li>
+</ol>
+</li>
+<li>类似stl的数据类型<ol>
+<li>Varray </li>
+<li>table </li>
+<li>record</li>
+</ol>
+</li>
+<li>自定义数据类型<ol>
+<li>type</li>
+</ol>
+</li>
+<li>异常<ol>
+<li>支持自定义抛出异常<ol>
+<li>当在函数和存储过程中抛出异常时，可以在调用函数和存储过程的外面进行异常的处理</li>
+</ol>
+</li>
+<li>支持选择自己处理异常，和oracle系统处理异常<ol>
+<li>当没有写exception段时，默认就是让oracle处理异常</li>
 </ol>
 </li>
 </ol>
 </li>
-<li>另外一种写法：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> b.s,b.zcj,<span class="keyword">count</span>(<span class="number">1</span>) mc <span class="keyword">from</span>  (<span class="keyword">select</span> sc.s,<span class="keyword">sum</span>(sc.score) zcj <span class="keyword">from</span> sc <span class="keyword">group</span> <span class="keyword">by</span> sc.s) b ,  (<span class="keyword">select</span> sc.s,<span class="keyword">sum</span>(sc.score) zcj <span class="keyword">from</span> sc <span class="keyword">group</span> <span class="keyword">by</span> sc.s) a <span class="keyword">where</span> b.zcj&lt;=a.zcj <span class="keyword">GROUP</span> <span class="keyword">BY</span> b.s <span class="keyword">ORDER</span> <span class="keyword">BY</span> mc</span><br></pre></td></tr></table></figure></li>
-<li>区别在于：b.zcj&lt;=a.zcj  这是由于主表不一样，上面的是a,下面的是b</li>
-<li>体现的重要知识点是：b.zcj&lt;=a.zcj  两个变量可以直接比较，平常我们都是其中一个是变量</li>
-</ol>
-</li>
-<li><strong>exit</strong><ol>
-<li>以前的文章写过<a href="bear://x-callback-url/open-note?id=841A654A-5853-4CFD-972D-E90B1DE681B3-2779-000009EC0796A800">SQL书本笔记摘抄</a></li>
-</ol>
-</li>
-</ol>
-<h2 id="表的结构"><a href="#表的结构" class="headerlink" title="表的结构"></a>表的结构</h2><p>图</p>
-<p>总体的结构</p>
-<p>的 的用法</p>
-<p>主干</p>
-<p>拼</p>
-<p>4+2</p>
-<p>select</p>
-<p>group</p>
-<p>6<br>7</p>
-<p>datetime Oracle没有</p>
-<p>select 中使用group by ，那么select能查出来的结果一定要使用goup by 来分组</p>
-<p>Rownum</p>
-<p>null  count</p>
-<p>数据类型</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E5%AE%9E%E7%8E%B0%E5%90%84%E7%A7%8D%E5%8A%A8%E7%94%BB%E7%9A%84%E7%BB%8F%E9%AA%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E5%AE%9E%E7%8E%B0%E5%90%84%E7%A7%8D%E5%8A%A8%E7%94%BB%E7%9A%84%E7%BB%8F%E9%AA%8C/" class="post-title-link" itemprop="url">js实现各种动画的经验</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-30 01:03:00" itemprop="dateCreated datePublished" datetime="2017-08-30T01:03:00+08:00">2017-08-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E5%AE%9E%E7%8E%B0%E5%90%84%E7%A7%8D%E5%8A%A8%E7%94%BB%E7%9A%84%E7%BB%8F%E9%AA%8C/" class="post-meta-item leancloud_visitors" data-flag-title="js实现各种动画的经验" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>412</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月30日 下午1:03</p>
-<h3 id="不完善的地方"><a href="#不完善的地方" class="headerlink" title="不完善的地方"></a>不完善的地方</h3><ol>
-<li>没有经过大的检测</li>
-<li>应该讲具体的每个知识点的连接放上去</li>
-</ol>
-<h2 id="动画的几个要素"><a href="#动画的几个要素" class="headerlink" title="动画的几个要素"></a>动画的几个要素</h2><ol>
-<li>事件源<strong>（html）</strong></li>
-<li>事件处理<strong>（函数）</strong></li>
-<li>事件类型（事件句柄）<strong>（触发类型）</strong></li>
-</ol>
-<h2 id="先弄清楚几个问题（对应上面说的动画的几个要素）"><a href="#先弄清楚几个问题（对应上面说的动画的几个要素）" class="headerlink" title="先弄清楚几个问题（对应上面说的动画的几个要素）"></a>先弄清楚几个问题（对应上面说的动画的几个要素）</h2><ol>
-<li>由谁触发</li>
-<li>怎样触发</li>
-<li>触发后如何执行<ol>
-<li>拆分，一部分一部分的完成</li>
-<li>把每部分步骤细化</li>
-<li><strong>先别想程序，先站在生活的角度把步骤写出来</strong></li>
-</ol>
-</li>
-<li>排除</li>
-</ol>
-<h2 id="将具体细化的每一部分与知识相连接"><a href="#将具体细化的每一部分与知识相连接" class="headerlink" title="将具体细化的每一部分与知识相连接"></a>将具体细化的每一部分与知识相连接</h2><ol>
-<li><strong>只有两中实现方式</strong>：对象的属性 或 对象的方法</li>
-<li><strong>一个最小的功能</strong>的实现是通过控制对象属性？还是通过对象的方法</li>
-<li>对象<ol>
-<li>BOM对象：就是那几种，用的比较少吧</li>
-<li>JS对象：通过js来产生DOM对象（<strong>JS对象可以是一个统称</strong>）</li>
-<li><strong>DOM</strong>对象：（<strong>DOM中属性、文本等也可以当做对象来操作</strong>）<ol>
-<li>Html标签（元素）<ol>
-<li>通用的标签操作<ol>
-<li>DOM树的增删改查</li>
-</ol>
-</li>
-<li>特有的标签操作<ol>
-<li>不同的标签有不同的设置项</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>event对象（全局变量）<ol>
-<li>鼠标</li>
-<li>键盘</li>
-<li><strong>Event就像一个boss，可以全局的看，并且还可以控制一定的事件</strong></li>
-</ol>
-</li>
-<li>属性</li>
-<li>文本、注释</li>
+<li>package<ol>
+<li>这个就是java中的类，不是java中的包</li>
+<li>可以在package中和java一样定义变量，常量，函数（存储过程+函数）等等</li>
+<li>packages + package body</li>
+<li>如何操作<ol>
+<li>不是java中的先new一个对象，然后用对象调用</li>
+<li>Sql中没有new对象，直接使用package名  点就行了</li>
 </ol>
 </li>
 </ol>
 </li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%2011g%20%E7%9A%84%E4%BA%86%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%2011g%20%E7%9A%84%E4%BA%86%E8%A7%A3/" class="post-title-link" itemprop="url">ORACLE 11g 的了解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-28 08:23:00" itemprop="dateCreated datePublished" datetime="2017-08-28T08:23:00+08:00">2017-08-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%2011g%20%E7%9A%84%E4%BA%86%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="ORACLE 11g 的了解" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>536</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月28日 上午8:23</p>
-<h2 id="关于oracle的的一些基础知识"><a href="#关于oracle的的一些基础知识" class="headerlink" title="关于oracle的的一些基础知识"></a>关于oracle的的一些基础知识</h2><p><a href="http://www.cnblogs.com/hoobey/p/6010804.html" target="_blank" rel="noopener">Oracle 11g安装步骤详谈 - starskyhu - 博客园</a><br><a href="http://blog.csdn.net/sz_bdqn/article/details/17225515" target="_blank" rel="noopener">Oracle 11g 默认用户名和密码 - sz_bdqn的专栏        - CSDN博客</a><br><a href="http://blog.csdn.net/v123411739/article/details/19007083" target="_blank" rel="noopener">Oracle_11g中解决被锁定的scott用户的方法 - CSDN博客</a></p>
-<h2 id="表空间的概念"><a href="#表空间的概念" class="headerlink" title="表空间的概念"></a>表空间的概念</h2><p><a href="https://www.zhihu.com/question/20396730" target="_blank" rel="noopener">请问下oracle为什么要创建表空间？表空间该如何创建？是将所有表放入一个表空间，还是将几个大表放入表空间？ - 知乎</a><br><a href="https://www.zhihu.com/question/20396730" target="_blank" rel="noopener">请问下oracle为什么要创建表空间？表空间该如何创建？是将所有表放入一个表空间，还是将几个大表放入表空间？ - 知乎</a><br><a href="https://baike.baidu.com/item/%E8%A1%A8%E7%A9%BA%E9%97%B4/1269860?fr=aladdin" target="_blank" rel="noopener">表空间_百度百科</a></p>
-<h2 id="Sql语句总结"><a href="#Sql语句总结" class="headerlink" title="Sql语句总结"></a>Sql语句总结</h2><p><a href="http://www.cnblogs.com/wishyouhappy/p/3700683.html" target="_blank" rel="noopener">常用sql语句及案例（oracle） - wishyouhappy - 博客园</a><br><a href="http://www.cnblogs.com/jiangxinnju/p/5840420.html" target="_blank" rel="noopener">Oracle系统表整理+常用SQL语句收集 - Aloys寒风 - 博客园</a></p>
-<h2 id="五种约束"><a href="#五种约束" class="headerlink" title="五种约束"></a>五种约束</h2><ol>
-<li>主键约束 primary key:保证数据不能为空，切不能重复</li>
-<li>非空约束：保证了该列不能存储null</li>
-<li>默认值约束 not null：如果用户不为此列添加数据，那么数据字典会为该列添加默认值</li>
-<li>Check约束 check：为某一列添加条件约束，如果用户不满足条件，那么操作被驳回</li>
-<li>唯一约束 unique：数据唯一性</li>
-<li>外键约束 foreign key：存在于两张表中，有其中一张表的某一字段指向另一章标的主键，从而让两张表产生关系</li>
+<h3 id="存储过程的构成"><a href="#存储过程的构成" class="headerlink" title="存储过程的构成"></a>存储过程的构成</h3><ol>
+<li>给PLSQL去了个名字方便调用</li>
+<li>存储过程</li>
+<li>传入参数</li>
+<li>传出参数</li>
 </ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/" class="post-title-link" itemprop="url">用Navicat premium连接win7虚拟机中的ORACLE11g（附账户密码）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-28 04:55:00" itemprop="dateCreated datePublished" datetime="2017-08-28T04:55:00+08:00">2017-08-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="用Navicat premium连接win7虚拟机中的ORACLE11g（附账户密码）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>941</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月28日 下午4:55</p>
-<p>Navicat的官方手册：<br><a href="https://www.navicat.com.cn/manual/online_manual/en/navicat/mac_manual/#/main_window_0" target="_blank" rel="noopener">Navicat Tutorials | Navicat Online Manual</a></p>
-<h2 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h2><p>当我升级了Mac os10.13后，出现ORA-21561: OID generation failed这个错误。这是由于升级系统导致的问题。<br>解决：<a href="http://blog.csdn.net/elonlink/article/details/52635523" target="_blank" rel="noopener">解决 ORA-21561: OID generation failed - ElonLink的博客        - CSDN博客</a><br>我的步骤：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Last login: Sun Oct  8 13:09:31 on ttys000</span><br><span class="line">czhdeMacBook-Pro:~ czh$ hostname</span><br><span class="line">czhdeMacBook-Pro.local</span><br><span class="line">czhdeMacBook-Pro:~ czh$ cd &#x2F;etc</span><br><span class="line">czhdeMacBook-Pro:etc czh$ open hosts</span><br><span class="line">czhdeMacBook-Pro:etc czh$ sudo scutil --set HostName localhost</span><br><span class="line">Password:</span><br><span class="line">czhdeMacBook-Pro:etc czh$</span><br></pre></td></tr></table></figure>
-
-<p>下面是一个错误，其实我还遇见的好多问题，但是按下面的步骤改的改的就好得了，具体哪个问题怎么呢解决我就不知道了<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/054C0361-E15F-44DA-A9BE-9A1E59404D59.png" alt></p>
-<h2 id="将虚拟机中的防火墙关掉"><a href="#将虚拟机中的防火墙关掉" class="headerlink" title="将虚拟机中的防火墙关掉"></a>将虚拟机中的防火墙关掉</h2><p><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/526697B9-6A3C-486C-96F9-D098987FF7A2.png" alt><br>否则出现超时timeout的错误：<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/47961D9F-712B-4612-ADD7-87E07D4D50FD.png" alt></p>
-<h2 id="连接过程的注意事项"><a href="#连接过程的注意事项" class="headerlink" title="连接过程的注意事项"></a>连接过程的注意事项</h2><ol>
-<li>这里要使用SID，不要使用service Name </li>
+<h3 id="为什么要封装成存储过程"><a href="#为什么要封装成存储过程" class="headerlink" title="为什么要封装成存储过程?"></a>为什么要封装成存储过程?</h3><ol>
+<li>封装之后方便传入传出参数 </li>
+<li>匿名块只能在数据库环境中调用 存储过程可以被外界调用(比如JDBC)</li>
 </ol>
-<p><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/78FF4B68-7470-4CF7-BCCA-9B067AD56DE1.png" alt></p>
-<ol start="2">
-<li><p>要填虚拟机中的ip(这里的192.168.42.64)<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/0F0F071A-50B5-4895-A590-E259FACD6DED.png" alt></p>
+<h3 id="函数与存储过程比较："><a href="#函数与存储过程比较：" class="headerlink" title="函数与存储过程比较："></a>函数与存储过程比较：</h3><ol>
+<li>函数可以看做一类特殊的存储过程 没有输出参数 必有唯一返回值</li>
+<li>删掉输出参数，添加返回值</li>
+<li>存储过程可以完全的实现函数的功能</li>
+</ol>
+<h3 id="如何选择函数与存储过程"><a href="#如何选择函数与存储过程" class="headerlink" title="如何选择函数与存储过程"></a>如何选择函数与存储过程</h3><ol>
+<li>当PL-SQL需要嵌在SQL中使用时用函数<ol>
+<li>就像min() max() count()这些函数</li>
+</ol>
 </li>
-<li><p>要将虚拟机设置为桥接模式，为了保证虚拟机与主机在同一网段（这里的42）<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/6C65A24D-B5AB-4C6D-8B20-3037AB1825B7.png" alt></p>
-</li>
+<li>当有多个返回值或者要被其它程序调用时用存储过程</li>
 </ol>
-<h2 id="关于PL-SQL-Developer"><a href="#关于PL-SQL-Developer" class="headerlink" title="关于PL/SQL Developer"></a>关于PL/SQL Developer</h2><ol>
-<li>我的虚拟机装的是win7，好像win7中安装PL/SQL本身就要问题，我查了好久，但是还是解决不了，我放弃了，因为我找不到原因。</li>
-<li>换用navicat效果一样</li>
-</ol>
-<p><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/8E6AF536-7A0D-439C-A988-9F72A8FF7295.png" alt></p>
-<h2 id="关于ORACLE中的配置文件的修改"><a href="#关于ORACLE中的配置文件的修改" class="headerlink" title="关于ORACLE中的配置文件的修改"></a>关于ORACLE中的配置文件的修改</h2><ol>
-<li>网上有好多blog都是让改oracle中的这两个问题，我这里没有改，也照样解决了问题（能不改就不改）<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/39F20A9E-F6AF-4279-B777-A65B2A1A6710.png" alt><br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/7007E912-D4C1-4D6B-957F-EDD6C494A3E5.png" alt></li>
-</ol>
-<h2 id="在navicat中注册新用户"><a href="#在navicat中注册新用户" class="headerlink" title="在navicat中注册新用户"></a>在navicat中注册新用户</h2><p><a href="http://www.cnblogs.com/renboqie/p/5635611.html" target="_blank" rel="noopener">navicat 关于orcale新建表空间，用户和权限分配 - 仁波切 - 博客园</a></p>
+<p>既然利用PLSQL可以实现高级语言的特性，那么当我们实现一个功能的时候，有哪些不同的、或者值得注意的地方</p>
+<p>需求：利用存储过程查询含有特定信息的学生id<br>思路：</p>
 <ol>
-<li>这里的User Name这一项一定要大写（不能写成chen）<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/FB3A10AD-BF7F-4649-80C7-9F7186EA05C0.png" alt></li>
-<li>这里的chen就是错的，而且role这里我虽然给CHEN设置的ROLE是DBA，但是这里的role依然要选default，不要选DBA<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/FC24BDD4-4988-4ED7-99F2-35DC559C8D59.png" alt></li>
+<li>也就是说这个参数可以是学生姓名，生日，电话号等等信息。在java中我们需要对这个特定信息进行判断，写上一堆if，但是在sql中我直接写在where语句中就行了，就省去了判断的过程</li>
+<li>体现了sql的优势，对比与java语言</li>
 </ol>
-<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>在这里：<a href="bear://x-callback-url/open-note?id=D03220D3-BB27-4183-9EB2-EC2D0EA099FB-6818-00002D988DF620BA">软件开发的相关密码</a></p>
+<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><ol>
+<li>使用触发器的环境:<ol>
+<li>业务逻辑是多步骤的 而且可能从任意一个步骤执行  一般用触发器链</li>
+<li>传进来的参数 是一行数据  一般用触发器</li>
+</ol>
+</li>
+<li>有了存储过程  为什么还要用触发器<ol>
+<li>存储过程需要特殊的调用方式</li>
+<li>A -&gt;  B  -&gt;  c -&gt;  D-&gt;    <ol>
+<li>连锁操作的业务逻辑 用触发器,JDBC只要正常的SQL语句</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>触发器要注意的地方 <ol>
+<li>暂时用不到的触发器全部禁用  <ol>
+<li>使用disable</li>
+</ol>
+</li>
+<li>避免逻辑死锁<ol>
+<li>一个trigger就是一个线程</li>
+<li>那么，不说自己的创建的线程，光是系统中默认的操作表的线程就有可能和自己的一个trigger线程产生冲突</li>
+</ol>
+</li>
+<li>尽量避免update触发器中对本表的操作</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p>Sequence 就像一个全局int型变量，他可以一直记录一个变量的值</p>
+<hr>
+<hr>
+<p>百度</p>
+<hr>
+<p><a href="http://blog.csdn.net/caoxiaohong1005/article/details/53433131" target="_blank" rel="noopener">Mac下不用虚拟机一样可以使用PLSQL Developer - iCoding91        - CSDN博客</a></p>
+<p>%符号 理解成“的”</p>
 
       
     </div>
@@ -678,7 +362,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -692,7 +376,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/" class="post-title-link" itemprop="url">ThinkPHP源码分析（核心）-7</a>
+            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">ORACLE的三个客户端工具</a>
         </h1>
 
         <div class="post-meta">
@@ -702,374 +386,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-08-23 10:57:00" itemprop="dateCreated datePublished" datetime="2017-08-23T10:57:00+08:00">2017-08-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析（核心）-7" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>880</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月23日 上午10:57</p>
-<h2 id="TP中的一个特点"><a href="#TP中的一个特点" class="headerlink" title="TP中的一个特点"></a>TP中的一个特点</h2><ol>
-<li><p>TP执行过程中很大部分都是<strong>环境的配置</strong>，这里要<strong>组织各种不同位置、不同作用的文件</strong>。那么，如何组织他们之间的工作其实也是一个大工程，就好像一个公司，<strong>boss需要思考</strong>自己需要哪些职位、各个职位他们之间如何协作、如何调节他们之间的关系、出现冲突如何处理、如何处理人员的流动（CBD模式）</p>
-</li>
-<li><p>这个的环境配置不仅仅是各种<strong>数组配置文件（define,static）</strong></p>
-</li>
-<li><p>还有各种<strong>类加载（include)</strong>，类加载之后是为了可以直接使用他们的方法</p>
-</li>
-<li><p>这里说是为了说明方法的来源，<strong>我以前目光里只有配置文件</strong></p>
-</li>
-</ol>
-<h2 id="TP中函数的特点、及它引出的深层思考"><a href="#TP中函数的特点、及它引出的深层思考" class="headerlink" title="TP中函数的特点、及它引出的深层思考"></a>TP中函数的特点、及它引出的深层思考</h2><ol>
-<li><p>TP中<strong>单个函数却要执行多个功能</strong>，这中情况还不少</p>
-</li>
-<li><p>这就导致的他的函数会有很多的判断，这样不仅加大了自己设计代码时的难度，让读的人也不舒服</p>
-</li>
-<li><p>但是，这样做的好处就是让上层使用更加方便</p>
-</li>
-<li><p>各有利弊吧</p>
-</li>
-<li><p><strong>还有另一种情形：</strong></p>
-</li>
-<li><p>就是其实功能说起来也很简单，让我实现的话也觉得不难</p>
-</li>
-<li><p>但是，当你去看他函数写的实现过程时，各种判断，绕来绕去，觉得麻烦</p>
-</li>
-<li><p>当然，这样麻烦不是由于人家水平不行，而是由于<strong>要站在一个框架的高度去思考</strong>，它自然就复杂了</p>
-</li>
-<li><p>我们思考的时候都是<strong>单一情景下的，而框架中的情景太多，那么，自然会让一个功能的实现过程变得复杂，需要各种判断、处理</strong></p>
-</li>
-<li><p>这就是<strong>框架设计者设计的核心</strong>，在开工之前需要进行严密的思考。</p>
-</li>
-<li><p><strong>理清各种情景，各种情景之间的关系</strong></p>
-</li>
-<li><p>这也是各个框架最不同、最有价值的地方</p>
-</li>
-<li><p>像老师说的看一个<strong>string类</strong>等是怎样实现的，这些其实都是<strong>框架的皮毛</strong>了</p>
-</li>
-</ol>
-<p>最后：<strong>看框架的人，最高境界就是能理清楚上面说的，能够画出他们之间的逻辑关系图</strong></p>
-<p>到现在为止我就把TP一个应用的启动过程看完了，没完成的有</p>
-<ol>
-<li>TP的core代码，在Library/Think目录下的那些.php文件<ol>
-<li>我只粗略的看了看Hook.class.php，Dispatcher.class.php</li>
-</ol>
-</li>
-<li>在 <a href="bear://x-callback-url/open-note?id=29F62E49-0E3B-40CE-98F0-DCC5C69E67DE-2779-000009EC0DA8F32F">ThinkPHP源码分析-2</a>中关于View的一些东西我没有看，这个其实很关键的，但是没时间了<ol>
-<li><a href="http://www.daydaytc.com/php/142.html" target="_blank" rel="noopener">Thinkphp源码分析系列（七）–控制器基类-TC部落</a></li>
-<li><a href="http://www.daydaytc.com/php/206.html" target="_blank" rel="noopener">Thinkphp源码分析系列（九）–视图view类-TC部落</a><br><img src="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/1B8462AB-C0AE-4F49-8BA8-078CAA355211.png" alt></li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-6/" class="post-title-link" itemprop="url">ThinkPHP源码分析-6</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-23 08:18:00" itemprop="dateCreated datePublished" datetime="2017-08-23T08:18:00+08:00">2017-08-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-6/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析-6" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>334</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月23日 上午8:18</p>
-<h2 id="Hook-class-php"><a href="#Hook-class-php" class="headerlink" title="Hook.class.php"></a>Hook.class.php</h2><ol>
-<li>这个类其实很简单，其中有一个$tags static数组变量用来报错tag和行为的对应关系</li>
-<li>static public function listen($tag, &amp;$params=NULL)这个监听函数，其实是一个执行函数，他直接调用了  static public function exec($name, $tag,&amp;$params=NULL)函数来执行给的tag对应的行为</li>
-<li>除了上面核心的，其他的都是$tags的导入、获取方法</li>
-</ol>
-<h2 id="Dispatcher-class-php"><a href="#Dispatcher-class-php" class="headerlink" title="Dispatcher.class.php"></a>Dispatcher.class.php</h2><ol>
-<li>URL映射到控制器，将URL进行解析对应到相应控制器的方法</li>
-<li>这里并不执行，最后要将解析结果保存在define中、全局变量中</li>
-<li>还有具体的看他的解析过程</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/22/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-5/" class="post-title-link" itemprop="url">ThinkPHP源码分析-5</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-22 09:51:00" itemprop="dateCreated datePublished" datetime="2017-08-22T09:51:00+08:00">2017-08-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-5/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析-5" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>178</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月22日 上午9:51</p>
-<p>方法的执行是一个短暂的过程，那么他如何维持它的效果</p>
-<ol>
-<li>字符串<ol>
-<li>define</li>
-<li>static变量</li>
-<li>数组</li>
-</ol>
-</li>
-<li>这就涉及到一个抽象的过程，一个抽象的状态你用一个字符串来表示，这个字符串就是所谓的状态</li>
-<li>这说明了两点<ol>
-<li>字符串（数组）是每一个项目的核心。不论是用来处理数据、还是完成让人不可思议的功能</li>
-<li>抽象建模的能力。不是实物的东西，用一个字符串（数组）来表示</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/22/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%A2%B3%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%A2%B3%E7%90%86/" class="post-title-link" itemprop="url">js知识体系的梳理</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-22 05:29:00" itemprop="dateCreated datePublished" datetime="2017-08-22T05:29:00+08:00">2017-08-22</time>
+              <time title="创建时间：2017-09-01 05:44:00" itemprop="dateCreated datePublished" datetime="2017-09-01T05:44:00+08:00">2017-09-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1091,7 +408,7 @@
             </span>
 
           
-            <span id="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%A2%B3%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="js知识体系的梳理" title="阅读次数">
+            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/" class="post-meta-item leancloud_visitors" data-flag-title="ORACLE的三个客户端工具" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1103,7 +420,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>132</span>
+              <span>329</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1122,23 +439,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2017年8月22日 下午5:29</p>
-<h2 id="由这几部分组成"><a href="#由这几部分组成" class="headerlink" title="由这几部分组成"></a>由这几部分组成</h2><ol>
-<li>Js的非对象语法规则：这个其实简单，基本上和其他语言一致，一定不会造成大问题</li>
-<li>对象：如图1<ol>
-<li>javaScript对象</li>
-<li>Browser对象</li>
-<li>DOM对象</li>
-<li>HTML对象</li>
+          <p>2017年9月1日 下午5:44</p>
+<p>ORACLE SQL Developer<br>Navticat premium<br>PL/SQL</p>
+<ol>
+<li>我觉得最好的是ORACLE SQL Developer</li>
+<li>这个是oracle官方出的<a href="http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" target="_blank" rel="noopener">Oracle SQL Developer Downloads</a></li>
+<li>可以支持多系统，包括mac</li>
+<li>官方手册<a href="http://www.oracle.com/ocom/groups/public/@otn/documents/webcontent/229076_zhs.htm#t3" target="_blank" rel="noopener">使用 SQL Developer 开发和调试 PL/SQL</a>等</li>
+<li>左侧有各种功能支持，右击就可以<ol>
+<li>他的使用和PL_SQL差不多，但是界面美化比PL_SQL好多了</li>
+<li>与navicat相比，navicat毕竟不是亲生的，左侧功能的支持不好，比如package</li>
 </ol>
 </li>
-<li>事件机制：<ol>
-<li>事件包括：事件源()</li>
 </ol>
-</li>
-</ol>
-<p>对象的来源<br>如何操作对象<br>对象可以干什么</p>
-<p><img src="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%A2%B3%E7%90%86/DB08A82B-088F-4DFA-A8D5-140AF9DEC958.png" alt></p>
+<p><img src="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/C188C2C6-B90B-4ADA-B0EC-B1F196F279E2.png" alt><br>可以看出他们可以同时连接<br>但是在navicat中添加的数据，在PL/SQL中会乱码<br><a href="http://blog.csdn.net/aovenus/article/details/12648751" target="_blank" rel="noopener">plsql查询数据显示为乱码解决方法 - aovenus的专栏        - CSDN博客</a></p>
 
       
     </div>
@@ -1158,7 +472,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/21/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-4/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1172,7 +486,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/08/21/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-4/" class="post-title-link" itemprop="url">ThinkPHP源码分析-4</a>
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">SQL表连接</a>
         </h1>
 
         <div class="post-meta">
@@ -1182,7 +496,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-08-21 11:37:00" itemprop="dateCreated datePublished" datetime="2017-08-21T11:37:00+08:00">2017-08-21</time>
+              <time title="创建时间：2017-08-31 11:03:00" itemprop="dateCreated datePublished" datetime="2017-08-31T11:03:00+08:00">2017-08-31</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1197,14 +511,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2017/08/21/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-4/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析-4" title="阅读次数">
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-meta-item leancloud_visitors" data-flag-title="SQL表连接" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1216,7 +530,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>755</span>
+              <span>92</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1235,52 +549,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2017年8月21日 上午11:37</p>
-<h3 id="反思1"><a href="#反思1" class="headerlink" title="反思1"></a>反思1</h3><ol>
-<li>Tp源码中一个函数看似看挺长，其实目的很简单</li>
-<li>长的原因是是要处理多种情况<ol>
-<li>上层设计中，让一个功能呢有多种操作方式，那么，下层对于每种方式都要做好适配</li>
-<li>不同的操作环境</li>
-</ol>
-</li>
-</ol>
-<h2 id="反思2"><a href="#反思2" class="headerlink" title="反思2"></a>反思2</h2><ol>
-<li>一个类定义的变量/函数都是static的</li>
-<li>大量的使用static来维持自己的阶段性成果</li>
-<li>随着程序的执行static变量不断的扩充</li>
-<li>其实都属于Thinkphp_3.2.3/index.php 这个作用域</li>
-<li>这个回答的为啥autoload（）函数只定义在了think.class.php中，但是却可以让自己的项目实现自动加载</li>
-<li>Include/require 引入另一个php文件+执行代码</li>
-<li>Include/require 包含进来的php程序，可以直接使用上文中的变量</li>
-<li>include/require 可以理解直接剪贴过来了</li>
-</ol>
-<h2 id="反思3"><a href="#反思3" class="headerlink" title="反思3"></a>反思3</h2><ol>
-<li>Think.class.php<ol>
-<li>这时候还没有真正的跑起来项目，还是在做它运行需要的准备工作</li>
-</ol>
-</li>
-<li>主要作用：<ol>
-<li>加载各种配置文件（都是return 数组），将他们变成static变量<ol>
-<li>由于TP要实现，同一功能根据不同的情景，采取不同的配置方法</li>
-<li>所以，这里的配置文件的加载步骤比较繁琐</li>
-</ol>
-</li>
-<li>重写php本身的函数，自动加载类库、异常处理、错误处理等<ol>
-<li>这些功能的实现php本身就有很好的辅助函数</li>
-<li>这就可以很方便的实现上面的功能</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>阅读框架，依靠<ol>
-<li>了解业务</li>
-<li>语言功底</li>
-</ol>
-</li>
-<li>TP这个框架思想其实比较简单，在这个过程中锻炼的是自己对语言本身的理解。</li>
-<li>结论：框架学习过程中觉得难，并不是框架的作者发明了多少让人难以理解的代码过程，一定是由于自己：<ol>
-<li>业务本身不了解，    跟不上作者的思路。在具体的看之前，就要脑子中知道作者的目的是啥、有啥效果、要考虑啥特殊情况、大概有几个步骤等</li>
-<li>语言功底中要知道语言本身他又那些特性、这些特性能如何巧用、已经封装好了那些功能、那些没有封装好</li>
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午11:03</p>
+<h2 id="连接有哪些"><a href="#连接有哪些" class="headerlink" title="连接有哪些"></a>连接有哪些</h2><ol>
+<li>固定的：外键连接</li>
+<li>额外的：看自己有啥要求，或者要过滤那些情况<ol>
+<li><strong>关键是要明白自己的需求</strong></li>
+<li>然后转换成里逻辑表达式</li>
 </ol>
 </li>
 </ol>
@@ -1303,7 +577,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/phpDocument%E7%9A%84%E7%89%A2%E9%AA%9A/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1317,7 +591,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/phpDocument%E7%9A%84%E7%89%A2%E9%AA%9A/" class="post-title-link" itemprop="url">phpDocument的牢骚</a>
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">SQL表连接</a>
         </h1>
 
         <div class="post-meta">
@@ -1327,7 +601,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-08-19 11:34:00" itemprop="dateCreated datePublished" datetime="2017-08-19T11:34:00+08:00">2017-08-19</time>
+              <time title="创建时间：2017-08-31 11:03:00" itemprop="dateCreated datePublished" datetime="2017-08-31T11:03:00+08:00">2017-08-31</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1342,14 +616,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/phpDocument%E7%9A%84%E7%89%A2%E9%AA%9A/" class="post-meta-item leancloud_visitors" data-flag-title="phpDocument的牢骚" title="阅读次数">
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-meta-item leancloud_visitors" data-flag-title="SQL表连接" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1361,14 +635,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.2k</span>
+              <span>92</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -1380,47 +654,772 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2017年8月19日 上午11:34</p>
-<p>官方网站：<a href="https://phpdoc.org/" target="_blank" rel="noopener">https://phpdoc.org/</a></p>
-<p>起因：我最近在看TP的源码，想做出一个html文档作为辅助</p>
-<h2 id="牢骚"><a href="#牢骚" class="headerlink" title="牢骚"></a>牢骚</h2><ol>
-<li>官方网站中的<strong>system requrement</strong>，能不能标明<strong>那些是必须的、哪些是附加的</strong>！出现错误的时候至少排除不是环境的问题</li>
-<li>官方网站中能不能有一个<strong>Q&amp;A</strong>，出了错我都不知道去哪找，百度中的资料，大家的情况基本上都不一样，抄来抄去，不但学不到东西、弄不懂原理，而且八成还解决不了问题</li>
-<li><strong>phpDocument</strong>你行不行，不知道大家用的不同的系统的，<strong>能不能说一说不同电脑之间的区别</strong>。百度上都没有一个关于mac上用pear安装phpDocument的文档，注意是一个！我安装下来各种报错</li>
-<li><strong>最后埋怨埋怨我</strong><ol>
-<li><strong>看资料能不能不着急</strong>！尤其是english，你不知道english不好吗！<ol>
-<li>把 “PHAR”看成“PEAR”，这不是第一次了。这最起码就浪费了1个多小时</li>
-<li>看Stack Overflow里的文章，先看懂人家的情况和自己一样不，不要就是着急找答案，人家问题你都不仔细看，能找见个屁！</li>
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午11:03</p>
+<h2 id="连接有哪些"><a href="#连接有哪些" class="headerlink" title="连接有哪些"></a>连接有哪些</h2><ol>
+<li>固定的：外键连接</li>
+<li>额外的：看自己有啥要求，或者要过滤那些情况<ol>
+<li><strong>关键是要明白自己的需求</strong></li>
+<li>然后转换成里逻辑表达式</li>
 </ol>
 </li>
-<li>学习不是一日之工，是水到渠成。<strong>还是不要着急，保持一个清晰的思维</strong></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-title-link" itemprop="url">关于聚合函数注意事项</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-31 09:51:00" itemprop="dateCreated datePublished" datetime="2017-08-31T09:51:00+08:00">2017-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-meta-item leancloud_visitors" data-flag-title="关于聚合函数注意事项" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>192</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午9:51</p>
+<h2 id="关于聚合函数注意事项"><a href="#关于聚合函数注意事项" class="headerlink" title="关于聚合函数注意事项"></a>关于聚合函数注意事项</h2><p><strong>原则</strong>：select中的每一项，<strong>单独查询</strong>的话结果条数相等<br><strong>技巧</strong>：当没有group by 使用聚合函数最有可能出问题</p>
+<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/319E23B9-C559-4807-A700-C9DD02264DF3.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/8FB29BBD-F353-4E70-85A9-4D337624929E.png" alt><br>查询student表中的男生<br>一共四个男生，对应四条数据</p>
+<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/190A05BD-A3CA-4FF9-89A6-40308767CA1E.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/6E9F14FE-4CE0-46DC-9552-DB858B1E97F6.png" alt><br>查询student表中的男生人数<br>男生人数是4，就一条数据</p>
+<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/E9659418-56DD-430F-9476-CBF9CB522DAE.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/B60DC261-6E43-4EAE-8904-2867C141F87F.png" alt><br>当同时查询男生人数，和男生时<br>就会造成1对4 表就不知道怎么表示了</p>
+<p>修改为下图也可以<br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/946941D7-04E7-4BBD-A4F9-E408E22ACA81.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-title-link" itemprop="url">关于聚合函数注意事项</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-31 09:51:00" itemprop="dateCreated datePublished" datetime="2017-08-31T09:51:00+08:00">2017-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-meta-item leancloud_visitors" data-flag-title="关于聚合函数注意事项" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>192</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午9:51</p>
+<h2 id="关于聚合函数注意事项"><a href="#关于聚合函数注意事项" class="headerlink" title="关于聚合函数注意事项"></a>关于聚合函数注意事项</h2><p><strong>原则</strong>：select中的每一项，<strong>单独查询</strong>的话结果条数相等<br><strong>技巧</strong>：当没有group by 使用聚合函数最有可能出问题</p>
+<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/319E23B9-C559-4807-A700-C9DD02264DF3.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/8FB29BBD-F353-4E70-85A9-4D337624929E.png" alt><br>查询student表中的男生<br>一共四个男生，对应四条数据</p>
+<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/190A05BD-A3CA-4FF9-89A6-40308767CA1E.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/6E9F14FE-4CE0-46DC-9552-DB858B1E97F6.png" alt><br>查询student表中的男生人数<br>男生人数是4，就一条数据</p>
+<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/E9659418-56DD-430F-9476-CBF9CB522DAE.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/B60DC261-6E43-4EAE-8904-2867C141F87F.png" alt><br>当同时查询男生人数，和男生时<br>就会造成1对4 表就不知道怎么表示了</p>
+<p>修改为下图也可以<br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/946941D7-04E7-4BBD-A4F9-E408E22ACA81.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%B4%A2%E5%BC%95+%E4%BA%8B%E5%8A%A1+sequence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%B4%A2%E5%BC%95+%E4%BA%8B%E5%8A%A1+sequence/" class="post-title-link" itemprop="url">数据库中索引+事务+sequence</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-31 02:35:00" itemprop="dateCreated datePublished" datetime="2017-08-31T02:35:00+08:00">2017-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%B4%A2%E5%BC%95+%E4%BA%8B%E5%8A%A1+sequence/" class="post-meta-item leancloud_visitors" data-flag-title="数据库中索引+事务+sequence" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 下午2:35</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ol>
+<li>主键索引，唯一索引（unique）</li>
+<li><strong>索引</strong>： index   建立索引是为了提高查询速度   但是对于频繁改动的字段添加索引会降低性能</li>
+<li>在创建表或者改变表内字段约束时，  primary key 和 unique 约束会自动为该字段创建对应索引</li>
+<li>索引的<strong>用途</strong>：   在查询时将索引字段用于条件判断可以提升速度（性能）</li>
+<li><strong>慎用！！</strong></li>
+<li>索引的创建  与  删除  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create index stu_s_name on stu(s_name)</span><br><span class="line"></span><br><span class="line">drop index stu_s_name</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h2 id="事务在不同数据库中的不同"><a href="#事务在不同数据库中的不同" class="headerlink" title="事务在不同数据库中的不同"></a>事务在不同数据库中的不同</h2><ol>
+<li><strong>MYSQL和Windows sqlSEVER</strong> 默认开启自动提交</li>
+<li>在 <strong>MySQL</strong> 命令行的默认设置下，<strong>事务都是自动提交的</strong>，即执行 SQL 语句后就会马上执行 COMMIT 操作。</li>
+<li>因此要显式地开启一个事务务须使用<strong>命令 BEGIN</strong> 或 <strong>START TRANSACTION</strong>，或者执行<strong>命令 SET AUTOCOMMIT=0</strong>，用来禁止使用当前会话的自动提交。</li>
+<li>当使用begin时，就不会自动提交了</li>
+<li><strong>ORACL</strong>中需要<strong>手动的commit</strong>进行提交，不会默认进行提交</li>
+<li>参考<a href="http://www.runoob.com/mysql/mysql-transaction.html" target="_blank" rel="noopener">MySQL 事务 | 菜鸟教程</a><ol>
+<li>在没有commit之前，是可以回滚的</li>
+<li>但是commit之后就不可以回滚了，同时，前面设置的回滚点也会失效</li>
 </ol>
 </li>
-<li>TP你能为啥就不按phpDocument的格式写，你瞧不起外国人的东西啊（做的好！）</li>
 </ol>
-<h2 id="这次的问题我做的比较好的地方（第三点是最核心的）"><a href="#这次的问题我做的比较好的地方（第三点是最核心的）" class="headerlink" title="这次的问题我做的比较好的地方（第三点是最核心的）"></a>这次的问题我做的比较好的地方（第三点是最核心的）</h2><ol>
-<li>学习phpDocument<strong>首先想到是官方文档</strong>，先进行了文档的阅读，按着文档的思路来做</li>
-<li>我最后实在解决不了问题1、问题2。是按着<strong>官方文档</strong>的方法去试的第二种，从<strong>百度</strong>中乱七八糟的东西中抽出身来。事实证明我是对的</li>
-<li>对于那些报错，我最后觉得是我解决不了的问题，因为他的报错中涉及到了这个软件本身的代码，以及一些php整个原理上的东西。我首先对人家代码不了解，其次我对php整个的运行过程并不熟悉，只是会做不涉及php本质的项目。我既然目前的知识体系不足，<strong>就没必要在自己肯定解决不了的问题中徘徊</strong>，弄的自己蓬头垢面</li>
+<p>注：</p>
+<ol>
+<li>在一个<strong>查询窗口</strong>中，<strong>没有commit</strong>的insert操作是不写入<strong>磁盘</strong>的。这时的insert的操作只是影响<strong>内存</strong>的数据</li>
+<li>在PL/SQL中（软件），如果一个sql <strong>insert</strong>执行完<strong>没有commit</strong>，在当前查询窗口中，查询<strong>select</strong>是可以出表的变化的。</li>
+<li>但是，但如果换一个查询窗口，或者去表中去看，其实是没有插入的，这就是因为oracle不是自动commit事务，需要手动提交，</li>
+<li>你在当前查询窗口中可以查询出表的变化，是因为在当前窗口中是从当前查询表对应的内存去查询，并不是去硬盘上去查询</li>
 </ol>
-<h2 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h2><p>Pear安装过程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">czhdeMacBook-Pro:.ssh czh$ sudo pear channel-discover pear.phpdoc.org</span><br><span class="line">Password:</span><br><span class="line">Adding Channel &quot;pear.phpdoc.org&quot; succeeded</span><br><span class="line">Discovery of channel &quot;pear.phpdoc.org&quot; succeeded</span><br><span class="line">czhdeMacBook-Pro:.ssh czh$ pear install phpdoc&#x2F;phpDocumentor</span><br><span class="line">Cannot install, php_dir for channel &quot;pear.phpdoc.org&quot; is not writeable by the current user</span><br><span class="line">czhdeMacBook-Pro:.ssh czh$ sudo pear install phpdoc&#x2F;phpDocumentor</span><br><span class="line">downloading phpDocumentor-2.9.0.tgz ...</span><br><span class="line">Starting to download phpDocumentor-2.9.0.tgz (16,175,113 bytes)</span><br><span class="line">...............................................................................done: 16,175,113 bytes</span><br><span class="line">install ok: channel:&#x2F;&#x2F;pear.phpdoc.org&#x2F;phpDocumentor-2.9.0</span><br></pre></td></tr></table></figure>
+<h2 id="sequence-序列"><a href="#sequence-序列" class="headerlink" title="sequence  序列"></a>sequence  序列</h2><ol>
+<li><strong>mysql  SQLServer</strong> 由表自身维护主键</li>
+<li><strong>Oracle</strong>  由<strong>对象</strong>维护主键 需要有SQL进行配合（这里的对象指的是sequence对象）</li>
+<li>不一定保证连续</li>
+<li>每行调用nextval后都会自增</li>
+<li>同一行多次调用后只会自增一次</li>
+<li><strong>想使用currval  必须先调用一次 nextval</strong>   否则序列不会自动初始化</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">create</span> <span class="keyword">sequence</span> seq_stu</span><br><span class="line"> <span class="keyword">minvalue</span> <span class="number">15</span> </span><br><span class="line"> <span class="keyword">start</span> <span class="keyword">with</span> <span class="number">15</span> </span><br><span class="line"> <span class="keyword">increment</span> <span class="keyword">by</span> <span class="number">1</span>;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> school <span class="keyword">values</span>(seq_stu.nextval,<span class="string">'a'</span>,<span class="string">'a'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> seq_stu.nextval <span class="keyword">from</span> dual</span><br><span class="line"><span class="keyword">select</span> seq_stu.currval <span class="keyword">from</span> dual</span><br></pre></td></tr></table></figure>
 
-<p>（第一个错）-解决不了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">czhdeMacBook-Pro:thinkphp_3.2.3 czh$ php phpDocumentor.phar -d . -t docs&#x2F;api</span><br><span class="line">Could not open input file: phpDocumentor.phar</span><br><span class="line">czhdeMacBook-Pro:thinkphp_3.2.3 czh$ sudo php phpDocumentor.phar -d . -t docs&#x2F;api</span><br><span class="line">Password:</span><br><span class="line">Could not open input file: phpDocumentor.phar</span><br></pre></td></tr></table></figure>
 
-<p>（更改路径之后报的第二个错）—解决不了也</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">czhdeMacBook-Pro:thinkphp_3.2.3 czh$  phpdoc -d .&#x2F;ThinkPHP -t .&#x2F;docs&#x2F;api</span><br><span class="line">PHP Warning:  require_once(&#x2F;dompdf&#x2F;dompdf&#x2F;dompdf_config.inc.php): failed to open stream: No such file or directory in &#x2F;usr&#x2F;local&#x2F;pear&#x2F;share&#x2F;pear&#x2F;phpDocumentor&#x2F;src&#x2F;phpDocumentor&#x2F;Bootstrap.php on line 178</span><br><span class="line"></span><br><span class="line">Warning: require_once(&#x2F;dompdf&#x2F;dompdf&#x2F;dompdf_config.inc.php): failed to open stream: No such file or directory in &#x2F;usr&#x2F;local&#x2F;pear&#x2F;share&#x2F;pear&#x2F;phpDocumentor&#x2F;src&#x2F;phpDocumentor&#x2F;Bootstrap.php on line 178</span><br><span class="line">PHP Fatal error:  require_once(): Failed opening required &#39;&#x2F;dompdf&#x2F;dompdf&#x2F;dompdf_config.inc.php&#39; (include_path&#x3D;&#39;.:&#x2F;usr&#x2F;local&#x2F;pear&#x2F;share&#x2F;pear&#39;) in &#x2F;usr&#x2F;local&#x2F;pear&#x2F;share&#x2F;pear&#x2F;phpDocumentor&#x2F;src&#x2F;phpDocumentor&#x2F;Bootstrap.php on line 178</span><br><span class="line"></span><br><span class="line">Fatal error: require_once(): Failed opening required &#39;&#x2F;dompdf&#x2F;dompdf&#x2F;dompdf_config.inc.php&#39; (include_path&#x3D;&#39;.:&#x2F;usr&#x2F;local&#x2F;pear&#x2F;share&#x2F;pear&#39;) in &#x2F;usr&#x2F;local&#x2F;pear&#x2F;share&#x2F;pear&#x2F;phpDocumentor&#x2F;src&#x2F;phpDocumentor&#x2F;Bootstrap.php on line 178</span><br><span class="line">czhdeMacBook-Pro:thinkphp_3.2.3 czh$</span><br></pre></td></tr></table></figure>
 
-<p>我换用PHAR安装后，发现能行了（phpDocumentor.phar方式）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">bogon:~ czh$ php phpDocumentor.phar -d test -t docs&#x2F;api</span><br><span class="line">Collecting files .. OK</span><br><span class="line">Initializing parser .. OK</span><br><span class="line">Parsing files</span><br><span class="line">Parsing &#x2F;Users&#x2F;czh&#x2F;test&#x2F;test.php</span><br><span class="line">Storing cache in &quot;&#x2F;Users&#x2F;czh&#x2F;docs&#x2F;api&quot; .. OK</span><br><span class="line">Load cache                                                         ..    0.000s</span><br><span class="line">Preparing template &quot;clean&quot;                                         ..    0.003s</span><br><span class="line">Preparing 17 transformations                                       ..    0.000s</span><br><span class="line">Build &quot;elements&quot; index                                             ..    0.000s</span><br><span class="line">Replace textual FQCNs with object aliases                          ..    0.000s</span><br><span class="line">Resolve @link and @see tags in descriptions                        ..    0.000s</span><br><span class="line">Enriches inline example tags with their sources                    ..    0.000s</span><br><span class="line">Build &quot;packages&quot; index                                             ..    0.000s</span><br><span class="line">Build &quot;namespaces&quot; index and add namespaces to &quot;elements&quot;          ..    0.000s</span><br><span class="line">Collect all markers embedded in tags                               ..    0.000s</span><br><span class="line">Transform analyzed project into artifacts                          ..</span><br><span class="line">Applying 17 transformations</span><br><span class="line">  Initialize writer &quot;phpDocumentor\Plugin\Core\Transformer\Writer\FileIo&quot;</span><br><span class="line">  Initialize writer &quot;phpDocumentor\Plugin\Twig\Writer\Twig&quot;</span><br><span class="line">  Initialize writer &quot;phpDocumentor\Plugin\Graphs\Writer\Graph&quot;</span><br><span class="line">  Execute transformation using writer &quot;FileIo&quot;</span><br><span class="line">  Execute transformation using writer &quot;FileIo&quot;</span><br><span class="line">  Execute transformation using writer &quot;FileIo&quot;</span><br><span class="line">  Execute transformation using writer &quot;FileIo&quot;</span><br><span class="line">  Execute transformation using writer &quot;FileIo&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;Graph&quot;</span><br><span class="line">Unable to find the &#96;dot&#96; command of the GraphViz package. Is GraphViz correctly installed and present in your path?   0.164s</span><br><span class="line">Analyze results and write report to log                            ..    0.000s</span><br><span class="line">bogon:~ czh$</span><br></pre></td></tr></table></figure>
 
-<p>（报的第三个错）（phpDocumentor.phar方式）<br>说明：phpDocumentor.phar 这个必须在当前目录下（我觉着改改路径其他目录也行，没试）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bogon:htdocs czh$ php phpDocumentor.phar -d test -t docs&#x2F;api</span><br><span class="line">Could not open input file: phpDocumentor.phar</span><br></pre></td></tr></table></figure>
+<p>创建索引<br>自动创建索引</p>
+<p>case<br>exists<br>sequence</p>
+<p>用户 表空间 版本号</p>
 
-<p>看看成果吧！</p>
-<p><img src="/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/phpDocument%E7%9A%84%E7%89%A2%E9%AA%9A/4C8626C8-87D1-4062-8F76-83078C381F94.png" alt></p>
-<p><img src="/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/phpDocument%E7%9A%84%E7%89%A2%E9%AA%9A/FEAFEFD3-1F1B-445C-842D-89ADBF04C8DA.png" alt><br>注：我倒是没琢磨这个具体怎么用，和javadoc有区别</p>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%B4%A2%E5%BC%95+%E4%BA%8B%E5%8A%A1+sequence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%B4%A2%E5%BC%95+%E4%BA%8B%E5%8A%A1+sequence/" class="post-title-link" itemprop="url">数据库中索引+事务+sequence</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-31 02:35:00" itemprop="dateCreated datePublished" datetime="2017-08-31T02:35:00+08:00">2017-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%B4%A2%E5%BC%95+%E4%BA%8B%E5%8A%A1+sequence/" class="post-meta-item leancloud_visitors" data-flag-title="数据库中索引+事务+sequence" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 下午2:35</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ol>
+<li>主键索引，唯一索引（unique）</li>
+<li><strong>索引</strong>： index   建立索引是为了提高查询速度   但是对于频繁改动的字段添加索引会降低性能</li>
+<li>在创建表或者改变表内字段约束时，  primary key 和 unique 约束会自动为该字段创建对应索引</li>
+<li>索引的<strong>用途</strong>：   在查询时将索引字段用于条件判断可以提升速度（性能）</li>
+<li><strong>慎用！！</strong></li>
+<li>索引的创建  与  删除  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create index stu_s_name on stu(s_name)</span><br><span class="line"></span><br><span class="line">drop index stu_s_name</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h2 id="事务在不同数据库中的不同"><a href="#事务在不同数据库中的不同" class="headerlink" title="事务在不同数据库中的不同"></a>事务在不同数据库中的不同</h2><ol>
+<li><strong>MYSQL和Windows sqlSEVER</strong> 默认开启自动提交</li>
+<li>在 <strong>MySQL</strong> 命令行的默认设置下，<strong>事务都是自动提交的</strong>，即执行 SQL 语句后就会马上执行 COMMIT 操作。</li>
+<li>因此要显式地开启一个事务务须使用<strong>命令 BEGIN</strong> 或 <strong>START TRANSACTION</strong>，或者执行<strong>命令 SET AUTOCOMMIT=0</strong>，用来禁止使用当前会话的自动提交。</li>
+<li>当使用begin时，就不会自动提交了</li>
+<li><strong>ORACL</strong>中需要<strong>手动的commit</strong>进行提交，不会默认进行提交</li>
+<li>参考<a href="http://www.runoob.com/mysql/mysql-transaction.html" target="_blank" rel="noopener">MySQL 事务 | 菜鸟教程</a><ol>
+<li>在没有commit之前，是可以回滚的</li>
+<li>但是commit之后就不可以回滚了，同时，前面设置的回滚点也会失效</li>
+</ol>
+</li>
+</ol>
+<p>注：</p>
+<ol>
+<li>在一个<strong>查询窗口</strong>中，<strong>没有commit</strong>的insert操作是不写入<strong>磁盘</strong>的。这时的insert的操作只是影响<strong>内存</strong>的数据</li>
+<li>在PL/SQL中（软件），如果一个sql <strong>insert</strong>执行完<strong>没有commit</strong>，在当前查询窗口中，查询<strong>select</strong>是可以出表的变化的。</li>
+<li>但是，但如果换一个查询窗口，或者去表中去看，其实是没有插入的，这就是因为oracle不是自动commit事务，需要手动提交，</li>
+<li>你在当前查询窗口中可以查询出表的变化，是因为在当前窗口中是从当前查询表对应的内存去查询，并不是去硬盘上去查询</li>
+</ol>
+<h2 id="sequence-序列"><a href="#sequence-序列" class="headerlink" title="sequence  序列"></a>sequence  序列</h2><ol>
+<li><strong>mysql  SQLServer</strong> 由表自身维护主键</li>
+<li><strong>Oracle</strong>  由<strong>对象</strong>维护主键 需要有SQL进行配合（这里的对象指的是sequence对象）</li>
+<li>不一定保证连续</li>
+<li>每行调用nextval后都会自增</li>
+<li>同一行多次调用后只会自增一次</li>
+<li><strong>想使用currval  必须先调用一次 nextval</strong>   否则序列不会自动初始化</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">create</span> <span class="keyword">sequence</span> seq_stu</span><br><span class="line"> <span class="keyword">minvalue</span> <span class="number">15</span> </span><br><span class="line"> <span class="keyword">start</span> <span class="keyword">with</span> <span class="number">15</span> </span><br><span class="line"> <span class="keyword">increment</span> <span class="keyword">by</span> <span class="number">1</span>;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> school <span class="keyword">values</span>(seq_stu.nextval,<span class="string">'a'</span>,<span class="string">'a'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> seq_stu.nextval <span class="keyword">from</span> dual</span><br><span class="line"><span class="keyword">select</span> seq_stu.currval <span class="keyword">from</span> dual</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>创建索引<br>自动创建索引</p>
+<p>case<br>exists<br>sequence</p>
+<p>用户 表空间 版本号</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">关于ORACLE配置文件和连接的问题总结</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-30 08:34:00" itemprop="dateCreated datePublished" datetime="2017-08-30T08:34:00+08:00">2017-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="关于ORACLE配置文件和连接的问题总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年8月30日 上午8:34</p>
+<p>我参考过一些文章<br><a href="http://blog.csdn.net/kobe269/article/details/8700224" target="_blank" rel="noopener">ORACLE配置tnsnames.ora文件详解 - kobe269的专栏</a><br><a href="http://blog.sina.com.cn/s/blog_60b8e4e501069rub.html" target="_blank" rel="noopener">关于“ORA-12518: TNS: 监听程序无法分发客户机连接”的解决</a><br><a href="http://blog.csdn.net/qitongce/article/details/53895538" target="_blank" rel="noopener">plsql 安装后database下拉没有东西 - qitongce的博客        - CSDN博客</a><br><a href="https://jingyan.baidu.com/article/0f5fb099c19d466d8334ead4.html" target="_blank" rel="noopener">pl/sql登录时database下拉框没有任何内容_百度经验</a><br><a href="http://blog.csdn.net/u012270113/article/details/25304719" target="_blank" rel="noopener">卸载plsql后重新安装遇到问题小结 - 到底意难平的专栏        - CSDN博客</a><br><a href="http://blog.csdn.net/evilcry2012/article/details/45534207" target="_blank" rel="noopener">tnsping用法 - evilcry2012的专栏        - CSDN博客</a></p>
+<h2 id="关于配置关键问题理解"><a href="#关于配置关键问题理解" class="headerlink" title="关于配置关键问题理解"></a>关于配置关键问题理解</h2><ol>
+<li>listener.ora  tnsnames.ora sqlnet.ora<ol>
+<li>listener.ora是用来配置<strong>服务端监听</strong>客户端申请操作的</li>
+<li>因此，告诉服务器的监听要监听哪个GLOBAL_DBNAME，SID_NAME</li>
+<li>通俗的就是说，<strong>只有规定的人才可以连接我的数据库</strong>，其他没有定义的人是不可以连接我的数据库的</li>
+<li>而且，<strong>也规定了这个人可以连接哪个数据库</strong>。这不是连接的时候定的，而是我服务端一开始配置就写死的，你作为使用者是不能更改的</li>
+<li>其中的GLOBAL_DBNAME 对应着的是客户端连接时填写的SERVER_NAME</li>
+<li>其中的SID_NAME对应着客户端连接时填写的SID</li>
+</ol>
+</li>
+<li>tnsnames.ora  <ol>
+<li>这个文件是给<strong>客户端</strong>用的</li>
+<li><strong>客户端连接服务器数据库过程</strong>：我作为用户，要<strong>和哪个监听对应</strong>，那么我就填所选监听的名字（SERVER_NAME或SID），这个<strong>监听的位置</strong>（ip）然后，就会去判断这个位置上的这个名字的监听在不在，如果在，那么就连接上这个监听对应的数据库</li>
+</ol>
+</li>
+<li>sqlnet.ora<ol>
+<li>这个东西我不知道是啥，网上说是自动生成的，也是一个配置文件</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># listener.ora Network Configuration File: C:\Users\All Users\Desktop\listener.ora</span><br><span class="line"># Generated by Oracle configuration tools.</span><br><span class="line"></span><br><span class="line">SID_LIST_LISTENER &#x3D;</span><br><span class="line">  (SID_LIST &#x3D;</span><br><span class="line">    (SID_DESC &#x3D;</span><br><span class="line">      (GLOBAL_DBNAME &#x3D; ORCL)</span><br><span class="line">      (SID_NAME &#x3D; ORCL)</span><br><span class="line">    )</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">LISTENER &#x3D;</span><br><span class="line">  (DESCRIPTION &#x3D;</span><br><span class="line">    (ADDRESS &#x3D; (PROTOCOL &#x3D; TCP)(HOST &#x3D; 192.168.1.103)(PORT &#x3D; 1521))</span><br><span class="line">  )</span><br><span class="line"></span><br><span class="line">ADR_BASE_LISTENER &#x3D; C:\app\oracle\product\11.2.0\dbhome_2\log</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># tnsnames.ora Network Configuration File: C:\Users\All Users\Desktop\tnsnames.ora</span><br><span class="line"># Generated by Oracle configuration tools.</span><br><span class="line"></span><br><span class="line">ORICLE_SERVER_NAME &#x3D;</span><br><span class="line">  (DESCRIPTION &#x3D;</span><br><span class="line">    (ADDRESS_LIST &#x3D;</span><br><span class="line">      (ADDRESS &#x3D; (PROTOCOL &#x3D; TCP)(HOST &#x3D; 192.168.1.103)(PORT &#x3D; 1521))</span><br><span class="line">    )</span><br><span class="line">    (CONNECT_DATA &#x3D;</span><br><span class="line">      (SERVICE_NAME &#x3D; ORCL)</span><br><span class="line">    )</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># sqlnet.ora Network Configuration File: C:\Users\All Users\Desktop\sqlnet.ora</span><br><span class="line"># Generated by Oracle configuration tools.</span><br><span class="line"></span><br><span class="line"># This file is actually generated by netca. But if customers choose to </span><br><span class="line"># install &quot;Software Only&quot;, this file wont exist and without the native </span><br><span class="line"># authentication, they will not be able to connect to the database on NT.</span><br><span class="line"></span><br><span class="line">SQLNET.AUTHENTICATION_SERVICES&#x3D; (NTS)</span><br><span class="line"></span><br><span class="line">NAMES.DIRECTORY_PATH&#x3D; (TNSNAMES, EZCONNECT)</span><br><span class="line"></span><br><span class="line">ADR_BASE &#x3D; C:\app\oracle\product\11.2.0\dbhome_2\log</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="当服务的网络ip发生更改"><a href="#当服务的网络ip发生更改" class="headerlink" title="当服务的网络ip发生更改"></a>当服务的网络ip发生更改</h2><ol>
+<li>有三个文件需要更改</li>
+<li>更改的内容是<strong>服务器的ip</strong></li>
+<li>重新配置lisenter.ora,本地PL\SQL使用的nsnames.ora，以及外部客户端软件navicat</li>
+<li>否则，会出现监听服务不随系统启动，并且，当我们手动启动的时候出现下面的报错，然后又自动关闭了<br><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/DF7BB04A-B674-4385-8B15-5181E2B72435.png" alt></li>
+</ol>
+<h2 id="解决问题过程中的一些截图"><a href="#解决问题过程中的一些截图" class="headerlink" title="解决问题过程中的一些截图"></a>解决问题过程中的一些截图</h2><p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/4734B8E0-F705-4635-8FB8-64E646CF7698.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/1901C84F-F058-4F80-B118-F0D9E121529E.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/B81EA375-031F-4D05-930C-9BC92D26E259.png" alt></p>
+<h2 id="测试istener-ora-tnsnames-ora-sqlnet-ora-这三个文件的作用的过程"><a href="#测试istener-ora-tnsnames-ora-sqlnet-ora-这三个文件的作用的过程" class="headerlink" title="测试istener.ora  tnsnames.ora sqlnet.ora 这三个文件的作用的过程"></a>测试istener.ora  tnsnames.ora sqlnet.ora 这三个文件的作用的过程</h2><p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/20BB1DD7-F4E3-4643-A603-8CC6FEAB9708.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/FB21F9C4-A267-4B22-853C-6DAA3A2063F5.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/57D40ED3-F7AB-4DC9-8B86-A507695DD286.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/9AA4C6E5-B62A-4769-9430-7DAF185FD79F.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/97B0B9E8-E011-484C-98F9-769DF2468734.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/BEB8C75F-1B27-4F32-866B-3AF267D5A1CF.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/B54D8F78-FD41-4BCC-93B2-26A0ABC5F509.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/8F00CD0E-9DD4-41C9-8A28-E1466A5B59BB.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/1B9F7893-56BD-45B8-BDA3-F3135B9D3CB7.png" alt><br>当我主机中个客户端navicat在删除<strong>服务命名</strong>时，同样也可以连接。<br>说明</p>
+<ol>
+<li>当我用navicat连接服务器数据库时，nsnames.ora 文件会根据你在<strong>navicat的配置自动生成</strong></li>
+<li>用net manager配置的nsnames.ora （服务命名）其实也是给客户端程序用的，例如，PL\SQL中配置环境变量<ol>
+<li>配置参考<a href="https://jingyan.baidu.com/article/0f5fb099c19d466d8334ead4.html" target="_blank" rel="noopener">pl/sql登录时database下拉框没有任何内容_百度经验</a></li>
+<li>你配置的服务名就会出现在PL\SQL登陆界面的下拉框中<br><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/418F09A1-D022-4E42-982E-926B9CB457B8.png" alt></li>
+</ol>
+</li>
+</ol>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/C9206C64-349A-4ADB-A98A-F345D32CE4F3.png" alt></p>
+<h2 id="解决PL-SQL安装问题"><a href="#解决PL-SQL安装问题" class="headerlink" title="解决PL\SQL安装问题"></a>解决PL\SQL安装问题</h2><h3 id="第二个问题"><a href="#第二个问题" class="headerlink" title="第二个问题"></a>第二个问题</h3><p>我的环境是win7 64位虚拟机，当我安装PL\SQL时出现了一个错是关于<strong>路径中不能使用括号</strong>，因为默认的路径是(x86)，这个(x86)就是括号，这里一定要更改默认路径才行 （ps:他的warning是英文的，我就是没有仔细看，而且也不认识这个括号的单词）</p>
+<h3 id="第一个问题"><a href="#第一个问题" class="headerlink" title="第一个问题"></a>第一个问题</h3><p>提示没有msvcr100这个文件，这个去百度上下一个，放到路径中规定的路径就可以解决。（网上有一个教程是安装一个window官方的软件，我这里是不行）</p>
+<h2 id="解决PL-SQL下拉框问题"><a href="#解决PL-SQL下拉框问题" class="headerlink" title="解决PL\SQL下拉框问题"></a>解决PL\SQL下拉框问题</h2><p>[assets/6413C249-774A-4A4A-8E2D-FD199350E91F.png]<br>我不知道这个lisener_ORCL是从哪来的<br>[assets/7DB6B554-0CC8-4BB3-B05C-0498EA4959DC.png]<br>但出现这个问题是因为自己的的nsnames.ora 文件没有设置好，可以在net manager中设置<br>[assets/98B3AAAC-FB50-428C-92D1-52DBFEEDAE15.png]<br>我这里起的是local_server_name。<br>这个名字要出现在PL\SQL中的下框中，来说明这次登陆使用的是哪个nsnames.ora<br>[assets/4ECA1415-F659-4D58-9221-E667037E3860.png]<br>这里一定要调试通，才可以说明问题解决了<br><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/63C99616-2E50-4A2D-AEAC-B84B04ACBE8C.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/4134E2F8-4AB6-4509-A0E3-75938997CBBC.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/096201CF-71C8-4B76-8F62-97B33E2C65B4.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/B236C42B-7A46-41BC-9455-A289B2B11198.png" alt></p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/A42EFA97-DAD5-45F1-BEB6-A0C3505AFB0B.png" alt><br>这里说明成功登陆了</p>
+<p><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8EORACLE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%92%8C%E8%BF%9E%E6%8E%A5%E7%9A%84%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/6849D923-3BE0-47B0-8F24-B2C01AFEA399.png" alt></p>
+<ol>
+<li>t<strong>nsping这个命令</strong>是用来判断你的<strong>服务名</strong>配置是否成功</li>
+<li>我理解就是模拟了一次使用nsnames.ora文件进行访问服务器监听的过程，和在软件中的操作一样，只不过在软件中是界面的形式</li>
+<li>可以发现最后是“ok”，说明我的这个nsnames.ora是没有问题的</li>
+<li>当发现问题时，重新去net manager中配置服务名</li>
+<li><a href="http://blog.csdn.net/evilcry2012/article/details/45534207" target="_blank" rel="noopener">tnsping用法 - evilcry2012的专栏        - CSDN博客</a></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" class="post-title-link" itemprop="url">SQL的执行顺序</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-30 07:22:00" itemprop="dateCreated datePublished" datetime="2017-08-30T07:22:00+08:00">2017-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" class="post-meta-item leancloud_visitors" data-flag-title="SQL的执行顺序" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>70</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月30日 上午7:22</p>
+<p><a href="http://www.cnblogs.com/qanholas/archive/2010/10/24/1859924.html" target="_blank" rel="noopener">sql执行顺序</a><br><a href="http://transcoder.baiducontent.com/from=844b/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%401320_2001%2Cta%40iphone_1_10.3_3_603/baiduid=9F648DF39E2DD01FB019A79FEEA58865/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&lid=13438957229324129736&order=1&fm=alhm&h5ad=1&srd=1&dict=32&tj=h5_mobile_1_0_10_title&w_qd=IlPT2AEptyoA_yimDUwc-hCuEEBPbWAprD1Xj3bQsxM7Uec5Q6e&sec=23592&di=be52f61a795b881e&bdenc=1&tch=124.100.37.200.0.0&nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRAVW_fAijCZpPPtCPQpxoJw8yh_mIskNYWgK&eqid=ba80c465bd8858001000000159a605c0&wd=&clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22h5_mobile%22%2C%22t%22%3A1504052679517%2C%22sig%22%3A%227017%22%2C%22xpath%22%3A%22div-a-h3%22%7D" target="_blank" rel="noopener">SQL嵌套子查询和相关子查询的执行过程有什么区别(推荐) </a><br><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/BD09960A-6366-46CE-97D9-6A419479C5AE.png" alt></p>
 
       
     </div>
@@ -1440,7 +1439,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/110/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/110/">110</a><span class="page-number current">111</span><a class="page-number" href="/page/112/">112</a><span class="space">&hellip;</span><a class="page-number" href="/page/116/">116</a><a class="extend next" rel="next" href="/page/112/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/110/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/110/">110</a><span class="page-number current">111</span><a class="page-number" href="/page/112/">112</a><span class="space">&hellip;</span><a class="page-number" href="/page/118/">118</a><a class="extend next" rel="next" href="/page/112/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1506,7 +1505,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1157</span>
+          <span class="site-state-item-count">1173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1547,12 +1546,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.1m</span>
+    <span title="站点总字数">1.2m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:15</span>
+    <span title="站点阅读时长">17:45</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

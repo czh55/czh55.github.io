@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E8%B0%83%E7%94%A8%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%92%8C%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +172,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">JDBC常见错误</a>
+            <a href="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E8%B0%83%E7%94%A8%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%92%8C%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">JDBC调用存储过程和函数</a>
         </h1>
 
         <div class="post-meta">
@@ -182,7 +182,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-09-04 02:37:00" itemprop="dateCreated datePublished" datetime="2017-09-04T02:37:00+08:00">2017-09-04</time>
+              <time title="创建时间：2017-09-05 08:40:00" itemprop="dateCreated datePublished" datetime="2017-09-05T08:40:00+08:00">2017-09-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -204,7 +204,7 @@
             </span>
 
           
-            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/" class="post-meta-item leancloud_visitors" data-flag-title="JDBC常见错误" title="阅读次数">
+            <span id="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E8%B0%83%E7%94%A8%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B%E5%92%8C%E5%87%BD%E6%95%B0/" class="post-meta-item leancloud_visitors" data-flag-title="JDBC调用存储过程和函数" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -216,7 +216,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>131</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -235,12 +235,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2017年9月4日 下午2:37</p>
-<h2 id="乱码"><a href="#乱码" class="headerlink" title="乱码"></a>乱码</h2><ol>
-<li>当我们从jdbc中插入数据库的值为乱码时，要查看当前project的编码方式（从propertise），如下图（这里是UTF-8）。</li>
-<li>如果数据库的编码是UTF-8，而project的编码是gbk，那么就会出现插入的数据库信息乱码。</li>
-</ol>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/7DCBDEC6-A0D6-4297-BBD5-7FF73DC7CC5C.png" alt></p>
+          <p>2017年9月5日 上午8:40</p>
+<p><code>CallableStatement pc = conn.prepareCall(&quot;{?= call fun_getInfo(?)}&quot;);</code><br><strong>参考</strong>：<a href="https://baike.baidu.com/item/CallableStatement/7304803?fr=aladdin" target="_blank" rel="noopener">CallableStatement_百度百科</a><br>摘抄：<br>    1. 这种调用是 用一种<strong>换码语法</strong>来写的，有两种形式：一种形式带结果参，另一种形式不带结果参数<br>    2. 其<strong>他仔细的看看这个链接就行了</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.sql.CallableStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"><span class="keyword">import</span> java.sql.Types;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCDemo6</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);</span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:oracle:thin:@192.168.42.43:1521:orcl"</span>,<span class="string">"gao"</span>, <span class="string">"gao"</span>);</span><br><span class="line">	  		<span class="comment">//操作数据库调用函数或存储过程需要另一个操作数据库的对象CallableStatement   </span></span><br><span class="line">	  		CallableStatement pc = conn.prepareCall(<span class="string">"&#123;?= call fun_getInfo(?)&#125;"</span>);</span><br><span class="line">	  		<span class="comment">// 注册返回值的类型</span></span><br><span class="line">	  		pc.registerOutParameter(<span class="number">1</span>,Types.VARCHAR);</span><br><span class="line">	  		<span class="comment">// 设置函数/存储过程的参数列表    in  in out  out   </span></span><br><span class="line">	  		pc.setInt(<span class="number">2</span>,<span class="number">10</span>);</span><br><span class="line">	  		<span class="comment">//调用对应的函数/存储过程</span></span><br><span class="line">	  		pc.execute();</span><br><span class="line">	  		<span class="comment">//接受返回值</span></span><br><span class="line">	  		String name = pc.getString(<span class="number">1</span>);</span><br><span class="line">	  		System.out.println(name);</span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;                </span><br><span class="line">	  		</span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -260,7 +257,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/02/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E6%89%B9%E5%A4%84%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -274,7 +271,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-title-link" itemprop="url">表复制（根据一个表创建另一个表）</a>
+            <a href="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E6%89%B9%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">JDBC批处理</a>
         </h1>
 
         <div class="post-meta">
@@ -284,7 +281,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-09-02 08:44:00" itemprop="dateCreated datePublished" datetime="2017-09-02T08:44:00+08:00">2017-09-02</time>
+              <time title="创建时间：2017-09-05 08:35:00" itemprop="dateCreated datePublished" datetime="2017-09-05T08:35:00+08:00">2017-09-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -306,7 +303,7 @@
             </span>
 
           
-            <span id="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="表复制（根据一个表创建另一个表）" title="阅读次数">
+            <span id="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E6%89%B9%E5%A4%84%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="JDBC批处理" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -318,7 +315,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>99</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -337,8 +334,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>#web开发/czh_blog/数据库<br>2017年9月2日 上午8:44</p>
-<p><a href="http://ears.iteye.com/blog/1470605" target="_blank" rel="noopener">CREATE TABLE 表名 AS SELECT 语句</a><br><a href="http://blog.csdn.net/qq_27317147/article/details/52130427" target="_blank" rel="noopener">oracle SELECT INTO 和 INSERT INTO SELECT 两种表复制语句详解</a></p>
+          <p>2017年9月5日 上午8:35</p>
+<p><strong>作用：通过预编译对象，同时执行多条sql</strong><br>实现方式：<br>    1.     <code>PreparedStatement ps = conn.prepareStatement(sql);</code>使用预编译对象，绑定sql<br>    2.  <code>ps.addBatch();</code>添加批处理<br>    3. <code>int[] counts = ps.executeBatch();</code>执行批处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCDemo5</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/test4?useUnicode=true&amp;characterEncoding=utf8"</span>,<span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">	  		String sql = <span class="string">"insert into people(name,age,sex) values(?,?,?)"</span>;</span><br><span class="line">	  		<span class="comment">//Statement sta = conn.createStatement();</span></span><br><span class="line">	  		</span><br><span class="line">	  		<span class="comment">//打开一个预编译对象  同时绑定sql</span></span><br><span class="line">	  		PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">	  		ps.setString(<span class="number">1</span>, <span class="string">"bob"</span>);</span><br><span class="line">	  		ps.setString(<span class="number">3</span>, <span class="string">"boy"</span>);</span><br><span class="line">	  		ps.setInt(<span class="number">2</span>, <span class="number">22</span>);</span><br><span class="line">	  		<span class="comment">//将本条sql处理 加入批处理</span></span><br><span class="line">	  		ps.addBatch();</span><br><span class="line">	  		</span><br><span class="line">	  		ps.setString(<span class="number">1</span>, <span class="string">"mary"</span>);</span><br><span class="line">	  		ps.setString(<span class="number">3</span>, <span class="string">"girl"</span>);</span><br><span class="line">	  		ps.setInt(<span class="number">2</span>, <span class="number">18</span>);</span><br><span class="line">	  		<span class="comment">//将重新设置参数后的预编译sql继续加入批处理</span></span><br><span class="line">	  		ps.addBatch();</span><br><span class="line">	  		<span class="comment">//同时也可以绑定多条静态sql</span></span><br><span class="line">	  		ps.addBatch(<span class="string">"insert into people(name,age,sex) values('rose',19,'girl')"</span>);</span><br><span class="line">	  		<span class="comment">//执行批处理任务</span></span><br><span class="line">	  		<span class="keyword">int</span>[] counts = ps.executeBatch();</span><br><span class="line">	  		ps.clearBatch();</span><br><span class="line">	  		<span class="keyword">for</span> (<span class="keyword">int</span> i : counts) &#123;</span><br><span class="line">				System.out.println(i);</span><br><span class="line">			&#125;</span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;                                      </span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -358,7 +356,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/02/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/05/web%E5%BC%80%E5%8F%91/czh_blog/php/%E6%96%B0Mac%E7%9A%84php%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0%20201795/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -372,7 +370,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-title-link" itemprop="url">表复制（根据一个表创建另一个表）</a>
+            <a href="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_blog/php/%E6%96%B0Mac%E7%9A%84php%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0%20201795/" class="post-title-link" itemprop="url">新Mac的php环境配置笔记 2017/9/5</a>
         </h1>
 
         <div class="post-meta">
@@ -382,7 +380,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-09-02 08:44:00" itemprop="dateCreated datePublished" datetime="2017-09-02T08:44:00+08:00">2017-09-02</time>
+              <time title="创建时间：2017-09-05 05:36:00" itemprop="dateCreated datePublished" datetime="2017-09-05T05:36:00+08:00">2017-09-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -397,14 +395,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_blog/PHP</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="表复制（根据一个表创建另一个表）" title="阅读次数">
+            <span id="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_blog/php/%E6%96%B0Mac%E7%9A%84php%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0%20201795/" class="post-meta-item leancloud_visitors" data-flag-title="新Mac的php环境配置笔记 2017/9/5" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -416,14 +414,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>99</span>
+              <span>1.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -435,8 +433,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>#web开发/czh_blog/数据库<br>2017年9月2日 上午8:44</p>
-<p><a href="http://ears.iteye.com/blog/1470605" target="_blank" rel="noopener">CREATE TABLE 表名 AS SELECT 语句</a><br><a href="http://blog.csdn.net/qq_27317147/article/details/52130427" target="_blank" rel="noopener">oracle SELECT INTO 和 INSERT INTO SELECT 两种表复制语句详解</a></p>
+          <p>2017年9月5日 下午5:36</p>
+<p><a href="php%E9%85%8D%E7%BD%AE%E7%AC%94%E8%AE%B0.pages">php配置笔记.pages</a><br>两个重要文档<br><a href="https://segmentfault.com/a/1190000000606752" target="_blank" rel="noopener">https://segmentfault.com/a/1190000000606752</a><br><a href="http://www.thinkphp.cn/topic/34380.html" target="_blank" rel="noopener">http://www.thinkphp.cn/topic/34380.html</a></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#测试php-fpm配置</span></span><br><span class="line">php-fpm -t</span><br><span class="line">php-fpm -c /usr/local/etc/php/<span class="number">5.6</span>/php.ini -y /usr/local/etc/php/<span class="number">5.6</span>/php-fpm.conf -t</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动php-fpm——这个命令报错</span></span><br><span class="line">php-fpm -D</span><br><span class="line">php-fpm -c /usr/local/etc/php/<span class="number">5.6</span>/php.ini -y /usr/local/etc/php/<span class="number">5.6</span>/php-fpm.conf -D</span><br><span class="line"></span><br><span class="line"><span class="comment">#关闭php-fpm</span></span><br><span class="line">kill -INT `cat /usr/local/<span class="keyword">var</span>/run/php-fpm.pid`</span><br><span class="line"></span><br><span class="line"><span class="comment">#重启php-fpm</span></span><br><span class="line">kill -USR2 `cat /usr/local/<span class="keyword">var</span>/run/php-fpm.pid`</span><br><span class="line"></span><br><span class="line"><span class="comment">#也可以用上文提到的brew命令来重启php-fpm，不过他官方不推荐用这个命令了</span></span><br><span class="line">brew services restart php56</span><br><span class="line"></span><br><span class="line"><span class="comment">#还可以用这个命令来启动php-fpm</span></span><br><span class="line">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php56.plist</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">由于Mac自带了php和php-fpm，因此需要添加系统环境变量PATH来替代自带PHP版本。</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'export PATH="$(brew --prefix php56)/bin:$PATH"'</span> &gt;&gt; ~/.bash_profile  <span class="comment">#for php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'export PATH="$(brew --prefix php56)/sbin:$PATH"'</span> &gt;&gt; ~/.bash_profile  <span class="comment">#for php-fpm</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">'export PATH="/usr/local/bin:/usr/local/sbib:$PATH"'</span> &gt;&gt; ~/.bash_profile <span class="comment">#for other brew install soft</span></span><br><span class="line">source ~/.bash_profile</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo chown root:wheel /usr/local/Cellar/nginx/<span class="number">1.10</span><span class="number">.2</span>_1/bin/nginx</span><br><span class="line">sudo chmod u+s /usr/local/Cellar/nginx/<span class="number">1.10</span><span class="number">.2</span>_1/bin/nginx</span><br><span class="line"></span><br><span class="line">ln -sfv /usr/local/opt/php56<span class="comment">/*.plist ~/Library/LaunchAgents</span></span><br><span class="line"><span class="comment">launchctl load ~/Library/LaunchAgents/homebrew.mxcl.php56.plist</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">更换php7.0</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#关闭php-fpm</span></span><br><span class="line"><span class="comment">kill -INT `cat /usr/local/var/run/php-fpm.pid`</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#php7.0</span></span><br><span class="line"><span class="comment">echo 'export PATH="$(brew --prefix php70)/bin:$PATH"' &gt;&gt; ~/.bash_profile  #for php</span></span><br><span class="line"><span class="comment">echo 'export PATH="$(brew --prefix php70)/sbin:$PATH"' &gt;&gt; ~/.bash_profile  #for php-fpm</span></span><br><span class="line"><span class="comment">echo 'export PATH="/usr/local/bin:/usr/local/sbib:$PATH"' &gt;&gt; ~/.bash_profile #for other brew install soft</span></span><br><span class="line"><span class="comment">source ~/.bash_profile</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#php开机自启</span></span><br><span class="line"><span class="comment">ln -sfv /usr/local/opt/php70/*.plist ~/Library/LaunchAgents</span></span><br><span class="line"><span class="comment">launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php70.plist</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -456,7 +455,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -470,7 +469,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">PLSQL（PLSQL语法+存储过程+触发器）</a>
+            <a href="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/" class="post-title-link" itemprop="url">Mac中安装tomcat9</a>
         </h1>
 
         <div class="post-meta">
@@ -480,7 +479,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-09-01 10:36:00" itemprop="dateCreated datePublished" datetime="2017-09-01T10:36:00+08:00">2017-09-01</time>
+              <time title="创建时间：2017-09-05 05:14:00" itemprop="dateCreated datePublished" datetime="2017-09-05T05:14:00+08:00">2017-09-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -502,7 +501,7 @@
             </span>
 
           
-            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="PLSQL（PLSQL语法+存储过程+触发器）" title="阅读次数">
+            <span id="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/" class="post-meta-item leancloud_visitors" data-flag-title="Mac中安装tomcat9" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -514,7 +513,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
+              <span>614</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -533,114 +532,232 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>#web开发/czh_blog/数据库<br>2017年9月1日 上午10:36</p>
-<p>这里知识理解一些概念，有一个基本的认识<br>知道ORACLE支持哪些功能，以后一个功能呢不好做的时候，来这里瞧瞧，看有没有正好能用上额特性</p>
-<h2 id="PLSQL中语法特别的地方"><a href="#PLSQL中语法特别的地方" class="headerlink" title="PLSQL中语法特别的地方"></a>PLSQL中语法特别的地方</h2><p>没有逻辑修饰符：|| &amp;&amp;<br>用这些代替：And or between<br>等号：是:= 不是=<br>没有：++ — —<br>|| 内容拼接 隐式转换成字符串连接</p>
-<h2 id="SQL的高级语言特性PLSQL"><a href="#SQL的高级语言特性PLSQL" class="headerlink" title="SQL的高级语言特性PLSQL"></a>SQL的高级语言特性PLSQL</h2><ol>
-<li>所谓的plsql其实就是：sql编程语言一样编程，有高级语言的特性</li>
-<li>If  switch for loop</li>
-<li>Cursor游标 是专门用来解决表中多条数据的情况<ol>
-<li>这个高级语言中没有，是数据库语言中特有的</li>
-<li>和loop连用</li>
+          <p>2017年9月5日 下午5:14</p>
+<h2 id="tomcat启动常用指令"><a href="#tomcat启动常用指令" class="headerlink" title="tomcat启动常用指令"></a>tomcat启动常用指令</h2><p>cd  _usr_local_tomcat9_bin<br>./startup.sh<br>./shutdown.sh</p>
+<p>注:Mac中调出 前往文件夹 的快捷键command + shift + g</p>
+<h2 id="tomcat类别："><a href="#tomcat类别：" class="headerlink" title="tomcat类别："></a>tomcat类别：</h2><ol>
+<li>第一种：安装版，一个电脑只能安装一个</li>
+<li>第二种：绿色版，一个电脑可以安装多个，但是需要不同的端口</li>
 </ol>
-</li>
-<li>类似stl的数据类型<ol>
-<li>Varray </li>
-<li>table </li>
-<li>record</li>
-</ol>
-</li>
-<li>自定义数据类型<ol>
-<li>type</li>
-</ol>
-</li>
-<li>异常<ol>
-<li>支持自定义抛出异常<ol>
-<li>当在函数和存储过程中抛出异常时，可以在调用函数和存储过程的外面进行异常的处理</li>
-</ol>
-</li>
-<li>支持选择自己处理异常，和oracle系统处理异常<ol>
-<li>当没有写exception段时，默认就是让oracle处理异常</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>package<ol>
-<li>这个就是java中的类，不是java中的包</li>
-<li>可以在package中和java一样定义变量，常量，函数（存储过程+函数）等等</li>
-<li>packages + package body</li>
-<li>如何操作<ol>
-<li>不是java中的先new一个对象，然后用对象调用</li>
-<li>Sql中没有new对象，直接使用package名  点就行了</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="存储过程的构成"><a href="#存储过程的构成" class="headerlink" title="存储过程的构成"></a>存储过程的构成</h3><ol>
-<li>给PLSQL去了个名字方便调用</li>
-<li>存储过程</li>
-<li>传入参数</li>
-<li>传出参数</li>
-</ol>
-<h3 id="为什么要封装成存储过程"><a href="#为什么要封装成存储过程" class="headerlink" title="为什么要封装成存储过程?"></a>为什么要封装成存储过程?</h3><ol>
-<li>封装之后方便传入传出参数 </li>
-<li>匿名块只能在数据库环境中调用 存储过程可以被外界调用(比如JDBC)</li>
-</ol>
-<h3 id="函数与存储过程比较："><a href="#函数与存储过程比较：" class="headerlink" title="函数与存储过程比较："></a>函数与存储过程比较：</h3><ol>
-<li>函数可以看做一类特殊的存储过程 没有输出参数 必有唯一返回值</li>
-<li>删掉输出参数，添加返回值</li>
-<li>存储过程可以完全的实现函数的功能</li>
-</ol>
-<h3 id="如何选择函数与存储过程"><a href="#如何选择函数与存储过程" class="headerlink" title="如何选择函数与存储过程"></a>如何选择函数与存储过程</h3><ol>
-<li>当PL-SQL需要嵌在SQL中使用时用函数<ol>
-<li>就像min() max() count()这些函数</li>
-</ol>
-</li>
-<li>当有多个返回值或者要被其它程序调用时用存储过程</li>
-</ol>
-<p>既然利用PLSQL可以实现高级语言的特性，那么当我们实现一个功能的时候，有哪些不同的、或者值得注意的地方</p>
-<p>需求：利用存储过程查询含有特定信息的学生id<br>思路：</p>
+<h2 id="下载地址：（绿色版）"><a href="#下载地址：（绿色版）" class="headerlink" title="下载地址：（绿色版）"></a>下载地址：（绿色版）</h2><p><a href="http://tomcat.apache.org/download-90.cgi" target="_blank" rel="noopener">Apache Tomcat® - Apache Tomcat 9 Software Downloads</a><br><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/F8E72105-6EE0-49E0-B6DC-70670AA7609D.png" alt></p>
+<h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><p><strong>注：nginx的端口是80，而tomcat的端口是8080，不冲突</strong><br><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/CB0E00CE-5BC0-40D1-9A75-A60F74ABED2F.png" alt><br>我的安装路径_usr_local_tomcat9_bin</p>
+<p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/linux-comm-pico.html" alt><br><strong>在默认的~路径下配置没有用，我也不知道为啥</strong><br>我现在还是得<code>cd  /usr/local/tomcat9/bin</code>，然后<code>./startup.sh</code>才能启动,用完后<code>./shutdown.sh</code></p>
+<p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/2FA71387-E032-4C8C-814E-C99D69B5AB2D.png" alt><br>在iterm中对路径下的tomcat进行权限配置</p>
+<p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/7D4153F8-C594-4BBC-BA1F-DB30513D9455.png" alt><br>在给startup.sh配置权限的时候，提示也要对catalina.sh文件权限配置</p>
+<p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/2977A8CE-DC0F-475B-91B3-308A0950E424.png" alt><br>我在第二次启动tomcat的时候，会提示logs/catalina.out：permissin denied<br>这时切到logs目录下，chmod 777 catalina.out就行了<br>注：我试过给整个文件夹777权限，但是依然报错</p>
+<p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/D0C5140C-D282-4BCE-97DD-BFEE4E6B1B09.png" alt><br>这样就开启了</p>
+<p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/88C04260-5ACD-4AF0-9495-6996266F519E.png" alt><br><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/CE6B85CA-5C64-4B99-9D1B-BFD6429BE22A.png" alt><br>创建站点目录到主目录，方便快捷访问<br><a href="http://www.runoob.com/linux/linux-comm-ln.html" target="_blank" rel="noopener">Linux ln命令 | 菜鸟教程</a></p>
+<h3 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h3><p><img src="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/Mac%E4%B8%AD%E5%AE%89%E8%A3%85tomcat9/EC474FDB-5D5E-49DC-8956-92FDF79CC3F2.png" alt><br>发现不同的路径下，有不同的.bash_profile文件</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/DAO%E5%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/DAO%E5%B1%82/" class="post-title-link" itemprop="url">DAO层</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-05 04:10:00" itemprop="dateCreated datePublished" datetime="2017-09-05T04:10:00+08:00">2017-09-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/05/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/DAO%E5%B1%82/" class="post-meta-item leancloud_visitors" data-flag-title="DAO层" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月5日 下午4:10</p>
+<p>先看：<br><a href="bear://x-callback-url/open-note?id=685E3B88-BB6F-430B-8082-24A7BD7473EF-2779-000009EBF22633BB">JDBC，通过属性配置文件封装DbUtiles类</a><br><a href="bear://x-callback-url/open-note?id=69A28996-5973-42D6-82BA-D8D817CFE503-2779-000009EC16AF3B64">两种数据库连接池 （2017/9/5）</a></p>
+<h2 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h2><p>Dao（持久层）是与改进的DbUtiles层同时使用的，可以参考<a href="bear://x-callback-url/open-note?id=69A28996-5973-42D6-82BA-D8D817CFE503-2779-000009EC16AF3B64">两种数据库连接池 （2017/9/5）</a>，这篇文件中就详细介绍了dao层和DbUtils的关系</p>
+<p>附录代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin.dao;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"><span class="keyword">import</span> java.sql.Types;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.shanxi.weixin.dbUtils.DbUtils;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * superDao实现类   </span></span><br><span class="line"><span class="comment"> * 本类提供了  查询多条数据  查询单条数据 查询数量 对数据增删改的基本实现 </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SuperDaoImpl</span> <span class="keyword">implements</span> <span class="title">SuperDao</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的查询多条数据方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql    需要执行的sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> list  执行查询sql后返回的结果视图集合</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> List&lt;Map&lt;String, Object&gt;&gt; queryForList(String sql) &#123;</span><br><span class="line">		List&lt;Map&lt;String,Object&gt;&gt; list =  <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			Statement sta = conn.createStatement();</span><br><span class="line">			ResultSet rs = sta.executeQuery(sql);</span><br><span class="line">			list = rsToList(rs);</span><br><span class="line">			DbUtils.close();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 支持预编译的查询多条数据方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql 	需要执行的预编译sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> types	预编译sql中参数的类型数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> obj	预编译sql中参数的值数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		执行查询sql后返回的结果视图集合</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> List&lt;Map&lt;String, Object&gt;&gt; queryForList(String sql, <span class="keyword">int</span>[] types, Object[] obj) &#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">			<span class="comment">//循环遍历参数数组 并将数组中的值设置给预编译sql</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; obj.length; i++) &#123;</span><br><span class="line">				<span class="keyword">switch</span> (types[i]) &#123;</span><br><span class="line">				<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">					ps.setInt(i+<span class="number">1</span>,Integer.parseInt(obj[i].toString()));</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			ResultSet rs = ps.executeQuery();</span><br><span class="line">			list = rsToList(rs);</span><br><span class="line">			DbUtils.close();</span><br><span class="line">		</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的查询单条数据方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql	需要执行的sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		执行查询sql后返回的单条数据</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">queryForMap</span><span class="params">(String sql)</span> </span>&#123;</span><br><span class="line">		List&lt;Map&lt;String,Object&gt;&gt; list =  <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			Statement sta = conn.createStatement();</span><br><span class="line">			ResultSet rs = sta.executeQuery(sql);</span><br><span class="line">			list = rsToList(rs);</span><br><span class="line">			DbUtils.close();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(!list.isEmpty())&#123;</span><br><span class="line">			<span class="keyword">return</span> list.get(<span class="number">0</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 支持预编译的查询单条数据方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql	需要执行的预编译sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> types 预编译sql中参数的类型数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> obj	预编译sql中参数的值数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		执行查询sql后返回的单条数据</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">queryForMap</span><span class="params">(String sql, <span class="keyword">int</span>[] types, Object[] obj)</span> </span>&#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">			<span class="comment">//循环遍历参数数组 并将数组中的值设置给预编译sql</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; obj.length; i++) &#123;</span><br><span class="line">				<span class="keyword">switch</span> (types[i]) &#123;</span><br><span class="line">				<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">					ps.setInt(i+<span class="number">1</span>,Integer.parseInt(obj[i].toString()));</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			ResultSet rs = ps.executeQuery();</span><br><span class="line">			list = rsToList(rs);</span><br><span class="line">			DbUtils.close();</span><br><span class="line">		</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(!list.isEmpty())&#123;</span><br><span class="line">			<span class="keyword">return</span> list.get(<span class="number">0</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的增删改方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql	需要执行的sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		对数据库操作后发生变化的数据条数</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">excuteUpdate</span><span class="params">(String sql)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			Statement sta = conn.createStatement();</span><br><span class="line">			<span class="keyword">int</span> count = sta.executeUpdate(sql);</span><br><span class="line">			DbUtils.close();</span><br><span class="line">			<span class="keyword">return</span> count;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 支持预编译的增删改方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql	需要执行的预编译sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> types 预编译sql中参数的类型数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> obj	预编译sql中参数的值数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		对数据库操作后发生变化的数据条数</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">excuteUpdate</span><span class="params">(String sql, <span class="keyword">int</span>[] types, Object[] obj)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">			<span class="comment">//循环遍历参数数组 并将数组中的值设置给预编译sql</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; obj.length; i++) &#123;</span><br><span class="line">				<span class="keyword">switch</span> (types[i]) &#123;</span><br><span class="line">				<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">					ps.setInt(i+<span class="number">1</span>,Integer.parseInt(obj[i].toString()));</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">int</span> count = ps.executeUpdate();</span><br><span class="line">			DbUtils.close();</span><br><span class="line">			<span class="keyword">return</span> count;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的统计数据条数方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql	需要执行的sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		查询sql执行后返回的条目数量结果</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">queryForCount</span><span class="params">(String sql)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			Statement sta = conn.createStatement();</span><br><span class="line">			ResultSet rs = sta.executeQuery(sql);</span><br><span class="line">			<span class="keyword">int</span> count = <span class="number">0</span> ;</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				count = rs.getInt(<span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			DbUtils.close();</span><br><span class="line">			<span class="keyword">return</span> count;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 支持预编译的统计数据条数方法</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> sql	需要执行的预编译sql语句</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> types 预编译sql中参数的类型数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> obj	预编译sql中参数的值数组</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span>		查询sql执行后返回的条目数量结果</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">queryForCount</span><span class="params">(String sql, <span class="keyword">int</span>[] types, Object[] obj)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Connection conn = DbUtils.getConnection();</span><br><span class="line">			PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">			<span class="comment">//循环遍历参数数组 并将数组中的值设置给预编译sql</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; obj.length; i++) &#123;</span><br><span class="line">				<span class="keyword">switch</span> (types[i]) &#123;</span><br><span class="line">				<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">					ps.setInt(i+<span class="number">1</span>,Integer.parseInt(obj[i].toString()));</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			ResultSet rs = ps.executeQuery();</span><br><span class="line">			<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				count = rs.getInt(<span class="number">1</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			DbUtils.close();</span><br><span class="line">			<span class="keyword">return</span> count;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 提供将ResultSet结果集转换为list集合的实现</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span>  rs 	需要转换的结果集视图</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span> list	转换后封装数据的集合 </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> List&lt;Map&lt;String, Object&gt;&gt; rsToList(ResultSet rs) &#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				Map&lt;String, Object&gt;  map =  <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= rs.getMetaData().getColumnCount(); i++) &#123;</span><br><span class="line">					<span class="keyword">switch</span> (rs.getMetaData().getColumnType(i)) &#123;</span><br><span class="line">					<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getInt(i));</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getString(i));</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">default</span>:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getObject(i));</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				list.add(map);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">//查询多条数据</span></span><br><span class="line">		SuperDao dao =  <span class="keyword">new</span> SuperDaoImpl();</span><br><span class="line">		String sql = <span class="string">"select * from people"</span>;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = dao.queryForList(sql);</span><br><span class="line">		System.out.println(list);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">HOSTS文件</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-04 11:32:00" itemprop="dateCreated datePublished" datetime="2017-09-04T11:32:00+08:00">2017-09-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/" class="post-meta-item leancloud_visitors" data-flag-title="HOSTS文件" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>832</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月4日 上午11:32</p>
+<h2 id="理解hosts文件"><a href="#理解hosts文件" class="headerlink" title="理解hosts文件"></a>理解hosts文件</h2><p>作者：Wildog<br>链接：<a href="https://www.zhihu.com/question/19782572/answer/12946786" target="_blank" rel="noopener">https://www.zhihu.com/question/19782572/answer/12946786</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
 <ol>
-<li>也就是说这个参数可以是学生姓名，生日，电话号等等信息。在java中我们需要对这个特定信息进行判断，写上一堆if，但是在sql中我直接写在where语句中就行了，就省去了判断的过程</li>
-<li>体现了sql的优势，对比与java语言</li>
+<li>为了方便用户记忆，我们将IP变成一个个的域名来输入到浏览器进行访问。而这使得访问网站时要先将其域名解析成 IP 。DNS (Domain Name Server) 的作用就是进行 IP 解析，把域名对应到 IP。在 Great FireWall 的 5 种封锁方法中，有一种简单而效果很好的方法是 DNS 污染。GFW 会对 DNS 的解析过程进行干扰，这会使对某些被干扰的域名返回一个错误的 IP 地址给你的主机，使你无法正确连接到你要的服务器上读取正确的信息。Hosts 文件本来是用来提高解析效率。</li>
+<li>在进行 DNS 请求以前，系统会先检查自己的 Hosts 文件中是否有这个地址映射关系，如果有则调用这个 IP 地址映射，如果没有再向已知的 DNS 服务器提出域名解析。也就是说 Hosts 的请求级别比 DNS 高。<strong>当你的 Hosts 文件里面有对应的 IP 时，它就会直接访问那个 IP，而不用通过 DNS。</strong></li>
+<li>所以，当我们直接将 Google、Twitter、Facebook 之类的 IP 放入 Hosts 文件后，就可以跳过 DNS 的解析这一步，直接就行 IP 访问，不受 GFW 的 DNS 污染干扰了。补充一条，就是为什么 Hosts 的 IP 要时不时更改，为什么 FB、Twitter 会仍旧上不去。是因为 GFW 的第二个大招，IP 封锁。比如访问国外一个 IP 无法访问，Ping 不通，tracert 这个 IP 后发现，全部在边缘路由器 (GFW) 附近被拦截。换言之，GFW 直接拦截带有这个 IP 头的数据包。所以，如果你更改的 IP 被封锁了，就算你过了 DNS 这一关，也仍旧不能翻过 GFW。</li>
 </ol>
-<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><ol>
-<li>使用触发器的环境:<ol>
-<li>业务逻辑是多步骤的 而且可能从任意一个步骤执行  一般用触发器链</li>
-<li>传进来的参数 是一行数据  一般用触发器</li>
-</ol>
-</li>
-<li>有了存储过程  为什么还要用触发器<ol>
-<li>存储过程需要特殊的调用方式</li>
-<li>A -&gt;  B  -&gt;  c -&gt;  D-&gt;    <ol>
-<li>连锁操作的业务逻辑 用触发器,JDBC只要正常的SQL语句</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>触发器要注意的地方 <ol>
-<li>暂时用不到的触发器全部禁用  <ol>
-<li>使用disable</li>
-</ol>
-</li>
-<li>避免逻辑死锁<ol>
-<li>一个trigger就是一个线程</li>
-<li>那么，不说自己的创建的线程，光是系统中默认的操作表的线程就有可能和自己的一个trigger线程产生冲突</li>
-</ol>
-</li>
-<li>尽量避免update触发器中对本表的操作</li>
-</ol>
-</li>
-</ol>
-<hr>
-<p>Sequence 就像一个全局int型变量，他可以一直记录一个变量的值</p>
-<hr>
-<hr>
-<p>百度</p>
-<hr>
-<p><a href="http://blog.csdn.net/caoxiaohong1005/article/details/53433131" target="_blank" rel="noopener">Mac下不用虚拟机一样可以使用PLSQL Developer - iCoding91        - CSDN博客</a></p>
-<p>%符号 理解成“的”</p>
+<h2 id="window7下hosts文件位置"><a href="#window7下hosts文件位置" class="headerlink" title="window7下hosts文件位置"></a>window7下hosts文件位置</h2><p>C:\Windows\System32\drivers\etc</p>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/03D6A282-F78E-4B08-84D2-267810CD5693.png" alt></p>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/F2963AF9-7F70-4B8F-BD1E-2AFC0877F880.png" alt></p>
+<p>可以看出，hosts文件默认是空的</p>
 
       
     </div>
@@ -660,7 +777,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E6%8F%90%E4%BA%A4%E4%BA%8B%E5%8A%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -674,7 +791,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">PLSQL（PLSQL语法+存储过程+触发器）</a>
+            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E6%8F%90%E4%BA%A4%E4%BA%8B%E5%8A%A1/" class="post-title-link" itemprop="url">JDBC提交事务</a>
         </h1>
 
         <div class="post-meta">
@@ -684,7 +801,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-09-01 10:36:00" itemprop="dateCreated datePublished" datetime="2017-09-01T10:36:00+08:00">2017-09-01</time>
+              <time title="创建时间：2017-09-04 11:25:00" itemprop="dateCreated datePublished" datetime="2017-09-04T11:25:00+08:00">2017-09-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -706,7 +823,7 @@
             </span>
 
           
-            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="PLSQL（PLSQL语法+存储过程+触发器）" title="阅读次数">
+            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E6%8F%90%E4%BA%A4%E4%BA%8B%E5%8A%A1/" class="post-meta-item leancloud_visitors" data-flag-title="JDBC提交事务" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -718,14 +835,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
+              <span>2.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -737,114 +854,140 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>#web开发/czh_blog/数据库<br>2017年9月1日 上午10:36</p>
-<p>这里知识理解一些概念，有一个基本的认识<br>知道ORACLE支持哪些功能，以后一个功能呢不好做的时候，来这里瞧瞧，看有没有正好能用上额特性</p>
-<h2 id="PLSQL中语法特别的地方"><a href="#PLSQL中语法特别的地方" class="headerlink" title="PLSQL中语法特别的地方"></a>PLSQL中语法特别的地方</h2><p>没有逻辑修饰符：|| &amp;&amp;<br>用这些代替：And or between<br>等号：是:= 不是=<br>没有：++ — —<br>|| 内容拼接 隐式转换成字符串连接</p>
-<h2 id="SQL的高级语言特性PLSQL"><a href="#SQL的高级语言特性PLSQL" class="headerlink" title="SQL的高级语言特性PLSQL"></a>SQL的高级语言特性PLSQL</h2><ol>
-<li>所谓的plsql其实就是：sql编程语言一样编程，有高级语言的特性</li>
-<li>If  switch for loop</li>
-<li>Cursor游标 是专门用来解决表中多条数据的情况<ol>
-<li>这个高级语言中没有，是数据库语言中特有的</li>
-<li>和loop连用</li>
+          <p>2017年9月4日 上午11:25</p>
+<p>注：即使<strong>oracle</strong>中要提交commit之后，才能在真正的写到磁盘中，但是在使用jdbc时，jar包中的源码会自动的补充提交一次commit，这就和navicat premiun中操作oracle一样了</p>
+<h2 id="通过java，将多个sql语句组合成一个事务"><a href="#通过java，将多个sql语句组合成一个事务" class="headerlink" title="通过java，将多个sql语句组合成一个事务"></a>通过java，将多个sql语句组合成一个事务</h2><ol>
+<li><strong>作用</strong>：事务的原子性</li>
+<li>将数据库的事务提交方式设为手动<br> <code>conn.setAutoCommit(false);</code></li>
+<li>提交事务单元<br> <code>conn.commit();</code></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//1、加载驱动类</span></span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">	  		<span class="comment">//2、获取数据库连接对象connection //jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8</span></span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/test4"</span>,<span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">	  		<span class="comment">//System.out.println(conn);</span></span><br><span class="line">	  		<span class="comment">//3、通过connection 获取操作数据库的对象  statement</span></span><br><span class="line">	  		Statement sta = conn.createStatement();</span><br><span class="line">	  		<span class="comment">//4、使用statement对象操作数据库完成相应的业务</span></span><br><span class="line">	  			<span class="comment">//2.1  将数据库的事务提交方式设为手动</span></span><br><span class="line">	  		conn.setAutoCommit(<span class="keyword">false</span>);</span><br><span class="line">	  		<span class="keyword">int</span> a = sta.executeUpdate(<span class="string">"delete from company where company_id in (9,10)"</span>);</span><br><span class="line">	  		<span class="keyword">int</span> b = sta.executeUpdate(<span class="string">"delete from company where company_id = 1 "</span>);</span><br><span class="line">	  		<span class="keyword">int</span> c = sta.executeUpdate(<span class="string">"insert into company(company_id,company_name) values(null,'ccc')"</span>);</span><br><span class="line">	  		<span class="keyword">int</span> d = sta.executeUpdate(<span class="string">"insert into company(company_id,company_name) values(3,'ddd')"</span>);</span><br><span class="line">	  		<span class="comment">//ResultSet rs = sta.executeQuery("select * from people");</span></span><br><span class="line">		  		<span class="comment">//2.2 提交事务单元</span></span><br><span class="line">		  	conn.commit();</span><br><span class="line">	  		<span class="comment">//5、处理结果集</span></span><br><span class="line">	  		System.out.println(a + b + c + d);</span><br><span class="line">	  		</span><br><span class="line"><span class="comment">//	  		while(rs.next())&#123;</span></span><br><span class="line"><span class="comment">//	  			System.out.println(rs.getString("name")+"---"+rs.getString("idcard"));</span></span><br><span class="line"><span class="comment">//	  		&#125;</span></span><br><span class="line">	  		<span class="comment">//6、关闭资源，释放空间。</span></span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;</span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCDemo2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//1、加载驱动类</span></span><br><span class="line">			Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);</span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:oracle:thin:@192.168.42.43:1521:orcl"</span>,<span class="string">"gao"</span>, <span class="string">"gao"</span>);</span><br><span class="line">	  		<span class="comment">//System.out.println(conn);</span></span><br><span class="line">	  		<span class="comment">//3、通过connection 获取操作数据库的对象  statement</span></span><br><span class="line">	  		Statement sta = conn.createStatement();</span><br><span class="line">	  		<span class="comment">//4、使用statement对象操作数据库完成相应的业务</span></span><br><span class="line">	  		<span class="comment">//ResultSet rs = sta.executeQuery("select * from stu");</span></span><br><span class="line">	  		<span class="keyword">int</span> a =sta.executeUpdate(<span class="string">"delete from stu where s_id = 20"</span>);</span><br><span class="line">	  		<span class="keyword">int</span> b =sta.executeUpdate(<span class="string">"insert into stu(s_id,s_name) values(9,'aaa')"</span>);</span><br><span class="line">	  		<span class="comment">//5、处理结果集</span></span><br><span class="line"><span class="comment">//	  		while(rs.next())&#123;</span></span><br><span class="line"><span class="comment">//	  			System.out.println(rs.getString("s_name")+"---"+rs.getString("s_addr"));</span></span><br><span class="line"><span class="comment">//	  		&#125;</span></span><br><span class="line">	  		System.out.println(a + b);</span><br><span class="line">	  		<span class="comment">//6、关闭资源，释放空间。</span></span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;</span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">php-pear的总结</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-04 08:48:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:48:00+08:00">2017-09-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_blog/PHP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="php-pear的总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月4日 上午8:48</p>
+<p>我把原来windows的php项目放到Mac上时出现了pear不能正常使用的情况<br><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/001XFkONzy7c4Gcl2Etad.jpeg" alt></p>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/001XFkONzy7c4GdPbTg86.jpeg" alt></p>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/001XFkONzy7c4GfqyBT95.jpeg" alt></p>
+<h3 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h3><ol>
+<li><strong>现象1+现象2：​</strong><ol>
+<li><strong>原因：</strong>表面上看是路径上的问题，但是，本质上是我一开始使用pear的时候理解不到位，按照百度上的各种资料查查查，改改改，以后改的乱七八糟。</li>
+<li><strong>解决：</strong>我在pear中安装了pear install Mail，pear install Mail_Mine，pear install Net_SMTP</li>
 </ol>
 </li>
-<li>类似stl的数据类型<ol>
-<li>Varray </li>
-<li>table </li>
-<li>record</li>
-</ol>
-</li>
-<li>自定义数据类型<ol>
-<li>type</li>
-</ol>
-</li>
-<li>异常<ol>
-<li>支持自定义抛出异常<ol>
-<li>当在函数和存储过程中抛出异常时，可以在调用函数和存储过程的外面进行异常的处理</li>
-</ol>
-</li>
-<li>支持选择自己处理异常，和oracle系统处理异常<ol>
-<li>当没有写exception段时，默认就是让oracle处理异常</li>
+<li><strong>现象3：</strong>邮箱的代理密码过期了，重新弄一个就行了<ol>
+<li>参考的文章：<a href="http://www.poluoluo.com/jzxy/201601/450302.html" target="_blank" rel="noopener">PHP使用Pear发送邮件（Windows环境）</a></li>
 </ol>
 </li>
 </ol>
-</li>
-<li>package<ol>
-<li>这个就是java中的类，不是java中的包</li>
-<li>可以在package中和java一样定义变量，常量，函数（存储过程+函数）等等</li>
-<li>packages + package body</li>
-<li>如何操作<ol>
-<li>不是java中的先new一个对象，然后用对象调用</li>
-<li>Sql中没有new对象，直接使用package名  点就行了</li>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ol>
+<li>对待新的知识我当初没有理解清楚就去做了，当时也是费了千辛万苦，觉得好难，但是现在回过头去看，这么简单的东西一个就应该学会的啊，这是为什么？。</li>
+<li>一方面来说我当时时间紧，不可能等你完全弄懂了在去操作，一方面是自己的能力还是不够，经验还是不足​。</li>
+<li>下图就是我搞出的笑话。</li>
 </ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="存储过程的构成"><a href="#存储过程的构成" class="headerlink" title="存储过程的构成"></a>存储过程的构成</h3><ol>
-<li>给PLSQL去了个名字方便调用</li>
-<li>存储过程</li>
-<li>传入参数</li>
-<li>传出参数</li>
-</ol>
-<h3 id="为什么要封装成存储过程"><a href="#为什么要封装成存储过程" class="headerlink" title="为什么要封装成存储过程?"></a>为什么要封装成存储过程?</h3><ol>
-<li>封装之后方便传入传出参数 </li>
-<li>匿名块只能在数据库环境中调用 存储过程可以被外界调用(比如JDBC)</li>
-</ol>
-<h3 id="函数与存储过程比较："><a href="#函数与存储过程比较：" class="headerlink" title="函数与存储过程比较："></a>函数与存储过程比较：</h3><ol>
-<li>函数可以看做一类特殊的存储过程 没有输出参数 必有唯一返回值</li>
-<li>删掉输出参数，添加返回值</li>
-<li>存储过程可以完全的实现函数的功能</li>
-</ol>
-<h3 id="如何选择函数与存储过程"><a href="#如何选择函数与存储过程" class="headerlink" title="如何选择函数与存储过程"></a>如何选择函数与存储过程</h3><ol>
-<li>当PL-SQL需要嵌在SQL中使用时用函数<ol>
-<li>就像min() max() count()这些函数</li>
-</ol>
-</li>
-<li>当有多个返回值或者要被其它程序调用时用存储过程</li>
-</ol>
-<p>既然利用PLSQL可以实现高级语言的特性，那么当我们实现一个功能的时候，有哪些不同的、或者值得注意的地方</p>
-<p>需求：利用存储过程查询含有特定信息的学生id<br>思路：</p>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/001XFkONzy7c4HC049F67.png" alt></p>
 <ol>
-<li>也就是说这个参数可以是学生姓名，生日，电话号等等信息。在java中我们需要对这个特定信息进行判断，写上一堆if，但是在sql中我直接写在where语句中就行了，就省去了判断的过程</li>
-<li>体现了sql的优势，对比与java语言</li>
+<li>我一开始就把pear理解成类库，所以就在TP手册中查怎样才能调用第三方类库，最后找到了Vendor，pear也在vendor中有一份</li>
+<li>这样各种策论混在以前用使用pear 又使用vendor，虽然最后功能成功了，但是其实也没学下啥，脑子里一团糟，根本给别人讲不通。</li>
+<li>总结，面对这样的问题，我们首先要看自己有没有一个思路，不要想自己当初一样，就知道熬夜，像无头苍蝇一样乱撞。在保持自己清晰的思路之后，要想到和比自己强的人请教，虚心求教，这方面我的确需要更加努力！ ​</li>
 </ol>
-<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><ol>
-<li>使用触发器的环境:<ol>
-<li>业务逻辑是多步骤的 而且可能从任意一个步骤执行  一般用触发器链</li>
-<li>传进来的参数 是一行数据  一般用触发器</li>
-</ol>
-</li>
-<li>有了存储过程  为什么还要用触发器<ol>
-<li>存储过程需要特殊的调用方式</li>
-<li>A -&gt;  B  -&gt;  c -&gt;  D-&gt;    <ol>
-<li>连锁操作的业务逻辑 用触发器,JDBC只要正常的SQL语句</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>触发器要注意的地方 <ol>
-<li>暂时用不到的触发器全部禁用  <ol>
-<li>使用disable</li>
-</ol>
-</li>
-<li>避免逻辑死锁<ol>
-<li>一个trigger就是一个线程</li>
-<li>那么，不说自己的创建的线程，光是系统中默认的操作表的线程就有可能和自己的一个trigger线程产生冲突</li>
-</ol>
-</li>
-<li>尽量避免update触发器中对本表的操作</li>
-</ol>
-</li>
-</ol>
-<hr>
-<p>Sequence 就像一个全局int型变量，他可以一直记录一个变量的值</p>
-<hr>
-<hr>
-<p>百度</p>
-<hr>
-<p><a href="http://blog.csdn.net/caoxiaohong1005/article/details/53433131" target="_blank" rel="noopener">Mac下不用虚拟机一样可以使用PLSQL Developer - iCoding91        - CSDN博客</a></p>
-<p>%符号 理解成“的”</p>
+<h3 id="​附录：安装过程"><a href="#​附录：安装过程" class="headerlink" title="​附录：安装过程"></a>​附录：安装过程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">Last login: Wed Jun 21 16:44:16 on ttys001</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ kill -INT &#96;cat &#x2F;usr&#x2F;local&#x2F;var&#x2F;run&#x2F;php-fpm.pid&#96;</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php56.plist</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ kill -INT &#96;cat &#x2F;usr&#x2F;local&#x2F;var&#x2F;run&#x2F;php-fpm.pid&#96;</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ echo &#39;export PATH&#x3D;&quot;$(brew --prefix php70)&#x2F;bin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile  #for php</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ echo &#39;export PATH&#x3D;&quot;$(brew --prefix php70)&#x2F;sbin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile  #for php-fpm</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ echo &#39;export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;sbib:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile #for other brew install soft</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ source ~&#x2F;.bash_profile</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ php -v</span><br><span class="line"></span><br><span class="line">PHP 7.0.14 (cli) (built: Dec  9 2016 07:34:25) ( NTS )</span><br><span class="line"></span><br><span class="line">Copyright (c) 1997-2016 The PHP Group</span><br><span class="line"></span><br><span class="line">Zend Engine v3.0.0, Copyright (c) 1998-2016 Zend Technologies</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist</span><br><span class="line"></span><br><span class="line">&#x2F;Users&#x2F;czh&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist: No such file or directory</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php7.plist</span><br><span class="line"></span><br><span class="line">&#x2F;Users&#x2F;czh&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php7.plist: No such file or directory</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ ln -sfv &#x2F;usr&#x2F;local&#x2F;opt&#x2F;php70&#x2F;*.plist ~&#x2F;Library&#x2F;LaunchAgents</span><br><span class="line"></span><br><span class="line">&#x2F;Users&#x2F;czh&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist -&gt; &#x2F;usr&#x2F;local&#x2F;opt&#x2F;php70&#x2F;homebrew.mxcl.php70.plist</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ pear install Mail</span><br><span class="line"></span><br><span class="line">WARNING: configuration download directory &quot;&#x2F;tmp&#x2F;pear&#x2F;install&quot; is not writeable.  Change download_dir config variable to a writeable dir to avoid this warning</span><br><span class="line"></span><br><span class="line">WARNING: channel &quot;pear.php.net&quot; has updated its protocols, use &quot;pear channel-update pear.php.net&quot; to update</span><br><span class="line"></span><br><span class="line">Cannot install, php_dir for channel &quot;pear.php.net&quot; is not writeable by the current user</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo pear install Mail</span><br><span class="line"></span><br><span class="line">Password:</span><br><span class="line"></span><br><span class="line">WARNING: channel &quot;pear.php.net&quot; has updated its protocols, use &quot;pear channel-update pear.php.net&quot; to update</span><br><span class="line"></span><br><span class="line">Did not download optional dependencies: pear&#x2F;Net_SMTP, use --alldeps to download automatically</span><br><span class="line"></span><br><span class="line">pear&#x2F;Mail can optionally use package &quot;pear&#x2F;Net_SMTP&quot; (version &gt;&#x3D; 1.4.1)</span><br><span class="line"></span><br><span class="line">downloading Mail-1.4.1.tgz ...</span><br><span class="line"></span><br><span class="line">Starting to download Mail-1.4.1.tgz (21,756 bytes)</span><br><span class="line"></span><br><span class="line">........done: 21,756 bytes</span><br><span class="line"></span><br><span class="line">install ok: channel:&#x2F;&#x2F;pear.php.net&#x2F;Mail-1.4.1</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo pear install Mail_Mine</span><br><span class="line"></span><br><span class="line">No releases available for package &quot;pear.php.net&#x2F;Mail_Mine&quot;</span><br><span class="line"></span><br><span class="line">install failed</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo pear install Mail_Mime</span><br><span class="line"></span><br><span class="line">WARNING: channel &quot;pear.php.net&quot; has updated its protocols, use &quot;pear channel-update pear.php.net&quot; to update</span><br><span class="line"></span><br><span class="line">downloading Mail_Mime-1.10.1.tgz ...</span><br><span class="line"></span><br><span class="line">Starting to download Mail_Mime-1.10.1.tgz (36,336 bytes)</span><br><span class="line"></span><br><span class="line">..........done: 36,336 bytes</span><br><span class="line"></span><br><span class="line">install ok: channel:&#x2F;&#x2F;pear.php.net&#x2F;Mail_Mime-1.10.1</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo pear install Net_SMTP</span><br><span class="line"></span><br><span class="line">WARNING: channel &quot;pear.php.net&quot; has updated its protocols, use &quot;pear channel-update pear.php.net&quot; to update</span><br><span class="line"></span><br><span class="line">WARNING: &quot;pear&#x2F;Auth_SASL&quot; is deprecated in favor of &quot;pear&#x2F;Auth_SASL2&quot;</span><br><span class="line"></span><br><span class="line">Did not download optional dependencies: pear&#x2F;Auth_SASL, use --alldeps to download automatically</span><br><span class="line"></span><br><span class="line">pear&#x2F;Net_SMTP can optionally use package &quot;pear&#x2F;Auth_SASL&quot; (version &gt;&#x3D; 1.0.5)</span><br><span class="line"></span><br><span class="line">downloading Net_SMTP-1.8.0.tgz ...</span><br><span class="line"></span><br><span class="line">Starting to download Net_SMTP-1.8.0.tgz (14,399 bytes)</span><br><span class="line"></span><br><span class="line">.....done: 14,399 bytes</span><br><span class="line"></span><br><span class="line">downloading Net_Socket-1.2.2.tgz ...</span><br><span class="line"></span><br><span class="line">Starting to download Net_Socket-1.2.2.tgz (6,903 bytes)</span><br><span class="line"></span><br><span class="line">...done: 6,903 bytes</span><br><span class="line"></span><br><span class="line">install ok: channel:&#x2F;&#x2F;pear.php.net&#x2F;Net_Socket-1.2.2</span><br><span class="line"></span><br><span class="line">install ok: channel:&#x2F;&#x2F;pear.php.net&#x2F;Net_SMTP-1.8.0</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -864,7 +1007,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E5%AE%89%E8%A3%85php-pear/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -878,7 +1021,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">ORACLE的三个客户端工具</a>
+            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E5%AE%89%E8%A3%85php-pear/" class="post-title-link" itemprop="url">Mac中安装php-pear</a>
         </h1>
 
         <div class="post-meta">
@@ -888,7 +1031,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-09-01 05:44:00" itemprop="dateCreated datePublished" datetime="2017-09-01T05:44:00+08:00">2017-09-01</time>
+              <time title="创建时间：2017-09-04 08:30:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:30:00+08:00">2017-09-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -903,14 +1046,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_blog/PHP</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/" class="post-meta-item leancloud_visitors" data-flag-title="ORACLE的三个客户端工具" title="阅读次数">
+            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E5%AE%89%E8%A3%85php-pear/" class="post-meta-item leancloud_visitors" data-flag-title="Mac中安装php-pear" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -922,14 +1065,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>329</span>
+              <span>4.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -941,20 +1084,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2017年9月1日 下午5:44</p>
-<p>ORACLE SQL Developer<br>Navticat premium<br>PL/SQL</p>
-<ol>
-<li>我觉得最好的是ORACLE SQL Developer</li>
-<li>这个是oracle官方出的<a href="http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" target="_blank" rel="noopener">Oracle SQL Developer Downloads</a></li>
-<li>可以支持多系统，包括mac</li>
-<li>官方手册<a href="http://www.oracle.com/ocom/groups/public/@otn/documents/webcontent/229076_zhs.htm#t3" target="_blank" rel="noopener">使用 SQL Developer 开发和调试 PL/SQL</a>等</li>
-<li>左侧有各种功能支持，右击就可以<ol>
-<li>他的使用和PL_SQL差不多，但是界面美化比PL_SQL好多了</li>
-<li>与navicat相比，navicat毕竟不是亲生的，左侧功能的支持不好，比如package</li>
-</ol>
-</li>
-</ol>
-<p><img src="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/C188C2C6-B90B-4ADA-B0EC-B1F196F279E2.png" alt><br>可以看出他们可以同时连接<br>但是在navicat中添加的数据，在PL/SQL中会乱码<br><a href="http://blog.csdn.net/aovenus/article/details/12648751" target="_blank" rel="noopener">plsql查询数据显示为乱码解决方法 - aovenus的专栏        - CSDN博客</a></p>
+          <p>2017年9月4日 上午8:30</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br></pre></td><td class="code"><pre><span class="line">czhdeMacBook-Pro:~ czh$ sudo php -d detect_unicode=<span class="number">0</span> <span class="keyword">go</span>-pear.phar</span><br><span class="line"></span><br><span class="line">Password:</span><br><span class="line"></span><br><span class="line">Below <span class="keyword">is</span> <span class="keyword">a</span> suggested <span class="keyword">file</span> layout <span class="keyword">for</span> your <span class="keyword">new</span> PEAR installation.  To</span><br><span class="line"></span><br><span class="line"><span class="keyword">change</span> individual locations, <span class="built_in">type</span> the <span class="keyword">number</span> in front of the</span><br><span class="line"></span><br><span class="line">directory.  Type <span class="string">'all'</span> <span class="keyword">to</span> <span class="keyword">change</span> <span class="keyword">all</span> of them <span class="built_in">or</span> simply press Enter <span class="keyword">to</span></span><br><span class="line"></span><br><span class="line">accept these locations.</span><br><span class="line"></span><br><span class="line"> <span class="number">1</span>. Installation base ($prefix)                   : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7</span><br><span class="line"></span><br><span class="line"> <span class="number">2</span>. Temporary directory <span class="keyword">for</span> processing            : /tmp/pear/install</span><br><span class="line"></span><br><span class="line"> <span class="number">3</span>. Temporary directory <span class="keyword">for</span> downloads             : /tmp/pear/install</span><br><span class="line"></span><br><span class="line"> <span class="number">4</span>. Binaries directory                            : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/bin</span><br><span class="line"></span><br><span class="line"> <span class="number">5</span>. PHP code directory ($php_dir)                 : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/share/pear</span><br><span class="line"></span><br><span class="line"> <span class="number">6</span>. Documentation directory                       : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/docs</span><br><span class="line"></span><br><span class="line"> <span class="number">7</span>. Data directory                                : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/data</span><br><span class="line"></span><br><span class="line"> <span class="number">8</span>. User-modifiable configuration <span class="keyword">files</span> directory : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/cfg</span><br><span class="line"></span><br><span class="line"> <span class="number">9</span>. Public Web Files directory                    : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/www</span><br><span class="line"></span><br><span class="line"><span class="number">10</span>. System manual pages directory                 : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/man</span><br><span class="line"></span><br><span class="line"><span class="number">11</span>. Tests directory                               : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/tests</span><br><span class="line"></span><br><span class="line"><span class="number">12</span>. Name of configuration <span class="keyword">file</span>                    : /usr/local/etc/php/<span class="number">7.0</span>/pear.<span class="keyword">conf</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>-<span class="number">12</span>, <span class="string">'all'</span> <span class="built_in">or</span> Enter <span class="keyword">to</span> <span class="keyword">continue</span>: <span class="number">1</span></span><br><span class="line"></span><br><span class="line">(Use $prefix <span class="keyword">as</span> <span class="keyword">a</span> shortcut <span class="keyword">for</span> <span class="string">'/usr/local/Cellar/php70/7.0.14_7'</span>, etc.)</span><br><span class="line"></span><br><span class="line">Installation base ($prefix) [/usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7] : /usr/local/pear</span><br><span class="line"></span><br><span class="line">Below <span class="keyword">is</span> <span class="keyword">a</span> suggested <span class="keyword">file</span> layout <span class="keyword">for</span> your <span class="keyword">new</span> PEAR installation.  To</span><br><span class="line"></span><br><span class="line"><span class="keyword">change</span> individual locations, <span class="built_in">type</span> the <span class="keyword">number</span> in front of the</span><br><span class="line"></span><br><span class="line">directory.  Type <span class="string">'all'</span> <span class="keyword">to</span> <span class="keyword">change</span> <span class="keyword">all</span> of them <span class="built_in">or</span> simply press Enter <span class="keyword">to</span></span><br><span class="line"></span><br><span class="line">accept these locations.</span><br><span class="line"></span><br><span class="line"> <span class="number">1</span>. Installation base ($prefix)                   : /usr/local/pear</span><br><span class="line"></span><br><span class="line"> <span class="number">2</span>. Temporary directory <span class="keyword">for</span> processing            : /tmp/pear/install</span><br><span class="line"></span><br><span class="line"> <span class="number">3</span>. Temporary directory <span class="keyword">for</span> downloads             : /tmp/pear/install</span><br><span class="line"></span><br><span class="line"> <span class="number">4</span>. Binaries directory                            : /usr/local/pear/bin</span><br><span class="line"></span><br><span class="line"> <span class="number">5</span>. PHP code directory ($php_dir)                 : /usr/local/pear/share/pear</span><br><span class="line"></span><br><span class="line"> <span class="number">6</span>. Documentation directory                       : /usr/local/pear/docs</span><br><span class="line"></span><br><span class="line"> <span class="number">7</span>. Data directory                                : /usr/local/pear/data</span><br><span class="line"></span><br><span class="line"> <span class="number">8</span>. User-modifiable configuration <span class="keyword">files</span> directory : /usr/local/pear/cfg</span><br><span class="line"></span><br><span class="line"> <span class="number">9</span>. Public Web Files directory                    : /usr/local/pear/www</span><br><span class="line"></span><br><span class="line"><span class="number">10</span>. System manual pages directory                 : /usr/local/pear/man</span><br><span class="line"></span><br><span class="line"><span class="number">11</span>. Tests directory                               : /usr/local/pear/tests</span><br><span class="line"></span><br><span class="line"><span class="number">12</span>. Name of configuration <span class="keyword">file</span>                    : /usr/local/etc/php/<span class="number">7.0</span>/pear.<span class="keyword">conf</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>-<span class="number">12</span>, <span class="string">'all'</span> <span class="built_in">or</span> Enter <span class="keyword">to</span> <span class="keyword">continue</span>: <span class="number">4</span></span><br><span class="line"></span><br><span class="line">(Use $prefix <span class="keyword">as</span> <span class="keyword">a</span> shortcut <span class="keyword">for</span> <span class="string">'/usr/local/pear'</span>, etc.)</span><br><span class="line"></span><br><span class="line">Binaries directory [$prefix/bin] : /usr/local/bin</span><br><span class="line"></span><br><span class="line">Below <span class="keyword">is</span> <span class="keyword">a</span> suggested <span class="keyword">file</span> layout <span class="keyword">for</span> your <span class="keyword">new</span> PEAR installation.  To</span><br><span class="line"></span><br><span class="line"><span class="keyword">change</span> individual locations, <span class="built_in">type</span> the <span class="keyword">number</span> in front of the</span><br><span class="line"></span><br><span class="line">directory.  Type <span class="string">'all'</span> <span class="keyword">to</span> <span class="keyword">change</span> <span class="keyword">all</span> of them <span class="built_in">or</span> simply press Enter <span class="keyword">to</span></span><br><span class="line"></span><br><span class="line">accept these locations.</span><br><span class="line"></span><br><span class="line"> <span class="number">1</span>. Installation base ($prefix)                   : /usr/local/pear</span><br><span class="line"></span><br><span class="line"> <span class="number">2</span>. Temporary directory <span class="keyword">for</span> processing            : /tmp/pear/install</span><br><span class="line"></span><br><span class="line"> <span class="number">3</span>. Temporary directory <span class="keyword">for</span> downloads             : /tmp/pear/install</span><br><span class="line"></span><br><span class="line"> <span class="number">4</span>. Binaries directory                            : /usr/local/bin</span><br><span class="line"></span><br><span class="line"> <span class="number">5</span>. PHP code directory ($php_dir)                 : /usr/local/pear/share/pear</span><br><span class="line"></span><br><span class="line"> <span class="number">6</span>. Documentation directory                       : /usr/local/pear/docs</span><br><span class="line"></span><br><span class="line"> <span class="number">7</span>. Data directory                                : /usr/local/pear/data</span><br><span class="line"></span><br><span class="line"> <span class="number">8</span>. User-modifiable configuration <span class="keyword">files</span> directory : /usr/local/pear/cfg</span><br><span class="line"></span><br><span class="line"> <span class="number">9</span>. Public Web Files directory                    : /usr/local/pear/www</span><br><span class="line"></span><br><span class="line"><span class="number">10</span>. System manual pages directory                 : /usr/local/pear/man</span><br><span class="line"></span><br><span class="line"><span class="number">11</span>. Tests directory                               : /usr/local/pear/tests</span><br><span class="line"></span><br><span class="line"><span class="number">12</span>. Name of configuration <span class="keyword">file</span>                    : /usr/local/etc/php/<span class="number">7.0</span>/pear.<span class="keyword">conf</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>-<span class="number">12</span>, <span class="string">'all'</span> <span class="built_in">or</span> Enter <span class="keyword">to</span> <span class="keyword">continue</span>:</span><br><span class="line"></span><br><span class="line">Beginning install...</span><br><span class="line"></span><br><span class="line">Configuration written <span class="keyword">to</span> /usr/local/etc/php/<span class="number">7.0</span>/pear.<span class="keyword">conf</span>...</span><br><span class="line"></span><br><span class="line">Initialized registry...</span><br><span class="line"></span><br><span class="line">Preparing <span class="keyword">to</span> install...</span><br><span class="line"></span><br><span class="line">installing phar:///Users/czh/<span class="keyword">go</span>-pear.phar/PEAR/<span class="keyword">go</span>-pear-tarballs/Archive_Tar-<span class="number">1.4</span>.<span class="number">2</span>.tar...</span><br><span class="line"></span><br><span class="line">installing phar:///Users/czh/<span class="keyword">go</span>-pear.phar/PEAR/<span class="keyword">go</span>-pear-tarballs/Console_Getopt-<span class="number">1.4</span>.<span class="number">1</span>.tar...</span><br><span class="line"></span><br><span class="line">installing phar:///Users/czh/<span class="keyword">go</span>-pear.phar/PEAR/<span class="keyword">go</span>-pear-tarballs/PEAR-<span class="number">1.10</span>.<span class="number">4</span>.tar...</span><br><span class="line"></span><br><span class="line">installing phar:///Users/czh/<span class="keyword">go</span>-pear.phar/PEAR/<span class="keyword">go</span>-pear-tarballs/Structures_Graph-<span class="number">1.1</span>.<span class="number">1</span>.tar...</span><br><span class="line"></span><br><span class="line">installing phar:///Users/czh/<span class="keyword">go</span>-pear.phar/PEAR/<span class="keyword">go</span>-pear-tarballs/XML_Util-<span class="number">1.4</span>.<span class="number">2</span>.tar...</span><br><span class="line"></span><br><span class="line">install ok: channe<span class="variable">l:</span>//pear.php.net/Archive_Tar-<span class="number">1.4</span>.<span class="number">2</span></span><br><span class="line"></span><br><span class="line">install ok: channe<span class="variable">l:</span>//pear.php.net/Console_Getopt-<span class="number">1.4</span>.<span class="number">1</span></span><br><span class="line"></span><br><span class="line">install ok: channe<span class="variable">l:</span>//pear.php.net/Structures_Graph-<span class="number">1.1</span>.<span class="number">1</span></span><br><span class="line"></span><br><span class="line">install ok: channe<span class="variable">l:</span>//pear.php.net/XML_Util-<span class="number">1.4</span>.<span class="number">2</span></span><br><span class="line"></span><br><span class="line">install ok: channe<span class="variable">l:</span>//pear.php.net/PEAR-<span class="number">1.10</span>.<span class="number">4</span></span><br><span class="line"></span><br><span class="line">PEAR: Optional feature webinstaller available (PEAR<span class="string">'s web-based installer)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">PEAR: Optional feature gtkinstaller available (PEAR'</span>s PHP-GTK-based installer)</span><br><span class="line"></span><br><span class="line">PEAR: Optional feature gtk2installer available (PEAR<span class="string">'s PHP-GTK2-based installer)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">PEAR: To install optional features use "pear install pear/PEAR#featurename"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">******************************************************************************</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">WARNING!  The include_path defined in the currently used php.ini does not</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">contain the PEAR PHP directory you just specified:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">If the specified directory is also not in the include_path used by</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">your scripts, you will have problems getting any PEAR packages working.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Would you like to alter php.ini ? [Y/n] : Y</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">php.ini include_path updated.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Current include path           : .:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Configured directory           : /usr/local/pear/share/pear</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Currently used php.ini (guess) : /usr/local/etc/php/7.0/php.ini</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Press Enter to continue:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The '</span>pear<span class="string">' command is now at your service at /usr/local/bin/pear</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -974,7 +1105,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -988,7 +1119,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">SQL表连接</a>
+            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/" class="post-title-link" itemprop="url">Mac中更改php版本（5.6-7.0）</a>
         </h1>
 
         <div class="post-meta">
@@ -998,7 +1129,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-08-31 11:03:00" itemprop="dateCreated datePublished" datetime="2017-08-31T11:03:00+08:00">2017-08-31</time>
+              <time title="创建时间：2017-09-04 08:30:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:30:00+08:00">2017-09-04</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1013,14 +1144,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_blog/PHP</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-meta-item leancloud_visitors" data-flag-title="SQL表连接" title="阅读次数">
+            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="Mac中更改php版本（5.6-7.0）" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1032,7 +1163,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>92</span>
+              <span>844</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1051,324 +1182,20 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午11:03</p>
-<h2 id="连接有哪些"><a href="#连接有哪些" class="headerlink" title="连接有哪些"></a>连接有哪些</h2><ol>
-<li>固定的：外键连接</li>
-<li>额外的：看自己有啥要求，或者要过滤那些情况<ol>
-<li><strong>关键是要明白自己的需求</strong></li>
-<li>然后转换成里逻辑表达式</li>
-</ol>
-</li>
-</ol>
+          <p>2017年9月4日 上午8:30</p>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/01343801-2119-45D9-8BC4-29DE027229CD.png" alt></p>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/26856B9C-166E-4B28-A917-C24E125D937E.png" alt></p>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/0A387C0E-C7B3-4EEC-BD1B-8FF871F439B7.png" alt></p>
+<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/FA7CEF11-2EB9-4759-BE85-5F7C52F7ABAD.png" alt></p>
+<p><strong>简单原理：</strong>关闭原来的php-fpm，将新的环境变量写入，然后设置开机自启。<br><strong>总结：</strong>这回的操作就不是从网上找的，而是靠自己的理解，尝试出来的结果。还是那就话，始终要提醒自己要有一个清晰的头脑去思考问题。​</p>
+<h2 id="补充-用到的指令"><a href="#补充-用到的指令" class="headerlink" title="补充:用到的指令"></a>补充:用到的指令</h2><h3 id="关闭php-fpm"><a href="#关闭php-fpm" class="headerlink" title="关闭php-fpm"></a>关闭php-fpm</h3><p>kill -INT <code>cat /usr/local/var/run/php-fpm.pid</code></p>
+<h3 id="php7-0-写入新的环境变量"><a href="#php7-0-写入新的环境变量" class="headerlink" title="php7.0 写入新的环境变量"></a>php7.0 写入新的环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">echo &#39;export PATH&#x3D;&quot;$(brew --prefix php70)&#x2F;bin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile  #for php</span><br><span class="line"></span><br><span class="line">echo &#39;export PATH&#x3D;&quot;$(brew --prefix php70)&#x2F;sbin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile  #for php-fpm</span><br><span class="line"></span><br><span class="line">echo &#39;export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;sbib:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile #for other brew install soft</span><br><span class="line"></span><br><span class="line">source ~&#x2F;.bash_profile</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
+<h3 id="php开机自启"><a href="#php开机自启" class="headerlink" title="php开机自启"></a>php开机自启</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ln -sfv &#x2F;usr&#x2F;local&#x2F;opt&#x2F;php70&#x2F;*.plist ~&#x2F;Library&#x2F;LaunchAgents</span><br><span class="line"></span><br><span class="line">launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist</span><br><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">SQL表连接</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-31 11:03:00" itemprop="dateCreated datePublished" datetime="2017-08-31T11:03:00+08:00">2017-08-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-meta-item leancloud_visitors" data-flag-title="SQL表连接" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>92</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午11:03</p>
-<h2 id="连接有哪些"><a href="#连接有哪些" class="headerlink" title="连接有哪些"></a>连接有哪些</h2><ol>
-<li>固定的：外键连接</li>
-<li>额外的：看自己有啥要求，或者要过滤那些情况<ol>
-<li><strong>关键是要明白自己的需求</strong></li>
-<li>然后转换成里逻辑表达式</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-title-link" itemprop="url">关于聚合函数注意事项</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-31 09:51:00" itemprop="dateCreated datePublished" datetime="2017-08-31T09:51:00+08:00">2017-08-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-meta-item leancloud_visitors" data-flag-title="关于聚合函数注意事项" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>192</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午9:51</p>
-<h2 id="关于聚合函数注意事项"><a href="#关于聚合函数注意事项" class="headerlink" title="关于聚合函数注意事项"></a>关于聚合函数注意事项</h2><p><strong>原则</strong>：select中的每一项，<strong>单独查询</strong>的话结果条数相等<br><strong>技巧</strong>：当没有group by 使用聚合函数最有可能出问题</p>
-<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/319E23B9-C559-4807-A700-C9DD02264DF3.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/8FB29BBD-F353-4E70-85A9-4D337624929E.png" alt><br>查询student表中的男生<br>一共四个男生，对应四条数据</p>
-<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/190A05BD-A3CA-4FF9-89A6-40308767CA1E.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/6E9F14FE-4CE0-46DC-9552-DB858B1E97F6.png" alt><br>查询student表中的男生人数<br>男生人数是4，就一条数据</p>
-<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/E9659418-56DD-430F-9476-CBF9CB522DAE.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/B60DC261-6E43-4EAE-8904-2867C141F87F.png" alt><br>当同时查询男生人数，和男生时<br>就会造成1对4 表就不知道怎么表示了</p>
-<p>修改为下图也可以<br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/946941D7-04E7-4BBD-A4F9-E408E22ACA81.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-title-link" itemprop="url">关于聚合函数注意事项</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-31 09:51:00" itemprop="dateCreated datePublished" datetime="2017-08-31T09:51:00+08:00">2017-08-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-meta-item leancloud_visitors" data-flag-title="关于聚合函数注意事项" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>192</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午9:51</p>
-<h2 id="关于聚合函数注意事项"><a href="#关于聚合函数注意事项" class="headerlink" title="关于聚合函数注意事项"></a>关于聚合函数注意事项</h2><p><strong>原则</strong>：select中的每一项，<strong>单独查询</strong>的话结果条数相等<br><strong>技巧</strong>：当没有group by 使用聚合函数最有可能出问题</p>
-<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/319E23B9-C559-4807-A700-C9DD02264DF3.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/8FB29BBD-F353-4E70-85A9-4D337624929E.png" alt><br>查询student表中的男生<br>一共四个男生，对应四条数据</p>
-<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/190A05BD-A3CA-4FF9-89A6-40308767CA1E.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/6E9F14FE-4CE0-46DC-9552-DB858B1E97F6.png" alt><br>查询student表中的男生人数<br>男生人数是4，就一条数据</p>
-<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/E9659418-56DD-430F-9476-CBF9CB522DAE.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/B60DC261-6E43-4EAE-8904-2867C141F87F.png" alt><br>当同时查询男生人数，和男生时<br>就会造成1对4 表就不知道怎么表示了</p>
-<p>修改为下图也可以<br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/946941D7-04E7-4BBD-A4F9-E408E22ACA81.png" alt></p>
+<h2 id="其他人的方法："><a href="#其他人的方法：" class="headerlink" title="其他人的方法："></a>其他人的方法：</h2><p><a href="https://segmentfault.com/q/1010000002912955" target="_blank" rel="noopener">刚刚装了php7 nginx下有多个php版本,怎么选择使用哪一个? - SegmentFault</a></p>
 
       
     </div>
@@ -1388,7 +1215,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/108/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/108/">108</a><span class="page-number current">109</span><a class="page-number" href="/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/page/116/">116</a><a class="extend next" rel="next" href="/page/110/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/108/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/108/">108</a><span class="page-number current">109</span><a class="page-number" href="/page/110/">110</a><span class="space">&hellip;</span><a class="page-number" href="/page/118/">118</a><a class="extend next" rel="next" href="/page/110/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1454,7 +1281,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1157</span>
+          <span class="site-state-item-count">1173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1495,12 +1322,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.1m</span>
+    <span title="站点总字数">1.2m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:15</span>
+    <span title="站点阅读时长">17:45</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

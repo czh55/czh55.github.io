@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2020年4月6日 下午11:00 以下四行代码的区别是什么？ const char * arr &#x3D; “123”; char * brr &#x3D; “123”; const char crr[] &#x3D; “123”; char drr[] &#x3D; “123”; const char * arr &#x3D; &quot;123”; 字符串123保存在常量区，const本来是修饰arr指向的值不能通过arr去修改，但是字符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="专题知识点3：const">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2020/04/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%B8%93%E9%A2%98%E7%9F%A5%E8%AF%86%E7%82%B93%EF%BC%9Aconst/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2020年4月6日 下午11:00 以下四行代码的区别是什么？ const char * arr &#x3D; “123”; char * brr &#x3D; “123”; const char crr[] &#x3D; “123”; char drr[] &#x3D; “123”; const char * arr &#x3D; &quot;123”; 字符串123保存在常量区，const本来是修饰arr指向的值不能通过arr去修改，但是字符">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-06T03:00:00.000Z">
+<meta property="article:modified_time" content="2020-04-12T11:31:54.705Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2020/04/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%B8%93%E9%A2%98%E7%9F%A5%E8%AF%86%E7%82%B93%EF%BC%9Aconst/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>专题知识点3：const | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2020/04/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%B8%93%E9%A2%98%E7%9F%A5%E8%AF%86%E7%82%B93%EF%BC%9Aconst/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          专题知识点3：const
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-06 11:00:00" itemprop="dateCreated datePublished" datetime="2020-04-06T11:00:00+08:00">2020-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-12 19:31:54" itemprop="dateModified" datetime="2020-04-12T19:31:54+08:00">2020-04-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AF%AD%E8%A8%80-c/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_语言/c++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%B8%93%E9%A2%98%E7%9F%A5%E8%AF%86%E7%82%B93%EF%BC%9Aconst/" class="post-meta-item leancloud_visitors" data-flag-title="专题知识点3：const" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2020年4月6日 下午11:00</p>
+<h4 id="以下四行代码的区别是什么？-const-char-arr-“123”-char-brr-“123”-const-char-crr-“123”-char-drr-“123”"><a href="#以下四行代码的区别是什么？-const-char-arr-“123”-char-brr-“123”-const-char-crr-“123”-char-drr-“123”" class="headerlink" title="以下四行代码的区别是什么？ const char * arr = “123”; char * brr = “123”; const char crr[] = “123”; char drr[] = “123”;"></a>以下四行代码的区别是什么？ const char * arr = “123”; char * brr = “123”; const char crr[] = “123”; char drr[] = “123”;</h4><ol>
+<li><code>const char * arr = &quot;123”;</code><ul>
+<li>字符串123保存在常量区，const本来是修饰arr指向的值不能通过arr去修改，但是字符串“123”在常量区，本来就不能改变，所以加不加const效果都一样</li>
+</ul>
+</li>
+<li><code>char * brr = &quot;123&quot;;</code><ul>
+<li>字符串123保存在常量区，这个arr指针指向的是同一个位置，同样不能通过brr去修改”123”的值</li>
+</ul>
+</li>
+<li><code>const char crr[] = “123”;</code><ul>
+<li>这里123本来是在栈上的，但是编译器可能会做某些优化，将其放到常量区</li>
+</ul>
+</li>
+<li><code>char drr[] = “123”;</code><ul>
+<li>字符串123保存在栈区，可以通过drr去修改</li>
+</ul>
+</li>
+</ol>
+<h4 id="Const-修饰指针变量有以下三种情况"><a href="#Const-修饰指针变量有以下三种情况" class="headerlink" title="Const 修饰指针变量有以下三种情况"></a>Const 修饰指针变量有以下三种情况</h4><ul>
+<li>A: const 修饰指针指向的内容，则内容为不可变量。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p = <span class="number">8</span>;</span><br><span class="line"><span class="comment">//则指针指向的内容 8 不可改变。简称左定值，因为 const 位于 * 号的左边。</span></span><br></pre></td></tr></table></figure></li>
+<li>B: const 修饰指针，则指针为不可变量。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">8</span>;</span><br><span class="line"><span class="keyword">int</span>* <span class="keyword">const</span> p = &amp;a;</span><br><span class="line">*p = <span class="number">9</span>; <span class="comment">// 正确</span></span><br><span class="line"><span class="keyword">int</span>  b = <span class="number">7</span>;</span><br><span class="line">P = &amp;b; <span class="comment">// 错误</span></span><br><span class="line"><span class="comment">//对于 const 指针 p 其指向的内存地址不能够被改变，但其内容可以改变。简称，右定向。因为 const 位于 * 号的右边。</span></span><br></pre></td></tr></table></figure></li>
+<li>C: const 修饰指针和指针指向的内容，则指针和指针指向的内容都为不可变量。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">8</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> * <span class="keyword">const</span>  p = &amp;a;</span><br><span class="line"><span class="comment">//这时，const p 的指向的内容和指向的内存地址都已固定，不可改变。</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="C-里是怎么定义常量的？常量存放在内存的哪个位置？"><a href="#C-里是怎么定义常量的？常量存放在内存的哪个位置？" class="headerlink" title="C++里是怎么定义常量的？常量存放在内存的哪个位置？"></a>C++里是怎么定义常量的？常量存放在内存的哪个位置？</h4><ol>
+<li><a href="https://www.runoob.com/cplusplus/cpp-constants-literals.html" target="_blank" rel="noopener">C++ 常量 | 菜鸟教程</a><ol>
+<li>常量是固定值，在程序执行期间不会改变。这些固定的值，又叫做<strong>字面量</strong>。</li>
+<li>常量可以是任何的基本数据类型，可分为整型数字、浮点数字、字符、字符串和布尔值。</li>
+<li>常量就像是常规的变量，只不过常量的值在定义后不能进行修改。</li>
+</ol>
+</li>
+<li>在 C++ 中，有两种简单的定义常量的方式：<ol>
+<li>使用 <strong>#define</strong> 预处理器。</li>
+<li>使用 <strong>const</strong> 关键字。</li>
+</ol>
+</li>
+<li>常量在C++里的定义就是一个top-level const加上对象类型，常量定义必须初始化。<ol>
+<li>对于局部对象，常量存放在栈区</li>
+<li>对于全局对象，常量存放在全局/静态存储区。</li>
+<li>对于字面值常量，常量存放在常量存储区。</li>
+</ol>
+</li>
+<li><strong>代码段</strong>:<ol>
+<li><strong>包括只读存储区和文本区</strong>，其中只读存储区存储字符串常量(const就存在这里)，文本区存储程序的机器代码。</li>
+</ol>
+</li>
+<li><a href="https://blog.csdn.net/duan19920101/article/details/50989431" target="_blank" rel="noopener">C++内存分配方式详解(堆、栈、自由存储区、全局/静态存储区和常量存储区)_C/C++_那年聪聪-CSDN博客</a><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>  a=<span class="number">0</span>;   全局初始化区 .data   </span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> *p1;   全局未初始化区 .bss  </span><br><span class="line"><span class="function"><span class="keyword">int</span>  <span class="title">main</span><span class="params">()</span>    </span></span><br><span class="line"><span class="function"></span>&#123;    </span><br><span class="line">  <span class="keyword">int</span>  b; <span class="comment">//栈    </span></span><br><span class="line">  <span class="keyword">char</span>  s[]=<span class="string">"abc"</span>; <span class="comment">//栈    </span></span><br><span class="line">  <span class="keyword">char</span>  *p2; <span class="comment">//栈    </span></span><br><span class="line">  <span class="keyword">char</span>  *p3=<span class="string">"123456"</span>; <span class="comment">//123456/0在常量区 .text中的_const，p3在栈上。    </span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">int</span> c =<span class="number">0</span>；<span class="comment">//全局（静态）初始化区  .data  </span></span><br><span class="line">  p1 =  (<span class="keyword">char</span>  *)<span class="built_in">malloc</span>(<span class="number">10</span>);  <span class="comment">//分配得来得10和20字节的区域就在堆区</span></span><br><span class="line">  p2  = (<span class="keyword">char</span>  *)<span class="built_in">malloc</span>(<span class="number">20</span>);       </span><br><span class="line">  <span class="built_in">strcpy</span>(p3,<span class="string">"123456"</span>); <span class="comment">//123456/0放在常量区，编译器可能会将它与p3所指向的"123456"  优化成一个地方。    </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>堆和栈究竟有什么区别？<ol>
+<li><a href="https://blog.csdn.net/duan19920101/article/details/50989431" target="_blank" rel="noopener">C++内存分配方式详解(堆、栈、自由存储区、全局/静态存储区和常量存储区)_C/C++_那年聪聪-CSDN博客</a></li>
+</ol>
+</li>
+</ol>
+<h4 id="Const修饰成员函数的目的是什么？"><a href="#Const修饰成员函数的目的是什么？" class="headerlink" title="Const修饰成员函数的目的是什么？"></a>Const修饰成员函数的目的是什么？</h4><p>Const修饰的成员函数表明函数调用不会对对象做出任何更改，事实上，如果确认不会对对象做更改，就应该为函数加上const限定，这样无论const对象还是普通对象都可以调用该函数。</p>
+<h4 id="同时定义了两个函数，一个带const，一个不带，会有问题吗？"><a href="#同时定义了两个函数，一个带const，一个不带，会有问题吗？" class="headerlink" title="同时定义了两个函数，一个带const，一个不带，会有问题吗？"></a>同时定义了两个函数，一个带const，一个不带，会有问题吗？</h4><p>不会，这相当于函数的重载。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%B8%93%E9%A2%98%E7%9F%A5%E8%AF%864%EF%BC%9A%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8/" rel="prev" title="专题知识4：函数调用">
+      <i class="fa fa-chevron-left"></i> 专题知识4：函数调用
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E9%9B%B6%E6%95%A3/" rel="next" title="零散">
+      零散 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#以下四行代码的区别是什么？-const-char-arr-“123”-char-brr-“123”-const-char-crr-“123”-char-drr-“123”"><span class="nav-number">1.</span> <span class="nav-text">以下四行代码的区别是什么？ const char * arr &#x3D; “123”; char * brr &#x3D; “123”; const char crr[] &#x3D; “123”; char drr[] &#x3D; “123”;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Const-修饰指针变量有以下三种情况"><span class="nav-number">2.</span> <span class="nav-text">Const 修饰指针变量有以下三种情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-里是怎么定义常量的？常量存放在内存的哪个位置？"><span class="nav-number">3.</span> <span class="nav-text">C++里是怎么定义常量的？常量存放在内存的哪个位置？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Const修饰成员函数的目的是什么？"><span class="nav-number">4.</span> <span class="nav-text">Const修饰成员函数的目的是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同时定义了两个函数，一个带const，一个不带，会有问题吗？"><span class="nav-number">5.</span> <span class="nav-text">同时定义了两个函数，一个带const，一个不带，会有问题吗？</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:45</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : 'e1f8cdfb7f42d6efa4bbd296c97ad6d3',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

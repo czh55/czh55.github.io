@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/linux%E6%96%87%E6%9C%AC%E4%B8%89%E5%89%91%E5%AE%A2+find/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +172,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/14/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">异步编程的理解</a>
+            <a href="/2019/12/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/linux%E6%96%87%E6%9C%AC%E4%B8%89%E5%89%91%E5%AE%A2+find/" class="post-title-link" itemprop="url">linux文本三剑客+find</a>
         </h1>
 
         <div class="post-meta">
@@ -182,226 +182,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-14 11:46:00" itemprop="dateCreated datePublished" datetime="2019-12-14T11:46:00+08:00">2019-12-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 14:54:31" itemprop="dateModified" datetime="2020-04-01T14:54:31+08:00">2020-04-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-python-%E8%AF%AD%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">c数据科学/czh_python/语法</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/14/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E7%9A%84%E7%90%86%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="异步编程的理解" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>801</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月14日 上午11:46</p>
-<p><a href="http://www.ruanyifeng.com/blog/2019/11/python-asyncio.html" target="_blank" rel="noopener">Python 异步编程入门 - 阮一峰的网络日志</a></p>
-<ol>
-<li>有了 <a href="https://timber.io/blog/multiprocessing-vs-multithreading-in-python-what-you-need-to-know/" target="_blank" rel="noopener">多线程（threading）和多进程（multiprocessing）</a> ，就没必要一定支持异步了。如果一个线程（或进程）阻塞，新建其他线程（或进程）就可以了，程序不会卡死。</li>
-<li>但是，多线程有”线程竞争”的问题，处理起来很复杂，还涉及加锁。对于简单的异步任务来说（比如与网页互动），写起来很麻烦。</li>
-<li>asyncio 模块最大特点就是，只存在一个线程，跟 JavaScript 一样。<br>由于只有一个线程，就不可能多个任务同时运行。<ul>
-<li>asyncio 是”多任务合作”模式（cooperative multitasking），允许异步任务交出执行权给其他任务，等到其他任务完成，再收回执行权继续往下执行，这跟 JavaScript 也是一样的。</li>
-<li>由于代码的执行权在多个任务之间交换，所以看上去好像多个任务同时运行，<strong>其实底层只有一个线程，多个任务分享运行时间</strong>。</li>
-<li>表面上，这是一个不合理的设计，明明有多线程多进程的能力，为什么放着多余的 CPU 核心不用，而只用一个线程呢？但是就像前面说的，单线程简化了很多问题，使得代码逻辑变得简单，写法符合直觉。</li>
-</ul>
-</li>
-<li>asyncio 模块在单线程上启动一个事件循环（event loop），时刻监听新进入循环的事件，加以处理，并不断重复这个过程，直到异步任务结束。事件循环的内部机制，可以参考  <a href="https://wangdoc.com/javascript/async/general.html" target="_blank" rel="noopener">JavaScript 的模型</a> ，两者是一样的。</li>
-<li>总结：<ul>
-<li>最关键的：其实底层只有一个线程，多个任务分享运行时间</li>
-<li>让我不经思考，程序本身就是串行执行的，异步编程也是串行执行。也就说，<strong>所谓的异步编程是可以直接转化为串行的程序的</strong>。</li>
-<li>那么，异步编程的意义是什么❓<ul>
-<li><strong>编程单元</strong>，这个概念是我自己编的，意思是虽然我们正常的程序就可以完成异步编程的工作，但是使用异步编程之后，我们还可以保证依然是已函数为我们编程的单元，使代码更加调理，<strong>自己编程的时候也更容易将复杂功能抽象模块化</strong>。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%BB%9F%E8%AE%A1/%E8%92%99%E6%89%98%E5%8D%A1%E7%BD%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%BB%9F%E8%AE%A1/%E8%92%99%E6%89%98%E5%8D%A1%E7%BD%97/" class="post-title-link" itemprop="url">蒙托卡罗</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-14 11:38:00" itemprop="dateCreated datePublished" datetime="2019-12-14T11:38:00+08:00">2019-12-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:02:04" itemprop="dateModified" datetime="2020-03-12T20:02:04+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3-czh-%E7%BB%9F%E8%AE%A1/" itemprop="url" rel="index">
-                    <span itemprop="name">f数学相关/czh_统计</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%BB%9F%E8%AE%A1/%E8%92%99%E6%89%98%E5%8D%A1%E7%BD%97/" class="post-meta-item leancloud_visitors" data-flag-title="蒙托卡罗" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>44</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月14日 下午11:38</p>
-<ol>
-<li><a href="https://www.cnblogs.com/pinard/p/6625739.html" target="_blank" rel="noopener">MCMC</a> (1~4)</li>
-<li><a href="http://www.ruanyifeng.com/blog/2015/07/monte-carlo-method.html" target="_blank" rel="noopener">蒙特卡罗方法入门 - 阮一峰的网络日志</a></li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Systemd/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Systemd/" class="post-title-link" itemprop="url">Systemd</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-14 11:23:00" itemprop="dateCreated datePublished" datetime="2019-12-14T11:23:00+08:00">2019-12-14</time>
+              <time title="创建时间：2019-12-20 03:09:00" itemprop="dateCreated datePublished" datetime="2019-12-20T03:09:00+08:00">2019-12-20</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -423,7 +204,7 @@
             </span>
 
           
-            <span id="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Systemd/" class="post-meta-item leancloud_visitors" data-flag-title="Systemd" title="阅读次数">
+            <span id="/2019/12/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/linux%E6%96%87%E6%9C%AC%E4%B8%89%E5%89%91%E5%AE%A2+find/" class="post-meta-item leancloud_visitors" data-flag-title="linux文本三剑客+find" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -435,7 +216,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>66</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -454,117 +235,81 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2019年12月14日 上午11:23<br><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-commands.html" target="_blank" rel="noopener">Systemd 入门教程：命令篇 - 阮一峰的网络日志</a><br><a href="http://www.ruanyifeng.com/blog/2016/03/systemd-tutorial-part-two.html" target="_blank" rel="noopener">Systemd 入门教程：实战篇 - 阮一峰的网络日志</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/" class="post-title-link" itemprop="url">矩阵求导</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-14 11:21:00" itemprop="dateCreated datePublished" datetime="2019-12-14T11:21:00+08:00">2019-12-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:02:04" itemprop="dateModified" datetime="2020-03-12T20:02:04+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3-czh-%E7%9F%A9%E9%98%B5/" itemprop="url" rel="index">
-                    <span itemprop="name">f数学相关/czh_矩阵</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/" class="post-meta-item leancloud_visitors" data-flag-title="矩阵求导" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>241</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月14日 下午11:21<br><strong>心里大体轮廓有数就行！需要的时候再回来查，需要的再仔细学！</strong></p>
+          <p>2019年12月20日 下午3:09<br>Find 和cp连用：mac上<br><a href="https://unix.stackexchange.com/questions/285169/xargs-on-osx-illegal-option" target="_blank" rel="noopener">xargs on OSX: illegal option – - Unix &amp; Linux Stack Exchange</a><br><code>find ./ -name &#39;*tld*&#39; | xargs -I F cp &#39;F&#39; ../result_opencv2/tld</code></p>
+<p>2019年11月8日 下午3:12<br><a href="https://blog.51cto.com/12040328/2307143" target="_blank" rel="noopener">find 与mv rm 的合用-菜鸟中的菜鸟-51CTO博客</a></p>
+<ul>
+<li>第一种：<ul>
+<li><code>find ./ -name &quot;tet/“|xargs -I mv {} /tmp/</code></li>
+</ul>
+</li>
+<li>第二种：<ul>
+<li><code>mv find /root/ -name “/.tar” /tmp/</code></li>
+</ul>
+</li>
+<li>第三种: <ul>
+<li><code>find ./ -name test.tar.gz -exec mv {} /tmp \</code></li>
+</ul>
+</li>
+<li>注：::一些简单的直接在mv中使用正则就行，不需要使用find::</li>
+</ul>
+<p>2019年11月1日 下午4:04</p>
 <ol>
-<li>本质还是高数中学习的求导公式，并不是新的一门学问。只不过这里使用向量化思维进行扩展，从维度上进行扩充，本质还是没有变。明白了这个道理，学习起来就可以解决心理中的困扰：觉得很难弄。</li>
+<li>grep: 更适合单纯的查找或者匹配文本<ol>
+<li><code>grep [-abcEFGhHilLnqrsvVwxy][-A&lt;显示列数&gt;][-B&lt;显示列数&gt;][-C&lt;显示列数&gt;][-d&lt;进行动作&gt;][-e&lt;范本样式&gt;][-f&lt;范本文件&gt;][—help][范本样式][文件或目录…]</code></li>
 </ol>
-<p><a href="https://mp.weixin.qq.com/s/yVuLjQo2LKhI5O080Y_Jmw" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/yVuLjQo2LKhI5O080Y_Jmw</a></p>
+</li>
+<li>sed：更适合编辑找到的文本<ol>
+<li><code>sed [-hnV][-e&lt;script&gt;][-f&lt;script文件&gt;][文本文件]</code></li>
+</ol>
+</li>
+<li>awk：更适合格式化文本，对文本进行较复杂的格式处理<ul>
+<li><code>awk [option] ‘Pattern{action}’ file</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="第0部分：正则"><a href="#第0部分：正则" class="headerlink" title="第0部分：正则"></a>第0部分：正则</h3><p><a href="https://www.cnblogs.com/zhangmo/p/3571735.html" target="_blank" rel="noopener">linux下的find文件查找命令与grep文件内容查找命令 - 晨光静默 - 博客园</a><br><strong>pattern正则表达式主要参数：</strong><br>　　　　1. \： 忽略正则表达式中特殊字符的原有含义。<br>　　　　2. ^：匹配正则表达式的开始行。<br>　　　　3. $: 匹配正则表达式的结束行。<br>　　　　4. &lt;：从匹配正则表达 式的行开始。<br>　　　　5. &gt;：到匹配正则表达式的行结束。<br>　　　　6. [ ]：单个字符，如[A]即A符合要求 。<br>　　　　7. [ - ]：范围，如[A-Z]，即A、B、C一直到Z都符合要求 。<br>　　　　8. .：所有的单个字符。<br>　　　　9. * ：有字符，长度可以为0。</p>
+<h3 id="第一部分：awk"><a href="#第一部分：awk" class="headerlink" title="第一部分：awk"></a>第一部分：awk</h3><p>2019年12月15日 下午10:43<br><a href="http://www.ruanyifeng.com/blog/2018/11/awk.html" target="_blank" rel="noopener">awk 入门教程 - 阮一峰的网络日志</a></p>
+<p><a href="http://www.zsythink.net/archives/tag/awk/" target="_blank" rel="noopener">awk | 朱双印博客</a></p>
 <ol>
-<li>一个简要的目录，具体的推理证明在：<ol>
-<li><a href="https://www.cnblogs.com/pinard/p/10750718.html" target="_blank" rel="noopener">机器学习中的矩阵向量求导</a> (1~4)</li>
-<li><a href="https://zhuanlan.zhihu.com/p/24709748" target="_blank" rel="noopener">矩阵求导术（上） - 知乎</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/24863977" target="_blank" rel="noopener">矩阵求导术（下） - 知乎</a></li>
+<li><a href="http://www.zsythink.net/archives/1336" target="_blank" rel="noopener">awk命令基础</a> 看完</li>
+<li><a href="http://www.zsythink.net/archives/1357" target="_blank" rel="noopener">awk分隔符详解</a>看完</li>
+<li><a href="http://www.zsythink.net/archives/1374" target="_blank" rel="noopener">awk变量详解</a></li>
+<li><a href="http://www.zsythink.net/archives/1421" target="_blank" rel="noopener">awk格式化能力详解</a></li>
+<li><a href="http://www.zsythink.net/archives/1426" target="_blank" rel="noopener">awk pattern详解-1</a></li>
+<li><a href="http://www.zsythink.net/archives/2025" target="_blank" rel="noopener">awk pattern详解-2</a></li>
+<li><a href="http://www.zsythink.net/archives/2046" target="_blank" rel="noopener">awk 动作详解-1</a></li>
+<li><a href="http://www.zsythink.net/archives/2062" target="_blank" rel="noopener">awk 动作详解-2</a></li>
+<li><a href="http://www.zsythink.net/archives/2093" target="_blank" rel="noopener">awk数组详解</a></li>
+<li><a href="http://www.zsythink.net/archives/2113" target="_blank" rel="noopener">awk内置函数示例</a></li>
+</ol>
+<h3 id="第二部分：sed"><a href="#第二部分：sed" class="headerlink" title="第二部分：sed"></a>第二部分：sed</h3><p><a href="https://www.runoob.com/linux/linux-comm-sed.html" target="_blank" rel="noopener">Linux sed 命令 | 菜鸟教程</a>看过</p>
+<h3 id="第三部分：find-grep"><a href="#第三部分：find-grep" class="headerlink" title="第三部分：find + grep"></a>第三部分：find + grep</h3><p><a href="https://www.cnblogs.com/zhangmo/p/3571735.html" target="_blank" rel="noopener">linux下的find文件查找命令与grep文件内容查找命令 - 晨光静默 - 博客园</a></p>
+<ol>
+<li><strong>区别</strong>：<ul>
+<li><strong>find</strong>是根据<strong>文件的属性</strong>进行查找，如文件名，文件大小，所有者，所属组，是否为空，访问时间，修改时间等。 </li>
+<li><strong>grep</strong>是根据<strong>文件的内容进行</strong>查找，会对文件的每一行按照给定的模式(patter)进行匹配查找。</li>
+</ul>
+</li>
+<li>find三种方式 <ol>
+<li>按照文件名查找<ul>
+<li><code>find /etc -name &#39;*srm*&#39;</code>　</li>
+<li>使用通配符*(0或者任意多个)。表示在/etc目录下查找文件名中含有字符串‘srm’的文件`</li>
+</ul>
+</li>
+<li>按照文件特征查找<ul>
+<li>最后访问时间</li>
+<li>大小</li>
+</ul>
+</li>
+<li>使用混合查找方式查找文件</li>
+</ol>
+</li>
+<li>Grep<ol>
+<li>学习连接中的参数就行</li>
+<li><a href="https://www.runoob.com/linux/linux-comm-grep.html" target="_blank" rel="noopener">Linux grep 命令 | 菜鸟教程</a>看过</li>
 </ol>
 </li>
 </ol>
-<p><img src="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/IMG_2750.JPG" alt><br><img src="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/IMG_2751.JPG" alt><br><img src="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/IMG_2752.JPG" alt><br><img src="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/IMG_2753.JPG" alt><br><img src="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/IMG_2754.JPG" alt><br><img src="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/IMG_2755.JPG" alt><br><img src="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/IMG_2756.JPG" alt><br><img src="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/IMG_2757.JPG" alt><br><img src="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/IMG_2758.JPG" alt><br><img src="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E7%9F%A9%E9%98%B5/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/IMG_2759.JPG" alt></p>
 
       
     </div>
@@ -584,7 +329,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Linux%20%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%B9%E6%B3%95bg%E3%80%81disown%E3%80%81nohup%E3%80%81tmux%E3%80%81sytemd/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E8%BF%9B%E7%A8%8Bpid%E4%B8%8E%E7%AB%AF%E5%8F%A3port%E7%9A%84%E5%AF%B9%E5%BA%94%E6%9F%A5%E8%AF%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -598,7 +343,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Linux%20%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%B9%E6%B3%95bg%E3%80%81disown%E3%80%81nohup%E3%80%81tmux%E3%80%81sytemd/" class="post-title-link" itemprop="url">Linux 守护进程的启动方法bg、disown、nohup、tmux、sytemd</a>
+            <a href="/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E8%BF%9B%E7%A8%8Bpid%E4%B8%8E%E7%AB%AF%E5%8F%A3port%E7%9A%84%E5%AF%B9%E5%BA%94%E6%9F%A5%E8%AF%A2/" class="post-title-link" itemprop="url">进程pid与端口port的对应查询</a>
         </h1>
 
         <div class="post-meta">
@@ -608,7 +353,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-14 11:11:00" itemprop="dateCreated datePublished" datetime="2019-12-14T11:11:00+08:00">2019-12-14</time>
+              <time title="创建时间：2019-12-18 03:58:00" itemprop="dateCreated datePublished" datetime="2019-12-18T03:58:00+08:00">2019-12-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -630,7 +375,7 @@
             </span>
 
           
-            <span id="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/Linux%20%E5%AE%88%E6%8A%A4%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%90%AF%E5%8A%A8%E6%96%B9%E6%B3%95bg%E3%80%81disown%E3%80%81nohup%E3%80%81tmux%E3%80%81sytemd/" class="post-meta-item leancloud_visitors" data-flag-title="Linux 守护进程的启动方法bg、disown、nohup、tmux、sytemd" title="阅读次数">
+            <span id="/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E8%BF%9B%E7%A8%8Bpid%E4%B8%8E%E7%AB%AF%E5%8F%A3port%E7%9A%84%E5%AF%B9%E5%BA%94%E6%9F%A5%E8%AF%A2/" class="post-meta-item leancloud_visitors" data-flag-title="进程pid与端口port的对应查询" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -642,7 +387,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>915</span>
+              <span>425</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -661,44 +406,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2019年12月14日 上午11:11<br><a href="http://www.ruanyifeng.com/blog/2016/02/linux-daemon.html" target="_blank" rel="noopener">Linux 守护进程的启动方法 - 阮一峰的网络日志</a></p>
-<ol>
-<li>只要在命令的尾部加上符号<code>&amp;</code>，启动的进程就会成为”后台任务”。如果要让正在运行的”前台任务”变为”后台任务”，可以先按ctrl + z，然后执行bg命令（让最近一个暂停的”后台任务”继续执行）。</li>
-<li>“后台任务”有两个特点<ul>
-<li>继承当前 session （对话）的标准输出（stdout）和标准错误（stderr）。因此，后台任务的所有输出依然会同步地在命令行下显示。</li>
-<li>不再继承当前 session 的标准输入（stdin）。你无法向这个任务输入指令了。如果它试图读取标准输入，就会暂停执行（halt）。</li>
-</ul>
-</li>
-<li>用户退出 session 以后:<ul>
-<li>用户准备退出 session</li>
-<li>系统向该 session 发出SIGHUP信号</li>
-<li>session 将SIGHUP信号发给所有子进程</li>
-<li>子进程收到SIGHUP信号后，自动退出</li>
-</ul>
-</li>
-<li>disown命令。<ul>
-<li>它可以将指定任务从”后台任务”列表（jobs命令的返回结果）之中移除。一个”后台任务”只要不在这个列表之中，session 就肯定不会向它发出SIGHUP信号</li>
-<li>“后台任务”的标准 I_O 继承自当前 session，disown命令并没有改变这一点。一旦”后台任务”读写标准 I_O，就会发现它已经不存在了，所以就报错终止执行。</li>
-</ul>
-</li>
-<li>对”后台任务”的标准 I/O 进行重定向.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node server.js &gt; stdout.txt 2&gt; stderr.txt &lt; &#x2F;dev&#x2F;null &amp;</span><br><span class="line">disown</span><br></pre></td></tr></table></figure></li>
-<li>nohup命令对进程做了三件事：<ul>
-<li>阻止SIGHUP信号发到这个进程。</li>
-<li>关闭标准输入。该进程不再能够接收任何输入，即使运行在前台。</li>
-<li>重定向标准输出和标准错误到文件nohup.out。</li>
-<li>nohup:<ol>
-<li>nohup命令实际上将子进程与它所在的 session 分离了</li>
-<li>nohup命令不会自动把进程变为”后台任务”，所以必须加上&amp;符号</li>
-</ol>
-</li>
-</ul>
-</li>
-<li>Screen 命令与 Tmux 命令</li>
-<li>systemd:<ul>
-<li>Linux系统有自己的守护进程管理工具 Systemd 。它是操作系统的一部分，直接与内核交互，性能出色，功能极其强大。我们完全可以将程序交给 Systemd ，让系统统一管理，成为真正意义上的系统服务</li>
-</ul>
-</li>
-</ol>
+          <p>2019年12月18日 下午3:58<br><a href="https://www.cnblogs.com/wanghetao/p/4276496.html" target="_blank" rel="noopener">linux下查看进程占用端口和端口占用进程命令 - wanghetao - 博客园</a></p>
+<h3 id="第一步：进程名-———-gt-进程号"><a href="#第一步：进程名-———-gt-进程号" class="headerlink" title="第一步：进程名 ———&gt; 进程号"></a>第一步：进程名 ———&gt; 进程号</h3><p>查看程序对应进程号：<code>ps –ef|grep 进程名</code></p>
+<h3 id="第二步：进程号-—-—-gt-端口号"><a href="#第二步：进程号-—-—-gt-端口号" class="headerlink" title="第二步：进程号  — — &gt; 端口号"></a>第二步：进程号  — — &gt; 端口号</h3><p>REDHAT :查看进程号所占用的端口号：<code>netstat –nltp|grep 进程号</code><br>ubuntu:查看进程占用端口号：<code>netstat -anp|grep pid</code></p>
+<h3 id="另：端口号-—-gt-进程号"><a href="#另：端口号-—-gt-进程号" class="headerlink" title="另：端口号 —&gt; 进程号"></a>另：端口号 —&gt; 进程号</h3><p>Linux下查看端口号所使用的进程号：<br>使用lsof命令：<code>lsof –I:端口号</code></p>
+<h3 id="端口是否开启"><a href="#端口是否开启" class="headerlink" title="端口是否开启"></a>端口是否开启</h3><p><code>telnet ip  端口号</code>   测试远程主机端口是否打开<br><a href="https://www.linuxprobe.com/telnet-test-port.html" target="_blank" rel="noopener">如何优雅的使用telnet测试端口连通性 | 《Linux就该这么学》</a><br><img src="/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E8%BF%9B%E7%A8%8Bpid%E4%B8%8E%E7%AB%AF%E5%8F%A3port%E7%9A%84%E5%AF%B9%E5%BA%94%E6%9F%A5%E8%AF%A2/77D3BB22-D74C-499F-8C7E-6E391916D3CA.png" alt><br>补充：<a href="https://www.cnblogs.com/peida/archive/2013/03/13/2956992.html" target="_blank" rel="noopener">每天一个linux命令（58）：telnet命令 - peida - 博客园</a>telnet命令通常用来远程登录、确定远程服务的状态，比如确定远程服务器的某个端口是否能访问</p>
+<h3 id="检测你和相应IP是否能连通"><a href="#检测你和相应IP是否能连通" class="headerlink" title="检测你和相应IP是否能连通"></a>检测你和相应IP是否能连通</h3><p>Ping命令是不能检测端口,只能检测你和相应IP是否能连通.</p>
 
       
     </div>
@@ -718,7 +431,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E4%BF%A1%E6%81%AF%E8%AE%BA/%E4%BF%A1%E6%81%AF%E8%AE%BA%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20-%20%E9%98%AE%E4%B8%80%E5%B3%B0/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/ssh%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -732,7 +445,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E4%BF%A1%E6%81%AF%E8%AE%BA/%E4%BF%A1%E6%81%AF%E8%AE%BA%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20-%20%E9%98%AE%E4%B8%80%E5%B3%B0/" class="post-title-link" itemprop="url">信息论入门教程 - 阮一峰</a>
+            <a href="/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/ssh%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="post-title-link" itemprop="url">ssh实现反向代理、正向代理、内网穿透</a>
         </h1>
 
         <div class="post-meta">
@@ -742,105 +455,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-14 10:48:00" itemprop="dateCreated datePublished" datetime="2019-12-14T10:48:00+08:00">2019-12-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:02:04" itemprop="dateModified" datetime="2020-03-12T20:02:04+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3-czh-%E4%BF%A1%E6%81%AF%E8%AE%BA/" itemprop="url" rel="index">
-                    <span itemprop="name">f数学相关/czh_信息论</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E4%BF%A1%E6%81%AF%E8%AE%BA/%E4%BF%A1%E6%81%AF%E8%AE%BA%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20-%20%E9%98%AE%E4%B8%80%E5%B3%B0/" class="post-meta-item leancloud_visitors" data-flag-title="信息论入门教程 - 阮一峰" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>34</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月14日 上午10:48<br><a href="http://www.ruanyifeng.com/blog/2019/08/information-theory.html" target="_blank" rel="noopener">信息论入门教程 - 阮一峰的网络日志</a></p>
-<p><img src="/2019/12/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E4%BF%A1%E6%81%AF%E8%AE%BA/%E4%BF%A1%E6%81%AF%E8%AE%BA%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B%20-%20%E9%98%AE%E4%B8%80%E5%B3%B0/36FEB42D-F5FD-48FD-9322-0B8FE500DC5B.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E6%89%93%E5%8D%B0%EF%BC%9Alinux%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E6%89%93%E5%8D%B0%EF%BC%9Alinux%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/" class="post-title-link" itemprop="url">打印：linux一切皆文件的系统讲解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-14 10:39:00" itemprop="dateCreated datePublished" datetime="2019-12-14T10:39:00+08:00">2019-12-14</time>
+              <time title="创建时间：2019-12-18 02:51:00" itemprop="dateCreated datePublished" datetime="2019-12-18T02:51:00+08:00">2019-12-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -855,14 +470,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-%E6%95%B4%E7%90%86/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_计算机系统/整理</span>
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-%E7%BD%91%E7%BB%9C-%E4%BB%A3%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_计算机系统/网络/代理</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E6%89%93%E5%8D%B0%EF%BC%9Alinux%E4%B8%80%E5%88%87%E7%9A%86%E6%96%87%E4%BB%B6%E7%9A%84%E7%B3%BB%E7%BB%9F%E8%AE%B2%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="打印：linux一切皆文件的系统讲解" title="阅读次数">
+            <span id="/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/ssh%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/" class="post-meta-item leancloud_visitors" data-flag-title="ssh实现反向代理、正向代理、内网穿透" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -874,14 +489,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>219</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -893,8 +508,110 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2019年12月14日 上午10:39</p>
-<p><a href="https://www.cnblogs.com/MrVolleyball/p/9957679.html" target="_blank" rel="noopener">linux一切皆文件之文件描述符（一） - wilson排球 - 博客园</a><br><a href="https://www.cnblogs.com/MrVolleyball/p/9961793.html" target="_blank" rel="noopener">linux一切皆文件之Unix domain socket描述符（二） - wilson排球 - 博客园</a><br><a href="https://www.cnblogs.com/MrVolleyball/p/9987208.html" target="_blank" rel="noopener">linux一切皆文件之tcp socket描述符（三） - wilson排球 - 博客园</a><br><a href="https://www.cnblogs.com/MrVolleyball/p/9993137.html" target="_blank" rel="noopener">linux一切皆文件之块设备文件（四） - wilson排球 - 博客园</a><br><a href="https://www.cnblogs.com/MrVolleyball/p/10024540.html" target="_blank" rel="noopener">linux一切皆文件之tty字符设备(深入理解sshd创建pty的过程) （五） - wilson排球 - 博客园</a></p>
+          <p>2019年12月18日 下午2:51<br><a href="https://www.cnblogs.com/bubaya/p/7828817.html" target="_blank" rel="noopener">ssh 反向代理 - 不拨牙 - 博客园</a></p>
+<ul>
+<li>备用地址：<a href="https://www.linuxidc.com/Linux/2017-05/144245.htm" target="_blank" rel="noopener">备用地址</a><br><a href="https://www.jianshu.com/p/09fd97f8c43f" target="_blank" rel="noopener">ubuntu16.04利用ssh反向代理及autossh实现内网穿透 - 简书</a></li>
+</ul>
+<h3 id="相关知识："><a href="#相关知识：" class="headerlink" title="相关知识："></a>相关知识：</h3><ol>
+<li>nat和内网穿透的概念：<ul>
+<li><a href="https://baike.baidu.com/item/nat/320024?fr=aladdin" target="_blank" rel="noopener">nat（网络地址转换方法）_百度百科</a></li>
+<li><a href="https://baike.baidu.com/item/%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/8597835?fr=aladdin" target="_blank" rel="noopener">内网穿透_百度百科</a></li>
+<li>关键词是：地址转换。表示：公网ip和局域网ip进行对应关系，这个关系是：多对一(一个公网ip对应n个内网ip)。这也导致会有<strong>内网穿透</strong>这个说法：用于确定将一个公网ip：port对应到局域网中的ip。</li>
+<li><strong>nat与内网穿透的关系</strong>：<ul>
+<li>::<strong>逆过程</strong>：从nat的说明中可看出，nat其实指的是<strong>多对一编码</strong>这个过程，而内网穿透强调了是<strong>一对多的解码过程</strong>::</li>
+<li>nat：出去的过程</li>
+<li>内网穿透：回来的过程</li>
+</ul>
+</li>
+<li>NAT网关的工作步骤：<br><img src="/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/ssh%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/51E92BE1-CE43-41F6-8E98-A15B51AEB729.png" alt><br><img src="/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/ssh%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/5D809651-7A2C-41A3-A8A5-0F57D190886A.png" alt></li>
+</ul>
+</li>
+<li>ssh 代理和 vpn代理的区别：<ol>
+<li><a href="https://ceeji.net/blog/vpn-vs-ssh/?replytocom=1943" target="_blank" rel="noopener">该使用 SSH 还是该使用 VPN？</a></li>
+<li>vpn：<ul>
+<li>VPN 是<strong>虚拟专用网络</strong>，它虚拟了一个网卡，类似于一个<strong>数据隧道</strong>，使用 VPN 后，你连接到了一个新的网络连接，这个网络连接和你所使用的宽带连接、局域网连接等是平级的，（但实际上数据是先加密，再通过你其它的网卡发送的），如果你使用这种方式连接了网络，你的所有网络数据包都将通过 VPN 加密隧道发送。</li>
+</ul>
+</li>
+<li>SSH：<ol>
+<li>::他不是一个单独的网络连接，只是在现有网络连接内的一个协议::</li>
+</ol>
+</li>
+<li>VPN 更接近底层，相当于一个新的虚拟网卡，更有“专用”的性质，而 SSH 更像加密的代理服务器，是在你现有的网络上的一个普通的连接。</li>
+</ol>
+</li>
+<li>为什么VPN比SSH繁荣？<ol>
+<li>因为ssh做不了的事情，VPN都可以做；而ssh能做的，VPN也统统能做。</li>
+<li><a href="http://www.mujj.cn/archives/76.txt" target="_blank" rel="noopener">ssh和vpn哪个好，区别是什么？ | Mujj博客</a></li>
+</ol>
+</li>
+<li>其他：<ol>
+<li>其实ssh只是代理的一种，代理有很多种，例如http代理，反向代理等，这些之所以在国内的网络环境里不堪大用，主要是因为他们内容传输都是使用明文，不加密的内容很容易被第三方嗅探，然后截断连接</li>
+<li>ssh和vpn都是加密传输，相对安全，在国内恶劣的网络环境下，总算能够生存。</li>
+</ol>
+</li>
+</ol>
+<h3 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h3><ul>
+<li>如果抱着登录服务器的目的来说，最简单的方法就依然还是必须有A、B服务器，但是没不要设置啥代理，直接先从Cssh登录到B，再从B登录到A一样可以完成连接。</li>
+<li>所以说，如果简单的连接一下A服务器，没必要弄得这么复杂！！！</li>
+</ul>
+<h3 id="理解核心"><a href="#理解核心" class="headerlink" title="理解核心"></a>理解核心</h3><p>::一台linuxA，它不仅可以主动的连接B，也可以<strong>命令B来连接自己</strong>::</p>
+<ul>
+<li>这就是linux反向代理最难理解的地方，这个<strong>命令B来连接自己</strong>这个动作有点反直觉，谁会想到linux有这功能，这也体现了linux中的确有很多的设计哲学在里面。</li>
+<li>这两种的结果虽然都是B-&gt;A，但是不同点是：反向代理会使B机器启动一个ssh连接(B-&gt;A)对应的端口号。如果正向连接B-&gt;A，这个ssh在B上没有启动一个对应的接口，不好之处是：<strong>无法将B机器其他端口的内容转接到B-&gt;A之间的连接</strong>(eg：无法再在B机器上进行正向代理端口映射到已有的连接中)。</li>
+</ul>
+<p><a href="https://segmentfault.com/a/1190000010364534" target="_blank" rel="noopener">利用SSH代理访问内网资源 - DTeam的团队日志 - SegmentFault 思否</a><br><img src="/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/ssh%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/F9DC7A1B-2211-4559-BB0B-972A0C5B2B4C.png" alt></p>
+<h3 id="另一种理解："><a href="#另一种理解：" class="headerlink" title="另一种理解："></a>另一种理解：</h3><p><a href="https://segmentfault.com/a/1190000019540114?utm_medium=referral&utm_source=tuicool" target="_blank" rel="noopener">正向代理与反向代理的区别？ - 个人文章 - SegmentFault 思否</a><br>正向代理：代理的是客户端（服务器并不知道真正的客户端到底是谁）<br>反向代理：代理的是服务端（客户端也不知道真正的服务器是谁）</p>
+<h3 id="参数说明："><a href="#参数说明：" class="headerlink" title="参数说明："></a>参数说明：</h3><ol>
+<li><strong>反向代理</strong><ul>
+<li><code>ssh -fCNR</code></li>
+</ul>
+</li>
+<li><strong>正向代理</strong><ul>
+<li><code>ssh -fCNL</code></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>-f 后台执行ssh指令</li>
+<li>-C 允许压缩数据</li>
+<li>-N 不执行远程指令</li>
+<li>-R <strong>将远程主机(服务器)的某个端口转发到本地端指定机器的指定端口</strong><ul>
+<li>这就是<strong>反向</strong>两个字的意思！！！</li>
+</ul>
+</li>
+<li>-L <strong>将本地机(客户机)的某个端口转发到远端指定机器的指定端口</strong><ul>
+<li>这就是<strong>正向</strong>两个字的意思！！！</li>
+</ul>
+</li>
+<li>-p 指定远程主机的端口</li>
+</ul>
+<h3 id="机器状况："><a href="#机器状况：" class="headerlink" title="机器状况："></a>机器状况：</h3><p><img src="/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/ssh%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/81F4FC9D-718A-43AC-B794-FC2ACB7FEBEB.png" alt></p>
+<h3 id="流程说明："><a href="#流程说明：" class="headerlink" title="流程说明："></a>流程说明：</h3><ol>
+<li>第一步：就是在机器A上做到B机器的反向代理<ol>
+<li>命令： <code>ssh -fCNR 7280:localhost:22 root@123.123.123.123</code></li>
+<li>步骤：<ol>
+<li>登录B机器：<code>ssh root@123.123.123.123</code> 注：这里是默认的22端口</li>
+<li>在B机器中端口转发：<code>B:7280-&gt;A:22</code>，注：我认为这就是一个正向代理。也就说：<strong>反向代理中是正向代理的包装！</strong></li>
+</ol>
+</li>
+<li>结果：<ol>
+<li>此时，AB之间的ssh连接一直保持（结果就像B ssh连接了A一样,只不过是由A要求B做的）</li>
+<li>此时，可以在B机器中使用<code>ssh -p 7280 localhost</code>来登录</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>第二步：在B机器上做正向的代理实现本地端口的转发<ol>
+<li><code>ssh -fCNL *:1234:localhost:7280 localhost</code></li>
+<li>需要这次转发的原因是：<code>B:7280</code>是B机器与A进行通讯的ssh进程启动的端口(只有反向代理才会有)，而不是登录B机器的端口，因此我们需要B机器上的另一个端口<code>B:1234</code>作为B机器的登录端口，并将此次登录的内容，转发到<code>B:1234-&gt;B:7280</code></li>
+</ol>
+</li>
+<li>第三部：在另一台外网服务器C中通过<code>B:1234</code>端口来登录B<ol>
+<li><code>ssh -p1234 gdut728@123.123.123.123</code></li>
+</ol>
+</li>
+</ol>
+<h4 id="检验是否已经启动了可以使用ps-aux-grep-ssh指令来查看："><a href="#检验是否已经启动了可以使用ps-aux-grep-ssh指令来查看：" class="headerlink" title="检验是否已经启动了可以使用ps aux | grep ssh指令来查看："></a>检验是否已经启动了可以使用ps aux | grep ssh指令来查看：</h4><p><img src="/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/ssh%E5%AE%9E%E7%8E%B0%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F/170525152459041.png" alt></p>
 
       
     </div>
@@ -914,7 +631,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E9%99%90%E5%88%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%99%BB%E5%BD%95%EF%BC%9A%E5%8F%AA%E8%83%BD%E6%9C%AC%E6%9C%BASSH%E5%85%AC%E9%92%A5%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95%E6%8C%87%E5%AE%9A%E7%94%A8%E6%88%B7/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/ssh25%20Best%20SSH%20Commands%20%20Tricks/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -928,7 +645,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E9%99%90%E5%88%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%99%BB%E5%BD%95%EF%BC%9A%E5%8F%AA%E8%83%BD%E6%9C%AC%E6%9C%BASSH%E5%85%AC%E9%92%A5%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95%E6%8C%87%E5%AE%9A%E7%94%A8%E6%88%B7/" class="post-title-link" itemprop="url">限制服务器登录：只能本机SSH公钥进行登录指定用户</a>
+            <a href="/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/ssh25%20Best%20SSH%20Commands%20%20Tricks/" class="post-title-link" itemprop="url">ssh25 Best SSH Commands / Tricks</a>
         </h1>
 
         <div class="post-meta">
@@ -938,7 +655,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-14 10:25:00" itemprop="dateCreated datePublished" datetime="2019-12-14T10:25:00+08:00">2019-12-14</time>
+              <time title="创建时间：2019-12-18 02:22:00" itemprop="dateCreated datePublished" datetime="2019-12-18T02:22:00+08:00">2019-12-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -953,14 +670,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-%E7%BD%91%E7%BB%9C-%E4%BB%A3%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_计算机系统/网络/代理</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2019/12/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E9%99%90%E5%88%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%99%BB%E5%BD%95%EF%BC%9A%E5%8F%AA%E8%83%BD%E6%9C%AC%E6%9C%BASSH%E5%85%AC%E9%92%A5%E8%BF%9B%E8%A1%8C%E7%99%BB%E5%BD%95%E6%8C%87%E5%AE%9A%E7%94%A8%E6%88%B7/" class="post-meta-item leancloud_visitors" data-flag-title="限制服务器登录：只能本机SSH公钥进行登录指定用户" title="阅读次数">
+            <span id="/2019/12/18/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/ssh25%20Best%20SSH%20Commands%20%20Tricks/" class="post-meta-item leancloud_visitors" data-flag-title="ssh25 Best SSH Commands / Tricks" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -972,7 +689,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>349</span>
+              <span>53</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -991,18 +708,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2019年12月14日 下午10:25</p>
-<p><a href="http://www.ruanyifeng.com/blog/2014/03/server_setup.html" target="_blank" rel="noopener">Linux服务器的初步配置流程 - 阮一峰的网络日志</a></p>
-<ol>
-<li>新建用户</li>
-<li>SSH设置（重点）</li>
-</ol>
-<h4 id="禁止root用户登录，以及禁止用密码方式登录"><a href="#禁止root用户登录，以及禁止用密码方式登录" class="headerlink" title="禁止root用户登录，以及禁止用密码方式登录"></a>禁止root用户登录，以及禁止用密码方式登录</h4><p>注：在配置文件的末尾，指定允许登陆的用户</p>
-<ol>
-<li><code>sudo cp /etc/ssh/sshd_config ~</code></li>
-<li><code>sudo nano /etc/ssh/sshd_config</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Protocol 2</span><br><span class="line"></span><br><span class="line">PermitRootLogin no</span><br><span class="line">PermitEmptyPasswords no</span><br><span class="line">PasswordAuthentication no</span><br><span class="line"></span><br><span class="line">RSAAuthentication yes</span><br><span class="line">PubkeyAuthentication yes</span><br><span class="line">AuthorizedKeysFile .ssh&#x2F;authorized_keys</span><br><span class="line"></span><br><span class="line">UseDNS no</span><br><span class="line"></span><br><span class="line">AllowUsers bill</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+          <p>2019年12月18日 下午2:22<br><a href="https://blog.urfix.com/25-ssh-commands-tricks/" target="_blank" rel="noopener">25 Best SSH Commands / Tricks – UrFix’s  Blog</a></p>
 
       
     </div>
@@ -1022,7 +728,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/kill/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E7%BD%91%E7%BB%9C%E6%9F%A5%E7%9C%8B%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1036,7 +742,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/kill/" class="post-title-link" itemprop="url">kill</a>
+            <a href="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E7%BD%91%E7%BB%9C%E6%9F%A5%E7%9C%8B%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/" class="post-title-link" itemprop="url">网络查看工具汇总</a>
         </h1>
 
         <div class="post-meta">
@@ -1046,7 +752,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-13 05:56:00" itemprop="dateCreated datePublished" datetime="2019-12-13T05:56:00+08:00">2019-12-13</time>
+              <time title="创建时间：2019-12-17 09:37:00" itemprop="dateCreated datePublished" datetime="2019-12-17T09:37:00+08:00">2019-12-17</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1068,7 +774,7 @@
             </span>
 
           
-            <span id="/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/kill/" class="post-meta-item leancloud_visitors" data-flag-title="kill" title="阅读次数">
+            <span id="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E7%BD%91%E7%BB%9C%E6%9F%A5%E7%9C%8B%E5%B7%A5%E5%85%B7%E6%B1%87%E6%80%BB/" class="post-meta-item leancloud_visitors" data-flag-title="网络查看工具汇总" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1080,7 +786,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>324</span>
+              <span>63</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1099,15 +805,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2019年12月13日 下午5:56<br><a href="https://www.cnblogs.com/aspirant/p/11543456.html" target="_blank" rel="noopener">Linux kill、kill-15、kill-9区别 - aspirant - 博客园</a><br><img src="/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/kill/u=12843675,3963687809&fm=173&s=E8A03C7283DC7DC0587D05DF0000C0B1&w=640&h=218&img.JPEG.jpg" alt></p>
-<ol>
-<li><strong>执行kill（不加 - 默认kill -15）命令，系统会发送一个SIGTERM信号给对应的程序</strong><ul>
-<li>大部分程序接收到SIGTERM信号后，会先释放自己的资源，然后再停止。但是也有程序可能接收信号后，做一些其他的事情（如果程序正在等待IO，可能就不会立马做出响应，我在使用wkhtmltopdf转pdf的项目中遇到这现象），也就是说，SIGTERM多半是会被阻塞的</li>
-</ul>
-</li>
-<li><strong>kill -9命令，系统给对应程序发送的信号是SIGKILL，即exit。exit信号不会被系统阻塞，所以kill -9能顺利杀掉进程。</strong></li>
-<li><strong>不要使用kill -9。不要用收割机来修剪花盆里的花。</strong></li>
-</ol>
+          <p>2019年12月17日 下午9:37<br><a href="https://www.cnblogs.com/jins-note/p/9850439.html" target="_blank" rel="noopener">Linux 网络流量查看 Linux ip traffic monitor - Jerry_Jin - 博客园</a></p>
 
       
     </div>
@@ -1127,7 +825,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC%E5%92%8C%E7%AE%A1%E7%90%86%E5%91%98/">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/iotop%E6%AF%8F%E4%B8%AA%E8%BF%9B%E7%A8%8B%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20IO/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1141,7 +839,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC%E5%92%8C%E7%AE%A1%E7%90%86%E5%91%98/" class="post-title-link" itemprop="url">查看系统版本和管理员</a>
+            <a href="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/iotop%E6%AF%8F%E4%B8%AA%E8%BF%9B%E7%A8%8B%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20IO/" class="post-title-link" itemprop="url">iotop每个进程是如何使用 IO</a>
         </h1>
 
         <div class="post-meta">
@@ -1151,7 +849,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-12-13 03:33:00" itemprop="dateCreated datePublished" datetime="2019-12-13T03:33:00+08:00">2019-12-13</time>
+              <time title="创建时间：2019-12-17 09:33:00" itemprop="dateCreated datePublished" datetime="2019-12-17T09:33:00+08:00">2019-12-17</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1173,7 +871,7 @@
             </span>
 
           
-            <span id="/2019/12/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E7%89%88%E6%9C%AC%E5%92%8C%E7%AE%A1%E7%90%86%E5%91%98/" class="post-meta-item leancloud_visitors" data-flag-title="查看系统版本和管理员" title="阅读次数">
+            <span id="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/iotop%E6%AF%8F%E4%B8%AA%E8%BF%9B%E7%A8%8B%E6%98%AF%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%20IO/" class="post-meta-item leancloud_visitors" data-flag-title="iotop每个进程是如何使用 IO" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1185,7 +883,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>681</span>
+              <span>216</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1204,18 +902,428 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2019年12月13日 下午3:33</p>
-<p><a href="https://blog.csdn.net/cg129054036/article/details/86583484" target="_blank" rel="noopener">查看ubuntu系统的版本信息</a></p>
-<ol>
-<li><strong>查看linux内核、gcc版本、ubuntu版本</strong></li>
-<li><strong>显示linux的内核版本和系统是多少位</strong></li>
-</ol>
-<p><a href="https://www.helplib.com/ubuntu/article_165596" target="_blank" rel="noopener">用户管理如何知道我是否是我的Ubuntu管理员？_ubuntu_HELPLIB</a></p>
-<ol>
-<li>运行命令 id 或者 groups，看看是否位于 sudo 组中</li>
-<li>尝试运行 sudo echo ok 并输入密码；如果这里打印为 ok，则你是管理员。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">cy@master:~&#x2F;basemap_server_python$ cat &#x2F;proc&#x2F;version</span><br><span class="line">Linux version 4.4.0-21-generic (buildd@lgw01-21) (gcc version 5.3.1 20160413 (Ubuntu 5.3.1-14ubuntu2) ) #37-Ubuntu SMP Mon Apr 18 18:33:37 UTC 2016</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cy@master:~&#x2F;basemap_server_python$ uname -a</span><br><span class="line">Linux master 4.4.0-21-generic #37-Ubuntu SMP Mon Apr 18 18:33:37 UTC 2016 x86_64 x86_64 x86_64 GNU&#x2F;Linux</span><br><span class="line"></span><br><span class="line">cy@master:~&#x2F;basemap_server_python$ lsb_release -a</span><br><span class="line">No LSB modules are available.</span><br><span class="line">Distributor ID:	Ubuntu</span><br><span class="line">Description:	Ubuntu 16.04 LTS</span><br><span class="line">Release:	16.04</span><br><span class="line">Codename:	xenial</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+          <p>2019年12月17日 下午9:33</p>
+<p><a href="https://www.cnblogs.com/jins-note/p/9667342.html" target="_blank" rel="noopener">一文详解 Linux 系统常用监控工具(top,htop,iotop,iftop) - Jerry_Jin - 博客园</a><br>Iotop 是用来监控硬盘 IO 的使用情况，UI 界面和 top 类似，其中包括 PID、用户、I/O、进程 等相关信息。<br>Linux 下系统自带的 IO 统计工具如 iostat，nmon 等大多数是只能统计到 per 设备的读写情况，如果你想知道每个进程是如何使用 IO 的就比较麻烦，使用 iotop 命令可以很方便的查看。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/iftop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/iftop/" class="post-title-link" itemprop="url">iftop</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-17 09:31:00" itemprop="dateCreated datePublished" datetime="2019-12-17T09:31:00+08:00">2019-12-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/iftop/" class="post-meta-item leancloud_visitors" data-flag-title="iftop" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>791</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月17日 下午9:31<br><a href="https://www.cnblogs.com/jins-note/p/9667342.html" target="_blank" rel="noopener">一文详解 Linux 系统常用监控工具(top,htop,iotop,iftop) - Jerry_Jin - 博客园</a><br><img src="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/iftop/1470684-20180918100419000-2065445942.png" alt></p>
+<p><img src="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/iftop/1470684-20180918100419375-1370105884.png" alt></p>
+<p>Iftop 命令常用的参数如下，这里做个小规模总结：</p>
+<ul>
+<li>-I 设定监测的网卡，如：# iftop -I eth1</li>
+<li>-B 以 bytes 为单位显示流量 (默认是 bits)，如：# iftop -B</li>
+<li>-n 使 host 信息默认直接都显示 IP，如：# iftop -n</li>
+<li>-N 使端口信息默认直接都显示端口号，如: # iftop -N</li>
+<li>-F 显示特定网段的进出流量，如 # iftop -F 10.10.1.0/24 或 # iftop -F 10.10.1.0/255.255.255.0</li>
+<li>-h（ display this message ），帮助，显示参数信息</li>
+<li>-p 使用这个参数后，中间的列表显示的本地主机信息，出现了本机以外的 IP 信息;</li>
+<li>-b 使流量图形条默认就显示;<br>再来总结一下，进入 iftop 视图画面后的一些操作命令 (注意大小写)：</li>
+<li>按 h切换是否显示帮助;</li>
+<li>按 n切换显示本机的 IP 或主机名;</li>
+<li>按 s切换是否显示本机的 host 信息;</li>
+<li>按 d切换是否显示远端目标主机的 host 信息;</li>
+<li>按 t切换显示格式为 2 行 /1 行 /只显示发送流量 /只显示接收流量;</li>
+<li>按 N切换显示端口号或端口服务名称;</li>
+<li>按 S切换是否显示本机的端口信息;</li>
+<li>按 D切换是否显示远端目标主机的端口信息;</li>
+<li>按 p切换是否显示端口信息;</li>
+<li>按 P切换暂停 /继续显示;</li>
+<li>按 b切换是否显示平均流量图形条;</li>
+<li>按 T切换是否显示每个连接的总流量;</li>
+<li>按 l打开屏幕过滤功能，输入要过滤的字符，比如 ip,按回车后，屏幕就只显示这个 IP 相关的流量信息;</li>
+<li>按 L切换显示画面上边的刻度;刻度不同，流量图形条会有变化;</li>
+<li>按 j或按k可以向上或向下滚动屏幕显示的连接记录;</li>
+<li>按 1或2或3可以根据右侧显示的三列流量数据进行排序;</li>
+<li>按&lt;根据左边的本机名或 IP 排序;</li>
+<li>按&gt;根据远端目标主机的主机名或 IP 排序;</li>
+<li>按o切换是否固定只显示当前的连接;</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/htop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/htop/" class="post-title-link" itemprop="url">htop</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-17 09:29:00" itemprop="dateCreated datePublished" datetime="2019-12-17T09:29:00+08:00">2019-12-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/htop/" class="post-meta-item leancloud_visitors" data-flag-title="htop" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>70</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月17日 下午9:29<br><a href="https://www.cnblogs.com/jins-note/p/9667342.html" target="_blank" rel="noopener">一文详解 Linux 系统常用监控工具(top,htop,iotop,iftop) - Jerry_Jin - 博客园</a><br><img src="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/htop/1470684-20180918100416703-87744477.png" alt></p>
+<p><img src="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/htop/1470684-20180918100417400-555099914.png" alt><br><img src="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/htop/1470684-20180918100417722-294731673.png" alt><br><img src="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/htop/1470684-20180918100418132-1583333836.png" alt><br><img src="/2019/12/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/htop/1470684-20180918100418436-345593578.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/16/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_slam/%E6%89%93%E5%8D%B0%EF%BC%9A%E5%BE%AE%E9%89%B4%E9%81%93%E9%95%BFSLAM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E7%9B%AE%E5%BD%95%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/16/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_slam/%E6%89%93%E5%8D%B0%EF%BC%9A%E5%BE%AE%E9%89%B4%E9%81%93%E9%95%BFSLAM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E7%9B%AE%E5%BD%95%EF%BC%89/" class="post-title-link" itemprop="url">打印：微鉴道长SLAM学习笔记（目录）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-16 05:29:00" itemprop="dateCreated datePublished" datetime="2019-12-16T05:29:00+08:00">2019-12-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 15:27:50" itemprop="dateModified" datetime="2020-04-01T15:27:50+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-SLAM/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_SLAM</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/16/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_slam/%E6%89%93%E5%8D%B0%EF%BC%9A%E5%BE%AE%E9%89%B4%E9%81%93%E9%95%BFSLAM%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E7%9B%AE%E5%BD%95%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="打印：微鉴道长SLAM学习笔记（目录）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>503</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月16日 下午5:29<br><a href="https://blog.csdn.net/zkk9527/article/details/102952863" target="_blank" rel="noopener">微鉴道长SLAM学习笔记（目录）</a><br>SLAM14讲学习笔记（一) 李群李代数基础<br>SLAM14讲学习笔记（二）相机模型总结<br>SLAM14讲学习笔记（三）非线性优化基础<br>SLAM14讲学习笔记（四）视觉里程计（特征点法）和重难点总结<br>SLAM14讲学习笔记（五）视觉里程计（光流法和直接法）和对于雅克比矩阵的理解<br>SLAM14讲学习笔记（六）后端（最难一章：卡尔曼滤波器推导、理解以及扩展）<br>SLAM14讲学习笔记（七）后端（BA与图优化，Pose Graph优化的理论与公式详解、因子图优化）<br>SLAM14讲学习笔记（八）回环检测<br>SLAM14讲学习笔记（九）单目稠密重建、深度滤波器详解与补充<br>SLAM14讲学习笔记（十）建图与SLAM开源方案对比<br>SLAM14讲学习笔记（十一）g2o图优化中的要点与难点（前端VO中雅克比矩阵的定义）<br>SLAM14讲学习笔记（十二）ch9设计前端（代码详述）<br>SLAM14讲学习笔记（十三）ch10 后端1（代码详述）<br>SLAM14讲学习笔记（十四）ch13 建图（代码详述带注释）<br>SLAM14讲学习笔记（十五）卡尔曼滤波器的直观理解<br>SLAM就业问题汇总复习（持续更新中）</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/lsof(list%20open%20files)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/lsof(list%20open%20files)/" class="post-title-link" itemprop="url">lsof(list open files)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-15 11:07:00" itemprop="dateCreated datePublished" datetime="2019-12-15T11:07:00+08:00">2019-12-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/lsof(list%20open%20files)/" class="post-meta-item leancloud_visitors" data-flag-title="lsof(list open files)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>179</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月15日 下午11:07<br><a href="https://www.cnblogs.com/sparkbj/p/7161669.html" target="_blank" rel="noopener">linux lsof命令详解 - 星火spark - 博客园</a><br>系统在后台都为该<strong>应用程序分配了一个文件描述符</strong>，无论这个文件的本质如何，该文件描述符为应用程序与基础操作系统之间的交互提供了通用接口。因为<strong>应用程序打开文件的描述符列表提供了大量关于这个应用程序本身的信息</strong>，因此通过lsof工具能够查看这个列表对系统监测以及排错将是很有帮助的。</p>
 
       
     </div>
@@ -1235,7 +1343,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/116/">116</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/118/">118</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1301,7 +1409,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1157</span>
+          <span class="site-state-item-count">1173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1342,12 +1450,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.1m</span>
+    <span title="站点总字数">1.2m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:15</span>
+    <span title="站点阅读时长">17:45</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="2020年3月17日 下午11:50 基础知识：函数式编程：本质意义来源于数学函数f(x)* 在实现方式上，有函数套函数、函数返回函数、函数里定义函数……把人搞得很糊涂 * C++的是通过模板来实现函数式编程，起点比较高 * Python是目前使用函数式变成最简单的方式 * eg:C++:一个人就能实现三种范式 过程式、函数式、面向对象式 对于C++而言，模板是泛型编程、函数式编程的实现方式 函数">
+  <meta name="description" content="2020年3月17日 下午11:50 基础知识：函数式编程：本质意义来源于数学函数f(x)* 在实现方式上，有函数套函数、函数返回函数、函数里定义函数……把人搞得很糊涂 * C++的是通过模板来实现函数式编程，起点比较高 * Python是目前使用函数式变成最简单的方式 * eg:语言不只是工具。语言和编程范式极大的影响了我们的思维C++:一个人就能实现三种范式 过程式、函数式、面向对象式 对于C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="编程范式理解">
 <meta property="og:url" content="http://www.chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%90%86%E8%A7%A3/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
-<meta property="og:description" content="2020年3月17日 下午11:50 基础知识：函数式编程：本质意义来源于数学函数f(x)* 在实现方式上，有函数套函数、函数返回函数、函数里定义函数……把人搞得很糊涂 * C++的是通过模板来实现函数式编程，起点比较高 * Python是目前使用函数式变成最简单的方式 * eg:C++:一个人就能实现三种范式 过程式、函数式、面向对象式 对于C++而言，模板是泛型编程、函数式编程的实现方式 函数">
+<meta property="og:description" content="2020年3月17日 下午11:50 基础知识：函数式编程：本质意义来源于数学函数f(x)* 在实现方式上，有函数套函数、函数返回函数、函数里定义函数……把人搞得很糊涂 * C++的是通过模板来实现函数式编程，起点比较高 * Python是目前使用函数式变成最简单的方式 * eg:语言不只是工具。语言和编程范式极大的影响了我们的思维C++:一个人就能实现三种范式 过程式、函数式、面向对象式 对于C">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://www.chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%90%86%E8%A7%A3/bear_sketch@2x.png">
 <meta property="og:image" content="http://www.chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%90%86%E8%A7%A3/IMG_0294.JPG">
 <meta property="og:image" content="http://www.chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%90%86%E8%A7%A3/IMG_0295.JPG">
 <meta property="og:image" content="http://www.chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%90%86%E8%A7%A3/IMG_0296.JPG">
 <meta property="article:published_time" content="2020-03-17T03:50:00.000Z">
-<meta property="article:modified_time" content="2020-04-01T06:55:21.043Z">
+<meta property="article:modified_time" content="2020-04-12T11:32:44.628Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%90%86%E8%A7%A3/bear_sketch@2x.png">
@@ -197,7 +197,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 14:55:21" itemprop="dateModified" datetime="2020-04-01T14:55:21+08:00">2020-04-01</time>
+                <time title="修改时间：2020-04-12 19:32:44" itemprop="dateModified" datetime="2020-04-12T19:32:44+08:00">2020-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -224,7 +224,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>719</span>
+              <span>760</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -247,7 +247,7 @@
 <h2 id="基础知识："><a href="#基础知识：" class="headerlink" title="基础知识："></a>基础知识：</h2><h4 id="函数式编程：本质意义来源于数学函数f-x"><a href="#函数式编程：本质意义来源于数学函数f-x" class="headerlink" title="函数式编程：本质意义来源于数学函数f(x)"></a>函数式编程：本质意义来源于数学函数f(x)</h4><pre><code>* 在实现方式上，有函数套函数、函数返回函数、函数里定义函数……把人搞得很糊涂
 * C++的是通过模板来实现函数式编程，起点比较高
 * Python是目前使用函数式变成最简单的方式
-* eg:</code></pre><h4 id="C-一个人就能实现三种范式"><a href="#C-一个人就能实现三种范式" class="headerlink" title="C++:一个人就能实现三种范式"></a>C++:一个人就能实现三种范式</h4><ul>
+* eg:</code></pre><h4 id="语言不只是工具。语言和编程范式极大的影响了我们的思维"><a href="#语言不只是工具。语言和编程范式极大的影响了我们的思维" class="headerlink" title="语言不只是工具。语言和编程范式极大的影响了我们的思维"></a>语言不只是工具。语言和编程范式极大的影响了我们的思维</h4><h4 id="C-一个人就能实现三种范式"><a href="#C-一个人就能实现三种范式" class="headerlink" title="C++:一个人就能实现三种范式"></a>C++:一个人就能实现三种范式</h4><ul>
 <li>过程式、函数式、面向对象式</li>
 <li>对于C++而言，模板是泛型编程、函数式编程的实现方式</li>
 <li>函数式编程是泛型编程的进一步抽象，但他们的实现方式都是模板</li>
@@ -275,7 +275,8 @@
 <li>函数式：是控制与业务分离的手段<br>Ps：先控制与数据分离，后控制与业务分离</li>
 </ul>
 <h4 id="其实唯一目标很清晰：独立出控制"><a href="#其实唯一目标很清晰：独立出控制" class="headerlink" title="其实唯一目标很清晰：独立出控制"></a>其实唯一目标很清晰：独立出控制</h4><ul>
-<li><strong>控制一个程序流转的方式</strong>，即程序执行的方式，并行还是串行，同步还是异步，以及调度不同执行路径或模块，数据之间的存储关系，这些和业务逻辑没有关系。<br><img src="/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%90%86%E8%A7%A3/IMG_0294.JPG" alt></li>
+<li><strong>控制一个程序流转的方式</strong>，即程序执行的方式，并行还是串行，同步还是异步，以及调度不同执行路径或模块，数据之间的存储关系，这些和业务逻辑没有关系。</li>
+<li>控制，也许换成<strong>调度</strong>更好理解一些<br><img src="/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F/%E7%BC%96%E7%A8%8B%E8%8C%83%E5%BC%8F%E7%90%86%E8%A7%A3/IMG_0294.JPG" alt></li>
 </ul>
 <h4 id="如何使用独立出来的控制来完成我们需要功能："><a href="#如何使用独立出来的控制来完成我们需要功能：" class="headerlink" title="如何使用独立出来的控制来完成我们需要功能："></a>如何使用独立出来的控制来完成我们需要功能：</h4><ul>
 <li>后期添加logic + data<ul>
@@ -367,7 +368,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识："><span class="nav-number">1.</span> <span class="nav-text">基础知识：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数式编程：本质意义来源于数学函数f-x"><span class="nav-number">1.0.1.</span> <span class="nav-text">函数式编程：本质意义来源于数学函数f(x)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-一个人就能实现三种范式"><span class="nav-number">1.0.2.</span> <span class="nav-text">C++:一个人就能实现三种范式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象-与-实例编程-区别联系"><span class="nav-number">1.0.3.</span> <span class="nav-text">面向对象 与 实例编程 区别联系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从设计、选型的角度："><span class="nav-number">2.</span> <span class="nav-text">从设计、选型的角度：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#我们需要分离什么："><span class="nav-number">2.0.1.</span> <span class="nav-text">我们需要分离什么：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何实现分离的？"><span class="nav-number">2.0.2.</span> <span class="nav-text">如何实现分离的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其实唯一目标很清晰：独立出控制"><span class="nav-number">2.0.3.</span> <span class="nav-text">其实唯一目标很清晰：独立出控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何使用独立出来的控制来完成我们需要功能："><span class="nav-number">2.0.4.</span> <span class="nav-text">如何使用独立出来的控制来完成我们需要功能：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一共就四种范式而已："><span class="nav-number">2.0.5.</span> <span class="nav-text">一共就四种范式而已：</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识："><span class="nav-number">1.</span> <span class="nav-text">基础知识：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#函数式编程：本质意义来源于数学函数f-x"><span class="nav-number">1.0.1.</span> <span class="nav-text">函数式编程：本质意义来源于数学函数f(x)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#语言不只是工具。语言和编程范式极大的影响了我们的思维"><span class="nav-number">1.0.2.</span> <span class="nav-text">语言不只是工具。语言和编程范式极大的影响了我们的思维</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-一个人就能实现三种范式"><span class="nav-number">1.0.3.</span> <span class="nav-text">C++:一个人就能实现三种范式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#面向对象-与-实例编程-区别联系"><span class="nav-number">1.0.4.</span> <span class="nav-text">面向对象 与 实例编程 区别联系</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从设计、选型的角度："><span class="nav-number">2.</span> <span class="nav-text">从设计、选型的角度：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#我们需要分离什么："><span class="nav-number">2.0.1.</span> <span class="nav-text">我们需要分离什么：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何实现分离的？"><span class="nav-number">2.0.2.</span> <span class="nav-text">如何实现分离的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其实唯一目标很清晰：独立出控制"><span class="nav-number">2.0.3.</span> <span class="nav-text">其实唯一目标很清晰：独立出控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何使用独立出来的控制来完成我们需要功能："><span class="nav-number">2.0.4.</span> <span class="nav-text">如何使用独立出来的控制来完成我们需要功能：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一共就四种范式而已："><span class="nav-number">2.0.5.</span> <span class="nav-text">一共就四种范式而已：</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -381,7 +382,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1157</span>
+          <span class="site-state-item-count">1173</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -422,12 +423,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.1m</span>
+    <span title="站点总字数">1.2m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:15</span>
+    <span title="站点阅读时长">17:45</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

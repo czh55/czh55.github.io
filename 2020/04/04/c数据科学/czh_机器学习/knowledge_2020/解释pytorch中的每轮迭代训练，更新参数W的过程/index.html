@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2020年4月4日 下午2:58 解释pytorch三个内置函数的功能：What does the backward() function do? - autograd - PyTorch Forums  loss.backward() computes dloss&#x2F;dx for every parameter x which has requires_grad&#x3D;True. These are a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解释pytorch中的每轮迭代训练，更新参数W的过程">
+<meta property="og:url" content="http://www.chenzhiheng.cn/2020/04/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge_2020/%E8%A7%A3%E9%87%8Apytorch%E4%B8%AD%E7%9A%84%E6%AF%8F%E8%BD%AE%E8%BF%AD%E4%BB%A3%E8%AE%AD%E7%BB%83%EF%BC%8C%E6%9B%B4%E6%96%B0%E5%8F%82%E6%95%B0W%E7%9A%84%E8%BF%87%E7%A8%8B/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2020年4月4日 下午2:58 解释pytorch三个内置函数的功能：What does the backward() function do? - autograd - PyTorch Forums  loss.backward() computes dloss&#x2F;dx for every parameter x which has requires_grad&#x3D;True. These are a">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-03T18:58:00.000Z">
+<meta property="article:modified_time" content="2020-04-12T11:31:53.851Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://www.chenzhiheng.cn/2020/04/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge_2020/%E8%A7%A3%E9%87%8Apytorch%E4%B8%AD%E7%9A%84%E6%AF%8F%E8%BD%AE%E8%BF%AD%E4%BB%A3%E8%AE%AD%E7%BB%83%EF%BC%8C%E6%9B%B4%E6%96%B0%E5%8F%82%E6%95%B0W%E7%9A%84%E8%BF%87%E7%A8%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>解释pytorch中的每轮迭代训练，更新参数W的过程 | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2020/04/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge_2020/%E8%A7%A3%E9%87%8Apytorch%E4%B8%AD%E7%9A%84%E6%AF%8F%E8%BD%AE%E8%BF%AD%E4%BB%A3%E8%AE%AD%E7%BB%83%EF%BC%8C%E6%9B%B4%E6%96%B0%E5%8F%82%E6%95%B0W%E7%9A%84%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          解释pytorch中的每轮迭代训练，更新参数W的过程
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-04 02:58:00" itemprop="dateCreated datePublished" datetime="2020-04-04T02:58:00+08:00">2020-04-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-12 19:31:53" itemprop="dateModified" datetime="2020-04-12T19:31:53+08:00">2020-04-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-knowledge-2020/" itemprop="url" rel="index">
+                    <span itemprop="name">c数据科学/czh_机器学习/knowledge_2020</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge_2020/%E8%A7%A3%E9%87%8Apytorch%E4%B8%AD%E7%9A%84%E6%AF%8F%E8%BD%AE%E8%BF%AD%E4%BB%A3%E8%AE%AD%E7%BB%83%EF%BC%8C%E6%9B%B4%E6%96%B0%E5%8F%82%E6%95%B0W%E7%9A%84%E8%BF%87%E7%A8%8B/" class="post-meta-item leancloud_visitors" data-flag-title="解释pytorch中的每轮迭代训练，更新参数W的过程" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2020年4月4日 下午2:58</p>
+<h3 id="解释pytorch三个内置函数的功能："><a href="#解释pytorch三个内置函数的功能：" class="headerlink" title="解释pytorch三个内置函数的功能："></a>解释pytorch三个内置函数的功能：</h3><p><a href="https://discuss.pytorch.org/t/what-does-the-backward-function-do/9944" target="_blank" rel="noopener">What does the backward() function do? - autograd - PyTorch Forums</a></p>
+<ol>
+<li><strong>loss.backward()</strong> computes dloss/dx for every parameter x which has requires_grad=True. These are accumulated into x.grad for every parameter x. In pseudo-code:<ul>
+<li>x.grad += dloss/dx</li>
+</ul>
+</li>
+<li><strong>optimizer.step</strong> updates the value of x using the gradient x.grad. For example, the SGD optimizer performs:<ul>
+<li>x += -lr * x.grad</li>
+</ul>
+</li>
+<li><strong>optimizer.zero_grad()</strong> clears x.grad for every parameter x in the optimizer. It’s important to call this before loss.backward(), otherwise you’ll accumulate the gradients from multiple passes.</li>
+<li>If you have <strong>multiple losses (loss1, loss2)</strong> you can sum them and then call backwards once:<ul>
+<li>loss3 = loss1 + loss2</li>
+<li>loss3.backward()</li>
+</ul>
+</li>
+</ol>
+<h4 id="重要"><a href="#重要" class="headerlink" title="重要"></a>重要</h4><ol>
+<li>在每轮训练的过程中，其实还是<strong>数学结论的代码实现</strong>，代码只负责数学的结论，不体现你在稿纸上的推理结论过程</li>
+<li>在每轮训练的过程中尝试问自己一个问题？<ol>
+<li><strong>为什么 x += -lr * x.grad 就可以让W越来越接近正确的结果？</strong><ul>
+<li>这里的x，其实写成 w += -lr * w.grad，我觉得更加正确，loss函数的自变量应该是w，而不是样本x，样本应该是已知量。</li>
+<li>首先需要认识到这是一个从数学推导出来的结论，这个推导过程叫做SGD(梯度下降)，这个loss就是f(w)，在SGD中我们对他进行了泰勒展开，得出了更新w的结论w += -lr * w.grad</li>
+</ul>
+</li>
+<li>这个问题必须得问出来，否则犯了一个本末倒置的问题<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"><span class="comment"># Assuming we know that the desired function is a polynomial of 2nd degree, we</span></span><br><span class="line"><span class="comment"># allocate a vector of size 3 to hold the coefficients and initialize it with</span></span><br><span class="line"><span class="comment"># random noise.</span></span><br><span class="line">w = torch.tensor(torch.randn([<span class="number">3</span>, <span class="number">1</span>]), requires_grad=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># We use the Adam optimizer with learning rate set to 0.1 to minimize the loss.</span></span><br><span class="line">opt = torch.optim.Adam([w], <span class="number">0.1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">model</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="comment"># We define yhat to be our estimate of y.</span></span><br><span class="line">    f = torch.stack([x * x, x, torch.ones_like(x)], <span class="number">1</span>)</span><br><span class="line">    yhat = torch.squeeze(f @ w, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> yhat</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">compute_loss</span><span class="params">(y, yhat)</span>:</span></span><br><span class="line">    <span class="comment"># The loss is defined to be the mean squared error distance between our</span></span><br><span class="line">    <span class="comment"># estimate of y and its true value. </span></span><br><span class="line">    loss = torch.nn.functional.mse_loss(yhat, y)</span><br><span class="line">    <span class="keyword">return</span> loss</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">generate_data</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># Generate some training data based on the true function</span></span><br><span class="line">    x = torch.rand(<span class="number">100</span>) * <span class="number">20</span> - <span class="number">10</span></span><br><span class="line">    y = <span class="number">5</span> * x * x + <span class="number">3</span></span><br><span class="line">    <span class="keyword">return</span> x, y</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_step</span><span class="params">()</span>:</span></span><br><span class="line">    x, y = generate_data()</span><br><span class="line"></span><br><span class="line">    yhat = model(x)</span><br><span class="line">    loss = compute_loss(y, yhat)</span><br><span class="line"></span><br><span class="line">    opt.zero_grad()</span><br><span class="line">    loss.backward()</span><br><span class="line">    opt.step()</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    train_step()</span><br><span class="line"></span><br><span class="line">print(w.detach().numpy())</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/10%E9%81%93%E5%A4%A7%E5%8E%82%E9%9D%A2%E8%AF%95%E5%BF%85%E8%80%83%E9%A2%98/" rel="prev" title="10道大厂面试必考题">
+      <i class="fa fa-chevron-left"></i> 10道大厂面试必考题
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge_2020/pytorch%20tensorflow%E6%95%99%E7%A8%8B%EF%BC%9A/" rel="next" title="pytorch tensorflow教程：">
+      pytorch tensorflow教程： <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解释pytorch三个内置函数的功能："><span class="nav-number">1.</span> <span class="nav-text">解释pytorch三个内置函数的功能：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#重要"><span class="nav-number">1.1.</span> <span class="nav-text">重要</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1173</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">17:45</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '7ba85cfc4b6d442c3c599626b57b3c47',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
