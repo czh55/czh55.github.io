@@ -158,124 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/25/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%88%86%E6%AE%B5%E9%94%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/25/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%88%86%E6%AE%B5%E9%94%81/" class="post-title-link" itemprop="url">并发容器中的分段锁</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-25 12:53:00" itemprop="dateCreated datePublished" datetime="2019-03-25T12:53:00+08:00">2019-03-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/java并发</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/03/25/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%88%86%E6%AE%B5%E9%94%81/" class="post-meta-item leancloud_visitors" data-flag-title="并发容器中的分段锁" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>448</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年3月25日 下午12:53<br><a href="https://cloud.tencent.com/developer/article/1150780" target="_blank" rel="noopener">分段锁的原理 - 云+社区 - 腾讯云</a></p>
-<h3 id="独占锁-串行化的缺点："><a href="#独占锁-串行化的缺点：" class="headerlink" title="独占锁-串行化的缺点："></a>独占锁-串行化的缺点：</h3><ol>
-<li>在并发程序中，串行操作是会降低可伸缩性，并且上下文切换也会减低性能。</li>
-<li>在锁上发生竞争时将通水导致这两种问题，使用<strong>独占锁</strong>时保护受限资源的时候，基本上是采用<strong>串行方式—-每次只能有一个线程能访问它</strong>。 </li>
-<li><em>所以对于可伸缩性来说最大的威胁就是独占锁。</em></li>
-</ol>
-<h3 id="降低锁的竞争程度的三种方式："><a href="#降低锁的竞争程度的三种方式：" class="headerlink" title="降低锁的竞争程度的三种方式："></a>降低锁的竞争程度的三种方式：</h3><ol>
-<li>减少锁的持有时间 </li>
-<li>降低锁的请求频率 </li>
-<li>使用带有协调机制的独占锁，这些机制允许更高的并发性。</li>
-</ol>
-<h3 id="独占锁："><a href="#独占锁：" class="headerlink" title="独占锁："></a>独占锁：</h3><ol>
-<li>在某些情况下我们可以将锁分解技术进一步扩展为一组独立对象上的锁进行分解，这成为<strong>分段锁</strong>。</li>
-<li>原理：<ol>
-<li>其实说的简单一点就是：<strong>容器里有多把锁，每一把锁用于锁容器其中一部分数据，那么当多线程访问容器里不同数据段的数据时，线程间就不会存在锁竞争</strong>，从而可以有效的提高并发访问效率，</li>
-</ol>
-</li>
-<li>eg:<ol>
-<li>这就是ConcurrentHashMap所使用的锁分段技术，首先将数据分成一段一段的存储，然后给每一段数据配一把锁，当一个线程占用锁访问其中一个段数据的时候，其他段的数据也能被其他线程访问。</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/25/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%AE%B9%E5%99%A8%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84%E5%8C%BA%E5%88%AB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1285,6 +1167,141 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/19/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/leetcode/%E9%A2%98%E7%9B%AE/%E7%AC%AC1%E5%91%A8%EF%BC%9A%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/19/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/leetcode/%E9%A2%98%E7%9B%AE/%E7%AC%AC1%E5%91%A8%EF%BC%9A%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E7%AF%87/" class="post-title-link" itemprop="url">第1周：数值计算篇</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-19 09:51:00" itemprop="dateCreated datePublished" datetime="2019-03-19T09:51:00+08:00">2019-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-leetcode-%E9%A2%98%E7%9B%AE/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_算法/leetcode/题目</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/03/19/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/leetcode/%E9%A2%98%E7%9B%AE/%E7%AC%AC1%E5%91%A8%EF%BC%9A%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E7%AF%87/" class="post-meta-item leancloud_visitors" data-flag-title="第1周：数值计算篇" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年3月19日 上午9:51</p>
+<h3 id="针对的问题以及要达到的目的："><a href="#针对的问题以及要达到的目的：" class="headerlink" title="针对的问题以及要达到的目的："></a>针对的问题以及要达到的目的：</h3><ol>
+<li>数值计算，我并没有按网上的教程以及一些书的目录的步骤去学习算法，他们很多都是从堆栈开始讲起的。</li>
+<li>我认为这样不好的原因：<ol>
+<li><strong>目的性不强，这样会导致学习效率低下，并且会很快忘记。</strong></li>
+</ol>
+</li>
+<li>我的做法：<ol>
+<li>结合当前的切实问题和需要来针对性的练习</li>
+</ol>
+</li>
+</ol>
+<h3 id="主要参考文章："><a href="#主要参考文章：" class="headerlink" title="主要参考文章："></a>主要参考文章：</h3><ol>
+<li><a href="https://blog.csdn.net/linhuanmars/article/details/38771593" target="_blank" rel="noopener">LeetCode总结 — 数值计算篇 - Code Ganker - CSDN博客</a><ol>
+<li><a href="http://www.cnblogs.com/grandyang/p/4125588.html" target="_blank" rel="noopener">LeetCode Reverse Integer 翻转整数 - Grandyang - 博客园</a></li>
+<li><a href="https://blog.csdn.net/linhuanmars/article/details/20024837" target="_blank" rel="noopener">Reverse Integer — LeetCode - Code Ganker - CSDN博客</a></li>
+</ol>
+</li>
+</ol>
+<h2 id="链接："><a href="#链接：" class="headerlink" title="链接："></a>链接：</h2><ol>
+<li><a href="https://leetcode.com/problems/reverse-integer/description/" target="_blank" rel="noopener">Reverse Integer - LeetCode</a></li>
+<li><a href="https://leetcode.com/problems/palindrome-number/description/" target="_blank" rel="noopener">Palindrome Number - LeetCode</a></li>
+<li><a href="https://leetcode.com/problems/sqrtx/description/" target="_blank" rel="noopener">Sqrt(x) - LeetCode</a></li>
+<li><a href="https://leetcode.com/problems/powx-n/description/" target="_blank" rel="noopener">Pow(x, n) - LeetCode</a></li>
+</ol>
+<h2 id="详情："><a href="#详情：" class="headerlink" title="详情："></a>详情：</h2><ol>
+<li><p><a href="https://leetcode.com/problems/reverse-integer/description/" target="_blank" rel="noopener">Reverse Integer - LeetCode</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">reverse</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//考虑可以溢出:1000*0009</span></span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        <span class="comment">//负数转正数</span></span><br><span class="line">        <span class="keyword">int</span> neg = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(x&lt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="comment">//排除：-128~127中的-128去反128就直接溢出了</span></span><br><span class="line">            <span class="keyword">if</span>(x == (<span class="number">-1</span>*INT_MAX <span class="number">-1</span>)) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            </span><br><span class="line">            x *= <span class="number">-1</span>;</span><br><span class="line">            neg = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//反转</span></span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> rev=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(x&gt;<span class="number">0</span>)&#123;</span><br><span class="line">            rev = rev*<span class="number">10</span> + x%<span class="number">10</span>;<span class="comment">//赋值的过程都可能溢出，所以要检验</span></span><br><span class="line">            <span class="keyword">if</span>(rev &gt; INT_MAX)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            x = x/<span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//检验溢出</span></span><br><span class="line">        <span class="keyword">if</span>(rev &gt; INT_MAX)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(neg)&#123;</span><br><span class="line">            <span class="keyword">return</span> -rev;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> rev;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://leetcode.com/problems/palindrome-number/description/" target="_blank" rel="noopener">Palindrome Number - LeetCode</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//考虑负数</span></span><br><span class="line">        <span class="keyword">if</span>(x&lt;<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">int</span> div = x;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> ten = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//统计长度index</span></span><br><span class="line">        <span class="keyword">while</span>(div &gt;= <span class="number">10</span>)&#123;</span><br><span class="line">            div = div/<span class="number">10</span>;</span><br><span class="line">            index++;</span><br><span class="line">            <span class="comment">//计算倍数</span></span><br><span class="line">            ten *= <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;index&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="comment">//首尾进行比较</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i &lt;= index/<span class="number">2</span> ; i++)&#123;</span><br><span class="line">            <span class="comment">//取首</span></span><br><span class="line">            <span class="keyword">int</span> <span class="built_in">begin</span> = x/ten;</span><br><span class="line">            <span class="built_in">begin</span> = <span class="built_in">begin</span>%<span class="number">10</span>;</span><br><span class="line">            ten /= <span class="number">10</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">int</span> <span class="built_in">end</span>;</span><br><span class="line">            <span class="comment">//计算倍数</span></span><br><span class="line">            <span class="keyword">int</span> k = i;</span><br><span class="line">            <span class="keyword">int</span> temp=<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">while</span>(k--)&#123;</span><br><span class="line">                temp*=<span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//取尾</span></span><br><span class="line">            <span class="built_in">end</span> = x/(temp);</span><br><span class="line">            <span class="built_in">end</span> = <span class="built_in">end</span>%<span class="number">10</span>;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">//cout&lt;&lt;begin&lt;&lt;" "&lt;&lt;end &lt;&lt;" "&lt;&lt;i&lt;&lt;endl;</span></span><br><span class="line">            <span class="comment">//比较</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="built_in">begin</span> != <span class="built_in">end</span>) <span class="keyword">return</span> <span class="literal">false</span>;          </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://leetcode.com/problems/sqrtx/description/" target="_blank" rel="noopener">Sqrt(x) - LeetCode</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">mySqrt</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//变成二分搜索问题</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(x == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(x == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> <span class="built_in">begin</span>=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> <span class="built_in">end</span>=x;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> mid = (<span class="built_in">begin</span>+<span class="built_in">end</span>)/<span class="number">2</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">begin</span> &lt;= <span class="built_in">end</span>)&#123;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">long</span> <span class="keyword">long</span> temp = mid*mid;</span><br><span class="line">            <span class="keyword">if</span>(temp == x)&#123;</span><br><span class="line">                <span class="keyword">return</span> mid;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(temp &gt; x)&#123;</span><br><span class="line">                <span class="built_in">end</span> = mid;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(temp &lt; x)&#123;</span><br><span class="line">                <span class="keyword">if</span>((mid+<span class="number">1</span>)*(mid+<span class="number">1</span>) &gt; x)&#123;</span><br><span class="line">                    <span class="keyword">return</span> mid;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="built_in">begin</span> = mid;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            mid = (<span class="built_in">begin</span>+<span class="built_in">end</span>)/<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://leetcode.com/problems/powx-n/description/" target="_blank" rel="noopener">Pow(x, n) - LeetCode</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">没过的例子：</span></span><br><span class="line"><span class="comment">1.00000</span></span><br><span class="line"><span class="comment">-2147483648</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Input</span></span><br><span class="line"><span class="comment">34.00515</span></span><br><span class="line"><span class="comment">-3</span></span><br><span class="line"><span class="comment">Output</span></span><br><span class="line"><span class="comment">0.00086</span></span><br><span class="line"><span class="comment">Expected</span></span><br><span class="line"><span class="comment">3e-05</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">2</span></span><br><span class="line"><span class="comment">-1</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">double</span> <span class="title">myPow</span><span class="params">(<span class="keyword">double</span> x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> x;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">int</span> flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> n_2= n;</span><br><span class="line">        <span class="keyword">if</span>(n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">            flag = <span class="number">1</span>;</span><br><span class="line">            n_2 *= <span class="number">-1</span>;<span class="comment">//-2147483648去反会溢出</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">double</span> temp = myPow(x,n_2/<span class="number">2</span>);</span><br><span class="line">        <span class="keyword">if</span>(n_2%<span class="number">2</span> == <span class="number">1</span>)&#123;</span><br><span class="line">            temp= temp*temp*x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            temp= temp*temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;flag&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">if</span>(flag == <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>/temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> temp;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1355,7 +1372,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1173</span>
+          <span class="site-state-item-count">1172</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

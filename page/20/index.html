@@ -158,119 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/11/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%EF%BC%9A%E5%8E%9F%E7%90%86+%E6%B8%85%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%EF%BC%9A%E5%8E%9F%E7%90%86+%E6%B8%85%E7%90%86/" class="post-title-link" itemprop="url">僵尸进程：原理+清理</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-11 08:10:00" itemprop="dateCreated datePublished" datetime="2019-11-11T08:10:00+08:00">2019-11-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/11/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%EF%BC%9A%E5%8E%9F%E7%90%86+%E6%B8%85%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="僵尸进程：原理+清理" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>748</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年11月11日 下午8:10<br><a href="https://blog.51cto.com/jiemian/1852698" target="_blank" rel="noopener">linux 如何清理僵尸进程-毛虫臭臭-51CTO博客</a></p>
-<h3 id="僵尸进程如何产生的？"><a href="#僵尸进程如何产生的？" class="headerlink" title="僵尸进程如何产生的？"></a>僵尸进程如何产生的？</h3><ol>
-<li>如果一个进程在其终止的时候，自己就回收所有分配给它的资源，系统就不会产生所谓的僵尸进程了。那么我们说一个进程终止之后，还保留哪些信息？为什么终止之后还需要保留这些信息呢？</li>
-<li>一个进程终止的方法很多，进程终止后有些信息对于父进程和内核还是很有用的，例如进程的ID号、进程的退出状态、进程运行的CPU时间等。因此进程在终止时，回收所有内核分配给它的内存、关闭它打开的所有文件等等，<strong>但是还会保留以上极少的信息，以供父进程使用</strong>。父进程可以使用 wait/waitpid 等系统调用来为子进程收拾，做一些收尾工作。</li>
-<li>因此，<strong>一个僵尸进程产生的过程是</strong>：父进程调用fork创建子进程后，子进程运行直至其终止，它立即从内存中移除，但进程描述符仍然保留在内存中（进程描述符占有极少的内存空间）。子进程的状态变成EXIT_ZOMBIE，并且向父进程发送<strong>SIGCHLD</strong> 信号，父进程此时应该调用 wait() 系统调用来获取子进程的退出状态以及其它的信息。在 wait 调用之后，僵尸进程就完全从内存中移除。因此一个僵尸存在于其终止到父进程调用 wait 等函数这个时间的间隙，一般很快就消失，但如果编程不合理，父进程从不调用 wait 等系统调用来收集僵尸进程，那么这些进程会一直存在内存中。</li>
-</ol>
-<h3 id="清理僵尸进程："><a href="#清理僵尸进程：" class="headerlink" title="清理僵尸进程："></a>清理僵尸进程：</h3><ol>
-<li>cut版<ul>
-<li><code>ps -e -o ppid,stat | grep Z | cut -d” ” -f1 | xargs kill -9</code></li>
-</ul>
-</li>
-<li>awk版<ul>
-<li><code>kill -HUP ’ps -A -ostat,ppid | grep -e ‘^[Zz]’ | awk ‘{print $2}’’</code></li>
-</ul>
-</li>
-</ol>
-<p>其他：清理<code>ps aux | grep par_crop.py| awk &#39;{print$2}&#39; | xargs kill -9</code></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/11/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/ps/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1305,6 +1192,144 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/11/08/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E7%AC%AC%E5%85%AB%E8%AF%BE%EF%BC%9Apandas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/08/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E7%AC%AC%E5%85%AB%E8%AF%BE%EF%BC%9Apandas/" class="post-title-link" itemprop="url">第八课：pandas</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-08 05:33:00" itemprop="dateCreated datePublished" datetime="2019-11-08T05:33:00+08:00">2019-11-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-python-%E8%AF%AD%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">c数据科学/czh_python/语法</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/11/08/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E7%AC%AC%E5%85%AB%E8%AF%BE%EF%BC%9Apandas/" class="post-meta-item leancloud_visitors" data-flag-title="第八课：pandas" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>494</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年11月8日 下午5:33<br><a href="https://blog.csdn.net/albertolin/article/details/98476495" target="_blank" rel="noopener">Python：pandas DataFrame取多列的方法</a></p>
+<ul>
+<li>选择表格中的’w’、’z’列<ul>
+<li>data[[‘w’,’z’]]</li>
+</ul>
+</li>
+</ul>
+<p>2018年1月8日 下午5:33</p>
+<h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><p><a href="class8.html">class8.html</a></p>
+<h2 id="主要内容："><a href="#主要内容：" class="headerlink" title="主要内容："></a>主要内容：</h2><ol>
+<li><strong>两种数据类型（主）</strong><ol>
+<li>Series<ol>
+<li>生成：<ol>
+<li>list</li>
+<li>字典</li>
+</ol>
+</li>
+<li>特殊住处在于<strong>对索引有很多操作</strong>，我把他和数据操作对比，叫做结构操作</li>
+<li>还可以有更加任性的切片操作</li>
+</ol>
+</li>
+<li>DataFrame<ol>
+<li>生成：<ol>
+<li>字典中包含list来生成</li>
+<li>numpy的narry生成</li>
+</ol>
+</li>
+<li><strong>大部分是对对整列/整行进行操作</strong></li>
+<li>特殊之处在于可以向Sql一样操作</li>
+</ol>
+</li>
+<li><strong>其实就是一维数组/二维数组的增删改查</strong></li>
+</ol>
+</li>
+<li>pandas画图</li>
+<li>数据分析例题</li>
+</ol>
+<h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><ol>
+<li><strong>数据处理</strong>：这门知识我本身是不熟悉的，我从来没有进行过数据处理，这种处理能力的源头是对数学的敏感，以及对数学知识的掌握，掌握编程相比于掌握数学要简单的多</li>
+<li>要<strong>先站在现实的角度去思考问题</strong>，然后才是动手编程。这里的<strong>先站在现实的角度去思考问题</strong>中要加上<strong>从数学统计的角度去思考问题</strong>，这种思考又对我们提出了新的要求</li>
+<li>数据分析=机器学习：在这节最后的例题“泰坦尼克号”中，在<strong>预测缺失年龄</strong>的过程中就是使用了及机器学习。但是，我不懂得原理，参数也不知道是啥</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1375,7 +1400,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1173</span>
+          <span class="site-state-item-count">1172</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

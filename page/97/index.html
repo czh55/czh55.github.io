@@ -158,107 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">LCD + ADC + 触摸屏 +I2C原理</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-09 08:36:00" itemprop="dateCreated datePublished" datetime="2018-02-09T08:36:00+08:00">2018-02-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_arm</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="LCD + ADC + 触摸屏 +I2C原理" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>66</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月9日 下午8:36</p>
-<p>注：这篇文章只是想了解一下大致的硬件原理就行。</p>
-<h3 id="LCD硬件原理："><a href="#LCD硬件原理：" class="headerlink" title="LCD硬件原理："></a>LCD硬件原理：</h3><p><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/002_S3C2440_LCD%E6%8E%A7%E5%88%B6%E5%99%A8.jpg" alt></p>
-<h3 id="ADC和触摸屏硬件原理："><a href="#ADC和触摸屏硬件原理：" class="headerlink" title="ADC和触摸屏硬件原理："></a>ADC和触摸屏硬件原理：</h3><p><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/003_S3C2440%E8%A7%A6%E6%91%B8%E5%B1%8F%E6%8E%A5%E5%8F%A3.jpg" alt></p>
-<h2 id="I2C硬件原理："><a href="#I2C硬件原理：" class="headerlink" title="I2C硬件原理："></a>I2C硬件原理：</h2><p><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/001_I2C%E5%8D%8F%E8%AE%AE%E4%B8%8EEEPROM.jpg" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/arm%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E8%AE%BE%E8%AE%A1%EF%BC%88%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1293,6 +1192,120 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E6%95%B4%E4%BD%93%E4%B8%8A%E5%8E%BB%E7%90%86%E8%A7%A32440%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E6%95%B4%E4%BD%93%E4%B8%8A%E5%8E%BB%E7%90%86%E8%A7%A32440%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">整体上去理解2440结构</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-02 03:34:00" itemprop="dateCreated datePublished" datetime="2018-02-02T03:34:00+08:00">2018-02-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_arm</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E6%95%B4%E4%BD%93%E4%B8%8A%E5%8E%BB%E7%90%86%E8%A7%A32440%E7%BB%93%E6%9E%84/" class="post-meta-item leancloud_visitors" data-flag-title="整体上去理解2440结构" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>352</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月2日 下午3:34</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
+<li>内存管理器(memory control)有两个能力：<ol>
+<li>通过地址<strong>选择</strong>不同的 <em>寄存器</em></li>
+<li>通过地址<strong>选择</strong>不同的 <em>片选</em></li>
+</ol>
+</li>
+<li>从外接芯片有无地址线，来分类不同的<strong>外接设备</strong><ol>
+<li>有地址线——&gt;”类内存”设备</li>
+<li>无地址线——&gt;GPIO高低位输出/入，UART通讯类，Nand硬盘类</li>
+</ol>
+</li>
+<li><strong>共用</strong>的好处/劣势：节省空间，但复杂度高，导致出现<strong>片选</strong>功能</li>
+<li>对于<strong>GPIO</strong>来说：<strong>控制高低电平的方式是寄存器中的0/1</strong>，原理我们不知道</li>
+<li>对于<strong>UART</strong>来说：如何将数据显示在屏幕，其实我们是不知道的，我们知道到将值放入到一个寄存器中，<strong>这个值好像就神奇的显示在屏幕了</strong>，原理我们不用管</li>
+<li>对于<strong>键盘点亮LED</strong>（代码6)来说：我们代码检测亮/不亮的标准，就是单GPFDAT寄存器的值，<strong>从我们按键到GPFDAT寄存器的值发生改变这一过程我们是不知道的</strong></li>
+</ol>
+<p><img src="/2018/02/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E6%95%B4%E4%BD%93%E4%B8%8A%E5%8E%BB%E7%90%86%E8%A7%A32440%E7%BB%93%E6%9E%84/IMG_7687.JPG" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1363,7 +1376,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1173</span>
+          <span class="site-state-item-count">1172</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

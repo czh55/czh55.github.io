@@ -158,104 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" class="post-title-link" itemprop="url">SQL的执行顺序</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-30 07:22:00" itemprop="dateCreated datePublished" datetime="2017-08-30T07:22:00+08:00">2017-08-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" class="post-meta-item leancloud_visitors" data-flag-title="SQL的执行顺序" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>70</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#web开发/czh_blog/数据库<br>2017年8月30日 上午7:22</p>
-<p><a href="http://www.cnblogs.com/qanholas/archive/2010/10/24/1859924.html" target="_blank" rel="noopener">sql执行顺序</a><br><a href="http://transcoder.baiducontent.com/from=844b/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%401320_2001%2Cta%40iphone_1_10.3_3_603/baiduid=9F648DF39E2DD01FB019A79FEEA58865/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&lid=13438957229324129736&order=1&fm=alhm&h5ad=1&srd=1&dict=32&tj=h5_mobile_1_0_10_title&w_qd=IlPT2AEptyoA_yimDUwc-hCuEEBPbWAprD1Xj3bQsxM7Uec5Q6e&sec=23592&di=be52f61a795b881e&bdenc=1&tch=124.100.37.200.0.0&nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRAVW_fAijCZpPPtCPQpxoJw8yh_mIskNYWgK&eqid=ba80c465bd8858001000000159a605c0&wd=&clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22h5_mobile%22%2C%22t%22%3A1504052679517%2C%22sig%22%3A%227017%22%2C%22xpath%22%3A%22div-a-h3%22%7D" target="_blank" rel="noopener">SQL嵌套子查询和相关子查询的执行过程有什么区别(推荐) </a><br><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/BD09960A-6366-46CE-97D9-6A419479C5AE.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/ORCALE%20SQL%E8%AF%AD%E6%B3%95%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1447,6 +1349,154 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/" class="post-title-link" itemprop="url">ThinkPHP源码分析（核心）-7</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-23 10:57:00" itemprop="dateCreated datePublished" datetime="2017-08-23T10:57:00+08:00">2017-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_blog/PHP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析（核心）-7" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>880</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年8月23日 上午10:57</p>
+<h2 id="TP中的一个特点"><a href="#TP中的一个特点" class="headerlink" title="TP中的一个特点"></a>TP中的一个特点</h2><ol>
+<li><p>TP执行过程中很大部分都是<strong>环境的配置</strong>，这里要<strong>组织各种不同位置、不同作用的文件</strong>。那么，如何组织他们之间的工作其实也是一个大工程，就好像一个公司，<strong>boss需要思考</strong>自己需要哪些职位、各个职位他们之间如何协作、如何调节他们之间的关系、出现冲突如何处理、如何处理人员的流动（CBD模式）</p>
+</li>
+<li><p>这个的环境配置不仅仅是各种<strong>数组配置文件（define,static）</strong></p>
+</li>
+<li><p>还有各种<strong>类加载（include)</strong>，类加载之后是为了可以直接使用他们的方法</p>
+</li>
+<li><p>这里说是为了说明方法的来源，<strong>我以前目光里只有配置文件</strong></p>
+</li>
+</ol>
+<h2 id="TP中函数的特点、及它引出的深层思考"><a href="#TP中函数的特点、及它引出的深层思考" class="headerlink" title="TP中函数的特点、及它引出的深层思考"></a>TP中函数的特点、及它引出的深层思考</h2><ol>
+<li><p>TP中<strong>单个函数却要执行多个功能</strong>，这中情况还不少</p>
+</li>
+<li><p>这就导致的他的函数会有很多的判断，这样不仅加大了自己设计代码时的难度，让读的人也不舒服</p>
+</li>
+<li><p>但是，这样做的好处就是让上层使用更加方便</p>
+</li>
+<li><p>各有利弊吧</p>
+</li>
+<li><p><strong>还有另一种情形：</strong></p>
+</li>
+<li><p>就是其实功能说起来也很简单，让我实现的话也觉得不难</p>
+</li>
+<li><p>但是，当你去看他函数写的实现过程时，各种判断，绕来绕去，觉得麻烦</p>
+</li>
+<li><p>当然，这样麻烦不是由于人家水平不行，而是由于<strong>要站在一个框架的高度去思考</strong>，它自然就复杂了</p>
+</li>
+<li><p>我们思考的时候都是<strong>单一情景下的，而框架中的情景太多，那么，自然会让一个功能的实现过程变得复杂，需要各种判断、处理</strong></p>
+</li>
+<li><p>这就是<strong>框架设计者设计的核心</strong>，在开工之前需要进行严密的思考。</p>
+</li>
+<li><p><strong>理清各种情景，各种情景之间的关系</strong></p>
+</li>
+<li><p>这也是各个框架最不同、最有价值的地方</p>
+</li>
+<li><p>像老师说的看一个<strong>string类</strong>等是怎样实现的，这些其实都是<strong>框架的皮毛</strong>了</p>
+</li>
+</ol>
+<p>最后：<strong>看框架的人，最高境界就是能理清楚上面说的，能够画出他们之间的逻辑关系图</strong></p>
+<p>到现在为止我就把TP一个应用的启动过程看完了，没完成的有</p>
+<ol>
+<li>TP的core代码，在Library/Think目录下的那些.php文件<ol>
+<li>我只粗略的看了看Hook.class.php，Dispatcher.class.php</li>
+</ol>
+</li>
+<li>在 <a href="bear://x-callback-url/open-note?id=29F62E49-0E3B-40CE-98F0-DCC5C69E67DE-2779-000009EC0DA8F32F">ThinkPHP源码分析-2</a>中关于View的一些东西我没有看，这个其实很关键的，但是没时间了<ol>
+<li><a href="http://www.daydaytc.com/php/142.html" target="_blank" rel="noopener">Thinkphp源码分析系列（七）–控制器基类-TC部落</a></li>
+<li><a href="http://www.daydaytc.com/php/206.html" target="_blank" rel="noopener">Thinkphp源码分析系列（九）–视图view类-TC部落</a><br><img src="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/1B8462AB-C0AE-4F49-8BA8-078CAA355211.png" alt></li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1517,7 +1567,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1173</span>
+          <span class="site-state-item-count">1172</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

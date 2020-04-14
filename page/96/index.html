@@ -158,109 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/" class="post-title-link" itemprop="url">更改centos镜像源</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-19 10:23:00" itemprop="dateCreated datePublished" datetime="2018-02-19T10:23:00+08:00">2018-02-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/" class="post-meta-item leancloud_visitors" data-flag-title="更改centos镜像源" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>320</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月19日 下午10:23</p>
-<p>操作步骤：<a href="http://mirrors.aliyun.com/help/centos" target="_blank" rel="noopener">centos</a> </p>
-<h2 id="出错的步骤："><a href="#出错的步骤：" class="headerlink" title="出错的步骤："></a>出错的步骤：</h2><p><img src="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/0FCBD8D4-ED0B-4CD2-B7A7-56D5732D2F29.png" alt></p>
-<h2 id="出现的两个问题："><a href="#出现的两个问题：" class="headerlink" title="出现的两个问题："></a>出现的两个问题：</h2><p>问题一：设置当前用户权限为ALL<br><a href="https://jingyan.baidu.com/article/49ad8bce77a0365834d8fa95.html" target="_blank" rel="noopener">centos普通用户设置sudo权限_百度经验</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 developer]$ su -</span><br><span class="line">Password: </span><br><span class="line">[root@centos6 ~]# </span><br><span class="line">[root@centos6 ~]# visudo</span><br><span class="line">[root@centos6 ~]# visudo</span><br><span class="line">visudo: &#x2F;etc&#x2F;sudoers.tmp unchanged</span><br><span class="line">[root@centos6 ~]# visudo</span><br><span class="line">[root@centos6 ~]# exit</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/FED5D179-1626-4A79-BAFC-FB260DF00413.png" alt></p>
-<p>问题二：<br>wget: unable to resolve host address<br>我的解决方法是：修改虚拟机网络配置<br><img src="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/08637ED0-9E75-4D72-93C7-429B55D56600.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/14/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/%E7%99%BE%E5%BA%A6%E4%BA%91%E8%B5%84%E6%96%99%EF%BC%88151351%E2%80%A6..%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1321,6 +1218,107 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">LCD + ADC + 触摸屏 +I2C原理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-09 08:36:00" itemprop="dateCreated datePublished" datetime="2018-02-09T08:36:00+08:00">2018-02-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_arm</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="LCD + ADC + 触摸屏 +I2C原理" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>66</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月9日 下午8:36</p>
+<p>注：这篇文章只是想了解一下大致的硬件原理就行。</p>
+<h3 id="LCD硬件原理："><a href="#LCD硬件原理：" class="headerlink" title="LCD硬件原理："></a>LCD硬件原理：</h3><p><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/002_S3C2440_LCD%E6%8E%A7%E5%88%B6%E5%99%A8.jpg" alt></p>
+<h3 id="ADC和触摸屏硬件原理："><a href="#ADC和触摸屏硬件原理：" class="headerlink" title="ADC和触摸屏硬件原理："></a>ADC和触摸屏硬件原理：</h3><p><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/003_S3C2440%E8%A7%A6%E6%91%B8%E5%B1%8F%E6%8E%A5%E5%8F%A3.jpg" alt></p>
+<h2 id="I2C硬件原理："><a href="#I2C硬件原理：" class="headerlink" title="I2C硬件原理："></a>I2C硬件原理：</h2><p><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/001_I2C%E5%8D%8F%E8%AE%AE%E4%B8%8EEEPROM.jpg" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1391,7 +1389,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1173</span>
+          <span class="site-state-item-count">1172</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

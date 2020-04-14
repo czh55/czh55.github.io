@@ -158,111 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%884%EF%BC%89mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu%E8%A1%A5%E5%85%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%884%EF%BC%89mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu%E8%A1%A5%E5%85%85/" class="post-title-link" itemprop="url">（4）mac连接腾讯云ubuntu补充</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-04 08:28:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:28:00+08:00">2017-09-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%884%EF%BC%89mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu%E8%A1%A5%E5%85%85/" class="post-meta-item leancloud_visitors" data-flag-title="（4）mac连接腾讯云ubuntu补充" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>258</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月4日 上午8:28</p>
-<p><strong>问题：</strong>在 <del>ssh -I 秘钥  用户名@ip</del> 之后一直都是 <del>operation timed out</del><br><strong>原因：</strong>安全组上没有配置好<br><strong>解决：</strong><br><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%884%EF%BC%89mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu%E8%A1%A5%E5%85%85/001XFkONzy7c19WViOk70.jpeg" alt><br>​注意上图可以直接选择linux 开放22端口，腾讯都给我们想好了</p>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%884%EF%BC%89mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu%E8%A1%A5%E5%85%85/001XFkONzy7c1a2QXmYfc.jpeg" alt></p>
-<h3 id="在这个图中展示了，三个问题"><a href="#在这个图中展示了，三个问题" class="headerlink" title="在这个图中展示了，三个问题"></a>在这个图中展示了，三个问题</h3><ol>
-<li>operation timed out   –配置安全组</li>
-<li>the authenticity of hose*to the list of known host–这个是因为我在已存在的安全组中配置开放22端口。原因我不知道，但是正如腾讯所提示的一样，我们最好还是新建一个安全组去配置22端口。</li>
-<li>权限 –常见问题了​​​</li>
-</ol>
-<p>​</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%883%EF%BC%89%E5%9C%A8ubuntu%E4%B8%AD%E9%85%8D%E7%BD%AEphp%E9%A1%B9%E7%9B%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1399,6 +1294,210 @@ scp _path_filename username@servername:/path  </code></pre><h2 id="1：连接数
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">PLSQL（PLSQL语法+存储过程+触发器）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-01 10:36:00" itemprop="dateCreated datePublished" datetime="2017-09-01T10:36:00+08:00">2017-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="PLSQL（PLSQL语法+存储过程+触发器）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年9月1日 上午10:36</p>
+<p>这里知识理解一些概念，有一个基本的认识<br>知道ORACLE支持哪些功能，以后一个功能呢不好做的时候，来这里瞧瞧，看有没有正好能用上额特性</p>
+<h2 id="PLSQL中语法特别的地方"><a href="#PLSQL中语法特别的地方" class="headerlink" title="PLSQL中语法特别的地方"></a>PLSQL中语法特别的地方</h2><p>没有逻辑修饰符：|| &amp;&amp;<br>用这些代替：And or between<br>等号：是:= 不是=<br>没有：++ — —<br>|| 内容拼接 隐式转换成字符串连接</p>
+<h2 id="SQL的高级语言特性PLSQL"><a href="#SQL的高级语言特性PLSQL" class="headerlink" title="SQL的高级语言特性PLSQL"></a>SQL的高级语言特性PLSQL</h2><ol>
+<li>所谓的plsql其实就是：sql编程语言一样编程，有高级语言的特性</li>
+<li>If  switch for loop</li>
+<li>Cursor游标 是专门用来解决表中多条数据的情况<ol>
+<li>这个高级语言中没有，是数据库语言中特有的</li>
+<li>和loop连用</li>
+</ol>
+</li>
+<li>类似stl的数据类型<ol>
+<li>Varray </li>
+<li>table </li>
+<li>record</li>
+</ol>
+</li>
+<li>自定义数据类型<ol>
+<li>type</li>
+</ol>
+</li>
+<li>异常<ol>
+<li>支持自定义抛出异常<ol>
+<li>当在函数和存储过程中抛出异常时，可以在调用函数和存储过程的外面进行异常的处理</li>
+</ol>
+</li>
+<li>支持选择自己处理异常，和oracle系统处理异常<ol>
+<li>当没有写exception段时，默认就是让oracle处理异常</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>package<ol>
+<li>这个就是java中的类，不是java中的包</li>
+<li>可以在package中和java一样定义变量，常量，函数（存储过程+函数）等等</li>
+<li>packages + package body</li>
+<li>如何操作<ol>
+<li>不是java中的先new一个对象，然后用对象调用</li>
+<li>Sql中没有new对象，直接使用package名  点就行了</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="存储过程的构成"><a href="#存储过程的构成" class="headerlink" title="存储过程的构成"></a>存储过程的构成</h3><ol>
+<li>给PLSQL去了个名字方便调用</li>
+<li>存储过程</li>
+<li>传入参数</li>
+<li>传出参数</li>
+</ol>
+<h3 id="为什么要封装成存储过程"><a href="#为什么要封装成存储过程" class="headerlink" title="为什么要封装成存储过程?"></a>为什么要封装成存储过程?</h3><ol>
+<li>封装之后方便传入传出参数 </li>
+<li>匿名块只能在数据库环境中调用 存储过程可以被外界调用(比如JDBC)</li>
+</ol>
+<h3 id="函数与存储过程比较："><a href="#函数与存储过程比较：" class="headerlink" title="函数与存储过程比较："></a>函数与存储过程比较：</h3><ol>
+<li>函数可以看做一类特殊的存储过程 没有输出参数 必有唯一返回值</li>
+<li>删掉输出参数，添加返回值</li>
+<li>存储过程可以完全的实现函数的功能</li>
+</ol>
+<h3 id="如何选择函数与存储过程"><a href="#如何选择函数与存储过程" class="headerlink" title="如何选择函数与存储过程"></a>如何选择函数与存储过程</h3><ol>
+<li>当PL-SQL需要嵌在SQL中使用时用函数<ol>
+<li>就像min() max() count()这些函数</li>
+</ol>
+</li>
+<li>当有多个返回值或者要被其它程序调用时用存储过程</li>
+</ol>
+<p>既然利用PLSQL可以实现高级语言的特性，那么当我们实现一个功能的时候，有哪些不同的、或者值得注意的地方</p>
+<p>需求：利用存储过程查询含有特定信息的学生id<br>思路：</p>
+<ol>
+<li>也就是说这个参数可以是学生姓名，生日，电话号等等信息。在java中我们需要对这个特定信息进行判断，写上一堆if，但是在sql中我直接写在where语句中就行了，就省去了判断的过程</li>
+<li>体现了sql的优势，对比与java语言</li>
+</ol>
+<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><ol>
+<li>使用触发器的环境:<ol>
+<li>业务逻辑是多步骤的 而且可能从任意一个步骤执行  一般用触发器链</li>
+<li>传进来的参数 是一行数据  一般用触发器</li>
+</ol>
+</li>
+<li>有了存储过程  为什么还要用触发器<ol>
+<li>存储过程需要特殊的调用方式</li>
+<li>A -&gt;  B  -&gt;  c -&gt;  D-&gt;    <ol>
+<li>连锁操作的业务逻辑 用触发器,JDBC只要正常的SQL语句</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>触发器要注意的地方 <ol>
+<li>暂时用不到的触发器全部禁用  <ol>
+<li>使用disable</li>
+</ol>
+</li>
+<li>避免逻辑死锁<ol>
+<li>一个trigger就是一个线程</li>
+<li>那么，不说自己的创建的线程，光是系统中默认的操作表的线程就有可能和自己的一个trigger线程产生冲突</li>
+</ol>
+</li>
+<li>尽量避免update触发器中对本表的操作</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p>Sequence 就像一个全局int型变量，他可以一直记录一个变量的值</p>
+<hr>
+<hr>
+<p>百度</p>
+<hr>
+<p><a href="http://blog.csdn.net/caoxiaohong1005/article/details/53433131" target="_blank" rel="noopener">Mac下不用虚拟机一样可以使用PLSQL Developer - iCoding91        - CSDN博客</a></p>
+<p>%符号 理解成“的”</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1469,7 +1568,7 @@ scp _path_filename username@servername:/path  </code></pre><h2 id="1：连接数
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1173</span>
+          <span class="site-state-item-count">1172</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

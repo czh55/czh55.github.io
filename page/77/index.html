@@ -158,105 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">面包屑🍞的实现原理</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-20 05:29:00" itemprop="dateCreated datePublished" datetime="2018-05-20T05:29:00+08:00">2018-05-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/前端</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="面包屑🍞的实现原理" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>44</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年5月20日 下午5:29</p>
-<h2 id="面包屑🍞的实现原理："><a href="#面包屑🍞的实现原理：" class="headerlink" title="面包屑🍞的实现原理："></a>面包屑🍞的实现原理：</h2><p><img src="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/085EDCF3-D745-4B64-95AF-D59ACF5D7436.png" alt><br><img src="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/1D2D7C2B-1EDF-4C7F-9EB2-D9BB6B0A6224.png" alt></p>
-<h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><p><img src="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/334D96B6-AFE8-4AE0-BEFA-D5387B04FF3E.png" alt><br><img src="/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/%E9%9D%A2%E5%8C%85%E5%B1%91%F0%9F%8D%9E%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/4357B998-AFF8-4035-89E5-D3BB7ED196C2.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/05/20/web%E5%BC%80%E5%8F%91/czh_java/%E5%89%8D%E7%AB%AF/Html-webpack-plugin%E7%9A%84%E4%BD%9C%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1180,6 +1081,106 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/05/12/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/@Param()%E7%9B%B8%E5%85%B3%E6%8A%A5%E9%94%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/12/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/@Param()%E7%9B%B8%E5%85%B3%E6%8A%A5%E9%94%99/" class="post-title-link" itemprop="url">Param()相关报错</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-12 08:41:00" itemprop="dateCreated datePublished" datetime="2018-05-12T08:41:00+08:00">2018-05-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/05/12/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/@Param()%E7%9B%B8%E5%85%B3%E6%8A%A5%E9%94%99/" class="post-meta-item leancloud_visitors" data-flag-title="Param()相关报错" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>240</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年5月12日 下午8:41</p>
+<p><strong>在解决问题的同时也明白了@Param()的作用；</strong>:只要是实体类中的属性，我们就必须加上@Param()。不用管它为啥</p>
+<p><strong>报错：</strong>There is no getter for property named ‘sponsorId’ in ‘class java.lang.Integer’</p>
+<p><strong>参考</strong>：<a href="https://blog.csdn.net/fansunion/article/details/43761435" target="_blank" rel="noopener">Mybatis找不到参数错误：There is no getter for property named ‘categoryId’ in ‘class java.lang.Integer’。 - CSDN博客</a><br><img src="/2018/05/12/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/@Param()%E7%9B%B8%E5%85%B3%E6%8A%A5%E9%94%99/50F38329-2FD2-4842-8B23-9B7EDE7F2D36.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1250,7 +1251,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1173</span>
+          <span class="site-state-item-count">1172</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

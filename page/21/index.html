@@ -158,144 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/11/08/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E7%AC%AC%E5%85%AB%E8%AF%BE%EF%BC%9Apandas/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/11/08/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E7%AC%AC%E5%85%AB%E8%AF%BE%EF%BC%9Apandas/" class="post-title-link" itemprop="url">第八课：pandas</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-11-08 05:33:00" itemprop="dateCreated datePublished" datetime="2019-11-08T05:33:00+08:00">2019-11-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-python-%E8%AF%AD%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">c数据科学/czh_python/语法</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/11/08/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E7%AC%AC%E5%85%AB%E8%AF%BE%EF%BC%9Apandas/" class="post-meta-item leancloud_visitors" data-flag-title="第八课：pandas" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>494</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年11月8日 下午5:33<br><a href="https://blog.csdn.net/albertolin/article/details/98476495" target="_blank" rel="noopener">Python：pandas DataFrame取多列的方法</a></p>
-<ul>
-<li>选择表格中的’w’、’z’列<ul>
-<li>data[[‘w’,’z’]]</li>
-</ul>
-</li>
-</ul>
-<p>2018年1月8日 下午5:33</p>
-<h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><p><a href="class8.html">class8.html</a></p>
-<h2 id="主要内容："><a href="#主要内容：" class="headerlink" title="主要内容："></a>主要内容：</h2><ol>
-<li><strong>两种数据类型（主）</strong><ol>
-<li>Series<ol>
-<li>生成：<ol>
-<li>list</li>
-<li>字典</li>
-</ol>
-</li>
-<li>特殊住处在于<strong>对索引有很多操作</strong>，我把他和数据操作对比，叫做结构操作</li>
-<li>还可以有更加任性的切片操作</li>
-</ol>
-</li>
-<li>DataFrame<ol>
-<li>生成：<ol>
-<li>字典中包含list来生成</li>
-<li>numpy的narry生成</li>
-</ol>
-</li>
-<li><strong>大部分是对对整列/整行进行操作</strong></li>
-<li>特殊之处在于可以向Sql一样操作</li>
-</ol>
-</li>
-<li><strong>其实就是一维数组/二维数组的增删改查</strong></li>
-</ol>
-</li>
-<li>pandas画图</li>
-<li>数据分析例题</li>
-</ol>
-<h2 id="问题："><a href="#问题：" class="headerlink" title="问题："></a>问题：</h2><ol>
-<li><strong>数据处理</strong>：这门知识我本身是不熟悉的，我从来没有进行过数据处理，这种处理能力的源头是对数学的敏感，以及对数学知识的掌握，掌握编程相比于掌握数学要简单的多</li>
-<li>要<strong>先站在现实的角度去思考问题</strong>，然后才是动手编程。这里的<strong>先站在现实的角度去思考问题</strong>中要加上<strong>从数学统计的角度去思考问题</strong>，这种思考又对我们提出了新的要求</li>
-<li>数据分析=机器学习：在这节最后的例题“泰坦尼克号”中，在<strong>预测缺失年龄</strong>的过程中就是使用了及机器学习。但是，我不懂得原理，参数也不知道是啥</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/11/08/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E6%97%A5%E5%90%8E%E8%A1%A5%E5%85%85%E8%AF%AD%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1538,6 +1400,121 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B9%8B%E9%97%B4%E6%8B%B7%E8%B4%9Danaconda%E7%8E%AF%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B9%8B%E9%97%B4%E6%8B%B7%E8%B4%9Danaconda%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">服务器之间拷贝anaconda环境</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-01 03:58:00" itemprop="dateCreated datePublished" datetime="2019-11-01T03:58:00+08:00">2019-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-linux%E5%91%BD%E4%BB%A4-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_linux命令/常用指令</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B9%8B%E9%97%B4%E6%8B%B7%E8%B4%9Danaconda%E7%8E%AF%E5%A2%83/" class="post-meta-item leancloud_visitors" data-flag-title="服务器之间拷贝anaconda环境" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>271</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年11月1日 下午3:58</p>
+<h3 id="服务器之间拷贝："><a href="#服务器之间拷贝：" class="headerlink" title="服务器之间拷贝："></a>服务器之间拷贝：</h3><ol>
+<li><a href="https://www.cnblogs.com/ftl1012/p/scp.html" target="_blank" rel="noopener">Linux scp命令详解 - 小a玖拾柒 - 博客园</a><ol>
+<li><code>scp -r -P *** zhiheng_chen@210.76.**.**:/home/** ./</code></li>
+</ol>
+</li>
+<li><a href="https://blog.csdn.net/lwgkzl/article/details/100927998" target="_blank" rel="noopener">移动了anconda的文件夹</a><ol>
+<li><code>echo $PATH</code></li>
+<li><code>export PATH=“**/anaconda3/bin:$PATH”</code> 写入 ~/.bashrc中</li>
+<li>以下命令一行一行的执行，在打开文件的第一行中，修改对应路径即可<ol>
+<li><code>vim ~/anaconda3/bin/pip</code></li>
+<li><code>vim ~/anaconda3/bin/conda</code></li>
+<li><code>vim ~/anaconda3/bin/pip3</code></li>
+</ol>
+</li>
+<li><code>conda init</code></li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1608,7 +1585,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1173</span>
+          <span class="site-state-item-count">1172</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

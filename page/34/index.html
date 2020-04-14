@@ -158,119 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/05/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E4%BA%91%E8%AE%A1%E7%AE%97/shadowSock(ss)%E7%9A%84%E5%8E%9F%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E4%BA%91%E8%AE%A1%E7%AE%97/shadowSock(ss)%E7%9A%84%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">shadowSock(ss)的原理</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-13 09:19:00" itemprop="dateCreated datePublished" datetime="2019-05-13T09:19:00+08:00">2019-05-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E4%BA%91%E8%AE%A1%E7%AE%97/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_分布式/云计算</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/05/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E4%BA%91%E8%AE%A1%E7%AE%97/shadowSock(ss)%E7%9A%84%E5%8E%9F%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="shadowSock(ss)的原理" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>467</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年5月13日 下午9:19</p>
-<h2 id="从协议的角度去理解："><a href="#从协议的角度去理解：" class="headerlink" title="从协议的角度去理解："></a>从协议的角度去理解：</h2><p><a href="https://medium.com/@thomas_summon/%E6%B5%85%E8%B0%88vpn-vps-proxy%E4%BB%A5%E5%8F%8Ashadowsocks%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB%E5%92%8C%E5%8C%BA%E5%88%AB-b0198f92db1b" target="_blank" rel="noopener">浅谈vpn、vps、Proxy以及shadowsocks之间的联系和区别 – Thomas Xu – Medium</a></p>
-<ol>
-<li>我认为把shadowsock理解成<strong>协议</strong>是最正确的</li>
-<li>clowwindy设计的这套协议，<strong>参数少，还能满足我们的需求(安全等等)</strong></li>
-<li>协议：<strong>就是表述：我对一份数据是怎么进行加工处理的</strong>。<ol>
-<li>就像整理家一样，<strong>clowwindy一定是一个居家好男人</strong></li>
-</ol>
-</li>
-</ol>
-<h2 id="从端口的角度去理解："><a href="#从端口的角度去理解：" class="headerlink" title="从端口的角度去理解："></a>从端口的角度去理解：</h2><p><a href="https://segmentfault.com/a/1190000011862912" target="_blank" rel="noopener">你也能写个 Shadowsocks - 吴浩麟的技术博客 - SegmentFault 思否</a><br><a href="https://bingtaoli.github.io/2016/11/23/shadowsocks%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86/" target="_blank" rel="noopener">shadowsocks实现原理 | Hexo</a><br><a href="https://fanzheng.org/archives/2" target="_blank" rel="noopener">https://fanzheng.org/archives/2</a><br>这里面有几个关键的概念：这三个监听对应的收拾电脑上的三个服务(每个服务有自己的端口、进程)，并且<strong>shaowsock的是同时执行这三个程序的</strong></p>
-<ol>
-<li>SOCK监听：负责与加密+与远程服务器通讯</li>
-<li>PAC监听：负责监听用户想访问哪里，<strong>是否需要转到sock</strong></li>
-<li>Http监听：为了为满足扩展性更强，让那些只能通过http通讯的程序也可以访问外网，<strong>将http协议转换成sock协议</strong><br><img src="/2019/05/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E4%BA%91%E8%AE%A1%E7%AE%97/shadowSock(ss)%E7%9A%84%E5%8E%9F%E7%90%86/85579F0E-67AC-49B0-9C99-8CA1E51F3E2E.png" alt></li>
-</ol>
-<p><img src="/2019/05/13/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E4%BA%91%E8%AE%A1%E7%AE%97/shadowSock(ss)%E7%9A%84%E5%8E%9F%E7%90%86/B56D9C50-5626-406A-86F8-3D05CC90F6A5.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/05/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E4%BA%91%E8%AE%A1%E7%AE%97/PageRank/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1356,6 +1243,128 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/04/29/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E7%90%86%E8%A7%A3%E7%9F%A9%E9%98%B5%EF%BC%9A%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F%E5%92%8C%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%A4%E7%A7%8D%E7%94%A8%E9%80%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/29/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E7%90%86%E8%A7%A3%E7%9F%A9%E9%98%B5%EF%BC%9A%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F%E5%92%8C%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%A4%E7%A7%8D%E7%94%A8%E9%80%94/" class="post-title-link" itemprop="url">理解矩阵：特征向量和特征值两种用途</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-04-29 07:33:00" itemprop="dateCreated datePublished" datetime="2019-04-29T07:33:00+08:00">2019-04-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:02:04" itemprop="dateModified" datetime="2020-03-12T20:02:04+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3-czh-%E6%95%B0%E5%AD%A6-%E5%88%86%E7%B1%BB-%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" itemprop="url" rel="index">
+                    <span itemprop="name">f数学相关/czh_数学/分类/线性代数</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/04/29/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E7%90%86%E8%A7%A3%E7%9F%A9%E9%98%B5%EF%BC%9A%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F%E5%92%8C%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%A4%E7%A7%8D%E7%94%A8%E9%80%94/" class="post-meta-item leancloud_visitors" data-flag-title="理解矩阵：特征向量和特征值两种用途" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>179</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年4月29日 下午7:33</p>
+<ol>
+<li>给定一个<strong>矩阵A</strong>，我们就已知的他的<strong>特征向量</strong>和<strong>特征值</strong></li>
+<li>可以用来：<ol>
+<li>压缩：<ol>
+<li>直观的表现就是旋转坐标系，让映射后的数据方差大、协方差小</li>
+<li>可以用来改变原始的数据(A)</li>
+</ol>
+</li>
+<li>把<strong>矩阵</strong>当成一种<strong>函数</strong>来理解。<ol>
+<li>这个函数主要有两个性质<ol>
+<li>性质1：<strong>特征向量</strong>表方向</li>
+<li>性质2：<strong>特征值</strong>表步长</li>
+</ol>
+</li>
+<li><strong>这样理解有什么用？</strong>可以理解下面这幅图在说什么<br><img src="/2019/04/29/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/%E7%90%86%E8%A7%A3%E7%9F%A9%E9%98%B5%EF%BC%9A%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F%E5%92%8C%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%A4%E7%A7%8D%E7%94%A8%E9%80%94/4D052A1C-650D-41B7-9927-8179E073F606.png" alt></li>
+<li>参考：<ol>
+<li><a href="bear://x-callback-url/open-note?id=4F41C4B6-4592-45CE-B591-63B561114AC8-327-0003235FE49BFD49">如何理解矩阵特征值？</a></li>
+<li><a href="https://www.matongxue.com/madocs/555.html" target="_blank" rel="noopener">如何理解矩阵乘法？</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1426,7 +1435,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1173</span>
+          <span class="site-state-item-count">1172</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -158,210 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">PLSQL（PLSQL语法+存储过程+触发器）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-01 10:36:00" itemprop="dateCreated datePublished" datetime="2017-09-01T10:36:00+08:00">2017-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="PLSQL（PLSQL语法+存储过程+触发器）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#web开发/czh_blog/数据库<br>2017年9月1日 上午10:36</p>
-<p>这里知识理解一些概念，有一个基本的认识<br>知道ORACLE支持哪些功能，以后一个功能呢不好做的时候，来这里瞧瞧，看有没有正好能用上额特性</p>
-<h2 id="PLSQL中语法特别的地方"><a href="#PLSQL中语法特别的地方" class="headerlink" title="PLSQL中语法特别的地方"></a>PLSQL中语法特别的地方</h2><p>没有逻辑修饰符：|| &amp;&amp;<br>用这些代替：And or between<br>等号：是:= 不是=<br>没有：++ — —<br>|| 内容拼接 隐式转换成字符串连接</p>
-<h2 id="SQL的高级语言特性PLSQL"><a href="#SQL的高级语言特性PLSQL" class="headerlink" title="SQL的高级语言特性PLSQL"></a>SQL的高级语言特性PLSQL</h2><ol>
-<li>所谓的plsql其实就是：sql编程语言一样编程，有高级语言的特性</li>
-<li>If  switch for loop</li>
-<li>Cursor游标 是专门用来解决表中多条数据的情况<ol>
-<li>这个高级语言中没有，是数据库语言中特有的</li>
-<li>和loop连用</li>
-</ol>
-</li>
-<li>类似stl的数据类型<ol>
-<li>Varray </li>
-<li>table </li>
-<li>record</li>
-</ol>
-</li>
-<li>自定义数据类型<ol>
-<li>type</li>
-</ol>
-</li>
-<li>异常<ol>
-<li>支持自定义抛出异常<ol>
-<li>当在函数和存储过程中抛出异常时，可以在调用函数和存储过程的外面进行异常的处理</li>
-</ol>
-</li>
-<li>支持选择自己处理异常，和oracle系统处理异常<ol>
-<li>当没有写exception段时，默认就是让oracle处理异常</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>package<ol>
-<li>这个就是java中的类，不是java中的包</li>
-<li>可以在package中和java一样定义变量，常量，函数（存储过程+函数）等等</li>
-<li>packages + package body</li>
-<li>如何操作<ol>
-<li>不是java中的先new一个对象，然后用对象调用</li>
-<li>Sql中没有new对象，直接使用package名  点就行了</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="存储过程的构成"><a href="#存储过程的构成" class="headerlink" title="存储过程的构成"></a>存储过程的构成</h3><ol>
-<li>给PLSQL去了个名字方便调用</li>
-<li>存储过程</li>
-<li>传入参数</li>
-<li>传出参数</li>
-</ol>
-<h3 id="为什么要封装成存储过程"><a href="#为什么要封装成存储过程" class="headerlink" title="为什么要封装成存储过程?"></a>为什么要封装成存储过程?</h3><ol>
-<li>封装之后方便传入传出参数 </li>
-<li>匿名块只能在数据库环境中调用 存储过程可以被外界调用(比如JDBC)</li>
-</ol>
-<h3 id="函数与存储过程比较："><a href="#函数与存储过程比较：" class="headerlink" title="函数与存储过程比较："></a>函数与存储过程比较：</h3><ol>
-<li>函数可以看做一类特殊的存储过程 没有输出参数 必有唯一返回值</li>
-<li>删掉输出参数，添加返回值</li>
-<li>存储过程可以完全的实现函数的功能</li>
-</ol>
-<h3 id="如何选择函数与存储过程"><a href="#如何选择函数与存储过程" class="headerlink" title="如何选择函数与存储过程"></a>如何选择函数与存储过程</h3><ol>
-<li>当PL-SQL需要嵌在SQL中使用时用函数<ol>
-<li>就像min() max() count()这些函数</li>
-</ol>
-</li>
-<li>当有多个返回值或者要被其它程序调用时用存储过程</li>
-</ol>
-<p>既然利用PLSQL可以实现高级语言的特性，那么当我们实现一个功能的时候，有哪些不同的、或者值得注意的地方</p>
-<p>需求：利用存储过程查询含有特定信息的学生id<br>思路：</p>
-<ol>
-<li>也就是说这个参数可以是学生姓名，生日，电话号等等信息。在java中我们需要对这个特定信息进行判断，写上一堆if，但是在sql中我直接写在where语句中就行了，就省去了判断的过程</li>
-<li>体现了sql的优势，对比与java语言</li>
-</ol>
-<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><ol>
-<li>使用触发器的环境:<ol>
-<li>业务逻辑是多步骤的 而且可能从任意一个步骤执行  一般用触发器链</li>
-<li>传进来的参数 是一行数据  一般用触发器</li>
-</ol>
-</li>
-<li>有了存储过程  为什么还要用触发器<ol>
-<li>存储过程需要特殊的调用方式</li>
-<li>A -&gt;  B  -&gt;  c -&gt;  D-&gt;    <ol>
-<li>连锁操作的业务逻辑 用触发器,JDBC只要正常的SQL语句</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>触发器要注意的地方 <ol>
-<li>暂时用不到的触发器全部禁用  <ol>
-<li>使用disable</li>
-</ol>
-</li>
-<li>避免逻辑死锁<ol>
-<li>一个trigger就是一个线程</li>
-<li>那么，不说自己的创建的线程，光是系统中默认的操作表的线程就有可能和自己的一个trigger线程产生冲突</li>
-</ol>
-</li>
-<li>尽量避免update触发器中对本表的操作</li>
-</ol>
-</li>
-</ol>
-<hr>
-<p>Sequence 就像一个全局int型变量，他可以一直记录一个变量的值</p>
-<hr>
-<hr>
-<p>百度</p>
-<hr>
-<p><a href="http://blog.csdn.net/caoxiaohong1005/article/details/53433131" target="_blank" rel="noopener">Mac下不用虚拟机一样可以使用PLSQL Developer - iCoding91        - CSDN博客</a></p>
-<p>%符号 理解成“的”</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1435,6 +1231,104 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" class="post-title-link" itemprop="url">SQL的执行顺序</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-30 07:22:00" itemprop="dateCreated datePublished" datetime="2017-08-30T07:22:00+08:00">2017-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/" class="post-meta-item leancloud_visitors" data-flag-title="SQL的执行顺序" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>70</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月30日 上午7:22</p>
+<p><a href="http://www.cnblogs.com/qanholas/archive/2010/10/24/1859924.html" target="_blank" rel="noopener">sql执行顺序</a><br><a href="http://transcoder.baiducontent.com/from=844b/bd_page_type=1/ssid=0/uid=0/pu=usm%401%2Csz%401320_2001%2Cta%40iphone_1_10.3_3_603/baiduid=9F648DF39E2DD01FB019A79FEEA58865/w=0_10_/t=iphone/l=3/tc?ref=www_iphone&lid=13438957229324129736&order=1&fm=alhm&h5ad=1&srd=1&dict=32&tj=h5_mobile_1_0_10_title&w_qd=IlPT2AEptyoA_yimDUwc-hCuEEBPbWAprD1Xj3bQsxM7Uec5Q6e&sec=23592&di=be52f61a795b881e&bdenc=1&tch=124.100.37.200.0.0&nsrc=IlPT2AEptyoA_yixCFOxXnANedT62v3IEQGG_ytK1DK6mlrte4viZQRAVW_fAijCZpPPtCPQpxoJw8yh_mIskNYWgK&eqid=ba80c465bd8858001000000159a605c0&wd=&clk_info=%7B%22srcid%22%3A%221599%22%2C%22tplname%22%3A%22h5_mobile%22%2C%22t%22%3A1504052679517%2C%22sig%22%3A%227017%22%2C%22xpath%22%3A%22div-a-h3%22%7D" target="_blank" rel="noopener">SQL嵌套子查询和相关子查询的执行过程有什么区别(推荐) </a><br><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/BD09960A-6366-46CE-97D9-6A419479C5AE.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1505,7 +1399,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1173</span>
+          <span class="site-state-item-count">1172</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
