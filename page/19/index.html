@@ -315,155 +315,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/12/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_basemap/Basemap%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E%EF%BC%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_basemap/Basemap%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E%EF%BC%9A/" class="post-title-link" itemprop="url">Basemap环境安装说明：</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-12-04 12:22:00" itemprop="dateCreated datePublished" datetime="2019-12-04T12:22:00+08:00">2019-12-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 16:19:13" itemprop="dateModified" datetime="2020-04-01T16:19:13+08:00">2020-04-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-Basemap/" itemprop="url" rel="index">
-                    <span itemprop="name">e视觉相关/czh_Basemap</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/12/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_basemap/Basemap%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E%EF%BC%9A/" class="post-meta-item leancloud_visitors" data-flag-title="Basemap环境安装说明：" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>549</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年12月4日 下午12:22</p>
-<p>注： 全部在root权限下安装，用到的安装包在<code>zip.tar</code>中</p>
-<ol>
-<li>安装anaconda，Python版本3.6<ol>
-<li><code>pip install numpy pyshp geos</code></li>
-<li><code>conda install pyproj=1.9.6</code></li>
-</ol>
-</li>
-<li>安装netcdf4<ul>
-<li><code>pip install h5p</code>    </li>
-<li><code>pip install numpy</code></li>
-<li><code>pip install cython</code></li>
-<li><code>pip install netcdf4</code></li>
-</ul>
-</li>
-<li>升级gcc:<ul>
-<li><a href="https://www.cnblogs.com/gyfluck/p/10537383.html" target="_blank" rel="noopener">升级 GCC 支持C++11</a></li>
-</ul>
-</li>
-<li>安装matplotlib 2.2.0：<ul>
-<li><code>python setup.py build</code><ul>
-<li>根据提示进行安装依赖库！</li>
-</ul>
-</li>
-<li><code>python setup.py install</code></li>
-</ul>
-</li>
-<li>手动编译安装geos-3.7.3：<ul>
-<li><code>./configure —-prefix=/usr/local/geos</code><ul>
-<li>结尾处有false是正常的</li>
-</ul>
-</li>
-<li><code>make</code></li>
-<li><code>sudo make install</code></li>
-<li><code>export GEOS_DIR=/usr/local/geos</code></li>
-</ul>
-</li>
-<li>安装libpng:<ul>
-<li><code>./configure</code></li>
-<li><code>make &amp;&amp; make install</code></li>
-<li><code>sudo ldconfig</code></li>
-</ul>
-</li>
-<li>安装basemap:<ul>
-<li><code>python setup.py install</code></li>
-<li>验证<code>from mpl_toolkits.basemap import Basemap</code>是否导入正确<ul>
-<li>说明完全安装正确！</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p><a href="Python%20%E9%99%8D%E6%B0%B4%E5%9B%BE%E6%9C%8D%E5%8A%A1%E8%AF%B4%E6%98%8E.docx">Python 降水图服务说明.docx</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/12/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_basemap/Basemap%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E5%92%8C%E7%A8%8B%E5%BA%8F%E5%8F%82%E8%80%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -597,6 +448,155 @@
 <h4 id="python-Socket编程"><a href="#python-Socket编程" class="headerlink" title="python Socket编程"></a>python Socket编程</h4><p><a href="https://www.cnblogs.com/xiaowenshu/p/9916755.html" target="_blank" rel="noopener">socket、tcp/ip协议、udp协议 - 小文叔 - 博客园</a><br>    * 讲解原理+多线程<br>    * <a href="https://www.cnblogs.com/skynet/archive/2010/12/12/1903949.html" target="_blank" rel="noopener">Linux Socket编程（不限Linux） - 吴秦 - 博客园</a><br><a href="https://blog.csdn.net/weixin_41991401/article/details/90380621" target="_blank" rel="noopener">Python socket服务端，客户端互相通信</a><br>    * 完整的服务端和客户端代码</p>
 <p><a href="http://blog.sciencenet.cn/home.php?mod=space&uid=2758859&do=blog&id=1120259" target="_blank" rel="noopener">科学网—转载matplotlib绘图 - 杨秦政的博文</a></p>
 <h4 id="http的客户端和服务端"><a href="#http的客户端和服务端" class="headerlink" title="http的客户端和服务端"></a>http的客户端和服务端</h4><p><a href="https://blog.csdn.net/qq_37701443/article/details/81484120" target="_blank" rel="noopener">http:客户端代码</a><br><a href="https://www.cnblogs.com/dpf-learn/p/8028088.html" target="_blank" rel="noopener">python socket 实现的简单http服务器 </a> 通过socket来使用http<br><a href="https://blog.csdn.net/htwhtw123/article/details/78134219" target="_blank" rel="noopener">python 服务器和客户端 学习http请求和响应报文头</a><br><a href="https://blog.csdn.net/weixin_40283816/article/details/83591582" target="_blank" rel="noopener">python3报错：TypeError: a bytes-like object is required, not ‘str’</a><br><a href="https://www.cnblogs.com/yangxiaoqin/p/8460395.html" target="_blank" rel="noopener">位、字节、字符的区别 - heheheda - 博客园</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/12/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_basemap/Basemap%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E%EF%BC%9A/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/12/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_basemap/Basemap%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E%EF%BC%9A/" class="post-title-link" itemprop="url">Basemap环境安装说明：</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-04 12:22:00" itemprop="dateCreated datePublished" datetime="2019-12-04T12:22:00+08:00">2019-12-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:13" itemprop="dateModified" datetime="2020-04-01T16:19:13+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-Basemap/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_Basemap</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_basemap/Basemap%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85%E8%AF%B4%E6%98%8E%EF%BC%9A/" class="post-meta-item leancloud_visitors" data-flag-title="Basemap环境安装说明：" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>549</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年12月4日 下午12:22</p>
+<p>注： 全部在root权限下安装，用到的安装包在<code>zip.tar</code>中</p>
+<ol>
+<li>安装anaconda，Python版本3.6<ol>
+<li><code>pip install numpy pyshp geos</code></li>
+<li><code>conda install pyproj=1.9.6</code></li>
+</ol>
+</li>
+<li>安装netcdf4<ul>
+<li><code>pip install h5p</code>    </li>
+<li><code>pip install numpy</code></li>
+<li><code>pip install cython</code></li>
+<li><code>pip install netcdf4</code></li>
+</ul>
+</li>
+<li>升级gcc:<ul>
+<li><a href="https://www.cnblogs.com/gyfluck/p/10537383.html" target="_blank" rel="noopener">升级 GCC 支持C++11</a></li>
+</ul>
+</li>
+<li>安装matplotlib 2.2.0：<ul>
+<li><code>python setup.py build</code><ul>
+<li>根据提示进行安装依赖库！</li>
+</ul>
+</li>
+<li><code>python setup.py install</code></li>
+</ul>
+</li>
+<li>手动编译安装geos-3.7.3：<ul>
+<li><code>./configure —-prefix=/usr/local/geos</code><ul>
+<li>结尾处有false是正常的</li>
+</ul>
+</li>
+<li><code>make</code></li>
+<li><code>sudo make install</code></li>
+<li><code>export GEOS_DIR=/usr/local/geos</code></li>
+</ul>
+</li>
+<li>安装libpng:<ul>
+<li><code>./configure</code></li>
+<li><code>make &amp;&amp; make install</code></li>
+<li><code>sudo ldconfig</code></li>
+</ul>
+</li>
+<li>安装basemap:<ul>
+<li><code>python setup.py install</code></li>
+<li>验证<code>from mpl_toolkits.basemap import Basemap</code>是否导入正确<ul>
+<li>说明完全安装正确！</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><a href="Python%20%E9%99%8D%E6%B0%B4%E5%9B%BE%E6%9C%8D%E5%8A%A1%E8%AF%B4%E6%98%8E.docx">Python 降水图服务说明.docx</a></p>
 
       
     </div>
