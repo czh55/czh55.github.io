@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2020年3月15日 下午10:47 操作系统内核：也是存在底层调用的，并不是从零开始开发的！ BIOS就是操作系统的开发工具包。 其实和你写leetcode是一样的，STL就像是BIOS提供的中断，面对很多问题，例如要调度优先级最高的任务，着其实就是各种算法。 结论：像操作系统这样的底层、大程序，从思维难度上来说等价于LeetCode十几行得代码。 算法题中的hard其实就是各种easy，med">
 <meta property="og:type" content="article">
 <meta property="og:title" content="总结复习： 2020年3月15日">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2020/03/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E6%80%BB%E7%BB%93%E5%A4%8D%E4%B9%A0%EF%BC%9A%202020%E5%B9%B43%E6%9C%8815%E6%97%A5/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2020/03/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E6%80%BB%E7%BB%93%E5%A4%8D%E4%B9%A0%EF%BC%9A%202020%E5%B9%B43%E6%9C%8815%E6%97%A5/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2020年3月15日 下午10:47 操作系统内核：也是存在底层调用的，并不是从零开始开发的！ BIOS就是操作系统的开发工具包。 其实和你写leetcode是一样的，STL就像是BIOS提供的中断，面对很多问题，例如要调度优先级最高的任务，着其实就是各种算法。 结论：像操作系统这样的底层、大程序，从思维难度上来说等价于LeetCode十几行得代码。 算法题中的hard其实就是各种easy，med">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2020/03/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E6%80%BB%E7%BB%93%E5%A4%8D%E4%B9%A0%EF%BC%9A%202020%E5%B9%B43%E6%9C%8815%E6%97%A5/">
+<link rel="canonical" href="http://chenzhiheng.cn/2020/03/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E6%80%BB%E7%BB%93%E5%A4%8D%E4%B9%A0%EF%BC%9A%202020%E5%B9%B43%E6%9C%8815%E6%97%A5/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2020/03/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E6%80%BB%E7%BB%93%E5%A4%8D%E4%B9%A0%EF%BC%9A%202020%E5%B9%B43%E6%9C%8815%E6%97%A5/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2020/03/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/%E6%80%BB%E7%BB%93%E5%A4%8D%E4%B9%A0%EF%BC%9A%202020%E5%B9%B43%E6%9C%8815%E6%97%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

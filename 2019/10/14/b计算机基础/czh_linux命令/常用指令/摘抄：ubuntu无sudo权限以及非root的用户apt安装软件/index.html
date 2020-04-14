@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2019年10月14日 下午1:07 ubuntu无sudo权限以及非root的用户apt安装软件 ubuntu无sudo权限以及非root的用户apt安装软件_caixiong~的博客-CSDN博客 第一步： 一般来说使用apt安装软件,必须要有root权限,因为apt安装时需要写_usr_bin _usr_lib _usr_share等目录,而这些目录只有root用户(或有sudo权限)才有写">
 <meta property="og:type" content="article">
 <meta property="og:title" content="摘抄：ubuntu无sudo权限以及非root的用户apt安装软件">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2019/10/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%91%98%E6%8A%84%EF%BC%9Aubuntu%E6%97%A0sudo%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E9%9D%9Eroot%E7%9A%84%E7%94%A8%E6%88%B7apt%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2019/10/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%91%98%E6%8A%84%EF%BC%9Aubuntu%E6%97%A0sudo%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E9%9D%9Eroot%E7%9A%84%E7%94%A8%E6%88%B7apt%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2019年10月14日 下午1:07 ubuntu无sudo权限以及非root的用户apt安装软件 ubuntu无sudo权限以及非root的用户apt安装软件_caixiong~的博客-CSDN博客 第一步： 一般来说使用apt安装软件,必须要有root权限,因为apt安装时需要写_usr_bin _usr_lib _usr_share等目录,而这些目录只有root用户(或有sudo权限)才有写">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2019/10/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%91%98%E6%8A%84%EF%BC%9Aubuntu%E6%97%A0sudo%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E9%9D%9Eroot%E7%9A%84%E7%94%A8%E6%88%B7apt%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6/">
+<link rel="canonical" href="http://chenzhiheng.cn/2019/10/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%91%98%E6%8A%84%EF%BC%9Aubuntu%E6%97%A0sudo%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E9%9D%9Eroot%E7%9A%84%E7%94%A8%E6%88%B7apt%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/10/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%91%98%E6%8A%84%EF%BC%9Aubuntu%E6%97%A0sudo%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E9%9D%9Eroot%E7%9A%84%E7%94%A8%E6%88%B7apt%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/10/14/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E6%91%98%E6%8A%84%EF%BC%9Aubuntu%E6%97%A0sudo%E6%9D%83%E9%99%90%E4%BB%A5%E5%8F%8A%E9%9D%9Eroot%E7%9A%84%E7%94%A8%E6%88%B7apt%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

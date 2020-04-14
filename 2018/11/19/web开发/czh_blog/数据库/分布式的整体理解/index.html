@@ -17,27 +17,27 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年11月19日 下午9:25 用大白话聊聊分布式系统 | waylau.comdistributed-java&#x2F;basic.md at master · waylau&#x2F;distributed-java · GitHub  什么是分布式系统？ 分布式系统有哪些优势？ 分布式系统的扩展和升级都比较容易。 分布式系统某些节点故障，不影响整理可用   分布式系统会面临哪里挑战？ 这里涉及到了很多的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="分布式的整体理解">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年11月19日 下午9:25 用大白话聊聊分布式系统 | waylau.comdistributed-java&#x2F;basic.md at master · waylau&#x2F;distributed-java · GitHub  什么是分布式系统？ 分布式系统有哪些优势？ 分布式系统的扩展和升级都比较容易。 分布式系统某些节点故障，不影响整理可用   分布式系统会面临哪里挑战？ 这里涉及到了很多的">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/CAD7835E-3E7C-4CC4-ADE3-8BD26969DF5B.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/C8F52F3A-4607-4863-990E-42E7704FAFFF.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/5EA72150-82CD-4298-A3B8-3DEF9E6D49C2.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/E6847CF1-624B-43E7-9C46-D4E1EE62CAAC.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/CAD7835E-3E7C-4CC4-ADE3-8BD26969DF5B.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/C8F52F3A-4607-4863-990E-42E7704FAFFF.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/5EA72150-82CD-4298-A3B8-3DEF9E6D49C2.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/E6847CF1-624B-43E7-9C46-D4E1EE62CAAC.png">
 <meta property="article:published_time" content="2018-11-19T01:25:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:07.036Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/CAD7835E-3E7C-4CC4-ADE3-8BD26969DF5B.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/CAD7835E-3E7C-4CC4-ADE3-8BD26969DF5B.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -167,7 +167,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

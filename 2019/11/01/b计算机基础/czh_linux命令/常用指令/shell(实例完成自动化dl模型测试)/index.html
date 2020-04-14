@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2019年11月1日 下午5:39 目标：实现自动化测试深度学习训练出来的模型 实现方式： 这其中涉及到expect的安装和使用：用来自动化交互过程 shell脚本传参实现scp命令无需输入密码和别的参数 Linux expect 介绍和用法 - 梦徒 - 博客园 expect实现scp&#x2F;ssh-copy-id非交互 - 骏马金龙 - 博客园   其中的代码主要是使用shell语言写 scp 文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="shell(实例完成自动化dl模型测试)">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/shell(%E5%AE%9E%E4%BE%8B%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96dl%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95)/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/shell(%E5%AE%9E%E4%BE%8B%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96dl%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95)/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2019年11月1日 下午5:39 目标：实现自动化测试深度学习训练出来的模型 实现方式： 这其中涉及到expect的安装和使用：用来自动化交互过程 shell脚本传参实现scp命令无需输入密码和别的参数 Linux expect 介绍和用法 - 梦徒 - 博客园 expect实现scp&#x2F;ssh-copy-id非交互 - 骏马金龙 - 博客园   其中的代码主要是使用shell语言写 scp 文件">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/shell(%E5%AE%9E%E4%BE%8B%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96dl%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95)/">
+<link rel="canonical" href="http://chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/shell(%E5%AE%9E%E4%BE%8B%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96dl%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95)/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/shell(%E5%AE%9E%E4%BE%8B%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96dl%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95)/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/shell(%E5%AE%9E%E4%BE%8B%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96dl%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

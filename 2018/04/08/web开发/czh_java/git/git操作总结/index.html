@@ -17,49 +17,49 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年4月8日 下午12:33 参考：版本管理工具Git入门 –留下学习生活中的点点滴滴 在master分支edit+add，在dev分支commit原始的状态是：  master分支index.jsp有“master”字符 dev分支index.jsp有“dev”字符 这种操作是无用的，那要分支干啥呀！！！！ 关键就是要明白两个分支commit节点图，脑子重要时刻留意！  我本地是maste">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git操作总结">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年4月8日 下午12:33 参考：版本管理工具Git入门 –留下学习生活中的点点滴滴 在master分支edit+add，在dev分支commit原始的状态是：  master分支index.jsp有“master”字符 dev分支index.jsp有“dev”字符 这种操作是无用的，那要分支干啥呀！！！！ 关键就是要明白两个分支commit节点图，脑子重要时刻留意！  我本地是maste">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/85E99EAB-1EAB-4FF8-BEB9-CA52B58B1806.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/9840A58A-BAE9-4AB8-82FD-D912AE066C28.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/24B0D810-C0D6-4A2B-908A-049752611CE8.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/E1DF62E0-896F-436F-9A56-867873621CD8.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/B701B121-F365-41E3-A6AE-372C7642BE5E.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/FA71C1E8-2699-43C9-B74C-5A0518041E48.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/ED2EB09C-BA39-455E-AE39-2CE5F97A62E4.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/2D110108-41B8-473E-916E-CFE67D90B17D.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/A9E4E528-1F49-4E33-9BB9-2736638E139A.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/E67D17EB-57B4-4D43-926E-B52F270EDFC9.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/BB86B057-0F0C-49A1-8B55-2969C455E609.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/4037E3FB-3128-4F25-AA68-2BD9455B5AA1.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/6BB31558-8D4C-4CB9-A1BB-4B3CD87BD6CC.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/6C513684-AA9D-4ED8-8590-1793CD333EA0.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/E2825CD5-1D84-4192-A657-FD155FEFC423.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/9E3DDE63-7AEA-44D5-A37D-49A546939199.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/D055E3AA-FB58-4FA5-A40C-199221289413.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/DEEF4368-3DC4-4479-8AC7-121AF265A8F8.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/B9B38496-359F-462D-A2C6-ADCA84688D1B.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/DB539486-3903-4106-A0DC-C346C81A3C8B.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/50D61756-119D-4D01-B27D-C1E9D85A0AA1.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/A08ACC78-131E-4173-B10F-0712B3596C3B.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/90C8A035-2799-4876-BF3B-EAAAF3106AC4.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/396D6CF3-EB75-40BF-94C7-B352AED088F7.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/B1960894-3A83-402D-A7E8-254191F9F40C.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/8AD8139B-F124-42D6-8DFD-3763C1718466.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/85E99EAB-1EAB-4FF8-BEB9-CA52B58B1806.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/9840A58A-BAE9-4AB8-82FD-D912AE066C28.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/24B0D810-C0D6-4A2B-908A-049752611CE8.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/E1DF62E0-896F-436F-9A56-867873621CD8.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/B701B121-F365-41E3-A6AE-372C7642BE5E.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/FA71C1E8-2699-43C9-B74C-5A0518041E48.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/ED2EB09C-BA39-455E-AE39-2CE5F97A62E4.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/2D110108-41B8-473E-916E-CFE67D90B17D.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/A9E4E528-1F49-4E33-9BB9-2736638E139A.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/E67D17EB-57B4-4D43-926E-B52F270EDFC9.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/BB86B057-0F0C-49A1-8B55-2969C455E609.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/4037E3FB-3128-4F25-AA68-2BD9455B5AA1.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/6BB31558-8D4C-4CB9-A1BB-4B3CD87BD6CC.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/6C513684-AA9D-4ED8-8590-1793CD333EA0.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/E2825CD5-1D84-4192-A657-FD155FEFC423.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/9E3DDE63-7AEA-44D5-A37D-49A546939199.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/D055E3AA-FB58-4FA5-A40C-199221289413.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/DEEF4368-3DC4-4479-8AC7-121AF265A8F8.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/B9B38496-359F-462D-A2C6-ADCA84688D1B.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/DB539486-3903-4106-A0DC-C346C81A3C8B.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/50D61756-119D-4D01-B27D-C1E9D85A0AA1.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/A08ACC78-131E-4173-B10F-0712B3596C3B.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/90C8A035-2799-4876-BF3B-EAAAF3106AC4.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/396D6CF3-EB75-40BF-94C7-B352AED088F7.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/B1960894-3A83-402D-A7E8-254191F9F40C.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/8AD8139B-F124-42D6-8DFD-3763C1718466.png">
 <meta property="article:published_time" content="2018-04-08T04:33:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:08.067Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/85E99EAB-1EAB-4FF8-BEB9-CA52B58B1806.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/85E99EAB-1EAB-4FF8-BEB9-CA52B58B1806.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/">
 
 
 <script id="page-configurations">
@@ -189,7 +189,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/04/08/web%E5%BC%80%E5%8F%91/czh_java/git/git%E6%93%8D%E4%BD%9C%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

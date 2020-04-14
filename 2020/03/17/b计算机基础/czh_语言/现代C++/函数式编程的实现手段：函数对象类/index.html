@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2020年3月17日 下午2:03 理解函数对象： 老师教的是：函数对象，在这我给他加上了一个“类”字。 主要原因： 想突出函数对象其实是一个类型 是类型的话，就可以和模板操作完美的联系在一起了  当定义好函数对象之后，能如何进行使用 当做类型，与模板一起使用 当做函数，进行函数式编程 当做参数，可以用来传递、使用、返回，这样的函数是高阶函数  函数对象类定义 函数对象是一个可以被当作函数来用的对">
 <meta property="og:type" content="article">
 <meta property="og:title" content="函数式编程的实现手段：函数对象类">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%8E%B0%E4%BB%A3C++/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5%EF%BC%9A%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E7%B1%BB/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%8E%B0%E4%BB%A3C++/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5%EF%BC%9A%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E7%B1%BB/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2020年3月17日 下午2:03 理解函数对象： 老师教的是：函数对象，在这我给他加上了一个“类”字。 主要原因： 想突出函数对象其实是一个类型 是类型的话，就可以和模板操作完美的联系在一起了  当定义好函数对象之后，能如何进行使用 当做类型，与模板一起使用 当做函数，进行函数式编程 当做参数，可以用来传递、使用、返回，这样的函数是高阶函数  函数对象类定义 函数对象是一个可以被当作函数来用的对">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%8E%B0%E4%BB%A3C++/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5%EF%BC%9A%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E7%B1%BB/">
+<link rel="canonical" href="http://chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%8E%B0%E4%BB%A3C++/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5%EF%BC%9A%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E7%B1%BB/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%8E%B0%E4%BB%A3C++/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5%EF%BC%9A%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/%E7%8E%B0%E4%BB%A3C++/%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%89%8B%E6%AE%B5%EF%BC%9A%E5%87%BD%E6%95%B0%E5%AF%B9%E8%B1%A1%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

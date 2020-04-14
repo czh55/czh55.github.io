@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年6月11日 下午7:22 分离： 先跳到一个html页面———&gt;页面的js去访问后端的接口拿到数据——&gt;将数据添加到当前html页面  不分离： a标签链接(很少用js)去访问后端的接口——&gt;后端先处理逻辑和数据，然后moduleAndView进行服务器转发———&gt;通过转发跳到另一个页面  总结：分离之后数据的获得是封装好的，给人的感觉是：数据由第三方提供，觉得有">
 <meta property="og:type" content="article">
 <meta property="og:title" content="web前后端分与不分离的比较">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/06/11/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/web%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E4%B8%8E%E4%B8%8D%E5%88%86%E7%A6%BB%E7%9A%84%E6%AF%94%E8%BE%83/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/06/11/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/web%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E4%B8%8E%E4%B8%8D%E5%88%86%E7%A6%BB%E7%9A%84%E6%AF%94%E8%BE%83/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年6月11日 下午7:22 分离： 先跳到一个html页面———&gt;页面的js去访问后端的接口拿到数据——&gt;将数据添加到当前html页面  不分离： a标签链接(很少用js)去访问后端的接口——&gt;后端先处理逻辑和数据，然后moduleAndView进行服务器转发———&gt;通过转发跳到另一个页面  总结：分离之后数据的获得是封装好的，给人的感觉是：数据由第三方提供，觉得有">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/06/11/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/web%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E4%B8%8E%E4%B8%8D%E5%88%86%E7%A6%BB%E7%9A%84%E6%AF%94%E8%BE%83/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/06/11/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/web%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E4%B8%8E%E4%B8%8D%E5%88%86%E7%A6%BB%E7%9A%84%E6%AF%94%E8%BE%83/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/06/11/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/web%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E4%B8%8E%E4%B8%8D%E5%88%86%E7%A6%BB%E7%9A%84%E6%AF%94%E8%BE%83/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/06/11/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/web%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E4%B8%8E%E4%B8%8D%E5%88%86%E7%A6%BB%E7%9A%84%E6%AF%94%E8%BE%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

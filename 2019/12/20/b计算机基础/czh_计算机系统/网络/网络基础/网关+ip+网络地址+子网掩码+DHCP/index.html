@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2019年12月20日 下午11:17 网关IP地址、网关地址、子网掩码地址IP地址，子网掩码、默认网关，DNS服务器之间的联系与区别  在Internet中的网关一般是指用于连接两个或者两个以上网段的网络设备，通常使用路由器（Router）作为网关。在TCP&#x2F;IP网络体系中，网关的基本作用是根据目的IP地址的网络号与子网号，选择最佳的出口对IP分组进行转发，实现跨网段的数据通信。 有时候把网关也">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网关+ip+网络地址+子网掩码+DHCP">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2019/12/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E7%BD%91%E5%85%B3+ip+%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80+%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81+DHCP/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2019/12/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E7%BD%91%E5%85%B3+ip+%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80+%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81+DHCP/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2019年12月20日 下午11:17 网关IP地址、网关地址、子网掩码地址IP地址，子网掩码、默认网关，DNS服务器之间的联系与区别  在Internet中的网关一般是指用于连接两个或者两个以上网段的网络设备，通常使用路由器（Router）作为网关。在TCP&#x2F;IP网络体系中，网关的基本作用是根据目的IP地址的网络号与子网号，选择最佳的出口对IP分组进行转发，实现跨网段的数据通信。 有时候把网关也">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2019/12/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E7%BD%91%E5%85%B3+ip+%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80+%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81+DHCP/">
+<link rel="canonical" href="http://chenzhiheng.cn/2019/12/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E7%BD%91%E5%85%B3+ip+%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80+%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81+DHCP/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E7%BD%91%E5%85%B3+ip+%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80+%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81+DHCP/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/12/20/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/%E7%BD%91%E5%85%B3+ip+%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80+%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81+DHCP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

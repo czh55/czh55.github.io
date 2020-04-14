@@ -17,29 +17,29 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年2月26日 上午11:25 配置：Dispatcher-servlet.xml ProductManageController.java inidex.jsp 具体实现代码：Service:FileServiceImpl.java具体代码： 12345678910111213141516171819202122232425262728293031323334353637383940414">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件上传（文件夹上传,多文件上传）">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年2月26日 上午11:25 配置：Dispatcher-servlet.xml ProductManageController.java inidex.jsp 具体实现代码：Service:FileServiceImpl.java具体代码： 12345678910111213141516171819202122232425262728293031323334353637383940414">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/7913EA67-913C-41BB-8A25-A2F3A340B730.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/FF9A8E2E-906B-4314-AEFC-9C4082EE5B29.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/852183B6-3E7B-4FF7-9A8E-0CD32FA65AFB.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/F44A9618-3CDC-449D-9E4A-D45626E7D917.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/DFE3AB2A-2617-46DB-BAF8-1E46B0A385BF.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/8D8D7F8B-0DDD-4CE0-B510-7CE9C0B30C2A.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/7913EA67-913C-41BB-8A25-A2F3A340B730.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/FF9A8E2E-906B-4314-AEFC-9C4082EE5B29.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/852183B6-3E7B-4FF7-9A8E-0CD32FA65AFB.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/F44A9618-3CDC-449D-9E4A-D45626E7D917.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/DFE3AB2A-2617-46DB-BAF8-1E46B0A385BF.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/8D8D7F8B-0DDD-4CE0-B510-7CE9C0B30C2A.png">
 <meta property="article:published_time" content="2018-02-26T03:25:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:08.299Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/7913EA67-913C-41BB-8A25-A2F3A340B730.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/7913EA67-913C-41BB-8A25-A2F3A340B730.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -169,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8A%E4%BC%A0,%E5%A4%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

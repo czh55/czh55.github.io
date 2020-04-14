@@ -17,25 +17,25 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2017年6月29日 下午12:09 第一个部分：数组定义定义的方法：    1.  int num[]&#x3D; new int[10];必须说明长度 int初始化为0    2.  int []num;     num&#x3D;new int[5]    3.  int num[]&#x3D;new int[]{1,2,3,4}    4.  int num[]&#x3D;{1,2,4,5,6,7}     String str">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6.29数组">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2017/06/29/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/6.29%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2017/06/29/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/6.29%E6%95%B0%E7%BB%84/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2017年6月29日 下午12:09 第一个部分：数组定义定义的方法：    1.  int num[]&#x3D; new int[10];必须说明长度 int初始化为0    2.  int []num;     num&#x3D;new int[5]    3.  int num[]&#x3D;new int[]{1,2,3,4}    4.  int num[]&#x3D;{1,2,4,5,6,7}     String str">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2017/06/29/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/6.29%E6%95%B0%E7%BB%84/workspace%20-%20Java%20-%20Class629-src-package1-Test4.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%8812.10.44.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2017/06/29/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/6.29%E6%95%B0%E7%BB%84/workspace%20-%20Java%20-%20Class629-src-package1-Test5.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%8812.11.02.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2017/06/29/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/6.29%E6%95%B0%E7%BB%84/workspace%20-%20Java%20-%20Class629-src-package1-Test4.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%8812.10.44.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2017/06/29/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/6.29%E6%95%B0%E7%BB%84/workspace%20-%20Java%20-%20Class629-src-package1-Test5.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%8812.11.02.png">
 <meta property="article:published_time" content="2017-06-29T04:09:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:07.124Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2017/06/29/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/6.29%E6%95%B0%E7%BB%84/workspace%20-%20Java%20-%20Class629-src-package1-Test4.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%8812.10.44.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2017/06/29/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/6.29%E6%95%B0%E7%BB%84/workspace%20-%20Java%20-%20Class629-src-package1-Test4.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%8812.10.44.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2017/06/29/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/6.29%E6%95%B0%E7%BB%84/">
+<link rel="canonical" href="http://chenzhiheng.cn/2017/06/29/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/6.29%E6%95%B0%E7%BB%84/">
 
 
 <script id="page-configurations">
@@ -165,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/06/29/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/6.29%E6%95%B0%E7%BB%84/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/06/29/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/6.29%E6%95%B0%E7%BB%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

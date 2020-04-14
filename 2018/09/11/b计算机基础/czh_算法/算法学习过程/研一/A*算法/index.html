@@ -17,25 +17,25 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年9月11日 下午3:54 A星算法详解(个人认为最详细,最通俗易懂的一个版本) - CSDN博客  我无法回答为啥通过这样的迭代方式，就可以产生最终的答案 我的理解： 算法的目的：能够设计出跳出局部最优解，从而选取全局最优解 方法：利用堆栈来记录自己的候选位置，配套设计了一套约束，用来限制下一点的走向。   评价函数的定义也是A*算法的难点，相同的问题可以定义不同的评价函数，会有不同的效">
 <meta property="og:type" content="article">
 <meta property="og:title" content="A*算法">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/09/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E7%A0%94%E4%B8%80/A*%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/09/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E7%A0%94%E4%B8%80/A*%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年9月11日 下午3:54 A星算法详解(个人认为最详细,最通俗易懂的一个版本) - CSDN博客  我无法回答为啥通过这样的迭代方式，就可以产生最终的答案 我的理解： 算法的目的：能够设计出跳出局部最优解，从而选取全局最优解 方法：利用堆栈来记录自己的候选位置，配套设计了一套约束，用来限制下一点的走向。   评价函数的定义也是A*算法的难点，相同的问题可以定义不同的评价函数，会有不同的效">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/09/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E7%A0%94%E4%B8%80/A*%E7%AE%97%E6%B3%95/61AA4FD3-01D9-4701-957E-E56624CE205D.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/09/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E7%A0%94%E4%B8%80/A*%E7%AE%97%E6%B3%95/E7DAA5AA-FDE6-4C6D-8F99-30FECAA2AC89.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/09/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E7%A0%94%E4%B8%80/A*%E7%AE%97%E6%B3%95/61AA4FD3-01D9-4701-957E-E56624CE205D.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/09/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E7%A0%94%E4%B8%80/A*%E7%AE%97%E6%B3%95/E7DAA5AA-FDE6-4C6D-8F99-30FECAA2AC89.png">
 <meta property="article:published_time" content="2018-09-10T19:54:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T08:46:20.374Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/09/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E7%A0%94%E4%B8%80/A*%E7%AE%97%E6%B3%95/61AA4FD3-01D9-4701-957E-E56624CE205D.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2018/09/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E7%A0%94%E4%B8%80/A*%E7%AE%97%E6%B3%95/61AA4FD3-01D9-4701-957E-E56624CE205D.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/09/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E7%A0%94%E4%B8%80/A*%E7%AE%97%E6%B3%95/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/09/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E7%A0%94%E4%B8%80/A*%E7%AE%97%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -165,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/09/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E7%A0%94%E4%B8%80/A*%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/09/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/%E7%A0%94%E4%B8%80/A*%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

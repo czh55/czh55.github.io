@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2020年3月17日 下午5:05 互斥量互斥量的基本语义是，一个互斥量只能被一个线程锁定，用来保护某个代码块在同一时间只能被一个线程执行。 在阅读的时候，我心里也有前面几个读者的关于锁、互斥量、原子操作的区别与联系的疑问🤔。 我尝试说一下我的理解：站在需求的角度 对单独没有逻辑联系的变量，直接使用原子量的relaxed就够了，没必要加上内存序 对于有联系的多个多线程中的变量，这时就需要考虑使用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++并发编程-锁、互斥量、原子操作的区别与联系">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/C++%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E9%94%81%E3%80%81%E4%BA%92%E6%96%A5%E9%87%8F%E3%80%81%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/C++%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E9%94%81%E3%80%81%E4%BA%92%E6%96%A5%E9%87%8F%E3%80%81%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2020年3月17日 下午5:05 互斥量互斥量的基本语义是，一个互斥量只能被一个线程锁定，用来保护某个代码块在同一时间只能被一个线程执行。 在阅读的时候，我心里也有前面几个读者的关于锁、互斥量、原子操作的区别与联系的疑问🤔。 我尝试说一下我的理解：站在需求的角度 对单独没有逻辑联系的变量，直接使用原子量的relaxed就够了，没必要加上内存序 对于有联系的多个多线程中的变量，这时就需要考虑使用">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/C++%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E9%94%81%E3%80%81%E4%BA%92%E6%96%A5%E9%87%8F%E3%80%81%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/">
+<link rel="canonical" href="http://chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/C++%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E9%94%81%E3%80%81%E4%BA%92%E6%96%A5%E9%87%8F%E3%80%81%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/C++%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E9%94%81%E3%80%81%E4%BA%92%E6%96%A5%E9%87%8F%E3%80%81%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2020/03/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/C++%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E9%94%81%E3%80%81%E4%BA%92%E6%96%A5%E9%87%8F%E3%80%81%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C%E7%9A%84%E5%8C%BA%E5%88%AB%E4%B8%8E%E8%81%94%E7%B3%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

@@ -17,25 +17,25 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年2月27日 下午9:35  Sql语句执行是一定有返回的值，但最常见的是int，表示影响的行数 MySQL null与not null和null与空值’’的区别 - 好好地 - SegmentFault 思否 对于自增的空字段如何insert时赋值 这个问题来源于我看到*Mapper.xml的insert时，是插入主键id的。 按我平时来说，我的insert语句中就没有主键id，那么问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="有一些mysql容易忽略的问题">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9C%89%E4%B8%80%E4%BA%9Bmysql%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9C%89%E4%B8%80%E4%BA%9Bmysql%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年2月27日 下午9:35  Sql语句执行是一定有返回的值，但最常见的是int，表示影响的行数 MySQL null与not null和null与空值’’的区别 - 好好地 - SegmentFault 思否 对于自增的空字段如何insert时赋值 这个问题来源于我看到*Mapper.xml的insert时，是插入主键id的。 按我平时来说，我的insert语句中就没有主键id，那么问题">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9C%89%E4%B8%80%E4%BA%9Bmysql%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E9%97%AE%E9%A2%98/0665E1D8-4252-4485-B41F-32D9F4A7A41D.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9C%89%E4%B8%80%E4%BA%9Bmysql%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E9%97%AE%E9%A2%98/2DF60596-143D-43CF-85F9-212FDFCE6C16.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9C%89%E4%B8%80%E4%BA%9Bmysql%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E9%97%AE%E9%A2%98/0665E1D8-4252-4485-B41F-32D9F4A7A41D.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9C%89%E4%B8%80%E4%BA%9Bmysql%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E9%97%AE%E9%A2%98/2DF60596-143D-43CF-85F9-212FDFCE6C16.png">
 <meta property="article:published_time" content="2018-02-27T01:35:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:08.461Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9C%89%E4%B8%80%E4%BA%9Bmysql%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E9%97%AE%E9%A2%98/0665E1D8-4252-4485-B41F-32D9F4A7A41D.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9C%89%E4%B8%80%E4%BA%9Bmysql%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E9%97%AE%E9%A2%98/0665E1D8-4252-4485-B41F-32D9F4A7A41D.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9C%89%E4%B8%80%E4%BA%9Bmysql%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E9%97%AE%E9%A2%98/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9C%89%E4%B8%80%E4%BA%9Bmysql%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E9%97%AE%E9%A2%98/">
 
 
 <script id="page-configurations">
@@ -165,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9C%89%E4%B8%80%E4%BA%9Bmysql%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/27/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9C%89%E4%B8%80%E4%BA%9Bmysql%E5%AE%B9%E6%98%93%E5%BF%BD%E7%95%A5%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

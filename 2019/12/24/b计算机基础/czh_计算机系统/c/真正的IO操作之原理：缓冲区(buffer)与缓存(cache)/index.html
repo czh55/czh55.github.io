@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2019年12月24日 下午10:46缓冲区(buffer)与缓存(cache) - 哦摩西罗伊 - 博客园  Buffer的核心作用是用来缓冲，缓和冲击。 比如你每秒要写100次硬盘，对系统冲击很大，浪费了大量时间在忙着处理开始写和结束写这两件事嘛。用个buffer暂存起来，变成每10秒写一次硬盘，对系统的冲击就很小，写入效率高了，日子过得爽了。极大缓和了冲击。   Cache的核心作用是加快取">
 <meta property="og:type" content="article">
 <meta property="og:title" content="真正的I&#x2F;O操作之原理：缓冲区(buffer)与缓存(cache)">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9C%9F%E6%AD%A3%E7%9A%84IO%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%8E%9F%E7%90%86%EF%BC%9A%E7%BC%93%E5%86%B2%E5%8C%BA(buffer)%E4%B8%8E%E7%BC%93%E5%AD%98(cache)/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9C%9F%E6%AD%A3%E7%9A%84IO%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%8E%9F%E7%90%86%EF%BC%9A%E7%BC%93%E5%86%B2%E5%8C%BA(buffer)%E4%B8%8E%E7%BC%93%E5%AD%98(cache)/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2019年12月24日 下午10:46缓冲区(buffer)与缓存(cache) - 哦摩西罗伊 - 博客园  Buffer的核心作用是用来缓冲，缓和冲击。 比如你每秒要写100次硬盘，对系统冲击很大，浪费了大量时间在忙着处理开始写和结束写这两件事嘛。用个buffer暂存起来，变成每10秒写一次硬盘，对系统的冲击就很小，写入效率高了，日子过得爽了。极大缓和了冲击。   Cache的核心作用是加快取">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9C%9F%E6%AD%A3%E7%9A%84IO%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%8E%9F%E7%90%86%EF%BC%9A%E7%BC%93%E5%86%B2%E5%8C%BA(buffer)%E4%B8%8E%E7%BC%93%E5%AD%98(cache)/">
+<link rel="canonical" href="http://chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9C%9F%E6%AD%A3%E7%9A%84IO%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%8E%9F%E7%90%86%EF%BC%9A%E7%BC%93%E5%86%B2%E5%8C%BA(buffer)%E4%B8%8E%E7%BC%93%E5%AD%98(cache)/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9C%9F%E6%AD%A3%E7%9A%84IO%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%8E%9F%E7%90%86%EF%BC%9A%E7%BC%93%E5%86%B2%E5%8C%BA(buffer)%E4%B8%8E%E7%BC%93%E5%AD%98(cache)/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9C%9F%E6%AD%A3%E7%9A%84IO%E6%93%8D%E4%BD%9C%E4%B9%8B%E5%8E%9F%E7%90%86%EF%BC%9A%E7%BC%93%E5%86%B2%E5%8C%BA(buffer)%E4%B8%8E%E7%BC%93%E5%AD%98(cache)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

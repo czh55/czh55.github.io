@@ -17,24 +17,24 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2017年7月1日 下午2:43 几个原则：    1. 测试类中方法不能太多        1. 解决方法：可以想象这个函数代表的功能是谁的    2. 测试类中主方法太长        1. 用c写的习惯了，100行以内根本不认为多        2. 而java中面向对象，超过二十行就觉得有点多了    3. 构造函数顺序：        1. 无参构造        2. 主键构造">
 <meta property="og:type" content="article">
 <meta property="og:title" content="项目结构总结">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2017年7月1日 下午2:43 几个原则：    1. 测试类中方法不能太多        1. 解决方法：可以想象这个函数代表的功能是谁的    2. 测试类中主方法太长        1. 用c写的习惯了，100行以内根本不认为多        2. 而java中面向对象，超过二十行就觉得有点多了    3. 构造函数顺序：        1. 无参构造        2. 主键构造">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/2E829A85D679272CB7FA191FFAE56CD3.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/2E829A85D679272CB7FA191FFAE56CD3.png">
 <meta property="article:published_time" content="2017-06-30T18:43:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:07.117Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/2E829A85D679272CB7FA191FFAE56CD3.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/2E829A85D679272CB7FA191FFAE56CD3.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/">
+<link rel="canonical" href="http://chenzhiheng.cn/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/">
 
 
 <script id="page-configurations">
@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E6%80%BB%E7%BB%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2019年3月25日 下午12:53分段锁的原理 - 云+社区 - 腾讯云 独占锁-串行化的缺点： 在并发程序中，串行操作是会降低可伸缩性，并且上下文切换也会减低性能。 在锁上发生竞争时将通水导致这两种问题，使用独占锁时保护受限资源的时候，基本上是采用串行方式—-每次只能有一个线程能访问它。  所以对于可伸缩性来说最大的威胁就是独占锁。  降低锁的竞争程度的三种方式： 减少锁的持有时间  降低锁的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="并发容器中的分段锁">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2019/03/25/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%88%86%E6%AE%B5%E9%94%81/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2019/03/25/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%88%86%E6%AE%B5%E9%94%81/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2019年3月25日 下午12:53分段锁的原理 - 云+社区 - 腾讯云 独占锁-串行化的缺点： 在并发程序中，串行操作是会降低可伸缩性，并且上下文切换也会减低性能。 在锁上发生竞争时将通水导致这两种问题，使用独占锁时保护受限资源的时候，基本上是采用串行方式—-每次只能有一个线程能访问它。  所以对于可伸缩性来说最大的威胁就是独占锁。  降低锁的竞争程度的三种方式： 减少锁的持有时间  降低锁的">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2019/03/25/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%88%86%E6%AE%B5%E9%94%81/">
+<link rel="canonical" href="http://chenzhiheng.cn/2019/03/25/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%88%86%E6%AE%B5%E9%94%81/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/03/25/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%88%86%E6%AE%B5%E9%94%81/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/25/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%AE%B9%E5%99%A8%E4%B8%AD%E7%9A%84%E5%88%86%E6%AE%B5%E9%94%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2019年12月24日 下午11:48 真正的I&#x2F;O操作之原理：缓冲区(buffer)与缓存(cache)真正的I&#x2F;O操作之应用：在程序中，内存中开辟的一片缓冲区域附录：  在学习的过程中，让我想起另一个问题：既然我们再敲键盘的时候，很多时候并没有真正的发生io过程， 那么显示器上是如何显示我们实时敲击的字符的 ？ 对于这个问题，我没有找到好的材料，但是间接找到了《ORANGE’S：一个操作系统的">
 <meta property="og:type" content="article">
 <meta property="og:title" content="目录(C)：主要关于内存">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9B%AE%E5%BD%95(C)%EF%BC%9A%E4%B8%BB%E8%A6%81%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9B%AE%E5%BD%95(C)%EF%BC%9A%E4%B8%BB%E8%A6%81%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2019年12月24日 下午11:48 真正的I&#x2F;O操作之原理：缓冲区(buffer)与缓存(cache)真正的I&#x2F;O操作之应用：在程序中，内存中开辟的一片缓冲区域附录：  在学习的过程中，让我想起另一个问题：既然我们再敲键盘的时候，很多时候并没有真正的发生io过程， 那么显示器上是如何显示我们实时敲击的字符的 ？ 对于这个问题，我没有找到好的材料，但是间接找到了《ORANGE’S：一个操作系统的">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9B%AE%E5%BD%95(C)%EF%BC%9A%E4%B8%BB%E8%A6%81%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98/">
+<link rel="canonical" href="http://chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9B%AE%E5%BD%95(C)%EF%BC%9A%E4%B8%BB%E8%A6%81%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9B%AE%E5%BD%95(C)%EF%BC%9A%E4%B8%BB%E8%A6%81%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/12/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/c/%E7%9B%AE%E5%BD%95(C)%EF%BC%9A%E4%B8%BB%E8%A6%81%E5%85%B3%E4%BA%8E%E5%86%85%E5%AD%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

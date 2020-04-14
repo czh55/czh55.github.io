@@ -17,25 +17,25 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年6月18日 上午11:13 只有war exploede才可以热部署：idea中war和war exploded的区别及修改jsp必须重新启动tomcat才能生效的问题(转) - 话说当初 - 博客园 两种方式得到的上下文环境的路径不同：String contextPath &#x3D; request.getSession().getServletContext().getRealPath(&amp;q">
 <meta property="og:type" content="article">
 <meta property="og:title" content="IDEA中war、war exploded的不同  +  热部署">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/06/18/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/IDEA%E4%B8%ADwar%E3%80%81war%20exploded%E7%9A%84%E4%B8%8D%E5%90%8C%20%20+%20%20%E7%83%AD%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/06/18/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/IDEA%E4%B8%ADwar%E3%80%81war%20exploded%E7%9A%84%E4%B8%8D%E5%90%8C%20%20+%20%20%E7%83%AD%E9%83%A8%E7%BD%B2/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年6月18日 上午11:13 只有war exploede才可以热部署：idea中war和war exploded的区别及修改jsp必须重新启动tomcat才能生效的问题(转) - 话说当初 - 博客园 两种方式得到的上下文环境的路径不同：String contextPath &#x3D; request.getSession().getServletContext().getRealPath(&amp;q">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/06/18/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/IDEA%E4%B8%ADwar%E3%80%81war%20exploded%E7%9A%84%E4%B8%8D%E5%90%8C%20%20+%20%20%E7%83%AD%E9%83%A8%E7%BD%B2/489ABB37-A598-4107-8EB1-68C7996067FB.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/06/18/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/IDEA%E4%B8%ADwar%E3%80%81war%20exploded%E7%9A%84%E4%B8%8D%E5%90%8C%20%20+%20%20%E7%83%AD%E9%83%A8%E7%BD%B2/Screenshot-2018-6-18%20idea%20Tomcat%20%E9%83%A8%E7%BD%B2%20war%E5%92%8Cwar%20exploded%E7%9A%84%E5%8C%BA%E5%88%AB%20-%20CSDN%E5%8D%9A%E5%AE%A2.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/06/18/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/IDEA%E4%B8%ADwar%E3%80%81war%20exploded%E7%9A%84%E4%B8%8D%E5%90%8C%20%20+%20%20%E7%83%AD%E9%83%A8%E7%BD%B2/489ABB37-A598-4107-8EB1-68C7996067FB.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/06/18/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/IDEA%E4%B8%ADwar%E3%80%81war%20exploded%E7%9A%84%E4%B8%8D%E5%90%8C%20%20+%20%20%E7%83%AD%E9%83%A8%E7%BD%B2/Screenshot-2018-6-18%20idea%20Tomcat%20%E9%83%A8%E7%BD%B2%20war%E5%92%8Cwar%20exploded%E7%9A%84%E5%8C%BA%E5%88%AB%20-%20CSDN%E5%8D%9A%E5%AE%A2.png">
 <meta property="article:published_time" content="2018-06-18T03:13:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:07.573Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/06/18/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/IDEA%E4%B8%ADwar%E3%80%81war%20exploded%E7%9A%84%E4%B8%8D%E5%90%8C%20%20+%20%20%E7%83%AD%E9%83%A8%E7%BD%B2/489ABB37-A598-4107-8EB1-68C7996067FB.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2018/06/18/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/IDEA%E4%B8%ADwar%E3%80%81war%20exploded%E7%9A%84%E4%B8%8D%E5%90%8C%20%20+%20%20%E7%83%AD%E9%83%A8%E7%BD%B2/489ABB37-A598-4107-8EB1-68C7996067FB.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/06/18/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/IDEA%E4%B8%ADwar%E3%80%81war%20exploded%E7%9A%84%E4%B8%8D%E5%90%8C%20%20+%20%20%E7%83%AD%E9%83%A8%E7%BD%B2/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/06/18/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/IDEA%E4%B8%ADwar%E3%80%81war%20exploded%E7%9A%84%E4%B8%8D%E5%90%8C%20%20+%20%20%E7%83%AD%E9%83%A8%E7%BD%B2/">
 
 
 <script id="page-configurations">
@@ -165,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/06/18/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/IDEA%E4%B8%ADwar%E3%80%81war%20exploded%E7%9A%84%E4%B8%8D%E5%90%8C%20%20+%20%20%E7%83%AD%E9%83%A8%E7%BD%B2/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/06/18/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/IDEA%E4%B8%ADwar%E3%80%81war%20exploded%E7%9A%84%E4%B8%8D%E5%90%8C%20%20+%20%20%E7%83%AD%E9%83%A8%E7%BD%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

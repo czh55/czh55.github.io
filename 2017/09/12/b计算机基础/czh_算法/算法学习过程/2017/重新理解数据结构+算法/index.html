@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2017年9月12日 下午4:15 概述： 今天的这篇文章最大的收获有两点 数据结构和算法是不同的两个东西 在广义的数据结构这一大家庭中，可以粗略的分为两个步骤 第一步骤是写工具 第二步骤是使用工具     以前说起说数据结构：不就是链表、树、图那些吗。这样去总结数据结构我觉得是很不正确的，因为这两个步骤 既说明了我们学习、使用、创造一个数据结构的步骤， 同时也体现了一种分层的思想，这种分层是必须">
 <meta property="og:type" content="article">
 <meta property="og:title" content="重新理解数据结构+算法">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2017/09/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84+%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2017/09/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84+%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2017年9月12日 下午4:15 概述： 今天的这篇文章最大的收获有两点 数据结构和算法是不同的两个东西 在广义的数据结构这一大家庭中，可以粗略的分为两个步骤 第一步骤是写工具 第二步骤是使用工具     以前说起说数据结构：不就是链表、树、图那些吗。这样去总结数据结构我觉得是很不正确的，因为这两个步骤 既说明了我们学习、使用、创造一个数据结构的步骤， 同时也体现了一种分层的思想，这种分层是必须">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2017/09/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84+%E7%AE%97%E6%B3%95/">
+<link rel="canonical" href="http://chenzhiheng.cn/2017/09/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84+%E7%AE%97%E6%B3%95/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84+%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84+%E7%AE%97%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

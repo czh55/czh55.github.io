@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2019年11月11日 下午8:10linux 如何清理僵尸进程-毛虫臭臭-51CTO博客 僵尸进程如何产生的？ 如果一个进程在其终止的时候，自己就回收所有分配给它的资源，系统就不会产生所谓的僵尸进程了。那么我们说一个进程终止之后，还保留哪些信息？为什么终止之后还需要保留这些信息呢？ 一个进程终止的方法很多，进程终止后有些信息对于父进程和内核还是很有用的，例如进程的ID号、进程的退出状态、进程运行">
 <meta property="og:type" content="article">
 <meta property="og:title" content="僵尸进程：原理+清理">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2019/11/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%EF%BC%9A%E5%8E%9F%E7%90%86+%E6%B8%85%E7%90%86/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2019/11/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%EF%BC%9A%E5%8E%9F%E7%90%86+%E6%B8%85%E7%90%86/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2019年11月11日 下午8:10linux 如何清理僵尸进程-毛虫臭臭-51CTO博客 僵尸进程如何产生的？ 如果一个进程在其终止的时候，自己就回收所有分配给它的资源，系统就不会产生所谓的僵尸进程了。那么我们说一个进程终止之后，还保留哪些信息？为什么终止之后还需要保留这些信息呢？ 一个进程终止的方法很多，进程终止后有些信息对于父进程和内核还是很有用的，例如进程的ID号、进程的退出状态、进程运行">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2019/11/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%EF%BC%9A%E5%8E%9F%E7%90%86+%E6%B8%85%E7%90%86/">
+<link rel="canonical" href="http://chenzhiheng.cn/2019/11/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%EF%BC%9A%E5%8E%9F%E7%90%86+%E6%B8%85%E7%90%86/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/11/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%EF%BC%9A%E5%8E%9F%E7%90%86+%E6%B8%85%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/11/11/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B%EF%BC%9A%E5%8E%9F%E7%90%86+%E6%B8%85%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

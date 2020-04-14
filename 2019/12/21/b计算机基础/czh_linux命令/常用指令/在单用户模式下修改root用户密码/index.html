@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2019年12月21日 下午3:07Linux忘记Root密码怎么找回 - Convict - 博客园Linux运行级别及解释 - Convict - 博客园 Linux中有七个运行级别，分别为0~70级：关机1级：单用户（找回丢失密码）2级：多用户无网络3级：多用户有网络，最常用的级别4级：保留，目前Linux暂无使用5级：图像界面6级：重启系统运行级别配置文件：_etc_inittab 修改r">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在单用户模式下修改root用户密码">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2019/12/21/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%9C%A8%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%E4%B8%8B%E4%BF%AE%E6%94%B9root%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2019/12/21/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%9C%A8%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%E4%B8%8B%E4%BF%AE%E6%94%B9root%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2019年12月21日 下午3:07Linux忘记Root密码怎么找回 - Convict - 博客园Linux运行级别及解释 - Convict - 博客园 Linux中有七个运行级别，分别为0~70级：关机1级：单用户（找回丢失密码）2级：多用户无网络3级：多用户有网络，最常用的级别4级：保留，目前Linux暂无使用5级：图像界面6级：重启系统运行级别配置文件：_etc_inittab 修改r">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2019/12/21/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%9C%A8%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%E4%B8%8B%E4%BF%AE%E6%94%B9root%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/">
+<link rel="canonical" href="http://chenzhiheng.cn/2019/12/21/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%9C%A8%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%E4%B8%8B%E4%BF%AE%E6%94%B9root%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/21/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%9C%A8%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%E4%B8%8B%E4%BF%AE%E6%94%B9root%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/12/21/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_linux%E5%91%BD%E4%BB%A4/%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/%E5%9C%A8%E5%8D%95%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%E4%B8%8B%E4%BF%AE%E6%94%B9root%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2017年8月19日 下午9:18 反思1 今天看源码看的看的就跳坑里了——自己的脑子一点都不清晰，学也学不进去 原因就是强迫自己去接受自己知识储配达不到的内容，eg：设计到php运行机制、php这么语言中自己不曾接触的东西，就类似于TP的使用者是不考虑这个框架他在不同系统兼容性好坏，着眼点在于完成功能，但是TP的设计者就得考虑，所以当我们从开发者转为设计者时，要求我们整个的视角会变大、变深，最后">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ThinkPHP源码分析-3">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-3/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-3/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2017年8月19日 下午9:18 反思1 今天看源码看的看的就跳坑里了——自己的脑子一点都不清晰，学也学不进去 原因就是强迫自己去接受自己知识储配达不到的内容，eg：设计到php运行机制、php这么语言中自己不曾接触的东西，就类似于TP的使用者是不考虑这个框架他在不同系统兼容性好坏，着眼点在于完成功能，但是TP的设计者就得考虑，所以当我们从开发者转为设计者时，要求我们整个的视角会变大、变深，最后">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-3/">
+<link rel="canonical" href="http://chenzhiheng.cn/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-3/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-3/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

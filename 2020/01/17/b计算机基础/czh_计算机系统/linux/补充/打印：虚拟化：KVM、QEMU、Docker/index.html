@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2020年1月17日 下午6:09 虚拟化的根本原理：linux中的容器与沙箱初探 — Atum 各种虚拟化之间的对比LXD容器入门 两个应用：绿色记忆:KVM和QEMU学习笔记绿色记忆:Docker学习笔记绿色记忆Docker学习笔记.pdf绿色记忆KVM和QEMU学习笔记.pdfDocker：Table Of Contents.docx 配套相关的，没有看：绿色记忆:libvirt学习笔记绿色">
 <meta property="og:type" content="article">
 <meta property="og:title" content="打印：虚拟化：KVM、QEMU、Docker">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2020/01/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E6%89%93%E5%8D%B0%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%9AKVM%E3%80%81QEMU%E3%80%81Docker/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2020/01/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E6%89%93%E5%8D%B0%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%9AKVM%E3%80%81QEMU%E3%80%81Docker/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2020年1月17日 下午6:09 虚拟化的根本原理：linux中的容器与沙箱初探 — Atum 各种虚拟化之间的对比LXD容器入门 两个应用：绿色记忆:KVM和QEMU学习笔记绿色记忆:Docker学习笔记绿色记忆Docker学习笔记.pdf绿色记忆KVM和QEMU学习笔记.pdfDocker：Table Of Contents.docx 配套相关的，没有看：绿色记忆:libvirt学习笔记绿色">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2020/01/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E6%89%93%E5%8D%B0%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%9AKVM%E3%80%81QEMU%E3%80%81Docker/">
+<link rel="canonical" href="http://chenzhiheng.cn/2020/01/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E6%89%93%E5%8D%B0%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%9AKVM%E3%80%81QEMU%E3%80%81Docker/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2020/01/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E6%89%93%E5%8D%B0%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%9AKVM%E3%80%81QEMU%E3%80%81Docker/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2020/01/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E6%89%93%E5%8D%B0%EF%BC%9A%E8%99%9A%E6%8B%9F%E5%8C%96%EF%BC%9AKVM%E3%80%81QEMU%E3%80%81Docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

@@ -17,31 +17,31 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年3月8日 下午2:48 参看文章：centos安装nginx：在配置文件中实现反向代理2017&#x2F;10&#x2F;2 Mac中配置php的步骤记录我Mac上nginx路径：_usr_local_etc_nginx 重要的分析： 这里一步是在没有开启nginx的时候，通过域名去访问8080，9080端口，也就说访问tomcat没有通过nginx。 对tomcat来说，到达他的方式有两种，不一定非得ng">
 <meta property="og:type" content="article">
 <meta property="og:title" content="配置Mac的双tomcat+nginx实现负载均衡">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年3月8日 下午2:48 参看文章：centos安装nginx：在配置文件中实现反向代理2017&#x2F;10&#x2F;2 Mac中配置php的步骤记录我Mac上nginx路径：_usr_local_etc_nginx 重要的分析： 这里一步是在没有开启nginx的时候，通过域名去访问8080，9080端口，也就说访问tomcat没有通过nginx。 对tomcat来说，到达他的方式有两种，不一定非得ng">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/0D691C21-5095-4D18-BEF9-B17D13B5403E.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/B00C9AEC-764D-4E32-A3EE-9D50C8A6E1E6.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/8BBBD88D-46C8-47EB-8C4A-89ED27BF8697.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/B5DBE42F-309D-44EA-B71E-61250A09ADF5.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/775A7C1B-E59A-4801-96E1-BA12AAB9B3E6.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/E42E56DD-9AF1-4194-8A2C-25E79D78CF3B.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/6125422B-7544-4386-BF66-79A4B1FA0F78.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/35F64FBE-1C3E-4FE5-93BE-F6B689E1E5F9.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/0D691C21-5095-4D18-BEF9-B17D13B5403E.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/B00C9AEC-764D-4E32-A3EE-9D50C8A6E1E6.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/8BBBD88D-46C8-47EB-8C4A-89ED27BF8697.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/B5DBE42F-309D-44EA-B71E-61250A09ADF5.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/775A7C1B-E59A-4801-96E1-BA12AAB9B3E6.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/E42E56DD-9AF1-4194-8A2C-25E79D78CF3B.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/6125422B-7544-4386-BF66-79A4B1FA0F78.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/35F64FBE-1C3E-4FE5-93BE-F6B689E1E5F9.png">
 <meta property="article:published_time" content="2018-03-07T18:48:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:07.894Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/0D691C21-5095-4D18-BEF9-B17D13B5403E.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/0D691C21-5095-4D18-BEF9-B17D13B5403E.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">
 
 
 <script id="page-configurations">
@@ -171,7 +171,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

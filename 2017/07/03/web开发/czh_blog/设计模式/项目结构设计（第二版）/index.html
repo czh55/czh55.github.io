@@ -17,29 +17,29 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2017年7月3日 下午4:55 这篇文章的思路是:    1. 文章产生的原因    2. 我总结出来的“框架”    3. 对框架的说明        1. 其中有哪些注意点        2. 原因        3. 如何解决        4. 例子 第二版改进：1. 加了一个原则：    2.  封装加了一个    3. 包的设计 项目难度分类    1. 数据库设计：我做过的就是报表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="项目结构设计（第二版）">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2017年7月3日 下午4:55 这篇文章的思路是:    1. 文章产生的原因    2. 我总结出来的“框架”    3. 对框架的说明        1. 其中有哪些注意点        2. 原因        3. 如何解决        4. 例子 第二版改进：1. 加了一个原则：    2.  封装加了一个    3. 包的设计 项目难度分类    1. 数据库设计：我做过的就是报表">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/Bear%20Bear,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%8810.55.22.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/Bear%20Bear,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%8810.56.00.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/Bear%20Bear,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%8810.56.33.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%20MindNode,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%889.48.30.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/StepService.java%20-%20BaiduTrace_AndroidSDK_v3.0.1_Sample1%20-%20%5B~-android_studio-BaiduTrace_AndroidSDK_v3.0.1_Sample1">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/2E829A85D679272CB7FA191FFAE56CD3.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/Bear%20Bear,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%8810.55.22.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/Bear%20Bear,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%8810.56.00.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/Bear%20Bear,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%8810.56.33.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE%20MindNode,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%889.48.30.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/StepService.java%20-%20BaiduTrace_AndroidSDK_v3.0.1_Sample1%20-%20%5B~-android_studio-BaiduTrace_AndroidSDK_v3.0.1_Sample1">
+<meta property="og:image" content="http://chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/2E829A85D679272CB7FA191FFAE56CD3.png">
 <meta property="article:published_time" content="2017-07-02T20:55:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:07.086Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/Bear%20Bear,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%8810.55.22.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/Bear%20Bear,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%8810.55.22.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/">
+<link rel="canonical" href="http://chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -169,7 +169,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/07/03/web%E5%BC%80%E5%8F%91/czh_blog/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1%EF%BC%88%E7%AC%AC%E4%BA%8C%E7%89%88%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

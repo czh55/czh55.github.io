@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2019年3月12日 上午11:00  在多目视觉中，几何模型几乎已经非常成熟了，显然，从这里改进的话会非常的难。 那么，假设模型完美，俺么在任何场景下效果是不是都非常好？ NO！在一些特殊场景下效果依然很差。   问题出现在哪里呢？ 模型的输入执行效果几乎完全取决于它的输入，也就是匹配点的质量。   那么，我们能不能从这里下手找改进呢？ 能！    上来就将怎么做的文章，都不是好文章 读懂Ope">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不从模型找创新点">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2019/03/12/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E4%B8%8D%E4%BB%8E%E6%A8%A1%E5%9E%8B%E6%89%BE%E5%88%9B%E6%96%B0%E7%82%B9/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2019/03/12/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E4%B8%8D%E4%BB%8E%E6%A8%A1%E5%9E%8B%E6%89%BE%E5%88%9B%E6%96%B0%E7%82%B9/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2019年3月12日 上午11:00  在多目视觉中，几何模型几乎已经非常成熟了，显然，从这里改进的话会非常的难。 那么，假设模型完美，俺么在任何场景下效果是不是都非常好？ NO！在一些特殊场景下效果依然很差。   问题出现在哪里呢？ 模型的输入执行效果几乎完全取决于它的输入，也就是匹配点的质量。   那么，我们能不能从这里下手找改进呢？ 能！    上来就将怎么做的文章，都不是好文章 读懂Ope">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2019/03/12/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E4%B8%8D%E4%BB%8E%E6%A8%A1%E5%9E%8B%E6%89%BE%E5%88%9B%E6%96%B0%E7%82%B9/">
+<link rel="canonical" href="http://chenzhiheng.cn/2019/03/12/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E4%B8%8D%E4%BB%8E%E6%A8%A1%E5%9E%8B%E6%89%BE%E5%88%9B%E6%96%B0%E7%82%B9/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/03/12/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E4%B8%8D%E4%BB%8E%E6%A8%A1%E5%9E%8B%E6%89%BE%E5%88%9B%E6%96%B0%E7%82%B9/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/12/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E4%B8%8D%E4%BB%8E%E6%A8%A1%E5%9E%8B%E6%89%BE%E5%88%9B%E6%96%B0%E7%82%B9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

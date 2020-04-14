@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="#b计算机基础&#x2F;czh_计算机系统&#x2F;整理2019年12月22日 下午10:21 进程 vs. 线程 - 廖雪峰的官方网站 结论： 稳定性：进程 &gt; 线程 创建的代价：进程 &gt; 线程 执行速度：要根据操作系统判断 任务类型：计算密集型 vs. IO密集型 Python这样的脚本语言运行效率很低，完全不适合计算密集型任务。对于计算密集型任务，最好用C语言编写。    模块实现说明： 整个模">
 <meta property="og:type" content="article">
 <meta property="og:title" content="以画降水图为例，学习线程和进程：python就不要使用多线程！！！">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BB%A5%E7%94%BB%E9%99%8D%E6%B0%B4%E5%9B%BE%E4%B8%BA%E4%BE%8B%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%EF%BC%9Apython%E5%B0%B1%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%81%EF%BC%81%EF%BC%81/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BB%A5%E7%94%BB%E9%99%8D%E6%B0%B4%E5%9B%BE%E4%B8%BA%E4%BE%8B%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%EF%BC%9Apython%E5%B0%B1%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%81%EF%BC%81%EF%BC%81/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="#b计算机基础&#x2F;czh_计算机系统&#x2F;整理2019年12月22日 下午10:21 进程 vs. 线程 - 廖雪峰的官方网站 结论： 稳定性：进程 &gt; 线程 创建的代价：进程 &gt; 线程 执行速度：要根据操作系统判断 任务类型：计算密集型 vs. IO密集型 Python这样的脚本语言运行效率很低，完全不适合计算密集型任务。对于计算密集型任务，最好用C语言编写。    模块实现说明： 整个模">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BB%A5%E7%94%BB%E9%99%8D%E6%B0%B4%E5%9B%BE%E4%B8%BA%E4%BE%8B%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%EF%BC%9Apython%E5%B0%B1%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%81%EF%BC%81%EF%BC%81/">
+<link rel="canonical" href="http://chenzhiheng.cn/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BB%A5%E7%94%BB%E9%99%8D%E6%B0%B4%E5%9B%BE%E4%B8%BA%E4%BE%8B%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%EF%BC%9Apython%E5%B0%B1%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%81%EF%BC%81%EF%BC%81/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BB%A5%E7%94%BB%E9%99%8D%E6%B0%B4%E5%9B%BE%E4%B8%BA%E4%BE%8B%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%EF%BC%9Apython%E5%B0%B1%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%81%EF%BC%81%EF%BC%81/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/12/22/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BB%A5%E7%94%BB%E9%99%8D%E6%B0%B4%E5%9B%BE%E4%B8%BA%E4%BE%8B%EF%BC%8C%E5%AD%A6%E4%B9%A0%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B%EF%BC%9Apython%E5%B0%B1%E4%B8%8D%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%EF%BC%81%EF%BC%81%EF%BC%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

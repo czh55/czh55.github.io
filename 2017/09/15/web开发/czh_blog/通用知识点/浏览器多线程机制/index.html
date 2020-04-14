@@ -17,24 +17,24 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2017年9月15日 上午10:49 参考：javascript-js实现多线程 - 浩大王 - 博客园浏览器的多线程机制（转） - SolHe - 博客园 概述先说明浏览器的多线程实现方式，其中着重说明了其中一个线程—javaScript引擎线程的执行方式 浏览器多线程实现方式只要理解了上图就说明理解了浏览器多线程工作的方式（这里不能说成js多线程） 总结来说：js引擎主要是通过一个队列来存放要">
 <meta property="og:type" content="article">
 <meta property="og:title" content="浏览器多线程机制">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2017年9月15日 上午10:49 参考：javascript-js实现多线程 - 浩大王 - 博客园浏览器的多线程机制（转） - SolHe - 博客园 概述先说明浏览器的多线程实现方式，其中着重说明了其中一个线程—javaScript引擎线程的执行方式 浏览器多线程实现方式只要理解了上图就说明理解了浏览器多线程工作的方式（这里不能说成js多线程） 总结来说：js引擎主要是通过一个队列来存放要">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/23994C1F-540B-4453-BC89-37B36B6335C7.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/23994C1F-540B-4453-BC89-37B36B6335C7.png">
 <meta property="article:published_time" content="2017-09-15T02:49:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:07.042Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/23994C1F-540B-4453-BC89-37B36B6335C7.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/23994C1F-540B-4453-BC89-37B36B6335C7.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/">
+<link rel="canonical" href="http://chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/">
 
 
 <script id="page-configurations">
@@ -164,7 +164,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

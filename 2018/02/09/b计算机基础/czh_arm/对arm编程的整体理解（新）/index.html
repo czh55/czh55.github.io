@@ -17,25 +17,25 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年2月9日 下午8:40 前言： 这篇文章的前奏是 对ARM的理解和整体上去理解2440结构这两篇文章。 在篇文章我有些观点与对ARM的理解不太合拍，我认为我现在这篇是更加合适更加让我舒服的理解。  正文： 【核心】： 站在硬件arm板设计者的角度去思考问题 ，在这个过程中只能从现实生活出发，思考：如过你是一个硬件的设计者，哪些情况需要考虑？比如说可扩展性、复用性、操作灵活性等等，整个流程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对arm编程的整体理解（新）">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年2月9日 下午8:40 前言： 这篇文章的前奏是 对ARM的理解和整体上去理解2440结构这两篇文章。 在篇文章我有些观点与对ARM的理解不太合拍，我认为我现在这篇是更加合适更加让我舒服的理解。  正文： 【核心】： 站在硬件arm板设计者的角度去思考问题 ，在这个过程中只能从现实生活出发，思考：如过你是一个硬件的设计者，哪些情况需要考虑？比如说可扩展性、复用性、操作灵活性等等，整个流程">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/IMG_7734.JPG">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/IMG_7735.JPG">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/IMG_7734.JPG">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/IMG_7735.JPG">
 <meta property="article:published_time" content="2018-02-09T00:40:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T08:46:20.900Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/IMG_7734.JPG">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/IMG_7734.JPG">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/">
 
 
 <script id="page-configurations">
@@ -165,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

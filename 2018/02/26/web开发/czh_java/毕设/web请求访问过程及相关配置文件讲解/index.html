@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年2月26日 上午10:02 为什么要上传到ftp服务器_实战问答 jsp中的request.getContextPath() - 原谅时光记住爱 - 博客园 2011-01-16 JavaWeb-WEB应用-虚拟目录三种映射-虚拟主机-web.xml-web应用组成结构_HeDgeHog_新浪博客 nginx+tomcat实现代理访问java web项目 - CSDN博客自己重写 一次完">
 <meta property="og:type" content="article">
 <meta property="og:title" content="web请求访问过程及相关配置文件讲解">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/web%E8%AF%B7%E6%B1%82%E8%AE%BF%E9%97%AE%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AE%B2%E8%A7%A3/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/web%E8%AF%B7%E6%B1%82%E8%AE%BF%E9%97%AE%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AE%B2%E8%A7%A3/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年2月26日 上午10:02 为什么要上传到ftp服务器_实战问答 jsp中的request.getContextPath() - 原谅时光记住爱 - 博客园 2011-01-16 JavaWeb-WEB应用-虚拟目录三种映射-虚拟主机-web.xml-web应用组成结构_HeDgeHog_新浪博客 nginx+tomcat实现代理访问java web项目 - CSDN博客自己重写 一次完">
 <meta property="og:locale" content="zh_CN">
@@ -32,7 +32,7 @@
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/web%E8%AF%B7%E6%B1%82%E8%AE%BF%E9%97%AE%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AE%B2%E8%A7%A3/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/web%E8%AF%B7%E6%B1%82%E8%AE%BF%E9%97%AE%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AE%B2%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -162,7 +162,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/web%E8%AF%B7%E6%B1%82%E8%AE%BF%E9%97%AE%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AE%B2%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/web%E8%AF%B7%E6%B1%82%E8%AE%BF%E9%97%AE%E8%BF%87%E7%A8%8B%E5%8F%8A%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AE%B2%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

@@ -17,25 +17,25 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2017年9月4日 上午11:32 理解hosts文件作者：Wildog链接：https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;19782572&#x2F;answer&#x2F;12946786来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。  为了方便用户记忆，我们将IP变成一个个的域名来输入到浏览器进行访问。而这使得访问网站时要先将其域名解析成 IP 。DNS (Dom">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HOSTS文件">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2017年9月4日 上午11:32 理解hosts文件作者：Wildog链接：https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;19782572&#x2F;answer&#x2F;12946786来源：知乎著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。  为了方便用户记忆，我们将IP变成一个个的域名来输入到浏览器进行访问。而这使得访问网站时要先将其域名解析成 IP 。DNS (Dom">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/03D6A282-F78E-4B08-84D2-267810CD5693.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/F2963AF9-7F70-4B8F-BD1E-2AFC0877F880.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/03D6A282-F78E-4B08-84D2-267810CD5693.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/F2963AF9-7F70-4B8F-BD1E-2AFC0877F880.png">
 <meta property="article:published_time" content="2017-09-04T03:32:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:07.194Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/03D6A282-F78E-4B08-84D2-267810CD5693.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/03D6A282-F78E-4B08-84D2-267810CD5693.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/">
+<link rel="canonical" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/">
 
 
 <script id="page-configurations">
@@ -165,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/HOSTS%E6%96%87%E4%BB%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

@@ -17,25 +17,25 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2020年4月8日 下午5:57 关键：理解了buffer的作用其实就是有一个buffer用作缓存(事件（消息）队列)，当动作发生的时候，我并不执行，而是将它扔到一个buffer里，让另外的处理线程去执行，这个处理线程就会不间断的执行buffer里的任务，如果当前的动作发生了阻塞，那么处理线程立刻再把它放到这个buffer中(注册一个回调到事件循环中)，找下一个进行执行，直到buffer为空 事件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="事件驱动编程模型 &#x3D;&#x3D; 异步编程">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%20==%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%20==%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2020年4月8日 下午5:57 关键：理解了buffer的作用其实就是有一个buffer用作缓存(事件（消息）队列)，当动作发生的时候，我并不执行，而是将它扔到一个buffer里，让另外的处理线程去执行，这个处理线程就会不间断的执行buffer里的任务，如果当前的动作发生了阻塞，那么处理线程立刻再把它放到这个buffer中(注册一个回调到事件循环中)，找下一个进行执行，直到buffer为空 事件">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%20==%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/986023-20170516213233307-426720751.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%20==%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/986023-20170516213325916-254282572.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%20==%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/986023-20170516213233307-426720751.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%20==%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/986023-20170516213325916-254282572.png">
 <meta property="article:published_time" content="2020-04-07T21:57:00.000Z">
 <meta property="article:modified_time" content="2020-04-12T11:32:44.649Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%20==%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/986023-20170516213233307-426720751.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%20==%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/986023-20170516213233307-426720751.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%20==%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
+<link rel="canonical" href="http://chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%20==%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
 
 
 <script id="page-configurations">
@@ -165,7 +165,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%20==%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E4%BA%8B%E4%BB%B6%E9%A9%B1%E5%8A%A8%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%20==%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

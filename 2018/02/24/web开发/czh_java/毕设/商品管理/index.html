@@ -17,28 +17,28 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年2月24日 下午9:17 学习目标一：与实现vo相关 抽象POJO、BO、VO对象之间的转换关系及解决思路 在一期中，我们只使用vo(value object)，不用bo(business object) 效果：ServiceResponse以前中data对象保存的是POJO_Product对象，现在保存的是vo_ProductDetailVo。 本质：vo\ProductDetailV">
 <meta property="og:type" content="article">
 <meta property="og:title" content="商品管理">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年2月24日 下午9:17 学习目标一：与实现vo相关 抽象POJO、BO、VO对象之间的转换关系及解决思路 在一期中，我们只使用vo(value object)，不用bo(business object) 效果：ServiceResponse以前中data对象保存的是POJO_Product对象，现在保存的是vo_ProductDetailVo。 本质：vo\ProductDetailV">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/653859E4-2615-40AA-8F68-B00253C510AA.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/59083A39-A76F-465C-B87F-6D8D692397D6.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/013CDA25-B6DA-48DF-A306-51591DCABD99.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/B0D747B8-93FD-44F4-8BA1-4AEDA3D56B73.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/1D9AB7A1-FCA7-4143-8A82-CFF96D3977EF.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/653859E4-2615-40AA-8F68-B00253C510AA.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/59083A39-A76F-465C-B87F-6D8D692397D6.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/013CDA25-B6DA-48DF-A306-51591DCABD99.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/B0D747B8-93FD-44F4-8BA1-4AEDA3D56B73.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/1D9AB7A1-FCA7-4143-8A82-CFF96D3977EF.png">
 <meta property="article:published_time" content="2018-02-24T01:17:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:08.547Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/653859E4-2615-40AA-8F68-B00253C510AA.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/653859E4-2615-40AA-8F68-B00253C510AA.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/">
 
 
 <script id="page-configurations">
@@ -168,7 +168,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%95%86%E5%93%81%E7%AE%A1%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

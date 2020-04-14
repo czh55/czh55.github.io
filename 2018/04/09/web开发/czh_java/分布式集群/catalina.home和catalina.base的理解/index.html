@@ -17,28 +17,28 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年4月9日 上午9:58  要分清实例与tomcat的区别：这里的实例默认指没有bin,lib目录的tomcat，其他的东西是复制过来的。 我的项目中没有使用公共目录bin,lib目录，而是直接使用解压的官网的解压版 站在tomcat启动的角度：需要独有的catalina_base，以及可以不独有的catalina_home。另外，如果要同时启动的话要配置不同的端口  tomcat7源码学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="catalina.home和catalina.base的理解">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年4月9日 上午9:58  要分清实例与tomcat的区别：这里的实例默认指没有bin,lib目录的tomcat，其他的东西是复制过来的。 我的项目中没有使用公共目录bin,lib目录，而是直接使用解压的官网的解压版 站在tomcat启动的角度：需要独有的catalina_base，以及可以不独有的catalina_home。另外，如果要同时启动的话要配置不同的端口  tomcat7源码学">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/C52DEEC6-C58C-4AD4-8365-7F3429C00A6D.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/F3E3781C-8816-4072-8852-29AD483B9153.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/E9E44B05-067F-4A60-B93C-27753752520D.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/4601DEBD-7BE6-470B-BE10-AD14D270B531.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/810FF4A6-4453-430B-8D06-3BB761B2B8C0.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/C52DEEC6-C58C-4AD4-8365-7F3429C00A6D.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/F3E3781C-8816-4072-8852-29AD483B9153.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/E9E44B05-067F-4A60-B93C-27753752520D.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/4601DEBD-7BE6-470B-BE10-AD14D270B531.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/810FF4A6-4453-430B-8D06-3BB761B2B8C0.png">
 <meta property="article:published_time" content="2018-04-09T01:58:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:07.986Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/C52DEEC6-C58C-4AD4-8365-7F3429C00A6D.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/C52DEEC6-C58C-4AD4-8365-7F3429C00A6D.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -168,7 +168,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/04/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/catalina.home%E5%92%8Ccatalina.base%E7%9A%84%E7%90%86%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">

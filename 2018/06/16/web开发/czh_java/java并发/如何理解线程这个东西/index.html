@@ -17,26 +17,26 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"www.chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="2018年6月16日 下午11:12 缘由：尤其在这个图中，主内存是物理设备，而线程就是一个概念，他们两个是怎么扯上关系的，而且主内存和CPU之间的关系图也是这种样子。 解惑： 线程是cpu的抽象，线程是cpu调度的对象 一个cpu可以在不同的时间片执行不同的线程 但一个线程只能在一个cpu上执行 cpu抽象为线程的原因就是可以隐藏上面这两条的关系。    cpu个数、核数、线程数、Java多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何理解线程这个东西">
-<meta property="og:url" content="http://www.chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/index.html">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2018年6月16日 下午11:12 缘由：尤其在这个图中，主内存是物理设备，而线程就是一个概念，他们两个是怎么扯上关系的，而且主内存和CPU之间的关系图也是这种样子。 解惑： 线程是cpu的抽象，线程是cpu调度的对象 一个cpu可以在不同的时间片执行不同的线程 但一个线程只能在一个cpu上执行 cpu抽象为线程的原因就是可以隐藏上面这两条的关系。    cpu个数、核数、线程数、Java多线程">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/4118928E-9A48-4545-9BB5-7ACD77CEAF09.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/71E8CF66-4D3F-404A-BB3D-ED081A6ACFDE.png">
-<meta property="og:image" content="http://www.chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/54EE45B7-2043-48EC-9823-0FAB3DC5E0C6.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/4118928E-9A48-4545-9BB5-7ACD77CEAF09.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/71E8CF66-4D3F-404A-BB3D-ED081A6ACFDE.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/54EE45B7-2043-48EC-9823-0FAB3DC5E0C6.png">
 <meta property="article:published_time" content="2018-06-16T03:12:00.000Z">
 <meta property="article:modified_time" content="2020-03-12T12:06:07.357Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/4118928E-9A48-4545-9BB5-7ACD77CEAF09.png">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/4118928E-9A48-4545-9BB5-7ACD77CEAF09.png">
 
-<link rel="canonical" href="http://www.chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/">
+<link rel="canonical" href="http://chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/">
 
 
 <script id="page-configurations">
@@ -166,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://www.chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/06/16/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E7%BA%BF%E7%A8%8B%E8%BF%99%E4%B8%AA%E4%B8%9C%E8%A5%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
