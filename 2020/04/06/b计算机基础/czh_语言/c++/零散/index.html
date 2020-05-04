@@ -27,10 +27,12 @@
 <meta property="og:site_name" content="陈志恒的技术博客">
 <meta property="og:description" content="2020年4月6日 下午11:30 strcpy和strlen Strcpy是字符串拷贝函数，原型： char *strcpy(char* dest, const char *src); 从src逐字节拷贝到dest，直到遇到’\0’结束，因为没有指定长度，可能会导致拷贝越界，造成缓冲区溢出漏洞,安全版本是strncpy函数。   Strlen函数是计算字符串长度的函数，返回从开始到’\0’之间的">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://chenzhiheng.cn/2020/04/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E9%9B%B6%E6%95%A3/33220680_1587611285754_v2-189c3a1df92df112232516471e2917fd_1440w.png">
 <meta property="article:published_time" content="2020-04-06T03:30:00.000Z">
-<meta property="article:modified_time" content="2020-04-12T11:31:54.940Z">
+<meta property="article:modified_time" content="2020-05-04T08:20:16.623Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2020/04/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E9%9B%B6%E6%95%A3/33220680_1587611285754_v2-189c3a1df92df112232516471e2917fd_1440w.png">
 
 <link rel="canonical" href="http://chenzhiheng.cn/2020/04/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E9%9B%B6%E6%95%A3/">
 
@@ -192,7 +194,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-12 19:31:54" itemprop="dateModified" datetime="2020-04-12T19:31:54+08:00">2020-04-12</time>
+                <time title="修改时间：2020-05-04 16:20:16" itemprop="dateModified" datetime="2020-05-04T16:20:16+08:00">2020-05-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -219,14 +221,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -247,6 +249,16 @@
 </li>
 <li>Strlen函数是计算字符串长度的函数，返回从开始到’\0’之间的字符个数。</li>
 </ol>
+<h4 id="全局变量和静态全局变量的区别"><a href="#全局变量和静态全局变量的区别" class="headerlink" title="全局变量和静态全局变量的区别"></a>全局变量和静态全局变量的区别</h4><p><img src="/2020/04/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E9%9B%B6%E6%95%A3/33220680_1587611285754_v2-189c3a1df92df112232516471e2917fd_1440w.png" alt></p>
+<p><a href="https://blog.csdn.net/u012223913/article/details/51181761" target="_blank" rel="noopener">关于int、short int、long int、long long 的区别_C/C++_Adrianna的专栏-CSDN博客</a></p>
+<ol>
+<li>在标准中，并没有规定long一定要比int长，也没有规定short要比int短。</li>
+<li>标准是这么说的:长整型至少和整型一样长，整型至少和短整型一样长。</li>
+<li>这个的规则同样适用于浮点型long double至少和double一样长，double至少和float一样长。</li>
+<li>至于如何实现要看编译器厂商.</li>
+</ol>
+<p>从双刃剑的角度去总结<br><a href="https://blog.csdn.net/lms1008611/article/details/81408236" target="_blank" rel="noopener">C++中类的(static)静态成员变量与(static)静态成员函数_C/C++_年少轻狂，幸福时光-CSDN博客</a><br>static能怎样，不能怎样</p>
+<p><a href="https://blog.csdn.net/qq_32599479/article/details/80703759" target="_blank" rel="noopener">static和const关键字的作用_JavaScript_许政的博客-CSDN博客</a><br>const修饰哪些，有哪些使用场景</p>
 <h4 id="i和i-的实现"><a href="#i和i-的实现" class="headerlink" title="++i和i++的实现"></a>++i和i++的实现</h4><ol>
 <li>++i 实现：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>&amp;  <span class="keyword">int</span>::<span class="keyword">operator</span>++（）</span><br><span class="line">&#123;</span><br><span class="line">	*<span class="keyword">this</span> +=<span class="number">1</span>；</span><br><span class="line">	<span class="keyword">return</span> *<span class="keyword">this</span>；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 <li>i++ 实现：<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> <span class="keyword">int</span>::<span class="keyword">operator</span>（<span class="keyword">int</span>）</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">int</span> oldValue = *<span class="keyword">this</span>；</span><br><span class="line">	++（*<span class="keyword">this</span>）；</span><br><span class="line">	<span class="keyword">return</span> oldValue；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -287,7 +299,7 @@
 <h4 id="struct和class的区别"><a href="#struct和class的区别" class="headerlink" title="struct和class的区别"></a>struct和class的区别</h4><ol>
 <li><strong>默认的继承访问权</strong>：【继承下】<ol>
 <li>class默认的是private,strcut默认的是public。</li>
-<li>当然，到底默认是public继承还是private继承，取决于子类而不是基类。我的意思是，struct可以继承class，同样class也可以继承struct，那么默认的继承访问权限是看子类到底是用的struct还是class。</li>
+<li>当然，到底默认是public继承还是private继承，取决于子类而不是基类。意思是，struct可以继承class，同样class也可以继承struct，那么默认的继承访问权限是看子类到底是用的struct还是class。</li>
 </ol>
 </li>
 <li><strong>成员变量默认访问权限</strong>：【非继承下】<ol>
@@ -333,7 +345,7 @@
       <i class="fa fa-chevron-left"></i> 专题知识点3：const
     </a></div>
       <div class="post-nav-item">
-    <a href="/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/%E6%95%B4%E7%90%86/%E5%B9%BF%E4%B9%89%E7%9A%84IO%E6%A8%A1%E5%9E%8B%EF%BC%9A%E9%98%BB%E5%A1%9EIO-%3E%E9%9D%9E%E9%98%BB%E5%A1%9E%E5%BF%99%E8%BD%AE%E8%AF%A2IO-%3Eselectepoll%E6%97%A0%E5%B7%AE%E5%88%AB%E8%BD%AE%E8%AF%A2%E4%BB%A3%E7%90%86-%3E%20epoll/" rel="next" title="广义的IO模型：阻塞I/O->非阻塞忙轮询I/O->select/epoll无差别轮询代理-> epoll">
+    <a href="/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E5%B9%BF%E4%B9%89%E7%9A%84IO%E6%A8%A1%E5%9E%8B%EF%BC%9A%E9%98%BB%E5%A1%9EIO-%3E%E9%9D%9E%E9%98%BB%E5%A1%9E%E5%BF%99%E8%BD%AE%E8%AF%A2IO-%3Eselectepoll%E6%97%A0%E5%B7%AE%E5%88%AB%E8%BD%AE%E8%AF%A2%E4%BB%A3%E7%90%86-%3E%20epoll/" rel="next" title="广义的IO模型：阻塞I/O->非阻塞忙轮询I/O->select/epoll无差别轮询代理-> epoll">
       广义的IO模型：阻塞I/O->非阻塞忙轮询I/O->select/epoll无差别轮询代理-> epoll <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -396,7 +408,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#strcpy和strlen"><span class="nav-number">1.</span> <span class="nav-text">strcpy和strlen</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#i和i-的实现"><span class="nav-number">2.</span> <span class="nav-text">++i和i++的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型转换"><span class="nav-number">3.</span> <span class="nav-text">类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说说你了解的RTTI"><span class="nav-number">4.</span> <span class="nav-text">说说你了解的RTTI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#struct和class的区别"><span class="nav-number">5.</span> <span class="nav-text">struct和class的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-中可以定义引用数据成员吗？"><span class="nav-number">6.</span> <span class="nav-text">C++中可以定义引用数据成员吗？</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#strcpy和strlen"><span class="nav-number">1.</span> <span class="nav-text">strcpy和strlen</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局变量和静态全局变量的区别"><span class="nav-number">2.</span> <span class="nav-text">全局变量和静态全局变量的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#i和i-的实现"><span class="nav-number">3.</span> <span class="nav-text">++i和i++的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类型转换"><span class="nav-number">4.</span> <span class="nav-text">类型转换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说说你了解的RTTI"><span class="nav-number">5.</span> <span class="nav-text">说说你了解的RTTI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#struct和class的区别"><span class="nav-number">6.</span> <span class="nav-text">struct和class的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C-中可以定义引用数据成员吗？"><span class="nav-number">7.</span> <span class="nav-text">C++中可以定义引用数据成员吗？</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -410,7 +422,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1172</span>
+          <span class="site-state-item-count">1194</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -456,7 +468,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:45</span>
+    <span title="站点阅读时长">18:20</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/UART%EF%BC%88%E4%B8%B2%E5%8F%A3%EF%BC%89/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85jdk/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +172,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/UART%EF%BC%88%E4%B8%B2%E5%8F%A3%EF%BC%89/" class="post-title-link" itemprop="url">UART（串口）</a>
+            <a href="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85jdk/" class="post-title-link" itemprop="url">centos安装jdk</a>
         </h1>
 
         <div class="post-meta">
@@ -182,14 +182,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-01-31 10:36:00" itemprop="dateCreated datePublished" datetime="2018-01-31T10:36:00+08:00">2018-01-31</time>
+              <time title="创建时间：2018-02-19 11:58:00" itemprop="dateCreated datePublished" datetime="2018-02-19T11:58:00+08:00">2018-02-19</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -197,14 +197,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_arm</span>
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/UART%EF%BC%88%E4%B8%B2%E5%8F%A3%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="UART（串口）" title="阅读次数">
+            <span id="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85jdk/" class="post-meta-item leancloud_visitors" data-flag-title="centos安装jdk" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -216,7 +216,120 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>120</span>
+              <span>6.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月19日 下午11:58</p>
+<p>清除centos中本身的jdk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]# rpm -qa | grep jdk</span><br><span class="line">java-1.7.0-openjdk-1.7.0.99-2.6.5.1.el6.x86_64</span><br><span class="line">java-1.6.0-openjdk-1.6.0.38-1.13.10.4.el6.x86_64</span><br><span class="line">[root@centos6 ~]# sudo yum remove java-1.6.0-openjdk-1.6.0.38-1.13.10.4.el6.x86_64</span><br><span class="line">已加载插件：fastestmirror, refresh-packagekit, security</span><br><span class="line">设置移除进程</span><br><span class="line">解决依赖关系</span><br><span class="line">--&gt; 执行事务检查</span><br><span class="line">---&gt; Package java-1.6.0-openjdk.x86_64 1:1.6.0.38-1.13.10.4.el6 will be 删除</span><br><span class="line">--&gt; 完成依赖关系计算</span><br><span class="line"></span><br><span class="line">依赖关系解决</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> 软件包             架构   版本  仓库                                      大小</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">正在删除:</span><br><span class="line"> java-1.6.0-openjdk x86_64 1:1.6.0.38-1.13.10.4.el6</span><br><span class="line">                                 @anaconda-CentOS-201605220104.x86_64&#x2F;6.8  76 M</span><br><span class="line"></span><br><span class="line">事务概要</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Remove        1 Package(s)</span><br><span class="line"></span><br><span class="line">Installed size: 76 M</span><br><span class="line">确定吗？[y&#x2F;N]：y</span><br><span class="line">下载软件包：</span><br><span class="line">运行 rpm_check_debug</span><br><span class="line">执行事务测试</span><br><span class="line">事务测试成功</span><br><span class="line">执行事务</span><br><span class="line">  正在删除   : 1:java-1.6.0-openjdk-1.6.0.38-1.13.10.4.el6.x86_64           1&#x2F;1</span><br><span class="line">  Verifying  : 1:java-1.6.0-openjdk-1.6.0.38-1.13.10.4.el6.x86_64           1&#x2F;1</span><br><span class="line"></span><br><span class="line">删除:</span><br><span class="line">  java-1.6.0-openjdk.x86_64 1:1.6.0.38-1.13.10.4.el6</span><br><span class="line"></span><br><span class="line">完毕！</span><br><span class="line">[root@centos6 ~]# sudo yum remove java-1.7.0-openjdk-1.7.0.99-2.6.5.1.el6.x86_64</span><br><span class="line">已加载插件：fastestmirror, refresh-packagekit, security</span><br><span class="line">设置移除进程</span><br><span class="line">解决依赖关系</span><br><span class="line">--&gt; 执行事务检查</span><br><span class="line">---&gt; Package java-1.7.0-openjdk.x86_64 1:1.7.0.99-2.6.5.1.el6 will be 删除</span><br><span class="line">--&gt; 完成依赖关系计算</span><br><span class="line"></span><br><span class="line">依赖关系解决</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> 软件包</span><br><span class="line">   架构   版本                   仓库                                      大小</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">正在删除:</span><br><span class="line"> java-1.7.0-openjdk</span><br><span class="line">   x86_64 1:1.7.0.99-2.6.5.1.el6 @anaconda-CentOS-201605220104.x86_64&#x2F;6.8  91 M</span><br><span class="line"></span><br><span class="line">事务概要</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Remove        1 Package(s)</span><br><span class="line"></span><br><span class="line">Installed size: 91 M</span><br><span class="line">确定吗？[y&#x2F;N]：y</span><br><span class="line">下载软件包：</span><br><span class="line">运行 rpm_check_debug</span><br><span class="line">执行事务测试</span><br><span class="line">事务测试成功</span><br><span class="line">执行事务</span><br><span class="line">  正在删除   : 1:java-1.7.0-openjdk-1.7.0.99-2.6.5.1.el6.x86_64             1&#x2F;1</span><br><span class="line">  Verifying  : 1:java-1.7.0-openjdk-1.7.0.99-2.6.5.1.el6.x86_64             1&#x2F;1</span><br><span class="line"></span><br><span class="line">删除:</span><br><span class="line">  java-1.7.0-openjdk.x86_64 1:1.7.0.99-2.6.5.1.el6</span><br><span class="line"></span><br><span class="line">完毕！</span><br><span class="line">[root@centos6 ~]#  java -version</span><br><span class="line">-bash: &#x2F;usr&#x2F;bin&#x2F;java: 没有那个文件或目录</span><br></pre></td></tr></table></figure>
+
+
+<p>下载jdk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 ~]$ ls</span><br><span class="line">Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos</span><br><span class="line">[czh@centos6 ~]$ mkdir developer</span><br><span class="line">[czh@centos6 ~]$ ls</span><br><span class="line">Desktop    Documents  Music     Public     Videos</span><br><span class="line">developer  Downloads  Pictures  Templates</span><br><span class="line">[czh@centos6 ~]$ cd developer&#x2F;</span><br><span class="line">[czh@centos6 developer]$ wget http:&#x2F;&#x2F;download.oracle.com&#x2F;otn&#x2F;java&#x2F;jdk&#x2F;7u80-b15&#x2F;jdk-7u80-linux-x64.rpm?AuthParam&#x3D;1519056529_baacf6b88be6717a2de3fb95812613ec</span><br><span class="line">--2018-02-20 00:07:44--  http:&#x2F;&#x2F;download.oracle.com&#x2F;otn&#x2F;java&#x2F;jdk&#x2F;7u80-b15&#x2F;jdk-7u80-linux-x64.rpm?AuthParam&#x3D;1519056529_baacf6b88be6717a2de3fb95812613ec</span><br><span class="line">正在解析主机 download.oracle.com... 23.38.178.182</span><br><span class="line">正在连接 download.oracle.com|23.38.178.182|:80... 已连接。</span><br><span class="line">已发出 HTTP 请求，正在等待回应... 200 OK</span><br><span class="line">长度：138090286 (132M) [application&#x2F;x-redhat-package-manager]</span><br><span class="line">正在保存至: “jdk-7u80-linux-x64.rpm?AuthParam&#x3D;1519056529_baacf6b88be6717a2de3fb95812613ec”</span><br><span class="line"></span><br><span class="line"> 0% [</span><br></pre></td></tr></table></figure>
+
+<p>安装jdk</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 developer]$ ls</span><br><span class="line">jdk-7u80-linux-x64.rpm?AuthParam&#x3D;1519056529_baacf6b88be6717a2de3fb95812613ec</span><br><span class="line">[czh@centos6 developer]$  sudo rpm -ivh jdk-7u80-linux-x64.rpm\?AuthParam\&#x3D;1519056529_baacf6b88be6717a2de3fb95812613ec </span><br><span class="line">[sudo] password for czh: </span><br><span class="line">Preparing...                ########################################### [100%]</span><br><span class="line">   1:jdk                    ########################################### [100%]</span><br><span class="line">Unpacking JAR files...</span><br><span class="line">	rt.jar...</span><br><span class="line">	jsse.jar...</span><br><span class="line">	charsets.jar...</span><br><span class="line">	tools.jar...</span><br><span class="line">	localedata.jar...</span><br><span class="line">	jfxrt.jar...</span><br></pre></td></tr></table></figure>
+
+<p>Jdk环境变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 jdk1.7.0_80]$ sudo vim &#x2F;etc&#x2F;profile</span><br><span class="line">[czh@centos6 jdk1.7.0_80]$ sudo vim &#x2F;etc&#x2F;profile</span><br><span class="line">[czh@centos6 jdk1.7.0_80]$ source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.7.0_80</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;jre&#x2F;lib&#x2F;rt.jar:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br><span class="line">export PATH&#x3D;$JAVA_HOME&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85jdk/B1A4D386-2020-4419-B732-E2FB28554170.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/" class="post-title-link" itemprop="url">更改centos镜像源</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-19 10:23:00" itemprop="dateCreated datePublished" datetime="2018-02-19T10:23:00+08:00">2018-02-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/" class="post-meta-item leancloud_visitors" data-flag-title="更改centos镜像源" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>320</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -235,16 +348,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2018年1月31日 下午10:36</p>
-<h2 id="几个简单知识点："><a href="#几个简单知识点：" class="headerlink" title="几个简单知识点："></a>几个简单知识点：</h2><ol>
-<li>讲解arm—&gt;pc串口通信参数：</li>
-<li>内存—&gt;UART—&gt;pc数据传输过程</li>
-<li>如何知道UART中数据寄存器中数据的情况？有没有<ol>
-<li>通过中断</li>
-<li>通过轮询：不断地查看UART中的状态寄存器标志位<br><img src="/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/UART%EF%BC%88%E4%B8%B2%E5%8F%A3%EF%BC%89/001_UART%E7%A1%AC%E4%BB%B6%E4%BB%8B%E7%BB%8D.jpg" alt></li>
-</ol>
-</li>
-</ol>
+          <p>2018年2月19日 下午10:23</p>
+<p>操作步骤：<a href="http://mirrors.aliyun.com/help/centos" target="_blank" rel="noopener">centos</a> </p>
+<h2 id="出错的步骤："><a href="#出错的步骤：" class="headerlink" title="出错的步骤："></a>出错的步骤：</h2><p><img src="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/0FCBD8D4-ED0B-4CD2-B7A7-56D5732D2F29.png" alt></p>
+<h2 id="出现的两个问题："><a href="#出现的两个问题：" class="headerlink" title="出现的两个问题："></a>出现的两个问题：</h2><p>问题一：设置当前用户权限为ALL<br><a href="https://jingyan.baidu.com/article/49ad8bce77a0365834d8fa95.html" target="_blank" rel="noopener">centos普通用户设置sudo权限_百度经验</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 developer]$ su -</span><br><span class="line">Password: </span><br><span class="line">[root@centos6 ~]# </span><br><span class="line">[root@centos6 ~]# visudo</span><br><span class="line">[root@centos6 ~]# visudo</span><br><span class="line">visudo: &#x2F;etc&#x2F;sudoers.tmp unchanged</span><br><span class="line">[root@centos6 ~]# visudo</span><br><span class="line">[root@centos6 ~]# exit</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/FED5D179-1626-4A79-BAFC-FB260DF00413.png" alt></p>
+<p>问题二：<br>wget: unable to resolve host address<br>我的解决方法是：修改虚拟机网络配置<br><img src="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/08637ED0-9E75-4D72-93C7-429B55D56600.png" alt></p>
 
       
     </div>
@@ -264,7 +374,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%A6%82%E4%BD%95%E7%9C%8B2440%20Manual/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/14/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/%E7%99%BE%E5%BA%A6%E4%BA%91%E8%B5%84%E6%96%99%EF%BC%88151351%E2%80%A6..%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -278,7 +388,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%A6%82%E4%BD%95%E7%9C%8B2440%20Manual/" class="post-title-link" itemprop="url">如何看2440 Manual</a>
+            <a href="/2018/02/14/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/%E7%99%BE%E5%BA%A6%E4%BA%91%E8%B5%84%E6%96%99%EF%BC%88151351%E2%80%A6..%EF%BC%89/" class="post-title-link" itemprop="url">百度云资料（151351…..）</a>
         </h1>
 
         <div class="post-meta">
@@ -288,338 +398,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-01-31 04:44:00" itemprop="dateCreated datePublished" datetime="2018-01-31T04:44:00+08:00">2018-01-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_arm</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%A6%82%E4%BD%95%E7%9C%8B2440%20Manual/" class="post-meta-item leancloud_visitors" data-flag-title="如何看2440 Manual" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>425</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年1月31日 下午4:44</p>
-<p>注：能到达目的就行，看手册不是唯一的方法，百度也可以。</p>
-<h2 id="几个不知道："><a href="#几个不知道：" class="headerlink" title="几个不知道："></a>几个不知道：</h2><ol>
-<li><strong>大致的组成、原理是什么？</strong></li>
-<li>使用寄存器的个数不知道？</li>
-<li><strong>具体使用那几个寄存器也不知道？</strong></li>
-<li>具体如何给寄存器置位也不知道？</li>
-</ol>
-<h2 id="怎么知道：我们需要干什么❓"><a href="#怎么知道：我们需要干什么❓" class="headerlink" title="怎么知道：我们需要干什么❓"></a>怎么知道：我们需要干什么❓</h2><p>首先从自己的需求功能开始推理，从手册中<strong>提取</strong>出完成自己需要功能的<strong>线条</strong>，<strong>最终定位到使用哪些寄存器</strong>、以及如何使用这些寄存器</p>
-<p><strong>线条：</strong>有些功能的实现需要不仅仅一个步骤，需要多个寄存器进行配合。要把这些步骤的先后顺序梳理清楚<br><strong>定位寄存器：</strong>Manual中有明确指明是哪个寄存器，这个最关键的问题，也是最好解决的问题</p>
-<h2 id="关于手册的几个小的tips"><a href="#关于手册的几个小的tips" class="headerlink" title="关于手册的几个小的tips"></a>关于手册的几个小的tips</h2><ol>
-<li>每一章分三个模块:overview + operate(function) + register</li>
-<li>overview一定仔细看看</li>
-<li>operate挑着看</li>
-<li>register注意看description</li>
-<li>当碰见一个词不认识的时候，comment + F 查查上下文有没有解释，毕竟是挑着看，容易落下东西</li>
-</ol>
-<h2 id="例子🌰：时钟clock"><a href="#例子🌰：时钟clock" class="headerlink" title="例子🌰：时钟clock"></a>例子🌰：时钟clock</h2><p><img src="/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%A6%82%E4%BD%95%E7%9C%8B2440%20Manual/Untitled%20Diagram%20(1).png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AE%9E%E7%8E%B0printf()%E5%87%BD%E6%95%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AE%9E%E7%8E%B0printf()%E5%87%BD%E6%95%B0/" class="post-title-link" itemprop="url">实现printf()函数</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-31 01:15:00" itemprop="dateCreated datePublished" datetime="2018-01-31T01:15:00+08:00">2018-01-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_arm</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AE%9E%E7%8E%B0printf()%E5%87%BD%E6%95%B0/" class="post-meta-item leancloud_visitors" data-flag-title="实现printf()函数" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年1月31日 下午1:15</p>
-<h2 id="实现arm中的printf函数源代码-注释是重点-："><a href="#实现arm中的printf函数源代码-注释是重点-：" class="headerlink" title="实现arm中的printf函数源代码(注释是重点)："></a>实现arm中的printf函数源代码(注释是重点)：</h2><h3 id="c文件"><a href="#c文件" class="headerlink" title=".c文件"></a>.c文件</h3><ol>
-<li>my_printf.c </li>
-<li>uart.c</li>
-<li>main.c<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br></pre></td><td class="code"><pre><span class="line">my_printf.c </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span>  <span class="meta-string">"my_printf.h"</span></span></span><br><span class="line">==================================================================================================</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> *  va_list;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面这段是利用宏来完成功能，用宏来代替函数，牛逼</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _INTSIZEOF(n)   ( (sizeof(n) + sizeof(int) - 1) &amp; ~(sizeof(int) - 1) )</span></span><br><span class="line"><span class="comment">//宏本身就是一个赋值语句，牛逼</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> va_start(ap,v)  ( ap = (va_list)&amp;v + _INTSIZEOF(v) )</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//逗号表达式功能：（表达式1，表达式2）运算顺序是表达式1--&gt;表达式2，返回表达式2的结果</span></span><br><span class="line"><span class="comment">//下面两种写法作用一致</span></span><br><span class="line"><span class="comment">//#define va_arg(ap,t)    ( *(t *)((ap += _INTSIZEOF(t)) - _INTSIZEOF(t)) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> va_arg(ap,t)    ( *(t *)( ap=ap + _INTSIZEOF(t), ap- _INTSIZEOF(t)) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> va_end(ap)      ( ap = (va_list)0 )</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//==================================================================================================</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> hex_tab[]=&#123;<span class="string">'0'</span>,<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span>,<span class="string">'5'</span>,<span class="string">'6'</span>,<span class="string">'7'</span>,\</span><br><span class="line">		                 <span class="string">'8'</span>,<span class="string">'9'</span>,<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>,<span class="string">'f'</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出显示char</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">outc</span><span class="params">(<span class="keyword">int</span> c)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	__out_putchar(c);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出显示string</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">outs</span> <span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (*s != <span class="string">'\0'</span>)	</span><br><span class="line">		__out_putchar(*s++);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出显示number:传入n，进制，前导位，最大宽度。最后要转化成字符串输出！！</span></span><br><span class="line"><span class="comment">//这个函数得打断点看输出，我没有看！</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">out_num</span><span class="params">(<span class="keyword">long</span> n, <span class="keyword">int</span> base,<span class="keyword">char</span> lead,<span class="keyword">int</span> maxwidth)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> m=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">char</span> buf[MAX_NUMBER_BYTES], *s = buf + <span class="keyword">sizeof</span>(buf);</span><br><span class="line">	<span class="keyword">int</span> count=<span class="number">0</span>,i=<span class="number">0</span>;</span><br><span class="line">			</span><br><span class="line"></span><br><span class="line">	*--s = <span class="string">'\0'</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		m = -n;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		m = n;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">do</span>&#123;</span><br><span class="line">		*--s = hex_tab[m%base];</span><br><span class="line">		count++;</span><br><span class="line">	&#125;<span class="keyword">while</span> ((m /= base) != <span class="number">0</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>( maxwidth &amp;&amp; count &lt; maxwidth)&#123;</span><br><span class="line">		<span class="keyword">for</span> (i=maxwidth - count; i; i--)	</span><br><span class="line">			*--s = lead;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (n &lt; <span class="number">0</span>)</span><br><span class="line">		*--s = <span class="string">'-'</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> outs(s);</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="comment">//my_vprintf函数，通过调整指向+步长去完成printf的功能</span></span><br><span class="line"><span class="comment">/*reference :   int vprintf(const char *format, va_list ap); */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">my_vprintf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *fmt, va_list ap)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> lead=<span class="string">' '</span>;</span><br><span class="line">	<span class="keyword">int</span>  maxwidth=<span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(; *fmt != <span class="string">'\0'</span>; fmt++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//初始化</span></span><br><span class="line">		lead=<span class="string">' '</span>;</span><br><span class="line">		maxwidth=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (*fmt != <span class="string">'%'</span>) &#123;</span><br><span class="line">			outc(*fmt);</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">			</span><br><span class="line">		<span class="comment">//format : %08d, %8d,%d,%u,%x,%f,%c,%s </span></span><br><span class="line">		fmt++;</span><br><span class="line">		<span class="comment">//处理前导零</span></span><br><span class="line">		<span class="keyword">if</span>(*fmt == <span class="string">'0'</span>)&#123;</span><br><span class="line">			lead = <span class="string">'0'</span>;</span><br><span class="line">			fmt++;	</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//设置最大宽度</span></span><br><span class="line">		<span class="keyword">while</span>(*fmt &gt;= <span class="string">'0'</span> &amp;&amp; *fmt &lt;= <span class="string">'9'</span>)&#123;</span><br><span class="line">			maxwidth *=<span class="number">10</span>;</span><br><span class="line">			maxwidth += (*fmt - <span class="string">'0'</span>);</span><br><span class="line">			fmt++;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//根据列类型符：先取值，再移动指针。</span></span><br><span class="line">		<span class="comment">//va_arg的作用是：取出当前ap指向的数据，然后ap再根据“步长”去移动到下一个位置</span></span><br><span class="line">		<span class="comment">//这样做的好处：这时的“步长”就是当前取出这个数据的长度，牛逼🐂！</span></span><br><span class="line">		<span class="comment">//va_arg的“返回值”=当前ap指向的数据</span></span><br><span class="line">		<span class="comment">//out_num()函数的参数: 当前ap指向的数据 + </span></span><br><span class="line">		<span class="keyword">switch</span> (*fmt) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'d'</span>: out_num(va_arg(ap, <span class="keyword">int</span>),          <span class="number">10</span>,lead,maxwidth); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'o'</span>: out_num(va_arg(ap, <span class="keyword">unsigned</span> <span class="keyword">int</span>),  <span class="number">8</span>,lead,maxwidth); <span class="keyword">break</span>;				</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'u'</span>: out_num(va_arg(ap, <span class="keyword">unsigned</span> <span class="keyword">int</span>), <span class="number">10</span>,lead,maxwidth); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'x'</span>: out_num(va_arg(ap, <span class="keyword">unsigned</span> <span class="keyword">int</span>), <span class="number">16</span>,lead,maxwidth); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'c'</span>: outc(va_arg(ap, <span class="keyword">int</span>   )); <span class="keyword">break</span>;		</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'s'</span>: outs(va_arg(ap, <span class="keyword">char</span> *)); <span class="keyword">break</span>;		  		</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">default</span>:  </span><br><span class="line">				outc(*fmt);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重点：实现printf</span></span><br><span class="line"><span class="comment">//reference :  int printf(const char *format, ...); </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">printf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *fmt, ...)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/*这个指针ap，我觉得倒是很有话说</span></span><br><span class="line"><span class="comment">	 *因为指针体现出了printf这个函数的本质，最精华的地方：所有的取值都是通过ap这一个指针来实现的！！</span></span><br><span class="line"><span class="comment">	 *通过调整指针的指向+步长，来最终确定我们的操作。</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	va_list ap;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//va_start这个宏，就是一个赋值语句。作用：给ap赋值，初始化ap指针的指向为第一个参数fmt</span></span><br><span class="line">	va_start(ap, fmt);</span><br><span class="line">	<span class="comment">//my_vprintf函数，通过调整指向+步长去完成printf的功能</span></span><br><span class="line">	my_vprintf(fmt, ap);	</span><br><span class="line">	<span class="comment">//防止“野指针”</span></span><br><span class="line">	va_end(ap);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//测试函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">my_printf_test</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"This is www.100ask.org   my_printf test\n\r"</span>) ;	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test char           =%c,%c\n\r"</span>, <span class="string">'A'</span>,<span class="string">'a'</span>) ;	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test decimal number =%d\n\r"</span>,    <span class="number">123456</span>) ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test decimal number =%d\n\r"</span>,    <span class="number">-123456</span>) ;	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test hex     number =0x%x\n\r"</span>,  <span class="number">0x55aa55aa</span>) ;	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test string         =%s\n\r"</span>,    <span class="string">"www.100ask.org"</span>) ;	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=%08d\n\r"</span>,   <span class="number">12345</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=%8d\n\r"</span>,    <span class="number">12345</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=0x%08x\n\r"</span>, <span class="number">0x12345</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=0x%8x\n\r"</span>,  <span class="number">0x12345</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=0x%02x\n\r"</span>, <span class="number">0x1</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=0x%2x\n\r"</span>,  <span class="number">0x1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=%05d\n\r"</span>, <span class="number">0x1</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=%5d\n\r"</span>,  <span class="number">0x1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">uart.c</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"s3c2440_soc.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化UART芯片</span></span><br><span class="line"><span class="comment">/* 115200,8n1 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">uart0_init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//这是根据电路原理图来设定的，本身GPIO就是一个通用口</span></span><br><span class="line">	<span class="comment">/* 设置引脚用于串口 */</span></span><br><span class="line">	<span class="comment">/* GPH2,3用于TxD0, RxD0 */</span></span><br><span class="line">	GPHCON &amp;= ~((<span class="number">3</span>&lt;&lt;<span class="number">4</span>) | (<span class="number">3</span>&lt;&lt;<span class="number">6</span>));</span><br><span class="line">	GPHCON |= ((<span class="number">2</span>&lt;&lt;<span class="number">4</span>) | (<span class="number">2</span>&lt;&lt;<span class="number">6</span>));</span><br><span class="line"></span><br><span class="line">	GPHUP &amp;= ~((<span class="number">1</span>&lt;&lt;<span class="number">2</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">3</span>));  <span class="comment">/* 使能内部上拉 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//manual中专门以小结将波特率，直接告诉你使用那些寄存器，怎么使用，公式是啥，写的很完善。</span></span><br><span class="line">	<span class="comment">/* 设置波特率 */</span></span><br><span class="line">	<span class="comment">/* UBRDIVn = (int)( UART clock / ( buad rate x 16) ) –1</span></span><br><span class="line"><span class="comment">	 *  UART clock = 50M</span></span><br><span class="line"><span class="comment">	 *  UBRDIVn = (int)( 50000000 / ( 115200 x 16) ) –1 = 26</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	UCON0 = <span class="number">0x00000005</span>; <span class="comment">/* PCLK,中断/查询模式 */</span></span><br><span class="line">	UBRDIV0 = <span class="number">26</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 设置数据格式 */</span></span><br><span class="line">	ULCON0 = <span class="number">0x00000003</span>; <span class="comment">/* 8n1: 8个数据位, 无较验位, 1个停止位 */</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/*  */</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向pc显示器发送显示数据，按char</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">putchar</span><span class="params">(<span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/* UTRSTAT0 */</span></span><br><span class="line">	<span class="comment">/* UTXH0 */</span></span><br><span class="line">	<span class="comment">//为啥是UTRSTAT0，这里的0是哪里来的？Each UART channel contains two 64-byte FIFOs for receiver and transmitter.</span></span><br><span class="line">	<span class="comment">//这个问题应该一开始就问，根本原因是原理图中使用的是TxD0,RxD0。版子的厂家电路就是这样焊好的！！！你要咋吧</span></span><br><span class="line">	<span class="keyword">while</span> (!(UTRSTAT0 &amp; (<span class="number">1</span>&lt;&lt;<span class="number">2</span>)));</span><br><span class="line"></span><br><span class="line">	<span class="comment">//manual中总体介绍中，并没有提到UTXH0寄存器，但是在手册中最后说明寄存器中有：There are three UART transmit buffer registers including UTXH0, UTXH1 and UTXH2 in the UART block.</span></span><br><span class="line">	<span class="comment">//也许像这种数据寄存器，就当成默认有的吧，所以manual就直接写在寄存器部分！！</span></span><br><span class="line">	UTXH0 = (<span class="keyword">unsigned</span> <span class="keyword">char</span>)c;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 拿回从pc显示器输入的值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getchar</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (!(UTRSTAT0 &amp; (<span class="number">1</span>&lt;&lt;<span class="number">0</span>)));</span><br><span class="line">	<span class="keyword">return</span> URXH0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向pc显示器发送显示数据，按字符串</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">puts</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (*s)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">putchar</span>(*s);</span><br><span class="line">		s++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">main.c</span><br><span class="line"><span class="comment">// 这里就是这节函数牛逼的地方，不用像stdio.h这种系统函数库，全是自己写的</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"s3c2440_soc.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"uart.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span>  <span class="meta-string">"my_printf.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> c;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//初始化uart</span></span><br><span class="line">	uart0_init();</span><br><span class="line">	<span class="comment">//pc显示字符串：Hello, world!</span></span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">"Hello, world!\n\r"</span>);</span><br><span class="line">	<span class="comment">//测试printf函数</span></span><br><span class="line">	my_printf_test();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//pc与arm的交互行为：又来有往</span></span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		c = getchar();</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">'\r'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">'\n'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">putchar</span>(<span class="string">'\r'</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">putchar</span>(c);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="h文件"><a href="#h文件" class="headerlink" title=".h文件"></a>.h文件</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">uart.h</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _UART_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _UART_H</span></span><br><span class="line">	<span class="comment">//声明本身的函数</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">uart0_init</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">putchar</span><span class="params">(<span class="keyword">int</span> c)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getchar</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">puts</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">my_printf.h</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _MY_PRINTF_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _MY_PRINTF_H</span></span><br><span class="line">	<span class="comment">// 说明my_printf.c依赖于uart.c</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"uart.h"</span></span></span><br><span class="line">	<span class="comment">// 宏定义</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span>  __out_putchar  putchar</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span>  MAX_NUMBER_BYTES  64</span></span><br><span class="line">	<span class="comment">// 声明本身的所带有的函数</span></span><br><span class="line">	<span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">my_printf_test</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">printf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *fmt, ...)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* _MY_PRINTF_H */</span></span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/01/29/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E6%9C%AC/%E4%B8%83%E6%9C%88%E5%9C%A8%E7%BA%BF/%E9%9B%AA%E7%90%83%E7%9A%84%E5%BC%80%E7%AB%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/29/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E6%9C%AC/%E4%B8%83%E6%9C%88%E5%9C%A8%E7%BA%BF/%E9%9B%AA%E7%90%83%E7%9A%84%E5%BC%80%E7%AB%AF/" class="post-title-link" itemprop="url">雪球的开端</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-29 10:26:00" itemprop="dateCreated datePublished" datetime="2018-01-29T10:26:00+08:00">2018-01-29</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-mac-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%9F%BA%E6%9C%AC-%E4%B8%83%E6%9C%88%E5%9C%A8%E7%BA%BF/" itemprop="url" rel="index">
-                    <span itemprop="name">c数据科学/mac_机器学习/基本/七月在线</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/01/29/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E6%9C%AC/%E4%B8%83%E6%9C%88%E5%9C%A8%E7%BA%BF/%E9%9B%AA%E7%90%83%E7%9A%84%E5%BC%80%E7%AB%AF/" class="post-meta-item leancloud_visitors" data-flag-title="雪球的开端" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>157</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年1月29日 上午10:26</p>
-<p>我做这幅图的思路说明，我一开始是想着能不能把我做的笔记按知识点一节一节的讲出来，但是，但我去复习我的笔记的时候，我提出很多的问题，但是我却没有没有一个合适的答案。毕竟我是第一遍学，具体的讲清楚一个事情不太符合实际。<strong>于是，我就想能不能将这作为一个开端，创造一个好开端让雪球越滚越大。</strong></p>
-<p><img src="/2018/01/29/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E6%9C%AC/%E4%B8%83%E6%9C%88%E5%9C%A8%E7%BA%BF/%E9%9B%AA%E7%90%83%E7%9A%84%E5%BC%80%E7%AB%AF/50EB2E7C-FD64-4EC4-83DD-F3F7FAA4A778.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/01/28/web%E5%BC%80%E5%8F%91/czh_blog/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%B2%A1%E5%90%83%E8%BF%87%E7%8C%AA%E8%82%89%EF%BC%8C%E8%A7%81%E8%A7%81%E7%8C%AA%E8%B7%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/28/web%E5%BC%80%E5%8F%91/czh_blog/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%B2%A1%E5%90%83%E8%BF%87%E7%8C%AA%E8%82%89%EF%BC%8C%E8%A7%81%E8%A7%81%E7%8C%AA%E8%B7%91/" class="post-title-link" itemprop="url">没吃过猪肉，见见猪跑</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-28 10:22:00" itemprop="dateCreated datePublished" datetime="2018-01-28T10:22:00+08:00">2018-01-28</time>
+              <time title="创建时间：2018-02-14 09:36:00" itemprop="dateCreated datePublished" datetime="2018-02-14T09:36:00+08:00">2018-02-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -634,14 +413,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/服务器</span>
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%AB%98%E7%BA%A7/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/高级</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2018/01/28/web%E5%BC%80%E5%8F%91/czh_blog/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%B2%A1%E5%90%83%E8%BF%87%E7%8C%AA%E8%82%89%EF%BC%8C%E8%A7%81%E8%A7%81%E7%8C%AA%E8%B7%91/" class="post-meta-item leancloud_visitors" data-flag-title="没吃过猪肉，见见猪跑" title="阅读次数">
+            <span id="/2018/02/14/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/%E7%99%BE%E5%BA%A6%E4%BA%91%E8%B5%84%E6%96%99%EF%BC%88151351%E2%80%A6..%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="百度云资料（151351…..）" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -653,7 +432,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>34</span>
+              <span>416</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -672,9 +451,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2018年1月28日 上午10:22</p>
-<p><img src="/2018/01/28/web%E5%BC%80%E5%8F%91/czh_blog/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%B2%A1%E5%90%83%E8%BF%87%E7%8C%AA%E8%82%89%EF%BC%8C%E8%A7%81%E8%A7%81%E7%8C%AA%E8%B7%91/IMG_7649.JPG" alt></p>
-<h2 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h2><p><a href="%E7%AC%AC09%E8%AF%BE_%E5%B9%B6%E5%8F%91%E5%92%8C%E5%85%B6%E4%BB%96.pdf">第09课_并发和其他.pdf</a></p>
+          <p>2018年2月14日 下午9:36</p>
+<p>项目：<br><a href="http://www.itjc8.com/thread-1963-1-1.html" target="_blank" rel="noopener">Java电商项目负载均衡集群与分布式架构教程2018年1月新课 百度网盘</a><br><a href="http://www.itjc8.com/thread-1960-1-1.html" target="_blank" rel="noopener">java SSM springboot开发电商网站教程2017年11月新课 百度网盘</a><br><a href="http://www.itjc8.com/thread-1962-1-1.html" target="_blank" rel="noopener">2018最新Java系统优化打造高性能高并发的商城系统 百度网盘</a></p>
+<p>工具：<br><a href="http://www.itjc8.com/thread-1575-1-1.html" target="_blank" rel="noopener">【开发工具】intellij idea视频教程 百度网盘</a></p>
+<p>原理：<br><a href="http://www.itjc8.com/thread-1742-1-1.html" target="_blank" rel="noopener">2017年11月新课深入Java虚拟机jvm性能调优内存模型虚拟机 百度网盘</a><br><a href="http://www.itjc8.com/thread-1857-1-1.html" target="_blank" rel="noopener">2018java并发编程原理与项目开发课程 百度网盘</a></p>
+<p>框架：<br><a href="http://www.itjc8.com/thread-2000-1-1.html" target="_blank" rel="noopener">2017使用SpringCloud实战微服务 百度网盘</a><br><a href="http://www.itjc8.com/thread-1997-1-1.html" target="_blank" rel="noopener">Spring Boot实战与原理分析2017超清 百度网盘</a><br><a href="http://www.itjc8.com/thread-1993-1-1.html" target="_blank" rel="noopener">2017 Java 微服务实践-Spring Boot 系列课程 百度网盘</a></p>
+<p>架构：<br><a href="http://www.itjc8.com/thread-1648-1-1.html" target="_blank" rel="noopener">(第二版)亿级流量电商详情页实战缓存架构高可用架构微服务 百度网盘</a><br><a href="http://www.itjc8.com/thread-1773-1-1.html" target="_blank" rel="noopener">2017 JAVA-ACE-架构师系列视频课程-RocketMQ 上下全集 百度网盘</a></p>
+<p>其他：<br><a href="http://www.itjc8.com/thread-1737-1-1.html" target="_blank" rel="noopener">李xh系列-JAVA详解视频(jdk1.8)及项目实战教程 百度网盘</a></p>
 
       
     </div>
@@ -694,7 +477,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/01/28/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/latex/LaTeX%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E8%AE%A4%E8%AF%86%E8%A7%92%E5%BA%A6/%E6%88%91%E6%8F%90%E5%87%BA%E7%9A%84%E9%97%AE%E9%A2%981%EF%BC%9A/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -708,7 +491,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2018/01/28/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/latex/LaTeX%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">LaTeX语法学习教程</a>
+            <a href="/2018/02/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E8%AE%A4%E8%AF%86%E8%A7%92%E5%BA%A6/%E6%88%91%E6%8F%90%E5%87%BA%E7%9A%84%E9%97%AE%E9%A2%981%EF%BC%9A/" class="post-title-link" itemprop="url">我提出的问题1：</a>
         </h1>
 
         <div class="post-meta">
@@ -718,14 +501,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-01-28 08:46:00" itemprop="dateCreated datePublished" datetime="2018-01-28T08:46:00+08:00">2018-01-28</time>
+              <time title="创建时间：2018-02-14 02:40:00" itemprop="dateCreated datePublished" datetime="2018-02-14T02:40:00+08:00">2018-02-14</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+                <time title="修改时间：2020-03-12 20:02:04" itemprop="dateModified" datetime="2020-03-12T20:02:04+08:00">2020-03-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -733,14 +516,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AF%AD%E8%A8%80-LaTex/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_语言/LaTex</span>
+                  <a href="/categories/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3-czh-%E6%95%B0%E5%AD%A6-%E8%AE%A4%E8%AF%86%E8%A7%92%E5%BA%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">f数学相关/czh_数学/认识角度</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2018/01/28/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/latex/LaTeX%E8%AF%AD%E6%B3%95%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/" class="post-meta-item leancloud_visitors" data-flag-title="LaTeX语法学习教程" title="阅读次数">
+            <span id="/2018/02/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E8%AE%A4%E8%AF%86%E8%A7%92%E5%BA%A6/%E6%88%91%E6%8F%90%E5%87%BA%E7%9A%84%E9%97%AE%E9%A2%981%EF%BC%9A/" class="post-meta-item leancloud_visitors" data-flag-title="我提出的问题1：" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -752,7 +535,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>105</span>
+              <span>16</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -771,9 +554,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2018年1月28日 下午8:46<br><a href="http://www.jiantsou.com/using-latex-on-mac-a-simple-guide/" target="_blank" rel="noopener">在Mac上使用LaTeX，一份简单的指导</a></p>
-<p>这是2017最新版的手册：<br><a href="lshort-zh-cn.pdf">lshort-zh-cn.pdf</a></p>
-<p>2019网上找的：<br><a href="https://zhuanlan.zhihu.com/p/88249368" target="_blank" rel="noopener">【开源项目】LaTeX速查手册.pdf - 知乎</a><br><a href="LaTeX.pdf">LaTeX.pdf</a></p>
+          <p>2018年2月14日 下午2:40</p>
+<p><img src="/2018/02/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E8%AE%A4%E8%AF%86%E8%A7%92%E5%BA%A6/%E6%88%91%E6%8F%90%E5%87%BA%E7%9A%84%E9%97%AE%E9%A2%981%EF%BC%9A/4904D87E-410F-44D9-8FCC-534CA44B213D.png" alt></p>
+<p><img src="/2018/02/14/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E8%AE%A4%E8%AF%86%E8%A7%92%E5%BA%A6/%E6%88%91%E6%8F%90%E5%87%BA%E7%9A%84%E9%97%AE%E9%A2%981%EF%BC%9A/AE50EABD-77E9-4D5C-806E-5FBAF079213A.png" alt></p>
 
       
     </div>
@@ -793,7 +576,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/01/25/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/Mac%E4%B8%8B%E8%AF%BB%E5%8F%96window%E4%B8%ADgbkgb2312%E6%A0%BC%E5%BC%8F%E6%96%87%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/13/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E5%BE%AE%E7%A7%AF%E5%88%86/%E5%BE%AE%E5%88%86%E5%AD%A6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -807,7 +590,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2018/01/25/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/Mac%E4%B8%8B%E8%AF%BB%E5%8F%96window%E4%B8%ADgbkgb2312%E6%A0%BC%E5%BC%8F%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Mac下读取window中gbk/gb2312格式文件</a>
+            <a href="/2018/02/13/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E5%BE%AE%E7%A7%AF%E5%88%86/%E5%BE%AE%E5%88%86%E5%AD%A6/" class="post-title-link" itemprop="url">微分学</a>
         </h1>
 
         <div class="post-meta">
@@ -817,7 +600,261 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-01-25 11:11:00" itemprop="dateCreated datePublished" datetime="2018-01-25T11:11:00+08:00">2018-01-25</time>
+              <time title="创建时间：2018-02-13 12:33:00" itemprop="dateCreated datePublished" datetime="2018-02-13T12:33:00+08:00">2018-02-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:02:04" itemprop="dateModified" datetime="2020-03-12T20:02:04+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3-czh-%E6%95%B0%E5%AD%A6-%E5%88%86%E7%B1%BB-%E5%BE%AE%E7%A7%AF%E5%88%86/" itemprop="url" rel="index">
+                    <span itemprop="name">f数学相关/czh_数学/分类/微积分</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/13/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E5%BE%AE%E7%A7%AF%E5%88%86/%E5%BE%AE%E5%88%86%E5%AD%A6/" class="post-meta-item leancloud_visitors" data-flag-title="微分学" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>837</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月13日 上午12:33</p>
+<h2 id="对微分学的一种整体认识"><a href="#对微分学的一种整体认识" class="headerlink" title="对微分学的一种整体认识"></a>对微分学的一种整体认识</h2><p><img src="/2018/02/13/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E5%BE%AE%E7%A7%AF%E5%88%86/%E5%BE%AE%E5%88%86%E5%AD%A6/524B9FCE-0DC5-47C9-8F10-434A8EB3FDB9.png" alt><br>老师上课的最后一句话：微分学就是在逼近，关键是弄清楚我们在逼近什么</p>
+<h2 id="最大的收获是问题的解决"><a href="#最大的收获是问题的解决" class="headerlink" title="最大的收获是问题的解决"></a>最大的收获是问题的解决</h2><ol>
+<li>如何学习数学<ol>
+<li>我在最后的两张笔记中，最想说的并不是他们每个知识点的证明过程</li>
+<li>而是想说：<ol>
+<li>数学知识点区分大小：大的知识点可以推出小知识点，大知识点之间运用着其他大知识点结论。</li>
+<li>整理出他们之间的大小关系，我们就可以摆脱记忆大量知识点的痛苦，同时脑子中可以清晰的描绘出一门知识的脉络。</li>
+<li>::整理出脉络之后，你就可以将这个雪球越滚越大::</li>
+</ol>
+</li>
+<li>举例：<ol>
+<li>几何逼近</li>
+<li>夹逼定理<br><img src="/2018/02/13/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E5%BE%AE%E7%A7%AF%E5%88%86/%E5%BE%AE%E5%88%86%E5%AD%A6/5E71EFDF-DA22-41BF-B6D6-A38CE0BF29EA.png" alt><br><img src="/2018/02/13/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E5%BE%AE%E7%A7%AF%E5%88%86/%E5%BE%AE%E5%88%86%E5%AD%A6/06D1A456-F154-41EA-9218-5C0651A0333A.png" alt></li>
+<li>多元函数求偏导</li>
+<li>反函数求导法则</li>
+</ol>
+</li>
+<li>上面就是列出的就是微分学的6个核心知识点，他们就是微分学的脉络。从他们可以推导出课上所有的其他知识点，那么这些知识点就不用记忆了。他们就显示下图中最闪亮的星星一样。<br><img src="/2018/02/13/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E5%BE%AE%E7%A7%AF%E5%88%86/%E5%BE%AE%E5%88%86%E5%AD%A6/283549B9-62EB-4BB6-87ED-97E3AC29D3CE.png" alt></li>
+</ol>
+</li>
+<li>为什么现在建立的数学模型能描述我们的现实模型。<ol>
+<li>这里面深奥的词：<ol>
+<li>现实模型：其实就是我们现实生活着解决问题的思路。他不需要你有专业背景，是人都能听懂。</li>
+<li>数学模型：在微分学中其实就是一个函数</li>
+</ol>
+</li>
+<li>::【前提】：我们要先有现实生活着解决问题的思路！！！！::</li>
+<li>从现实模型到数学模型这个过程中，我觉得是那些博士，搞学术的人弄出来的。这里我还没那水平，就假设只使用别人已经建立的数学模型</li>
+<li>我们需要掌握的是：<strong>虽然没能力创建，但是最起码能看懂</strong></li>
+<li>这个没有具体的方法，但是100%最重要的是<strong>现实理解清楚</strong>，就算你猜吧也有个猜的方向。</li>
+<li>当然，一个函数表达式就可以完整的描述一个现实模型，还要在这个现实模型的基础上进行::代数运算::，这个代数运算的过程可以描述现实模型的过程。</li>
+</ol>
+</li>
+<li>从这个数学模型中，我们可以看出对应现实模型的优势/劣势。<ol>
+<li>也就是说当前这种解决方案的好坏</li>
+<li>只能举个例子，毕竟我现在还学的少，以后再补充</li>
+<li>在牛顿法中，与梯度下降法来对比就设计到二阶导数，那自然缺就是运算量大的要死。</li>
+</ol>
+</li>
+</ol>
+<h2 id="附件：笔记-pdf"><a href="#附件：笔记-pdf" class="headerlink" title="附件：笔记+pdf"></a>附件：笔记+pdf</h2><p><a href="https://zhidao.baidu.com/question/339541335.html?qbl=relate_question_0&word=%B6%FE%D4%AA%BA%AF%CA%FD%B5%C4%B6%FE%BD%D7%B1%C6%BD%FC" target="_blank" rel="noopener">什么是二元函数的泰勒展开式_百度知道</a><br><a href="%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E7%AC%AC%E4%BA%8C%E6%9C%9F%E7%AC%AC1%E8%AF%BE%E5%BE%AE%E5%88%86%E5%AD%A6%E4%B8%8E%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95.pdf">机器学习中的数学第二期第1课微分学与梯度下降法.pdf</a><a href="%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E7%AC%AC%E4%BA%8C%E6%9C%9F%E7%AC%AC2%E8%AF%BE%E5%BE%AE%E5%88%86%E5%AD%A6%E8%BF%9B%E9%98%B6.pdf">机器学习中的数学第二期第2课微分学进阶.pdf</a><br><img src="/2018/02/13/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E5%BE%AE%E7%A7%AF%E5%88%86/%E5%BE%AE%E5%88%86%E5%AD%A6/IMG_7741.JPG" alt></p>
+<p><img src="/2018/02/13/f%E6%95%B0%E5%AD%A6%E7%9B%B8%E5%85%B3/czh_%E6%95%B0%E5%AD%A6/%E5%88%86%E7%B1%BB/%E5%BE%AE%E7%A7%AF%E5%88%86/%E5%BE%AE%E5%88%86%E5%AD%A6/IMG_7740.JPG" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/13/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5/july/%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/13/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5/july/%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="post-title-link" itemprop="url">前馈神经网络</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-13 06:01:00" itemprop="dateCreated datePublished" datetime="2018-02-13T06:01:00+08:00">2018-02-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 19:41:52" itemprop="dateModified" datetime="2020-03-12T19:41:52+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-mac-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5-july/" itemprop="url" rel="index">
+                    <span itemprop="name">c数据科学/mac_机器学习/入门阶段/july</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/13/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5/july/%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/" class="post-meta-item leancloud_visitors" data-flag-title="前馈神经网络" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>451</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月13日 下午6:01</p>
+<p>ppt在这里：<a href="bear://x-callback-url/open-note?id=4E79F9DC-98A2-4969-9DB8-9075DA93E783-331-0002769161CBF72B">微分学</a>第二课最后</p>
+<h2 id="链接："><a href="#链接：" class="headerlink" title="链接："></a>链接：</h2><p><a href="http://www.aiportal.net/rnn-lstm/rnn%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B-1-%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-ffnn" target="_blank" rel="noopener">RNN算法之预备知识：前馈神经网络（FFNN）</a><br>这篇文章讲解FFNN不错，但是他没有涉及反向传播的知识</p>
+<p><a href="http://www.sohu.com/a/168767295_826434" target="_blank" rel="noopener">t推荐：一文搞懂反向传播算法_搜狐科技_搜狐网</a><br>这篇文章将反向传播与梯度下降进行了对比，可以理解成反向传播算法可以说是梯度下降在链式法则中的应用。</p>
+<h2 id="两个问题"><a href="#两个问题" class="headerlink" title="两个问题"></a>两个问题</h2><ol>
+<li>为什么不能用Taylor级数进行逼近，而是使用简单函数嵌套进行逼近？<ol>
+<li>在Taylor级数中我们前提是知道函数f(x)，就像我们在梯度下降和牛顿法发中，我们最起码知道一个<strong>优化的函数对象</strong>，虽然他可能在细节上十分的曲折。</li>
+<li>但在这里，我们现实的目的是：给你一个图片确定他是啥动物。<strong>我的研究目的是：知道其中蕴含的对应的函数关系。</strong>这个函数时我们不知道的，怎么能求导呢？</li>
+</ol>
+</li>
+<li>反向传播：<ol>
+<li>反向传播是当我们已经从出入的x，求到了左后的f(x)结果后</li>
+<li><strong>进行调参时(w，d，𝜃)</strong>这个过程中要从最外层的函数嵌套开始，从外向内。</li>
+<li>原因：从下面的红色部分代数推到公式可以看出—内层依靠外层<br><img src="/2018/02/13/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5/july/%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/4AB7236A-DFA5-45B8-8768-C06363AAD432.png" alt></li>
+</ol>
+</li>
+</ol>
+<p><img src="/2018/02/13/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5/july/%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/A625FF87-2350-4AC3-82D3-61084A09FEAA.png" alt><br>注：<strong>将第一幅图的公式带入第二副图中</strong></p>
+<p><img src="/2018/02/13/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5/july/%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/08AB911D-D524-4172-A59C-AD50D436FE85.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/12/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/Java%E6%8F%90%E9%AB%98%E7%8F%AD%E8%A6%81%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%86%85%E5%AE%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/12/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/Java%E6%8F%90%E9%AB%98%E7%8F%AD%E8%A6%81%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%86%85%E5%AE%B9/" class="post-title-link" itemprop="url">Java提高班要学习的内容</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-12 11:31:00" itemprop="dateCreated datePublished" datetime="2018-02-12T11:31:00+08:00">2018-02-12</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -832,14 +869,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/通用知识点</span>
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%AB%98%E7%BA%A7/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/高级</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2018/01/25/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/Mac%E4%B8%8B%E8%AF%BB%E5%8F%96window%E4%B8%ADgbkgb2312%E6%A0%BC%E5%BC%8F%E6%96%87%E4%BB%B6/" class="post-meta-item leancloud_visitors" data-flag-title="Mac下读取window中gbk/gb2312格式文件" title="阅读次数">
+            <span id="/2018/02/12/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/Java%E6%8F%90%E9%AB%98%E7%8F%AD%E8%A6%81%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%86%85%E5%AE%B9/" class="post-meta-item leancloud_visitors" data-flag-title="Java提高班要学习的内容" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -851,7 +888,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>262</span>
+              <span>929</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -870,19 +907,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2018年1月25日 上午11:11</p>
-<h2 id="步骤："><a href="#步骤：" class="headerlink" title="步骤："></a>步骤：</h2><ol>
-<li>使用sublime，操作<code>command + shift + p</code>+输入并安装 <code>install package controll</code></li>
-<li>提示安装成功后，再次<code>command + shift + p</code>+ 输入并安装 <code>CovertToUTF8</code></li>
-<li>安装Codecs，操作<code>command + shift + p</code>+输入并安装<code>Codecs</code></li>
-<li>完成</li>
+          <p>2018年2月12日 上午11:31</p>
+<p><img src="/2018/02/12/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/Java%E6%8F%90%E9%AB%98%E7%8F%AD%E8%A6%81%E5%AD%A6%E4%B9%A0%E7%9A%84%E5%86%85%E5%AE%B9/C4D22001-C690-4DEB-BF1C-E7C2FE7A40EF.png" alt></p>
+<p>第一部分 </p>
+<ol>
+<li>VueJS：MVVM模式；数据绑定；模板逻辑；计算函数；事件处理；Vue AJAX；</li>
+<li>全文搜索引擎：ElasticSearch、Solr、Lucene；</li>
+<li>Docker：什么是Docker、Docker使用、Docker在系统架构中的应用；</li>
+<li>Git：GitHub的使用；自己搭建Git服务器；Git命令行操作；Git图形界面使用；</li>
+<li>其他：网络支付、WebService</li>
 </ol>
-<h2 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h2><ol>
-<li>使用UltraEdit，也可以支持打开，但是这个软件花钱，只有30天试用期</li>
-<li>使用mac自带的文本软件打开，但是始终看的不爽！</li>
+<p>第二部分 NoSQL</p>
+<ol>
+<li>MongoDB：MongoDB的优缺点、MongoDB的数据管理、MongoDB应用案例分析；</li>
+<li>Redis：Redis的优缺点、Redis常用数据类型（String、List、Set、Sorted Set、Geo）、Redis应用案例分析；</li>
+<li>Memcached：Memcached介绍、Memcached 集群、Memcached应用案例分析；</li>
 </ol>
-<p><img src="/2018/01/25/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/Mac%E4%B8%8B%E8%AF%BB%E5%8F%96window%E4%B8%ADgbkgb2312%E6%A0%BC%E5%BC%8F%E6%96%87%E4%BB%B6/112931F9-8AAA-4068-BE83-D4349532E809.png" alt><br>::图1::第二步按装成功后会出现上图页面</p>
-<p><img src="/2018/01/25/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/Mac%E4%B8%8B%E8%AF%BB%E5%8F%96window%E4%B8%ADgbkgb2312%E6%A0%BC%E5%BC%8F%E6%96%87%E4%BB%B6/19F4708A-7E7B-47EF-A644-B724DF112AC7.png" alt><br>::图2::缺少第三步会提示error</p>
+<p>第三部分 设计模式</p>
+<ol>
+<li>创建型模式：工厂方法模式、抽象工厂模式、单例模式、建造者模式、原型模式。</li>
+<li>结构型模式：适配器模式、装饰器模式、代理模式、外观模式、桥接模式、组合模式、享元模式。</li>
+<li>行为型模式：策略模式、模板方法模式、观察者模式、迭代器模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。</li>
+<li>案例：Java中的设计模式应用；编写JDBC驱动；编写Java代码分析器；编写免配置的JavaWeb MVC框架；</li>
+</ol>
+<p>第四部分 分布式技术</p>
+<ol>
+<li>消息队列：RabbitMQ、MQ应用案例分析；</li>
+<li>分布式日志系统：ELK(ElasticSearch, Logstash, Kibana)；</li>
+<li>Spring Boot：SpringBoot优势分析；SpringBoot开发；SpringBoot测试；Actuator；部署SpringBoot应用；</li>
+<li>Spring Cloud：Eureka服务治理；Ribbon负载均衡；Hystrix熔断器；API网关Zuul；分布式配置中心；</li>
+<li>Nginx：反向代理；负载均衡；</li>
+<li>sharding jdbc：分库、分表；读写分离；</li>
+</ol>
+<p>第五部分 综合项目<br>  这是一个手机商城系统，综合应用VueJS、Spring Boot、Spring Cloud、NoSQL、MQ、全文检索、ELK、sharding jdbc等技术。</p>
 
       
     </div>
@@ -902,7 +959,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/01/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/Makefile/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/10/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F%E8%AE%BA%E6%96%87%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -916,7 +973,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2018/01/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/Makefile/" class="post-title-link" itemprop="url">Makefile</a>
+            <a href="/2018/02/10/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F%E8%AE%BA%E6%96%87%E9%9B%86/" class="post-title-link" itemprop="url">国家集训队论文集</a>
         </h1>
 
         <div class="post-meta">
@@ -926,7 +983,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-01-25 09:55:00" itemprop="dateCreated datePublished" datetime="2018-01-25T09:55:00+08:00">2018-01-25</time>
+              <time title="创建时间：2018-02-10 04:15:00" itemprop="dateCreated datePublished" datetime="2018-02-10T04:15:00+08:00">2018-02-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -941,14 +998,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_arm</span>
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2017/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2017</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2018/01/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/Makefile/" class="post-meta-item leancloud_visitors" data-flag-title="Makefile" title="阅读次数">
+            <span id="/2018/02/10/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F%E8%AE%BA%E6%96%87%E9%9B%86/" class="post-meta-item leancloud_visitors" data-flag-title="国家集训队论文集" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -960,316 +1017,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年1月25日 上午9:55</p>
-<h2 id="最重要的内容："><a href="#最重要的内容：" class="headerlink" title="最重要的内容："></a>最重要的内容：</h2><p>下面的注释就是我现在对makefile的理解</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#一些变量习惯性的放在最前面（下面10行都是变量）</span></span><br><span class="line">objs = a.o b.o c.o</span><br><span class="line"></span><br><span class="line"><span class="comment">#字符串处理函数</span></span><br><span class="line">dep_files := <span class="variable">$(<span class="built_in">patsubst</span> %,.%.d, <span class="variable">$(objs)</span>)</span></span><br><span class="line"><span class="comment">#判断文件是否存在的函数，将结果返回</span></span><br><span class="line">dep_files := <span class="variable">$(<span class="built_in">wildcard</span> <span class="variable">$(dep_files)</span>)</span></span><br><span class="line"></span><br><span class="line">CFLAGS = -Werror -Iinclude</span><br><span class="line"></span><br><span class="line"><span class="comment">#首要目标一定要放在最前面</span></span><br><span class="line"><span class="section">test: <span class="variable">$(objs)</span></span></span><br><span class="line">	gcc -o test <span class="variable">$^</span></span><br><span class="line">	</span><br><span class="line"><span class="comment">#文件存在你才可以包含进来呀（是针对第一次make或者clean之后第一次make优化）</span></span><br><span class="line"><span class="keyword">ifneq</span> (<span class="variable">$(dep_files)</span>,)</span><br><span class="line"><span class="keyword">include</span> <span class="variable">$(dep_files)</span></span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"></span><br><span class="line">%.o : %.c</span><br><span class="line">	gcc <span class="variable">$(CFLAGS)</span> -c -o <span class="variable">$@</span> <span class="variable">$&lt;</span> -MD -MF .<span class="variable">$@</span>.d</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">	rm *.o test</span><br><span class="line"><span class="comment">#这里是这个程序的一个bug，如果执行make distclean 那么就必须make clean初始化程序。</span></span><br><span class="line"><span class="comment">#否则.h文件修改就不起作用了</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#这个程序现在的功能是没有能力单独生成.d文件的，是和.o文件绑定在一起</span></span><br><span class="line"><span class="comment">#只有两种情况能让.h文件一种正常1.clean之后make 2..d文件存在</span></span><br><span class="line"><span class="comment">#这个程序要是优化的化，就是让其具有单独生产.d文件的能力，并且在程序执行一开始就产生，那么任何时候都是正确的</span></span><br><span class="line"><span class="section">distclean:</span></span><br><span class="line">	rm <span class="variable">$(dep_files)</span></span><br><span class="line">	</span><br><span class="line"><span class="meta"><span class="meta-keyword">.PHONY</span>: clean</span></span><br></pre></td></tr></table></figure>
-
-<p>注：配套的源码在：<code>D:\005_ARM裸机1期加强版\源码文档图片\源码_201180109_添加gcc_pointer_makefile_printf\008_gcc_pointer_Makefile_009\003_Makefile\003_example_009_008</code></p>
-<h2 id="调试过程："><a href="#调试过程：" class="headerlink" title="调试过程："></a>调试过程：</h2><p>为了体现上面makefile的bug</p>
-<p><img src="/2018/01/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/Makefile/5C81B539-F0C0-4517-902E-F4F517614074.png" alt></p>
-<h2 id="Makefile的详细笔记："><a href="#Makefile的详细笔记：" class="headerlink" title="Makefile的详细笔记："></a>Makefile的详细笔记：</h2><p><a href="https://www.cnblogs.com/xiaojiang1025/p/5955065.html" target="_blank" rel="noopener">Makefile目标，伪目标，头文件自动依赖 - Abnor - 博客园</a><br><strong>Makefile是根据依赖关系</strong>，时间戳和生成规则来判断哪些文件需要更新</p>
-<ol>
-<li><p>makefile每次执行，要保证生成的对象的所有<strong>依赖串中的依赖</strong>都必须检查一遍是否更新过</p>
-</li>
-<li><p>Makefile的核心1—规则 :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">目标1 : 依赖1 依赖2 ...</span><br><span class="line">[TAB]命令</span><br></pre></td></tr></table></figure>
-<ol>
-<li>指令执行条件：<ol>
-<li><strong>当”目标文件”不存在,</strong> </li>
-<li><strong>某个依赖文件比目标文件”新”,</strong></li>
-<li>则: 执行”命令”</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>Makefile的核心2—规则 :</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">目标2 : 依赖1 依赖2 ...</span><br></pre></td></tr></table></figure>
-<ol>
-<li>当执行条件成立时，如何找到对应执行的语句？<ol>
-<li>去找 目标1=目标2</li>
-<li>执行目标2的[TAB]命令</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>Makefile的语法</p>
-<ol>
-<li>通配符: %.o</li>
-<li>$@ 表示目标</li>
-<li>$&lt; 表示第1个依赖文件</li>
-<li>$^ 表示所有依赖文件</li>
-<li>假想目标: .PHONY</li>
-<li>即时变量、延时变量, export<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">简单变量(即时变量) :</span><br><span class="line">A :&#x3D; xxx   # A的值即刻确定，在定义时即确定</span><br><span class="line">B &#x3D; xxx    # B的值使用到时才确定 </span><br><span class="line"></span><br><span class="line">:&#x3D;   # 即时变量</span><br><span class="line">&#x3D;    # 延时变量</span><br><span class="line">?&#x3D;   # 延时变量, 如果是第1次定义才起效, 如果在前面该变量已定义则忽略这句</span><br><span class="line">+&#x3D;   # 附加, 它是即时变量还是延时变量取决于前面的定义</span><br></pre></td></tr></table></figure>
-参考文档:<br>a. 百度搜 “gnu make 于凤昌”<br>b. 官方文档: <a href="http://www.gnu.org/software/make/manual/" target="_blank" rel="noopener">http://www.gnu.org/software/make/manual/</a></li>
-</ol>
-</li>
-<li><p>Makefile函数</p>
-<ol>
-<li>$(foreach var,list,text)</li>
-<li>$(filter pattern…,text)      <ol>
-<li><h1 id="在text中取出符合patten格式的值"><a href="#在text中取出符合patten格式的值" class="headerlink" title="在text中取出符合patten格式的值"></a>在text中取出符合patten格式的值</h1></li>
-</ol>
-</li>
-<li>$(filter-out pattern…,text)  <ol>
-<li><h1 id="在text中取出不符合patten格式的值"><a href="#在text中取出不符合patten格式的值" class="headerlink" title="在text中取出不符合patten格式的值"></a>在text中取出不符合patten格式的值</h1></li>
-</ol>
-</li>
-<li>$(wildcard pattern)            <ol>
-<li><h1 id="pattern定义了文件名的格式"><a href="#pattern定义了文件名的格式" class="headerlink" title="pattern定义了文件名的格式,"></a>pattern定义了文件名的格式,</h1></li>
-<li><h1 id="wildcard取出其中存在的文件"><a href="#wildcard取出其中存在的文件" class="headerlink" title="wildcard取出其中存在的文件"></a>wildcard取出其中存在的文件</h1></li>
-</ol>
-</li>
-<li>$(patsubst pattern,replacement,$(var))  <ol>
-<li><h1 id="从列表中取出每一个值"><a href="#从列表中取出每一个值" class="headerlink" title="从列表中取出每一个值"></a>从列表中取出每一个值</h1></li>
-<li><h1 id="如果符合pattern"><a href="#如果符合pattern" class="headerlink" title="如果符合pattern"></a>如果符合pattern</h1></li>
-<li><h1 id="则替换为replacement"><a href="#则替换为replacement" class="headerlink" title="则替换为replacement"></a>则替换为replacement</h1></li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>Makefile实例<br>改进: 支持头文件依赖<br><a href="http://blog.csdn.net/qq1452008/article/details/50855810" target="_blank" rel="noopener">Linux Makefile生成*.d依赖文件及 gcc -M -MF -MP等相关选项说明 - CSDN博客</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gcc -M c.c &#x2F;&#x2F; 打印出依赖</span><br><span class="line">gcc -M -MF c.d c.c  &#x2F;&#x2F; 把依赖写入文件c.d</span><br><span class="line">gcc -c -o c.o c.c -MD -MF c.d  &#x2F;&#x2F; 编译c.o, 把依赖写入文件c.d</span><br></pre></td></tr></table></figure>
-<p>b. 添加CFLAGS</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/01/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%85%B3%E4%BA%8Earm%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A31/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%85%B3%E4%BA%8Earm%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A31/" class="post-title-link" itemprop="url">关于arm程序的一些理解1</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-25 09:37:00" itemprop="dateCreated datePublished" datetime="2018-01-25T09:37:00+08:00">2018-01-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_arm</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/01/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%85%B3%E4%BA%8Earm%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E8%A7%A31/" class="post-meta-item leancloud_visitors" data-flag-title="关于arm程序的一些理解1" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年1月25日 下午9:37</p>
-<h2 id="先整体理解："><a href="#先整体理解：" class="headerlink" title="先整体理解："></a>先整体理解：</h2><p>我觉得对arm编程就类似于一份这样的工作：</p>
-<ol>
-<li>一个大的工厂，现在这个工厂已经实现了机器化生产，所有的机器就像我们电影中看到了一样它有一个总控，这个总控的操作形式就是一堆的开关、按键。当一个新的工人去这个工厂打工，他最终的目的是要学会如何操作那个总控，但是在这之前，他的绝大部分时间并不是去学习对应的开关是干什么的，因为即使有师傅告诉他这个开关是干啥的，他不一定能听懂这位师傅说的是什么，因为你对后面的这一大片的机器，以及各个机器之间的运作方式并不清楚，当让他做一个事情的时候，他必须分析出如何做到老板的要求。也就是说，<strong>其实这个人在开始阶段大部分时间的学习都放在了学习背后这些机器的原理上了</strong></li>
-<li>同样，在arm中我觉得写起程序的样子也是先找到对应的位置（地址），然后再判断这里是开或关或输入一个值（寄存器），我们学习arm的难点是取了解2440芯片的说明手册，以及芯片底盘原理图，<strong>这就是去了解整套机器本身的已经定死的运行原理，并不随你的操作不同而改变的内容，才是最最关键重要的内容</strong>。</li>
-</ol>
-<h2 id="具体上来说有一些套路："><a href="#具体上来说有一些套路：" class="headerlink" title="具体上来说有一些套路："></a>具体上来说有一些套路：</h2><ol>
-<li><p>操作寄存器方式固定</p>
-<ol>
-<li>就一步：赋值</li>
-<li>连地址都给你封装到.h文件中了</li>
-<li>简单的要死</li>
-</ol>
-</li>
-<li><p>清零，置位方法固定</p>
-<ol>
-<li>一个原则：只操作我们需要改变的位，其他位我们不影响</li>
-<li><strong>结论：他俩并不是互逆的运算，而是各有各的功能，不被替代</strong></li>
-<li>&amp;一定用于清零 用1保护剩余位，清零位=0</li>
-<li>|一定用于置位   用0保护剩余位， 置位位=1</li>
-<li><strong>口诀：或的符号“|”，置位不就是1吗，其他的位置根据相反的关系记忆</strong><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GPFCON &amp;= ~((<span class="number">3</span>&lt;&lt;<span class="number">8</span>) | (<span class="number">3</span>&lt;&lt;<span class="number">10</span>) | (<span class="number">3</span>&lt;&lt;<span class="number">12</span>));#清零</span><br><span class="line">GPFCON |=  ((<span class="number">1</span>&lt;&lt;<span class="number">8</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">10</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">12</span>));#置位</span><br></pre></td></tr></table></figure></li>
-<li>&amp;还有截取的能力 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tmp = ~val;</span><br><span class="line">tmp &amp;= <span class="number">7</span>;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-<li><p>使用arm指令固定</p>
-<ol>
-<li>在arm汇编中，指令会三个就行ldr str ldr(伪指令)</li>
-<li>其他的cmp这些用的很少</li>
-</ol>
-</li>
-</ol>
-<h2 id="两个问题："><a href="#两个问题：" class="headerlink" title="两个问题："></a>两个问题：</h2><h3 id="C语言方便在哪里了？"><a href="#C语言方便在哪里了？" class="headerlink" title="C语言方便在哪里了？"></a>C语言方便在哪里了？</h3><ol>
-<li>C语言有{}，可以缩进写条件、循环，更加直观</li>
-<li>不用记复杂指令，c会变量+条件+循环+函数+置位就可写各种程序</li>
-</ol>
-<h3 id="哪些是C语言无法方便的？"><a href="#哪些是C语言无法方便的？" class="headerlink" title="哪些是C语言无法方便的？"></a>哪些是C语言无法方便的？</h3><ol>
-<li>不管你使用哪种语言，查芯片手册是一定要做的，躲不了</li>
-<li>C语言带来的舒服可以理解成：他追求一种视觉上的舒服，分门别类的明显区分开来，一目了然，尤其针对代码比较多的项目，<strong>翻到哪页，我一看函数名就知道要干啥，我在接的看看条件和循环结构就知道他这个功能实现的大致步骤是个啥，这是汇编远远比不上的</strong></li>
-</ol>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"s3c2440_soc.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">delay</span><span class="params">(<span class="keyword">volatile</span> <span class="keyword">int</span> d)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (d--);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> val = <span class="number">0</span>;  <span class="comment">/* val: 0b000, 0b111 */</span></span><br><span class="line">	<span class="keyword">int</span> tmp;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 设置GPFCON让GPF4/5/6配置为输出引脚 */</span></span><br><span class="line">	GPFCON &amp;= ~((<span class="number">3</span>&lt;&lt;<span class="number">8</span>) | (<span class="number">3</span>&lt;&lt;<span class="number">10</span>) | (<span class="number">3</span>&lt;&lt;<span class="number">12</span>));</span><br><span class="line">	GPFCON |=  ((<span class="number">1</span>&lt;&lt;<span class="number">8</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">10</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">12</span>));</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 循环点亮 */</span></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		tmp = ~val;</span><br><span class="line">		tmp &amp;= <span class="number">7</span>;</span><br><span class="line">		GPFDAT &amp;= ~(<span class="number">7</span>&lt;&lt;<span class="number">4</span>);</span><br><span class="line">		GPFDAT |= (tmp&lt;&lt;<span class="number">4</span>);</span><br><span class="line">		<span class="built_in">delay</span>(<span class="number">100000</span>);</span><br><span class="line">		val++;</span><br><span class="line">		<span class="keyword">if</span> (val == <span class="number">8</span>)</span><br><span class="line">			val =<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">.text</span><br><span class="line">.global _start</span><br><span class="line"></span><br><span class="line">_start:</span><br><span class="line"></span><br><span class="line">	&#x2F;* 关闭看门狗 *&#x2F;</span><br><span class="line">	ldr r0, &#x3D;0x53000000</span><br><span class="line">	ldr r1, &#x3D;0</span><br><span class="line">	str r1, [r0]</span><br><span class="line"></span><br><span class="line">	&#x2F;* 设置MPLL, FCLK : HCLK : PCLK &#x3D; 400m : 100m : 50m *&#x2F;</span><br><span class="line">	&#x2F;* LOCKTIME(0x4C000000) &#x3D; 0xFFFFFFFF *&#x2F;</span><br><span class="line">	ldr r0, &#x3D;0x4C000000</span><br><span class="line">	ldr r1, &#x3D;0xFFFFFFFF</span><br><span class="line">	str r1, [r0]</span><br><span class="line"></span><br><span class="line">	&#x2F;* CLKDIVN(0x4C000014) &#x3D; 0X5, tFCLK:tHCLK:tPCLK &#x3D; 1:4:8  *&#x2F;</span><br><span class="line">	ldr r0, &#x3D;0x4C000014</span><br><span class="line">	ldr r1, &#x3D;0x5</span><br><span class="line">	str r1, [r0]</span><br><span class="line"></span><br><span class="line">	&#x2F;* 设置CPU工作于异步模式 *&#x2F;</span><br><span class="line">	mrc p15,0,r0,c1,c0,0</span><br><span class="line">	orr r0,r0,#0xc0000000   &#x2F;&#x2F;R1_nF:OR:R1_iA</span><br><span class="line">	mcr p15,0,r0,c1,c0,0</span><br><span class="line"></span><br><span class="line">	&#x2F;* 设置MPLLCON(0x4C000004) &#x3D; (92&lt;&lt;12)|(1&lt;&lt;4)|(1&lt;&lt;0) </span><br><span class="line">	 *  m &#x3D; MDIV+8 &#x3D; 92+8&#x3D;100</span><br><span class="line">	 *  p &#x3D; PDIV+2 &#x3D; 1+2 &#x3D; 3</span><br><span class="line">	 *  s &#x3D; SDIV &#x3D; 1</span><br><span class="line">	 *  FCLK &#x3D; 2*m*Fin&#x2F;(p*2^s) &#x3D; 2*100*12&#x2F;(3*2^1)&#x3D;400M</span><br><span class="line">	 *&#x2F;</span><br><span class="line">	ldr r0, &#x3D;0x4C000004</span><br><span class="line">	ldr r1, &#x3D;(92&lt;&lt;12)|(1&lt;&lt;4)|(1&lt;&lt;0)</span><br><span class="line">	str r1, [r0]</span><br><span class="line"></span><br><span class="line">	&#x2F;* 一旦设置PLL, 就会锁定lock time直到PLL输出稳定</span><br><span class="line">	 * 然后CPU工作于新的频率FCLK</span><br><span class="line">	 *&#x2F;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	&#x2F;* 设置内存: sp 栈 *&#x2F;</span><br><span class="line">	&#x2F;* 分辨是nor&#x2F;nand启动</span><br><span class="line">	 * 写0到0地址, 再读出来</span><br><span class="line">	 * 如果得到0, 表示0地址上的内容被修改了, 它对应ram, 这就是nand启动</span><br><span class="line">	 * 否则就是nor启动</span><br><span class="line">	 *&#x2F;</span><br><span class="line">	mov r1, #0</span><br><span class="line">	ldr r0, [r1] &#x2F;* 读出原来的值备份 *&#x2F;</span><br><span class="line">	str r1, [r1] &#x2F;* 0-&gt;[0] *&#x2F; </span><br><span class="line">	ldr r2, [r1] &#x2F;* r2&#x3D;[0] *&#x2F;</span><br><span class="line">	cmp r1, r2   &#x2F;* r1&#x3D;&#x3D;r2? 如果相等表示是NAND启动 *&#x2F;</span><br><span class="line">	ldr sp, &#x3D;0x40000000+4096 &#x2F;* 先假设是nor启动 *&#x2F;</span><br><span class="line">	moveq sp, #4096  &#x2F;* nand启动 *&#x2F;</span><br><span class="line">	streq r0, [r1]   &#x2F;* 恢复原来的值 *&#x2F;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	bl main</span><br><span class="line"></span><br><span class="line">halt:</span><br><span class="line">	b halt</span><br></pre></td></tr></table></figure>
-<p>注：这是第9课的代码</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/01/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/c%E6%8C%87%E9%92%88%E7%9A%84%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/c%E6%8C%87%E9%92%88%E7%9A%84%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">c指针的重新理解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-23 08:14:00" itemprop="dateCreated datePublished" datetime="2018-01-23T08:14:00+08:00">2018-01-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_arm</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/01/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/c%E6%8C%87%E9%92%88%E7%9A%84%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="c指针的重新理解" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>477</span>
+              <span>45</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1288,24 +1036,265 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2018年1月23日 下午8:14</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
-<li>以问题的形式说明知识点</li>
-<li>一个关于指针的口诀</li>
-<li>理解数组名</li>
+          <p>2018年2月10日 下午4:15<br><a href="http://download.csdn.net/album/detail/657" target="_blank" rel="noopener">(14个) 国家集训队论文集1999~2015-CSDN下载</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/10/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E9%AA%97%E5%88%86%E5%AF%BC%E8%AE%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/10/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E9%AA%97%E5%88%86%E5%AF%BC%E8%AE%BA/" class="post-title-link" itemprop="url">骗分导论</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-10 04:15:00" itemprop="dateCreated datePublished" datetime="2018-02-10T04:15:00+08:00">2018-02-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2017/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2017</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/10/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E9%AA%97%E5%88%86%E5%AF%BC%E8%AE%BA/" class="post-meta-item leancloud_visitors" data-flag-title="骗分导论" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>323</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月10日 下午4:15</p>
+<p><a href="%E9%AA%97%E5%88%86%E5%AF%BC%E8%AE%BA.pdf">骗分导论.pdf</a></p>
+<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p><strong>最重要的作用是提供了一种新的思考文件的角度</strong></p>
+<h2 id="关键点罗列："><a href="#关键点罗列：" class="headerlink" title="关键点罗列："></a>关键点罗列：</h2><ol>
+<li>复杂度的常数优化</li>
+<li>数学分析与猜想：也就是利用数学上的一些定理方法</li>
+<li>非完美算法：<ol>
+<li>贪心：我不证明对不对，但最起码能出一个可能正确的结果</li>
+<li>随机：<ol>
+<li>我把过程中不会的部分随机来代替，</li>
+<li>或者就是根据随机我重新想一套思路，</li>
+<li>甚至是将原先完整的算法中部分用随机来代替，为了提高速度</li>
 </ol>
-<h2 id="一：以问题的形式说明知识点"><a href="#一：以问题的形式说明知识点" class="headerlink" title="一：以问题的形式说明知识点"></a>一：以问题的形式说明知识点</h2><h3 id="前提："><a href="#前提：" class="headerlink" title="前提："></a>前提：</h3><p>Int a=1;<br>TYPE *pa=&amp;a<br>假设a的地址是：0x12345678</p>
-<h3 id="第一个问题-：where"><a href="#第一个问题-：where" class="headerlink" title="第一个问题    ：where"></a>第一个问题    ：where</h3><pre><code>1. **指针变量存放在哪里？**
-    1. 存放在内存中
-2. **存放在内存中哪里？**
-    1. 存放在&amp;pa处
-3. **为啥放在那里？**
-    1. 编译时就决定了地址位置（这个结论来源于arm，我没有验证）</code></pre><h3 id="第二个问题：how-存"><a href="#第二个问题：how-存" class="headerlink" title="第二个问题：how 存"></a>第二个问题：how 存</h3><pre><code>1. **如何存放别人的地址值？**
-2. 小端方式存放别人的地址值（eg地址：0x12345678）</code></pre><h3 id="第三个问题：how-取"><a href="#第三个问题：how-取" class="headerlink" title="第三个问题：how 取"></a>第三个问题：how 取</h3><pre><code>1. **如何取对应地址的处的值？**
-2. 根据”步长“，也就是sizeof TYPE 的结果</code></pre><h2 id="二：一个关于指针的口诀"><a href="#二：一个关于指针的口诀" class="headerlink" title="二：一个关于指针的口诀"></a>二：一个关于指针的口诀</h2><p><strong>两变，两不变</strong></p>
-<p><strong>两变：</strong><br>    1. 指向的内存地址<br>    2. 每次+1走的步长<br><strong>两不变：</strong><br>    1. 在32位linux系统中，指针本身占内存空间4个字节<br>        1. 64位系统中，指针占8个字节<br>    2. 指针指向的是被指向对象的起始地址，被指向对象多长不管</p>
-<h2 id="三：理解数组名（说的太好了）"><a href="#三：理解数组名（说的太好了）" class="headerlink" title="三：理解数组名（说的太好了）"></a>三：理解数组名（说的太好了）</h2><p><a href="http://www.cnblogs.com/litifeng/p/7065384.html" target="_blank" rel="noopener">c语言中数组名和指针变量的区别 - 立体风 - 博客园</a><br><img src="/2018/01/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/c%E6%8C%87%E9%92%88%E7%9A%84%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3/E6AA3431-0B31-4527-A99A-7D3989173DB6.png" alt></p>
-<p>附录：<br>老师的笔记：<br><img src="/2018/01/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/c%E6%8C%87%E9%92%88%E7%9A%84%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3/c%E8%AF%AD%E8%A8%80%E6%8C%87%E9%92%88%E5%A4%8D%E4%B9%A01.jpg" alt></p>
+</li>
+<li>枚举：我全试试</li>
+<li>调整：一次达不到最终的结果，需要走走停停，即使根据当前环境调整，知道达到最终结果</li>
+<li>搜索：对多层for进行优化<ol>
+<li>可行性减枝：根据实际情况，删去一些“不可行”的一些实际情况</li>
+<li>最优性减枝：选取最优的，其他的不要的</li>
+<li>局部贪心，动态规划：</li>
+<li>启发式搜索：</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="附件："><a href="#附件：" class="headerlink" title="附件："></a>附件：</h2><p>这个我没有看：<br><a href="%E6%95%B0%E5%AD%A6%E9%AA%97%E5%88%86%E5%AF%BC%E8%AE%BA.pdf">数学骗分导论.pdf</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9%E4%B8%AD%E6%96%AD%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9%E4%B8%AD%E6%96%AD%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/" class="post-title-link" itemprop="url">对中断的理解（新）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-09 08:43:00" itemprop="dateCreated datePublished" datetime="2018-02-09T08:43:00+08:00">2018-02-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_arm</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9%E4%B8%AD%E6%96%AD%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="对中断的理解（新）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>600</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月9日 下午8:43</p>
+<ol>
+<li>中断原则上来说是异常的一种，因为中断发生时也是跳转到中断向量表处，开始中断过程。但是从触发的过程上来说，在2440中有专门的INTERRUPT CONTROLLER进行控制，这个控制器最主要的作用是：分辨中断源+使能+设置不同的模式。<strong>这个有专人服务的贵宾待遇啊！</strong><br><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9%E4%B8%AD%E6%96%AD%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/AF60EF71-03B1-4E5E-A6C5-FAF6DBDD48AC.png" alt></li>
+<li>编程之前要有的整体意识：<ol>
+<li>我总结下来当涉及到中断时，<strong>大体需要三个控制器</strong><ol>
+<li>INTERRUPT CONTROLLER控制器</li>
+<li>一个2440的内部<strong>可以触发中断的控制器</strong><ol>
+<li>定时器使用的是PWM TIMER</li>
+<li>按键使用的是GPIO</li>
+<li>ADC使用时ADC AND TOUCH SCREEN INTERFACE</li>
+</ol>
+</li>
+<li>在中断处理过程中，根据功能可能还涉及到一个控制器</li>
+</ol>
+</li>
+<li>”可以触发中断的控制器“和“中断控制器”之间的关系，我见过三种<ol>
+<li>定时器使用的是PWM TIMER<ol>
+<li><strong>直接</strong>将中断信号连接到中断控制器，中间没有任何寄存器和设备。 所以，不需要设置。</li>
+</ol>
+</li>
+<li>按键使用的是GPIO<ol>
+<li><strong>部分引脚</strong>的数据要通过EINTMASK寄存器的使能设置。<br><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9%E4%B8%AD%E6%96%AD%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/D825CA73-56C2-4937-A001-2A90DC433B0C.png" alt></li>
+<li>按键在中断控制器中，走的路线是（without sub register）<br><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9%E4%B8%AD%E6%96%AD%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/B60DCE82-436B-4AAD-A2DB-7FDDC9342EF0.png" alt></li>
+</ol>
+</li>
+<li>ADC使用时ADC AND TOUCH SCREEN INTERFACE<ol>
+<li>双引脚引入中断控制器的，但公用一个引脚，所以一定需要寄存器进行区分</li>
+<li>并且，在中断控制器中走的路线是（with sub register）<br><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9%E4%B8%AD%E6%96%AD%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/AAB2642B-1A3C-4F73-A0D0-68B062C3D399.png" alt></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>在中断中的第三个部分：<strong>中断触发执行的过程</strong><ol>
+<li>这个过程与我们们一般执行普通arm程序一样，没啥区别</li>
+</ol>
+</li>
+</ol>
 
       
     </div>
@@ -1325,7 +1314,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/97/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/97/">97</a><span class="page-number current">98</span><a class="page-number" href="/page/99/">99</a><span class="space">&hellip;</span><a class="page-number" href="/page/118/">118</a><a class="extend next" rel="next" href="/page/99/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/97/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/97/">97</a><span class="page-number current">98</span><a class="page-number" href="/page/99/">99</a><span class="space">&hellip;</span><a class="page-number" href="/page/120/">120</a><a class="extend next" rel="next" href="/page/99/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1391,7 +1380,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1172</span>
+          <span class="site-state-item-count">1194</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1437,7 +1426,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17:45</span>
+    <span title="站点阅读时长">18:20</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
