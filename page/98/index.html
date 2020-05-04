@@ -158,119 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85jdk/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85jdk/" class="post-title-link" itemprop="url">centos安装jdk</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-19 11:58:00" itemprop="dateCreated datePublished" datetime="2018-02-19T11:58:00+08:00">2018-02-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85jdk/" class="post-meta-item leancloud_visitors" data-flag-title="centos安装jdk" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月19日 下午11:58</p>
-<p>清除centos中本身的jdk</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line">[root@centos6 ~]# rpm -qa | grep jdk</span><br><span class="line">java-1.7.0-openjdk-1.7.0.99-2.6.5.1.el6.x86_64</span><br><span class="line">java-1.6.0-openjdk-1.6.0.38-1.13.10.4.el6.x86_64</span><br><span class="line">[root@centos6 ~]# sudo yum remove java-1.6.0-openjdk-1.6.0.38-1.13.10.4.el6.x86_64</span><br><span class="line">已加载插件：fastestmirror, refresh-packagekit, security</span><br><span class="line">设置移除进程</span><br><span class="line">解决依赖关系</span><br><span class="line">--&gt; 执行事务检查</span><br><span class="line">---&gt; Package java-1.6.0-openjdk.x86_64 1:1.6.0.38-1.13.10.4.el6 will be 删除</span><br><span class="line">--&gt; 完成依赖关系计算</span><br><span class="line"></span><br><span class="line">依赖关系解决</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> 软件包             架构   版本  仓库                                      大小</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">正在删除:</span><br><span class="line"> java-1.6.0-openjdk x86_64 1:1.6.0.38-1.13.10.4.el6</span><br><span class="line">                                 @anaconda-CentOS-201605220104.x86_64&#x2F;6.8  76 M</span><br><span class="line"></span><br><span class="line">事务概要</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Remove        1 Package(s)</span><br><span class="line"></span><br><span class="line">Installed size: 76 M</span><br><span class="line">确定吗？[y&#x2F;N]：y</span><br><span class="line">下载软件包：</span><br><span class="line">运行 rpm_check_debug</span><br><span class="line">执行事务测试</span><br><span class="line">事务测试成功</span><br><span class="line">执行事务</span><br><span class="line">  正在删除   : 1:java-1.6.0-openjdk-1.6.0.38-1.13.10.4.el6.x86_64           1&#x2F;1</span><br><span class="line">  Verifying  : 1:java-1.6.0-openjdk-1.6.0.38-1.13.10.4.el6.x86_64           1&#x2F;1</span><br><span class="line"></span><br><span class="line">删除:</span><br><span class="line">  java-1.6.0-openjdk.x86_64 1:1.6.0.38-1.13.10.4.el6</span><br><span class="line"></span><br><span class="line">完毕！</span><br><span class="line">[root@centos6 ~]# sudo yum remove java-1.7.0-openjdk-1.7.0.99-2.6.5.1.el6.x86_64</span><br><span class="line">已加载插件：fastestmirror, refresh-packagekit, security</span><br><span class="line">设置移除进程</span><br><span class="line">解决依赖关系</span><br><span class="line">--&gt; 执行事务检查</span><br><span class="line">---&gt; Package java-1.7.0-openjdk.x86_64 1:1.7.0.99-2.6.5.1.el6 will be 删除</span><br><span class="line">--&gt; 完成依赖关系计算</span><br><span class="line"></span><br><span class="line">依赖关系解决</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line"> 软件包</span><br><span class="line">   架构   版本                   仓库                                      大小</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">正在删除:</span><br><span class="line"> java-1.7.0-openjdk</span><br><span class="line">   x86_64 1:1.7.0.99-2.6.5.1.el6 @anaconda-CentOS-201605220104.x86_64&#x2F;6.8  91 M</span><br><span class="line"></span><br><span class="line">事务概要</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Remove        1 Package(s)</span><br><span class="line"></span><br><span class="line">Installed size: 91 M</span><br><span class="line">确定吗？[y&#x2F;N]：y</span><br><span class="line">下载软件包：</span><br><span class="line">运行 rpm_check_debug</span><br><span class="line">执行事务测试</span><br><span class="line">事务测试成功</span><br><span class="line">执行事务</span><br><span class="line">  正在删除   : 1:java-1.7.0-openjdk-1.7.0.99-2.6.5.1.el6.x86_64             1&#x2F;1</span><br><span class="line">  Verifying  : 1:java-1.7.0-openjdk-1.7.0.99-2.6.5.1.el6.x86_64             1&#x2F;1</span><br><span class="line"></span><br><span class="line">删除:</span><br><span class="line">  java-1.7.0-openjdk.x86_64 1:1.7.0.99-2.6.5.1.el6</span><br><span class="line"></span><br><span class="line">完毕！</span><br><span class="line">[root@centos6 ~]#  java -version</span><br><span class="line">-bash: &#x2F;usr&#x2F;bin&#x2F;java: 没有那个文件或目录</span><br></pre></td></tr></table></figure>
-
-
-<p>下载jdk</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 ~]$ ls</span><br><span class="line">Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos</span><br><span class="line">[czh@centos6 ~]$ mkdir developer</span><br><span class="line">[czh@centos6 ~]$ ls</span><br><span class="line">Desktop    Documents  Music     Public     Videos</span><br><span class="line">developer  Downloads  Pictures  Templates</span><br><span class="line">[czh@centos6 ~]$ cd developer&#x2F;</span><br><span class="line">[czh@centos6 developer]$ wget http:&#x2F;&#x2F;download.oracle.com&#x2F;otn&#x2F;java&#x2F;jdk&#x2F;7u80-b15&#x2F;jdk-7u80-linux-x64.rpm?AuthParam&#x3D;1519056529_baacf6b88be6717a2de3fb95812613ec</span><br><span class="line">--2018-02-20 00:07:44--  http:&#x2F;&#x2F;download.oracle.com&#x2F;otn&#x2F;java&#x2F;jdk&#x2F;7u80-b15&#x2F;jdk-7u80-linux-x64.rpm?AuthParam&#x3D;1519056529_baacf6b88be6717a2de3fb95812613ec</span><br><span class="line">正在解析主机 download.oracle.com... 23.38.178.182</span><br><span class="line">正在连接 download.oracle.com|23.38.178.182|:80... 已连接。</span><br><span class="line">已发出 HTTP 请求，正在等待回应... 200 OK</span><br><span class="line">长度：138090286 (132M) [application&#x2F;x-redhat-package-manager]</span><br><span class="line">正在保存至: “jdk-7u80-linux-x64.rpm?AuthParam&#x3D;1519056529_baacf6b88be6717a2de3fb95812613ec”</span><br><span class="line"></span><br><span class="line"> 0% [</span><br></pre></td></tr></table></figure>
-
-<p>安装jdk</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 developer]$ ls</span><br><span class="line">jdk-7u80-linux-x64.rpm?AuthParam&#x3D;1519056529_baacf6b88be6717a2de3fb95812613ec</span><br><span class="line">[czh@centos6 developer]$  sudo rpm -ivh jdk-7u80-linux-x64.rpm\?AuthParam\&#x3D;1519056529_baacf6b88be6717a2de3fb95812613ec </span><br><span class="line">[sudo] password for czh: </span><br><span class="line">Preparing...                ########################################### [100%]</span><br><span class="line">   1:jdk                    ########################################### [100%]</span><br><span class="line">Unpacking JAR files...</span><br><span class="line">	rt.jar...</span><br><span class="line">	jsse.jar...</span><br><span class="line">	charsets.jar...</span><br><span class="line">	tools.jar...</span><br><span class="line">	localedata.jar...</span><br><span class="line">	jfxrt.jar...</span><br></pre></td></tr></table></figure>
-
-<p>Jdk环境变量：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[czh@centos6 jdk1.7.0_80]$ sudo vim &#x2F;etc&#x2F;profile</span><br><span class="line">[czh@centos6 jdk1.7.0_80]$ sudo vim &#x2F;etc&#x2F;profile</span><br><span class="line">[czh@centos6 jdk1.7.0_80]$ source &#x2F;etc&#x2F;profile</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;usr&#x2F;java&#x2F;jdk1.7.0_80</span><br><span class="line">export CLASSPATH&#x3D;.:$JAVA_HOME&#x2F;jre&#x2F;lib&#x2F;rt.jar:$JAVA_HOME&#x2F;lib&#x2F;dt.jar:$JAVA_HOME&#x2F;lib&#x2F;tools.jar</span><br><span class="line">export PATH&#x3D;$JAVA_HOME&#x2F;bin:$PATH</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/centos%E5%AE%89%E8%A3%85jdk/B1A4D386-2020-4419-B732-E2FB28554170.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/19/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9B%B4%E6%94%B9centos%E9%95%9C%E5%83%8F%E6%BA%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1310,6 +1197,130 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/" class="post-title-link" itemprop="url">对arm编程的整体理解（新）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-09 08:40:00" itemprop="dateCreated datePublished" datetime="2018-02-09T08:40:00+08:00">2018-02-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_arm</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="对arm编程的整体理解（新）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>577</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月9日 下午8:40</p>
+<h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><ol>
+<li>这篇文章的前奏是 <a href="bear://x-callback-url/open-note?id=12FFEFDD-836F-4C13-B395-D40DFB90D8C2-331-0000ECAE1DA84BC0">对ARM的理解</a>和<a href="bear://x-callback-url/open-note?id=1B4F6189-B81E-425D-B3F5-6C566365C2DA-331-0000C834E19CE501">整体上去理解2440结构</a>这两篇文章。</li>
+<li>在篇文章我有些观点与<a href="bear://x-callback-url/open-note?id=12FFEFDD-836F-4C13-B395-D40DFB90D8C2-331-0000ECAE1DA84BC0">对ARM的理解</a>不太合拍，我认为我现在这篇是更加合适更加让我舒服的理解。</li>
+</ol>
+<h2 id="正文："><a href="#正文：" class="headerlink" title="正文："></a>正文：</h2><ol>
+<li>【核心】： <em>站在硬件arm板设计者的角度去思考问题</em> ，在这个过程中只能从现实生活出发，<strong>思考：</strong>如过你是一个硬件的设计者，哪些情况需要考虑？比如说可扩展性、复用性、操作灵活性等等，整个流程中需要哪些必不可少的组成部分？<ol>
+<li>这个过程，其实和我算法部分的认识是一致的！</li>
+</ol>
+</li>
+<li>其次，才是我<strong>以前</strong>认为最重要的寄存器。如果你认为寄存器是最终的，那么整个arm的核心点就是去记忆这些寄存器，把arm编程了一种体力活，这是初学者最容易犯的一个错误❌。</li>
+</ol>
+<h2 id="方法、技巧："><a href="#方法、技巧：" class="headerlink" title="方法、技巧："></a>方法、技巧：</h2><ol>
+<li>在我们 <em>站在硬件arm版设计者的角度去思考问题</em> 时</li>
+<li>【关键】：<strong>原理图 + 时序图 + block diagram</strong> 这些都是站在不同的角度去说明同一个问题。<strong>这些图最终的目的：</strong>就是说明arm板设计者是如何考虑问题的，他提出的设计方案是啥。</li>
+<li>我们虽然不可能将这种设计方案通过硬件去实现，但是我们一定要去思考🤔，为啥设计者要这样去设计整个系统？</li>
+<li>::简单来说就是：我已经给你设计好了，你最起码也得理解其中的奥秘吧::。</li>
+<li><strong>我总结的一些设计时常常要考虑的内容：</strong><ol>
+<li>高_低电平有效、上_下降沿</li>
+<li>使能的观点</li>
+<li>支持多种模式</li>
+<li>单引脚多用途</li>
+<li>时序，考虑硬件相应</li>
+<li>……..</li>
+</ol>
+</li>
+</ol>
+<h2 id="附件：我的笔记"><a href="#附件：我的笔记" class="headerlink" title="附件：我的笔记"></a>附件：我的笔记</h2><p><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/IMG_7734.JPG" alt><br><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/IMG_7735.JPG" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1380,7 +1391,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1194</span>
+          <span class="site-state-item-count">1193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

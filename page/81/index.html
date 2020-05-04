@@ -158,112 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/05/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/05/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/" class="post-title-link" itemprop="url">枚举类的学习(二)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-05-08 10:25:00" itemprop="dateCreated datePublished" datetime="2018-05-08T10:25:00+08:00">2018-05-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/05/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/" class="post-meta-item leancloud_visitors" data-flag-title="枚举类的学习(二)" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>165</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年5月8日 下午10:25</p>
-<p><a href="https://blog.csdn.net/qq_31655965/article/details/55049192" target="_blank" rel="noopener">重新认识java（十） —— Enum（枚举类） - CSDN博客</a></p>
-<h2 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h2><ol>
-<li>这篇文章学到了不仅仅是学java枚举类的使用，<strong>还学会了如何去学习、理解</strong>一个java语言本身的知识点。</li>
-<li>最原始的静态变量的方式：<br><img src="/2018/05/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/48948F54-0ADB-4FA2-B213-1F4D560F866E.png" alt></li>
-<li>静态变量的改进：从int类型到对象类型<br><img src="/2018/05/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/64C897F7-A793-4242-8294-53ADBDD56041.png" alt></li>
-<li>从对象类型改进：使用枚举类<br><img src="/2018/05/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E5%AD%A6%E4%B9%A0(%E4%BA%8C)/06B70381-9511-4C46-A8EF-A1CE1D21E0F3.png" alt></li>
-<li>枚举类的使用：包含它本身的方法</li>
-<li>枚举类的实现原理</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/05/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%9E%9A%E4%B8%BE%E7%B1%BB%E7%9A%84%E5%AD%A6%E4%B9%A0(%E4%B8%80)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1196,6 +1090,118 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E7%AD%96%E7%95%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E7%AD%96%E7%95%A5/" class="post-title-link" itemprop="url">线程安全的策略</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-05-04 09:56:00" itemprop="dateCreated datePublished" datetime="2018-05-04T09:56:00+08:00">2018-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java并发</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E7%AD%96%E7%95%A5/" class="post-meta-item leancloud_visitors" data-flag-title="线程安全的策略" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>106</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年5月4日 上午9:56</p>
+<ol>
+<li>不可变对象<br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E7%AD%96%E7%95%A5/1391B328-9896-4488-909B-0250AAF60EA1.png" alt></li>
+<li>线程封闭<br><img src="/2018/05/04/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E7%9A%84%E7%AD%96%E7%95%A5/678F63A6-5681-4ACE-B2AD-33990B8AC49D.png" alt></li>
+<li>同步容器<ol>
+<li>通过<strong>加锁</strong>，最终将<strong>操作串行化</strong>—一次只允许一个线程进行访问</li>
+<li>可行，但是效率不高</li>
+</ol>
+</li>
+<li>并发容器<ol>
+<li>也是通过<strong>加锁</strong>，但是这里的锁设计的更加好。</li>
+<li>在<strong>锁的设计</strong>上下功夫</li>
+<li><a href="bear://x-callback-url/open-note?id=952630DD-D914-4B98-BB50-FEC9384150AB-2564-0000850D8ECAA21E">并发容器中的分段锁</a></li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1266,7 +1272,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1194</span>
+          <span class="site-state-item-count">1193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

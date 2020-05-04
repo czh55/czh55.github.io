@@ -158,151 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/" class="post-title-link" itemprop="url">分布式的整体理解</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-11-19 09:25:00" itemprop="dateCreated datePublished" datetime="2018-11-19T09:25:00+08:00">2018-11-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/数据库</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="分布式的整体理解" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>748</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年11月19日 下午9:25</p>
-<p><a href="https://waylau.com/talk-about-distributed-system/" target="_blank" rel="noopener">用大白话聊聊分布式系统 | waylau.com</a><br><a href="https://github.com/waylau/distributed-java/blob/master/docs/basic.md" target="_blank" rel="noopener">distributed-java/basic.md at master · waylau/distributed-java · GitHub</a></p>
-<ol>
-<li>什么是分布式系统？</li>
-<li>分布式系统有哪些<strong>优势</strong>？<ol>
-<li>分布式系统的扩展和升级都比较容易。</li>
-<li>分布式系统某些节点故障，不影响整理可用</li>
-</ol>
-</li>
-<li>分布式系统会面临哪里<strong>挑战</strong>？<ol>
-<li>这里涉及到了很多的“<strong>性”，这里面关键的一点是：  *要明白这些性之间是会出现相互矛盾的</strong>。</li>
-<li>并且，这些性是很不好理解的，因为他们太抽想了，需要结合具体的实例才可以理解</li>
-</ol>
-</li>
-<li>如何来<strong>设计</strong>分布式？<ol>
-<li>系统如何拆分为<strong>子系统</strong>？</li>
-<li>如何规划子系统间的<strong>通信</strong>？</li>
-<li>通信过程中的<strong>安全</strong>如何考虑？</li>
-<li>如何让子系统可以<strong>扩展</strong>？</li>
-<li>子系统的<strong>可靠性</strong>如何保证？</li>
-<li>数据的<strong>一致性</strong>是如何实现的？</li>
-</ol>
-</li>
-<li>为什么选择<strong>Java</strong> 分布式系统<ol>
-<li>它的目的是作为一个<strong>生产性语言</strong>，而不是一个研究性语言，因此，在设计上避免了包括新的和未经考验的功能。</li>
-<li>Java 天然支持分布式应用</li>
-<li>Java 分布式系统应用广泛，且久经考验</li>
-<li>Java 拥有丰富的<strong>中间件框架</strong>，避免了很多底层编码的复杂性，帮助你站在巨人的肩膀上。</li>
-</ol>
-</li>
-</ol>
-<p><a href="https://cloud.tencent.com/developer/article/1032135" target="_blank" rel="noopener">带着问题学习分布式系统之数据分片 - 云+社区 - 腾讯云</a><br>本文主要讨论数据分片的三个问题：</p>
-<ol>
-<li>如何做数据分片，即<strong>如何将数据映射到节点</strong><ol>
-<li>一共有三种数据分片的方式</li>
-</ol>
-</li>
-<li>数据分片的特征值，即<strong>按照数据中的哪一个属性（字段）来分片</strong><ol>
-<li>::还没看::</li>
-</ol>
-</li>
-<li>数据分片的<strong>元数据的管理</strong>，如何保证<strong>元数据服务器的高性能、高可用</strong>，如果是一组服务器，如何保证强一致性<ol>
-<li>::还没看::</li>
-</ol>
-</li>
-</ol>
-<p><a href="http://www.ityouknow.com/mongodb/2017/08/05/mongodb-cluster-setup.html" target="_blank" rel="noopener">mongodb 3.4 集群搭建：分片+副本集 - 纯洁的微笑博客</a><br><img src="/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/CAD7835E-3E7C-4CC4-ADE3-8BD26969DF5B.png" alt><br><img src="/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/C8F52F3A-4607-4863-990E-42E7704FAFFF.png" alt></p>
-<p><a href="https://www.zhihu.com/question/54105974" target="_blank" rel="noopener">CAP理论中的P到底是个什么意思？ - 知乎</a><br><img src="/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/5EA72150-82CD-4298-A3B8-3DEF9E6D49C2.png" alt></p>
-<h2 id="CAP和ACID的区别："><a href="#CAP和ACID的区别：" class="headerlink" title="CAP和ACID的区别："></a>CAP和ACID的区别：</h2><p><a href="https://www.jdon.com/artichect/acid-cap.html" target="_blank" rel="noopener">ACID和CAP的详尽比较 -解道Jdon</a><br><a href="https://my.oschina.net/zlb1992/blog/877149" target="_blank" rel="noopener">谈谈对数据库中ACID、CAP、BASE的认识 - 张龙斌的个人空间 - 开源中国</a><br><img src="/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%88%86%E5%B8%83%E5%BC%8F%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3/E6847CF1-624B-43E7-9C46-D4E1EE62CAAC.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/11/19/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%9C%A8%E6%95%B4%E4%B8%AA%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E4%B8%AD%E7%9A%84%E4%BD%8D%E7%BD%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1374,6 +1229,118 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/10/19/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E7%82%B9%E4%BA%91%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E7%9A%84%E6%9C%AC%E8%B4%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/10/19/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E7%82%B9%E4%BA%91%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E7%9A%84%E6%9C%AC%E8%B4%A8/" class="post-title-link" itemprop="url">点云三维重建的本质</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-10-19 11:42:00" itemprop="dateCreated datePublished" datetime="2018-10-19T11:42:00+08:00">2018-10-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:06" itemprop="dateModified" datetime="2020-04-01T16:19:06+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1-%E7%82%B9%E4%BA%91-%E5%8E%9F%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维建模(点云)/原理#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/10/19/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E7%82%B9%E4%BA%91%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA%E7%9A%84%E6%9C%AC%E8%B4%A8/" class="post-meta-item leancloud_visitors" data-flag-title="点云三维重建的本质" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>291</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年10月19日 下午11:42</p>
+<ol>
+<li><strong>所站的角度</strong>：三维空间之后，摆放着一个个的点</li>
+<li><strong>本质</strong>：让点云，从无序变-&gt;序状态，点云-&gt;平面-&gt;边界-&gt;模型就是这样</li>
+<li>主要的两种数据：<ol>
+<li>无序<strong>点云</strong></li>
+<li>拓扑结构<strong>网格</strong></li>
+</ol>
+</li>
+<li>流程上的创新：<ol>
+<li>不要分步骤去理解，尽量的忽略步骤之间的前后关系。<strong>站在点云的角度，无序的点云我可以随意的处理。只要是大的方向是从无序-&gt;有序就行</strong>。处理的结果，我可以用来孔洞的修复、配准、重建，而完成这些以后的结果，也可以继续作为中间结果。如果要是理解步骤是死的，那么说明自己还是没有理解。</li>
+<li><strong>本质上来说，对点云的处理，就是让点云多多少少而已</strong>，::他还是个点云::</li>
+</ol>
+</li>
+<li>算法上的改进：</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1444,7 +1411,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1194</span>
+          <span class="site-state-item-count">1193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

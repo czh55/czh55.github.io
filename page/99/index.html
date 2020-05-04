@@ -158,130 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/" class="post-title-link" itemprop="url">对arm编程的整体理解（新）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-09 08:40:00" itemprop="dateCreated datePublished" datetime="2018-02-09T08:40:00+08:00">2018-02-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_arm</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="对arm编程的整体理解（新）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>577</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月9日 下午8:40</p>
-<h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><ol>
-<li>这篇文章的前奏是 <a href="bear://x-callback-url/open-note?id=12FFEFDD-836F-4C13-B395-D40DFB90D8C2-331-0000ECAE1DA84BC0">对ARM的理解</a>和<a href="bear://x-callback-url/open-note?id=1B4F6189-B81E-425D-B3F5-6C566365C2DA-331-0000C834E19CE501">整体上去理解2440结构</a>这两篇文章。</li>
-<li>在篇文章我有些观点与<a href="bear://x-callback-url/open-note?id=12FFEFDD-836F-4C13-B395-D40DFB90D8C2-331-0000ECAE1DA84BC0">对ARM的理解</a>不太合拍，我认为我现在这篇是更加合适更加让我舒服的理解。</li>
-</ol>
-<h2 id="正文："><a href="#正文：" class="headerlink" title="正文："></a>正文：</h2><ol>
-<li>【核心】： <em>站在硬件arm板设计者的角度去思考问题</em> ，在这个过程中只能从现实生活出发，<strong>思考：</strong>如过你是一个硬件的设计者，哪些情况需要考虑？比如说可扩展性、复用性、操作灵活性等等，整个流程中需要哪些必不可少的组成部分？<ol>
-<li>这个过程，其实和我算法部分的认识是一致的！</li>
-</ol>
-</li>
-<li>其次，才是我<strong>以前</strong>认为最重要的寄存器。如果你认为寄存器是最终的，那么整个arm的核心点就是去记忆这些寄存器，把arm编程了一种体力活，这是初学者最容易犯的一个错误❌。</li>
-</ol>
-<h2 id="方法、技巧："><a href="#方法、技巧：" class="headerlink" title="方法、技巧："></a>方法、技巧：</h2><ol>
-<li>在我们 <em>站在硬件arm版设计者的角度去思考问题</em> 时</li>
-<li>【关键】：<strong>原理图 + 时序图 + block diagram</strong> 这些都是站在不同的角度去说明同一个问题。<strong>这些图最终的目的：</strong>就是说明arm板设计者是如何考虑问题的，他提出的设计方案是啥。</li>
-<li>我们虽然不可能将这种设计方案通过硬件去实现，但是我们一定要去思考🤔，为啥设计者要这样去设计整个系统？</li>
-<li>::简单来说就是：我已经给你设计好了，你最起码也得理解其中的奥秘吧::。</li>
-<li><strong>我总结的一些设计时常常要考虑的内容：</strong><ol>
-<li>高_低电平有效、上_下降沿</li>
-<li>使能的观点</li>
-<li>支持多种模式</li>
-<li>单引脚多用途</li>
-<li>时序，考虑硬件相应</li>
-<li>……..</li>
-</ol>
-</li>
-</ol>
-<h2 id="附件：我的笔记"><a href="#附件：我的笔记" class="headerlink" title="附件：我的笔记"></a>附件：我的笔记</h2><p><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/IMG_7734.JPG" alt><br><img src="/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%AF%B9arm%E7%BC%96%E7%A8%8B%E7%9A%84%E6%95%B4%E4%BD%93%E7%90%86%E8%A7%A3%EF%BC%88%E6%96%B0%EF%BC%89/IMG_7735.JPG" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/LCD%20+%20ADC%20+%20%E8%A7%A6%E6%91%B8%E5%B1%8F%20+I2C%E5%8E%9F%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1317,6 +1193,106 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%86%85%E5%AD%98%E6%8E%A7%E5%88%B6%E5%99%A8%E4%B8%8ESDRAM/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%86%85%E5%AD%98%E6%8E%A7%E5%88%B6%E5%99%A8%E4%B8%8ESDRAM/" class="post-title-link" itemprop="url">内存控制器与SDRAM</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-02 04:01:00" itemprop="dateCreated datePublished" datetime="2018-02-02T04:01:00+08:00">2018-02-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-arm/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_arm</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%86%85%E5%AD%98%E6%8E%A7%E5%88%B6%E5%99%A8%E4%B8%8ESDRAM/" class="post-meta-item leancloud_visitors" data-flag-title="内存控制器与SDRAM" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>106</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月2日 下午4:01</p>
+<p>注：关于2440整体结构的理解，看另外一篇文章：<br> <a href="bear://x-callback-url/open-note?id=1B4F6189-B81E-425D-B3F5-6C566365C2DA-331-0000C834E19CE501">整体上去理解2440结构</a></p>
+<h2 id="课堂笔记"><a href="#课堂笔记" class="headerlink" title="课堂笔记"></a>课堂笔记</h2><p><a href="%E7%AC%AC012%E8%AF%BE_%E5%86%85%E5%AD%98%E6%8E%A7%E5%88%B6%E5%99%A8%E4%B8%8ESDRAM.pdf">第012课_内存控制器与SDRAM.pdf</a></p>
+<h2 id="SDRAM参考书籍"><a href="#SDRAM参考书籍" class="headerlink" title="SDRAM参考书籍"></a>SDRAM参考书籍</h2><p><a href="%E9%AB%98%E6%89%8B%E8%BF%9B%E9%98%B6_%E7%BB%88%E6%9E%81%E5%86%85%E5%AD%98%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97%E2%80%94%E2%80%94%E5%AE%8C%E6%95%B4.pdf">高手进阶_终极内存技术指南——完整.pdf</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1387,7 +1363,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1194</span>
+          <span class="site-state-item-count">1193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

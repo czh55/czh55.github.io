@@ -158,116 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%B3%9B%E5%9E%8B%EF%BC%9A%E4%BB%A5responseService%E4%B8%BA%E4%BE%8B%E5%AD%90/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%B3%9B%E5%9E%8B%EF%BC%9A%E4%BB%A5responseService%E4%B8%BA%E4%BE%8B%E5%AD%90/" class="post-title-link" itemprop="url">泛型：以responseService为例子</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-26 08:51:00" itemprop="dateCreated datePublished" datetime="2018-02-26T08:51:00+08:00">2018-02-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%B3%9B%E5%9E%8B%EF%BC%9A%E4%BB%A5responseService%E4%B8%BA%E4%BE%8B%E5%AD%90/" class="post-meta-item leancloud_visitors" data-flag-title="泛型：以responseService为例子" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月26日 下午8:51</p>
-<h2 id="关于responseService"><a href="#关于responseService" class="headerlink" title="关于responseService"></a>关于responseService</h2><ol>
-<li>在这个项目中，responseService因为是泛型类，所以，有responseService的地方就应该写成responseService<T>，T是具体的类型。</T></li>
-<li>但是我们可以看到，有的写了有的没写<br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%B3%9B%E5%9E%8B%EF%BC%9A%E4%BB%A5responseService%E4%B8%BA%E4%BE%8B%E5%AD%90/15D59FB7-F375-48E5-B7A3-C252C870C396.png" alt></li>
-<li>我的理解是最好写上，有些情况下是不写代码也是正常运行。但是我们一遇到报错的情况，就必须写了。</li>
-</ol>
-<h2 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h2><ol>
-<li>泛型的语法：<a href="https://www.cnblogs.com/iyangyuan/archive/2013/04/09/3011274.html" target="_blank" rel="noopener">Java中的泛型方法 - 杨元 - 博客园</a><br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%B3%9B%E5%9E%8B%EF%BC%9A%E4%BB%A5responseService%E4%B8%BA%E4%BE%8B%E5%AD%90/B6848480-CE17-43C7-8E68-7C4FD7D198FA.png" alt><br><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%B3%9B%E5%9E%8B%EF%BC%9A%E4%BB%A5responseService%E4%B8%BA%E4%BE%8B%E5%AD%90/9D09E7FE-F14D-423E-BDA7-B840EDC0EB14.png" alt></li>
-<li>是否拥有泛型方法，与其所在的类是否泛型没有关系。要定义泛型方法，只需将泛型参数列表置于返回值前。<a href="https://zhidao.baidu.com/question/405273183.html" target="_blank" rel="noopener">JAVA中的泛型用法一种： <T> 返回值用法。_百度知道</T></a></li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mmall.common;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.codehaus.jackson.annotate.JsonIgnore;</span><br><span class="line"><span class="keyword">import</span> org.codehaus.jackson.map.annotate.JsonSerialize;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.Serializable;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by geely</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@JsonSerialize</span>(include =  JsonSerialize.Inclusion.NON_NULL)</span><br><span class="line"><span class="comment">//保证序列化json的时候,如果是null的对象,key也会消失</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServerResponse</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> status;</span><br><span class="line">    <span class="keyword">private</span> String msg;</span><br><span class="line">    <span class="keyword">private</span> T data;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ServerResponse</span><span class="params">(<span class="keyword">int</span> status)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.status = status;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ServerResponse</span><span class="params">(<span class="keyword">int</span> status,T data)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.status = status;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ServerResponse</span><span class="params">(<span class="keyword">int</span> status,String msg,T data)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.status = status;</span><br><span class="line">        <span class="keyword">this</span>.msg = msg;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">ServerResponse</span><span class="params">(<span class="keyword">int</span> status,String msg)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.status = status;</span><br><span class="line">        <span class="keyword">this</span>.msg = msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@JsonIgnore</span></span><br><span class="line">    <span class="comment">//使之不在json序列化结果当中</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSuccess</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.status == ResponseCode.SUCCESS.getCode();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getStatus</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> status;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">getData</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getMsg</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> msg;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ServerResponse&lt;T&gt; <span class="title">createBySuccess</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ServerResponse&lt;T&gt;(ResponseCode.SUCCESS.getCode());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ServerResponse&lt;T&gt; <span class="title">createBySuccessMessage</span><span class="params">(String msg)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ServerResponse&lt;T&gt;(ResponseCode.SUCCESS.getCode(),msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ServerResponse&lt;T&gt; <span class="title">createBySuccess</span><span class="params">(T data)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ServerResponse&lt;T&gt;(ResponseCode.SUCCESS.getCode(),data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ServerResponse&lt;T&gt; <span class="title">createBySuccess</span><span class="params">(String msg,T data)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ServerResponse&lt;T&gt;(ResponseCode.SUCCESS.getCode(),msg,data);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ServerResponse&lt;T&gt; <span class="title">createByError</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ServerResponse&lt;T&gt;(ResponseCode.ERROR.getCode(),ResponseCode.ERROR.getDesc());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ServerResponse&lt;T&gt; <span class="title">createByErrorMessage</span><span class="params">(String errorMessage)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ServerResponse&lt;T&gt;(ResponseCode.ERROR.getCode(),errorMessage);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">ServerResponse&lt;T&gt; <span class="title">createByErrorCodeMessage</span><span class="params">(<span class="keyword">int</span> errorCode,String errorMessage)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ServerResponse&lt;T&gt;(errorCode,errorMessage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E6%80%9D%E8%80%83/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1322,6 +1212,105 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/23/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E9%A1%B9%E7%9B%AE%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/23/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E9%A1%B9%E7%9B%AE%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">项目前期准备文件</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-23 12:27:00" itemprop="dateCreated datePublished" datetime="2018-02-23T12:27:00+08:00">2018-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/23/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E9%A1%B9%E7%9B%AE%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%E6%96%87%E4%BB%B6/" class="post-meta-item leancloud_visitors" data-flag-title="项目前期准备文件" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>17</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月23日 下午12:27</p>
+<p><img src="/2018/02/23/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E9%A1%B9%E7%9B%AE%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%E6%96%87%E4%BB%B6/98C9EE68-600F-4AB5-B306-1C58D9EE18D8.png" alt></p>
+<p><img src="/2018/02/23/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E9%A1%B9%E7%9B%AE%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87%E6%96%87%E4%BB%B6/B788F93B-62AE-445B-9732-2CDEBCE9DD77.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1392,7 +1381,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1194</span>
+          <span class="site-state-item-count">1193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

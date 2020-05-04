@@ -158,147 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2020/04/27/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E8%B5%84%E6%BA%90(%E7%BC%93%E5%AD%98IO%E5%8F%98%E9%87%8F%E4%BB%A3%E7%A0%81%E6%AE%B5)%E7%9A%84%E8%8E%B7%E5%8F%96%E3%80%81%E6%94%BE%E5%85%A5%E5%AE%89%E5%85%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/04/27/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E8%B5%84%E6%BA%90(%E7%BC%93%E5%AD%98IO%E5%8F%98%E9%87%8F%E4%BB%A3%E7%A0%81%E6%AE%B5)%E7%9A%84%E8%8E%B7%E5%8F%96%E3%80%81%E6%94%BE%E5%85%A5%E5%AE%89%E5%85%A8/" class="post-title-link" itemprop="url">资源(缓存/IO/变量/代码段)的获取、放入安全</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-04-27 11:35:00" itemprop="dateCreated datePublished" datetime="2020-04-27T11:35:00+08:00">2020-04-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-04 16:19:51" itemprop="dateModified" datetime="2020-05-04T16:19:51+08:00">2020-05-04</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-linux-%E8%A1%A5%E5%85%85/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_计算机系统/linux/补充</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/04/27/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E8%A1%A5%E5%85%85/%E8%B5%84%E6%BA%90(%E7%BC%93%E5%AD%98IO%E5%8F%98%E9%87%8F%E4%BB%A3%E7%A0%81%E6%AE%B5)%E7%9A%84%E8%8E%B7%E5%8F%96%E3%80%81%E6%94%BE%E5%85%A5%E5%AE%89%E5%85%A8/" class="post-meta-item leancloud_visitors" data-flag-title="资源(缓存/IO/变量/代码段)的获取、放入安全" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>883</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2020年4月27日 下午11:35</p>
-<p>注：这篇是从安全的角度去考虑的，另外还有从效率的角度去思考<br>效率这个这个角度我认为是一个tradeoff,计算机软件体系是一个从底层开始层层抽象发展的，这个的目的是为了上下层抽象的过程中简化编程的思维，但是对于数据的处理、拷贝、交互来说，应该是扁平的，这中间就会有矛盾，面对这样的矛盾，我们处理的方法就是让数据的交互来说尽可能的放在这个体系的底层，也就是内核层去完成，尽量不要用到用户态，这个就减少了没有实际效率意义的内核态与用户态之间的数据拷贝，一个专业的名次是0拷贝。</p>
-<h4 id="多线程核心知识的两个层面去理解："><a href="#多线程核心知识的两个层面去理解：" class="headerlink" title="多线程核心知识的两个层面去理解："></a>多线程核心知识的两个层面去理解：</h4><ol>
-<li>本质讨论的都是资源的获取和放入</li>
-<li>【资源本身】资源的两种保护形式-主动、被动：<ul>
-<li>主动：缓存/IO为空 <ul>
-<li>这里的空就可以等价的理解为加了锁</li>
-<li>缓存 IO有四种状态 <a href="bear://x-callback-url/open-note?id=28DD9699-859D-4E62-B989-DD32C0C31845-1248-0000FF1164D1C1D6">广义的IO模型：阻塞I/O-&gt;非阻塞忙轮询I/O-&gt;select/epoll无差别轮询代理-&gt; epoll</a></li>
-</ul>
-</li>
-<li>被动：缓存_操作对象(变量_代码段)有，但加锁 ==》都会造成线程的阻塞</li>
-<li>独立于线程之外的资源对象：缓存、IO，变量、C++全局变量(要注意这里的全局变量)</li>
-</ul>
-</li>
-<li>【获取资源方】操作对象面对锁、等待、空之后的做法种类：<ul>
-<li>上面说明了不同的场景原因，以及唯一的操作者线程，不同的被操作对象，但是操作方都是线程为单位</li>
-<li>但是没有提到线程他对待这样的事情有几种处理方法：阻塞待唤醒、忙轮询、一遍轮询、不轮询直接获得操作对象<ul>
-<li><a href="bear://x-callback-url/open-note?id=28DD9699-859D-4E62-B989-DD32C0C31845-1248-0000FF1164D1C1D6">广义的IO模型：阻塞I/O-&gt;非阻塞忙轮询I/O-&gt;select/epoll无差别轮询代理-&gt; epoll</a></li>
-<li>我们一般在程序里默认是线程阻塞待唤醒<ul>
-<li><a href="bear://x-callback-url/open-note?id=A3A21BAA-50BE-4E30-B30D-331422005335-14547-00013A674895D522">目录(现代C++)</a>中的安全部分</li>
-</ul>
-</li>
-<li><a href="bear://x-callback-url/open-note?id=C059DA71-C50E-48D6-A01D-F2C7A43913DC-699-0000BB15FF1A8239">线程安全的策略</a>java中</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>上面三点说明了如何处理，如果不处理会出现什么情况：<ul>
-<li>为什么我们再多线程下需要使用锁？<ul>
-<li>脏数据</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<h4 id="我们可以根据场景进行自定义设计的地方："><a href="#我们可以根据场景进行自定义设计的地方：" class="headerlink" title="我们可以根据场景进行自定义设计的地方："></a>我们可以根据场景进行自定义设计的地方：</h4><ul>
-<li><strong>选择合适的锁的类型</strong><ul>
-<li>锁就是字面意思：锁住大门，不让你进。他有酸甜苦辣味，看你的需要选取。不同的锁的类型，体现你对资源的管理方式。</li>
-</ul>
-</li>
-<li>从线程的角度，你希望线程遇到阻塞之后，如何行事呢？<ul>
-<li>阻塞待唤醒、忙轮询、一遍轮询、不轮询直接获得操作对象等</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2020/04/27/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/leetcode/%E9%A2%98%E7%9B%AE/[%E6%91%98%E6%8A%84]map%E7%9A%84%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1466,6 +1325,188 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%B8%93%E9%A2%98%E7%9F%A5%E8%AF%865%EF%BC%9A%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%B8%93%E9%A2%98%E7%9F%A5%E8%AF%865%EF%BC%9A%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3/" class="post-title-link" itemprop="url">专题知识5：内存相关</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-08 11:51:00" itemprop="dateCreated datePublished" datetime="2020-04-08T11:51:00+08:00">2020-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-12 19:31:54" itemprop="dateModified" datetime="2020-04-12T19:31:54+08:00">2020-04-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AF%AD%E8%A8%80-c/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_语言/c++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%B8%93%E9%A2%98%E7%9F%A5%E8%AF%865%EF%BC%9A%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3/" class="post-meta-item leancloud_visitors" data-flag-title="专题知识5：内存相关" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2020年4月8日 上午11:51</p>
+<p><a href="bear://x-callback-url/open-note?id=A54ECAD0-E043-4021-AE84-B75D618E10DB-1248-0000DB50D44264DF">专题知识点3：const</a>const是存储在.text的常量区</p>
+<h4 id="new-delete与malloc-free的区别是什么"><a href="#new-delete与malloc-free的区别是什么" class="headerlink" title="new/delete与malloc/free的区别是什么"></a>new/delete与malloc/free的区别是什么</h4><ol>
+<li>首先，new_delete是C++的关键字，而malloc_free是C语言的库函数，</li>
+<li>malloc不会调用构造函数和析构函数：<ol>
+<li>需要给定申请内存的大小，返回的指针需要强转。</li>
+</ol>
+</li>
+<li>new会调用构造函数<ol>
+<li>不用指定内存大小，返回的指针不用强转。</li>
+</ol>
+</li>
+</ol>
+<h4 id="什么是memory-leak，也就是内存泄漏"><a href="#什么是memory-leak，也就是内存泄漏" class="headerlink" title="什么是memory leak，也就是内存泄漏"></a>什么是memory leak，也就是内存泄漏</h4><ol>
+<li><strong>内存泄漏(memory leak)是指由于疏忽或错误造成了程序未能释放掉不再使用的内存的情况。</strong>内存泄漏并非指内存在物理上的消失，而是应用程序分配某段内存后，由于设计错误，<strong>失去了对该段内存的控制</strong>，因而造成了内存的浪费。</li>
+</ol>
+<h4 id="内存泄漏的分类：内存泄漏的常见原因"><a href="#内存泄漏的分类：内存泄漏的常见原因" class="headerlink" title="内存泄漏的分类：内存泄漏的常见原因"></a>内存泄漏的分类：内存泄漏的常见原因</h4><ol>
+<li>堆内存泄漏 （Heap leak）。<ol>
+<li>对内存指的是程序运行中根据需要分配通过malloc,realloc new等从堆中分配的一块内存，再是完成后必须通过调用对应的 free或者delete 删掉。如果程序的设计的错误导致这部分内存没有被释放，那么此后这块内存将不会被使用，就会产生Heap Leak.</li>
+</ol>
+</li>
+<li>系统资源泄露（Resource Leak）。<ol>
+<li>主要指程序使用系统分配的资源比如 Bitmap,handle ,SOCKET等没有使用相应的函数释放掉，导致系统资源的浪费，严重可导致系统效能降低，系统运行不稳定。</li>
+</ol>
+</li>
+<li>没有将基类的析构函数定义为虚函数。<ol>
+<li>当基类指针指向子类对象时，如果基类的析构函数不是virtual，那么子类的析构函数将不会被调用，子类的资源没有正确是释放，因此造成内存泄露。</li>
+</ol>
+</li>
+<li><a href="bear://x-callback-url/open-note?id=71D3B9CC-2DE8-479F-9BBD-E153A8A6B9BA-1248-0000D5840CF48A53">专题知识点1：指针专题</a>smart_ptr也可以引起内存泄漏</li>
+</ol>
+<h4 id="C-的内存管理是怎样的？"><a href="#C-的内存管理是怎样的？" class="headerlink" title="C++的内存管理是怎样的？"></a>C++的内存管理是怎样的？</h4><ol>
+<li><strong>在C++中，虚拟内存分为代码段、数据段、BSS段、堆区、文件映射区以及栈区六部分。</strong></li>
+<li>代码段:<ol>
+<li>包括只读存储区和文本区，其中只读存储区存储字符串常量，文本区存储程序的机器代码。</li>
+</ol>
+</li>
+<li>数据段：<ol>
+<li>存储程序中已初始化的全局变量和静态变量</li>
+</ol>
+</li>
+<li>Bss 段：<ol>
+<li>存储未初始化的全局变量和静态变量（局部+全局），以及所有被初始化为0的全局变量和静态变量。</li>
+</ol>
+</li>
+<li>堆区：<ol>
+<li>调用new_malloc函数时在堆区动态分配内存，同时需要调用delete_free来手动释放申请的内存。</li>
+</ol>
+</li>
+<li>映射区:<ol>
+<li>存储动态链接库以及调用mmap函数进行的文件映射</li>
+</ol>
+</li>
+<li>栈：<ol>
+<li>使用栈空间存储函数的返回地址、参数、局部变量、返回值</li>
+</ol>
+</li>
+</ol>
+<h4 id="函数在main函数执行前先运行"><a href="#函数在main函数执行前先运行" class="headerlink" title="函数在main函数执行前先运行"></a>函数在main函数执行前先运行</h4><ol start="2">
+<li>在 .text之前：<strong>data段的内容</strong>:<ol>
+<li>全局对象的构造函数会在main 函数之前执行。</li>
+<li>一些全局变量、对象和静态变量、对象的空间分配和赋初值就是在执行main函数之前，而main函数执行完后，还要去执行一些诸如释放空间、释放资源使用权等操作</li>
+</ol>
+</li>
+<li>在 .text之前：<strong>.bss段的内容</strong><ol>
+<li>进程启动后，要执行一些初始化代码（如设置环境变量等），然后跳转到main执行。全局对象的构造也在main之前。</li>
+</ol>
+</li>
+<li>通过关键字<strong>attribute</strong>，让一个函数在主函数之前运行，进行一些数据初始化、模块加载验证等。</li>
+</ol>
+<h4 id="Main函数执行之前，主要就是初始化系统相关资源："><a href="#Main函数执行之前，主要就是初始化系统相关资源：" class="headerlink" title="Main函数执行之前，主要就是初始化系统相关资源："></a>Main函数执行之前，主要就是初始化系统相关资源：</h4><p><a href="https://www.jianshu.com/p/4260d859f181" target="_blank" rel="noopener">C语言深度总结全面认识main函数之前运行代码 - 简书</a></p>
+<ol>
+<li><strong>设置栈指针</strong></li>
+<li>在 .text之前：<strong>data段的内容</strong>:<ol>
+<li>初始化static静态和global全局变量</li>
+</ol>
+</li>
+<li>在 .text之前：<strong>.bss段的内容</strong><ol>
+<li>将未初始化部分的赋初值：数值型short，int，long等为0，bool为FALSE，指针为NULL，等等</li>
+</ol>
+</li>
+<li>.text段：<ol>
+<li>将main函数的参数，argc，argv等传递给main函数，然后才真正运行main函数</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1536,7 +1577,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1194</span>
+          <span class="site-state-item-count">1193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

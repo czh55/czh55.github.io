@@ -158,161 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/07/16/web%E5%BC%80%E5%8F%91/czh_blog/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/07/16/web%E5%BC%80%E5%8F%91/czh_blog/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">服务器安装笔记</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-07-16 04:01:00" itemprop="dateCreated datePublished" datetime="2017-07-16T04:01:00+08:00">2017-07-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-%E6%9C%8D%E5%8A%A1%E5%99%A8/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/服务器</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/07/16/web%E5%BC%80%E5%8F%91/czh_blog/%E6%9C%8D%E5%8A%A1%E5%99%A8/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="服务器安装笔记" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>17k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>15 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年7月16日 下午4:01</p>
-<p>效率 = 效率的如何评估+好的休息 + 事先安排+随机应变</p>
-<p>数据库远程链接失败</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ mysql -h 18.89.199.142 -u root -p</span><br><span class="line">Enter password:</span><br><span class="line">ERROR 2003 (HY000): Can&#39;t connect to MySQL server on &#39;18.89.199.142&#39; (60)</span><br></pre></td></tr></table></figure>
-<p>链接服务器配置数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">localhost:.ssh czh$ ssh -i shanghai ubuntu@118.89.199.142</span><br><span class="line">Welcome to Ubuntu 16.04.1 LTS (GNU&#x2F;Linux 4.4.0-53-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https:&#x2F;&#x2F;help.ubuntu.com</span><br><span class="line"> * Management:     https:&#x2F;&#x2F;landscape.canonical.com</span><br><span class="line"> * Support:        https:&#x2F;&#x2F;ubuntu.com&#x2F;advantage</span><br><span class="line"></span><br><span class="line">Last login: Sun Jun  4 19:14:42 2017 from 221.205.188.117</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo vim &#x2F;etc&#x2F;mysql&#x2F;my.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo vim &#x2F;etc&#x2F;mysql&#x2F;my.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo vim &#x2F;etc&#x2F;mysql&#x2F;my.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo vim &#x2F;etc&#x2F;mysql&#x2F;conf.d</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo vim &#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ cd &#x2F;etc</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc$ cd mysql</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql$ ls</span><br><span class="line">conf.d        debian.cnf  my.cnf.fallback  mysql.conf.d</span><br><span class="line">debian-start  my.cnf      mysql.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql$ sudo vim &#x2F;etc&#x2F;mysql&#x2F;mysql.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql$ sudo vim &#x2F;etc&#x2F;mysql&#x2F;conf.d</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql$ sudo vim &#x2F;etc&#x2F;mysql&#x2F;my.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql$ sudo vim &#x2F;etc&#x2F;mysql&#x2F;my.cnf.fallback</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql$ sudo vim &#x2F;etc&#x2F;mysql&#x2F;debian.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql$ sudo vim &#x2F;etc&#x2F;mysql&#x2F;my.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql$ cd &#x2F;etc&#x2F;mysql&#x2F;conf.d&#x2F;</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql&#x2F;conf.d$ ls</span><br><span class="line">mysql.cnf  mysqldump.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql&#x2F;conf.d$ sudo vim &#x2F;etc&#x2F;mysql&#x2F;mysql.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql&#x2F;conf.d$ sudo vim mysql.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql&#x2F;conf.d$ sudo vim mysqldump.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql&#x2F;conf.d$ cd ..</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql$ cd mysql.conf.d</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d$ ls</span><br><span class="line">mysqld.cnf  mysqld_safe_syslog.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d$ cd mysqld.cnf</span><br><span class="line">-bash: cd: mysqld.cnf: Not a directory</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d$ sudo vim mysqld.cnf</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d$ sudo restart mysql</span><br><span class="line">sudo: restart: command not found</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d$ sudo &#x2F;etc&#x2F;init.d&#x2F;mysql restart</span><br><span class="line">[ ok ] Restarting mysql (via systemctl): mysql.service.</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;mysql&#x2F;mysql.conf.d$ exit;</span><br><span class="line">logout</span><br></pre></td></tr></table></figure>
-
-<p>远程链接数据库失败</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Connection to 118.89.199.142 closed.</span><br><span class="line">localhost:.ssh czh$ mysql -h 118.89.199.142 -u root -p</span><br><span class="line">Enter password:</span><br><span class="line">ERROR 1130 (HY000): Host &#39;221.205.188.117&#39; is not allowed to connect to this MySQL server</span><br></pre></td></tr></table></figure>
-
-<p>连接服务器进入数据库</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ ssh -i shanghai ubuntu@118.89.199.142</span><br><span class="line">Welcome to Ubuntu 16.04.1 LTS (GNU&#x2F;Linux 4.4.0-53-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https:&#x2F;&#x2F;help.ubuntu.com</span><br><span class="line"> * Management:     https:&#x2F;&#x2F;landscape.canonical.com</span><br><span class="line"> * Support:        https:&#x2F;&#x2F;ubuntu.com&#x2F;advantage</span><br><span class="line"></span><br><span class="line">Last login: Sun Jun  4 19:29:11 2017 from 221.205.188.117</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ mysql -u root -p</span><br><span class="line">Enter password:</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 5</span><br><span class="line">Server version: 5.7.18-0ubuntu0.16.04.1 (Ubuntu)</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2017, Oracle and&#x2F;or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and&#x2F;or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">+--------------------+</span><br><span class="line">4 rows in set (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; exi;t</span><br><span class="line">ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;exi&#39; at line 1</span><br><span class="line">    -&gt;</span><br><span class="line">    -&gt; exit;</span><br><span class="line">ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near &#39;t</span><br><span class="line"></span><br><span class="line">exit&#39; at line 1</span><br><span class="line">mysql&gt; exit;</span><br><span class="line">Bye</span><br><span class="line"></span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ mysql -u root -p</span><br><span class="line">Enter password:</span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 6</span><br><span class="line">Server version: 5.7.18-0ubuntu0.16.04.1 (Ubuntu)</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2017, Oracle and&#x2F;or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and&#x2F;or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &#39;myuser&#39;@&#39;%&#39; IDENTIFIED BY &#39;012468czh.&#39; WITH GRANT OPTION</span><br><span class="line">    -&gt; ;</span><br><span class="line">ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &#39;myuser&#39;@&#39;%&#39; IDENTIFIED BY &#39;012468czh&#39; WITH GRANT OPTION;</span><br><span class="line">ERROR 1819 (HY000): Your password does not satisfy the current policy requirements</span><br><span class="line">mysql&gt; set global validate_password_policy&#x3D;0;</span><br><span class="line">Query OK, 0 rows affected (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &#39;myuser&#39;@&#39;%&#39; IDENTIFIED BY &#39;012468czh.&#39; WITH GRANT OPTION;</span><br><span class="line">Query OK, 0 rows affected, 1 warning (0.00 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; exit;</span><br><span class="line">Bye</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ exit;</span><br><span class="line">logout</span><br></pre></td></tr></table></figure>
-
-
-<p>远程连接数据库失败</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Connection to 118.89.199.142 closed.</span><br><span class="line">localhost:.ssh czh$ mysql -h 118.89.199.142 -u root -p</span><br><span class="line">Enter password:</span><br><span class="line">ERROR 1045 (28000): Access denied for user &#39;root&#39;@&#39;221.205.188.117&#39; (using password: YES)</span><br></pre></td></tr></table></figure>
-
-<p>连接数据库成功</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| sys                |</span><br><span class="line">+--------------------+</span><br><span class="line">4 rows in set (0.05 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; create database report;</span><br><span class="line">Query OK, 1 row affected (0.04 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; show databases;</span><br><span class="line">+--------------------+</span><br><span class="line">| Database           |</span><br><span class="line">+--------------------+</span><br><span class="line">| information_schema |</span><br><span class="line">| mysql              |</span><br><span class="line">| performance_schema |</span><br><span class="line">| report             |</span><br><span class="line">| sys                |</span><br><span class="line">+--------------------+</span><br><span class="line">5 rows in set (0.03 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt; use report;</span><br><span class="line">Database changed</span><br><span class="line">mysql&gt; source &#x2F;Users&#x2F;czh&#x2F;Downloads&#x2F;report.sql ;</span><br><span class="line">Query OK, 0 rows affected (0.04 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.03 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.03 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.04 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.03 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.04 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.07 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 7 rows affected (0.04 sec)</span><br><span class="line">Records: 7  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.07 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 7 rows affected (0.03 sec)</span><br><span class="line">Records: 7  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.04 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.07 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 10 rows affected (0.04 sec)</span><br><span class="line">Records: 10  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.05 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 7 rows affected (0.05 sec)</span><br><span class="line">Records: 7  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.03 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.06 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 1 row affected (0.04 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.05 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 7 rows affected (0.03 sec)</span><br><span class="line">Records: 7  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.11 sec)</span><br><span class="line">Records: 0  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.08 sec)</span><br><span class="line">Records: 0  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.07 sec)</span><br><span class="line">Records: 0  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.09 sec)</span><br><span class="line">Records: 0  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.09 sec)</span><br><span class="line">Records: 0  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.08 sec)</span><br><span class="line">Records: 0  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 7 rows affected (0.05 sec)</span><br><span class="line">Records: 7  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 7 rows affected (0.06 sec)</span><br><span class="line">Records: 7  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 10 rows affected (0.05 sec)</span><br><span class="line">Records: 10  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 7 rows affected (0.06 sec)</span><br><span class="line">Records: 7  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 1 row affected (0.05 sec)</span><br><span class="line">Records: 1  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 7 rows affected (0.05 sec)</span><br><span class="line">Records: 7  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 7 rows affected (0.05 sec)</span><br><span class="line">Records: 7  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 7 rows affected (0.05 sec)</span><br><span class="line">Records: 7  Duplicates: 0  Warnings: 0</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.03 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.04 sec)</span><br><span class="line"></span><br><span class="line">Query OK, 0 rows affected (0.04 sec)</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>——————————————————</p>
-<p>登陆服务器配置项目</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">Last login: Mon Jun  5 13:23:16 2017 from 221.205.47.210</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ cd &#x2F;var&#x2F;www&#x2F;html</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html$ ls</span><br><span class="line">index.nginx-debian.html  info.php  report</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html$ chmod 777 report</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html$ cd report</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report$ ls</span><br><span class="line">Application  README.md  Untitled-1.html  index.php</span><br><span class="line">Public       ThinkPHP   composer.json    target.xls</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report$ cd Application</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report&#x2F;Application$ ls</span><br><span class="line">Admin  Common  Home  README.md  Runtime  index.html</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report&#x2F;Application$ cd Runtime</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report&#x2F;Application&#x2F;Runtime$ cd..</span><br><span class="line">cd..: command not found</span><br><span class="line">##</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report&#x2F;Application&#x2F;Runtime$ cd ..</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report&#x2F;Application$ sudo rm Runtime</span><br><span class="line">rm: cannot remove &#39;Runtime&#39;: Is a directory</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report&#x2F;Application$ sudo rm -r Runtime</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report&#x2F;Application$ ls</span><br><span class="line">Admin  Common  Home  README.md  index.html</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report&#x2F;Application$ ls</span><br><span class="line">Admin  Common  Home  README.md  index.html</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report&#x2F;Application$ ls</span><br><span class="line">Admin  Common  Home  README.md  index.html</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report&#x2F;Application$ cd ..</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report$ chmod 777 Application</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;var&#x2F;www&#x2F;html&#x2F;report$ exit;</span><br><span class="line">logout</span><br><span class="line">Connection to 118.89.199.142 closed.</span><br></pre></td></tr></table></figure>
-
-<p>连接服务器配置nigix</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ ssh -i shanghai ubuntu@118.89.199.142</span><br><span class="line">Welcome to Ubuntu 16.04.1 LTS (GNU&#x2F;Linux 4.4.0-53-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https:&#x2F;&#x2F;help.ubuntu.com</span><br><span class="line"> * Management:     https:&#x2F;&#x2F;landscape.canonical.com</span><br><span class="line"> * Support:        https:&#x2F;&#x2F;ubuntu.com&#x2F;advantage</span><br><span class="line"></span><br><span class="line">Last login: Mon Jun  5 13:45:00 2017 from 221.205.47.210</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo vim &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ cd &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;nginx&#x2F;sites-available$ ls</span><br><span class="line">default</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;nginx&#x2F;sites-available$ exit;</span><br><span class="line">logout</span><br><span class="line">Connection to 118.89.199.142 closed.</span><br></pre></td></tr></table></figure>
-
-<p>远程下载</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ scp ubuntu@118.89.199.142:&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default&#x2F;Users&#x2F;czh&#x2F;Desktop&#x2F;</span><br><span class="line">usage: scp [-12346BCpqrv] [-c cipher] [-F ssh_config] [-i identity_file]</span><br><span class="line">           [-l limit] [-o ssh_option] [-P port] [-S program]</span><br><span class="line">           [[user@]host1:]file1 ... [[user@]host2:]file2</span><br><span class="line">localhost:.ssh czh$ scp ubuntu@118.89.199.142:&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default &#x2F;Users&#x2F;czh&#x2F;Desktop&#x2F;</span><br><span class="line">default                                       100% 2092    57.5KB&#x2F;s   00:00</span><br></pre></td></tr></table></figure>
-<p>登陆服务器配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ ssh -i shanghai ubuntu@118.89.199.142</span><br><span class="line">Welcome to Ubuntu 16.04.1 LTS (GNU&#x2F;Linux 4.4.0-53-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https:&#x2F;&#x2F;help.ubuntu.com</span><br><span class="line"> * Management:     https:&#x2F;&#x2F;landscape.canonical.com</span><br><span class="line"> * Support:        https:&#x2F;&#x2F;ubuntu.com&#x2F;advantage</span><br><span class="line"></span><br><span class="line">Last login: Mon Jun  5 16:46:55 2017 from 221.205.47.210</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ cd &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;nginx&#x2F;sites-available$ sudo rm default</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;nginx&#x2F;sites-available$ ls</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;nginx&#x2F;sites-available$ exit;</span><br><span class="line">logout</span><br><span class="line">Connection to 118.89.199.142 closed.</span><br></pre></td></tr></table></figure>
-<p>上传文件到服务器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ scp &#x2F;Users&#x2F;czh&#x2F;Desktop&#x2F;default ubuntu@118.89.199.142:&#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;</span><br><span class="line">scp: &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;&#x2F;default: Permission denied</span><br><span class="line">localhost:.ssh czh$ scp &#x2F;Users&#x2F;czh&#x2F;Desktop&#x2F;default ubuntu@118.89.199.142:&#x2F;etc&#x2F;nginx&#x2F;sites-available</span><br><span class="line">scp: &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default: Permission denied</span><br></pre></td></tr></table></figure>
-<p>连接服务器进行配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ ssh -i shanghai ubuntu@118.89.199.142</span><br><span class="line">Welcome to Ubuntu 16.04.1 LTS (GNU&#x2F;Linux 4.4.0-53-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https:&#x2F;&#x2F;help.ubuntu.com</span><br><span class="line"> * Management:     https:&#x2F;&#x2F;landscape.canonical.com</span><br><span class="line"> * Support:        https:&#x2F;&#x2F;ubuntu.com&#x2F;advantage</span><br><span class="line"></span><br><span class="line">Last login: Mon Jun  5 16:56:37 2017 from 221.205.47.210</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo chmod 777 &#x2F;etc&#x2F;nginx&#x2F;sites-available</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ exit;</span><br><span class="line">logout</span><br><span class="line">Connection to 118.89.199.142 closed.</span><br><span class="line">localhost:.ssh czh$ scp &#x2F;Users&#x2F;czh&#x2F;Desktop&#x2F;default ubuntu@118.89.199.142:&#x2F;etc&#x2F;nginx&#x2F;sites-available</span><br><span class="line">default                                       100% 1292    35.1KB&#x2F;s   00:00</span><br></pre></td></tr></table></figure>
-<p>登陆服务器重启nginx</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ ssh -i shanghai ubuntu@118.89.199.142</span><br><span class="line">Welcome to Ubuntu 16.04.1 LTS (GNU&#x2F;Linux 4.4.0-53-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https:&#x2F;&#x2F;help.ubuntu.com</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line"> * Management:     https:&#x2F;&#x2F;landscape.canonical.com</span><br><span class="line"> * Support:        https:&#x2F;&#x2F;ubuntu.com&#x2F;advantage</span><br><span class="line"></span><br><span class="line">Last login: Mon Jun  5 17:02:15 2017 from 221.205.47.210</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo systemctl reload nginx</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ exit;</span><br><span class="line">logout</span><br><span class="line">Connection to 118.89.199.142 closed.</span><br></pre></td></tr></table></figure>
-<p>上传文件到服务器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ scp &#x2F;Users&#x2F;czh&#x2F;Desktop&#x2F;default ubuntu@118.89.199.142:&#x2F;etc&#x2F;nginx&#x2F;sites-available</span><br><span class="line">default                                       100% 1287    27.9KB&#x2F;s   00:00</span><br></pre></td></tr></table></figure>
-
-<p>登陆服务器进行nginx配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ ssh -i shanghai ubuntu@118.89.199.142</span><br><span class="line">Welcome to Ubuntu 16.04.1 LTS (GNU&#x2F;Linux 4.4.0-53-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https:&#x2F;&#x2F;help.ubuntu.com</span><br><span class="line"> * Management:     https:&#x2F;&#x2F;landscape.canonical.com</span><br><span class="line"> * Support:        https:&#x2F;&#x2F;ubuntu.com&#x2F;advantage</span><br><span class="line"></span><br><span class="line">Last login: Mon Jun  5 17:03:27 2017 from 221.205.47.210</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo nginx -t</span><br><span class="line">nginx: the configuration file &#x2F;etc&#x2F;nginx&#x2F;nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file &#x2F;etc&#x2F;nginx&#x2F;nginx.conf test is successful</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo systemctl reload nginx</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo vim &#x2F;etc&#x2F;nginx&#x2F;sites-available&#x2F;default</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo nginx -t</span><br><span class="line">nginx: the configuration file &#x2F;etc&#x2F;nginx&#x2F;nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file &#x2F;etc&#x2F;nginx&#x2F;nginx.conf test is successful</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo systemctl reload nginx</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ exit;</span><br><span class="line">logout</span><br><span class="line">Connection to 118.89.199.142 closed.</span><br></pre></td></tr></table></figure>
-<p>上传文件到服务器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ scp &#x2F;Users&#x2F;czh&#x2F;Desktop&#x2F;default ubuntu@118.89.199.142:&#x2F;etc&#x2F;nginx&#x2F;sites-available</span><br><span class="line">default                                       100% 2092    56.6KB&#x2F;s   00:00</span><br></pre></td></tr></table></figure>
-
-<p>连接服务器配置nginx</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ ssh -i shanghai ubuntu@118.89.199.142</span><br><span class="line">Welcome to Ubuntu 16.04.1 LTS (GNU&#x2F;Linux 4.4.0-53-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https:&#x2F;&#x2F;help.ubuntu.com</span><br><span class="line"> * Management:     https:&#x2F;&#x2F;landscape.canonical.com</span><br><span class="line"> * Support:        https:&#x2F;&#x2F;ubuntu.com&#x2F;advantage</span><br><span class="line"></span><br><span class="line">Last login: Mon Jun  5 17:08:04 2017 from 221.205.47.210</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo nginx -t</span><br><span class="line">nginx: the configuration file &#x2F;etc&#x2F;nginx&#x2F;nginx.conf syntax is ok</span><br><span class="line">nginx: configuration file &#x2F;etc&#x2F;nginx&#x2F;nginx.conf test is successful</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo systemctl reload nginx</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ exit;</span><br><span class="line">logout</span><br><span class="line">Connection to 118.89.199.142 closed.</span><br></pre></td></tr></table></figure>
-
-<p>上传文件到服务器</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ scp &#x2F;Users&#x2F;czh&#x2F;Desktop&#x2F;default ubuntu@118.89.199.142:&#x2F;etc&#x2F;nginx&#x2F;sites-available</span><br><span class="line">default                                       100%  984    18.9KB&#x2F;s   00:00</span><br></pre></td></tr></table></figure>
-
-<p>连接服务器配置nginx</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">localhost:.ssh czh$ ssh -i shanghai ubuntu@118.89.199.142</span><br><span class="line">Welcome to Ubuntu 16.04.1 LTS (GNU&#x2F;Linux 4.4.0-53-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https:&#x2F;&#x2F;help.ubuntu.com</span><br><span class="line"> * Management:     https:&#x2F;&#x2F;landscape.canonical.com</span><br><span class="line"> * Support:        https:&#x2F;&#x2F;ubuntu.com&#x2F;advantage</span><br><span class="line"></span><br><span class="line">Last login: Mon Jun  5 17:14:25 2017 from 221.205.47.210</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ sudo nginx -t</span><br><span class="line">nginx: [emerg] unknown directive &quot;...&quot; in &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;default:3</span><br><span class="line">nginx: configuration file &#x2F;etc&#x2F;nginx&#x2F;nginx.conf test failed</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$ cd &#x2F;etc&#x2F;nginx&#x2F;sites-enabled&#x2F;</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;nginx&#x2F;sites-enabled$ ls</span><br><span class="line">default</span><br><span class="line">ubuntu@VM-219-69-ubuntu:&#x2F;etc&#x2F;nginx&#x2F;sites-enabled$ exit;</span><br><span class="line">logout</span><br><span class="line">Connection to 118.89.199.142 closed.</span><br></pre></td></tr></table></figure>
-<p>上传文件并配置nginx</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">localhost:.ssh czh$ scp &#x2F;Users&#x2F;czh&#x2F;Desktop&#x2F;default ubuntu@118.89.199.142:&#x2F;etc&#x2F;nginx&#x2F;sites-available</span><br><span class="line">default                                       100% 1324    34.6KB&#x2F;s   00:00</span><br><span class="line">localhost:.ssh czh$ ssh -i shanghai ubuntu@118.89.199.142</span><br><span class="line">Welcome to Ubuntu 16.04.1 LTS (GNU&#x2F;Linux 4.4.0-53-generic x86_64)</span><br><span class="line"></span><br><span class="line"> * Documentation:  https:&#x2F;&#x2F;help.ubuntu.com</span><br><span class="line"> * Management:     https:&#x2F;&#x2F;landscape.canonical.com</span><br><span class="line"> * Support:        https:&#x2F;&#x2F;ubuntu.com&#x2F;advantage</span><br><span class="line"></span><br><span class="line">Last login: Mon Jun  5 17:18:00 2017 from 221.205.47.210</span><br><span class="line">ubuntu@VM-219-69-ubuntu:~$g</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/07/07/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/java%E7%94%A8%E6%96%87%E4%BB%B6%E5%AE%9E%E7%8E%B0%E7%B1%BB%E4%BC%BC%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1678,6 +1523,368 @@ TargetInterface.java<strong>(adapt1.java+adapt2.java公用)</strong><figure clas
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B/" class="post-title-link" itemprop="url">java基础阶段图书管理系统项目需求分析过程</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-07-01 03:16:00" itemprop="dateCreated datePublished" datetime="2017-07-01T03:16:00+08:00">2017-07-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java基础</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B/" class="post-meta-item leancloud_visitors" data-flag-title="java基础阶段图书管理系统项目需求分析过程" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年7月1日 下午3:16</p>
+<h1 id="这篇文章就是我边想问题边写的，记录了我整个思考的过程"><a href="#这篇文章就是我边想问题边写的，记录了我整个思考的过程" class="headerlink" title="这篇文章就是我边想问题边写的，记录了我整个思考的过程"></a>这篇文章就是我边想问题边写的，记录了我整个思考的过程</h1><p>几个注意点：<br>    1. <strong>整体的结构要心中有数</strong>，可以用图来辅助<br>    2. 这个项目的难点在于功能流程的设计，数据库表的设计很简单<br>    3. 发现隐藏的功能，做好以后功能的扩展。<br>    4. 同时也要学会偷懒技巧，实现简单，但是却让人喜欢</p>
+<p>现在想到的功能有：<br>    1. 登陆注册，人员的流动                                                                 一天<br>        1. 多用户登陆<br>            1. 一个多线程的服务端<br>            2. 一个客户端<br>        2. 前后端两个<br>        3. 会员管理系统<br>    2. 权限管理系统：<br>        1. 前后端可以设计不同的阶梯，CCF                                      一天<br>    3. 图书<strong>查询</strong>系统【核心】：                                                           三天<br>        1. 用户查书有没有，模糊查询<br>            1. 按作者<br>            2. 按类别<br>            3. 按日期查询<br>            4. 按出版社<br>            5. 按库存<br>        2. 用户查自己的借阅情况<br>            1. 用户还书<br>            2. 超时扣钱<br>        3. 管理员<br>            1. 查询一本书的借阅历史<br>            2. 查破损</p>
+<pre><code>4. 辅助功能【看时间自由调整】：                                                  一天
+    1. 图书的破损，下架，丢失</code></pre><hr>
+<p>程序员可以创建类<br>而用户只能创建对象    </p>
+<hr>
+<p>老师的那个是权限于功能进行了绑定<br>而我的这个是权限和功能是分开的，先判断权限再去执行功能。<br>但是功能从哪来呢？<br>那还不如最小的权限绑定功能，而角色和权限的多对多功能，这是操作对象，所以能够给了用户来操作，用户和角色的一对多的关系也是对象操作，也可以给了用户</p>
+<hr>
+<h3 id="设计模式："><a href="#设计模式：" class="headerlink" title="设计模式："></a>设计模式：</h3><p>不能为了使用设计模式，专门去向哪里可以用，<br><strong>功能为导向哦！</strong></p>
+<hr>
+<p><img src="/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B/%E2%80%A2%20BookManage.mdj%20%E2%80%94%20StarUML%20StarUML,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%8810.22.28.png" alt><br><strong>这里的额priority1-3不能出现方法的重名</strong></p>
+<p>为了以后<strong>扩从管理员的功能</strong>：这里使用了<strong>代理模式</strong><br>priority1是priority3针对interface3种方法的扩充<br>interface1,interface2是横向扩充<br>interface3 是纵向扩充</p>
+<hr>
+<h3 id="如何实现一个权限分多级的情况？"><a href="#如何实现一个权限分多级的情况？" class="headerlink" title="如何实现一个权限分多级的情况？"></a>如何实现一个权限分多级的情况？</h3><p>在interface中写不同的方法e.g.：<strong>input1() input2()</strong><br>这里的权限1，2就是权限等级<br>这里的<strong>核心问题就是方法的参数化</strong>：利用反射可以解决<br>使用方法：<br>    User中有一个方法userMethod(String methodName);<br>实现类似于：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 反射中方法的测试</span></span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test_Method</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">		<span class="comment">//获取Student对应的Class对象</span></span><br><span class="line">		Class cla=Student<span class="class">.<span class="keyword">class</span></span>;</span><br><span class="line">		<span class="comment">//创建Student对象</span></span><br><span class="line">		Student p=<span class="keyword">new</span> Student();</span><br><span class="line">		<span class="comment">//得到setName方法</span></span><br><span class="line">		Method met1=cla.getMethod(<span class="string">"setName"</span>, String<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">		<span class="comment">//调用setName，为name赋值</span></span><br><span class="line">		met1.invoke(p, <span class="string">"Jack"</span>);</span><br><span class="line"></span><br><span class="line">		<span class="comment">//得到setName方法</span></span><br><span class="line">		Method met=cla.getMethod(<span class="string">"getName"</span>, <span class="keyword">null</span>);</span><br><span class="line">		<span class="comment">//调用setName，为name赋值</span></span><br><span class="line">		Object o=met.invoke(p, <span class="keyword">null</span>);</span><br><span class="line">		System.out.println(o);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实这里可以使用<strong>组合模式</strong><br>将Role继承自priority<br>好处是：要是用户只有一个Priority，一步就可以完成了，省去了Role。</p>
+<hr>
+<h3 id="如何实现上下级批准："><a href="#如何实现上下级批准：" class="headerlink" title="如何实现上下级批准："></a>如何实现上下级批准：</h3><p>这个不属于类的设计，是通过逻辑代码实现的。<br>要是在类图中就实现上下级，那是一定不可改变得。</p>
+<p>以及实现人员的变动，这都是通过逻辑代码实现的。</p>
+<hr>
+<h3 id="服务端的任务—其实是个假的服务端，因为他仅仅完成了登陆这一个功能："><a href="#服务端的任务—其实是个假的服务端，因为他仅仅完成了登陆这一个功能：" class="headerlink" title="服务端的任务—其实是个假的服务端，因为他仅仅完成了登陆这一个功能："></a>服务端的任务—其实是个假的服务端，因为他仅仅完成了登陆这一个功能：</h3><pre><code>1. 服务端就是一个黑盒
+2. 不走权限整个流程
+3. 接收的是用户名和密码
+    1. 实现判断
+    2. 实现注册
+4. 返回的是
+    1. 登陆是否成功
+    2. 注册是否成功
+    3. Flag标志区分普通用户和管理员
+5. 实现普通用户和管理员的区分
+    1. 查不同的文件txt</code></pre><h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端:"></a>客户端:</h3><pre><code>1. 拿到用户名密码
+2. 给了服务器
+3. 根据服务器的返回，执行不同的普通用户和管理员的方法
+4. 运行不同的操作（界面）</code></pre><hr>
+<h3 id="如何确定当前用户的操作？并执行？"><a href="#如何确定当前用户的操作？并执行？" class="headerlink" title="如何确定当前用户的操作？并执行？"></a>如何确定当前用户的操作？并执行？</h3><p>现在是像洋葱一样，一层一层的，要用的对象（priority对象）在最里面。<br>User的useMethod()方法中的Class.from()这里写啥？<br>如果要是表中：用户 &lt;—&gt;priority<br>那Role怎么办？<br>Role是程序写的，这里就要实现其中包含的priority的全部方法。</p>
+<h3 id="啥是活的啥是死的？"><a href="#啥是活的啥是死的？" class="headerlink" title="啥是活的啥是死的？"></a>啥是活的啥是死的？</h3><p>程序员：<br>    1. 增加一个priority类别，增加一个role类别<br>用户：<br>    1. 在当前已有的priority  和 role中进行选择</p>
+<h3 id="又绕回到了一开始的那就话："><a href="#又绕回到了一开始的那就话：" class="headerlink" title="又绕回到了一开始的那就话："></a>又绕回到了一开始的那就话：</h3><p>用户是不能去创建一个类，或者创建一个类中的方法的。<br>这些都是程序写死的，用户最多只能选择！</p>
+<hr>
+<p>人工智能</p>
+<hr>
+<h3 id="能不能先写逻辑，再写图形界面？"><a href="#能不能先写逻辑，再写图形界面？" class="headerlink" title="能不能先写逻辑，再写图形界面？"></a>能不能先写逻辑，再写图形界面？</h3><pre><code>1. 数据获取的方式发生改变。
+    1. 原来是scanner
+    2. 现在是JFrame的txt框
+2. 页面跳转的方式放生了变化
+    1. 原来是输入数字选
+    2. 现在是鼠标点
+3. 数据的输出方式了改变
+    1. 原来是printf
+    2. 现在是JFrame中</code></pre><p>总体来说：填了很多麻烦</p>
+<p>先写逻辑，后写图形</p>
+<h3 id="类有哪些？"><a href="#类有哪些？" class="headerlink" title="类有哪些？"></a>类有哪些？</h3><pre><code>1. 上面的权限，一堆
+2. 还有book，bookBiz
+3. 文件操作的FileBiz</code></pre><h3 id="有哪些包？"><a href="#有哪些包？" class="headerlink" title="有哪些包？"></a>有哪些包？</h3><pre><code>1. entity.book
+    1. 计算总价方法
+    2. 显示图书信息方法
+2. bookBiz
+    1. 初始化书的信息
+    2. 图书入库
+    3. 图书出库
+    4. 新增图书
+    5. 查询图书
+    6. 购买图书
+    7. 查询图书是否存在
+3. entity.user
+    1. 从priority获取方法名数组【长度规定为10】
+    2. 显示当前用户所具有的功能
+    3. 建立数字和方法的对应关系
+    4. 根据输入，通过反射调用不同的功能
+    5. 这里的输入之后，还得进行一个字符串拼接，实现权限分级
+4. priority
+    1. 调用bookBiz
+    2. **获取方法名的数组**
+5. priority.ext
+6. priority.impl
+7. file
+8. file.impl
+    1. 获取一行数据
+    2. 取一行数据，分割到数组
+    3. 取全部的数据，保存数组，除了第一行
+    4. 插入表头
+    5. 插入一条数据
+    6. 新建一个文件
+9. Test
+    1. 给client数据
+    2. 调用user完成工作
+10. Server
+    1. Thread
+    2. 干活的类
+11. Client
+    1. 从test拿到数据给server</code></pre><hr>
+<h3 id="步骤？"><a href="#步骤？" class="headerlink" title="步骤？"></a>步骤？</h3><pre><code>1. 文件
+2. book
+3. 权限
+4. server
+5. user
+6. test</code></pre><p>把这个权限打成一个jar包去使用<br>这个现在还不考虑</p>
+<hr>
+<h3 id="权限"><a href="#权限" class="headerlink" title="权限"></a>权限</h3><p>我知道的：<br>    1. 类名<br><strong>两种解决方法：</strong><br>    1. 给User建子类，每回登陆通过判断类名，好多的if产生不同的对象<br>        1. 每次增加一个类，都要两边写<br>    2. 试用反射，用类名 把类先反射出来（通过反射来<strong>读类</strong>）<br>        1. 这时已经能调用方法了<br>        2. 能调用方法，那所有的问题都解决了</p>
+<hr>
+<h3 id="新的问题"><a href="#新的问题" class="headerlink" title="新的问题"></a>新的问题</h3><pre><code>1. **方法知道了，但是参数不知道**
+    1. 在写一个参数的方法
+    2. 其重要有参数的个数 和 类型
+2. **invoke返回的是object对象**，除了string 和 int 类型
+    1. 其他的类型是固定的没几种
+        1. string[]
+        2. string[][]
+        3. ArrayList&lt;String&gt;</code></pre><p><strong>三个方法返回数组中的内容是有顺序的，必须一致</strong><br><strong>这个可以抽象成一个方法</strong><br>    3. <strong>如何融入权限分层</strong><br>        1. 要限定<br>            1. 一共三层<br>            2. 方法要用method_1(),method_2();固定的_来分割<br>            3. 把取出来的方法分割</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Class c=Class.forName(<span class="string">"cn.chenzhiheng.user.priority.PriorityClient"</span>);</span><br><span class="line">		Object o=c.newInstance();</span><br><span class="line">		Method[] m=c.getMethods();</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;m.length;i++)&#123;</span><br><span class="line">			System.out.println(m[i].getName());</span><br><span class="line">		</span><br><span class="line">			<span class="keyword">if</span>(m[i].getName().equals(method))&#123;</span><br><span class="line">				Object[] os=<span class="keyword">new</span> String[<span class="number">1</span>];</span><br><span class="line">				ArrayList&lt;String&gt; strings=(ArrayList&lt;String&gt;) m[i].invoke(o,<span class="keyword">null</span>);</span><br><span class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span> ;j &lt; strings.size();j++)&#123;</span><br><span class="line">					System.out.println(<span class="string">"***"</span>+strings.get(j));</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="Test的操作流程"><a href="#Test的操作流程" class="headerlink" title="Test的操作流程"></a>Test的操作流程</h3><pre><code>1. scanner **获取用户名和密码+userId**
+2. 通过client传递给server
+    1. 这里要区分增删改查
+3. 接受server传递过来的用户权限
+    1. 不一定是权限
+    2. 有可能是操作是否完成
+4. 根据用户权限调用user打印出当前所有的方法
+5. 调用方法去完成一些操作</code></pre><h3 id="当加上界面的时候"><a href="#当加上界面的时候" class="headerlink" title="当加上界面的时候"></a>当加上界面的时候</h3><pre><code>1. 界面是点的操作
+2. 而控制窗是从上到下的一个顺序操作
+3. 所以，**控制窗与逻辑的交互**由一个分割好的**test来完成**</code></pre><hr>
+<h3 id="三个数据表增删改查之间的关系"><a href="#三个数据表增删改查之间的关系" class="headerlink" title="三个数据表增删改查之间的关系"></a>三个数据表增删改查之间的关系</h3><pre><code>1. 买书的时候要增加info
+2. 不删除book和user 只更改他们的状态
+3. 退货删info
+    1. 输入infoId
+    2. 通过infoid找到bookid
+    3. 删除info
+    4. 更改bookid对应的数量
+4. **user_book不直接操作，全部由Book类来操作**</code></pre><hr>
+<h3 id="怎样实现自增"><a href="#怎样实现自增" class="headerlink" title="怎样实现自增"></a>怎样实现自增</h3><pre><code>1. 抽象类 static index
+2. index++;
+3. 构造函数</code></pre><hr>
+<h3 id="权限的升级："><a href="#权限的升级：" class="headerlink" title="权限的升级："></a>权限的升级：</h3><pre><code>1. 已有权限
+    1. 直接更改用户的priority字段
+    2. 用户权限的更改只能有管理员进行
+2. 没有的权限
+    1.有可能 **写Biz**
+    2. 写priorityImpl
+    3. 写priority继承自 ext 实现impl接口
+    4. 然后在写一个role在包括原来的和现在的对象
+    5. 在像上面一样更改用户权限字段</code></pre><hr>
+<p>Biz的功能不是priority 都必须用了e.g.：insertHead。<br>程序员用一次就行了</p>
+<hr>
+<p>这回幸亏是从下往上做，每一层都是一个封装。<br>对下层的多次运用</p>
+<hr>
+<h3 id="如何拿到使用不同类型反射回的结果"><a href="#如何拿到使用不同类型反射回的结果" class="headerlink" title="如何拿到使用不同类型反射回的结果"></a>如何拿到使用不同类型反射回的结果</h3><pre><code>1. 由于多态中不支持多返回的类型
+2. 所以这种情况，只能写不同的方法</code></pre><hr>
+<p>结算功能：<br>一个用户-一个权限-一个Userbiz(多个唯一的biz)</p>
+<hr>
+<p>理想中的代码层次-应该像：MVC<br>    1. 我从数据库中取出用户的权限等级，作为全局变量<br>    2. 然后生成对应这个等级的<strong>页面</strong><br>    3. 点击一个<strong>功能按钮</strong>，然后<strong>跳到逻辑处理层</strong><br>    4. 逻辑处理层的数据，然后<strong>投影到一个页面中</strong><br>    5. <strong>页面—&gt;跳到逻辑层—&gt;新的页面</strong><br>    6. <del>就像TP一样</del><br>现在：<br>    1. 我点击<strong>功能按钮</strong>，然后<strong>逻辑处理</strong><br>    2. 逻辑处理完，显示到页面<br>    3. 这个整个过程是<strong>瀑布型</strong>的，像c一样从上到下的执行<br>    4. <strong>没有跳转</strong><br>    5. <strong>页面—&gt;走逻辑—&gt;旧页面</strong><br>    6. <del>就像原生php一样</del></p>
+<hr>
+<h3 id="那么第二种为啥会把一个权限系统给废了？"><a href="#那么第二种为啥会把一个权限系统给废了？" class="headerlink" title="那么第二种为啥会把一个权限系统给废了？"></a>那么第二种为啥会把一个权限系统给废了？</h3><pre><code>1. 这的权限系统就是一个**逻辑层**
+2. **入口**的是你要执行的**方法名**
+3. **出口**是你要的**数据**
+4. 这就一个**封装**
+5. 不是废了，**我这个权限系统不是用来分层的**</code></pre><h3 id="假设你现在已经按不分层的想法写完了项目，那么有啥改进的地方？"><a href="#假设你现在已经按不分层的想法写完了项目，那么有啥改进的地方？" class="headerlink" title="假设你现在已经按不分层的想法写完了项目，那么有啥改进的地方？"></a>假设你现在已经按不分层的想法写完了项目，那么有啥改进的地方？</h3><pre><code>1. 现在的情况，就是JFrame其实就是再次把UserReflectf封装了一次
+2. 如果让增加功能，不仅权限里要增加相应的类，而且还要更改对应的页面
+3. 做的这个权限系统不是让权限完全随用户更改添加，而是更重要的是**程序员做维护的时候好维护，自己用这个权限写项目思路更加清晰**
+4. 如果是分层写的话，会这样思考
+    1. 页面用不用改？哪里改？眼前全是html
+    2. 逻辑用不用改？哪里改？眼前全是php逻辑
+5. 如果不是分层写的话，会这样思考
+    1. 乱死了，这个不是页面，跳过/这个不是逻辑，虽然明显，但是时间长了自己会**烦躁**。
+6. **关键：**分层写，我可以在逻辑层处理多种任务，获得多次的数据，然后把**多组数据**都传递给新的页面
+7. 分层于不分层的直观理解：
+    1. 分层是把不分层的中写在**一个页面的所有过程**，集中放在一个新页面中，是一个**提取的关系**
+    2. Ps：相似的功能可以通过将**各个过程封装到成方法中**
+8. **分层知识为了更清晰，没其他作用**</code></pre><hr>
+<h3 id="我用反射实现的权限管理"><a href="#我用反射实现的权限管理" class="headerlink" title="我用反射实现的权限管理"></a>我用反射实现的权限管理</h3><pre><code>1. 本质是实现了一对多的关系，**就是一个封装而已**
+    1. 反射解决的是字符串产生对象的这个过程
+    2. 一个字符串，就能对应那么多的具体的权限功能
+2. 但是在这个项目中界面中只能是一对一的关系
+    1. 一个界面已经绑定了一个代表权限的字符串了
+3. 那这个权限系统在哪里才可以发挥它最大的作用
+    1. 权限可以无限多
+    2. 增加起来方便
+    3. 一个权限功能的实现
+        1. 权限名
+        2. 方法名+参数
+        3. 2这个是必须的，并不是我这个系统设计不合理留下的小尾巴
+    4. 可以使用字符串直接对应权限，更加方便，直观（不用用数字去表示了）
+    5. 总结：**因为封装好了，以后程序员用起来就比较方便了**
+        1. 对用户来说，屁用没有
+        2. 对程序员来说，却是极大的方便
+    6. 这就是写框架要站的角度，和写项目占的角度**对比**
+        1. 写框架是为让程序员更加爽、简单，框架就是一个封装，把麻烦的事情封装到一个黑盒中，然后，留一口，然程序员简单做到。在这过程中，程序员不用懂得其中的道理。
+        2. 写项目时想的是如何实现一个功能，常常就为了一个boss功能较劲脑汁
+        3. **但是**，顶尖的程序员，**做出项目来估计和设计框架是一样的**</code></pre><hr>
+<h3 id="关于接口再说两句"><a href="#关于接口再说两句" class="headerlink" title="关于接口再说两句"></a>关于接口再说两句</h3><pre><code>1. 我突然一下感受到了接口的好处
+    1. 在一开始，我写底层一个最小单位的一个书籍管理权限，其实直接创建一个类，写方法，填注释就行了。这时写接口是一件麻烦的事情。
+    2. 但是，当我从底层越来越向上封装，集成。这时，我如果想在其他类中说明也要使用这些方法，我只要加上对应的接口，方法自动出来，我填内容就行。一般来说，内容可以直接用底层的对象调用来实现
+    3. 如果没有接口，我就得反复的回去看底层的具体的类实现。还生怕拉下一个。
+    4. 最常用的地方是：当修改一个，增加一个功能时，接口可以方便的提醒你还有哪些地方要改。对你的操作有**指示作用**
+    5. 有时候需要去写一个抽象类，但是，java本身的这个类中就有继承如JFrame继承自Frame，这时只能用接口来救急了。
+    6. 用了接口，妈妈在也不用为我担心这个问题了。</code></pre><hr>
+<p>我现在是站在一个<strong>写框架</strong>的角度去思考<br>但是，这也回答了一个问题我们<strong>看框架的时候会经历什么</strong><br>最终，当你看完一个框架的时候，你脑子中是有一副<strong>类图的</strong><br>like：<br><img src="/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B/%E2%80%A2%20BookManage.mdj%20%E2%80%94%20StarUML%20StarUML,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%884.40.07.png" alt></p>
+<hr>
+<h3 id="退书和总价的关系"><a href="#退书和总价的关系" class="headerlink" title="退书和总价的关系?"></a>退书和总价的关系?</h3><p>Index还是有问题<br>Table<br>    1. 不初始化初始化<br>    2. 覆盖</p>
+<hr>
+<h3 id="监听实现接口写在一起的好处"><a href="#监听实现接口写在一起的好处" class="headerlink" title="监听实现接口写在一起的好处"></a>监听实现接口写在一起的好处</h3><pre><code>1. 可以何在一起写逻辑，而，单个是时候互不影响</code></pre><hr>
+<h3 id="如何能发挥出这个权限系统的最大能力"><a href="#如何能发挥出这个权限系统的最大能力" class="headerlink" title="如何能发挥出这个权限系统的最大能力"></a>如何能发挥出这个权限系统的最大能力</h3><pre><code>1. 数据库中用户的权限是一个**对应权限类名**的一个字符串
+2. UserRflect的参数就是**权限字符串**
+3. 然后就可以通过UserRflect来调用**对应权限类**下的方法
+4. 能够去除当前权限下的所有方法，但是这些方法并不是简单地像输出不同的语句这样的**不需要任何输入，有统一输出的的方法**，所以不能做统一的界面去执行所有的功能。
+5. 就像web中的导航栏，导航栏可以是统一的，但是导航栏连接到的每个单独不同的页面，**这得一个一个的做**。</code></pre><hr>
+<h3 id="如何让这个权限系统能够自动识别权限等级"><a href="#如何让这个权限系统能够自动识别权限等级" class="headerlink" title="如何让这个权限系统能够自动识别权限等级"></a>如何让这个权限系统能够自动识别权限等级</h3><pre><code>1. 如果实现了能够自判等级大小
+    1. 那么在做相关功能的时候只需要调用一个方法就可以实现
+    2. 比如说我这里要实现**当前用户只能看权限比他低的人的信息**
+    3. 这个函数的参数是**权限字符串1 权限字符串2**
+    4. **返回boolean**
+2. 另一种实现方式，在biz查询全部用户的时候，在这就判断出结果。
+    1. 那么，这种实现方式就和权限系统没关系了
+    2. 如果在biz中在声明userRflect。
+        1. **userRflect是用来执行方法的，不是用来判断权限的！**
+    3. 那么，可以再设计一个userRflect配套的类，参数和返回值像1所说的。
+3. 现在方案定了，就差功能的实现了！
+    1. 如何才算是权限大，有哪些情况
+        1. 存在**包含关系**的时候能判断权限大小
+            1. 第一种：一个role中包含了多个priority，那么这些priority都比这个role权限小
+            2. 第二种：role1包含role2时，role1的权限大于role2 的权限。
+            3. 循环嵌套
+    2. 那么问题来了，如何**判断他们的包含关系**
+        1. 组合关系的递归
+4. **一下午！实现了**
+5. 使用方式：</code></pre><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Compare compare = <span class="keyword">new</span> Compare();		</span><br><span class="line"><span class="keyword">boolean</span> flag = compare.compare(<span class="string">"priority.PriorityBaseBook"</span>, <span class="string">"role.RoleAll"</span>);</span><br></pre></td></tr></table></figure>
+<hr>
+<p>我这个系统里面priorit对于图书的和用用户的管理都分别设置的普通给用户client端和管理员manager端，这是不符合实际的<br><img src="/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B/workspace%20-%20Java%20-%20BookManage-src-cn-chenzhiheng-user-role-PriorityAll.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8A%E5%8D%8810.48.42.png" alt><br><strong>因为</strong>：<br>    1. 现实中，manager和client等级一高一低<br>    2. 但是在<strong>priority包中定义的权限</strong>，<strong>他们是没有高低的，都是一个独立的权限</strong><br>怎么改：<br>    1. 将priority包下的manager接口方法移动到role包下的对应的manager接口中，<br>    2. 然后在role包下的实体类中重新实现接口中的方法<br>    3. 对于role下包的实体类来说，是没有影响的<br>    4. 因为，他implments 多个接口，我们现在只是把一个接口中的方法放到另一个接口中，对role实体类来说<strong>无视</strong></p>
+<hr>
+<p><strong>循环包含</strong>的时候<br>    1. 接口要自己去查基础功能的接口,可以直接从包含类implement中复制过来<br>    2. 返回的方法和返回值类型也可直接拷贝，修改下长度</p>
+<hr>
+<h3 id="这个权限系统使用的要求："><a href="#这个权限系统使用的要求：" class="headerlink" title="这个权限系统使用的要求："></a>这个权限系统使用的要求：</h3><pre><code>1. 名字 属性名两部分  类名前准
+    1. Priority包下,都是以priority为开头
+    2. Role包下都已role开头
+    3. 这个为了实现**权限等级判断的必要条件**
+2. 方法 实例化哪几个方法
+    1. PriorityExt抽象类下
+        1. getReturns
+        2. getMethods
+    2. RoleExt extends PriorityExt
+        1. getInclude
+        2. **注意：role方法+1 judge**
+3. 使用方式 
+    1. 只需要一个**权限字符串**
+4. 不同位置概念上的区别 
+    1. Priotity包下，都是**最小单位的权限**，**并且不包含**，各为独立的个体
+    2. Role包下，**可以不包括priority**，单独成为个体，作为最小单位。但是不同的是，**可以成为包含关系**</code></pre><hr>
+<h3 id="权限系统的完整包"><a href="#权限系统的完整包" class="headerlink" title="权限系统的完整包"></a>权限系统的完整包</h3><p><img src="/2017/07/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E9%98%B6%E6%AE%B5%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E5%88%86%E6%9E%90%E8%BF%87%E7%A8%8B/workspace%20-%20Java%20-%20BookManage-src-cn-chenzhiheng-test-Test.java%20-%20Eclipse%20Eclipse,%20%E4%BB%8A%E5%A4%A9%20at%20%E4%B8%8B%E5%8D%888.40.13.png" alt></p>
+<hr>
+<h3 id="最后要做的工作"><a href="#最后要做的工作" class="headerlink" title="最后要做的工作"></a>最后要做的工作</h3><pre><code>1. 表格实现信息修改—完成
+2. 管理员图书出库做判断—完成
+3. 用户查无此id的
+4. 退书应该加上专门的一个现实的表，然后进行点击退书
+5. 注册用户的验证
+6. 标题</code></pre><hr>
+<h3 id="如何学习table，如何了解table如何使用，他又那些功能。"><a href="#如何学习table，如何了解table如何使用，他又那些功能。" class="headerlink" title="如何学习table，如何了解table如何使用，他又那些功能。"></a>如何学习table，如何了解table如何使用，他又那些功能。</h3><pre><code>1. 即使是别人写好的，你也不一定会用！
+2. 手册的重要性，这个过程中一定会看大量的文档。
+3. 文档的写法基本上也是按照一个个功能，**问题为主导的**。
+4. 方便读者寻找自己想要的功能。
+5. 这与我写文章的思路正好相符
+6. 在这个过程中，有一个很大的问题就是**如何知道有什么功能**，以及会**涉及到其他**的什么类，接口，抽象等等
+7. **如何实现其实不是最难的**，**手册**能解决这个问题，但是上面一个问题手册不一定能明显的解决。</code></pre><p>table_3.addTableModelListener(this);<br>就像我不知Jtable中model这个东西一样</p>
+<hr>
+<p><strong>这回的文件封装的和屎一样</strong></p>
+<p>/*<br>                * 这里应该是通过当前用户的权限去更改User.txt文件中的数据<br>                * 但是我在client的接口中没有实现这个方法<br>                * 现在不带了改了<br>                * 所以就直接跳级<br>                * 用底层封装好的文件操作改了<br>                * 这样做是不对的！！！！！<br>         */</p>
+<hr>
+<h1 id="问题才是一个系统设计的核心！！！！"><a href="#问题才是一个系统设计的核心！！！！" class="headerlink" title="问题才是一个系统设计的核心！！！！"></a>问题才是一个系统设计的核心！！！！</h1>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1748,7 +1955,7 @@ TargetInterface.java<strong>(adapt1.java+adapt2.java公用)</strong><figure clas
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1194</span>
+          <span class="site-state-item-count">1193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

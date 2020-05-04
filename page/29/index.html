@@ -158,141 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/07/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%B9%B6%E8%A1%8C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%B9%B6%E8%A1%8C/" class="post-title-link" itemprop="url">GPU并行</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-07-15 09:16:00" itemprop="dateCreated datePublished" datetime="2019-07-15T09:16:00+08:00">2019-07-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_分布式/并行计算/知识点</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/07/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%B9%B6%E8%A1%8C/" class="post-meta-item leancloud_visitors" data-flag-title="GPU并行" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>529</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年7月15日 上午9:16</p>
-<h3 id="复习方法："><a href="#复习方法：" class="headerlink" title="复习方法："></a>复习方法：</h3><ol>
-<li>学会思考方式，以矩阵相乘贯穿知识点</li>
-<li>整理出来的两个pdf要自己的看，其中还有一些笔记在pdf中</li>
-</ol>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>下面三个点，分别取自3.4.5节的GPU课件，是GPU的核心。<strong>其中难点是有两个思维角度</strong></p>
-<ol>
-<li>::<strong>线程组织成数组</strong>去理解处理，你就发现这样简单的多::<ol>
-<li>万变不离其中，还是基本的数据结构</li>
-</ol>
-</li>
-<li>了解并利用好<strong>硬件结构</strong>，从输出的存储、读取的角度去优化</li>
-</ol>
-<h3 id="课件整理："><a href="#课件整理：" class="headerlink" title="课件整理："></a>课件整理：</h3><p>其中<strong>矩阵相乘</strong>的例子贯穿着三节课件，也是这些知识最好的直观体现</p>
-<ol>
-<li>GPU的硬件结构整理.pdf</li>
-<li>GPU矩阵相乘理解GPU编程的核心[三个pdf的精华、矩阵相乘的三个阶段].pdf</li>
-<li><a href="file:///Users/czh/Documents/课件汇总/[缪青海]并行计算">[缪青海]并行计算</a></li>
-</ol>
-<h3 id="具体："><a href="#具体：" class="headerlink" title="具体："></a>具体：</h3><ol>
-<li>这里最最关键的需要关心的问题：::一个线程对应于那个(哪些)数据，所有的线程就可以将工作完成::</li>
-<li>从<strong>线程的分级</strong>去优化<ol>
-<li>用<strong>数组</strong>去组织线程这种资源<ol>
-<li>有多少线程？数组的大小</li>
-<li>我们如何取到特点的线程？数组的下标就好比线程的编号</li>
-</ol>
-</li>
-<li><strong>grid-&gt;block-&gt;warp-&gt;thread</strong></li>
-</ol>
-</li>
-<li>::都是从硬件结构角度考虑、是客观现实引起的，我们需要做的是适应，从而利用好他们::<ol>
-<li>从<strong>内存的分级</strong>去优化<ol>
-<li><strong>global-&gt;shared-&gt;register</strong></li>
-</ol>
-</li>
-<li>针对wrap，从硬件结构的角度去优化<strong>wrap的速度</strong><br><img src="/2019/07/15/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/GPU%E5%B9%B6%E8%A1%8C/BBB213DF-EB53-42FE-8AB9-5ADDAB488D30.png" alt></li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/07/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/GPU%E6%89%A7%E8%A1%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1241,6 +1106,132 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B4%E7%90%86-%202019%E5%B9%B46%E6%9C%8824%E6%97%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B4%E7%90%86-%202019%E5%B9%B46%E6%9C%8824%E6%97%A5/" class="post-title-link" itemprop="url">整理- 2019年6月24日</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-24 08:48:00" itemprop="dateCreated datePublished" datetime="2019-06-24T08:48:00+08:00">2019-06-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:06" itemprop="dateModified" datetime="2020-04-01T16:19:06+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/知识点#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/06/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%95%B4%E7%90%86-%202019%E5%B9%B46%E6%9C%8824%E6%97%A5/" class="post-meta-item leancloud_visitors" data-flag-title="整理- 2019年6月24日" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>875</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年6月24日 下午8:48</p>
+<h3 id="粗浅的三维重建核心的总体理解："><a href="#粗浅的三维重建核心的总体理解：" class="headerlink" title="粗浅的三维重建核心的总体理解："></a>粗浅的三维重建核心的总体理解：</h3><ol>
+<li>三维重建核心：一共有两个，十分简单<ol>
+<li>用数学描述现实几何关系。用等式、等式组就可以表示这种关系。—-&gt; 已经研究透的东西</li>
+<li>等式组求解。——&gt;已经研究透的东西<ol>
+<li>这里又将等数组用矩阵表示，也就是将几何关系用带未知参数的矩阵来表示。</li>
+<li>最后就变成了矩阵的求解。</li>
+<li>换个角度说：如果我们知道了矩阵(本质矩阵 基本矩阵 H矩阵)，那么说明我们已经求出了各种点(二维点&lt;-&gt;三维点)之间的转换方式，选取合适的矩阵乘就行了。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>为什么效果不好的原因是：<ol>
+<li>在解不等式时，<strong>输入</strong>的数据不好：错误匹配点。<ol>
+<li>计算机视觉很多问题，原因都是因为输入不够好，其实视觉本身的模型早就研究透了</li>
+<li>现在的计算机视觉研究，真的就像是给不好的输入擦屁股，并不是从模型上改进。</li>
+</ol>
+</li>
+<li>为了弥补这些问题，我们才有了我们常用的算法：RANSAC，Bundle Adjustment。<strong>这些算法并不是三维重建的本质，一开始我就拘泥于这些算法中，导致没有看透知识！</strong></li>
+</ol>
+</li>
+<li>ps:视觉几何真心水深，没有理论积累，没有前人指点，坑是填不完的，祝好(对大家，也是对自己)—白巧克力亦维心</li>
+</ol>
+<h3 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h3><p><a href="bear://x-callback-url/open-note?id=DFC8A4DC-00E5-4B72-AB00-EBF5AA2F0099-29975-0000F289624F344B">单目和多目的对比</a><br>【<a href="bear://x-callback-url/open-note?id=8A5763B6-3CB9-48D3-AF9E-9B6475C94A2C-1592-0001B5D757769B7D">SFM整体流程的讲解</a>】<br><a href="bear://x-callback-url/open-note?id=D041D1E3-357A-4E21-81B2-A4D569210F4A-2877-000013A8F4DFCEDE">单相机和多相机的ba的不同</a><br><a href="bear://x-callback-url/open-note?id=A9E60A5B-DD72-4043-A7FA-B8B14C3C776E-2877-00001084F2B8946E">三维几何视觉的核心问题</a></p>
+<h3 id="数学："><a href="#数学：" class="headerlink" title="数学："></a>数学：</h3><p><a href="bear://x-callback-url/open-note?id=CBA9E854-CFE5-497F-8B2C-A43588A938C3-4005-00005F7CAF41353C">向量点乘（内积）和叉乘（外积、向量积）</a><br>【<a href="bear://x-callback-url/open-note?id=5B225919-6741-4612-B398-7B8B6B0A321F-2564-00003AC8429D3AF7">关于齐次坐标的五个问题</a>】<br>【<a href="bear://x-callback-url/open-note?id=A688C12A-2574-4C0F-8CAE-52E0D659C94C-1592-0001B23A40686EF6">本质矩阵，基本矩阵的区别</a>】<br><a href="bear://x-callback-url/open-note?id=870FCD81-76FE-4B60-BEEA-BC89B81D0CC6-1023-000063F1AD61C6BB">卡尔曼滤波器推导与解析</a><br><a href="bear://x-callback-url/open-note?id=CA4BE1C7-D533-4BD0-A3E3-6A745FF2425A-1023-000062B9C896B036">非线性优化</a><br>【<a href="bear://x-callback-url/open-note?id=6E87970C-FC13-48D9-9C21-64C659F9DEC2-682-00001218AA374FC7">RANSAC-随机一致性采样</a>】<br><a href="bear://x-callback-url/open-note?id=545A5FAB-679F-4F7A-A182-8EB71640C9CC-725-000101A0AD517276">协方差</a></p>
+<h3 id="空间-几何-模型："><a href="#空间-几何-模型：" class="headerlink" title="空间(几何)模型："></a>空间(几何)模型：</h3><p>【<a href="bear://x-callback-url/open-note?id=F6B650E4-4579-4F59-9EB9-103C48CCD770-1592-0001AADC2BD5782D">对极几何</a>】<br><a href="bear://x-callback-url/open-note?id=1FF36CC3-B495-4852-BBA7-800874C22F12-682-0000122CFDE0F170">Homography</a><a href="https://blog.csdn.net/heyijia0327/article/details/53782094" target="_blank" rel="noopener">Homography 知多少？ - 知行合一 - CSDN博客</a><br><a href="bear://x-callback-url/open-note?id=8578A640-5406-4568-AB2B-C60E59D3ED33-682-000011AABB7A28BD">三角量测-2</a><br><a href="bear://x-callback-url/open-note?id=39BEABB5-5BAD-43AE-B87D-347D8C59C3FA-1592-0001B6CE4F474539">三角量测-1：已知相机参数 + 匹配点 恢复 三维点坐标</a><br><a href="bear://x-callback-url/open-note?id=AC8A9360-23E9-4B11-8F48-0F66DBE24441-1592-0001B82EDBCB7E62">SFM算法的影响因素</a><br>【<a href="bear://x-callback-url/open-note?id=D29E1AF8-ACA1-4A6B-B700-690007A44F98-641-000077A5ED44355A">当物体移动小于一个像素的视差</a>】</p>
+<h3 id="坐标变换："><a href="#坐标变换：" class="headerlink" title="坐标变换："></a>坐标变换：</h3><p>【<a href="bear://x-callback-url/open-note?id=A8518991-9EE8-4A6E-8DCF-148714C8B5B8-2564-000039445194E43C">图像转换过程中的第4+1个坐标变换（畸变）</a>】<br>【<a href="bear://x-callback-url/open-note?id=037F5141-5ECF-42FA-9616-25D9F539656E-1908-00001CC7E7D51B42">坐标系「内外参」的详细转换推导</a>】<br>【<a href="bear://x-callback-url/open-note?id=B420F370-98F8-4FF7-8CA0-C646F4B2A7B3-1592-0001B380F4497943">外参矩阵的现实含义：相机坐标为啥是-R’*T</a>】</p>
+<h3 id="相机参数："><a href="#相机参数：" class="headerlink" title="相机参数："></a>相机参数：</h3><p>【<a href="bear://x-callback-url/open-note?id=57669546-7665-4BD7-80A4-7FF279A7F205-1592-0001B712B524CFE4">焦距f的再sfm中的作用</a>】<br>【<a href="bear://x-callback-url/open-note?id=73BABF45-4592-49B3-B4BF-EFA38B16333C-1592-0001B285E010E204">各个内参的解释</a>】</p>
+<h3 id="标定-畸变："><a href="#标定-畸变：" class="headerlink" title="标定-畸变："></a>标定-畸变：</h3><p><a href="bear://x-callback-url/open-note?id=C7BCECB0-209E-4537-9A41-7415A533A22C-2564-000040433789A9B0">matlab进行相机标定</a><br><a href="bear://x-callback-url/open-note?id=09C66456-ECD9-4079-96D9-E18536C095FE-1592-0001077FC74EB49D">相机标定(写的好)</a><br><a href="bear://x-callback-url/open-note?id=7A3822B0-7CE0-42BF-84D3-2BE30E8E6F72-2564-00003AD15E7EF9E5">OpenCV畸变校正原理以及损失有效像素原理分析</a></p>
+<h3 id="特征："><a href="#特征：" class="headerlink" title="特征："></a>特征：</h3><p><a href="bear://x-callback-url/open-note?id=4EA151A3-EC56-4B48-9D95-AC2992C610F6-682-00001310E6403884">sift</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1311,7 +1302,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1194</span>
+          <span class="site-state-item-count">1193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

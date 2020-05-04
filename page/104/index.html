@@ -158,135 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/01/01/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/Python%E7%9A%84%E5%8F%AF%E5%8F%98%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/01/01/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/Python%E7%9A%84%E5%8F%AF%E5%8F%98%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">Python的可变/不可变对象总结</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-01-01 01:07:00" itemprop="dateCreated datePublished" datetime="2018-01-01T01:07:00+08:00">2018-01-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-python-%E8%AF%AD%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">c数据科学/czh_python/语法</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/01/01/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/Python%E7%9A%84%E5%8F%AF%E5%8F%98%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="Python的可变/不可变对象总结" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>509</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年1月1日 下午1:07</p>
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><ol>
-<li><p>直接看最后的总结就行，前面都是分析过程，编程的时候不可能考虑那么多</p>
-</li>
-<li><p><a href="http://blog.csdn.net/taohuaxinmu123/article/details/39008281" target="_blank" rel="noopener">Python学习笔记——可变对象和不可变对象 - CSDN博客</a>一个小小的参考</p>
-</li>
-<li><p>不可变对象在程序中一定是唯一的一个</p>
-<ol>
-<li>a=5 b=5   其中5就一个</li>
-<li>而 list1=[1,2,3]  list2=[1,2,3] 中的[1,2,3]是不同的两个</li>
-<li>判断方法是id()值是否相同<strong>（不适合与list1=list2=[1,2,3]这种情况）</strong></li>
-</ol>
-</li>
-<li><p>关于id：主要是这里存在一个<strong>必要非充分条件</strong>判断是否可变</p>
-<ol>
-<li>样子一样的，不可变对象————&gt;Id相同</li>
-<li>id相同 ——\——&gt;样子一样的，不可变对象</li>
-</ol>
-</li>
-<li><p>Id相同的意思是：<strong>此时这两个对象</strong>是相同的（可变对象也可以相同，当list1=list2=[1,2,3]）</p>
-</li>
-<li><p>总结：<strong>最简单的方法</strong></p>
-<ol>
-<li>不可变（immutable）：int、字符串(string)、float、（数值型number）、元组（tuple)</li>
-<li>可变（mutable）：<strong>字典型(dictionary)、列表型(list)</strong><ol>
-<li><strong>只有多重赋值</strong>时（list1=list2=[1,2,3]），才是同一个对象</li>
-<li><strong>但他们两个添加元素的方式完全不同</strong></li>
-</ol>
-</li>
-<li><strong>多重赋值，一定是相同的对象</strong>（不论是否是可变）！！！！</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/12/30/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E8%AF%AD%E6%B3%95/%E7%AC%AC%E4%B8%89%E8%AF%BE%E7%AC%94%E8%AE%B0%EF%BC%9A%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1329,6 +1200,105 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/10/20/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/%E6%88%91%E6%9F%A5%E8%AF%A2%E9%97%AE%E9%A2%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/10/20/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/%E6%88%91%E6%9F%A5%E8%AF%A2%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">我查询问题</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-10-20 09:47:00" itemprop="dateCreated datePublished" datetime="2017-10-20T09:47:00+08:00">2017-10-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%AB%98%E7%BA%A7/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/高级</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/10/20/web%E5%BC%80%E5%8F%91/czh_java/%E9%AB%98%E7%BA%A7/%E6%88%91%E6%9F%A5%E8%AF%A2%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="我查询问题" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年10月20日 下午9:47</p>
+<p><a href="http://blog.csdn.net/gfd54gd5f46/article/details/60887313" target="_blank" rel="noopener">UEditor在JavaWeb中的应用 - LingDu        - CSDN博客</a><br><a href="http://www.iteye.com/problems/90489" target="_blank" rel="noopener">EL表达式 ${}中能有${}吗 - ITeye问答</a>’<br><a href="http://www.cnblogs.com/jackydalong/archive/2013/05/18/3085506.html" target="_blank" rel="noopener">JSTL 判断对象是否为空 - 笑剑钝 - 博客园</a><br><a href="http://blog.csdn.net/u012843873/article/details/52817788" target="_blank" rel="noopener">jsp+jquery+ajax+json 实例 - u012843873的博客        - CSDN博客</a><br><a href="http://www.cnblogs.com/super-d2/archive/2012/06/13/2547714.html" target="_blank" rel="noopener">js函数传参 - super-d2 - 博客园</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>($(<span class="string">'#username'</span>).val().length==<span class="number">0</span>)&#123;    </span><br><span class="line">		$(<span class="string">'.hint'</span>).text(<span class="string">"用户名不能位空"</span>).css(&#123;<span class="string">"background-color"</span>:<span class="string">"green"</span>&#125;);     </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;    </span><br><span class="line">		alert($(<span class="string">'#username'</span>).val());  </span><br><span class="line">		$.ajax(&#123;  </span><br><span class="line">	 		type: <span class="string">"get"</span>,<span class="comment">//使用post方法访问后台  </span></span><br><span class="line">			dataType: <span class="string">"json"</span>,<span class="comment">//返回json格式的数据  </span></span><br><span class="line">			url: <span class="string">"Output.jsp"</span>,<span class="comment">//要访问的后台地址  </span></span><br><span class="line">			contentType: <span class="string">"application/json;charset=utf-8"</span>,  </span><br><span class="line">			data: &#123;<span class="attr">username</span>:$(<span class="string">'#username'</span>).val()&#125;,<span class="comment">//要发送的数据  </span></span><br><span class="line">			beforeSend: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;  </span><br><span class="line">			$(<span class="string">"span"</span>).html(<span class="string">"&lt;font color='red'&gt;ajax数据处理中,请稍后...&lt;/font&gt;"</span>);&#125;,  </span><br><span class="line">			   </span><br><span class="line">			complete :<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;$(<span class="string">"span"</span>).html(<span class="string">"&lt;font color='red'&gt;ajax数据处理完毕&lt;/font&gt;"</span>);&#125;,<span class="comment">//AJAX请求完成时  </span></span><br><span class="line">			success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;<span class="comment">//data为返回的数据，在这里做数据绑定  </span></span><br><span class="line">	      		<span class="comment">//jsonArray数组 用each遍历  </span></span><br><span class="line">	         	$.each(data.jsonArray,<span class="function"><span class="keyword">function</span>(<span class="params">index</span>)</span>&#123;    	</span><br><span class="line">		         	$.each(data.jsonArray[index],<span class="function"><span class="keyword">function</span>(<span class="params">key,value</span>)</span>&#123;    </span><br><span class="line">		        	 		alert(key+<span class="string">":"</span>+value)   </span><br><span class="line">						$(<span class="string">'body'</span>).append(<span class="string">"&lt;div&gt;"</span>+key+<span class="string">"---"</span>+value+<span class="string">"&lt;/div&gt;"</span>).css(<span class="string">"color"</span>,<span class="string">"red"</span>);     </span><br><span class="line">					&#125;);    </span><br><span class="line">				&#125;);               </span><br><span class="line">	        		 <span class="comment">//单个字符串输出    </span></span><br><span class="line">	        		 $(<span class="string">'body'</span>).append(<span class="string">"&lt;div&gt;"</span>+data.account+<span class="string">"&lt;/div&gt;"</span>).css(<span class="string">"color"</span>,<span class="string">"red"</span>);    </span><br><span class="line">			&#125;,  </span><br><span class="line">			error: <span class="function"><span class="keyword">function</span>(<span class="params">XMLResponse</span>) </span>&#123;alert(XMLResponse.responseText)&#125;  </span><br><span class="line">		&#125;);           </span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
@@ -1399,7 +1369,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1194</span>
+          <span class="site-state-item-count">1193</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
