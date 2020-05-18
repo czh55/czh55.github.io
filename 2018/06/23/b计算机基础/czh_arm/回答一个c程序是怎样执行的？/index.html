@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="2018年6月23日 下午4:28 首先要理解这两节的pdf：从C编译到机器指令（八课）  这篇文章主要是为了介绍一些基础知识 点亮LED的步骤：也是操作arm的一般步骤 两种启动过程 操作GPF4的方法 几条汇编代码 机器码 快速转换2&#x2F;8&#x2F;16进制 字节序 位操作重定向   重定向是在main函数已经完成的情况下，处理如何合适的连接在内存中存储代码。  回答几个核心的问题： 这章运行时地址是最">
+  <meta name="description" content="2018年6月23日 下午4:28【这篇文章理解的不正确，看下面新写的文章，这篇文章就当留恋了】参看：   从ARM理解当前计算机的局限性 ARM编程的几个核心概念 从.C .S代码对应到内存位置：理解链接地址、运行地址、位置无关码、位置有关码  首先要理解这两节的pdf：从C编译到机器指令（八课）  这篇文章主要是为了介绍一些基础知识 点亮LED的步骤：也是操作arm的一般步骤 两种启动过程 操">
 <meta property="og:type" content="article">
 <meta property="og:title" content="回答一个c程序是怎样执行的？">
 <meta property="og:url" content="http://chenzhiheng.cn/2018/06/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%9B%9E%E7%AD%94%E4%B8%80%E4%B8%AAc%E7%A8%8B%E5%BA%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
-<meta property="og:description" content="2018年6月23日 下午4:28 首先要理解这两节的pdf：从C编译到机器指令（八课）  这篇文章主要是为了介绍一些基础知识 点亮LED的步骤：也是操作arm的一般步骤 两种启动过程 操作GPF4的方法 几条汇编代码 机器码 快速转换2&#x2F;8&#x2F;16进制 字节序 位操作重定向   重定向是在main函数已经完成的情况下，处理如何合适的连接在内存中存储代码。  回答几个核心的问题： 这章运行时地址是最">
+<meta property="og:description" content="2018年6月23日 下午4:28【这篇文章理解的不正确，看下面新写的文章，这篇文章就当留恋了】参看：   从ARM理解当前计算机的局限性 ARM编程的几个核心概念 从.C .S代码对应到内存位置：理解链接地址、运行地址、位置无关码、位置有关码  首先要理解这两节的pdf：从C编译到机器指令（八课）  这篇文章主要是为了介绍一些基础知识 点亮LED的步骤：也是操作arm的一般步骤 两种启动过程 操">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://chenzhiheng.cn/2018/06/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%9B%9E%E7%AD%94%E4%B8%80%E4%B8%AAc%E7%A8%8B%E5%BA%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F/9F4148D6-C9BA-4C3E-8AF8-7546672A6151.png">
 <meta property="og:image" content="http://chenzhiheng.cn/2018/06/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%9B%9E%E7%AD%94%E4%B8%80%E4%B8%AAc%E7%A8%8B%E5%BA%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F/DDDBDF3B-1E41-4765-B524-BC553BEB4338.png">
 <meta property="article:published_time" content="2018-06-22T20:28:00.000Z">
-<meta property="article:modified_time" content="2020-03-12T08:46:20.917Z">
+<meta property="article:modified_time" content="2020-05-18T10:16:09.617Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://chenzhiheng.cn/2018/06/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%9B%9E%E7%AD%94%E4%B8%80%E4%B8%AAc%E7%A8%8B%E5%BA%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F/9F4148D6-C9BA-4C3E-8AF8-7546672A6151.png">
@@ -195,7 +195,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+                <time title="修改时间：2020-05-18 18:16:09" itemprop="dateModified" datetime="2020-05-18T18:16:09+08:00">2020-05-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -222,7 +222,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>820</span>
+              <span>919</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -241,7 +241,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>2018年6月23日 下午4:28</p>
+        <p>2018年6月23日 下午4:28<br>【这篇文章理解的不正确，看下面新写的文章，这篇文章就当留恋了】<br>参看： </p>
+<ul>
+<li><a href="bear://x-callback-url/open-note?id=AE8F4555-02AF-41F8-BF13-BD393A349C17-904-00011107408D7AB4">从ARM理解当前计算机的局限性</a></li>
+<li><a href="bear://x-callback-url/open-note?id=ECFFE892-094B-405B-B0AC-29BA6FE1971B-904-00010BFD7A5A588B">ARM编程的几个核心概念</a></li>
+<li><a href="bear://x-callback-url/open-note?id=746C7893-3E76-4A3C-98EF-1C5CF8564C61-904-00010940D968447D">从.C .S代码对应到内存位置：理解链接地址、运行地址、位置无关码、位置有关码</a></li>
+</ul>
 <h2 id="首先要理解这两节的pdf："><a href="#首先要理解这两节的pdf：" class="headerlink" title="首先要理解这两节的pdf："></a>首先要理解这两节的pdf：</h2><p><a href="bear://x-callback-url/open-note?id=F3629C4F-D993-4B19-AC37-24EF22E4F8DE-37802-0001FB7FBD4096A7">从C编译到机器指令（八课）</a></p>
 <ol>
 <li>这篇文章主要是为了介绍一些基础知识<ol>
@@ -255,7 +260,7 @@
 <li>位操作<br><img src="/2018/06/23/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_arm/%E5%9B%9E%E7%AD%94%E4%B8%80%E4%B8%AAc%E7%A8%8B%E5%BA%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E6%89%A7%E8%A1%8C%E7%9A%84%EF%BC%9F/9F4148D6-C9BA-4C3E-8AF8-7546672A6151.png" alt><br><a href="bear://x-callback-url/open-note?id=040555F6-E404-4987-BFB5-B8A2DD60F48F-331-0000D742FDD709E7">重定向</a></li>
 </ol>
 </li>
-<li>重定向是在main函数已经完成的情况下，处理<strong>如何合适的连接在内存中存储代码</strong>。</li>
+<li>重定向是在main函数已经完成的情况下，处理<strong>如何合适的链接在内存中存储代码</strong>。</li>
 </ol>
 <h2 id="回答几个核心的问题："><a href="#回答几个核心的问题：" class="headerlink" title="回答几个核心的问题："></a>回答几个核心的问题：</h2><ol>
 <li>这章<strong>运行时地址</strong>是最重要的，从他的名字来判断，作用是：程序的运行地址设置在哪里，那么我们的程序就应该保存在那里，然后从这里运行。</li>
@@ -279,7 +284,7 @@
 </ol>
 </li>
 <li>我们很多时候是不可能做到代码一定就在<strong>运行地址</strong>处执行，那怎么办？<ol>
-<li>例如，刚刚烧到nor/nand的时候，是一定才0地址处开始执行的，此时，我们的运行地址一般都不从0开始</li>
+<li>例如，刚刚烧到nor/nand的时候，是一定从0地址处开始执行的，此时，我们的运行地址一般都不从0开始</li>
 <li>写位置无关码？<ol>
 <li>rodate，date段的全局/静态变量，必须使用绝对地址来查找（没为啥，arm规定）。那么，当程序不在<strong>运行地址</strong>处执行时，我们一定不可使用全局变量</li>
 <li>已赋值的数组中的值会保存在rodate段，即使数组本身是局部变量，应该在栈中，但是我们依然不可使用以赋值的数组。</li>
@@ -385,14 +390,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1193</span>
+          <span class="site-state-item-count">1216</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-count">104</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -426,12 +431,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.2m</span>
+    <span title="站点总字数">1.3m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">18:20</span>
+    <span title="站点阅读时长">19:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

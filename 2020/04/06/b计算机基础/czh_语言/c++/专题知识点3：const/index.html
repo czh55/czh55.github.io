@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="2020年4月6日 下午11:00 以下四行代码的区别是什么？ const char * arr &#x3D; “123”; char * brr &#x3D; “123”; const char crr[] &#x3D; “123”; char drr[] &#x3D; “123”; const char * arr &#x3D; &quot;123”; 字符串123保存在常量区，const本来是修饰arr指向的值不能通过arr去修改，但是字符">
+  <meta name="description" content="2020年4月6日 下午11:00 以下四行代码的区别是什么？ const char * arr &#x3D; “123”; char * brr &#x3D; “123”; const char crr[] &#x3D; “123”; char drr[] &#x3D; “123”; const char * arr &#x3D; &quot;123”; 字符串123保存在常量区 const本来是修饰arr指向的值不能通过arr去修改，但是字符">
 <meta property="og:type" content="article">
 <meta property="og:title" content="专题知识点3：const">
 <meta property="og:url" content="http://chenzhiheng.cn/2020/04/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%B8%93%E9%A2%98%E7%9F%A5%E8%AF%86%E7%82%B93%EF%BC%9Aconst/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
-<meta property="og:description" content="2020年4月6日 下午11:00 以下四行代码的区别是什么？ const char * arr &#x3D; “123”; char * brr &#x3D; “123”; const char crr[] &#x3D; “123”; char drr[] &#x3D; “123”; const char * arr &#x3D; &quot;123”; 字符串123保存在常量区，const本来是修饰arr指向的值不能通过arr去修改，但是字符">
+<meta property="og:description" content="2020年4月6日 下午11:00 以下四行代码的区别是什么？ const char * arr &#x3D; “123”; char * brr &#x3D; “123”; const char crr[] &#x3D; “123”; char drr[] &#x3D; “123”; const char * arr &#x3D; &quot;123”; 字符串123保存在常量区 const本来是修饰arr指向的值不能通过arr去修改，但是字符">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-06T03:00:00.000Z">
-<meta property="article:modified_time" content="2020-04-12T11:31:54.705Z">
+<meta property="article:modified_time" content="2020-05-18T10:15:12.333Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
@@ -192,7 +192,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-12 19:31:54" itemprop="dateModified" datetime="2020-04-12T19:31:54+08:00">2020-04-12</time>
+                <time title="修改时间：2020-05-18 18:15:12" itemprop="dateModified" datetime="2020-05-18T18:15:12+08:00">2020-05-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -219,14 +219,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
+              <span>1.9k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -241,7 +241,8 @@
         <p>2020年4月6日 下午11:00</p>
 <h4 id="以下四行代码的区别是什么？-const-char-arr-“123”-char-brr-“123”-const-char-crr-“123”-char-drr-“123”"><a href="#以下四行代码的区别是什么？-const-char-arr-“123”-char-brr-“123”-const-char-crr-“123”-char-drr-“123”" class="headerlink" title="以下四行代码的区别是什么？ const char * arr = “123”; char * brr = “123”; const char crr[] = “123”; char drr[] = “123”;"></a>以下四行代码的区别是什么？ const char * arr = “123”; char * brr = “123”; const char crr[] = “123”; char drr[] = “123”;</h4><ol>
 <li><code>const char * arr = &quot;123”;</code><ul>
-<li>字符串123保存在常量区，const本来是修饰arr指向的值不能通过arr去修改，但是字符串“123”在常量区，本来就不能改变，所以加不加const效果都一样</li>
+<li>字符串123保存在常量区</li>
+<li>const本来是修饰arr指向的值不能通过arr去修改，但是字符串“123”在常量区，本来就不能改变，所以加不加const效果都一样</li>
 </ul>
 </li>
 <li><code>char * brr = &quot;123&quot;;</code><ul>
@@ -293,7 +294,16 @@
 </li>
 </ol>
 <h4 id="Const修饰成员函数的目的是什么？"><a href="#Const修饰成员函数的目的是什么？" class="headerlink" title="Const修饰成员函数的目的是什么？"></a>Const修饰成员函数的目的是什么？</h4><p>Const修饰的成员函数表明函数调用不会对对象做出任何更改，事实上，如果确认不会对对象做更改，就应该为函数加上const限定，这样无论const对象还是普通对象都可以调用该函数。</p>
-<h4 id="同时定义了两个函数，一个带const，一个不带，会有问题吗？"><a href="#同时定义了两个函数，一个带const，一个不带，会有问题吗？" class="headerlink" title="同时定义了两个函数，一个带const，一个不带，会有问题吗？"></a>同时定义了两个函数，一个带const，一个不带，会有问题吗？</h4><p>不会，这相当于函数的重载。</p>
+<h4 id="同时定义了两个函数，一个带const，一个不带，会有问题吗？"><a href="#同时定义了两个函数，一个带const，一个不带，会有问题吗？" class="headerlink" title="同时定义了两个函数，一个带const，一个不带，会有问题吗？"></a>同时定义了两个函数，一个带const，一个不带，会有问题吗？</h4><ol>
+<li>不会，这相当于函数的重载。</li>
+<li>原因是：<ol>
+<li>按照函数重载的定义，函数名相同而形参表有本质不同的函数称为重载。在类中，由于隐含的this形参的存在，<strong>const版本的function函数使得作为形参的this指针的类型变为指向const对象的指针</strong>，而非const版本的使得作为形参的this指针就是正常版本的指针。</li>
+<li>此处是发生重载的本质。重载函数在最佳匹配过程中，对于const对象调用的就选取const版本的成员函数，而普通的对象调用就选取非const版本的成员函数。</li>
+</ol>
+</li>
+<li>（注：this指针是一个const指针，地址不能改，但能改变其指向的对象或者变量）</li>
+<li><a href="https://blog.csdn.net/guiyinzhou/article/details/6307754" target="_blank" rel="noopener">C++ 学习之函数重载、基于const的重载_C/C++_guiyinzhou的专栏-CSDN博客</a></li>
+</ol>
 
     </div>
 
@@ -390,14 +400,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1193</span>
+          <span class="site-state-item-count">1216</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-count">104</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -431,12 +441,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.2m</span>
+    <span title="站点总字数">1.3m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">18:20</span>
+    <span title="站点阅读时长">19:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

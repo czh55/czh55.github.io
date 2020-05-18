@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="2020年4月6日 下午9:14 请说一下C&#x2F;C++ 中指针和引用的区别？ 指针有自己的一块空间，是一种类型，而引用只是一个别名； 使用sizeof看一个指针的大小是4，而引用则是被引用对象的大小； 指针可以被初始化为NULL，而引用必须被初始化且必须是一个已有对象 的引用； 作为参数传递时，指针需要被解引用才可以对对象进行操作，而直接对引用的修改都会改变引用所指向的对象； 可以有const指针，">
+  <meta name="description" content="2020年4月6日 下午9:14 C&#x2F;C++ 中指针和引用的区别？ 指针有自己的一块空间，是一种类型，而引用只是一个别名； 初始化： 指针可以被初始化为NULL，而引用必须被初始化且必须是一个已有对象 的引用；   赋值： 指针在使用中可以指向其它对象，但是引用只能是一个对象的引用，不能被改变； C++中引用不能重新赋值的理解_c&#x2F;c++_liujianfei526的专栏-CSDN博客   参数传">
 <meta property="og:type" content="article">
 <meta property="og:title" content="专题知识点1：指针专题">
 <meta property="og:url" content="http://chenzhiheng.cn/2020/04/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AF%AD%E8%A8%80/c++/%E4%B8%93%E9%A2%98%E7%9F%A5%E8%AF%86%E7%82%B91%EF%BC%9A%E6%8C%87%E9%92%88%E4%B8%93%E9%A2%98/index.html">
 <meta property="og:site_name" content="陈志恒的技术博客">
-<meta property="og:description" content="2020年4月6日 下午9:14 请说一下C&#x2F;C++ 中指针和引用的区别？ 指针有自己的一块空间，是一种类型，而引用只是一个别名； 使用sizeof看一个指针的大小是4，而引用则是被引用对象的大小； 指针可以被初始化为NULL，而引用必须被初始化且必须是一个已有对象 的引用； 作为参数传递时，指针需要被解引用才可以对对象进行操作，而直接对引用的修改都会改变引用所指向的对象； 可以有const指针，">
+<meta property="og:description" content="2020年4月6日 下午9:14 C&#x2F;C++ 中指针和引用的区别？ 指针有自己的一块空间，是一种类型，而引用只是一个别名； 初始化： 指针可以被初始化为NULL，而引用必须被初始化且必须是一个已有对象 的引用；   赋值： 指针在使用中可以指向其它对象，但是引用只能是一个对象的引用，不能被改变； C++中引用不能重新赋值的理解_c&#x2F;c++_liujianfei526的专栏-CSDN博客   参数传">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-04-06T01:14:00.000Z">
-<meta property="article:modified_time" content="2020-05-04T08:19:51.041Z">
+<meta property="article:modified_time" content="2020-05-18T10:15:12.283Z">
 <meta property="article:author" content="Zhiheng Chen">
 <meta name="twitter:card" content="summary">
 
@@ -192,7 +192,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-04 16:19:51" itemprop="dateModified" datetime="2020-05-04T16:19:51+08:00">2020-05-04</time>
+                <time title="修改时间：2020-05-18 18:15:12" itemprop="dateModified" datetime="2020-05-18T18:15:12+08:00">2020-05-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -219,7 +219,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.2k</span>
+              <span>4.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -239,18 +239,38 @@
 
       
         <p>2020年4月6日 下午9:14</p>
-<h4 id="请说一下C-C-中指针和引用的区别？"><a href="#请说一下C-C-中指针和引用的区别？" class="headerlink" title="请说一下C/C++ 中指针和引用的区别？"></a>请说一下C/C++ 中指针和引用的区别？</h4><ol>
+<h4 id="C-C-中指针和引用的区别？"><a href="#C-C-中指针和引用的区别？" class="headerlink" title="C/C++ 中指针和引用的区别？"></a>C/C++ 中指针和引用的区别？</h4><ol>
 <li><strong>指针有自己的一块空间，是一种类型</strong>，而<strong>引用只是一个别名</strong>；</li>
-<li>使用sizeof看一个指针的大小是4，而引用则是被引用对象的大小；</li>
+<li>初始化：<ol>
 <li>指针可以被初始化为NULL，而引用必须被初始化且必须是一个已有对象 的引用；</li>
+</ol>
+</li>
+<li>赋值：<ol>
+<li>指针在使用中可以指向其它对象，但是引用只能是一个对象的引用，不能被改变；</li>
+<li><a href="https://blog.csdn.net/liujianfei526/article/details/47041433?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.nonecase" target="_blank" rel="noopener">C++中引用不能重新赋值的理解_c/c++_liujianfei526的专栏-CSDN博客</a></li>
+</ol>
+</li>
+<li>参数传递：<ol>
 <li>作为参数传递时，指针需要被解引用才可以对对象进行操作，而直接对引用的修改都会改变引用所指向的对象；</li>
-<li>可以有const指针，但是没有const引用；</li>
-<li>指针在使用中可以指向其它对象，但是引用只能是一个对象的引用，不能 被改变；</li>
+</ol>
+</li>
+<li>sizeof :<ol>
+<li>使用sizeof看一个指针的大小是4，而引用则是被引用对象的大小；</li>
+</ol>
+</li>
+<li>const:<ol>
+<li>可以有const指针</li>
+<li><strong>const引用和非const引用</strong><ol>
+<li>const引用是必须指向const对象的引用</li>
+</ol>
+</li>
+</ol>
+</li>
 <li>指针可以有多级指针（p），而引用至于一级；</li>
 <li>指针和引用使用++运算符的意义不一样；</li>
 <li>如果返回动态内存分配的对象或者内存，必须使用指针，引用可能引起内存泄露。</li>
 </ol>
-<h4 id="请你说一下你理解的c-中的smart-pointer四个智能指针：-shared-ptr-unique-ptr-weak-ptr-auto-ptr"><a href="#请你说一下你理解的c-中的smart-pointer四个智能指针：-shared-ptr-unique-ptr-weak-ptr-auto-ptr" class="headerlink" title="请你说一下你理解的c++中的smart pointer四个智能指针： shared_ptr,unique_ptr,weak_ptr,auto_ptr"></a>请你说一下你理解的c++中的smart pointer四个智能指针： shared_ptr,unique_ptr,weak_ptr,auto_ptr</h4><ol>
+<h4 id="c-中的smart-pointer四个智能指针：-shared-ptr-unique-ptr-weak-ptr-auto-ptr"><a href="#c-中的smart-pointer四个智能指针：-shared-ptr-unique-ptr-weak-ptr-auto-ptr" class="headerlink" title="c++中的smart pointer四个智能指针： shared_ptr,unique_ptr,weak_ptr,auto_ptr"></a>c++中的smart pointer四个智能指针： shared_ptr,unique_ptr,weak_ptr,auto_ptr</h4><ol>
 <li>C++里面的四个智能指针: auto_ptr, shared_ptr, weak_ptr, unique_ptr 其中后三个是c++11支持，并且第一个已经被11弃用。</li>
 <li><strong>为什么要使用智能指针：</strong><ol>
 <li>智能指针的作用是管理一个指针，因为存在以下这种情况：申请的空间在函数结束时忘记释放，造成内存泄漏。使用智能指针可以很大程度上的避免这个问题，因为智能指针就是一个类，当超出了类的作用域是，类会自动调用析构函数，析构函数会自动释放资源。所以智能指针的作用原理就是在函数结束时自动释放内存空间，不需要手动释放内存空间。</li>
@@ -287,7 +307,7 @@
 <li>weak_ptr 是一种不控制对象生命周期的智能指针, 它指向一个 shared_ptr 管理的对象. 进行该对象的内存管理的是那个强引用的 shared_ptr. </li>
 <li><strong>weak_ptr只是提供了对管理对象的一个访问手段</strong>。</li>
 <li>weak_ptr 设计的目的是为配合 shared_ptr 而引入的一种智能指针来协助 shared_ptr 工作, 它只可以从一个 shared_ptr 或另一个 weak_ptr 对象构造, 它的构造和析构不会引起引用记数的增加或减少。</li>
-<li>weak_ptr是用来解决shared_ptr相互引用时的死锁问题,如果说两个shared_ptr相互引用,那么这两个指针的引用计数永远不可能下降为0,资源永远不会释放。它是对对象的一种弱引用，不会增加对象的引用计数，和shared_ptr之间可以相互转化，shared_ptr可以直接赋值给它，它可以通过调用lock函数来获得shared_ptr。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;B&gt; pb_;</span><br><span class="line">	~A()</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;“A <span class="keyword">delete</span>\n”;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;A&gt; pa_;</span><br><span class="line">	~B()</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;“B <span class="keyword">delete</span>\n<span class="string">";</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">void fun()</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	shared_ptr&lt;B&gt; pb(new B());</span></span><br><span class="line"><span class="string">	shared_ptr&lt;A&gt; pa(new A());</span></span><br><span class="line"><span class="string">	pb-&gt;pa_ = pa;</span></span><br><span class="line"><span class="string">	pa-&gt;pb_ = pb;</span></span><br><span class="line"><span class="string">	cout&lt;&lt;pb.use_count()&lt;&lt;endl;</span></span><br><span class="line"><span class="string">	cout&lt;&lt;pa.use_count()&lt;&lt;endl;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">int main()</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	fun();</span></span><br><span class="line"><span class="string">	return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></li>
+<li>weak_ptr是用来解决shared_ptr相互引用时的死锁问题,如果说两个shared_ptr相互引用,那么这两个指针的引用计数永远不可能下降为0,资源永远不会释放。<strong>它是对对象的一种弱引用，不会增加对象的引用计数</strong>，和shared_ptr之间可以相互转化，shared_ptr可以直接赋值给它，它可以通过调用lock函数来获得shared_ptr。<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;B&gt; pb_;</span><br><span class="line">	~A()</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;“A <span class="keyword">delete</span>\n”;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">public</span>:</span><br><span class="line">	<span class="built_in">shared_ptr</span>&lt;A&gt; pa_;</span><br><span class="line">	~B()</span><br><span class="line">	&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;“B <span class="keyword">delete</span>\n<span class="string">";</span></span><br><span class="line"><span class="string">	&#125;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">void fun()</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	shared_ptr&lt;B&gt; pb(new B());</span></span><br><span class="line"><span class="string">	shared_ptr&lt;A&gt; pa(new A());</span></span><br><span class="line"><span class="string">	pb-&gt;pa_ = pa;</span></span><br><span class="line"><span class="string">	pa-&gt;pb_ = pb;</span></span><br><span class="line"><span class="string">	cout&lt;&lt;pb.use_count()&lt;&lt;endl;</span></span><br><span class="line"><span class="string">	cout&lt;&lt;pa.use_count()&lt;&lt;endl;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">int main()</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	fun();</span></span><br><span class="line"><span class="string">	return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></li>
 <li>可以看到fun函数中pa ，pb之间互相引用，两个资源的引用计数为2，<strong>当要跳出函数时，智能指针pa，pb析构时两个资源引用计数会减一，但是两者引用计数还是为1</strong>，导致跳出函数时资源没有被释放（A B的析构函数没有被调用）</li>
 <li>如果把其中一个改为weak_ptr就可以了，我们把类A里面的shared_ptr pb_; 改为weak_ptr pb_; 运行结果如下，这样的话，资源B的引用开始就只有1，当pb析构时，B的计数变为0，B得到释放，B释放的同时也会使A的计数减一，同时pa析构时使A的计数减一，那么A的计数为0，A得到释放。</li>
 <li><strong>注意的是我们不能通过weak_ptr直接访问对象的方法</strong>，比如B对象中有一个方法print(),我们不能这样访问，<code>pa-&gt;pb_-&gt;print();</code>英文pb_是一个weak_ptr，应该先把它转化为shared_ptr,如：<code>shared_ptr p = pa-&gt;pb_.lock(); p-&gt;print();</code></li>
@@ -304,7 +324,7 @@
 </ol>
 </li>
 </ol>
-<h4 id="请你回答一下野指针是什么？"><a href="#请你回答一下野指针是什么？" class="headerlink" title="请你回答一下野指针是什么？"></a>请你回答一下野指针是什么？</h4><ul>
+<h4 id="野指针是什么？"><a href="#野指针是什么？" class="headerlink" title="野指针是什么？"></a>野指针是什么？</h4><ul>
 <li>野指针就是指向一个已删除的对象或者未申请访问受限内存区域的指针</li>
 </ul>
 <h4 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h4><ol>
@@ -404,7 +424,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#请说一下C-C-中指针和引用的区别？"><span class="nav-number">1.</span> <span class="nav-text">请说一下C&#x2F;C++ 中指针和引用的区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请你说一下你理解的c-中的smart-pointer四个智能指针：-shared-ptr-unique-ptr-weak-ptr-auto-ptr"><span class="nav-number">2.</span> <span class="nav-text">请你说一下你理解的c++中的smart pointer四个智能指针： shared_ptr,unique_ptr,weak_ptr,auto_ptr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#智能指针的内存泄漏如何解决"><span class="nav-number">3.</span> <span class="nav-text">智能指针的内存泄漏如何解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#请你回答一下野指针是什么？"><span class="nav-number">4.</span> <span class="nav-text">请你回答一下野指针是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数指针"><span class="nav-number">5.</span> <span class="nav-text">函数指针</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#C-C-中指针和引用的区别？"><span class="nav-number">1.</span> <span class="nav-text">C&#x2F;C++ 中指针和引用的区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#c-中的smart-pointer四个智能指针：-shared-ptr-unique-ptr-weak-ptr-auto-ptr"><span class="nav-number">2.</span> <span class="nav-text">c++中的smart pointer四个智能指针： shared_ptr,unique_ptr,weak_ptr,auto_ptr</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#智能指针的内存泄漏如何解决"><span class="nav-number">3.</span> <span class="nav-text">智能指针的内存泄漏如何解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#野指针是什么？"><span class="nav-number">4.</span> <span class="nav-text">野指针是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数指针"><span class="nav-number">5.</span> <span class="nav-text">函数指针</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -418,14 +438,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1193</span>
+          <span class="site-state-item-count">1216</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-count">104</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -459,12 +479,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.2m</span>
+    <span title="站点总字数">1.3m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">18:20</span>
+    <span title="站点阅读时长">19:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

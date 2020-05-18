@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +172,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">redis的consistent hash算法</a>
+            <a href="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/" class="post-title-link" itemprop="url">环境初始化</a>
         </h1>
 
         <div class="post-meta">
@@ -182,7 +182,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-03-10 10:20:00" itemprop="dateCreated datePublished" datetime="2018-03-10T10:20:00+08:00">2018-03-10</time>
+              <time title="创建时间：2018-04-02 02:49:00" itemprop="dateCreated datePublished" datetime="2018-04-02T02:49:00+08:00">2018-04-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -197,14 +197,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/分布式集群</span>
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java并发</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="redis的consistent hash算法" title="阅读次数">
+            <span id="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/" class="post-meta-item leancloud_visitors" data-flag-title="环境初始化" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -216,7 +216,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>351</span>
+              <span>22</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -235,42 +235,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2018年3月10日 上午10:20</p>
-<h3 id="这里要理解redis的一致性算法的原理，目的"><a href="#这里要理解redis的一致性算法的原理，目的" class="headerlink" title="这里要理解redis的一致性算法的原理，目的"></a>这里要理解redis的一致性算法的原理，目的</h3><ol>
-<li><strong>目的：</strong>如果不使用一致性算法，当我们添加和删除redis缓存的时候，原先各个缓存中的数据会重新分配到各个redis缓存中。如果这时我们还使用原先数据和缓存的对应关系，还使用原先的hash算法，那么很大可能就会算错数据的位置。</li>
-<li>如果我们使用一致性算法，首先明确的是：添加和删除redis缓存的时候，一定会是原先的命中率从100%下降，我们的目标就是在hash算法不变的情况下，能尽量的减少命中率的下降，这就是一致性算法的关键作用</li>
-</ol>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/E54E089A-CA11-4008-A760-1D2B8DE41046.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/E069F5F6-8DCC-4C2D-A740-159C5BFC9452.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/3C3B0B6C-E11A-4957-9B2A-BEA32FB1C8C6.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/CEA44F58-176D-4039-A725-719CBA39F4FF.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/1F55C099-DC0D-4E45-A10B-0BEA71A43BF8.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/736367A8-2ED6-4D5E-A9FD-BDF7A94EF247.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/F507D534-7B07-4988-BEB3-D3A2EBE2DFAC.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/E8832C0A-6EF0-484E-B36F-63E51DBB4B24.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/76F67B26-4258-4D98-B3A3-C8F4F956E3FB.png" alt><br>Cache命中不到的话，就会极大地加大数据库的负载，因为请求会转到数据库中寻找数据</p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/7348A060-2839-4F5A-80D4-C16692F764C0.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/7FB9F647-BDBA-49A4-AE68-BEBCE110C0BB.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/FC546C24-E5A7-4C29-8D97-CAD0EEAF57D7.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/C99978AF-3B6E-4E84-B431-BF19A056A90F.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/B00388F3-4A47-4FD2-9934-58AB4E31CF53.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/351C685C-1970-4B09-97F1-7BE3FABA5A5C.png" alt><br>object映射到cache</p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/DEF7FD2A-6EE9-4D9B-86BA-FAF3903F46E0.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/E7EA3827-2A85-400E-A9F8-D6970D88E674.png" alt><br>删除之后，并不是原先的牵一发而动全身，但是也会出现命中不到的现象，如object4。这是他会</p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/BEA826C2-6AE1-4C06-B82F-2F08C4223241.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/6E3FBF83-A1CD-4012-976F-C3F7863C58E2.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/47C8BE0E-86EB-40B3-B1FA-4F37F92C1052.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/2D3D16FB-481D-4761-BFAC-914B86AA7C99.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/0C483C5A-EC87-4720-8D29-88204128A597.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/777D2877-D4E7-43FE-9A2C-A8ED0EE825F7.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/C58EF053-D9BD-4D75-9B65-46FE0A18F943.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/C30DDB25-5D14-4DAC-B0A8-AA43A47840F9.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/26B676C6-8509-491A-A095-E130AD840057.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/3A21DE2D-FD87-4363-968A-0D1D8EC2D9F0.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/DB1F3BDB-AA3F-4AE4-9D89-0571CC37EB4A.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/AE71B2B9-43B3-4C1F-9B8B-28763B6FD8D9.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/20C1C518-AE25-4CD2-925D-3B0F9836444A.png" alt></p>
-<p><img src="/2018/03/10/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E7%9A%84consistent%20hash%E7%AE%97%E6%B3%95/53CD2440-4C58-46D5-83F9-806D901FDB6A.png" alt></p>
+          <p>2018年4月2日 下午2:49</p>
+<p><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/DCEBAF97-B6FE-4622-AC13-421B0FE2A037.png" alt><br><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/DFEB173C-E12A-4EA2-AE00-CCFD47715FA6.png" alt><br><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/623642DD-A064-43CE-9744-0B5685F4C4BD.png" alt><br><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/23C1BBEA-812C-46BA-8C75-0C053C92E0CF.png" alt><br><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/0AB22EB7-E638-48DC-BAD5-E74B97D2AE1C.png" alt><br><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/58234C5F-0E5B-43A1-A177-A38056638382.png" alt><br><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/BF463074-BB94-41C1-81D6-3CAE4B18DAFA.png" alt><br><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/73213C60-6679-4F78-9C35-F76AA9AE1E23.png" alt><br><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/2BB696B7-CF3A-407B-B0F4-06C286B3972F.png" alt><br><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/7ED49FE6-CA26-4ADD-873E-08F81514B576.png" alt><br>直接启动报错！<br><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/FD1D7A11-C255-4FF9-896E-028E4DEDDA50.png" alt><br><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/0261CCD2-658E-4B2C-A4A5-D5C660CD4430.png" alt><br><img src="/2018/04/02/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%8E%AF%E5%A2%83%E5%88%9D%E5%A7%8B%E5%8C%96/0DC43121-113A-46C9-ABA5-F0D0BFCF5776.png" alt></p>
 
       
     </div>
@@ -290,7 +256,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E5%91%BD%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E7%9A%84%E4%BC%98%E5%8A%BF%E4%B8%8E%E9%A3%8E%E9%99%A9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -304,7 +270,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E5%91%BD%E4%BB%A4/" class="post-title-link" itemprop="url">redis命令</a>
+            <a href="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E7%9A%84%E4%BC%98%E5%8A%BF%E4%B8%8E%E9%A3%8E%E9%99%A9/" class="post-title-link" itemprop="url">并发的优势与风险</a>
         </h1>
 
         <div class="post-meta">
@@ -314,7 +280,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-03-09 11:11:00" itemprop="dateCreated datePublished" datetime="2018-03-09T11:11:00+08:00">2018-03-09</time>
+              <time title="创建时间：2018-04-01 12:21:00" itemprop="dateCreated datePublished" datetime="2018-04-01T12:21:00+08:00">2018-04-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -329,14 +295,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/分布式集群</span>
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java并发</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis%E5%91%BD%E4%BB%A4/" class="post-meta-item leancloud_visitors" data-flag-title="redis命令" title="阅读次数">
+            <span id="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E7%9A%84%E4%BC%98%E5%8A%BF%E4%B8%8E%E9%A3%8E%E9%99%A9/" class="post-meta-item leancloud_visitors" data-flag-title="并发的优势与风险" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -348,7 +314,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>33</span>
+              <span>16</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -367,8 +333,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2018年3月9日 上午11:11</p>
-<p>keyspace<br>Databases</p>
+          <p>2018年4月1日 下午12:21</p>
+<p><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E7%9A%84%E4%BC%98%E5%8A%BF%E4%B8%8E%E9%A3%8E%E9%99%A9/6509CC36-3824-47E2-9753-FED2D244F23F.png" alt></p>
 
       
     </div>
@@ -388,7 +354,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis2.8%E7%9A%84%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -402,7 +368,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis2.8%E7%9A%84%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">redis2.8的安装使用</a>
+            <a href="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">JAVA内存模型</a>
         </h1>
 
         <div class="post-meta">
@@ -412,7 +378,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2018-03-09 10:30:00" itemprop="dateCreated datePublished" datetime="2018-03-09T10:30:00+08:00">2018-03-09</time>
+              <time title="创建时间：2018-04-01 11:52:00" itemprop="dateCreated datePublished" datetime="2018-04-01T11:52:00+08:00">2018-04-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -427,14 +393,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/分布式集群</span>
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java并发</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis2.8%E7%9A%84%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="redis2.8的安装使用" title="阅读次数">
+            <span id="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="JAVA内存模型" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -446,958 +412,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>367</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年3月9日 上午10:30</p>
-<p><a href="http://download.redis.io/releases/" target="_blank" rel="noopener">Index of /releases</a>下载2.8版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf  redis-2.8.0.tar.gz</span><br></pre></td></tr></table></figure>
-
-<p>第一层目录下执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo make</span><br><span class="line">sudo make test</span><br></pre></td></tr></table></figure>
-
-<p>开启redis</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd src&#x2F;</span><br><span class="line">ls | grep redis</span><br><span class="line">sudo redis-server</span><br></pre></td></tr></table></figure>
-
-<p>关闭(自动持久化)：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli shutdown</span><br></pre></td></tr></table></figure>
-
-<h2 id="更换端口-不操作redia-conf-："><a href="#更换端口-不操作redia-conf-：" class="headerlink" title="更换端口(不操作redia.conf)："></a>更换端口(不操作redia.conf)：</h2><p>换端口启动：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo redis-server --port 6380</span><br></pre></td></tr></table></figure>
-
-<p>客户端换端口连接：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -p 6380</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -p 6380 shutdown</span><br></pre></td></tr></table></figure>
-
-<h2 id="更换端口-操作redis-conf"><a href="#更换端口-操作redis-conf" class="headerlink" title="更换端口(操作redis.conf):"></a>更换端口(操作redis.conf):</h2><p><strong>redis-cli</strong>的各种操作依然要执行-p参数</p>
-<h2 id="指定ip连接：-h"><a href="#指定ip连接：-h" class="headerlink" title="指定ip连接：-h"></a>指定ip连接：-h</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -p 6380 -h 127.0.0.1</span><br></pre></td></tr></table></figure>
-
-<h2 id="配置redis密码："><a href="#配置redis密码：" class="headerlink" title="配置redis密码："></a>配置redis密码：</h2><p><img src="/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/redis2.8%E7%9A%84%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/78048B38-18F5-45DF-9265-C7488B77EA4F.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/mac%E5%8F%96%E6%B6%88redis%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/mac%E5%8F%96%E6%B6%88redis%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" class="post-title-link" itemprop="url">mac取消redis开机自启</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-09 10:07:00" itemprop="dateCreated datePublished" datetime="2018-03-09T10:07:00+08:00">2018-03-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/分布式集群</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/mac%E5%8F%96%E6%B6%88redis%E5%BC%80%E6%9C%BA%E8%87%AA%E5%90%AF/" class="post-meta-item leancloud_visitors" data-flag-title="mac取消redis开机自启" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>766</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年3月9日 上午10:07</p>
-<h3 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h3><p><a href="https://baijiahao.baidu.com/s?id=1583143549389773853&wfr=spider&for=pc" target="_blank" rel="noopener">Linux kill和kill-9区别</a><br><a href="https://www.cnblogs.com/longshiyVip/p/4890181.html" target="_blank" rel="noopener">linux命令ps aux|grep xxx详解 - 人生设计师 - 博客园</a><br><a href="https://www.cnblogs.com/peida/archive/2012/12/11/2812294.html" target="_blank" rel="noopener">每天一个linux命令（35）：ln 命令 - peida - 博客园</a></p>
-<h3 id="关闭我已经自启的redis"><a href="#关闭我已经自启的redis" class="headerlink" title="关闭我已经自启的redis"></a>关闭我已经自启的redis</h3><p><a href="https://www.cnblogs.com/shoren/p/redis.html" target="_blank" rel="noopener">mac下redis安装、设置、启动停止 - 漫夭 - 博客园</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps axu|grep redis  ## 查找redis-server的PID</span><br><span class="line">kill -9 PID</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">## 启动redis-server，后台线程</span><br><span class="line">AT8775:redis shoren$ redis-server &#x2F;usr&#x2F;local&#x2F;redis&#x2F;etc&#x2F;redis.conf </span><br><span class="line">## 启动成功</span><br><span class="line">AT8775:redis shoren$ ps axu|grep redis</span><br><span class="line">shoren           14948   0.0  0.0  2434840    760 s000  S+   10:18上午   0:00.00 grep redis</span><br><span class="line">shoren           14946   0.0  0.0  2452968   1492   ??  Ss   10:18上午   0:00.01 redis-server *:6379 </span><br><span class="line">## 关闭服务器</span><br><span class="line">AT8775:redis shoren$ redis-cli shutdown</span><br><span class="line">##关闭成功</span><br><span class="line">AT8775:redis shoren$ ps axu|grep redis</span><br><span class="line">shoren           14952   0.0  0.0  2435864    772 s000  S+   10:19上午   0:00.01 grep redis</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="取消redis的开机自启"><a href="#取消redis的开机自启" class="headerlink" title="取消redis的开机自启"></a>取消redis的开机自启</h3><p><a href="https://jingyan.baidu.com/article/19020a0a0bae78529d2842b0.html" target="_blank" rel="noopener">Mac 取消软件开机启动_百度经验</a><br>我先前通过brew安装了一个redis：<a href="bear://x-callback-url/open-note?id=9B99E25B-EE68-456B-905F-5D394AD8D277-336-0001B84B4DA1EBDB">Redis安装</a>，并且我设置成了开机自启，所以我必须把开机自启关闭：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">launchctl unload ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.redis.plist</span><br></pre></td></tr></table></figure>
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%A7%A3%E5%86%B3session%E5%85%B1%E4%BA%AB%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%A7%A3%E5%86%B3session%E5%85%B1%E4%BA%AB%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/" class="post-title-link" itemprop="url">解决session共享，实现单点登录</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-09 02:53:00" itemprop="dateCreated datePublished" datetime="2018-03-09T02:53:00+08:00">2018-03-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/分布式集群</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/03/09/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E8%A7%A3%E5%86%B3session%E5%85%B1%E4%BA%AB%EF%BC%8C%E5%AE%9E%E7%8E%B0%E5%8D%95%E7%82%B9%E7%99%BB%E5%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="解决session共享，实现单点登录" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年3月9日 下午2:53</p>
-<ol>
-<li>在pom.xml中引入jedis2.6.0版本<ol>
-<li>与redis连接的javaAPI</li>
-</ol>
-</li>
-<li><strong>创建_common_RedisPool 类</strong><ol>
-<li>变量要使用static类型，因为要在tomcat启动的时候就配置好连接池</li>
-<li>initPool()只使用一次，并且<strong>要在tomcat启动的时候就调用</strong>，所以要放在静态块中岁tomcat启动时就初始化pool</li>
-<li>其中主要使用了我们引入的外部api<ol>
-<li>JedisPoolConfig</li>
-<li>JedisPool</li>
-</ol>
-</li>
-<li>对外部使用者来说，我们上面的两个对象是隐藏的，只有一下三个方法用于操作JedisPool的pool对象<ol>
-<li>getJedis</li>
-<li>returnBrokenResource</li>
-<li>returnResource</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>在mmall.prooerties中配置RedisPool的各种属性<ol>
-<li>RedisPool中使用PropertiesUtil读取配置</li>
-<li>都是连接池的配置或者是连接Redis的账户信息</li>
-</ol>
-</li>
-<li>书写main函数进行测试，看是否能将数据写入到redis中</li>
-<li><strong>创建_util_RedisPoolUtil工具类</strong>：<ol>
-<li>利用RedisPool中放出来的三个方法，将需要的redis的命令进行封装，主要都包括<ol>
-<li>获取jedis实例</li>
-<li>执行语句</li>
-<li>放回连接池</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>书写main函数进行测试，通过打断点，单步进行观察</li>
-</ol>
-<p><strong>序列化，反序列化原因</strong></p>
-<ol>
-<li><p><em>我们现在需要<strong>将我们的用户session存储在redis中</strong></em> ，但是redis中不能不能直接存储User对象，我们只能使用序列化的方法：将User对象序列化为json，然后用redis中的string类型进行存储</p>
-</li>
-<li><p><strong>创建_util_JsonUtil类</strong></p>
-<ol>
-<li>配置序列化的各种属性</li>
-<li>配置反序列化的各种属性</li>
-<li>重点：<ol>
-<li>使用<strong>typeReference</strong>,解决List<User>这类问题</User></li>
-<li><a href="https://www.cnblogs.com/chiangchou/archive/2017/09/05/idea-debug.html" target="_blank" rel="noopener">在Intellij IDEA中使用Debug - bojiangzhou - 博客园</a><ol>
-<li>计算表达式功能</li>
-<li>变量查看功能</li>
-</ol>
-</li>
-<li>参数中，<strong>使用Class&lt;?&gt;代替Class<T>原因</T></strong><ol>
-<li>我们在参数中要使用的class类型不确定，此时可以使用任意一个</li>
-<li>但是，当我们参数中的类型与函数的返回值类型不是恒定不变的一对一的关系时，我们就只能使用Class&lt;?&gt;</li>
-</ol>
-</li>
-<li><strong>我没有看6.9节的源码解析</strong></li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p><em>在controller中将session的保存用redis缓存来代替</em></p>
-<ol>
-<li>session.getId()作为redis的key值</li>
-</ol>
-</li>
-<li><p>配置tomcat启动配置，设置两个tomcat，tomcat1、tomcat2</p>
-<ol>
-<li>注意tomcat2的端口配置</li>
-<li>即使这里设置了两个，但是真正运行的时候idea只能在一个tomcat上部署</li>
-</ol>
-</li>
-<li><p>复制整个项目，改个名字就行，然后用idea打开这个复制好的项目，选择new windows。然后，在这个项目中运行配置选择tomcat2，运行。</p>
-</li>
-<li><p>打开已经配置好对域名<a href="http://www.imooc.com负载均衡的nginx服务器" target="_blank" rel="noopener">www.imooc.com负载均衡的nginx服务器</a></p>
-</li>
-<li><p>配置host，让域名<a href="http://www.imooc.com指向nginx的127.0.0.1" target="_blank" rel="noopener">www.imooc.com指向nginx的127.0.0.1</a></p>
-<ol>
-<li>测试，ping <a href="http://www.imooc.com看是否指向127.0.0.1" target="_blank" rel="noopener">www.imooc.com看是否指向127.0.0.1</a></li>
-<li>Reload nginx，因为nginx在负载均衡转发的时候，我们在分流的配置项中写的是<a href="http://www.imooc.com，而不是127.0.0.1。nginx在解析这里的www.imooc.com时，还是需要我们本机的host文件。所以，**配置host之后，一定要reload" target="_blank" rel="noopener">www.imooc.com，而不是127.0.0.1。nginx在解析这里的www.imooc.com时，还是需要我们本机的host文件。所以，**配置host之后，一定要reload</a> nginx**</li>
-</ol>
-</li>
-<li><p>在浏览器中访问<a href="http://www.imooc.com，看到tomcat1，Tomcat2随机访问" target="_blank" rel="noopener">www.imooc.com，看到tomcat1，Tomcat2随机访问</a></p>
-</li>
-</ol>
-<p><strong>现在的问题是</strong>：当我们分别访问tomcat1、tomcat2时，双方的登录信息sessionid不能共享。也就是说，当tomcat1登录之后，tomcat2依然没有登录</p>
-<ol>
-<li><strong>创建_util_CookieUtil</strong><ol>
-<li><strong>利用Cookie对象来操作管理浏览器的sessionid</strong></li>
-<li>通过domain按域名划分cookie的共用范围</li>
-<li>设置存在时间(或者销毁)</li>
-<li>这个过程是如何与浏览器进行信息的传递呢？<ol>
-<li>就是我们servlet最原始的request+response完成与浏览器的交互过程</li>
-</ol>
-</li>
-<li><a href="bear://x-callback-url/open-note?id=E1775CD3-B2AD-4AD3-A62C-AB1D5376D5B9-2779-000009EBE3D90FEC">cookie和session</a><strong>这篇文章很关键</strong></li>
-</ol>
-</li>
-<li>当用户登录信息正确时，我们将使用CookieUtil的writeLoginToken向发出请求的浏览器发送一个名字为mmall_login_taken的cookie，值为sessionId。<ol>
-<li>如果不正确的话，服务器只会给浏览器一个Jsessonid，对于Jsessonid，是请求都会给，这就导致了每次的访问都会更改JsessionId的值</li>
-<li><strong>JsessionId不等于session.getId()的值</strong>，JsessionId是一定存在的cookie，只要是个网站他就会返回给浏览器</li>
-</ol>
-</li>
-<li>重新发布两个相同的项目到两个tomcat中，<strong>打不开首页的处理方法</strong><ol>
-<li>分别执行：<code>mvn clean package -Dmaven.test.skip=true</code></li>
-<li>别一块启动tomcat，分开启动</li>
-</ol>
-</li>
-<li>注意这时<strong>要用debug模式运行</strong>，而不是run，因为我们要打断点进行联调<ol>
-<li>在debug模式，我们的断点在更改之后，立即在下一次访问生效，不用重新启动tomcat</li>
-<li>在debug模式，即使断点已经到来，我们依然可以在当前断点的后面增加断点，同样也是立即生效</li>
-</ol>
-</li>
-<li>现在就可以实现不同服务器共享session，其实准确点是共享cookie，<strong>这里的共享是按域名来划分，而不是按tomcat来划分，这是最根本的原理</strong><ol>
-<li>可以在<strong>chrome_检查_Application/Cookies</strong>中查看登录之后，我们配置的cookie是否有了</li>
-</ol>
-</li>
-<li>现在只是修改了login.do，其他访问路径依然还是使用session.getAttribute。我们要session写法改成CookieUtil的写法<ol>
-<li>login.do<ol>
-<li>login.do的时候要使用RedisPoolUtil来写入redis当前用户的信息</li>
-</ol>
-</li>
-<li>其他的各种方法都是调用CookieUtil的<strong>readLoginToken</strong>来读取用户的信息 <ol>
-<li>即要检查cookie有没有mmall.login.token，还要检查redis中是否真的有，双重验证。</li>
-</ol>
-</li>
-<li>logout.do是使用delLoginToken方法<ol>
-<li>同时要使用RedisPoolUtil删除redis中对应的键值</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><strong>创建_controller_common/SessionExpireFilter过滤器</strong>，用于在每次更新redis当前用的有效期<ol>
-<li>现在有两个有效期，一个是cookie的，一个是redis的，这两个缺一不可。 </li>
-<li>将过滤器这个组件加入到web.xml中</li>
-</ol>
-</li>
-<li><strong>用redis来代替我们各自tomcat中的GuavaCache</strong>，因为两个tomcat的GuavaCache并不是共享的。<ol>
-<li>用户输入获取token的tomcat1，与用户最终通过输入taken来修改密码的tomcat2是不同的，这时Tomcat2就无法验证保存在tomcat1中的正确的taken</li>
-<li>此时可以删除GuavaCache的工具类了</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/" class="post-title-link" itemprop="url">tomcat集群的详细ppt</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-08 12:44:00" itemprop="dateCreated datePublished" datetime="2018-03-08T12:44:00+08:00">2018-03-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/分布式集群</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/" class="post-meta-item leancloud_visitors" data-flag-title="tomcat集群的详细ppt" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>140</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年3月8日 下午12:44</p>
-<p>注：下文中提到配置文件可到：Learning.happymmall.com 下载</p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/1CE708D0-E392-435F-889A-90F418EF52C4.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/010FA111-C72F-4314-B42C-F6CDC8AF9526.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/7BC5D2FF-4D62-455B-9710-522351A78AA2.png" alt><br>热部署<br>http线程池</p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/2C974738-7400-4C1B-B620-5FC02B1D5D27.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/E2DF7029-2B55-472D-B28D-0EB7B92BDFEC.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/E8165B6F-12B0-449F-B58D-0672AA290B2B.png" alt><br>登录信息session的共享</p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/1E2A9B3D-4A27-4DED-8D02-C9BCFA55914B.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/D2F013E5-742E-4578-9FBB-AA4158FFFFA4.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/C9CFEBB0-691D-4C06-92A3-F4E9352E1DD4.png" alt></p>
-<p>架构的演进和代码的演进过程</p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0FD20018-6843-49AC-AB27-3A81407226D0.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0AD00977-7C4E-4DC4-BDD4-D2D23BDD65C7.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/31469F92-2561-47CD-99BE-754223411547.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/5648F2FF-1A83-4FEE-8CE0-4F2835C8204D.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/AE6EE694-09A0-4592-9974-A47BECCB24D3.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/7C40D036-742D-4A61-BBEC-8677788329A1.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/84D17559-D370-4624-81BE-D4923D215E21.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/9DA7469C-2723-4BB7-9BA1-B7C85028D77A.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/40EEFE76-3DCA-41B2-B491-D829971A689A.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/B394C158-5092-40B9-A971-0EBADC26E438.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/CA406914-B615-4DC7-9709-363A9C0B9E43.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/C6EBB7A4-409F-4CA0-B91C-3439AF3F50E1.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/789CBDB0-F182-4951-A88C-B59896CB1BAF.png" alt><br>注：我们这里要重新解压缩新的tomcat，使webapps得ROOT也藐视tomcat的默认首页</p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/AAC9EBD5-227F-4A9B-8759-438FF1FC42DD.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/6B77C30E-BB5D-4F79-A78A-FE200C7789E5.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/1B227F9C-897A-4C12-9C72-3FA1E391C1BC.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/B77DC72F-132D-49C6-B360-730744A1F910.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/66719A73-A9E8-4EB4-85FD-3239D2C9D9B7.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/16126E37-2690-4127-B170-E1B729FA3F49.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/E320C762-9B6E-4CCD-996E-0EADB6A8A34E.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/A50F47C5-9BF6-4E72-A3C5-2C5644D82CD2.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/93B3AAAC-6334-4876-A482-A50E13B584EF.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/5D0A5977-E808-4434-A623-C070D3B6A16B.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/C2808A3A-2217-4FED-9883-ECD09103DD7A.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/C10FC0E5-172F-4CA9-B2F0-6E97A4740876.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/885B0A3F-7651-4066-B760-5448AFA3689E.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/08A0D949-11A2-4C24-9A2A-C4B8268A8284.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/774EEE36-3C9F-4B0C-9AFD-86A8507BF3E2.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/14801C59-4139-4633-8A6A-BF6A0A72D907.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0D58665F-B67F-4E4E-AC38-41AE48179E4C.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/E7AC7811-8D41-41D8-B4B2-AE05587D1AE7.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/2CF6F3F5-8237-4F23-94C9-4BC830903261.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0DE2A0E1-D1E4-4DF7-91E1-911CA9E9621E.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/07DC0904-2995-453A-A170-807E02A3BF57.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/4E320866-DAE6-42D0-8578-3A7EBAE6C438.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/7E7806C4-B1C2-4428-81D1-D96EFF566616.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/DACECD2A-71A8-4AE9-87B8-FAE153C058F7.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/407B3A0B-5BD5-4414-8766-30D7BCC6D144.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/6686B22F-DDEB-4CD3-A424-82B8DEC7CA92.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/DE0F8FA3-5E2A-4ECE-A0A4-8AC7D2D69A11.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0C71110E-F4F3-4F8D-8DE8-8F525E42EDC3.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/tomcat%E9%9B%86%E7%BE%A4%E7%9A%84%E8%AF%A6%E7%BB%86ppt/0AFD748B-12DD-4AED-91AF-61634C6785D6.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/maven%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/maven%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB/" class="post-title-link" itemprop="url">maven环境隔离</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-08 12:17:00" itemprop="dateCreated datePublished" datetime="2018-03-08T12:17:00+08:00">2018-03-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/分布式集群</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/maven%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB/" class="post-meta-item leancloud_visitors" data-flag-title="maven环境隔离" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>350</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年3月8日 下午12:17</p>
-<h2 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h2><p>通过maven命令的不同打包方式打包，打包发布不同的环境，省去了本地环境与线上环境不同要逐个<strong>改配置文件的麻烦</strong></p>
-<h2 id="配置maven"><a href="#配置maven" class="headerlink" title="配置maven"></a>配置maven</h2><p>pom.xml<br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/maven%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB/0667FBF2-C86A-4C82-AF34-44EC826302FC.png" alt></p>
-<p>创建文件夹，修改各自的配置<br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/maven%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB/8AC58E24-A459-4282-ABF3-0C45C2FA4A46.png" alt></p>
-<p>使用—P命令选择打包的环境</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localhost:mmallv4.0 czh$ mvn clean package -Dmaven.test.skip&#x3D;true -Pdev</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="在tomcat中发布不同的环境："><a href="#在tomcat中发布不同的环境：" class="headerlink" title="在tomcat中发布不同的环境："></a>在tomcat中发布不同的环境：</h2><p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/maven%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB/3B622F56-0581-434B-83A0-7DF181678B79.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/maven%E7%8E%AF%E5%A2%83%E9%9A%94%E7%A6%BB/341124D6-0411-43D0-9BC3-1F00C14F4E5A.png" alt><br>注：</p>
-<ol>
-<li>此时如果发生更改也要点击import change</li>
-<li>profiles中我们只选择一个</li>
-<li><strong>maven project中选定环境和我们通过—P命令进行打包的有啥区别：</strong><ol>
-<li>—P命令进行打包是打包在了当前项目目录下的target文件夹下</li>
-<li>maven project中选定环境是给我们run时，选定的发布在tomcat的版本</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/" class="post-title-link" itemprop="url">lombok</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-08 10:35:00" itemprop="dateCreated datePublished" datetime="2018-03-08T10:35:00+08:00">2018-03-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/分布式集群</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/" class="post-meta-item leancloud_visitors" data-flag-title="lombok" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年3月8日 上午10:35</p>
-<h2 id="主要功能："><a href="#主要功能：" class="headerlink" title="主要功能："></a>主要功能：</h2><p>Lombok是一个可以通过简单的<strong>注解形式</strong>来帮助我们简化消除一些必须有但显得很臃肿的Java代码的工具，通过使用对应的注解，<strong>可以在编译源码的时候</strong>生成对应的方法。</p>
-<h2 id="官网："><a href="#官网：" class="headerlink" title="官网："></a>官网：</h2><p>lombok:<a href="https://projectlombok.org/" target="_blank" rel="noopener">Project Lombok</a><br>反编译软件：<a href="http://jd.benow.ca/" target="_blank" rel="noopener">Java Decompiler</a> 功能：class-&gt;java</p>
-<h2 id="lombok原理"><a href="#lombok原理" class="headerlink" title="lombok原理"></a>lombok原理</h2><p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/05EAF38D-F7FD-456E-B93A-7E13853D6B98.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/A35775FA-6EF3-495A-AE22-A879CE654A0C.png" alt></p>
-<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><ol>
-<li>@data注解会自动生成toString，EqualsAndHashCode(<strong>默认全变量</strong>)，get,set方法</li>
-<li>我们一般不使用@data，而是使用：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Getter</span><br><span class="line">@Setter</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@AllArgsConstructor</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="在项目中配置："><a href="#在项目中配置：" class="headerlink" title="在项目中配置："></a>在项目中配置：</h2><p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/F7086915-5723-48F5-8F6D-FFDA76E37A51.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/1B4B7164-475B-47C7-832C-3782B10F3EB7.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/0BCEBE95-327D-43F9-A6F7-2662C26F1C38.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/353FC2E4-2124-40DB-BA0D-D7B6571B4537.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/9896CCC2-95E2-4422-AB58-F13423DDB6B0.png" alt></p>
-<h2 id="使用maven打包时跳过单元测试，生成class文件"><a href="#使用maven打包时跳过单元测试，生成class文件" class="headerlink" title="使用maven打包时跳过单元测试，生成class文件"></a>使用maven打包时跳过单元测试，生成class文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">localhost:mmallv4.0 czh$ mvn clean package -Dmaven.test.skip&#x3D;true</span><br><span class="line">[INFO] Scanning for projects...</span><br><span class="line">[WARNING] </span><br><span class="line">[WARNING] Some problems were encountered while building the effective model for com:mmall:war:2.0-SNAPSHOT</span><br><span class="line">[WARNING] &#39;build.plugins.plugin.version&#39; for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 292, column 15</span><br><span class="line">[WARNING] </span><br><span class="line">[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.</span><br><span class="line">[WARNING] </span><br><span class="line">[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.</span><br><span class="line">[WARNING] </span><br><span class="line">[INFO]                                                                         </span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Building mmall Maven Webapp 2.0-SNAPSHOT</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ mmall ---</span><br><span class="line">[INFO] Deleting &#x2F;Users&#x2F;czh&#x2F;IdeaProjects&#x2F;mmallv4.0&#x2F;target</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-resources-plugin:2.5:resources (default-resources) @ mmall ---</span><br><span class="line">[debug] execute contextualize</span><br><span class="line">[INFO] Using &#39;UTF-8&#39; encoding to copy filtered resources.</span><br><span class="line">[INFO] Copying 4 resources</span><br><span class="line">[INFO] Copying 12 resources</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ mmall ---</span><br><span class="line">[INFO] Compiling 70 source files to &#x2F;Users&#x2F;czh&#x2F;IdeaProjects&#x2F;mmallv4.0&#x2F;target&#x2F;classes</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-resources-plugin:2.5:testResources (default-testResources) @ mmall ---</span><br><span class="line">[debug] execute contextualize</span><br><span class="line">[INFO] Using &#39;UTF-8&#39; encoding to copy filtered resources.</span><br><span class="line">[INFO] skip non existing resourceDirectory &#x2F;Users&#x2F;czh&#x2F;IdeaProjects&#x2F;mmallv4.0&#x2F;src&#x2F;test&#x2F;resources</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-compiler-plugin:2.3.2:testCompile (default-testCompile) @ mmall ---</span><br><span class="line">[INFO] Not compiling test sources</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-surefire-plugin:2.10:test (default-test) @ mmall ---</span><br><span class="line">[WARNING] The POM for org.apache.maven:maven-plugin-api:jar:2.0.9 is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details</span><br><span class="line">[INFO] Tests are skipped.</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-war-plugin:2.1.1:war (default-war) @ mmall ---</span><br><span class="line">[INFO] Packaging webapp</span><br><span class="line">[INFO] Assembling webapp [mmall] in [&#x2F;Users&#x2F;czh&#x2F;IdeaProjects&#x2F;mmallv4.0&#x2F;target&#x2F;mmall]</span><br><span class="line">[INFO] Processing war project</span><br><span class="line">[INFO] Copying webapp resources [&#x2F;Users&#x2F;czh&#x2F;IdeaProjects&#x2F;mmallv4.0&#x2F;src&#x2F;main&#x2F;webapp]</span><br><span class="line">[INFO] Webapp assembled in [647 msecs]</span><br><span class="line">[INFO] Building war: &#x2F;Users&#x2F;czh&#x2F;IdeaProjects&#x2F;mmallv4.0&#x2F;target&#x2F;mmall.war</span><br><span class="line">[INFO] WEB-INF&#x2F;web.xml already added, skipping</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: 10.264s</span><br><span class="line">[INFO] Finished at: Thu Mar 08 11:16:04 CST 2018</span><br><span class="line">[INFO] Final Memory: 23M&#x2F;369M</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">localhost:mmallv4.0 czh$</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/E8FE2E98-CF9F-41C2-8E43-315EB6334303.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/DA5B495F-F0E4-49AC-863A-8146EE7CF023.png" alt></p>
-<h2 id="最后，将class文件用反编译软件打开"><a href="#最后，将class文件用反编译软件打开" class="headerlink" title="最后，将class文件用反编译软件打开"></a>最后，将class文件用反编译软件打开</h2><p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/1FB68AAE-742B-4DE0-A952-B03BBF40D26F.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/" class="post-title-link" itemprop="url">maven project中红线报错</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-08 09:49:00" itemprop="dateCreated datePublished" datetime="2018-03-08T09:49:00+08:00">2018-03-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/" class="post-meta-item leancloud_visitors" data-flag-title="maven project中红线报错" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>320</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年3月8日 上午9:49</p>
-<h2 id="2018-4-2补充："><a href="#2018-4-2补充：" class="headerlink" title="2018/4/2补充："></a>2018/4/2补充：</h2><ol>
-<li><a href="https://www.jianshu.com/p/36433cd5bd29" target="_blank" rel="noopener">maven 学习笔记 - 简书</a></li>
-</ol>
-<h2 id="maven-project中红线报错："><a href="#maven-project中红线报错：" class="headerlink" title="maven project中红线报错："></a>maven project中红线报错：</h2><p><a href="https://stackoverflow.com/questions/8834806/m2eclipse-error" target="_blank" rel="noopener">eclipse - m2eclipse error - Stack Overflow</a><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/160622E0-626E-42C2-971C-58219D313711.png" alt><br><a href="http://blog.csdn.net/manlyzpk/article/details/43475299" target="_blank" rel="noopener">解决eclipse载入已有maven工程时出现的fail to read artifact descriptor….问题 - CSDN博客</a><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/027934E1-8C9C-4D82-BC9E-59C6B38473D2.png" alt><br><a href="http://blog.csdn.net/a303549861/article/details/53173640" target="_blank" rel="noopener">maven本地jar包在idea中dependencies总是有红线解决办法 - CSDN博客</a><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/83B35495-C853-40AD-B246-07606B137DA1.png" alt></p>
-<h2 id="我的解决步骤："><a href="#我的解决步骤：" class="headerlink" title="我的解决步骤："></a>我的解决步骤：</h2><p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/D4B8798E-FB65-4497-A0DF-4AF73B6261FC.png" alt></p>
-<p>去<a href="http://search.maven.org/" target="_blank" rel="noopener">The Central Repository Search Engine</a>找到maven中pom的配置：<br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/8D284C5E-80D5-4122-B568-FC66FF3D12BD.png" alt></p>
-<p>将内容复制到pom.xml中<br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/91CDFEC9-40B3-425A-95E0-398226302C86.png" alt></p>
-<p>在这个过程中有可以能会停住不动，这时挂上vpn试试。<br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/61049EFB-3494-4301-8EB7-308DA589BE28.png" alt></p>
-<p>反复进行第一步，第二步，直到出现：<br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/E185CAD6-58B6-44BB-B46E-DDF66E8FD4B6.png" alt></p>
-<p>最后就没有错误了<br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/35F7ABE1-8E5B-42CB-803E-1E3FE5BB80E9.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="post-title-link" itemprop="url">配置Mac的双tomcat+nginx实现负载均衡</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-08 02:48:00" itemprop="dateCreated datePublished" datetime="2018-03-08T02:48:00+08:00">2018-03-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/分布式集群</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/" class="post-meta-item leancloud_visitors" data-flag-title="配置Mac的双tomcat+nginx实现负载均衡" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1416,91 +431,884 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2018年3月8日 下午2:48</p>
-<h2 id="参看文章："><a href="#参看文章：" class="headerlink" title="参看文章："></a>参看文章：</h2><p><a href="bear://x-callback-url/open-note?id=B915CE73-DA02-4610-ADD3-C1DF02D53D3B-331-00049B811D9A997A">centos安装nginx：在配置文件中实现反向代理</a><br><a href="bear://x-callback-url/open-note?id=0AD40CEB-FEB0-4CF4-8B50-004BD0C05D05-2849-00000A34D902BB30">2017/10/2 Mac中配置php的步骤记录</a><br>我Mac上nginx路径：_usr_local_etc_nginx</p>
-<h2 id="重要的分析："><a href="#重要的分析：" class="headerlink" title="重要的分析："></a>重要的分析：</h2><ol>
-<li>这里一步是在没有开启nginx的时候，通过域名去访问8080，9080端口，也就说访问tomcat没有通过nginx。</li>
-<li>对tomcat来说，到达他的方式有两种，不一定非得nginx启动<br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/0D691C21-5095-4D18-BEF9-B17D13B5403E.png" alt></li>
+          <p>2018年4月1日 上午11:52</p>
+<ol>
+<li>它是一种规范</li>
+<li>他规定了<strong>虚拟机</strong>与计算机<strong>内存</strong>是如何协同工作的。它规定了一个<strong>线程</strong>如何和何时可以看到由其他线程修改过的共享变量的值。以及在必须时如何同步的访问<strong>共享变量</strong>。</li>
 </ol>
-<h2 id="第一步：操作tomcat"><a href="#第一步：操作tomcat" class="headerlink" title="第一步：操作tomcat"></a>第一步：操作tomcat</h2><ol>
-<li>删除原先的tomcat<ol>
-<li>我没有删，直接在~路径下创建了两个新的</li>
-</ol>
-</li>
-<li>解压两个tomcat，tomcat1、tomcat2</li>
-<li>修改两个tomcat的URLEncoding=utf-8<ol>
-<li>参考<a href="bear://x-callback-url/open-note?id=C97627BB-FF4D-4B18-99B0-DC7D0BC9C6FF-331-00048C4D8D61ED02">centos安装配置apache</a></li>
+<p><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/280FBDF0-0979-481E-A0EC-01DDF3A23A88.png" alt></p>
+<ol>
+<li>我们需要先弄清图片里面的两个JVM 内存分配的<strong>两个概念</strong>。</li>
+<li>java里的的<strong>堆</strong>呢，他是一个<strong>运行时的数据区</strong>，堆是由<strong>垃圾回收</strong>来负责的。<ol>
+<li>堆它的<strong>优势</strong>呢，是可以<strong>动态的分配内存大小</strong>。<strong>生存期</strong>也不必事先告诉<strong>编译器</strong>，因为他是在运行时动态分配内存了，java的垃圾收集器会自动收走这些不再使用的数据。</li>
+<li>但是也有<strong>缺点</strong>的，由于是要在运行时动态分配内存，因此受到<strong>存取速度</strong>相对慢一些</li>
 </ol>
 </li>
-<li>修改tomcat2的图标<ol>
-<li>~_tomcat2_webapps_ROOT_中</li>
+<li>这里的<strong>栈</strong>。<ol>
+<li>在它的<strong>优势</strong>是存取<strong>速度</strong>比堆要快。仅次于计算机里的<strong>寄存器</strong>，栈的数据还是可以<strong>共享</strong>的。</li>
+<li>但是它的<strong>缺点</strong>呢，是存在栈中的数据大小与生存期必须是确定的。缺乏一些<strong>灵活性</strong>。</li>
+<li>栈主要存放一些<strong>基本类型的变量</strong>。比如我们小写的int，short，byte，float，double，char和对象句柄。</li>
 </ol>
 </li>
-<li>开启tomcat进行测试<ol>
-<li>chmod u+x *.sh </li>
+<li>java内存模型呢<ol>
+<li>要求<strong>调用栈和本地内存变量</strong>存放在线程栈（Thread Stack）上</li>
+<li><strong>对象</strong>存放在堆上。</li>
 </ol>
 </li>
-<li>修改mac环境变量_etc_profile<ol>
-<li>我在这里使用 sudo open -e ~/.bash_profile</li>
-<li>因为sudo都没有权限操作_etc_profile</li>
+<li>我们具体说一下。一个<strong>本地变量</strong>，他也可能是指向一个<strong>对象的引用</strong>。<ol>
+<li>这种情况下引用这个本地变量，他是存放在这个线程栈上。</li>
+<li>但是<strong>对象本身他是存放在堆上的</strong>。一个对象，他可能包含方法之类的，这方法可能包含本地变量。这里面local variable1，local variable2。</li>
+<li><strong>这些本地变量，他仍然是存放在线程栈上的</strong>，<strong>即使这些方法所属的对象存放在堆上</strong>。</li>
+<li>一个<strong>对象的成员变量</strong>可能会<strong>随着这个对象自身存放在堆上</strong>。不管这个成员变量是原始类型，还是引用类型，静态成员变量跟随类的定义 一起存放在堆上。</li>
+<li>存放在<strong>堆上对象</strong>可以被<strong>所持有对这个对象引用的线程</strong>访问。这边，如果我们这个Thread的存放了object的一个引用，那么它是可以访问他的。</li>
+<li>当<strong>一个线程可以访问一个对象</strong>的时候呢，他也可以访问这个对象的成员变量。</li>
+<li><strong>两个线程同时调用同一个对象的同一个方法</strong>，他们将会都访问这个对象的成员变量。但是每一个线程都拥有了这个<strong>成员变量</strong>的<strong>私有拷贝</strong>。这个特别重要，就是如果两个线程里面，比如这个线程和这个线程，他们同时调用了同一个对象，这里object3，他们的同一个方法，他们都会访问这个对象的成员变量。但是呢，<strong>这两个线程他们都拥有的是这个成员变量的私有拷贝</strong>，记住了，这里是私有拷贝。<br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/C1537A82-DB14-45E3-AE6F-85F5CCF346FB.png" alt></li>
 </ol>
 </li>
-<li>使环境变量生效<ol>
-<li>source ~/.bash_profile</li>
+<li>我们说一下他们的运作原理。</li>
+<li>通常情况下，::当一个CPU需要读取主存的时候呢，它会将主存的部分数据读取到CPU缓存中。他甚至可能将缓存的部分内容读到它的内部寄存器里面。然后在寄存器中执行操作。当CPU需要将结果回起到主存的时候。他会将内部寄存器的值刷新到缓存中，然后在某个时间点就刷新回主存::<br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/72C2C29E-6D62-4A50-ACCD-6CD1DE94F958.png" alt></li>
+<li>下来呢，我们来看一下java内存模型和硬件的内存之间的一些关联。</li>
+<li>通过图呢，我们可以看出来的java内存模型与硬件内存之间存在一些差异的。<strong>硬件内存架构，它没有区分栈和堆</strong>。对于<strong>硬件而言</strong>，所有的线程，<strong>栈和堆都分布在总内存里面</strong>。有时候栈和堆可能有时候会出现在CPU缓存中和CPU内部的寄存器里面。<br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/4118928E-9A48-4545-9BB5-7ACD77CEAF09.png" alt></li>
+<li>来看一下<strong>线程和主内存之间</strong>的抽象的关系</li>
+<li>::<strong>线程之间的共享变量</strong>，它存储在我们的<strong>主内存</strong>里面，每个线程都有一个<strong>私有的本地内存</strong>::。</li>
+<li><strong>本地内存</strong>，他是java内存模型的一个抽象的概念，他并不是真实存在的，它涵盖了缓存，写缓存区区，寄存器以及其他的硬件和编译器的优化。</li>
+<li><strong>本地内存</strong>中他存储了该线程中已读或写， <strong>共享变量的拷贝的一个副本</strong>。<ol>
+<li>比如，这里面线程如要使用主内存中的一个共享变量。他先<strong>拷贝出来这个共享变量的一个副本</strong>放在自己的本地的里面。</li>
+<li>从更低的层次来说，<strong>主内存就是硬件的内存</strong>。是为了获取更好的运行速度。</li>
+<li>虚拟机及硬件系统系统可能会让<strong>工作内存</strong>优先，存储于寄存器和高速缓存中。</li>
 </ol>
 </li>
-<li>检验是否生效<ol>
-<li>localhost:bin czh$ echo $CATALINA_BASE</li>
+<li>那什么是的<strong>线程的工作内存</strong>。<ol>
+<li>java内存模型中<strong>线程的工作内存</strong>，是<strong>CPU的寄存器和高速缓存</strong>的一个抽象的描述。</li>
+<li>而JVM呢。静态内存存储模型就是我们JVM内存模型。<strong>它只是一种对内存的物理划分而已</strong>，他只局限在内存，而且只局限在JVM的内存。</li>
+<li>现在呢，如果<strong>线程间通信。他要求必须要经过主内存</strong>。</li>
 </ol>
 </li>
-<li>修改tomcat2的catalina.sh文件的配置<ol>
-<li>防止：在tomcat2目录启动的时候catalina_base和catalina_home用的是tomcat1的</li>
-<li><h1 id="OS后面两句话："><a href="#OS后面两句话：" class="headerlink" title="OS后面两句话："></a>OS后面两句话：</h1><ol>
-<li>export CATALINA_BASE=$CATALINA_2_BASE</li>
-<li>export CATALINA_HOME=$CATALINA_2_HOME</li>
+<li>::<strong>如果线程a和线程b之间要通信的话，必须要经历下面两个步骤</strong>。::<pre><code>1. 第一步是线程a，要把本地的内存a中更新过的共享变量刷新到主内存里面去。
+2. 线程b到主内存中去读取线程a之前已经更新过的共享变量。</code></pre></li>
+<li>听完这个这个可能许多人已经意识到之前演示的技术功能问题出在哪里。<br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/D29017C8-5916-41B5-9426-CA4984678D4B.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/E70B294F-7913-4C03-877E-761EB3BAB3AF.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/63392E95-D3D8-4454-9637-8929232B6F60.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/F7119FF4-92A6-408B-903B-5DDC207D8640.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/DC4E3407-2D28-4AF5-9C0A-84B44C9FBA2A.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/ACEAC796-F6B9-42A9-B40E-22F1B91BCEAC.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/JAVA%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/B0DA31E3-4C50-4454-A745-4F0290BEAEF5.png" alt></li>
+<li>首先java内存模型是规范。</li>
+<li>它规定了一个线程如何和何时可以<strong>看</strong>到有其他线程修改过后的<strong>共享变量的值</strong>。</li>
+<li>以及在必须时，如何<strong>同步的访问共享变量</strong>。</li>
+<li>他要求本地变量存放在线程栈上，对象存放在堆上。</li>
+<li>线程间通信必须要经过主内存。</li>
+<li>同时他定义了同步的八个操作及基本规则。</li>
+<li>这个呢，那我们处理并发问题提供了理论基础。后面我们对它的并发编程的一些手段都是基于java内存模型的这个规范的。</li>
 </ol>
-</li>
-</ol>
-</li>
-<li>修改tomcat2的conf/server.xml的三个端口号<ol>
-<li>看这个<a href="bear://x-callback-url/open-note?id=B321F8CB-2B7C-4E2C-8838-1E96DE61B349-612-00010D018D81787D">tomcat集群的详细ppt</a></li>
-</ol>
-</li>
-<li>同时启动tomcat1，2<ol>
-<li>一个端口8080，一个端口9080</li>
-</ol>
-</li>
-</ol>
-<h2 id="配置host，启动nginx"><a href="#配置host，启动nginx" class="headerlink" title="配置host，启动nginx"></a>配置host，启动nginx</h2><ol>
-<li>配置Mac的host，将域名指向127.0.0.1</li>
-<li>测试通过域名+端口号，进入tomcat1，Tomcat2<ol>
-<li>注意这里并有启动nginx，也就说访问tomcat没有通过nginx</li>
-</ol>
-</li>
-<li>启动nginx</li>
-<li>访问域名，不加端口号，看到nginx页面</li>
-</ol>
-<h2 id="配置nginx，实现负载均衡"><a href="#配置nginx，实现负载均衡" class="headerlink" title="配置nginx，实现负载均衡"></a>配置nginx，实现负载均衡</h2><ol>
-<li>配置nginx负载均衡<ol>
-<li>通过nginx的反向代理去访问nginx</li>
-<li>nginx -t</li>
-<li>sudo nginx -s reload<ol>
-<li><strong>出现这个警告不用管</strong>：nginx: [warn] conflicting server name “localhost” on 0.0.0.0:80, ignored</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="重点提取："><a href="#重点提取：" class="headerlink" title="重点提取："></a>重点提取：</h2><p>下载tomcat7，我放在了~路径下<br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/B00C9AEC-764D-4E32-A3EE-9D50C8A6E1E6.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/8BBBD88D-46C8-47EB-8C4A-89ED27BF8697.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">export CATALINA_BASE&#x3D;~&#x2F;tomcat1</span><br><span class="line">export CATALINA_HOME&#x3D;~&#x2F;tomcat1</span><br><span class="line">export TOMCAT_HOME&#x3D;~&#x2F;tomcat1</span><br><span class="line"></span><br><span class="line">export CATALINA_2_BASE&#x3D;~&#x2F;tomcat2</span><br><span class="line">export CATALINA_2_HOME&#x3D;~&#x2F;tomcat2</span><br><span class="line">export TOMCAT_2_HOME&#x3D;~&#x2F;tomcat2</span><br></pre></td></tr></table></figure>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/B5DBE42F-309D-44EA-B71E-61250A09ADF5.png" alt></p>
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/775A7C1B-E59A-4801-96E1-BA12AAB9B3E6.png" alt></p>
-<p>nginx的地址：_usr_local_etc_nginx<br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/E42E56DD-9AF1-4194-8A2C-25E79D78CF3B.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/6125422B-7544-4386-BF66-79A4B1FA0F78.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/%E9%85%8D%E7%BD%AEMac%E7%9A%84%E5%8F%8Ctomcat+nginx%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/35F64FBE-1C3E-4FE5-93BE-F6B689E1E5F9.png" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">upstream www.imooc.com&#123;</span><br><span class="line">	server 127.0.0.1:8080;</span><br><span class="line">	server 127.0.0.1:9080;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">        listen 80;</span><br><span class="line">        autoindex on;</span><br><span class="line">        server_name www.imooc.com imooc.com;</span><br><span class="line">        access_log &#x2F;usr&#x2F;local&#x2F;nginx&#x2F;logs&#x2F;access.log combined;</span><br><span class="line">        index index.html index.htm index.jsp index.php;</span><br><span class="line">        if ( $query_string ~* &quot;.*[\;&#39;\&lt;\&gt;].*&quot; )&#123;</span><br><span class="line">                return 404;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">                proxy_pass http:&#x2F;&#x2F;www.imooc.com;</span><br><span class="line">                &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+      
+    </div>
 
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/CPU%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-%E4%B9%B1%E5%BA%8F%E6%89%A7%E8%A1%8C%E4%BC%98%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/CPU%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-%E4%B9%B1%E5%BA%8F%E6%89%A7%E8%A1%8C%E4%BC%98%E5%8C%96/" class="post-title-link" itemprop="url">CPU多级缓存-乱序执行优化</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-04-01 11:47:00" itemprop="dateCreated datePublished" datetime="2018-04-01T11:47:00+08:00">2018-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java并发</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/CPU%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-%E4%B9%B1%E5%BA%8F%E6%89%A7%E8%A1%8C%E4%BC%98%E5%8C%96/" class="post-meta-item leancloud_visitors" data-flag-title="CPU多级缓存-乱序执行优化" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>27</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年4月1日 上午11:47</p>
+<p><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/CPU%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-%E4%B9%B1%E5%BA%8F%E6%89%A7%E8%A1%8C%E4%BC%98%E5%8C%96/E551752E-26C7-41F4-9A13-9E4DC35BAA61.png" alt><br>在多核时代容易出现问题</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/CPU%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/CPU%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/" class="post-title-link" itemprop="url">CPU多级缓存-缓存一致性</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-04-01 11:34:00" itemprop="dateCreated datePublished" datetime="2018-04-01T11:34:00+08:00">2018-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java并发</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/CPU%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/" class="post-meta-item leancloud_visitors" data-flag-title="CPU多级缓存-缓存一致性" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年4月1日 上午11:34</p>
+<p><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/CPU%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/22153973-4977-414F-861B-D3C47D983146.png" alt><br>由于main mamory和cache的速度差异被拉大，所以加入了多级缓存。<br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/CPU%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/7F24792E-FA67-4D93-9AFC-7A9DD177D061.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/CPU%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/1232C4C4-91EE-4CA2-A226-A0A6763FCF6B.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/CPU%E5%A4%9A%E7%BA%A7%E7%BC%93%E5%AD%98-%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/69919DD7-1803-4069-803B-D552C02D1178.png" alt><br>参考：</p>
+<ol>
+<li><p><a href="https://blog.csdn.net/happy_horse/article/details/51657957" target="_blank" rel="noopener">【4】Java并发编程：多线程中的缓存一致性和CAS - CSDN博客</a></p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/be923a7beb2c" target="_blank" rel="noopener">慕课网高并发实战（二）-并发基础 - 简书</a></p>
+</li>
+<li><p>他是个协议，MESI这个协议，为了保证<strong>多个CPU缓存</strong>中共享数据的<strong>一致性</strong>。</p>
+</li>
+<li><p>定义了<strong>cache的四种状态</strong>。</p>
+</li>
+<li><p>而<strong>CPU</strong>对cache的四种操作可能会产生<strong>不一致的状态</strong>。</p>
+</li>
+<li><p>因此<strong>缓存控制器</strong>，监听到本地操作和远程操作的时候。需要对cache状态做出一定的修改，从而<strong>保证数据在多个缓存之间流转的一致性</strong>。</p>
+</li>
+<li><p>SEMI其实是四个状态的缩写。</p>
+</li>
+</ol>
+<h3 id="四种cache状态：2-2-4（是否独有-是否与内存一致）"><a href="#四种cache状态：2-2-4（是否独有-是否与内存一致）" class="headerlink" title="四种cache状态：2*2=4（是否独有 * 是否与内存一致）"></a>四种cache状态：2*2=4（是否独有 * 是否与内存一致）</h3><ol>
+<li>M：Modified被修改的。<ol>
+<li>处于这一状态的数据，只在本CPU中有缓存数据，而其他CPU中没有。</li>
+<li>同时其状态相对于内存中的值来说，是已经被修改的，且没有更新到内存中。</li>
+</ol>
+</li>
+<li>E：Exclusive独占的。<ol>
+<li>处于这一状态的数据，只有在本CPU中有缓存，</li>
+<li>且其数据没有修改，即与内存中一致。</li>
+</ol>
+</li>
+<li>S：Share共享的。<ol>
+<li>处于这一状态的数据在多个CPU中都有缓存</li>
+<li>且与内存一致。</li>
+</ol>
+</li>
+<li>I：Invalid 无效的。<ol>
+<li>本CPU中的这份缓存已经无效。</li>
+</ol>
+</li>
+</ol>
+<h3 id="这里首先介绍该协议约定的缓存上对应的监听："><a href="#这里首先介绍该协议约定的缓存上对应的监听：" class="headerlink" title="这里首先介绍该协议约定的缓存上对应的监听："></a>这里首先介绍该协议约定的缓存上对应的监听：</h3><ol>
+<li><strong>自己的状态受别的CPU影响</strong>。<ol>
+<li>一个处于<strong>M状态</strong>的缓存行<ol>
+<li>必须时刻监听，所有试图读取该缓存行对应的主存地址的操作</li>
+<li>如果监听到，则必须在此操作执行前把其缓存行中的<strong>数据写回CPU</strong>。</li>
+</ol>
+</li>
+<li>一个处于<strong>S状态</strong>的缓存行<ol>
+<li>必须时刻监听，使该缓存行无效或者独享该缓存行的请求</li>
+<li>如果监听到，则必须把其缓存行<strong>状态设置为I</strong>。</li>
+</ol>
+</li>
+<li>一个处于<strong>E状态</strong>的缓存行<ol>
+<li>必须时刻监听，其他试图读取该缓存行对应的主存地址的操作</li>
+<li>如果监听到，则必须把其缓存行<strong>状态设置为S</strong>。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>当CPU需要<strong>读取数</strong>据时<ol>
+<li>一个<strong>invalid的缓存</strong>必须从主存中读取（<strong>变成S或者E状态</strong>）来满足该CPU的读请求</li>
+<li>如果<strong>不是I</strong>，则可以<strong>直接读取缓存</strong>中的值，<ol>
+<li>但在此之前，必须要等待其他CPU的监听结果</li>
+<li><strong>如其他CPU</strong>也有该数据的缓存且<strong>状态是M</strong>，则需要等待其把缓存更新到内存之后，再读取。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>当CPU需要<strong>写数据</strong>时<ol>
+<li>只有在其缓存行是<strong>M或者E</strong>的时候才能执行</li>
+<li>否则需要发出特殊的RFO指令(Read Or Ownership，这是一种<strong>总线事务</strong>)，通知<strong>其他CPU置缓存无效(I)</strong>，这种情况下会性能开销是相对较大的。</li>
+<li>在写入完成后，<strong>修改</strong>其缓存状态<strong>为M</strong>。</li>
+<li>所以如果一个变量在某段时间<strong>只被一个线程</strong>频繁地修改，则使用其内部缓存就完全可以办到，不涉及到总线事务，</li>
+<li>如果缓存<strong>一会被这个CPU独占、一会被那个CPU 独占</strong>，这时才会不断产生RFO指令影响到并发性能。</li>
+<li>这里说的缓存频繁被独占并不是指线程越多越容易触发，而是这里的CPU协调机制，这有点类似于有时多线程并不一定提高效率，原因是线程挂起、调度的开销比执行任务的开销还要大，这里的多CPU也是一样，如果在CPU间调度不合理，也会形成RFO指令的开销比任务开销还要大。当然，这不是编程者需要考虑的事，操作系统会有相应的内存地址的相关判断，这不在本文的讨论范围之内。</li>
+</ol>
+</li>
+<li>并非所有情况都会使用缓存一致性的，如被操作的数据不能被缓存在CPU内部或操作数据跨越多个缓存行(状态无法标识)，则处理器会调用总线锁定;另外当CPU不支持缓存锁定时，自然也只能用总线锁定了，比如说奔腾486以及更老的CPU。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%9B%AE%E5%BD%95(%E5%B9%B6%E5%8F%91)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%9B%AE%E5%BD%95(%E5%B9%B6%E5%8F%91)/" class="post-title-link" itemprop="url">目录(并发)</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-04-01 11:24:00" itemprop="dateCreated datePublished" datetime="2018-04-01T11:24:00+08:00">2018-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java并发</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%9B%AE%E5%BD%95(%E5%B9%B6%E5%8F%91)/" class="post-meta-item leancloud_visitors" data-flag-title="目录(并发)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>701</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年4月1日 上午11:24</p>
+<h2 id="别人好的笔记："><a href="#别人好的笔记：" class="headerlink" title="别人好的笔记："></a>别人好的笔记：</h2><p><a href="https://www.jianshu.com/c/dbfeae41a695" target="_blank" rel="noopener">并发编程 - 专题 - 简书</a><br><a href="https://blog.csdn.net/column/details/21011.html" target="_blank" rel="noopener">专栏：技术探索 - 慕课网实战·高并发 - CSDN博客</a></p>
+<h2 id="自己的总结："><a href="#自己的总结：" class="headerlink" title="自己的总结："></a>自己的总结：</h2><p>2018年11月19日 下午5:57<br><a href="https://www.imooc.com/article/25277" target="_blank" rel="noopener">《Java并发编程与高并发解决方案》课程相关手记汇总 - 持续更新_慕课手记</a><br><strong>脑子中要记住这个图，这是整个知识的脉络</strong>。这幅图中的除了补充内容以外，我都学完了，并且笔记做的还是不错的。<br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%9B%AE%E5%BD%95(%E5%B9%B6%E5%8F%91)/FCCD936D-C3E0-4525-8CA2-0E8D27836340.png" alt></p>
+<p>2019年3月25日 下午1:00<br><a href="bear://x-callback-url/open-note?id=952630DD-D914-4B98-BB50-FEC9384150AB-2564-0000850D8ECAA21E">并发容器中的分段锁</a><br><a href="bear://x-callback-url/open-note?id=EBA9CE8C-71BB-4BF9-B0F4-7B1943141D4B-2564-000085D5DDDA88E6">容器与线程池的区别</a></p>
+<p>2018年8月19日 下午7:31<br>【<a href="bear://x-callback-url/open-note?id=4A271916-E6BD-40DE-8DD7-B77AAD210F40-327-00031DE7FDC986A2">老师总结：多线程并发的使用、学习与测试</a>】</p>
+<p><a href="bear://x-callback-url/open-note?id=291ED314-445B-44B6-BC1C-CCCBFFA5ECC5-3345-00054A1C3507B289">关于JDK层中代码的一点认识</a><br><a href="bear://x-callback-url/open-note?id=5887DD8B-428F-41D1-B584-5FCF5CAE61B0-3345-00054A0A69186856">J.U.C知识点脉络图</a><br>【<a href="bear://x-callback-url/open-note?id=E1D4E200-113E-4032-906D-BD0D9D595006-3345-00054972A37E99DE">线程池</a>】<br><a href="bear://x-callback-url/open-note?id=06CBFB35-1FD0-4F0A-9A2E-0AA1BB59CE78-3345-000540DCF3D341D4">组件FutureTask、ForkJoin、BlockingQueue</a></p>
+<p><a href="bear://x-callback-url/open-note?id=63E04F90-C4F6-4A39-9341-C0E9147B1B87-3345-0005042FEDFEBA3A">心态的调节</a></p>
+<p>【<a href="bear://x-callback-url/open-note?id=101693CF-A73F-402B-90CC-DD7DC545FC92-3345-00053D84780211AC">AQS相关重点</a>】<br><a href="bear://x-callback-url/open-note?id=A2EFF1E4-4265-452E-8FF2-86EFCA427E24-3345-00053C6CD4E8C47F">读写锁和乐观读+ StampedLock放在一起理解</a><br><a href="bear://x-callback-url/open-note?id=30AF00CF-1C95-4404-A6B6-A099A8B695F2-3345-00053BB675C9BCB5">锁的可重入性</a><br><a href="bear://x-callback-url/open-note?id=3AC92440-D84A-4571-BE8F-D58D68D89579-3345-00053B8D593A23D8">06 锁：可重入锁 公平锁 读写锁</a><br><a href="bear://x-callback-url/open-note?id=625D61B1-11BE-4F2B-AC28-4384FB3FBC28-3345-000504876393E080">Collection&lt;? extends E&gt;</a><br>【<a href="bear://x-callback-url/open-note?id=86D774BF-34AC-4D83-99B1-14C83B16ADC1-3345-0004F71B296442B7">前面的重要问题提炼</a>】<br>【<a href="bear://x-callback-url/open-note?id=CD995CEF-7D0E-4947-ACBE-01E236DAFC8E-3345-0004F231882298F1">重新理解一下java内存模型(JMM)</a>】</p>
+<p>【<a href="bear://x-callback-url/open-note?id=2490EFF3-A875-4DB0-AD36-824E8D5E47D4-3345-00023349DEB74E68">如何理解线程这个东西</a>】<br><a href="bear://x-callback-url/open-note?id=C095BCD0-2DE4-4DB0-A25B-ED98F022815F-3345-00022DD7AC074690">java的初始化过程(有静态变量和方法)</a><br>【<a href="bear://x-callback-url/open-note?id=A87FC89A-8993-49E9-B5F0-EF9E8349AF48-3345-00022EEAA47F9E52">java堆栈的理解</a>】<br><a href="bear://x-callback-url/open-note?id=1B5E22F8-06FF-49DD-BA3F-54032E49B09F-3345-00022D2D7F063916">java中的static关键字</a></p>
+<p><a href="bear://x-callback-url/open-note?id=D90C2D8B-1D36-4C78-BD52-4DE464AD587F-699-0000BBAC66E066DA">同步容器也会线程不安全</a><br>【<a href="bear://x-callback-url/open-note?id=C059DA71-C50E-48D6-A01D-F2C7A43913DC-699-0000BB15FF1A8239">线程安全的策略</a>】<br>【<a href="bear://x-callback-url/open-note?id=77E6CCC6-6790-4971-BC54-06CCC43121F7-699-0000B905CC782408">中期对并发的整理总结</a>】<br>【<a href="bear://x-callback-url/open-note?id=F21F0C91-1EC3-4B8E-B4A1-E8D6A7902DCF-722-00013297765CD330">安全发布对象</a>】<br>【<a href="bear://x-callback-url/open-note?id=7AF7847D-1AD5-4D0E-95D4-EA645DBA36F0-722-00012C53FC9A6618">对MESI和JMM的认识</a>】<br><a href="bear://x-callback-url/open-note?id=C177DF8A-D609-4006-9049-7B1CCA66840E-722-00009C52C6D0D38E">线程安全性</a><br><a href="bear://x-callback-url/open-note?id=24E179F4-B97D-4EA2-BDB3-148CA6B95FF6-722-000104B0F69AC74E">qq群问答</a><br><a href="bear://x-callback-url/open-note?id=A5861531-E41B-4320-A9D7-80F5DC655AE8-722-00009A684A8F9269">并发模拟-代码</a><br><a href="bear://x-callback-url/open-note?id=FE3275EC-7CBA-477D-9E97-D5FFA6F298B7-722-00004DE1A6B98FCB">并发工具</a><br><a href="bear://x-callback-url/open-note?id=AD68B5C6-7658-4F7E-AE46-817BE5429ECD-722-00004CCD89687599">环境初始化</a><br><a href="bear://x-callback-url/open-note?id=5438B7BB-345D-4FF1-8DCE-D449C6C8F2D5-722-000016BA19DD9086">并发的优势与风险</a><br><a href="bear://x-callback-url/open-note?id=C8E03BB3-ABBF-4BC5-BC8C-93B8F9E1FA7F-722-00001524FBF775F8">JAVA内存模型</a><br><a href="bear://x-callback-url/open-note?id=95B8684B-5A9D-4417-9ABC-246A176715BF-722-000014D5ECE1A927">CPU多级缓存-乱序执行优化</a><br><a href="bear://x-callback-url/open-note?id=C5A04031-E873-48A2-A453-05582325574B-722-0000141FA860027D">CPU多级缓存-缓存一致性</a><br><a href="bear://x-callback-url/open-note?id=1F0B5C5A-A1F2-4E49-81EE-67F9D2B250E0-722-00001349D68AF429">并发和高并发的基本概念</a><br><a href="bear://x-callback-url/open-note?id=4F4CDE4F-0529-4B9E-AC57-D1491A0DE897-722-00001127B9F3D290">课程介绍</a></p>
+<h2 id="资料："><a href="#资料：" class="headerlink" title="资料："></a>资料：</h2><p><a href="https://www.imooc.com/article/24007" target="_blank" rel="noopener">《Java并发编程与高并发解决方案》知识点索引_慕课手记</a><br><a href="https://www.imooc.com/article/21449" target="_blank" rel="noopener">《Java开发企业级权限管理系统》问题汇总 - 持续更新中_慕课手记</a></p>
+<p><a href="Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.svg">Java并发编程与高并发解决方案.svg</a></p>
+<p><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E7%9B%AE%E5%BD%95(%E5%B9%B6%E5%8F%91)/Java%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B8%8E%E9%AB%98%E5%B9%B6%E5%8F%91%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">并发和高并发的基本概念</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-04-01 11:18:00" itemprop="dateCreated datePublished" datetime="2018-04-01T11:18:00+08:00">2018-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java并发</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-meta-item leancloud_visitors" data-flag-title="并发和高并发的基本概念" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>16</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年4月1日 上午11:18</p>
+<p><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/5AF173AF-94C3-431A-A0C1-95B050430F9C.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/1FBE2CDA-E22A-4B48-BF09-B13637B26AD5.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/153C9BC1-FF59-4B7D-AD78-9A28D438EE3F.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E5%B9%B6%E5%8F%91%E5%92%8C%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/082B530F-4F42-47E5-A315-13F2355CAE69.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/" class="post-title-link" itemprop="url">课程介绍</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-04-01 10:07:00" itemprop="dateCreated datePublished" datetime="2018-04-01T10:07:00+08:00">2018-04-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-java%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/java并发</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/" class="post-meta-item leancloud_visitors" data-flag-title="课程介绍" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>16</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年4月1日 上午10:07</p>
+<p><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/B2F89A44-5859-4C0D-9D7D-26532339DAEA.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/282A6856-7A3C-483D-8537-0B53045F6213.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/3DE01A5B-15F9-4904-9044-FF0B1945345B.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/91E66EC3-C8B7-4D34-91AF-BC39AB974D2B.png" alt><br><img src="/2018/04/01/web%E5%BC%80%E5%8F%91/czh_java/java%E5%B9%B6%E5%8F%91/%E8%AF%BE%E7%A8%8B%E4%BB%8B%E7%BB%8D/23C9CEC0-FC0C-444F-A2CA-1C6265655BE5.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/" class="post-title-link" itemprop="url">SpringMVC_RESTful</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-31 11:41:00" itemprop="dateCreated datePublished" datetime="2018-03-31T11:41:00+08:00">2018-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/分布式集群</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/" class="post-meta-item leancloud_visitors" data-flag-title="SpringMVC_RESTful" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年3月31日 上午11:41</p>
+<h2 id="对RESTful的理解："><a href="#对RESTful的理解：" class="headerlink" title="对RESTful的理解："></a>对RESTful的理解：</h2><ol>
+<li>其实就是要创建一种RESTful风格的URL</li>
+<li>参数全部暴露出来，通过斜杠<em>的方式。</em><strong>_斜杠_就是RESTful的主要表现方式</strong></li>
+<li><strong>原先URL通过.do的方式，URL指向的是一个方法，而RESTful风格的URL指向的是一个资源。</strong></li>
+<li><strong>我理解RESTful就是一种定位到方法的新的方式</strong>，这种方式是springMVC本身就支持的。而我们最先使用的detail.do?productId=26这种.do的方式，也是springMVC自带的其中一种而已。</li>
+</ol>
+<h2 id="不适合用RESTful的情况："><a href="#不适合用RESTful的情况：" class="headerlink" title="不适合用RESTful的情况："></a>不适合用RESTful的情况：</h2><ol>
+<li>当<strong>方法需要的参数过多</strong>的时候，我们就必须在URL中写那么多的参数，看见就不舒服。</li>
+<li>RESTful中声明的<strong>参数是不可以为空的</strong>，<br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/8DE7FF3C-A2ED-43ED-B3F9-0708D4AC0BC0.png" alt></li>
+</ol>
+<h2 id="SpringMVC-RESTful配置"><a href="#SpringMVC-RESTful配置" class="headerlink" title="SpringMVC_RESTful配置"></a>SpringMVC_RESTful配置</h2><p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/0D9A9A28-EECB-4DC3-9965-3A788E5209AC.png" alt></p>
+<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/5B956C91-FFE5-46FB-8919-580FDF60DA01.png" alt></p>
+<h2 id="一些例子："><a href="#一些例子：" class="headerlink" title="一些例子："></a>一些例子：</h2><p>下面的代码中有两个是bad例子，作为对比，很好理解，我就不带了写了，关键是理解清楚RESTful是干啥的就行了。<br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/B8079A54-0368-452F-BA37-6939268F2530.png" alt></p>
+<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/030DC169-2919-4734-B42D-D78B3F6348EF.png" alt></p>
+<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/BB0EF55F-3355-419E-BEC4-F3F2E57C7351.png" alt></p>
+<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/47FF3431-6BE9-4199-BA58-BAD1CE90D122.png" alt><br>资源定位不准确，restfull不予许为空</p>
+<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/655EF386-B3DB-48F4-A9EB-EBF3E99B2EF4.png" alt></p>
+<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/SpringMVC_RESTful/A6FE4209-8005-4B2D-9646-A98C47A3F391.png" alt></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mmall.controller.portal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.github.pagehelper.PageInfo;</span><br><span class="line"><span class="keyword">import</span> com.mmall.common.ServerResponse;</span><br><span class="line"><span class="keyword">import</span> com.mmall.service.IProductService;</span><br><span class="line"><span class="keyword">import</span> com.mmall.vo.ProductDetailVo;</span><br><span class="line"><span class="keyword">import</span> org.apache.commons.lang.StringUtils;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMethod;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestParam;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.ResponseBody;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Created by geely</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/product/"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ProductController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> IProductService iProductService;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"detail.do"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;ProductDetailVo&gt; <span class="title">detail</span><span class="params">(Integer productId)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductDetail(productId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/&#123;productId&#125;"</span>, method = RequestMethod.GET)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;ProductDetailVo&gt; <span class="title">detailRESTful</span><span class="params">(@PathVariable Integer productId)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductDetail(productId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"list.do"</span>)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;PageInfo&gt; <span class="title">list</span><span class="params">(@RequestParam(value = <span class="string">"keyword"</span>,required = <span class="keyword">false</span>)</span>String keyword,</span></span><br><span class="line"><span class="function">                                         @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"categoryId"</span>,required = <span class="keyword">false</span>)</span>Integer categoryId,</span></span><br><span class="line"><span class="function">                                         @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"pageNum"</span>,defaultValue = <span class="string">"1"</span>)</span> <span class="keyword">int</span> pageNum,</span></span><br><span class="line"><span class="function">                                         @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"pageSize"</span>,defaultValue = <span class="string">"10"</span>)</span> <span class="keyword">int</span> pageSize,</span></span><br><span class="line"><span class="function">                                         @<span class="title">RequestParam</span><span class="params">(value = <span class="string">"orderBy"</span>,defaultValue = <span class="string">""</span>)</span> String orderBy)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//http://www.happymmall.com/product/手机/100012/1/10/price_asc</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/&#123;keyword&#125;/&#123;categoryId&#125;/&#123;pageNum&#125;/&#123;pageSize&#125;/&#123;orderBy&#125;"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;PageInfo&gt; <span class="title">listRESTful</span><span class="params">(@PathVariable(value = <span class="string">"keyword"</span>)</span>String keyword,</span></span><br><span class="line"><span class="function">                                         @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"categoryId"</span>)</span>Integer categoryId,</span></span><br><span class="line"><span class="function">                                         @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageNum"</span>)</span> Integer pageNum,</span></span><br><span class="line"><span class="function">                                         @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageSize"</span>)</span> Integer pageSize,</span></span><br><span class="line"><span class="function">                                         @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"orderBy"</span>)</span> String orderBy)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pageNum == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageNum = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pageSize == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageSize = <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isBlank(orderBy))&#123;</span><br><span class="line">            orderBy = <span class="string">"price_asc"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductByKeywordCategory(keyword,categoryId,pageNum,pageSize,orderBy);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//    http://www.happymmall.com/product/100012/1/10/price_asc</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/&#123;categoryId&#125;/&#123;pageNum&#125;/&#123;pageSize&#125;/&#123;orderBy&#125;"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;PageInfo&gt; <span class="title">listRESTfulBadcase</span><span class="params">(@PathVariable(value = <span class="string">"categoryId"</span>)</span>Integer categoryId,</span></span><br><span class="line"><span class="function">                                                @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageNum"</span>)</span> Integer pageNum,</span></span><br><span class="line"><span class="function">                                                @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageSize"</span>)</span> Integer pageSize,</span></span><br><span class="line"><span class="function">                                                @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"orderBy"</span>)</span> String orderBy)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pageNum == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageNum = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pageSize == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageSize = <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isBlank(orderBy))&#123;</span><br><span class="line">            orderBy = <span class="string">"price_asc"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductByKeywordCategory(<span class="string">""</span>,categoryId,pageNum,pageSize,orderBy);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/&#123;keyword&#125;/&#123;pageNum&#125;/&#123;pageSize&#125;/&#123;orderBy&#125;"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;PageInfo&gt; <span class="title">listRESTfulBadcase</span><span class="params">(@PathVariable(value = <span class="string">"keyword"</span>)</span>String keyword,</span></span><br><span class="line"><span class="function">                                                @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageNum"</span>)</span> Integer pageNum,</span></span><br><span class="line"><span class="function">                                                @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageSize"</span>)</span> Integer pageSize,</span></span><br><span class="line"><span class="function">                                                @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"orderBy"</span>)</span> String orderBy)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pageNum == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageNum = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pageSize == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageSize = <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isBlank(orderBy))&#123;</span><br><span class="line">            orderBy = <span class="string">"price_asc"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductByKeywordCategory(keyword,<span class="keyword">null</span>,pageNum,pageSize,orderBy);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//http://www.happymmall.com/product/keyword/手机/1/10/price_asc</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/keyword/&#123;keyword&#125;/&#123;pageNum&#125;/&#123;pageSize&#125;/&#123;orderBy&#125;"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;PageInfo&gt; <span class="title">listRESTful</span><span class="params">(@PathVariable(value = <span class="string">"keyword"</span>)</span>String keyword,</span></span><br><span class="line"><span class="function">                                                       @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageNum"</span>)</span> Integer pageNum,</span></span><br><span class="line"><span class="function">                                                       @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageSize"</span>)</span> Integer pageSize,</span></span><br><span class="line"><span class="function">                                                       @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"orderBy"</span>)</span> String orderBy)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pageNum == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageNum = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pageSize == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageSize = <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isBlank(orderBy))&#123;</span><br><span class="line">            orderBy = <span class="string">"price_asc"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductByKeywordCategory(keyword,<span class="keyword">null</span>,pageNum,pageSize,orderBy);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//http://www.happymmall.com/product/category/100012/1/10/price_asc</span></span><br><span class="line">    <span class="meta">@RequestMapping</span>(value = <span class="string">"/category/&#123;categoryId&#125;/&#123;pageNum&#125;/&#123;pageSize&#125;/&#123;orderBy&#125;"</span>,method = RequestMethod.GET)</span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ServerResponse&lt;PageInfo&gt; <span class="title">listRESTful</span><span class="params">(@PathVariable(value = <span class="string">"categoryId"</span>)</span>Integer categoryId,</span></span><br><span class="line"><span class="function">                                                       @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageNum"</span>)</span> Integer pageNum,</span></span><br><span class="line"><span class="function">                                                       @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"pageSize"</span>)</span> Integer pageSize,</span></span><br><span class="line"><span class="function">                                                       @<span class="title">PathVariable</span><span class="params">(value = <span class="string">"orderBy"</span>)</span> String orderBy)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pageNum == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageNum = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pageSize == <span class="keyword">null</span>)&#123;</span><br><span class="line">            pageSize = <span class="number">10</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(StringUtils.isBlank(orderBy))&#123;</span><br><span class="line">            orderBy = <span class="string">"price_asc"</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> iProductService.getProductByKeywordCategory(<span class="string">""</span>,categoryId,pageNum,pageSize,orderBy);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/" class="post-title-link" itemprop="url">Spring Schedule实现定时关单</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-31 06:25:00" itemprop="dateCreated datePublished" datetime="2018-03-31T06:25:00+08:00">2018-03-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/分布式集群</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/" class="post-meta-item leancloud_visitors" data-flag-title="Spring Schedule实现定时关单" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>271</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年3月31日 下午6:25<br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/C514C112-5B03-4825-8866-B18B8CCFAB8F.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/D5B9A337-5BEF-488B-B48E-3186DFEBF49D.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/3C02E23D-A999-4BF7-92D1-C5E1564D4745.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/C2127892-C888-4281-8FBA-ECC0813A235A.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/B02E23D0-3E82-469D-833C-74CE953CF584.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/590DCA45-6C5D-41A7-A5F3-0B6960F7D099.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/B8AC0CB3-9E1F-4C60-A416-08DA5546D443.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/6598B09A-15B0-4438-8BFF-9F73434E8D3A.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/40EDCF25-62FC-4AA2-B4AD-579CAC5A5422.png" alt><br>也可以让网页自动生成cron<br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/50DF575C-2CE0-4613-B524-4B0530910CB0.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/7A69B8DA-0A4F-44D8-97D9-28C35D162FC5.png" alt></p>
+<hr>
+<p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/DB549839-621A-42E4-AE99-D659544DFE6B.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/4500B2AB-DC3F-4126-ABA7-EC990F34BBFC.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/4C513651-C622-4143-ACE6-77182F49B29D.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/4AD6A7C8-0DE2-4101-9A37-3C4761000849.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/90CA4DC2-D683-4394-95EA-4890A5EE42F9.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/D19899E4-31D2-43B5-B62C-4F6AAE7B7CD2.png" alt></p>
+<hr>
+<h2 id="配置spring-schedule"><a href="#配置spring-schedule" class="headerlink" title="配置spring schedule"></a>配置spring schedule</h2><p><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/C6509488-2F63-4DB4-94EF-8D0B730E68F4.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/92B71CED-085D-4358-9307-44DF84D3EB0D.png" alt></p>
+<h2 id="关单的操作的编写"><a href="#关单的操作的编写" class="headerlink" title="关单的操作的编写"></a>关单的操作的编写</h2><ol>
+<li>按时间查出到期的<strong>订单</strong></li>
+<li>查<strong>产品</strong>库存<ol>
+<li>需要写新的服务方法在IOderService中，和sql语句。<br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/7CEE04BA-7C89-4A68-BA71-3CC15657C13D.png" alt></li>
+<li>为了保证库存的一致性使用for update行锁<ol>
+<li>一定要用主键查，并且使用mysql的InnoDB引擎</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>更新<strong>每个产品</strong>的库存</li>
+<li>更改订单的状态status，使之关闭<h2 id="创建类tack-CloseOrderTask-java类"><a href="#创建类tack-CloseOrderTask-java类" class="headerlink" title="创建类tack/CloseOrderTask.java类"></a>创建类tack/CloseOrderTask.java类</h2><ol>
+<li>在这个类中写关单的流程</li>
+<li>要在<strong>配置文件property</strong>中声明一些重要的配置常量</li>
+</ol>
+</li>
+</ol>
+<h2 id="附带的操作："><a href="#附带的操作：" class="headerlink" title="附带的操作："></a>附带的操作：</h2><ol>
+<li>解决配置文件中外部属性无法正确显示(不影响运行)<br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/0D12ECB3-FE15-4766-AB2B-226A38023744.png" alt><br><img src="/2018/03/31/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/Spring%20Schedule%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E5%85%B3%E5%8D%95/CFC5CC7D-E442-4B6E-980A-0BF7769CC539.png" alt></li>
+</ol>
 
       
     </div>
@@ -1520,7 +1328,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/90/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/90/">90</a><span class="page-number current">91</span><a class="page-number" href="/page/92/">92</a><span class="space">&hellip;</span><a class="page-number" href="/page/120/">120</a><a class="extend next" rel="next" href="/page/92/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/90/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/90/">90</a><span class="page-number current">91</span><a class="page-number" href="/page/92/">92</a><span class="space">&hellip;</span><a class="page-number" href="/page/122/">122</a><a class="extend next" rel="next" href="/page/92/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1586,14 +1394,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1193</span>
+          <span class="site-state-item-count">1216</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-count">104</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1627,12 +1435,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.2m</span>
+    <span title="站点总字数">1.3m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">18:20</span>
+    <span title="站点阅读时长">19:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

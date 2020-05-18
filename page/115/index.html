@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/02/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +172,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/" class="post-title-link" itemprop="url">ThinkPHP源码分析（核心）-7</a>
+            <a href="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-title-link" itemprop="url">表复制（根据一个表创建另一个表）</a>
         </h1>
 
         <div class="post-meta">
@@ -182,374 +182,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-08-23 10:57:00" itemprop="dateCreated datePublished" datetime="2017-08-23T10:57:00+08:00">2017-08-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析（核心）-7" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>880</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月23日 上午10:57</p>
-<h2 id="TP中的一个特点"><a href="#TP中的一个特点" class="headerlink" title="TP中的一个特点"></a>TP中的一个特点</h2><ol>
-<li><p>TP执行过程中很大部分都是<strong>环境的配置</strong>，这里要<strong>组织各种不同位置、不同作用的文件</strong>。那么，如何组织他们之间的工作其实也是一个大工程，就好像一个公司，<strong>boss需要思考</strong>自己需要哪些职位、各个职位他们之间如何协作、如何调节他们之间的关系、出现冲突如何处理、如何处理人员的流动（CBD模式）</p>
-</li>
-<li><p>这个的环境配置不仅仅是各种<strong>数组配置文件（define,static）</strong></p>
-</li>
-<li><p>还有各种<strong>类加载（include)</strong>，类加载之后是为了可以直接使用他们的方法</p>
-</li>
-<li><p>这里说是为了说明方法的来源，<strong>我以前目光里只有配置文件</strong></p>
-</li>
-</ol>
-<h2 id="TP中函数的特点、及它引出的深层思考"><a href="#TP中函数的特点、及它引出的深层思考" class="headerlink" title="TP中函数的特点、及它引出的深层思考"></a>TP中函数的特点、及它引出的深层思考</h2><ol>
-<li><p>TP中<strong>单个函数却要执行多个功能</strong>，这中情况还不少</p>
-</li>
-<li><p>这就导致的他的函数会有很多的判断，这样不仅加大了自己设计代码时的难度，让读的人也不舒服</p>
-</li>
-<li><p>但是，这样做的好处就是让上层使用更加方便</p>
-</li>
-<li><p>各有利弊吧</p>
-</li>
-<li><p><strong>还有另一种情形：</strong></p>
-</li>
-<li><p>就是其实功能说起来也很简单，让我实现的话也觉得不难</p>
-</li>
-<li><p>但是，当你去看他函数写的实现过程时，各种判断，绕来绕去，觉得麻烦</p>
-</li>
-<li><p>当然，这样麻烦不是由于人家水平不行，而是由于<strong>要站在一个框架的高度去思考</strong>，它自然就复杂了</p>
-</li>
-<li><p>我们思考的时候都是<strong>单一情景下的，而框架中的情景太多，那么，自然会让一个功能的实现过程变得复杂，需要各种判断、处理</strong></p>
-</li>
-<li><p>这就是<strong>框架设计者设计的核心</strong>，在开工之前需要进行严密的思考。</p>
-</li>
-<li><p><strong>理清各种情景，各种情景之间的关系</strong></p>
-</li>
-<li><p>这也是各个框架最不同、最有价值的地方</p>
-</li>
-<li><p>像老师说的看一个<strong>string类</strong>等是怎样实现的，这些其实都是<strong>框架的皮毛</strong>了</p>
-</li>
-</ol>
-<p>最后：<strong>看框架的人，最高境界就是能理清楚上面说的，能够画出他们之间的逻辑关系图</strong></p>
-<p>到现在为止我就把TP一个应用的启动过程看完了，没完成的有</p>
-<ol>
-<li>TP的core代码，在Library/Think目录下的那些.php文件<ol>
-<li>我只粗略的看了看Hook.class.php，Dispatcher.class.php</li>
-</ol>
-</li>
-<li>在 <a href="bear://x-callback-url/open-note?id=29F62E49-0E3B-40CE-98F0-DCC5C69E67DE-2779-000009EC0DA8F32F">ThinkPHP源码分析-2</a>中关于View的一些东西我没有看，这个其实很关键的，但是没时间了<ol>
-<li><a href="http://www.daydaytc.com/php/142.html" target="_blank" rel="noopener">Thinkphp源码分析系列（七）–控制器基类-TC部落</a></li>
-<li><a href="http://www.daydaytc.com/php/206.html" target="_blank" rel="noopener">Thinkphp源码分析系列（九）–视图view类-TC部落</a><br><img src="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/1B8462AB-C0AE-4F49-8BA8-078CAA355211.png" alt></li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-6/" class="post-title-link" itemprop="url">ThinkPHP源码分析-6</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-23 08:18:00" itemprop="dateCreated datePublished" datetime="2017-08-23T08:18:00+08:00">2017-08-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-6/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析-6" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>334</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月23日 上午8:18</p>
-<h2 id="Hook-class-php"><a href="#Hook-class-php" class="headerlink" title="Hook.class.php"></a>Hook.class.php</h2><ol>
-<li>这个类其实很简单，其中有一个$tags static数组变量用来报错tag和行为的对应关系</li>
-<li>static public function listen($tag, &amp;$params=NULL)这个监听函数，其实是一个执行函数，他直接调用了  static public function exec($name, $tag,&amp;$params=NULL)函数来执行给的tag对应的行为</li>
-<li>除了上面核心的，其他的都是$tags的导入、获取方法</li>
-</ol>
-<h2 id="Dispatcher-class-php"><a href="#Dispatcher-class-php" class="headerlink" title="Dispatcher.class.php"></a>Dispatcher.class.php</h2><ol>
-<li>URL映射到控制器，将URL进行解析对应到相应控制器的方法</li>
-<li>这里并不执行，最后要将解析结果保存在define中、全局变量中</li>
-<li>还有具体的看他的解析过程</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/22/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-5/" class="post-title-link" itemprop="url">ThinkPHP源码分析-5</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-22 09:51:00" itemprop="dateCreated datePublished" datetime="2017-08-22T09:51:00+08:00">2017-08-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-5/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析-5" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>178</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月22日 上午9:51</p>
-<p>方法的执行是一个短暂的过程，那么他如何维持它的效果</p>
-<ol>
-<li>字符串<ol>
-<li>define</li>
-<li>static变量</li>
-<li>数组</li>
-</ol>
-</li>
-<li>这就涉及到一个抽象的过程，一个抽象的状态你用一个字符串来表示，这个字符串就是所谓的状态</li>
-<li>这说明了两点<ol>
-<li>字符串（数组）是每一个项目的核心。不论是用来处理数据、还是完成让人不可思议的功能</li>
-<li>抽象建模的能力。不是实物的东西，用一个字符串（数组）来表示</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/22/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%A2%B3%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%A2%B3%E7%90%86/" class="post-title-link" itemprop="url">js知识体系的梳理</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-22 05:29:00" itemprop="dateCreated datePublished" datetime="2017-08-22T05:29:00+08:00">2017-08-22</time>
+              <time title="创建时间：2017-09-02 08:44:00" itemprop="dateCreated datePublished" datetime="2017-09-02T08:44:00+08:00">2017-09-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -571,7 +204,7 @@
             </span>
 
           
-            <span id="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%A2%B3%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="js知识体系的梳理" title="阅读次数">
+            <span id="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="表复制（根据一个表创建另一个表）" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -583,7 +216,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>132</span>
+              <span>99</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -602,23 +235,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2017年8月22日 下午5:29</p>
-<h2 id="由这几部分组成"><a href="#由这几部分组成" class="headerlink" title="由这几部分组成"></a>由这几部分组成</h2><ol>
-<li>Js的非对象语法规则：这个其实简单，基本上和其他语言一致，一定不会造成大问题</li>
-<li>对象：如图1<ol>
-<li>javaScript对象</li>
-<li>Browser对象</li>
-<li>DOM对象</li>
-<li>HTML对象</li>
-</ol>
-</li>
-<li>事件机制：<ol>
-<li>事件包括：事件源()</li>
-</ol>
-</li>
-</ol>
-<p>对象的来源<br>如何操作对象<br>对象可以干什么</p>
-<p><img src="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%A2%B3%E7%90%86/DB08A82B-088F-4DFA-A8D5-140AF9DEC958.png" alt></p>
+          <p>#web开发/czh_blog/数据库<br>2017年9月2日 上午8:44</p>
+<p><a href="http://ears.iteye.com/blog/1470605" target="_blank" rel="noopener">CREATE TABLE 表名 AS SELECT 语句</a><br><a href="http://blog.csdn.net/qq_27317147/article/details/52130427" target="_blank" rel="noopener">oracle SELECT INTO 和 INSERT INTO SELECT 两种表复制语句详解</a></p>
 
       
     </div>
@@ -638,7 +256,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/21/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-4/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/02/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -652,7 +270,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/08/21/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-4/" class="post-title-link" itemprop="url">ThinkPHP源码分析-4</a>
+            <a href="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-title-link" itemprop="url">表复制（根据一个表创建另一个表）</a>
         </h1>
 
         <div class="post-meta">
@@ -662,584 +280,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-08-21 11:37:00" itemprop="dateCreated datePublished" datetime="2017-08-21T11:37:00+08:00">2017-08-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/21/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-4/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析-4" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>755</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月21日 上午11:37</p>
-<h3 id="反思1"><a href="#反思1" class="headerlink" title="反思1"></a>反思1</h3><ol>
-<li>Tp源码中一个函数看似看挺长，其实目的很简单</li>
-<li>长的原因是是要处理多种情况<ol>
-<li>上层设计中，让一个功能呢有多种操作方式，那么，下层对于每种方式都要做好适配</li>
-<li>不同的操作环境</li>
-</ol>
-</li>
-</ol>
-<h2 id="反思2"><a href="#反思2" class="headerlink" title="反思2"></a>反思2</h2><ol>
-<li>一个类定义的变量/函数都是static的</li>
-<li>大量的使用static来维持自己的阶段性成果</li>
-<li>随着程序的执行static变量不断的扩充</li>
-<li>其实都属于Thinkphp_3.2.3/index.php 这个作用域</li>
-<li>这个回答的为啥autoload（）函数只定义在了think.class.php中，但是却可以让自己的项目实现自动加载</li>
-<li>Include/require 引入另一个php文件+执行代码</li>
-<li>Include/require 包含进来的php程序，可以直接使用上文中的变量</li>
-<li>include/require 可以理解直接剪贴过来了</li>
-</ol>
-<h2 id="反思3"><a href="#反思3" class="headerlink" title="反思3"></a>反思3</h2><ol>
-<li>Think.class.php<ol>
-<li>这时候还没有真正的跑起来项目，还是在做它运行需要的准备工作</li>
-</ol>
-</li>
-<li>主要作用：<ol>
-<li>加载各种配置文件（都是return 数组），将他们变成static变量<ol>
-<li>由于TP要实现，同一功能根据不同的情景，采取不同的配置方法</li>
-<li>所以，这里的配置文件的加载步骤比较繁琐</li>
-</ol>
-</li>
-<li>重写php本身的函数，自动加载类库、异常处理、错误处理等<ol>
-<li>这些功能的实现php本身就有很好的辅助函数</li>
-<li>这就可以很方便的实现上面的功能</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>阅读框架，依靠<ol>
-<li>了解业务</li>
-<li>语言功底</li>
-</ol>
-</li>
-<li>TP这个框架思想其实比较简单，在这个过程中锻炼的是自己对语言本身的理解。</li>
-<li>结论：框架学习过程中觉得难，并不是框架的作者发明了多少让人难以理解的代码过程，一定是由于自己：<ol>
-<li>业务本身不了解，    跟不上作者的思路。在具体的看之前，就要脑子中知道作者的目的是啥、有啥效果、要考虑啥特殊情况、大概有几个步骤等</li>
-<li>语言功底中要知道语言本身他又那些特性、这些特性能如何巧用、已经封装好了那些功能、那些没有封装好</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/phpDocument%E7%9A%84%E7%89%A2%E9%AA%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/phpDocument%E7%9A%84%E7%89%A2%E9%AA%9A/" class="post-title-link" itemprop="url">phpDocument的牢骚</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-19 11:34:00" itemprop="dateCreated datePublished" datetime="2017-08-19T11:34:00+08:00">2017-08-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/phpDocument%E7%9A%84%E7%89%A2%E9%AA%9A/" class="post-meta-item leancloud_visitors" data-flag-title="phpDocument的牢骚" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月19日 上午11:34</p>
-<p>官方网站：<a href="https://phpdoc.org/" target="_blank" rel="noopener">https://phpdoc.org/</a></p>
-<p>起因：我最近在看TP的源码，想做出一个html文档作为辅助</p>
-<h2 id="牢骚"><a href="#牢骚" class="headerlink" title="牢骚"></a>牢骚</h2><ol>
-<li>官方网站中的<strong>system requrement</strong>，能不能标明<strong>那些是必须的、哪些是附加的</strong>！出现错误的时候至少排除不是环境的问题</li>
-<li>官方网站中能不能有一个<strong>Q&amp;A</strong>，出了错我都不知道去哪找，百度中的资料，大家的情况基本上都不一样，抄来抄去，不但学不到东西、弄不懂原理，而且八成还解决不了问题</li>
-<li><strong>phpDocument</strong>你行不行，不知道大家用的不同的系统的，<strong>能不能说一说不同电脑之间的区别</strong>。百度上都没有一个关于mac上用pear安装phpDocument的文档，注意是一个！我安装下来各种报错</li>
-<li><strong>最后埋怨埋怨我</strong><ol>
-<li><strong>看资料能不能不着急</strong>！尤其是english，你不知道english不好吗！<ol>
-<li>把 “PHAR”看成“PEAR”，这不是第一次了。这最起码就浪费了1个多小时</li>
-<li>看Stack Overflow里的文章，先看懂人家的情况和自己一样不，不要就是着急找答案，人家问题你都不仔细看，能找见个屁！</li>
-</ol>
-</li>
-<li>学习不是一日之工，是水到渠成。<strong>还是不要着急，保持一个清晰的思维</strong></li>
-</ol>
-</li>
-<li>TP你能为啥就不按phpDocument的格式写，你瞧不起外国人的东西啊（做的好！）</li>
-</ol>
-<h2 id="这次的问题我做的比较好的地方（第三点是最核心的）"><a href="#这次的问题我做的比较好的地方（第三点是最核心的）" class="headerlink" title="这次的问题我做的比较好的地方（第三点是最核心的）"></a>这次的问题我做的比较好的地方（第三点是最核心的）</h2><ol>
-<li>学习phpDocument<strong>首先想到是官方文档</strong>，先进行了文档的阅读，按着文档的思路来做</li>
-<li>我最后实在解决不了问题1、问题2。是按着<strong>官方文档</strong>的方法去试的第二种，从<strong>百度</strong>中乱七八糟的东西中抽出身来。事实证明我是对的</li>
-<li>对于那些报错，我最后觉得是我解决不了的问题，因为他的报错中涉及到了这个软件本身的代码，以及一些php整个原理上的东西。我首先对人家代码不了解，其次我对php整个的运行过程并不熟悉，只是会做不涉及php本质的项目。我既然目前的知识体系不足，<strong>就没必要在自己肯定解决不了的问题中徘徊</strong>，弄的自己蓬头垢面</li>
-</ol>
-<h2 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h2><p>Pear安装过程</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">czhdeMacBook-Pro:.ssh czh$ sudo pear channel-discover pear.phpdoc.org</span><br><span class="line">Password:</span><br><span class="line">Adding Channel &quot;pear.phpdoc.org&quot; succeeded</span><br><span class="line">Discovery of channel &quot;pear.phpdoc.org&quot; succeeded</span><br><span class="line">czhdeMacBook-Pro:.ssh czh$ pear install phpdoc&#x2F;phpDocumentor</span><br><span class="line">Cannot install, php_dir for channel &quot;pear.phpdoc.org&quot; is not writeable by the current user</span><br><span class="line">czhdeMacBook-Pro:.ssh czh$ sudo pear install phpdoc&#x2F;phpDocumentor</span><br><span class="line">downloading phpDocumentor-2.9.0.tgz ...</span><br><span class="line">Starting to download phpDocumentor-2.9.0.tgz (16,175,113 bytes)</span><br><span class="line">...............................................................................done: 16,175,113 bytes</span><br><span class="line">install ok: channel:&#x2F;&#x2F;pear.phpdoc.org&#x2F;phpDocumentor-2.9.0</span><br></pre></td></tr></table></figure>
-
-<p>（第一个错）-解决不了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">czhdeMacBook-Pro:thinkphp_3.2.3 czh$ php phpDocumentor.phar -d . -t docs&#x2F;api</span><br><span class="line">Could not open input file: phpDocumentor.phar</span><br><span class="line">czhdeMacBook-Pro:thinkphp_3.2.3 czh$ sudo php phpDocumentor.phar -d . -t docs&#x2F;api</span><br><span class="line">Password:</span><br><span class="line">Could not open input file: phpDocumentor.phar</span><br></pre></td></tr></table></figure>
-
-<p>（更改路径之后报的第二个错）—解决不了也</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">czhdeMacBook-Pro:thinkphp_3.2.3 czh$  phpdoc -d .&#x2F;ThinkPHP -t .&#x2F;docs&#x2F;api</span><br><span class="line">PHP Warning:  require_once(&#x2F;dompdf&#x2F;dompdf&#x2F;dompdf_config.inc.php): failed to open stream: No such file or directory in &#x2F;usr&#x2F;local&#x2F;pear&#x2F;share&#x2F;pear&#x2F;phpDocumentor&#x2F;src&#x2F;phpDocumentor&#x2F;Bootstrap.php on line 178</span><br><span class="line"></span><br><span class="line">Warning: require_once(&#x2F;dompdf&#x2F;dompdf&#x2F;dompdf_config.inc.php): failed to open stream: No such file or directory in &#x2F;usr&#x2F;local&#x2F;pear&#x2F;share&#x2F;pear&#x2F;phpDocumentor&#x2F;src&#x2F;phpDocumentor&#x2F;Bootstrap.php on line 178</span><br><span class="line">PHP Fatal error:  require_once(): Failed opening required &#39;&#x2F;dompdf&#x2F;dompdf&#x2F;dompdf_config.inc.php&#39; (include_path&#x3D;&#39;.:&#x2F;usr&#x2F;local&#x2F;pear&#x2F;share&#x2F;pear&#39;) in &#x2F;usr&#x2F;local&#x2F;pear&#x2F;share&#x2F;pear&#x2F;phpDocumentor&#x2F;src&#x2F;phpDocumentor&#x2F;Bootstrap.php on line 178</span><br><span class="line"></span><br><span class="line">Fatal error: require_once(): Failed opening required &#39;&#x2F;dompdf&#x2F;dompdf&#x2F;dompdf_config.inc.php&#39; (include_path&#x3D;&#39;.:&#x2F;usr&#x2F;local&#x2F;pear&#x2F;share&#x2F;pear&#39;) in &#x2F;usr&#x2F;local&#x2F;pear&#x2F;share&#x2F;pear&#x2F;phpDocumentor&#x2F;src&#x2F;phpDocumentor&#x2F;Bootstrap.php on line 178</span><br><span class="line">czhdeMacBook-Pro:thinkphp_3.2.3 czh$</span><br></pre></td></tr></table></figure>
-
-<p>我换用PHAR安装后，发现能行了（phpDocumentor.phar方式）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">bogon:~ czh$ php phpDocumentor.phar -d test -t docs&#x2F;api</span><br><span class="line">Collecting files .. OK</span><br><span class="line">Initializing parser .. OK</span><br><span class="line">Parsing files</span><br><span class="line">Parsing &#x2F;Users&#x2F;czh&#x2F;test&#x2F;test.php</span><br><span class="line">Storing cache in &quot;&#x2F;Users&#x2F;czh&#x2F;docs&#x2F;api&quot; .. OK</span><br><span class="line">Load cache                                                         ..    0.000s</span><br><span class="line">Preparing template &quot;clean&quot;                                         ..    0.003s</span><br><span class="line">Preparing 17 transformations                                       ..    0.000s</span><br><span class="line">Build &quot;elements&quot; index                                             ..    0.000s</span><br><span class="line">Replace textual FQCNs with object aliases                          ..    0.000s</span><br><span class="line">Resolve @link and @see tags in descriptions                        ..    0.000s</span><br><span class="line">Enriches inline example tags with their sources                    ..    0.000s</span><br><span class="line">Build &quot;packages&quot; index                                             ..    0.000s</span><br><span class="line">Build &quot;namespaces&quot; index and add namespaces to &quot;elements&quot;          ..    0.000s</span><br><span class="line">Collect all markers embedded in tags                               ..    0.000s</span><br><span class="line">Transform analyzed project into artifacts                          ..</span><br><span class="line">Applying 17 transformations</span><br><span class="line">  Initialize writer &quot;phpDocumentor\Plugin\Core\Transformer\Writer\FileIo&quot;</span><br><span class="line">  Initialize writer &quot;phpDocumentor\Plugin\Twig\Writer\Twig&quot;</span><br><span class="line">  Initialize writer &quot;phpDocumentor\Plugin\Graphs\Writer\Graph&quot;</span><br><span class="line">  Execute transformation using writer &quot;FileIo&quot;</span><br><span class="line">  Execute transformation using writer &quot;FileIo&quot;</span><br><span class="line">  Execute transformation using writer &quot;FileIo&quot;</span><br><span class="line">  Execute transformation using writer &quot;FileIo&quot;</span><br><span class="line">  Execute transformation using writer &quot;FileIo&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;twig&quot;</span><br><span class="line">  Execute transformation using writer &quot;Graph&quot;</span><br><span class="line">Unable to find the &#96;dot&#96; command of the GraphViz package. Is GraphViz correctly installed and present in your path?   0.164s</span><br><span class="line">Analyze results and write report to log                            ..    0.000s</span><br><span class="line">bogon:~ czh$</span><br></pre></td></tr></table></figure>
-
-<p>（报的第三个错）（phpDocumentor.phar方式）<br>说明：phpDocumentor.phar 这个必须在当前目录下（我觉着改改路径其他目录也行，没试）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bogon:htdocs czh$ php phpDocumentor.phar -d test -t docs&#x2F;api</span><br><span class="line">Could not open input file: phpDocumentor.phar</span><br></pre></td></tr></table></figure>
-
-<p>看看成果吧！</p>
-<p><img src="/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/phpDocument%E7%9A%84%E7%89%A2%E9%AA%9A/4C8626C8-87D1-4062-8F76-83078C381F94.png" alt></p>
-<p><img src="/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/phpDocument%E7%9A%84%E7%89%A2%E9%AA%9A/FEAFEFD3-1F1B-445C-842D-89ADBF04C8DA.png" alt><br>注：我倒是没琢磨这个具体怎么用，和javadoc有区别</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-3/" class="post-title-link" itemprop="url">ThinkPHP源码分析-3</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-19 09:18:00" itemprop="dateCreated datePublished" datetime="2017-08-19T09:18:00+08:00">2017-08-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-3/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析-3" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>425</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月19日 下午9:18</p>
-<h2 id="反思1"><a href="#反思1" class="headerlink" title="反思1"></a>反思1</h2><ol>
-<li>今天看源码看的看的就跳坑里了——自己的脑子一点都不清晰，学也学不进去</li>
-<li>原因就是强迫自己去接受自己知识储配达不到的内容，eg：设计到php运行机制、php这么语言中自己不曾接触的东西，就类似于TP的使用者是不考虑这个框架他在不同系统兼容性好坏，着眼点在于完成功能，但是TP的设计者就得考虑，所以当我们从开发者转为设计者时，要求我们整个的视角会变大、变深，最后有可能由于自身水平有限一下达不到这么高的要求，脑子负载过高，就像cpu一样宕机了</li>
-<li>对框架开发者的要求，同时也是我们能从看框架这个过程中能学到的知识。是扭转我们开发思路的重要一步</li>
-</ol>
-<h2 id="反思2"><a href="#反思2" class="headerlink" title="反思2"></a>反思2</h2><ol>
-<li>前两天忘记了php是在Thinkphp之下的。</li>
-<li>在现阶段中，我们把php中的变量也好、函数也好、等等其他内容作为黑盒。</li>
-<li>只需要能分辨出来，以及了解他的作用即可。不做深的研究</li>
-<li>需要大量的去查php手册，这也就说明了基础的重要性</li>
-</ol>
-<p>总结在这个学习过程中有哪些事物对自己产生触动</p>
-<p>反思 + 问题 + 总结</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-2/" class="post-title-link" itemprop="url">ThinkPHP源码分析-2</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-19 08:44:00" itemprop="dateCreated datePublished" datetime="2017-08-19T08:44:00+08:00">2017-08-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/19/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-2/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析-2" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年8月19日 上午8:44</p>
-<h2 id="这节就开始去阅读源码"><a href="#这节就开始去阅读源码" class="headerlink" title="这节就开始去阅读源码"></a>这节就开始去阅读源码</h2><h2 id="对自己的要求"><a href="#对自己的要求" class="headerlink" title="对自己的要求"></a>对自己的要求</h2><ol>
-<li>实时问自己能不能写出这样的代码？</li>
-<li>写出这样的代码需要怎样思考、基础有哪些？</li>
-<li>how：我的注释主要使用文档注释</li>
-<li>When：弄懂不懂的时候添加注释</li>
-</ol>
-<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
-<li>按照TP手册中的</li>
-<li>用户URL请求</li>
-<li>调用应用入口文件(通常是网站的index.php)</li>
-<li>载入框架入口文件(ThinkPHP.php)<ol>
-<li>记录初始运行时间和内存开销</li>
-<li>系统常量判断及定义</li>
-</ol>
-</li>
-<li>载入框架引导类(Think\Think)并执行Think::start方法进行应用初始化 <ol>
-<li>设置错误处理机制和自动加载机制</li>
-<li>调用Think\Storage类进行存储初始化(由STORAGE_TYPE常量定义存储类型) </li>
-<li>部署模式下如果存在应用编译缓存文件则直接加载(直接跳转到步骤22)</li>
-<li>读取应用模式(由APP_MODE常量定义)的定义文件(以下以普通模式为例说明) </li>
-<li>加载当前应用模式定义的核心文件(普通模式是 ThinkPHP_Mode_common.php) </li>
-<li>加载惯例配置文件(普通模式是 ThinkPHP_Conf_convention.php)</li>
-<li>加载应用配置文件(普通模式是 Application_Common_Conf/config.php) </li>
-<li>加载系统别名定义</li>
-<li>判断并读取应用别名定义文件(普通模式是 Application_Common_Conf/alias.php) </li>
-<li>加载系统行为定义</li>
-<li>判断并读取应用行为定义文件(普通模式是 Application_Common_Conf/tags.php) </li>
-<li>加载框架底层语言包(普通模式是 ThinkPHP_Lang_zh-cn.php)</li>
-<li>如果是部署模式则生成应用编译缓存文件</li>
-<li>加载调试模式系统配置文件(ThinkPHP_Conf_debug.php)</li>
-<li>判断并读取应用的调试配置文件(默认是 Application_Common_Conf/debug.php)</li>
-<li>判断应用状态并读取状态配置文件(如果APP_STATUS常量定义不为空的话)</li>
-<li>检测应用目录结构并自动生成(如果CHECK_APP_DIR配置开启并且RUNTIME_PATH目录不存在的情况下)</li>
-</ol>
-</li>
-<li>调用Think\App类的run方法启动应用<ol>
-<li>应用初始化(app_init)标签位侦听并执行绑定行为</li>
-<li>判断并加载动态配置和函数文件</li>
-<li>调用Think\Dispatcher::dispatch方法进行URL请求调度<ol>
-<li>自动识别兼容URL模式和命令行模式下面的$_SERVER[‘PATH_INFO’]参数</li>
-<li>检测域名部署以及完成模块和控制器的绑定操作(APP_SUB_DOMAIN_DEPLOY参数开启) </li>
-<li>分析URL地址中的PATH_INFO信息</li>
-<li>获取请求的模块信息</li>
-<li>检测模块是否存在和允许访问</li>
-<li>判断并加载模块配置文件、别名定义、行为定义及函数文件</li>
-<li>判断并加载模块的动态配置和函数文件</li>
-<li>模块的URL模式判断</li>
-<li>模块的路由检测(URL_ROUTER_ON开启)</li>
-<li>PATH_INFO处理(path_info)标签位侦听并执行绑定行为</li>
-<li>URL后缀检测(URL_DENY_SUFFIX以及URL_HTML_SUFFIX处理)</li>
-<li>获取当前控制器和操作，以及URL其他参数</li>
-<li>URL请求调度完成(url_dispatch)标签位侦听并执行绑定行为</li>
-</ol>
-</li>
-<li>应用开始(app_begin)标签位侦听并执行绑定行为</li>
-<li>调用SESSION_OPTIONS配置参数进行Session初始化(如果不是命令行模式)</li>
-<li>根据请求执行控制器方法<ol>
-<li>如果控制器不存在则检测空控制器是否存在</li>
-<li>控制器开始(action_begin)标签位侦听并执行绑定行为</li>
-<li>默认调用系统的ReadHtmlCache行为读取静态缓存(HTML_CACHE_ON参数开启)</li>
-<li>判断并调用控制器的_initialize初始化方法</li>
-<li>判断操作方法是否存在，如果不存在则检测是否定义空操作方法</li>
-<li>判断前置操作方法是否定义，有的话执行</li>
-<li>Action参数绑定检测，自动匹配操作方法的参数</li>
-<li>如果有模版渲染(调用控制器display方法)</li>
-<li>视图开始(view_begin)标签位侦听并执行绑定行为    </li>
-<li>调用Think\View的fetch方法解析并获取模版内容    </li>
-<li>自动识别当前主题以及定位模版文件        </li>
-<li>视图解析(view_parse)标签位侦听并执行绑定行为        </li>
-<li>默认调用内置ParseTemplate行为解析模版(普通模式下面)</li>
-<li>模版引擎解析模版内容后生成模版缓存    </li>
-<li>模版过滤替换(template_filter)标签位侦听并执行绑定行为    </li>
-<li>默认调用系统的ContentReplace行为进行模版替换    </li>
-<li>输出内容过滤(view_filter)标签位侦听并执行绑定行为</li>
-<li>默认调用系统的WriteHtmlCache行为写入静态缓存(HTML_CACHE_ON参数开启)</li>
-<li>调用Think\View类的render方法输出渲染内容</li>
-<li>视图结束(view_end)标签位侦听并执行绑定行为</li>
-<li>判断后置操作方法是否定义，有的话执行</li>
-<li>控制器结束(action_end)标签位侦听并执行绑定行为</li>
-</ol>
-</li>
-<li>应用结束(app_end)标签位侦听并执行绑定行为</li>
-</ol>
-</li>
-<li>执行系统的ShowPageTrace行为(SHOW_PAGE_TRACE参数开启并且不是AJAX请求)</li>
-<li>日志信息存储写入</li>
-</ol>
-<p>如果你绑定了更多的应用行为的话，流程可能会更加复杂。<br>如果是部署模式下面的第二次请求的话，上面的流程中的步骤10~21是可以省略的。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9A%84%E7%BB%86%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93(%E6%81%B6%E5%BF%83)/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9A%84%E7%BB%86%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93(%E6%81%B6%E5%BF%83)/" class="post-title-link" itemprop="url">js的细小知识点总结(恶心)</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-18 05:39:00" itemprop="dateCreated datePublished" datetime="2017-08-18T05:39:00+08:00">2017-08-18</time>
+              <time title="创建时间：2017-09-02 08:44:00" itemprop="dateCreated datePublished" datetime="2017-09-02T08:44:00+08:00">2017-09-02</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1261,7 +302,7 @@
             </span>
 
           
-            <span id="/2017/08/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9A%84%E7%BB%86%E5%B0%8F%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93(%E6%81%B6%E5%BF%83)/" class="post-meta-item leancloud_visitors" data-flag-title="js的细小知识点总结(恶心)" title="阅读次数">
+            <span id="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="表复制（根据一个表创建另一个表）" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1273,14 +314,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.7k</span>
+              <span>99</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -1292,279 +333,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2017年8月18日 下午5:39</p>
-<p>这个文章的内容乱的厉害，用的时候（command+F）关键字查询，千万别一个一个的看，恶心🤢！！！！！！！！！！</p>
-<h2 id="js与其他语言的区别"><a href="#js与其他语言的区别" class="headerlink" title="js与其他语言的区别"></a>js与其他语言的区别</h2><ol>
-<li>json 以及他的遍历——–新</li>
-<li>eval（）——–新<ol>
-<li><a href="http://www.w3school.com.cn/jsref/jsref_eval.asp" target="_blank" rel="noopener">JavaScript eval() 函数</a></li>
-</ol>
-</li>
-<li>三种输出————重要】】】】】<ol>
-<li><a href="http://www.w3school.com.cn/js/js_popup.asp" target="_blank" rel="noopener">JavaScript 消息框</a></li>
-</ol>
-</li>
-<li>触发————重要】】】】】】</li>
-<li>标签为对象，css为属性————重要】】】】】】</li>
-<li>无对象方法——–方便</li>
-<li>for in——–方便<ol>
-<li>for…in 语句用于对数组或者对象的属性进行循环操作。</li>
-<li><a href="http://www.w3school.com.cn/js/js_loop_for_in.asp" target="_blank" rel="noopener">JavaScript for…in 语句</a></li>
-</ol>
-</li>
-<li>弱类型——–方便</li>
-<li>就是些处理字符串等其他函数</li>
-<li>触发事件<br>总结：最牛的地方是能操控的了html标签和css属性</li>
-</ol>
-<p>这就理清了js html css的关系了，共同控制了整个页面</p>
-<h2 id="JS遇到问题怎么办"><a href="#JS遇到问题怎么办" class="headerlink" title="JS遇到问题怎么办"></a>JS遇到问题怎么办</h2><ol>
-<li>对出问题的地方去查手册，看手册中没有说限制</li>
-<li>很多时候都是浏览器的问题<ol>
-<li>不同浏览器的效果不同</li>
-<li>方法执行结果不同</li>
-<li>有些方法在部分浏览器中不能用</li>
-</ol>
-</li>
-<li>要看开发者工中的报错</li>
-<li>js中的有些事件是不按代码顺序走的，而是按触发来执行的，这一点区别于其他语言，一定要小心</li>
-</ol>
-<h2 id="JS分语法，事件，对象，AJAX"><a href="#JS分语法，事件，对象，AJAX" class="headerlink" title="JS分语法，事件，对象，AJAX"></a>JS分语法，事件，对象，AJAX</h2><p>1事件：onmouseover 和 onmouseout  onclick onmousedown 和 onmouseup  onload  onkeyup onchange六种（还能传参）<br>2对象：document操作的自定义对象，windows下的对象（理解思路）<br>    1：windows主要有四大对象history location nacigator screen<br>    2：其他的都是一些小的属性和方法<br>    3：windows是顶层，四大对象是中间，其他的就是属性和方法。一共就三层<br>3AJAX：格式很死</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">showCustomer</span>(<span class="params">str</span>)</span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> xmlhttp;    </span><br><span class="line">		<span class="keyword">if</span> (str==<span class="string">""</span>)</span><br><span class="line">		  &#123;</span><br><span class="line">			  <span class="built_in">document</span>.getElementById(<span class="string">"txtHint"</span>).innerHTML=<span class="string">""</span>;</span><br><span class="line">			  <span class="keyword">return</span>;</span><br><span class="line">		  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest)</span><br><span class="line">		  &#123;<span class="comment">// code for IE7+, Firefox, Chrome, Opera, Safari</span></span><br><span class="line">		 	 xmlhttp=<span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">		  &#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		  &#123;<span class="comment">// code for IE6, IE5</span></span><br><span class="line">		 	 xmlhttp=<span class="keyword">new</span> ActiveXObject(<span class="string">"Microsoft.XMLHTTP"</span>);</span><br><span class="line">		  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">		xmlhttp.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">		  </span>&#123;</span><br><span class="line">			  <span class="keyword">if</span> (xmlhttp.readyState==<span class="number">4</span> &amp;&amp; xmlhttp.status==<span class="number">200</span>)</span><br><span class="line">			    &#123;</span><br><span class="line">			   		 <span class="built_in">document</span>.getElementById(<span class="string">"txtHint"</span>).innerHTML=xmlhttp.responseText;</span><br><span class="line">			    &#125;</span><br><span class="line">		  &#125;</span><br><span class="line">		xmlhttp.open(<span class="string">"GET"</span>,<span class="string">"/ajax/getcustomer.asp?q="</span>+str,<span class="literal">true</span>);</span><br><span class="line">		xmlhttp.send();</span><br><span class="line">	&#125;</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
-<p>参考：<br><a href="http://www.runoob.com/ajax/ajax-tutorial.html" target="_blank" rel="noopener">AJAX 教程 | 菜鸟教程</a><br><a href="http://www.runoob.com/try/try.php?filename=tryajax_first" target="_blank" rel="noopener">菜鸟教程在线编辑器</a></p>
-<p>Js的一个<script></scrip>就好比一个java中的一个类，他可以有自己的变量和方法，同时也可以创建其他类的对象，调用方法</p>
-<p>对象的有哪些，对象的属性、功能看w3school<br>怎样取得对象，有哪些对象是接下来要熟悉的内容</p>
-<h2 id="Js中一些细小的知识点"><a href="#Js中一些细小的知识点" class="headerlink" title="Js中一些细小的知识点"></a>Js中一些细小的知识点</h2><ol>
-<li><p>Typeof <a href="http://www.360doc.com/content/14/0718/15/8790037_395279403.shtml" target="_blank" rel="noopener">js中typeof的用法</a></p>
-<ol>
-<li><code>alert(Number(&quot;123s&quot;));</code> 返回的是：NaN</li>
-</ol>
-</li>
-<li><p>Alert</p>
-<ol>
-<li><code>alert(window||document);</code> 结果是： [object window]</li>
-<li><code>alert(window&amp;&amp;document);</code>结果是：[object HTMLDocument]</li>
-</ol>
-</li>
-<li><p>“” ‘’</p>
-<ol>
-<li><code>onclick = “Javascript:window.open(‘b.html’)  “</code></li>
-</ol>
-</li>
-<li><p>null</p>
-</li>
-<li><p>NaN </p>
-<ol>
-<li>not a number</li>
-</ol>
-</li>
-<li><p>undefined</p>
-</li>
-<li><p>运算符</p>
-<ol>
-<li>= 赋值</li>
-<li>== 判断值是否相等</li>
-<li>=== 值和类型是否都相等</li>
-</ol>
-</li>
-<li><p>强制类型转换</p>
-<ol>
-<li>Number  特殊情况 结果都是：NaN<ol>
-<li><code>alert(Number(&quot;abc&quot;));</code> </li>
-<li><code>alert(Number(&quot;abc123&quot;));</code></li>
-<li><code>alert(Number(&quot;123abc&quot;));</code></li>
-</ol>
-</li>
-<li>parseFLoat()<ol>
-<li><code>alert(parseFloat(&quot;123abc&quot;));</code>   out:123</li>
-<li><code>alert(parseFloat(&quot;abc&quot;));</code>   out:NaN</li>
-<li><code>alert(parseFloat(&quot;123&quot;));</code> out:123</li>
-</ol>
-</li>
-<li>parseInt ()</li>
-<li>boolean() <ol>
-<li><code>alert(Boolean(&quot;123&quot;));</code> out：true</li>
-<li><code>alert(Boolean(&quot;&quot;));</code>  out:false</li>
-</ol>
-</li>
-<li>字符串拼接</li>
-</ol>
-</li>
-<li><p>isNaN()</p>
-</li>
-<li><p>With</p>
-</li>
-<li><p>Break和标签一起用</p>
-<ol>
-<li>标签  代表一个{}</li>
-</ol>
-</li>
-<li><p>countinue</p>
-</li>
-<li><p>Array(3)</p>
-<ol>
-<li>[] 任意值</li>
-<li>自动延伸</li>
-<li>array[4]  out: undefined</li>
-<li>二维的定义[[][]]</li>
-</ol>
-</li>
-<li><p>js函数没有重载，后面相同名字的函数会覆盖前面的</p>
-<ol>
-<li>argument会接收传过来的所有参数值，保存在argument中（每一个函数（对象）都有一个父类object ,这个argument可以理解成是父类的成员变量）<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">add(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);</span><br></pre></td></tr></table></figure></li>
-<li>会调用function add(a,b,c){}<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a,b</span>)</span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a,b,c</span>)</span>&#123;&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-<li><p>Delete </p>
-</li>
-<li><p>对象添加方法</p>
-<ol>
-<li>从数组中也可以看出</li>
-</ol>
-</li>
-<li><p>闭包： 一个函数，可以使用其他函数作用于的变量 </p>
-<ol>
-<li>闭包中的this</li>
-<li>闭包函数的参数</li>
-</ol>
-</li>
-<li><p>String.concat()</p>
-<ol>
-<li>string.join(“-”)</li>
-<li>.push</li>
-<li>.pop</li>
-<li>Sort  <ol>
-<li>如果是字符串的话，那么将字符串的第一个字符的ascii转进行排序，后面的字符不管他</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>Json是特殊的对象，对象在js中可以增删属性、方法 </p>
-<ol>
-<li>数组是特殊的json</li>
-<li>继承关系可以prototype，单独声明</li>
-<li>不支持多态</li>
-</ol>
-</li>
-<li><p>setInterval()</p>
-<ol>
-<li>setInterval(“*”,3000)</li>
-<li>setInterval(*,3000);</li>
-<li>setTimeOut</li>
-</ol>
-</li>
-<li><p>Js的位置放上面会可能会导致对象没找到</p>
-<ol>
-<li>Window.onload = function(){}</li>
-</ol>
-</li>
-<li><p>事件绑定</p>
-<ol>
-<li>Js中绑定<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">button.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> ul = <span class="built_in">document</span>.getElementById(<span class="string">"parent"</span>);</span><br><span class="line">		<span class="keyword">var</span> ls = <span class="built_in">document</span>.createElement(<span class="string">"li"</span>);</span><br><span class="line">		<span class="keyword">var</span> text = <span class="built_in">document</span>.createTextNode(<span class="string">"笨蛋"</span>);</span><br><span class="line">		ls.appendChild(text);</span><br><span class="line">		ul.appendChild(ls);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>html中<ol>
-<li>onclick=“javascript:alert()”写js语句</li>
-<li>Onclick = “test()”;</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>标签对象=null可用于清空标签对象</p>
-</li>
-<li><p>childNodes()在不同浏览器的差别</p>
-<ol>
-<li>IE  中ul.length = 3</li>
-<li>其他 ul.length = 7<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span> = <span class="string">"parent"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span>3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
-<li>firstChild  lastChild  也是不一样的</li>
-<li>原因：算上了中间的空白，所以每次都是2n+1</li>
-</ol>
-</li>
-<li><p>parentNode ()各个浏览器是一样的 </p>
-</li>
-<li><p>节点的增删该查注意：基本的操作需要借助父节点的操作方法来完成</p>
-</li>
-<li><p>js控制style样式 </p>
-<ol>
-<li>第一种方式<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> d = <span class="built_in">document</span>.getElementById(<span class="string">"d"</span>);</span><br><span class="line">alert(d.style.width);</span><br></pre></td></tr></table></figure></li>
-<li>第二种方式<ol>
-<li>IE: currentStyle.属性 获取</li>
-<li>W3C:   getComputedStyle(节点对象,null).属性   获取</li>
-</ol>
-</li>
-<li>区别：<ol>
-<li>方式一，只对行内style的有效（<code>&lt;button  id = &quot;button&quot; style=“width:300px”&gt;添加&lt;/button&gt;</code>）</li>
-<li>所以，通过link方式添加的css/<style>中的css，就要用第二种 </li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>DOM对象:DOM对象大量的是节点（node）对象，这里主要说的是属性，体现他们的包含关系</p>
-<ol>
-<li><a href="http://www.w3school.com.cn/jsref/dom_obj_all.asp" target="_blank" rel="noopener">HTML DOM Element 对象</a></li>
-<li>document对象</li>
-<li>节点(Node)对象<ol>
-<li>标签（元素）</li>
-<li>属性</li>
-<li>文本 ：文本对象的获取通过childNode()，不能通过innerHTML，这个是文本</li>
-<li>这里的节点不仅仅是标签，而且还有属性，和文本</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>DOM操作 ：这里说的是方法，增删改查<a href="http://www.w3school.com.cn/jsref/dom_obj_all.asp" target="_blank" rel="noopener">HTML DOM Element 对象</a></p>
-<ol>
-<li>appendChild(添加的对象) 剪切 其实就是把一个标签对象放到另一个地方<ol>
-<li>当添加的对象是目前文件中的，那么，会剪贴过来</li>
-<li>当添加对象是自己在js中创建的，那么，会添加新的</li>
-</ol>
-</li>
-<li>insertBefore(新，旧)在目标节点之前添加一个新的节点或者是一个已存在的其他节点</li>
-<li>removeChild() 移除一个已获得的节点对象</li>
-<li>replaceChild(新，旧) 替换一个节点</li>
-<li>cloneNode(true) 复制  为已获得的标签元素对象创建一个复制体</li>
-</ol>
-</li>
-<li><p>判断浏览器是否是ie</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> d = <span class="built_in">document</span>.getElementById(<span class="string">"d"</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getStyle</span>(<span class="params">a,b</span>)</span>&#123;<span class="comment">//a是节点对象，b是要查询的style中的属性</span></span><br><span class="line">	<span class="keyword">if</span>(d.currentStyle)&#123;</span><br><span class="line">		alert(<span class="string">"IE"</span>);</span><br><span class="line">		<span class="keyword">return</span> a.currentStyle[b];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		alert(<span class="string">"其他"</span>);</span><br><span class="line">		<span class="keyword">return</span> getComputedStyle(d，<span class="literal">null</span>)[b];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><p>一个节点绑定多个事件</p>
-<ol>
-<li>添加<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">d.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;);</span><br><span class="line">d.addEventListener(<span class="string">"click"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;);</span><br></pre></td></tr></table></figure></li>
-<li>删除<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d.removeEventListener(<span class="string">"click"</span>,cc);<span class="comment">//cc是绑定的函数名</span></span><br></pre></td></tr></table></figure></li>
-<li>特殊<ol>
-<li>IE attachEvent(“事件”,”处理”) detachEvent(“事件”,”处理”) </li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>event事件对象<a href="http://www.w3school.com.cn/jsref/dom_obj_event.asp" target="_blank" rel="noopener">HTML DOM Event 对象</a></p>
-<ol>
-<li>Event 对象代表事件的状态，比如事件在其中发生的元素、键盘按键的状态、鼠标的位置、鼠标按钮的状态。</li>
-<li>事件通常与函数结合使用，函数不会在事件发生前被执行！ </li>
-<li>event.target 获取事件源 （W3C）</li>
-<li>作用<br><img src="/000FC998-8DF6-47B7-AAC5-7A78F1623FCB.png" alt=""></li>
-</ol>
-</li>
-<li><p>Js事件流</p>
-<ol>
-<li>起泡型事件流</li>
-<li>捕获型事件流</li>
-</ol>
-</li>
-<li><p>Js默认的起泡型事件流</p>
-<ol>
-<li>阻止事件流<ol>
-<li>IE :  e.cancalBubble()</li>
-<li>W3C:   e.stopPropagation()</li>
-</ol>
-</li>
-<li>由内到外：由具体对象扩散到不具体对象</li>
-</ol>
-</li>
-<li><p>捕获型事件流</p>
-<ol>
-<li>由外到内：由不具体对象扩散到具体对象</li>
-</ol>
-</li>
-</ol>
-</script></p>
+          <p>#web开发/czh_blog/数据库<br>2017年9月2日 上午8:44</p>
+<p><a href="http://ears.iteye.com/blog/1470605" target="_blank" rel="noopener">CREATE TABLE 表名 AS SELECT 语句</a><br><a href="http://blog.csdn.net/qq_27317147/article/details/52130427" target="_blank" rel="noopener">oracle SELECT INTO 和 INSERT INTO SELECT 两种表复制语句详解</a></p>
+
       
     </div>
 
@@ -1583,7 +354,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%BB%E7%BB%93/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1597,7 +368,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/08/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">js的面向对象总结</a>
+            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">PLSQL（PLSQL语法+存储过程+触发器）</a>
         </h1>
 
         <div class="post-meta">
@@ -1607,7 +378,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-08-18 03:12:00" itemprop="dateCreated datePublished" datetime="2017-08-18T03:12:00+08:00">2017-08-18</time>
+              <time title="创建时间：2017-09-01 10:36:00" itemprop="dateCreated datePublished" datetime="2017-09-01T10:36:00+08:00">2017-09-01</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1629,7 +400,7 @@
             </span>
 
           
-            <span id="/2017/08/18/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9A%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="js的面向对象总结" title="阅读次数">
+            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="PLSQL（PLSQL语法+存储过程+触发器）" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1641,14 +412,14 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.5k</span>
+              <span>1.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -1660,142 +431,985 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2017年8月18日 下午3:12</p>
-<p>阅读方式：</p>
+          <p>#web开发/czh_blog/数据库<br>2017年9月1日 上午10:36</p>
+<p>这里知识理解一些概念，有一个基本的认识<br>知道ORACLE支持哪些功能，以后一个功能呢不好做的时候，来这里瞧瞧，看有没有正好能用上额特性</p>
+<h2 id="PLSQL中语法特别的地方"><a href="#PLSQL中语法特别的地方" class="headerlink" title="PLSQL中语法特别的地方"></a>PLSQL中语法特别的地方</h2><p>没有逻辑修饰符：|| &amp;&amp;<br>用这些代替：And or between<br>等号：是:= 不是=<br>没有：++ — —<br>|| 内容拼接 隐式转换成字符串连接</p>
+<h2 id="SQL的高级语言特性PLSQL"><a href="#SQL的高级语言特性PLSQL" class="headerlink" title="SQL的高级语言特性PLSQL"></a>SQL的高级语言特性PLSQL</h2><ol>
+<li>所谓的plsql其实就是：sql编程语言一样编程，有高级语言的特性</li>
+<li>If  switch for loop</li>
+<li>Cursor游标 是专门用来解决表中多条数据的情况<ol>
+<li>这个高级语言中没有，是数据库语言中特有的</li>
+<li>和loop连用</li>
+</ol>
+</li>
+<li>类似stl的数据类型<ol>
+<li>Varray </li>
+<li>table </li>
+<li>record</li>
+</ol>
+</li>
+<li>自定义数据类型<ol>
+<li>type</li>
+</ol>
+</li>
+<li>异常<ol>
+<li>支持自定义抛出异常<ol>
+<li>当在函数和存储过程中抛出异常时，可以在调用函数和存储过程的外面进行异常的处理</li>
+</ol>
+</li>
+<li>支持选择自己处理异常，和oracle系统处理异常<ol>
+<li>当没有写exception段时，默认就是让oracle处理异常</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>package<ol>
+<li>这个就是java中的类，不是java中的包</li>
+<li>可以在package中和java一样定义变量，常量，函数（存储过程+函数）等等</li>
+<li>packages + package body</li>
+<li>如何操作<ol>
+<li>不是java中的先new一个对象，然后用对象调用</li>
+<li>Sql中没有new对象，直接使用package名  点就行了</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="存储过程的构成"><a href="#存储过程的构成" class="headerlink" title="存储过程的构成"></a>存储过程的构成</h3><ol>
+<li>给PLSQL去了个名字方便调用</li>
+<li>存储过程</li>
+<li>传入参数</li>
+<li>传出参数</li>
+</ol>
+<h3 id="为什么要封装成存储过程"><a href="#为什么要封装成存储过程" class="headerlink" title="为什么要封装成存储过程?"></a>为什么要封装成存储过程?</h3><ol>
+<li>封装之后方便传入传出参数 </li>
+<li>匿名块只能在数据库环境中调用 存储过程可以被外界调用(比如JDBC)</li>
+</ol>
+<h3 id="函数与存储过程比较："><a href="#函数与存储过程比较：" class="headerlink" title="函数与存储过程比较："></a>函数与存储过程比较：</h3><ol>
+<li>函数可以看做一类特殊的存储过程 没有输出参数 必有唯一返回值</li>
+<li>删掉输出参数，添加返回值</li>
+<li>存储过程可以完全的实现函数的功能</li>
+</ol>
+<h3 id="如何选择函数与存储过程"><a href="#如何选择函数与存储过程" class="headerlink" title="如何选择函数与存储过程"></a>如何选择函数与存储过程</h3><ol>
+<li>当PL-SQL需要嵌在SQL中使用时用函数<ol>
+<li>就像min() max() count()这些函数</li>
+</ol>
+</li>
+<li>当有多个返回值或者要被其它程序调用时用存储过程</li>
+</ol>
+<p>既然利用PLSQL可以实现高级语言的特性，那么当我们实现一个功能的时候，有哪些不同的、或者值得注意的地方</p>
+<p>需求：利用存储过程查询含有特定信息的学生id<br>思路：</p>
 <ol>
-<li>一定要结合例子去看</li>
-<li><a href="http://www.jianshu.com/p/c7ab5ca23ae8#" target="_blank" rel="noopener">Javascript相关知识 - 简书</a>这个链接是我的主要参考的（熟练的看懂）</li>
-<li>汇总的一个js笔记，有很多的文章<a href="http://www.jianshu.com/c/0212550c0db3" target="_blank" rel="noopener">JavaScript学习笔记 - 专题 - 简书</a>可以后续的学</li>
-<li>零基础打造自己的 js 类库</li>
+<li>也就是说这个参数可以是学生姓名，生日，电话号等等信息。在java中我们需要对这个特定信息进行判断，写上一堆if，但是在sql中我直接写在where语句中就行了，就省去了判断的过程</li>
+<li>体现了sql的优势，对比与java语言</li>
 </ol>
-<h2 id="js中比较有特点的理解—–语法层"><a href="#js中比较有特点的理解—–语法层" class="headerlink" title="js中比较有特点的理解—–语法层"></a>js中比较有特点的理解—–语法层</h2><ol>
-<li><strong>函数</strong><ol>
-<li>函数也是一种类型，那么函数名其实就是一个变量，</li>
-<li>同时，<strong>函数也可以当成一个对象，在函数中可以使用this指向本身</strong></li>
-<li>有哪些部分<ol>
-<li>属性：需要通过对象来调用</li>
-<li>方法：需要通过对象来调用执行</li>
-<li><strong>过程</strong>：当函数作为对象new事件发生时，其中的过程会执行</li>
+<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><ol>
+<li>使用触发器的环境:<ol>
+<li>业务逻辑是多步骤的 而且可能从任意一个步骤执行  一般用触发器链</li>
+<li>传进来的参数 是一行数据  一般用触发器</li>
+</ol>
+</li>
+<li>有了存储过程  为什么还要用触发器<ol>
+<li>存储过程需要特殊的调用方式</li>
+<li>A -&gt;  B  -&gt;  c -&gt;  D-&gt;    <ol>
+<li>连锁操作的业务逻辑 用触发器,JDBC只要正常的SQL语句</li>
 </ol>
 </li>
 </ol>
 </li>
-<li><strong>js的运行机制</strong>：定义和执行时不同的（读两次），c语言中遍读遍执行</li>
-<li><strong>闭包</strong>：函数中的函数，它的最大用处有两个，<ol>
-<li>一个是前面提到的可以读取函数内部的变量，</li>
-<li>另一个就是让这些变量的值始终保持在内存中。有一部分static的作用</li>
-<li><a href="http://www.jb51.net/article/24101.htm" target="_blank" rel="noopener">javascript深入理解js闭包_javascript技巧_脚本之家</a>中的闭包用途</li>
+<li>触发器要注意的地方 <ol>
+<li>暂时用不到的触发器全部禁用  <ol>
+<li>使用disable</li>
 </ol>
 </li>
-<li><strong>作用域链</strong>  <ol>
-<li>其实就是一个如何找变量的过程，和c一样，都是从内向外找。程序是一个俄罗斯套娃</li>
+<li>避免逻辑死锁<ol>
+<li>一个trigger就是一个线程</li>
+<li>那么，不说自己的创建的线程，光是系统中默认的操作表的线程就有可能和自己的一个trigger线程产生冲突</li>
 </ol>
 </li>
-<li><strong>json</strong>是js中实现面向对象的方式。也就说，js和PHP一样，面向过程和面向对象都可以<ol>
-<li>Json可以理解为数组</li>
-<li>也可以理解为只带有变量的对象</li>
-</ol>
-</li>
-<li><strong>var</strong>参考：<a href="http://blog.csdn.net/qq_34986769/article/details/52166035" target="_blank" rel="noopener">javascript定义全局变量的时候有var和没有var的区别 - CSDN博客</a><ol>
-<li>是局部变量，不带时时全局变量</li>
-</ol>
-</li>
-<li><strong>js数组</strong><ol>
-<li>像是c++中的stl</li>
-<li><a href="http://www.jianshu.com/p/0a2a986836bc" target="_blank" rel="noopener">Javascript     Array数组初探 - 简书</a></li>
-</ol>
-</li>
-<li><strong>call方法和apply方法</strong>：参考：<a href="http://liuhd2010.iteye.com/blog/1894237" target="_blank" rel="noopener">js之this,call,apply用法</a><ol>
-<li>如果我们调用函数的时候，<strong>想让函数里的 this 代表别的对象</strong>，而不是当前函数的对象。有什么办法呢？那就只好使用call和apply了</li>
-<li>都知道call的用法了，apply其实是一个意思。只不过是调用参数的形式不一样罢了。</li>
-<li>call是一个一个调用参数，而apply是调用一个数组。</li>
-</ol>
-</li>
-<li><strong>对象原型</strong>：参考<a href="http://www.jianshu.com/p/c7ab5ca23ae8#" target="_blank" rel="noopener">Javascript相关知识 - 简书</a><ol>
-<li>所有的对象都有一个原型对象，所有的对象都继承原型对象的属性。</li>
-</ol>
-</li>
-<li><strong>原型链</strong>：参考：<a href="http://www.jianshu.com/p/c7ab5ca23ae8#" target="_blank" rel="noopener">Javascript相关知识 - 简书</a><ol>
-<li>实现：<code>Man.prototype = new Human();// Man的原型指向了Human</code></li>
-<li>作用：<ol>
-<li>指定两个函数（对象）之间的继承关系</li>
-<li>解决每个实例中的每个方法都独自占据一定的内存    </li>
-</ol>
-</li>
-<li>缺点：<pre><code>1. 无法传参给超类，方法不能共享（）
-2. [在JavaScript的原型链继承方式中，为什么子类在调用父类的构造函数时不能传参数](https://zhidao.baidu.com/question/467325883.html)
-3. 对象（实例）才是属性的拥有者。理解了这句话说明懂了</code></pre></li>
-</ol>
-</li>
-<li><strong>对象冒充</strong>：参考：<a href="http://www.jianshu.com/p/c7ab5ca23ae8#" target="_blank" rel="noopener">Javascript相关知识 - 简书</a><ol>
-<li>实现：使用call方法</li>
-<li>理解：给一个已有属性和方法的函数（对象）换一个名字</li>
-<li>作用<ol>
-<li>解决继承中向超类传参的问题</li>
-</ol>
-</li>
-<li>a.call(b,“abc”,123)     a,b 是两个对象    “abc”  123是两个变量</li>
-</ol>
-</li>
-<li><strong>构造函数</strong> <ol>
-<li>函数首字母大写就是构造函数</li>
-</ol>
-</li>
-<li><strong>继承</strong><ol>
-<li>js的面向对象和java的思想就不一样，java是自顶向下的，而js更加随意，给人的感觉是一点点扩展下来的，他的结构并不是一开始就想好的。</li>
-<li>js实现继承的方法主要依靠三个点：<ol>
-<li>原型链：可以继承属性，但无法传参给超类，方法不能共享（原型会被打断）</li>
-<li>对象冒充：通过call的方式将自己假装成父类</li>
-<li>闭包（函数中的函数）</li>
+<li>尽量避免update触发器中对本表的操作</li>
 </ol>
 </li>
 </ol>
-</li>
-<li><strong>关于js中循环带有触发的闭包的理解</strong>：参考：<a href="http://blog.csdn.net/yuli_zoe/article/details/43305855" target="_blank" rel="noopener">JS之经典for循环闭包问题解决方法 - CSDN博客</a>    <ol>
-<li>这个最本质的原因是js是一个像Android一样，是一个有状态的语言，体现上js是可以写触发的</li>
-<li>这就导致一个程序中其实存在两部分：1：顺序执行的2：等待执行的</li>
-<li>当等待执行的唤醒时，程序中的环境可能已经变了，并不是他睡觉时的那个状态了。</li>
-<li>解决办法：<ol>
-<li>给等待执行的程序专门分配一个内存空间，用来存放他醒来时要使用的变量等———–使用函数包含（闭包）</li>
-<li>把需要的变量先给到另一个地方暂为存放，到时候来拿就行了</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><strong>函数定义多种方式</strong> 参考：<a href="http://www.jianshu.com/p/c7ab5ca23ae8#" target="_blank" rel="noopener">Javascript相关知识 - 简书</a><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add1</span>(<span class="params">num1,num2</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add2 = <span class="function"><span class="keyword">function</span>(<span class="params">num1,num2</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> num1 + num2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add3 = <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"num1"</span>,<span class="string">"num2"</span>,<span class="string">"return num1 + num2"</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.console.log(<span class="string">"add1 = "</span> + add1(<span class="number">10</span>,<span class="number">20</span>));</span><br><span class="line"><span class="built_in">window</span>.console.log(<span class="string">"add2 = "</span> + add2(<span class="number">100</span>,<span class="number">200</span>));</span><br><span class="line"><span class="built_in">window</span>.console.log(<span class="string">"add3 = "</span> + add3(<span class="number">1000</span>,<span class="number">2000</span>));</span><br></pre></td></tr></table></figure></li>
-<li><strong>对象多种类型</strong>参考：<a href="http://www.jianshu.com/p/c7ab5ca23ae8#" target="_blank" rel="noopener">Javascript相关知识 - 简书</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var obj &#x3D; new Object();</span><br><span class="line">obj.name &#x3D; &quot;张三丰&quot;;</span><br><span class="line">alert(obj.name)</span><br><span class="line"></span><br><span class="line">var obj &#x3D; Object();</span><br><span class="line">obj.name&#x3D;&quot;zhangsanfeng&quot;;</span><br><span class="line">alert(obj.name);</span><br><span class="line"></span><br><span class="line">var obj &#x3D; &#123;&#125;;</span><br><span class="line">obj.name &#x3D; &quot;zhangjunbao&quot;;</span><br><span class="line">alert(obj.name);</span><br><span class="line"></span><br><span class="line">var obj &#x3D; &#123;</span><br><span class="line">    name:&quot;张三丰&quot;,</span><br><span class="line">    age:28,</span><br><span class="line">    add:function(num1,num2)&#123;</span><br><span class="line">        return num1 + num2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">alert(obj.name);</span><br><span class="line">alert(obj[&#39;name&#39;]);&#x2F;&#x2F; 以数组的方式来访问属性，必须有单引号或是双引号</span><br><span class="line">alert(obj.add(10,20));</span><br></pre></td></tr></table></figure></li>
-<li><strong>零基础打造自己的 js 类库</strong><a href="http://www.jianshu.com/p/a7dd083549a0" target="_blank" rel="noopener">零基础打造自己的 js 类库（1） - 简书</a><ol>
-<li>学到的知识<ol>
-<li>封装不是简单的方法的堆积，要考虑扩展性，客户端的简单操作性，面对需求更改时他的适应性是否够用</li>
-<li>这里不仅仅是是方法的堆积就可以解决的问题，更重要的是一个有一个策略</li>
-<li>最大的一个策略：这个类库给他一个dom对象，他就能返回操作这个dom对象各个属性的方法。要的很少，付出很多。</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="其他："><a href="#其他：" class="headerlink" title="其他："></a>其他：</h3><ol>
-<li>当2,4,6放在一起的时候就会变得很复杂，弄清楚这些仅仅是为了弄清楚js的运行机制。在编程的时候只要保证了，1：全局和局部变量不要同名2：只有多处使用的变量才成为全局变量3：声明变量一定要加上var附上值</li>
-<li>总结：c中也存在类似的作用域链，但是从来都关注，编程的时候更注重的是算法。所以说，关注作用域链时，是从变量的角度进行分析的，但是在实际的编程过程中，只思考那些变量是多处使用的，其他的全部写成局部变量。这样就不用考虑作用域链的问题了 。所以，这个作用域链只能作为一个了解的东西，编程时时没用的。</li>
-<li>今天对于语言来说又有了新的认识<ol>
-<li>以前的语言学习主要是侧重于语法层次，其实更重要的还有这么语言它本身所带有的类库。</li>
-<li>他的类库支持，更加决定了他的用途，而语法更加影响程序员的编程思路。</li>
-</ol>
-</li>
-</ol>
-<h2 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h2><h3 id="声明原型链中传参"><a href="#声明原型链中传参" class="headerlink" title="声明原型链中传参"></a>声明原型链中传参</h3><p>我认为，不是不能给父类构造函数传参数，而是传的参数最终不能起到作用。举个例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function Parents(ln) &#123; this.lastName&#x3D;ln; &#125; &#x2F;&#x2F;定义父类构造函数</span><br><span class="line">function Children(fn,ln) &#123; this.firstName&#x3D;fn; &#125; &#x2F;&#x2F;定义子类，lastName 继承自父类</span><br><span class="line">&#x2F;&#x2F;原型链继承，给父类构造函数传入参数，试图用 Children 类构造函数中传入的 ln 初始化 lastName：</span><br><span class="line">Children.prototype&#x3D;new Parents(this ln);</span><br><span class="line">&#x2F;&#x2F;尝试建立对象实例：</span><br><span class="line">var child&#x3D;new Children(&quot;Bill&quot;,&quot;Gates&quot;);</span><br><span class="line">&#x2F;&#x2F;输出结果。很明显，lastNmae 并没有得到想要的值：</span><br><span class="line">alert(child.firstName);&#x2F;&#x2F;Bill</span><br><span class="line">alert(child.lastName);&#x2F;&#x2F;Undefine</span><br></pre></td></tr></table></figure>
-<p>这说明给父类构造函数传递参数是无效的。原因就在于原型链方式中，<strong>调用父类构造函数的代码并不在子类构造函数中</strong>，建立对象实例时给的属性值（即子类构造函数的参数）并不能影响到子类调用的父类构造函数。<br>当然，在继承时可以这样写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Children.prototype&#x3D;new Parents(&quot;Gates&quot;);&#x2F;&#x2F;调用父类构造函数时给固定值</span><br></pre></td></tr></table></figure>
-<p>但是，这个固定的属性值必定会影响所有子类的对象实例，相当于子类构造函数“擅作主张”给所有对象实例的属性提前“赋了值”。这样写是不太符合面向对象编程的规则的。</p>
-<h3 id="匿名函数"><a href="#匿名函数" class="headerlink" title="匿名函数"></a>匿名函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 匿名函数赋值给变量</span></span><br><span class="line"><span class="keyword">var</span> add = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.console.log(<span class="string">"hhhhhhhhhhhhhhhhhhh"</span>);</span><br><span class="line">&#125;;</span><br><span class="line">add();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 自运行 (匿名函数)()</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.console.log(name + <span class="string">"来自于中国。。。。。。。"</span>);</span><br><span class="line">&#125;)(<span class="string">"zhangsanfeng"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 函数里面放置一个匿名函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">userInfo</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// 闭包：在一个函数中创建另外一个函数，通过另外一个函数访问这个函数的局部变量</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"userInfo"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.console.log(userInfo()());</span><br></pre></td></tr></table></figure>
+<hr>
+<p>Sequence 就像一个全局int型变量，他可以一直记录一个变量的值</p>
+<hr>
+<hr>
+<p>百度</p>
+<hr>
+<p><a href="http://blog.csdn.net/caoxiaohong1005/article/details/53433131" target="_blank" rel="noopener">Mac下不用虚拟机一样可以使用PLSQL Developer - iCoding91        - CSDN博客</a></p>
+<p>%符号 理解成“的”</p>
 
-<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">increase</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        count++;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.console.log(<span class="string">"count1 = "</span> + increase()());</span><br><span class="line"><span class="comment">//这里的increase()()有两个括号：第一步执行increase()定义count=0并返回一个闭包（函数/对象）第二步执行这个闭包count++;</span></span><br><span class="line"><span class="built_in">window</span>.console.log(<span class="string">"count2 = "</span> + increase()());</span><br><span class="line"><span class="built_in">window</span>.console.log(<span class="string">"count3 = "</span> + increase()());</span><br><span class="line"><span class="keyword">var</span> f = increase();<span class="comment">//f是increase()返回的闭包(函数/对象）</span></span><br><span class="line"><span class="comment">// 闭包的优点也是缺点：闭包作用域里面的局部变量资源不会被立刻销毁，如果使用不当，会造成内存泄漏</span></span><br><span class="line"><span class="built_in">window</span>.console.log(<span class="string">"count11 = "</span> + f());</span><br><span class="line"><span class="built_in">window</span>.console.log(<span class="string">"count12 = "</span> + f());</span><br><span class="line"><span class="built_in">window</span>.console.log(<span class="string">"count13 = "</span> + f());</span><br><span class="line"><span class="comment">//f()表示执行闭包</span></span><br><span class="line"><span class="comment">//两个的区别：increase()()是从头开始执行，每次都会重新定义count,而f()是把闭包拿出来，只执行闭包,count只定义了一次</span></span><br><span class="line"></span><br><span class="line">作者：紫苓</span><br><span class="line">链接：http:<span class="comment">//www.jianshu.com/p/c7ab5ca23ae8#</span></span><br><span class="line">來源：简书</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">PLSQL（PLSQL语法+存储过程+触发器）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-01 10:36:00" itemprop="dateCreated datePublished" datetime="2017-09-01T10:36:00+08:00">2017-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="PLSQL（PLSQL语法+存储过程+触发器）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年9月1日 上午10:36</p>
+<p>这里知识理解一些概念，有一个基本的认识<br>知道ORACLE支持哪些功能，以后一个功能呢不好做的时候，来这里瞧瞧，看有没有正好能用上额特性</p>
+<h2 id="PLSQL中语法特别的地方"><a href="#PLSQL中语法特别的地方" class="headerlink" title="PLSQL中语法特别的地方"></a>PLSQL中语法特别的地方</h2><p>没有逻辑修饰符：|| &amp;&amp;<br>用这些代替：And or between<br>等号：是:= 不是=<br>没有：++ — —<br>|| 内容拼接 隐式转换成字符串连接</p>
+<h2 id="SQL的高级语言特性PLSQL"><a href="#SQL的高级语言特性PLSQL" class="headerlink" title="SQL的高级语言特性PLSQL"></a>SQL的高级语言特性PLSQL</h2><ol>
+<li>所谓的plsql其实就是：sql编程语言一样编程，有高级语言的特性</li>
+<li>If  switch for loop</li>
+<li>Cursor游标 是专门用来解决表中多条数据的情况<ol>
+<li>这个高级语言中没有，是数据库语言中特有的</li>
+<li>和loop连用</li>
+</ol>
+</li>
+<li>类似stl的数据类型<ol>
+<li>Varray </li>
+<li>table </li>
+<li>record</li>
+</ol>
+</li>
+<li>自定义数据类型<ol>
+<li>type</li>
+</ol>
+</li>
+<li>异常<ol>
+<li>支持自定义抛出异常<ol>
+<li>当在函数和存储过程中抛出异常时，可以在调用函数和存储过程的外面进行异常的处理</li>
+</ol>
+</li>
+<li>支持选择自己处理异常，和oracle系统处理异常<ol>
+<li>当没有写exception段时，默认就是让oracle处理异常</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>package<ol>
+<li>这个就是java中的类，不是java中的包</li>
+<li>可以在package中和java一样定义变量，常量，函数（存储过程+函数）等等</li>
+<li>packages + package body</li>
+<li>如何操作<ol>
+<li>不是java中的先new一个对象，然后用对象调用</li>
+<li>Sql中没有new对象，直接使用package名  点就行了</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="存储过程的构成"><a href="#存储过程的构成" class="headerlink" title="存储过程的构成"></a>存储过程的构成</h3><ol>
+<li>给PLSQL去了个名字方便调用</li>
+<li>存储过程</li>
+<li>传入参数</li>
+<li>传出参数</li>
+</ol>
+<h3 id="为什么要封装成存储过程"><a href="#为什么要封装成存储过程" class="headerlink" title="为什么要封装成存储过程?"></a>为什么要封装成存储过程?</h3><ol>
+<li>封装之后方便传入传出参数 </li>
+<li>匿名块只能在数据库环境中调用 存储过程可以被外界调用(比如JDBC)</li>
+</ol>
+<h3 id="函数与存储过程比较："><a href="#函数与存储过程比较：" class="headerlink" title="函数与存储过程比较："></a>函数与存储过程比较：</h3><ol>
+<li>函数可以看做一类特殊的存储过程 没有输出参数 必有唯一返回值</li>
+<li>删掉输出参数，添加返回值</li>
+<li>存储过程可以完全的实现函数的功能</li>
+</ol>
+<h3 id="如何选择函数与存储过程"><a href="#如何选择函数与存储过程" class="headerlink" title="如何选择函数与存储过程"></a>如何选择函数与存储过程</h3><ol>
+<li>当PL-SQL需要嵌在SQL中使用时用函数<ol>
+<li>就像min() max() count()这些函数</li>
+</ol>
+</li>
+<li>当有多个返回值或者要被其它程序调用时用存储过程</li>
+</ol>
+<p>既然利用PLSQL可以实现高级语言的特性，那么当我们实现一个功能的时候，有哪些不同的、或者值得注意的地方</p>
+<p>需求：利用存储过程查询含有特定信息的学生id<br>思路：</p>
+<ol>
+<li>也就是说这个参数可以是学生姓名，生日，电话号等等信息。在java中我们需要对这个特定信息进行判断，写上一堆if，但是在sql中我直接写在where语句中就行了，就省去了判断的过程</li>
+<li>体现了sql的优势，对比与java语言</li>
+</ol>
+<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><ol>
+<li>使用触发器的环境:<ol>
+<li>业务逻辑是多步骤的 而且可能从任意一个步骤执行  一般用触发器链</li>
+<li>传进来的参数 是一行数据  一般用触发器</li>
+</ol>
+</li>
+<li>有了存储过程  为什么还要用触发器<ol>
+<li>存储过程需要特殊的调用方式</li>
+<li>A -&gt;  B  -&gt;  c -&gt;  D-&gt;    <ol>
+<li>连锁操作的业务逻辑 用触发器,JDBC只要正常的SQL语句</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>触发器要注意的地方 <ol>
+<li>暂时用不到的触发器全部禁用  <ol>
+<li>使用disable</li>
+</ol>
+</li>
+<li>避免逻辑死锁<ol>
+<li>一个trigger就是一个线程</li>
+<li>那么，不说自己的创建的线程，光是系统中默认的操作表的线程就有可能和自己的一个trigger线程产生冲突</li>
+</ol>
+</li>
+<li>尽量避免update触发器中对本表的操作</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p>Sequence 就像一个全局int型变量，他可以一直记录一个变量的值</p>
+<hr>
+<hr>
+<p>百度</p>
+<hr>
+<p><a href="http://blog.csdn.net/caoxiaohong1005/article/details/53433131" target="_blank" rel="noopener">Mac下不用虚拟机一样可以使用PLSQL Developer - iCoding91        - CSDN博客</a></p>
+<p>%符号 理解成“的”</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">ORACLE的三个客户端工具</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-01 05:44:00" itemprop="dateCreated datePublished" datetime="2017-09-01T05:44:00+08:00">2017-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/" class="post-meta-item leancloud_visitors" data-flag-title="ORACLE的三个客户端工具" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>329</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月1日 下午5:44</p>
+<p>ORACLE SQL Developer<br>Navticat premium<br>PL/SQL</p>
+<ol>
+<li>我觉得最好的是ORACLE SQL Developer</li>
+<li>这个是oracle官方出的<a href="http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" target="_blank" rel="noopener">Oracle SQL Developer Downloads</a></li>
+<li>可以支持多系统，包括mac</li>
+<li>官方手册<a href="http://www.oracle.com/ocom/groups/public/@otn/documents/webcontent/229076_zhs.htm#t3" target="_blank" rel="noopener">使用 SQL Developer 开发和调试 PL/SQL</a>等</li>
+<li>左侧有各种功能支持，右击就可以<ol>
+<li>他的使用和PL_SQL差不多，但是界面美化比PL_SQL好多了</li>
+<li>与navicat相比，navicat毕竟不是亲生的，左侧功能的支持不好，比如package</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/C188C2C6-B90B-4ADA-B0EC-B1F196F279E2.png" alt><br>可以看出他们可以同时连接<br>但是在navicat中添加的数据，在PL/SQL中会乱码<br><a href="http://blog.csdn.net/aovenus/article/details/12648751" target="_blank" rel="noopener">plsql查询数据显示为乱码解决方法 - aovenus的专栏        - CSDN博客</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">SQL表连接</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-31 11:03:00" itemprop="dateCreated datePublished" datetime="2017-08-31T11:03:00+08:00">2017-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-meta-item leancloud_visitors" data-flag-title="SQL表连接" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>92</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午11:03</p>
+<h2 id="连接有哪些"><a href="#连接有哪些" class="headerlink" title="连接有哪些"></a>连接有哪些</h2><ol>
+<li>固定的：外键连接</li>
+<li>额外的：看自己有啥要求，或者要过滤那些情况<ol>
+<li><strong>关键是要明白自己的需求</strong></li>
+<li>然后转换成里逻辑表达式</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">SQL表连接</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-31 11:03:00" itemprop="dateCreated datePublished" datetime="2017-08-31T11:03:00+08:00">2017-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-meta-item leancloud_visitors" data-flag-title="SQL表连接" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>92</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午11:03</p>
+<h2 id="连接有哪些"><a href="#连接有哪些" class="headerlink" title="连接有哪些"></a>连接有哪些</h2><ol>
+<li>固定的：外键连接</li>
+<li>额外的：看自己有啥要求，或者要过滤那些情况<ol>
+<li><strong>关键是要明白自己的需求</strong></li>
+<li>然后转换成里逻辑表达式</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-title-link" itemprop="url">关于聚合函数注意事项</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-31 09:51:00" itemprop="dateCreated datePublished" datetime="2017-08-31T09:51:00+08:00">2017-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-meta-item leancloud_visitors" data-flag-title="关于聚合函数注意事项" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>192</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午9:51</p>
+<h2 id="关于聚合函数注意事项"><a href="#关于聚合函数注意事项" class="headerlink" title="关于聚合函数注意事项"></a>关于聚合函数注意事项</h2><p><strong>原则</strong>：select中的每一项，<strong>单独查询</strong>的话结果条数相等<br><strong>技巧</strong>：当没有group by 使用聚合函数最有可能出问题</p>
+<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/319E23B9-C559-4807-A700-C9DD02264DF3.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/8FB29BBD-F353-4E70-85A9-4D337624929E.png" alt><br>查询student表中的男生<br>一共四个男生，对应四条数据</p>
+<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/190A05BD-A3CA-4FF9-89A6-40308767CA1E.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/6E9F14FE-4CE0-46DC-9552-DB858B1E97F6.png" alt><br>查询student表中的男生人数<br>男生人数是4，就一条数据</p>
+<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/E9659418-56DD-430F-9476-CBF9CB522DAE.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/B60DC261-6E43-4EAE-8904-2867C141F87F.png" alt><br>当同时查询男生人数，和男生时<br>就会造成1对4 表就不知道怎么表示了</p>
+<p>修改为下图也可以<br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/946941D7-04E7-4BBD-A4F9-E408E22ACA81.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-title-link" itemprop="url">关于聚合函数注意事项</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-31 09:51:00" itemprop="dateCreated datePublished" datetime="2017-08-31T09:51:00+08:00">2017-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" class="post-meta-item leancloud_visitors" data-flag-title="关于聚合函数注意事项" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>192</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午9:51</p>
+<h2 id="关于聚合函数注意事项"><a href="#关于聚合函数注意事项" class="headerlink" title="关于聚合函数注意事项"></a>关于聚合函数注意事项</h2><p><strong>原则</strong>：select中的每一项，<strong>单独查询</strong>的话结果条数相等<br><strong>技巧</strong>：当没有group by 使用聚合函数最有可能出问题</p>
+<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/319E23B9-C559-4807-A700-C9DD02264DF3.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/8FB29BBD-F353-4E70-85A9-4D337624929E.png" alt><br>查询student表中的男生<br>一共四个男生，对应四条数据</p>
+<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/190A05BD-A3CA-4FF9-89A6-40308767CA1E.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/6E9F14FE-4CE0-46DC-9552-DB858B1E97F6.png" alt><br>查询student表中的男生人数<br>男生人数是4，就一条数据</p>
+<p><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/E9659418-56DD-430F-9476-CBF9CB522DAE.png" alt><br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/B60DC261-6E43-4EAE-8904-2867C141F87F.png" alt><br>当同时查询男生人数，和男生时<br>就会造成1对4 表就不知道怎么表示了</p>
+<p>修改为下图也可以<br><img src="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/946941D7-04E7-4BBD-A4F9-E408E22ACA81.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%B4%A2%E5%BC%95+%E4%BA%8B%E5%8A%A1+sequence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%B4%A2%E5%BC%95+%E4%BA%8B%E5%8A%A1+sequence/" class="post-title-link" itemprop="url">数据库中索引+事务+sequence</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-31 02:35:00" itemprop="dateCreated datePublished" datetime="2017-08-31T02:35:00+08:00">2017-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%B4%A2%E5%BC%95+%E4%BA%8B%E5%8A%A1+sequence/" class="post-meta-item leancloud_visitors" data-flag-title="数据库中索引+事务+sequence" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 下午2:35</p>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><ol>
+<li>主键索引，唯一索引（unique）</li>
+<li><strong>索引</strong>： index   建立索引是为了提高查询速度   但是对于频繁改动的字段添加索引会降低性能</li>
+<li>在创建表或者改变表内字段约束时，  primary key 和 unique 约束会自动为该字段创建对应索引</li>
+<li>索引的<strong>用途</strong>：   在查询时将索引字段用于条件判断可以提升速度（性能）</li>
+<li><strong>慎用！！</strong></li>
+<li>索引的创建  与  删除  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create index stu_s_name on stu(s_name)</span><br><span class="line"></span><br><span class="line">drop index stu_s_name</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<h2 id="事务在不同数据库中的不同"><a href="#事务在不同数据库中的不同" class="headerlink" title="事务在不同数据库中的不同"></a>事务在不同数据库中的不同</h2><ol>
+<li><strong>MYSQL和Windows sqlSEVER</strong> 默认开启自动提交</li>
+<li>在 <strong>MySQL</strong> 命令行的默认设置下，<strong>事务都是自动提交的</strong>，即执行 SQL 语句后就会马上执行 COMMIT 操作。</li>
+<li>因此要显式地开启一个事务务须使用<strong>命令 BEGIN</strong> 或 <strong>START TRANSACTION</strong>，或者执行<strong>命令 SET AUTOCOMMIT=0</strong>，用来禁止使用当前会话的自动提交。</li>
+<li>当使用begin时，就不会自动提交了</li>
+<li><strong>ORACL</strong>中需要<strong>手动的commit</strong>进行提交，不会默认进行提交</li>
+<li>参考<a href="http://www.runoob.com/mysql/mysql-transaction.html" target="_blank" rel="noopener">MySQL 事务 | 菜鸟教程</a><ol>
+<li>在没有commit之前，是可以回滚的</li>
+<li>但是commit之后就不可以回滚了，同时，前面设置的回滚点也会失效</li>
+</ol>
+</li>
+</ol>
+<p>注：</p>
+<ol>
+<li>在一个<strong>查询窗口</strong>中，<strong>没有commit</strong>的insert操作是不写入<strong>磁盘</strong>的。这时的insert的操作只是影响<strong>内存</strong>的数据</li>
+<li>在PL/SQL中（软件），如果一个sql <strong>insert</strong>执行完<strong>没有commit</strong>，在当前查询窗口中，查询<strong>select</strong>是可以出表的变化的。</li>
+<li>但是，但如果换一个查询窗口，或者去表中去看，其实是没有插入的，这就是因为oracle不是自动commit事务，需要手动提交，</li>
+<li>你在当前查询窗口中可以查询出表的变化，是因为在当前窗口中是从当前查询表对应的内存去查询，并不是去硬盘上去查询</li>
+</ol>
+<h2 id="sequence-序列"><a href="#sequence-序列" class="headerlink" title="sequence  序列"></a>sequence  序列</h2><ol>
+<li><strong>mysql  SQLServer</strong> 由表自身维护主键</li>
+<li><strong>Oracle</strong>  由<strong>对象</strong>维护主键 需要有SQL进行配合（这里的对象指的是sequence对象）</li>
+<li>不一定保证连续</li>
+<li>每行调用nextval后都会自增</li>
+<li>同一行多次调用后只会自增一次</li>
+<li><strong>想使用currval  必须先调用一次 nextval</strong>   否则序列不会自动初始化</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">create</span> <span class="keyword">sequence</span> seq_stu</span><br><span class="line"> <span class="keyword">minvalue</span> <span class="number">15</span> </span><br><span class="line"> <span class="keyword">start</span> <span class="keyword">with</span> <span class="number">15</span> </span><br><span class="line"> <span class="keyword">increment</span> <span class="keyword">by</span> <span class="number">1</span>;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> school <span class="keyword">values</span>(seq_stu.nextval,<span class="string">'a'</span>,<span class="string">'a'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">commit</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> seq_stu.nextval <span class="keyword">from</span> dual</span><br><span class="line"><span class="keyword">select</span> seq_stu.currval <span class="keyword">from</span> dual</span><br></pre></td></tr></table></figure>
 
 
 
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrCreate</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">        <span class="comment">// 匿名函数自我执行</span></span><br><span class="line">        arr[i] = (<span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> num;</span><br><span class="line">        &#125;)(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = arrCreate();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">    <span class="built_in">window</span>.console.log(<span class="string">"arr["</span> + i + <span class="string">"] = "</span> + arr[i]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//////////////////////////////////////////////////////</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">arrCreate</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> arr = [];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">        arr[i] = (<span class="function"><span class="keyword">function</span>(<span class="params">num</span>)</span>&#123;</span><br><span class="line">            <span class="comment">// 局部变量驻留在内存中</span></span><br><span class="line">            <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> num;</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;)(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> arr = arrCreate();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)&#123;</span><br><span class="line">    <span class="built_in">window</span>.console.log(<span class="string">"arr["</span> + i + <span class="string">"] = "</span> + arr[i]());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">作者：紫苓</span><br><span class="line">链接：http:<span class="comment">//www.jianshu.com/p/c7ab5ca23ae8#</span></span><br><span class="line">來源：简书</span><br><span class="line">著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</span><br></pre></td></tr></table></figure>
-<p>这个例子和上一个例子知识点相同</p>
+
+<p>创建索引<br>自动创建索引</p>
+<p>case<br>exists<br>sequence</p>
+<p>用户 表空间 版本号</p>
 
       
     </div>
@@ -1815,7 +1429,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/114/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/page/116/">116</a><span class="space">&hellip;</span><a class="page-number" href="/page/120/">120</a><a class="extend next" rel="next" href="/page/116/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/114/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/114/">114</a><span class="page-number current">115</span><a class="page-number" href="/page/116/">116</a><span class="space">&hellip;</span><a class="page-number" href="/page/122/">122</a><a class="extend next" rel="next" href="/page/116/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1881,14 +1495,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1193</span>
+          <span class="site-state-item-count">1216</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">103</span>
+        <span class="site-state-item-count">104</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1922,12 +1536,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.2m</span>
+    <span title="站点总字数">1.3m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">18:20</span>
+    <span title="站点阅读时长">19:01</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
