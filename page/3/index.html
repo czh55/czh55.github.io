@@ -859,7 +859,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/linux%E5%86%85%E6%A0%B8%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%AD%90%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">linux内核任务调度子系统</a>
+            <a href="/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/linux%E5%86%85%E6%A0%B8%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%AD%90%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">b计算机基础/czh_计算机系统/linux/系统/linux内核任务调度子系统</a>
         </h1>
 
         <div class="post-meta">
@@ -870,22 +870,11 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-05-04 10:05:00 / 修改时间：16:20:16" itemprop="dateCreated datePublished" datetime="2020-05-04T10:05:00+08:00">2020-05-04</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F-linux-%E7%B3%BB%E7%BB%9F/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_计算机系统/linux/系统</span>
-                  </a>
-                </span>
+              <time title="创建时间：2020-05-04 10:05:23 / 修改时间：12:16:22" itemprop="dateCreated datePublished" datetime="2020-05-04T10:05:23+08:00">2020-05-04</time>
             </span>
 
           
-            <span id="/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/linux%E5%86%85%E6%A0%B8%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%AD%90%E7%B3%BB%E7%BB%9F/" class="post-meta-item leancloud_visitors" data-flag-title="linux内核任务调度子系统" title="阅读次数">
+            <span id="/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/linux%E5%86%85%E6%A0%B8%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%AD%90%E7%B3%BB%E7%BB%9F/" class="post-meta-item leancloud_visitors" data-flag-title="b计算机基础/czh_计算机系统/linux/系统/linux内核任务调度子系统" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -916,7 +905,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2020年5月4日 上午10:05</p>
+          <h1 id="linux内核任务调度子系统"><a href="#linux内核任务调度子系统" class="headerlink" title="linux内核任务调度子系统"></a>linux内核任务调度子系统</h1><p>#b计算机基础/czh_计算机系统/linux/系统<br>2020年5月4日 上午10:05</p>
 <ol>
 <li>任务调度子系统可以从一下三个方面进行总结：<ol>
 <li>主要参考资料：刘超老师的趣谈操作系统</li>
@@ -927,9 +916,10 @@
 <li>函数 update_curr 用于更新进程运行的统计量 vruntime ，CFS 还需要一个数据结构来对 vruntime 进行排序，找出最小的那个。在这里使用的是红黑树。红黑树的节点是 sched_entity，里面包含 vruntime。</li>
 </ol>
 </li>
-<li>调度算法的本质就是解决下一个进程应该轮到谁运行的问题，这个逻辑在 fair_sched_class.pick_next_task 中完成。<br><img src="/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/linux%E5%86%85%E6%A0%B8%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%AD%90%E7%B3%BB%E7%BB%9F/10381dbafe0f78d80beb87560a9506af.jpeg" alt></li>
+<li>调度算法的本质就是解决下一个进程应该轮到谁运行的问题，这个逻辑在 fair_sched_class.pick_next_task 中完成。</li>
 </ol>
 </li>
+<li><img src="/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/linux%E5%86%85%E6%A0%B8%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%AD%90%E7%B3%BB%E7%BB%9F/10381dbafe0f78d80beb87560a9506af.jpeg" alt></li>
 </ol>
 </li>
 <li>调度要解决的第二个问题是，什么时候切换任务？也即，什么时候，CPU 小伙伴应该停下一个进程，换另一个进程运行？<ol>
@@ -990,7 +980,8 @@
 <li>所以从这个角度来说，所谓的调度子系统其实就是对程序员来说屏蔽了自己编写数据保存、恢复的工作，这样会给程序员造成错误的感觉：认为cpu好智能的，他会自动的保存和恢复，以及调度ABCD的运行。</li>
 <li>调度子系统会将上层程序员编写的任务进行重新的拆解、分析，并生成cpu这个傻子需要的一条条的指令。这中间最最最关键的一点是：调度子系统也是一个task，调度这个词虽然是一个动词，但是调度子系统并不能完成调度的工作，他只是知道如何进行调度，时候一个理论派，不是实践派，他可以总结为一条条的步骤，其实就是指令。最终的调度这个动作，还是由cpu来完成的。所以，从cpu的角度来说，也不会区分ABCD和调度子系统，cpu认为他们是一样的。</li>
 <li>调度子系统是一个线程_进程_task，只不过他完成的工作比较特殊，首先他在linux内核中动作，不是程序员自己写的，上层程序员不容易察觉；他本身的这个工种的特殊性：自己是进程_线程_task，他处理的对象也是进程_线程_task，对他们进行安排，一般来说我们都是处理数据、计算啥的，这就会造成一种自己处理自己的感觉，这点估计就是理解调度系统和多线程/进程的关键，也是最让人不舒服的地方，容易让人忽视他的作用，或者神化他的作用。</li>
-<li>这中间理解的关键就是要从cpu无差别的角度去分析这个问题！<br><img src="/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/linux%E5%86%85%E6%A0%B8%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%AD%90%E7%B3%BB%E7%BB%9F/IMG_3414.JPG" alt></li>
+<li>这中间理解的关键就是要从cpu无差别的角度去分析这个问题！</li>
+<li><img src="/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/linux/%E7%B3%BB%E7%BB%9F/linux%E5%86%85%E6%A0%B8%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%AD%90%E7%B3%BB%E7%BB%9F/IMG_3414.JPG" alt></li>
 </ol>
 </li>
 </ol>
