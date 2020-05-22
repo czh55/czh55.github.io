@@ -158,114 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/MyBatis%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/MyBatis%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E/" class="post-title-link" itemprop="url">MyBatis语法简单说明</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-02-26 09:00:00" itemprop="dateCreated datePublished" datetime="2018-02-26T09:00:00+08:00">2018-02-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/毕设</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/MyBatis%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E/" class="post-meta-item leancloud_visitors" data-flag-title="MyBatis语法简单说明" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年2月26日 下午9:00</p>
-<p>我这里只是简单的举个例子，具体的还是百度吧</p>
-<h2 id="2018-4-2文章更新："><a href="#2018-4-2文章更新：" class="headerlink" title="2018/4/2文章更新："></a>2018/4/2文章更新：</h2><ol>
-<li><a href="https://www.jianshu.com/p/ab95e81d6d16" target="_blank" rel="noopener">mybatis 表名做为参数 - 简书</a></li>
-</ol>
-<h2 id="第一部分："><a href="#第一部分：" class="headerlink" title="第一部分："></a>第一部分：</h2><p><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/MyBatis%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E/6EDB8F29-3200-4379-9932-E2ABD5520755.png" alt></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectByNameAndProductId"</span> <span class="attr">resultMap</span>=<span class="string">"BaseResultMap"</span> <span class="attr">parameterType</span>=<span class="string">"map"</span>&gt;</span></span><br><span class="line">    SELECT</span><br><span class="line">    <span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"Base_Column_List"</span>/&gt;</span></span><br><span class="line">    from mmall_product</span><br><span class="line">    <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"productName != null"</span>&gt;</span></span><br><span class="line">        and name like #&#123;productName&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"productId != null"</span>&gt;</span></span><br><span class="line">        and id = #&#123;productId&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"selectByNameAndCategoryIds"</span> <span class="attr">resultMap</span>=<span class="string">"BaseResultMap"</span> <span class="attr">parameterType</span>=<span class="string">"map"</span>&gt;</span></span><br><span class="line">    SELECT</span><br><span class="line">    <span class="tag">&lt;<span class="name">include</span> <span class="attr">refid</span>=<span class="string">"Base_Column_List"</span>&gt;</span><span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">    from mmall_product</span><br><span class="line">    where status = 1</span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"productName != null"</span>&gt;</span></span><br><span class="line">      and name like #&#123;productName&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">"categoryIdList != null"</span> &gt;</span></span><br><span class="line">      and category_id in</span><br><span class="line">      <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">item</span>=<span class="string">"item"</span> <span class="attr">index</span>=<span class="string">"index"</span> <span class="attr">open</span>=<span class="string">"("</span> <span class="attr">separator</span>=<span class="string">","</span> <span class="attr">close</span>=<span class="string">")"</span> <span class="attr">collection</span>=<span class="string">"categoryIdList"</span>&gt;</span></span><br><span class="line">        #&#123;item&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="第二部分：批量插入"><a href="#第二部分：批量插入" class="headerlink" title="第二部分：批量插入"></a>第二部分：批量插入</h2><p><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/MyBatis%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E/9CBD04AF-4B4F-4770-9C27-427B3EA157AC.png" alt><br>orderItemMapper.xml</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"batchInsert"</span> <span class="attr">parameterType</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">  insert into mmall_order_item (id, order_no,user_id, product_id,</span><br><span class="line">    product_name, product_image, current_unit_price,</span><br><span class="line">    quantity, total_price, create_time,</span><br><span class="line">    update_time)</span><br><span class="line">  values</span><br><span class="line">  <span class="tag">&lt;<span class="name">foreach</span> <span class="attr">collection</span>=<span class="string">"orderItemList"</span> <span class="attr">index</span>=<span class="string">"index"</span> <span class="attr">item</span>=<span class="string">"item"</span> <span class="attr">separator</span>=<span class="string">","</span>&gt;</span></span><br><span class="line">    (</span><br><span class="line">    #&#123;item.id&#125;,#&#123;item.orderNo&#125;,#&#123;item.userId&#125;,#&#123;item.productId&#125;,#&#123;item.productName&#125;,#&#123;item.productImage&#125;,#&#123;item.currentUnitPrice&#125;,#&#123;item.quantity&#125;,#&#123;item.totalPrice&#125;,now(),now()</span><br><span class="line">    )</span><br><span class="line">  <span class="tag">&lt;/<span class="name">foreach</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="表示xml解析器忽略解析"><a href="#表示xml解析器忽略解析" class="headerlink" title="表示xml解析器忽略解析"></a><!--[CDATA[]]-->表示xml解析器忽略解析</h2><p><img src="/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/MyBatis%E8%AF%AD%E6%B3%95%E7%AE%80%E5%8D%95%E8%AF%B4%E6%98%8E/4EDFC38B-08C6-47BB-ACF7-042546319A1D.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/26/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/service%E5%B9%B3%E7%BA%A7%E8%B0%83%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1297,11 +1189,133 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%88%86%E7%B1%BB%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%88%86%E7%B1%BB%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">分类管理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-24 03:32:00" itemprop="dateCreated datePublished" datetime="2018-02-24T03:32:00+08:00">2018-02-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:08" itemprop="dateModified" datetime="2020-03-12T20:06:08+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E6%AF%95%E8%AE%BE/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/毕设</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%88%86%E7%B1%BB%E7%AE%A1%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="分类管理" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>713</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年2月24日 下午3:32</p>
+<h2 id="学习目标："><a href="#学习目标：" class="headerlink" title="学习目标："></a>学习目标：</h2><ol>
+<li>如何实际及封装无线层级的树状数据结构</li>
+<li>递归算法的设计思想<br><img src="/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%88%86%E7%B1%BB%E7%AE%A1%E7%90%86/63F9407B-4E83-4673-9673-4F12293CDE85.png" alt></li>
+</ol>
+<p><strong>注意我红框框出的内容</strong><br>4. 如何处理复杂对象排重<br>    1. 使用set集合<br>5. 重写hashcode和equal的注意事项<br>    1. 缘由：当我们使用set<Category>这样的语法去排重时，我们需要重新写Category的hashcode()和equal方法。<br>    2. 我们使用set<String>是没有问题的，原因就是String中本身就实现了自己的hashcode()和equal方法。<br>    3. 在这里，我们只能自己去写<br>    4. 操作：去<strong>Pojo/Category</strong>实体类中，快捷键control + enter<br><img src="/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%88%86%E7%B1%BB%E7%AE%A1%E7%90%86/3FC86ED8-0BFA-46FD-BF3E-7B55686CE25D.png" alt><br>    5. 最后的效果：<br><img src="/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%88%86%E7%B1%BB%E7%AE%A1%E7%90%86/DC5101B9-07BC-42CA-8D4C-7FEA84F6D0A9.png" alt></String></Category></p>
+<h2 id="增加功能的步骤："><a href="#增加功能的步骤：" class="headerlink" title="增加功能的步骤："></a>增加功能的步骤：</h2><ol>
+<li>新建文件controller,service(接口+实现)<ol>
+<li>每个文件的依赖对象<ol>
+<li>controller依赖于：service接口</li>
+<li>service依赖于：mapper接口</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>【controller】在controller方法中填写最上层的操作流程，<strong>空下需要调用service的部分</strong></li>
+<li>【service】在service方法中填写该层的操作流程，<strong>空下需要调用mapper的部分</strong></li>
+<li>【dao/mapper接口】就是一个接口，声明了就行了，<strong>具体的内容在resource\mappers中xml</strong></li>
+<li>【resource\mappers xml】就是写sql语句，当然要符合xml的语法的</li>
+<li><strong>返回补全我们空下的内容</strong></li>
+</ol>
+<h2 id="举例说明："><a href="#举例说明：" class="headerlink" title="举例说明："></a>举例说明：</h2><p>注：<strong>注意我在图中标出的红框配置，一点不能错</strong><br><img src="/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%88%86%E7%B1%BB%E7%AE%A1%E7%90%86/C4725402-7F7A-4661-9539-CEB2ECEC5A0A.png" alt><br>1.CategoryManagerController</p>
+<p><img src="/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%88%86%E7%B1%BB%E7%AE%A1%E7%90%86/E813BA23-2E6B-4505-8D9A-704DAA6E0A8A.png" alt><br>2.CategoryServiceImpl</p>
+<p><img src="/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%88%86%E7%B1%BB%E7%AE%A1%E7%90%86/319683B6-6AE4-4C5E-818F-2F3EE8A92C72.png" alt><br>3.ICategoryService</p>
+<p><img src="/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%88%86%E7%B1%BB%E7%AE%A1%E7%90%86/14279FAA-B08A-46B0-AF21-F48A99900840.png" alt><br>4.dao/ProductMapper</p>
+<p><img src="/2018/02/24/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/%E5%88%86%E7%B1%BB%E7%AE%A1%E7%90%86/1D9AB7A1-FCA7-4143-8A82-CFF96D3977EF.png" alt><br>5.Sources_mappers_CategoryMapper</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/96/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/96/">96</a><span class="page-number current">97</span><a class="page-number" href="/page/98/">98</a><span class="space">&hellip;</span><a class="page-number" href="/page/122/">122</a><a class="extend next" rel="next" href="/page/98/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/96/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/96/">96</a><span class="page-number current">97</span><a class="page-number" href="/page/98/">98</a><span class="space">&hellip;</span><a class="page-number" href="/page/121/">121</a><a class="extend next" rel="next" href="/page/98/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1367,7 +1381,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1216</span>
+          <span class="site-state-item-count">1209</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1413,7 +1427,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19:01</span>
+    <span title="站点阅读时长">18:59</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

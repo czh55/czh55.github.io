@@ -158,112 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/MP_MPI_GPU%E5%AF%B9%E6%AF%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/06/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/MP_MPI_GPU%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">MP_MPI_GPU对比</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-06-25 02:18:00" itemprop="dateCreated datePublished" datetime="2019-06-25T02:18:00+08:00">2019-06-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_分布式/并行计算/知识点</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/06/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/MP_MPI_GPU%E5%AF%B9%E6%AF%94/" class="post-meta-item leancloud_visitors" data-flag-title="MP_MPI_GPU对比" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>180</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年6月25日 下午2:18</p>
-<h2 id="MP和GPU"><a href="#MP和GPU" class="headerlink" title="MP和GPU"></a>MP和GPU</h2><ol>
-<li>编程框架：都是在<strong>串行的框架</strong>下指定并行区域，然后加上各种指令</li>
-<li>并行的<strong>对象都是线程</strong>，而不是process</li>
-<li>都可以理解成<strong>共享内存</strong>(但GPU涉及到与CPU进行同步的数据)</li>
-</ol>
-<h2 id="MPI"><a href="#MPI" class="headerlink" title="MPI"></a>MPI</h2><ol>
-<li>他不像是一种并行，理解成在<strong>分布式内存</strong>下的一种<strong>消息传递机制</strong>更好理解</li>
-<li><strong>说MPI是并行的原因是</strong>：多个处理器同时执行，消息的接/发是可能并不是同步的，而是异步的。</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E4%BA%91%E8%AE%A1%E7%AE%97/linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1253,11 +1147,109 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/21/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E5%AE%89%E8%A3%85/%E6%97%A5%E5%B8%B8Google/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/21/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E5%AE%89%E8%A3%85/%E6%97%A5%E5%B8%B8Google/" class="post-title-link" itemprop="url">日常Google</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-21 07:31:00" itemprop="dateCreated datePublished" datetime="2019-06-21T07:31:00+08:00">2019-06-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-python-%E5%AE%89%E8%A3%85/" itemprop="url" rel="index">
+                    <span itemprop="name">c数据科学/czh_python/安装</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/06/21/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_python/%E5%AE%89%E8%A3%85/%E6%97%A5%E5%B8%B8Google/" class="post-meta-item leancloud_visitors" data-flag-title="日常Google" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>58</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年6月21日 下午7:31</p>
+<p><a href="https://www.machunjie.com/python/101.html" target="_blank" rel="noopener">conda常用操作与更换源channal</a><br><a href="https://www.xncoding.com/2016/05/26/python/pycharm-remote.html" target="_blank" rel="noopener">使用PyCharm进行远程开发和调试 | 飞污熊</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/31/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/">33</a><span class="space">&hellip;</span><a class="page-number" href="/page/122/">122</a><a class="extend next" rel="next" href="/page/33/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/31/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/31/">31</a><span class="page-number current">32</span><a class="page-number" href="/page/33/">33</a><span class="space">&hellip;</span><a class="page-number" href="/page/121/">121</a><a class="extend next" rel="next" href="/page/33/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1323,7 +1315,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1216</span>
+          <span class="site-state-item-count">1209</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1369,7 +1361,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19:01</span>
+    <span title="站点阅读时长">18:59</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

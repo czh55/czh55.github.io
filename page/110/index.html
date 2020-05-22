@@ -158,766 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/2_1.cpp%20%E9%A1%BA%E5%BA%8F%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/2_1.cpp%20%E9%A1%BA%E5%BA%8F%E8%A1%A8/" class="post-title-link" itemprop="url">2_1.cpp 顺序表</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-17 04:15:00" itemprop="dateCreated datePublished" datetime="2017-09-17T04:15:00+08:00">2017-09-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2017/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2017</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/2_1.cpp%20%E9%A1%BA%E5%BA%8F%E8%A1%A8/" class="post-meta-item leancloud_visitors" data-flag-title="2_1.cpp 顺序表" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月17日 下午4:15</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2_1.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxSize 100</span></span><br><span class="line"><span class="comment">// 顺序表结构定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> data[maxSize];</span><br><span class="line">	<span class="keyword">int</span> length;</span><br><span class="line">&#125;SqList</span><br><span class="line"><span class="comment">//顺序表的第二种定义方式</span></span><br><span class="line"><span class="keyword">int</span> data[maxSize];</span><br><span class="line"><span class="keyword">int</span> length;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单链表结构体定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span>&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;LNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">//双链表结构体定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DLNode</span></span></span><br><span class="line"><span class="class">&#123;</span>	</span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">DLNode</span> *<span class="title">prior</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">DLNode</span> *<span class="title">next</span>;</span>	</span><br><span class="line">&#125;DLNode;</span><br><span class="line"><span class="comment">//动态分配内存</span></span><br><span class="line">LNode *A = (LNode * )<span class="built_in">malloc</span>(<span class="keyword">sizeof</span> DLNode);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 顺序表的findElem 返回第一个比x大的元素的位置</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findElem</span><span class="params">(SqList L,<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; l.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(L.data[i] &gt; x)&#123;</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 顺序表的findElem 返回e元素的位置 如果没有则返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findElem</span><span class="params">(SqList L,<span class="keyword">int</span> e)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; L.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(l.date[i] = e)&#123;</span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 顺序表insertElem() 按顺序插入</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertElem</span><span class="params">(SqList &amp;L,<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> p;</span><br><span class="line">	p = findElem(L,x);</span><br><span class="line">	<span class="comment">// 后移动</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = L.length<span class="number">-1</span>; i &gt;= p ;i-- )&#123;</span><br><span class="line">		L.data[i+<span class="number">1</span>] = L.data[i];</span><br><span class="line">	&#125;</span><br><span class="line">	L.data[p] =  x;</span><br><span class="line">	++(L.length);<span class="comment">//lenght要记得加一</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 顺序表插入元素的算法 按指定位置插入</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">insertElem</span><span class="params">(SqList &amp;L,<span class="keyword">int</span> p ,<span class="keyword">int</span> e)</span></span>&#123;<span class="comment">//要对p的位置进行限定</span></span><br><span class="line">	<span class="keyword">if</span>(L.length &lt; p || p &lt; <span class="number">0</span> || L.length == maxSize)&#123;<span class="comment">//这里p = l.length也行，并且要对maxSize进行判断</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = L.length; i &gt;= p ;i++)&#123;</span><br><span class="line">		L.data[i+<span class="number">1</span>] = L.data[i];</span><br><span class="line">	&#125;</span><br><span class="line">	L.data[p]=e;</span><br><span class="line">	(L.length)++;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 顺序表删除指定位置元素，并将删除元素赋值给e，成功返回1，否则返回0</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">deleteElem</span><span class="params">(SqList L, <span class="keyword">int</span> p ,<span class="keyword">int</span> &amp;e)</span></span>&#123;<span class="comment">//忘了设置e的值了</span></span><br><span class="line">	<span class="keyword">if</span>(p &gt; L.length<span class="number">-1</span> || p&lt;<span class="number">0</span> )<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// L.data[L.length-1] = ;//这里不用担心最后一个位置元素的值，因为L.lenght就限定死了</span></span><br><span class="line">	e = L.data[p];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = p; i &lt; L.length<span class="number">-1</span> ;i++)&#123;</span><br><span class="line">		L.data[i] = L.data[i+<span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	(L.length)--;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//顺序表的初始化</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">initList</span><span class="params">(SqList &amp;L)</span></span>&#123;</span><br><span class="line">	L.length=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//顺序表求指定位置元素</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getElem</span><span class="params">(SqList &amp;L,<span class="keyword">int</span> p ,<span class="keyword">int</span> &amp;e)</span></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(p &lt; <span class="number">0</span> || p &gt;= L.length) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	e = L.data[p];</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="string">"hello world"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/2_2.cpp%20%E9%93%BE%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/2_2.cpp%20%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">2_2.cpp 链表</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-17 04:15:00" itemprop="dateCreated datePublished" datetime="2017-09-17T04:15:00+08:00">2017-09-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2017/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2017</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/2_2.cpp%20%E9%93%BE%E8%A1%A8/" class="post-meta-item leancloud_visitors" data-flag-title="2_2.cpp 链表" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月17日 下午4:15</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//2_2.cpp</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">LNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">LNode</span> * <span class="title">next</span>;</span></span><br><span class="line">&#125;LNode;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 这节的内容默认链表是有序的，这也就是为什么最后要讲排序的原因</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//单链表的合并</span></span><br><span class="line"><span class="comment">// 这道题首先是了解链表的基本使用，不要在使用.来操作了</span></span><br><span class="line"><span class="comment">// 要有的几种意识：已有资源的意识，已有资源的意识，设置初始值的意识</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(LNode *A,LNode *B,LNode *&amp;C)</span></span>&#123;</span><br><span class="line">	LNode *p = A-&gt;next; <span class="comment">//跟踪最小值节点</span></span><br><span class="line">	LNode *q = B-&gt;next; </span><br><span class="line">	LNode *r;			<span class="comment">//为了链表尾部中添加节点方便</span></span><br><span class="line"></span><br><span class="line">	C = A;				<span class="comment">//利用已有资源的意识</span></span><br><span class="line">	C.next = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">free</span>(B);			<span class="comment">//已有资源的意识</span></span><br><span class="line">	r = C;				<span class="comment">//设置初始值的意识</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(p!=<span class="literal">NULL</span> &amp;&amp; q!= <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(p.data &gt; q.data)&#123;</span><br><span class="line">			r-&gt;next = p;</span><br><span class="line">			p = p-&gt;next;</span><br><span class="line">			r = r-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			r-&gt;next = q;</span><br><span class="line">			q = q-&gt;next;</span><br><span class="line">			r = r-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(q!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">		r-&gt;next = q;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(p!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">		r-&gt;next = p;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//有n个元素已经存储在了数组a中，用尾插法建立链表C</span></span><br><span class="line"><span class="comment">//只要是题目中出现的变量，都要作为参数，比如说这里的n(这里是为了使数组使用更加严谨)</span></span><br><span class="line"><span class="comment">// create操作说明需要一个s变量</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">createListR</span><span class="params">(LNode *&amp;C,<span class="keyword">int</span> a[],<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	LNode *s ,*r;<span class="comment">//这里说的是插入，所以要建立一个尾指针r</span></span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line"></span><br><span class="line">	C = (LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span> LNode);</span><br><span class="line">	C-&gt;next = <span class="literal">NULL</span>;<span class="comment">//关注初始值</span></span><br><span class="line">	r = C;<span class="comment">//</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span> ;i &lt; n ; i++)&#123;</span><br><span class="line">		s = (LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span> LNode);</span><br><span class="line">		s-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">		s.data = a[i];</span><br><span class="line"></span><br><span class="line">		r-&gt;next = s;</span><br><span class="line">		r = r-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 头插法</span></span><br><span class="line"><span class="comment">// 为了解决上一个问题无法下手的情况：如何确定我们需要什么</span></span><br><span class="line"><span class="comment">//这个头插法写的思路是：先确定我想实现的核心操作</span></span><br><span class="line">	<span class="comment">// s = (LNode *)malloc(sizeof LNode);</span></span><br><span class="line">	<span class="comment">// s-&gt;data=a[i];</span></span><br><span class="line">	<span class="comment">// s-&gt;next = C-&gt;next;</span></span><br><span class="line">	<span class="comment">// C-&gt;next = s;</span></span><br><span class="line"><span class="comment">//这时就会发现没有s和i变量，说明我们要创建这两个变量</span></span><br><span class="line"><span class="comment">//这里不需要使用r来指向尾节点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">createListL</span><span class="params">(LNode *&amp;C,<span class="keyword">int</span> a[],<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	LNode *s;</span><br><span class="line">	<span class="keyword">int</span> i ;</span><br><span class="line"></span><br><span class="line">	C = (LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span> LNode)；</span><br><span class="line">	C-next = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">1</span>;i &lt; n;i++)&#123;</span><br><span class="line">		s = (LNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span> LNode);</span><br><span class="line">		s-&gt;data=a[i];</span><br><span class="line">		s-&gt;next = C-&gt;next;</span><br><span class="line">		C-&gt;next = s;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2_1中侧重于对一些细小易错的知识点总结</span></span><br><span class="line"><span class="comment">// 2_2中除了上面说的，添加了一些思维上的技巧，帮助完成功能</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 归并为一个递减的链表</span></span><br><span class="line"><span class="comment">// 思考：一定是在原来的基础上做部分的修改，这里改用头插法就可以完成</span></span><br><span class="line"><span class="comment">//头插法---&gt; 注意链接断裂</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(LNode *A ,LNode *B,LNode *&amp;C)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//同样是先写核心内容</span></span><br><span class="line"></span><br><span class="line">	LNode *q = A;</span><br><span class="line">	LNode *p = B;</span><br><span class="line"></span><br><span class="line">	LNode *s;</span><br><span class="line"></span><br><span class="line">	C=B;</span><br><span class="line">	C-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">free</span>(A);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(p!= <span class="literal">NULL</span> &amp;&amp; q!= <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(p-&gt;data &gt; q-&gt;data)&#123;</span><br><span class="line">			s = p;<span class="comment">//否则会链表断裂，要写保存起来</span></span><br><span class="line">			p-&gt;next = C-next;<span class="comment">//</span></span><br><span class="line">			C-&gt;next = p;<span class="comment">//p代表最大值的节点</span></span><br><span class="line">			p = s-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			s = q;</span><br><span class="line">			q-&gt;next = C-next;</span><br><span class="line">			C-&gt;next = q;</span><br><span class="line">			q = s-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(p!= <span class="literal">NULL</span>)&#123;</span><br><span class="line">		s = p;</span><br><span class="line">		p-&gt;next = C-next;</span><br><span class="line">		C-&gt;next = p;</span><br><span class="line">		p = s-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(q!= <span class="literal">NULL</span>)&#123;</span><br><span class="line">		s = q;</span><br><span class="line">		q-&gt;next = C-next;</span><br><span class="line">		C-&gt;next = q;</span><br><span class="line">		q = s-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对于这些算法，我觉得还是要站在一个理解的角度去熟练记忆，而不是去站在一个创造者的角度去希望自己也能在不看他的源码基础上写出来。</span></span><br><span class="line"><span class="comment">// 能写是一定能写出来，但是时间上不划算，更何况是人家已经写出来的东西了，造成二次浪费。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 链表中节点的查找并删除节点  已知一个节点值</span></span><br><span class="line"><span class="comment">// 链表中只能按值来查询，而顺序表可以按下标查询</span></span><br><span class="line"><span class="comment">// 我写的时候没有考虑查找不到的情况：此时，p指向最后一个节点，因为此时p-&gt;next = NULL</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findAndDelete</span><span class="params">(LNode *C,<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">	LNode *p = C;</span><br><span class="line">	LNode *q ;<span class="comment">//临时保存用</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(p-&gt;next != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(p-&gt;next-&gt;data == x)<span class="keyword">break</span>;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//写到这里要返回去加上一前驱节点，因为删除一定要一个前驱节点</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(p-&gt;next==<span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="comment">//我在这里稍微迟疑了一下</span></span><br><span class="line">		<span class="comment">// 因为我错误的认为链表的最后一个节点的data值没有做判断，</span></span><br><span class="line">		<span class="comment">// 虽然p指向最后链表最后一个节点的时候没有执行上面的判断语句，</span></span><br><span class="line">		<span class="comment">// 但是，判断语句判断的是当前节点的下一个节点的data值，当前节点的data值，在之前已经判断过了，才来到这个节点的</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		q=p-&gt;next;</span><br><span class="line">		p-&gt;next = p-&gt;next-&gt;next;</span><br><span class="line">		<span class="built_in">free</span>(q)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">####################################################################################################################################</span><br><span class="line"></span><br><span class="line"><span class="comment">// 双链表</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DLNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">DLNode</span> *<span class="title">prior</span>;</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">DLNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;DLNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 采用尾插法建立双链表</span></span><br><span class="line"><span class="comment">//create的对于顺序表来说-----length++	但是在这里没用 只是记录一下思考的过程</span></span><br><span class="line"><span class="comment">//create---&gt;DLNode *s malloc节点</span></span><br><span class="line"><span class="comment">// 尾插法---&gt;DLNode *r 指向尾节点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">createDListR</span><span class="params">(DLNode *&amp;L,<span class="keyword">int</span> a[],<span class="keyword">int</span> n)</span></span>&#123;</span><br><span class="line">	DLNode *s;</span><br><span class="line">	DLNode *r;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//建立头节点</span></span><br><span class="line">	C = (DLNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span> DLNode);</span><br><span class="line">	C-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	c-&gt;prior = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n ; i++)&#123;</span><br><span class="line">		s = (DLNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span> DLNode);</span><br><span class="line">		s-&gt;data = a[i];</span><br><span class="line">		s-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">		s-&gt;prior = r;</span><br><span class="line">		r-&gt;next = s;</span><br><span class="line">		r = r-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 双链表（单链表）节点查找算法</span></span><br><span class="line"></span><br><span class="line"><span class="function">DLNode* <span class="title">findNode</span><span class="params">(DLNode *C,<span class="keyword">int</span> x)</span></span>&#123;<span class="comment">//同样，这里的x一定也是值data的值</span></span><br><span class="line">	DLNode *p ;</span><br><span class="line">	p = C-&gt;next;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(p!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(p-&gt;data == x)&#123;</span><br><span class="line">			<span class="keyword">return</span> p;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DLNode *&amp;L ;做参数 用这种写法做参数的时候，一般都是这个L传过来的时候就是空的链表，连头结点都没有。</span></span><br><span class="line"><span class="comment">// 那么，但我们给L定义头结点的时候，自然就要改变L本身的值。L = (DLNode *)malloc(sizeof DLNode);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// r-&gt;next = s;这么一句话如果要是这么想：next其实是一个指针，他存的其实是一个地址，这个地址指是另个一个DLNode节点的地址。</span></span><br><span class="line"><span class="comment">// 这么想你就做不了题，这样的分析是对的，但是这样的分析方法对我们做题写程序是一定用都没有。</span></span><br><span class="line"><span class="comment">// 那我们应该怎样去理解呢？宏观的认识就行了，认为指针不存在，上面的分析当做一种底层实现，而我们操作r-&gt;next = s;就像是在调用底层给我提供的好理解接口一样。</span></span><br><span class="line"><span class="comment">// 这就像是做java项目时的封装一样。</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 双链表插入</span></span><br><span class="line"><span class="comment">// 插入节点是s</span></span><br><span class="line"><span class="comment">// 前两行是关键，因为保证了最后一个不会丢，s-&gt;next 即可以找到</span></span><br><span class="line"><span class="comment">// 可以把s当成一个空值，那么前两行对于s这个空值的操作一定不会造成链接断裂的</span></span><br><span class="line">s-&gt;next = p—&gt;next;</span><br><span class="line">s-&gt;prior = p;</span><br><span class="line">p-&gt;next-&gt;prior = s;</span><br><span class="line">p-&gt;next = s;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 双链表删除</span></span><br><span class="line"><span class="comment">// 如果是不删除中间s节点的话，第一，第四句可省略</span></span><br><span class="line">s=p-&gt;next;</span><br><span class="line">p-&gt;next=p-&gt;next-&gt;next;</span><br><span class="line">p-&gt;next-&gt;prior = p;</span><br><span class="line"><span class="built_in">free</span>(s);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 总结：</span></span><br><span class="line"><span class="comment">// 不能说是编程的思路和编程的思路一样。但是的确，当我将我做数学题的思路拿过来的时候，有不少问题的确得到了解决。</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/Mac+%20sublime%20+%20%EF%BC%88g++%EF%BC%89%20%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/Mac+%20sublime%20+%20%EF%BC%88g++%EF%BC%89%20%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Mac+ sublime + （g++） 使用</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-17 04:15:00" itemprop="dateCreated datePublished" datetime="2017-09-17T04:15:00+08:00">2017-09-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2017/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2017</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/Mac+%20sublime%20+%20%EF%BC%88g++%EF%BC%89%20%E4%BD%BF%E7%94%A8/" class="post-meta-item leancloud_visitors" data-flag-title="Mac+ sublime + （g++） 使用" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>59</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月17日 下午4:15</p>
-<p><a href="http://www.cnblogs.com/weixuqin/p/6440252.html" target="_blank" rel="noopener">Mac上写C++ - 希希里之海 - 博客园</a><br><a href="http://www.cnblogs.com/cryinstall/archive/2011/09/27/2280824.html" target="_blank" rel="noopener">gcc/g++基本命令简介 - Livesss - 博客园</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/wrong.cpp%20%E5%87%BA%E7%8E%B0%E7%9A%84%E9%94%99%E8%AF%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/wrong.cpp%20%E5%87%BA%E7%8E%B0%E7%9A%84%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">wrong.cpp 出现的错误</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-17 04:15:00" itemprop="dateCreated datePublished" datetime="2017-09-17T04:15:00+08:00">2017-09-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2017/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2017</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/17/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/wrong.cpp%20%E5%87%BA%E7%8E%B0%E7%9A%84%E9%94%99%E8%AF%AF/" class="post-meta-item leancloud_visitors" data-flag-title="wrong.cpp 出现的错误" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月17日 下午4:15</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//wrong.cpp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 顺序表的findElem x暗示有序  e则无具体要求</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findElem</span><span class="params">(SqList L,<span class="keyword">int</span> x)</span></span>&#123;<span class="comment">//对参数x代表的意思模糊不清 x说明是查找大于x的第一个位置 </span></span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; l.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(L[i] == x)&#123;<span class="comment">//这里不是L[i]</span></span><br><span class="line">			x = i;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(i == l.length<span class="number">-1</span>)&#123;</span><br><span class="line">		x = <span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findElem</span><span class="params">(SqList L,<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; l.length;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(L[i] == x)&#123;<span class="comment">//这里不能用等于</span></span><br><span class="line">			<span class="keyword">return</span> i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(i == l.length<span class="number">-1</span>)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">####################################################################################################################################</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 顺序表insertElem()</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">insertElem</span><span class="params">(LNode L,<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> p;</span><br><span class="line">	p = findElem(L,x);</span><br><span class="line">	L[p] = x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">insertElem</span><span class="params">(LNode L,<span class="keyword">int</span> x)</span></span>&#123;<span class="comment">//操作类型是SqList,不是LNode</span></span><br><span class="line">	<span class="keyword">int</span> p;</span><br><span class="line">	p = findElem(L,x);</span><br><span class="line">	<span class="comment">// 后移动</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = L.length<span class="number">-1</span>; i &lt; p ;i-- )&#123;</span><br><span class="line">		L[i+<span class="number">1</span>] = L[i];</span><br><span class="line">	&#125;</span><br><span class="line">	L[p] =  x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">insertElem</span><span class="params">(SqList L,<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> p;</span><br><span class="line">	p = findElem(L,x);</span><br><span class="line">	<span class="comment">// 后移动</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = L.length<span class="number">-1</span>; i &lt; p ;i-- )&#123;<span class="comment">//这是不小于</span></span><br><span class="line">		L.data[i+<span class="number">1</span>] = L[i];</span><br><span class="line">	&#125;</span><br><span class="line">	L.data[p] =  x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">insertElem</span><span class="params">(SqList L,<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> p;</span><br><span class="line">	p = findElem(L,x);</span><br><span class="line">	<span class="comment">// 后移动</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = L.length<span class="number">-1</span>; i &gt;= p ;i-- )&#123;</span><br><span class="line">		L.data[i+<span class="number">1</span>] = L.data[i];</span><br><span class="line">	&#125;</span><br><span class="line">	L.data[p] =  x;</span><br><span class="line">	++(L.length);<span class="comment">//lenght要记得加一</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function">id <span class="title">insertElem</span><span class="params">(SqList &amp;L,<span class="keyword">int</span> x)</span></span>&#123;<span class="comment">//要使用引用传值,改变本来的值</span></span><br><span class="line">	<span class="keyword">int</span> p;</span><br><span class="line">	p = findElem(L,x);</span><br><span class="line">	<span class="comment">// 后移动</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = L.length<span class="number">-1</span>; i &gt;= p ;i-- )&#123;</span><br><span class="line">		L.data[i+<span class="number">1</span>] = L.data[i];</span><br><span class="line">	&#125;</span><br><span class="line">	L.data[p] =  x;</span><br><span class="line">	++(L.length);<span class="comment">//lenght要记得加一</span></span><br><span class="line">&#125;</span><br><span class="line">####################################################################################################################################</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 顺序表插入元素的算法 按指定位置插入</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertElem</span><span class="params">(SqList &amp;L,<span class="keyword">int</span> p ,<span class="keyword">int</span> e)</span></span>&#123;<span class="comment">//要对p的位置进行限定</span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = L.length; i &gt;= p ;i++)&#123;</span><br><span class="line">		L.data[i+<span class="number">1</span>] = L.data[i];</span><br><span class="line">	&#125;</span><br><span class="line">	L.data[p]=e;</span><br><span class="line">	(L.length)++;</span><br><span class="line">&#125;		</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">insertElem</span><span class="params">(SqList &amp;L,<span class="keyword">int</span> p ,<span class="keyword">int</span> e)</span></span>&#123;<span class="comment">//要对p的位置进行限定</span></span><br><span class="line">	<span class="keyword">if</span>(l.length =&lt; p || p &lt; <span class="number">0</span>)&#123;<span class="comment">//这里p = l.length也行，并且要对maxSize进行判断</span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = L.length; i &gt;= p ;i++)&#123;</span><br><span class="line">		L.data[i+<span class="number">1</span>] = L.data[i];</span><br><span class="line">	&#125;</span><br><span class="line">	L.data[p]=e;</span><br><span class="line">	(L.length)++;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line"><span class="comment">// 顺序表删除指定位置元素，并将删除元素赋值给e，成功返回1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">deleteElem</span><span class="params">(SqList &amp;L , <span class="keyword">int</span> p , <span class="keyword">int</span> &amp;e)</span></span>&#123;<span class="comment">//这里的e指的是你最后删除的值，而不是一开始指定说我要删哪个。这道题要求通过位置删除，不是元素内容</span></span><br><span class="line">	<span class="keyword">int</span> p;</span><br><span class="line">	p = findElem(SqList L,<span class="keyword">int</span> e);</span><br><span class="line">	<span class="keyword">if</span>(p == <span class="number">-1</span>) <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i= p;i &lt; L.length - <span class="number">1</span>;i++)&#123;</span><br><span class="line">		L.data[i] = L.data[i+<span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	(L.length)--;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">deleteElem</span><span class="params">(SqList L, <span class="keyword">int</span> p ,<span class="keyword">int</span> &amp;e)</span></span>&#123;<span class="comment">//忘了设置e的值了</span></span><br><span class="line">	<span class="keyword">if</span>(p &gt; L.length<span class="number">-1</span> || p&lt;<span class="number">0</span> )<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// L.data[L.length-1] = ;//这里不用担心最后一个位置元素的值，因为L.lenght就限定死了</span></span><br><span class="line">	e = L.data[p];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = p; i &lt; L.length<span class="number">-1</span> ;i++)&#123;</span><br><span class="line">		L.data[i] = L.data[i+<span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	(L.length)--;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">####################################################################################################################################</span><br><span class="line"></span><br><span class="line"><span class="comment">//单链表的合并</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(LNode *A,LNode *B,LNode *&amp;C)</span></span>&#123;</span><br><span class="line">	LNode *p = A-&gt;next;</span><br><span class="line">	LNode *q = B-&gt;next;</span><br><span class="line">	LNode *r;</span><br><span class="line"></span><br><span class="line">	C = A;</span><br><span class="line">	C.next = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">free</span>(B);</span><br><span class="line">	r = C;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(p!= <span class="literal">NULL</span>&amp;&amp;q!=<span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(p.data &gt; q.data)&#123;<span class="comment">//这里不能用点，要用-&gt;</span></span><br><span class="line">			r.data = p.data;<span class="comment">//这里是针对于整个节点，而不是对节点中的一个值</span></span><br><span class="line">							<span class="comment">//不是对r操作，而是对e-&gt;next操作</span></span><br><span class="line">			p = p.next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			r.data = q.data;</span><br><span class="line">			q = q.next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(LNode *A ,LNode *B,LNode *&amp;C)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//同样是先写核心内容</span></span><br><span class="line"></span><br><span class="line">	LNode *q = A;</span><br><span class="line">	LNode *p = B;</span><br><span class="line"></span><br><span class="line">	LNode *s;</span><br><span class="line"></span><br><span class="line">	C=B;</span><br><span class="line">	C-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">free</span>(A);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(p-&gt;next != <span class="literal">NULL</span> &amp;&amp; q-&gt;next != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(p-&gt;data &gt; q-&gt;data)&#123;</span><br><span class="line">			p-&gt;next = C-next;<span class="comment">//</span></span><br><span class="line">			C-&gt;next = p;<span class="comment">//p代表最大值的节点</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			q-&gt;next = C-next;</span><br><span class="line">			C-&gt;next = q;<span class="comment">//p代表最大值的节点</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(p-&gt;next != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="keyword">while</span>(p-&gt;next != <span class="literal">NULL</span>)&#123;</span><br><span class="line">			p-&gt;next = C-next;</span><br><span class="line">			C-&gt;next = p;<span class="comment">//p代表最大值的节点</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(q-&gt;next != <span class="literal">NULL</span>)&#123;</span><br><span class="line">		<span class="keyword">while</span>(q-&gt;next != <span class="literal">NULL</span>)&#123;</span><br><span class="line">			q-&gt;next = C-next;</span><br><span class="line">			C-&gt;next = q;<span class="comment">//p代表最大值的节点</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(LNode *A ,LNode *B,LNode *&amp;C)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//同样是先写核心内容</span></span><br><span class="line"></span><br><span class="line">	LNode *q = A;</span><br><span class="line">	LNode *p = B;</span><br><span class="line"></span><br><span class="line">	LNode *s;</span><br><span class="line"></span><br><span class="line">	C=B;</span><br><span class="line">	C-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="built_in">free</span>(A);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(p-&gt;next != <span class="literal">NULL</span> &amp;&amp; q-&gt;next != <span class="literal">NULL</span>)&#123;<span class="comment">//不能用p-&gt;next q-&gt;next 此时就是判断p,q本身就行</span></span><br><span class="line">		<span class="keyword">if</span>(p-&gt;data &gt; q-&gt;data)&#123;</span><br><span class="line">			s = p;<span class="comment">//否则会链表断裂，要写保存起来</span></span><br><span class="line">			p-&gt;next = C-next;<span class="comment">//</span></span><br><span class="line">			C-&gt;next = p;<span class="comment">//p代表最大值的节点</span></span><br><span class="line">			p = s-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			s = q;</span><br><span class="line">			q-&gt;next = C-next;</span><br><span class="line">			C-&gt;next = q;</span><br><span class="line">			q = s-&gt;next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(p-&gt;next != <span class="literal">NULL</span>)&#123;<span class="comment">//不能用p-&gt;next q-&gt;next 此时就是判断p,q本身就行</span></span><br><span class="line">		s = p;</span><br><span class="line">		p-&gt;next = C-next;</span><br><span class="line">		C-&gt;next = p;</span><br><span class="line">		p = s-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(q-&gt;next != <span class="literal">NULL</span>)&#123;<span class="comment">//不能用p-&gt;next q-&gt;next 此时就是判断p,q本身就行</span></span><br><span class="line">		s = q;</span><br><span class="line">		q-&gt;next = C-next;</span><br><span class="line">		C-&gt;next = q;</span><br><span class="line">		q = s-&gt;next;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findAndDelete</span><span class="params">(LNode *C,<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line"></span><br><span class="line">	LNode *p = C;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span>(p-&gt;next-&gt;next != <span class="literal">NULL</span>)&#123;<span class="comment">//不能用p-&gt;next-&gt;next  你想：你要的是下一个就行，next-&gt;next=下一个的下一个</span></span><br><span class="line">		<span class="keyword">if</span>(p-&gt;next-&gt;data == x)<span class="keyword">break</span>;</span><br><span class="line">		p=p-&gt;next;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//写到这里要返回去加上一前驱节点，因为删除一定要一个前驱节点</span></span><br><span class="line"></span><br><span class="line">	p-&gt;next = p-&gt;next-&gt;next;<span class="comment">//没有释放删去的那个中间节点</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">####################################################################################################################################</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/17/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%ADdate%E7%B1%BB%E5%9E%8B%E6%97%B6%E9%97%B4%E5%A4%84%E7%90%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/17/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%ADdate%E7%B1%BB%E5%9E%8B%E6%97%B6%E9%97%B4%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">关于数据库中date类型时间处理</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-17 02:16:00" itemprop="dateCreated datePublished" datetime="2017-09-17T02:16:00+08:00">2017-09-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/17/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%85%B3%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%ADdate%E7%B1%BB%E5%9E%8B%E6%97%B6%E9%97%B4%E5%A4%84%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="关于数据库中date类型时间处理" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月17日 下午2:16</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
-<li>首先明白一点：当数据库字段用date类型时，我们的一条sql针对于date类型时可以直接使用时间字符串表示的。<ol>
-<li>例如<code>insert into student(name,sex,age,address,birthday,remark) values(&#39;陈志恒&#39;,&#39;男&#39;,&#39;22&#39;,&#39;太原&#39;,&#39;1995-01-01&#39;,&#39;无&#39;)</code></li>
-</ol>
-</li>
-<li>说一下整个关于日期的处理步骤<ol>
-<li>第一步：从前台到数据库<ol>
-<li>从前台取到的是string类型</li>
-<li>string类型——&gt;java.util.Date date类型</li>
-<li>java.util.Date date类型——&gt;java.sql.Date(date.getTime()) 类型</li>
-</ol>
-</li>
-<li>第二步：从数据库到前台<ol>
-<li>java.sql.Date()类型 ——&gt;java.util.Date(rs.getDate(i).getTime()))类型</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>当我们需要对按时间进行where查询的时候<ol>
-<li>在mysql中使用datediff(时间差)函数</li>
-<li>一共有三个参数，参考下面的连接</li>
-<li>值得注意的一点是：这里的参数直接使用字符串类型就行。这就省去了我们转换的麻烦</li>
-<li>链接<ol>
-<li><a href="https://zhidao.baidu.com/question/37213809.html" target="_blank" rel="noopener">关于SQL模糊查询日期时间的方法_百度知道</a></li>
-<li><a href="http://endual.iteye.com/blog/1004798" target="_blank" rel="noopener">Java String 转成 Mysql Date - Hi, Sun - ITeye博客</a></li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="排错"><a href="#排错" class="headerlink" title="排错"></a>排错</h3><p>错误：net.sf.json.JSONException: java.lang.reflect.InvocationTargetException<br>参考：<a href="http://blog.csdn.net/ye1992/article/details/17436765" target="_blank" rel="noopener">json数据转换异常：net.sf.json.JSONException: java.lang.reflect.InvocationTargetException - ye1992的专栏        - CSDN博客</a><br>关键：<code>map.put(rs.getMetaData().getColumnName(i),new java.util.Date(rs.getDate(i).getTime()));</code></p>
-<h3 id="源码说明"><a href="#源码说明" class="headerlink" title="源码说明"></a>源码说明</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 按条件查询</span></span><br><span class="line"><span class="comment">	 * 按时间查询的完整例子</span></span><br><span class="line"><span class="comment"> 	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="keyword">public</span> List&lt;Map&lt;String, Object&gt;&gt; queryForListOnCondition(Page p, String condition, String condition_date) &#123;</span><br><span class="line">		String sql1 =<span class="string">"select count(1) from student   where name like '%"</span>+condition+<span class="string">"%' and datediff(day,date,'"</span>+condition_date+<span class="string">"') &lt; 0 "</span>;</span><br><span class="line">		<span class="keyword">int</span> count = dao.queryForCount(sql1);</span><br><span class="line">		p.setCount(count);</span><br><span class="line">		</span><br><span class="line"><span class="comment">//		String sql = "select * from student limit "+(p.getPageNum()-1)*p.getSize()+","+p.getSize();</span></span><br><span class="line"><span class="comment">//		return dao.queryForList(sql);</span></span><br><span class="line">		</span><br><span class="line">		String sql=<span class="string">"select * from student where name like '%"</span>+condition+<span class="string">"%' limit "</span>+(p.getPageNum()-<span class="number">1</span>)*p.getSize()+<span class="string">","</span>+p.getSize() ;</span><br><span class="line">		System.out.println(sql);</span><br><span class="line">		<span class="keyword">return</span> dao.queryForList(sql);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 增加保存</span></span><br><span class="line"><span class="comment">	 * 第一步：从前台到数据库（非预处理）</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">addSave</span><span class="params">(String name, String sex, String age, String address, String birthday)</span> </span>&#123;</span><br><span class="line">		java.util.Date date = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);</span><br><span class="line">			date = sdf.parse(birthday);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (ParseException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;  </span><br><span class="line">		String sql = <span class="string">"insert into student(name,sex,age,address,birthday,remark) values('"</span>+name+<span class="string">"','"</span>+sex+<span class="string">"',"</span>+age+<span class="string">",'"</span>+address+<span class="string">"',"</span>+<span class="string">"'"</span>+<span class="keyword">new</span> java.sql.Date(date.getTime())+<span class="string">"',"</span>+<span class="string">"'无'"</span>+<span class="string">")"</span>;</span><br><span class="line">		System.out.println(sql);</span><br><span class="line">		<span class="keyword">return</span> dao.excuteUpdate(sql);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 更新保存</span></span><br><span class="line"><span class="comment">	 * 第一步：从前台到数据库（预处理）</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">updateSave</span><span class="params">(String id, String name, String sex, String age, String address, String birthday)</span> </span>&#123;</span><br><span class="line">		java.util.Date date = <span class="keyword">null</span>;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);</span><br><span class="line">			date = sdf.parse(birthday);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (ParseException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; </span><br><span class="line">		String sql = <span class="string">"update student set name=?,sex=?,age=?,address=?,birthday=? where id=?"</span>;</span><br><span class="line">		<span class="keyword">int</span>[] types=&#123;Types.VARCHAR,Types.VARCHAR,Types.INTEGER,Types.VARCHAR,Types.DATE,Types.INTEGER&#125;;</span><br><span class="line">		Object[] obj = &#123;name,sex,age,address,<span class="keyword">new</span> java.sql.Date(date.getTime()),id&#125;;</span><br><span class="line">		<span class="keyword">return</span> dao.excuteUpdate(sql, types, obj);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 更新保存</span></span><br><span class="line"><span class="comment">	 * 第二步：从数据库到前台（放到map中）</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line"><span class="keyword">private</span> List&lt;Map&lt;String, Object&gt;&gt; rsToList(ResultSet rs) &#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				Map&lt;String, Object&gt;  map =  <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= rs.getMetaData().getColumnCount(); i++) &#123;</span><br><span class="line">					<span class="keyword">switch</span> (rs.getMetaData().getColumnType(i)) &#123;</span><br><span class="line">					<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getInt(i));</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getString(i));</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">default</span>:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),<span class="keyword">new</span> java.util.Date(rs.getDate(i).getTime()));</span><br><span class="line"><span class="comment">//						rs.getObject(i)</span></span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				list.add(map);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">浏览器多线程机制</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-15 10:49:00" itemprop="dateCreated datePublished" datetime="2017-09-15T10:49:00+08:00">2017-09-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/通用知识点</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/" class="post-meta-item leancloud_visitors" data-flag-title="浏览器多线程机制" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>690</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月15日 上午10:49</p>
-<p>参考：<br><a href="http://www.cnblogs.com/haodawang/articles/5850822.html" target="_blank" rel="noopener">javascript-js实现多线程 - 浩大王 - 博客园</a><br><a href="http://www.cnblogs.com/hksac/p/6596105.html" target="_blank" rel="noopener">浏览器的多线程机制（转） - SolHe - 博客园</a></p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>先说明浏览器的多线程实现方式，其中着重说明了其中一个线程—javaScript引擎线程的执行方式</p>
-<h2 id="浏览器多线程实现方式"><a href="#浏览器多线程实现方式" class="headerlink" title="浏览器多线程实现方式"></a>浏览器多线程实现方式</h2><p><img src="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/%E9%80%9A%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6/23994C1F-540B-4453-BC89-37B36B6335C7.png" alt><br>只要理解了上图就说明理解了浏览器多线程工作的方式（这里不能说成js多线程）</p>
-<p>总结来说：js引擎主要是通过一个队列来存放要执行的任务。只不过我们平时操作的时候我们很少会让一个js函数执行很长的时间，从造成线程堵塞，让我们误以为js是支持多线程的。这其中的队列是核心。</p>
-<h2 id="与android多线程对比，加强理解"><a href="#与android多线程对比，加强理解" class="headerlink" title="与android多线程对比，加强理解"></a>与android多线程对比，加强理解</h2><ol>
-<li>与android中操作图片的下载是一样的。在android的主视图是一个主线程，在这个主线程中我们是不允许使用http连接的，因为http连接如果事件过长，那么会造成屏幕操作的卡死，用户体验很差。这是我们就要新开一个线程去完成http请求并且下载大量图片。</li>
-<li>在这个新开的下载图片的线程中，handler（其实是视图主线程的handler，并不是looper这一线程的handler）先负责向looper拥有的message队列中放message，然后在looper要求的时候去处理message。这里的looper就相当于这里的js引擎，他们都有自己拥有的一个消息队列，并且他们这些队列中的消息都是由其他线程给的。</li>
-<li>他们有一个消息就处理一个消息，只关注眼前，根本不关心自己还有多少任务要做，心真大。</li>
-</ol>
-<p>附录：<br><a href="http://www.cnblogs.com/mingmingruyuedlut/archive/2011/10/18/2216553.html" target="_blank" rel="noopener">Ajax工作原理 - Eric Sun - 博客园</a><br>这篇文章对同步和异步解释的比较详细</p>
-<p><a href="%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%9C%BA%E5%88%B6%EF%BC%88%E8%BD%AC%EF%BC%89%20-%20SolHe%20-%20%E5%8D%9A%E5%AE%A2%E5%9B%AD.zip">浏览器的多线程机制（转） - SolHe - 博客园.zip</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/" class="post-title-link" itemprop="url">android中对代理模式的优化+两个类的封装</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-15 08:59:00" itemprop="dateCreated datePublished" datetime="2017-09-15T08:59:00+08:00">2017-09-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-Android/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/Android</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/" class="post-meta-item leancloud_visitors" data-flag-title="android中对代理模式的优化+两个类的封装" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>219</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月15日 上午8:59</p>
-<h2 id="android的两个封装"><a href="#android的两个封装" class="headerlink" title="android的两个封装"></a>android的两个封装</h2><h3 id="adapter系统原始封装"><a href="#adapter系统原始封装" class="headerlink" title="adapter系统原始封装"></a>adapter系统原始封装</h3><ol>
-<li>使用默认的视图</li>
-<li>隐藏的内容<ol>
-<li>Holder的视图（这里用传参的方式传入了）</li>
-<li>数据与视图的对应（以前通过视图set方法来手动设值）<ol>
-<li>这种方式需要严格的遵守人家的编码格式</li>
-<li>如果人家有格式转换类，使用格式转换类进行转换<br><img src="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/5BE484E8-F78B-4704-8E89-CEDF3358E45B.png" alt></li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="AsyncTask封装"><a href="#AsyncTask封装" class="headerlink" title="AsyncTask封装"></a>AsyncTask封装</h3><p>从整体上看两个步骤</p>
-<ol>
-<li>获取数据</li>
-<li>处理数据</li>
-<li>他隐藏的内容<ol>
-<li>与主线程进行通信你都看不见<br><img src="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/EB24D69E-1F6C-46A9-8558-F1A12F6DB02F.png" alt></li>
-</ol>
-</li>
-</ol>
-<hr>
-<h2 id="对代理模式的改进"><a href="#对代理模式的改进" class="headerlink" title="对代理模式的改进"></a>对代理模式的改进</h2><ol>
-<li>加方法<br><img src="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/1D6DA168-21D8-442F-9884-5E60D0281B35.png" alt></li>
-<li>加缓存<br><img src="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/E46D9E05-7824-47DE-8BB1-0669C758DF9B.png" alt><br><img src="/2017/09/15/web%E5%BC%80%E5%8F%91/czh_blog/android/android%E4%B8%AD%E5%AF%B9%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E5%8C%96+%E4%B8%A4%E4%B8%AA%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/46FD0710-9553-4213-A701-FE536F2AD0C9.png" alt></li>
-</ol>
-<p>其他：<br><a href="http://www.apkbus.com/forum.php?mod=viewthread&tid=18204&highlight=%E5%8F%8B%E7%9B%9F%E6%9D%AF&page=1" target="_blank" rel="noopener">android四大组件 友盟杯</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/14/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E4%B8%AD%E7%BA%A7%E9%A1%B9%E7%9B%AE%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1243,11 +483,886 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/12/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89-8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/12/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89-8/" class="post-title-link" itemprop="url">ThinkPHP源码分析（补充）-8</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-12 06:13:00" itemprop="dateCreated datePublished" datetime="2017-09-12T06:13:00+08:00">2017-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_blog/PHP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/12/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E8%A1%A5%E5%85%85%EF%BC%89-8/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析（补充）-8" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>143</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月12日 下午6:13</p>
+<p>TP从执行的步骤上来开，真正项目的启动放在最后一步<br>前面90%的步骤都是在读取配置文件<br><strong>这说明给了一个道理</strong>：<br>    1. 读取配置文件，并进行设置就是框架的主要工作，这些都在项目启动前完成。<br>    2. 与之对应的是，我们在使用框架的时候回会写大量的的配置文件，这下就知道原因了</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/12/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E4%B8%AD%E6%9C%9F%E7%BB%83%E4%B9%A0%E6%80%BB%E7%BB%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/12/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E4%B8%AD%E6%9C%9F%E7%BB%83%E4%B9%A0%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">中期练习总结</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-12 05:26:00" itemprop="dateCreated datePublished" datetime="2017-09-12T05:26:00+08:00">2017-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/12/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E4%B8%AD%E6%9C%9F%E7%BB%83%E4%B9%A0%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="中期练习总结" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月12日 下午5:26</p>
+<p><a href="http://blog.csdn.net/peng_hong_fu/article/details/52918450" target="_blank" rel="noopener">JSP页面实现批量删除数据 - 饮冰室人的博客        - CSDN博客</a></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>前面的笔记是针对于<strong>入门知识点</strong>的，而这篇笔记针对于<strong>功能</strong></li>
+<li>同时，这篇是希望<strong>以后忘了之后</strong>，看这篇文章能快速找到一个<strong>写servlet+jsp项目的正确的思路</strong></li>
+<li>中期项目名字是MVCDemo</li>
+</ul>
+<hr>
+<h2 id="常用几个小功能的总结"><a href="#常用几个小功能的总结" class="headerlink" title="常用几个小功能的总结"></a>常用几个小功能的总结</h2><p>（我这里没有听，我觉得自己看看也就会了，需要使用这个功能的时候去对应的项目去找源代码就行了）</p>
+<h3 id="ajax注意点"><a href="#ajax注意点" class="headerlink" title="ajax注意点"></a>ajax注意点</h3><ol>
+<li>get 中文乱码，出现中文的时候使用post来解决</li>
+<li>Post 可以设置请求头 和 请求体<br><a href="ajax.txt">ajax.txt</a><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3></li>
+<li>下载时文件名容易出现中文乱码，关于这个问题有统一的解决方案<br><a href="%E4%B8%8B%E8%BD%BD.txt">下载.txt</a><br><a href="%E4%B8%8B%E8%BD%BD%201.txt">下载 1.txt</a></li>
+</ol>
+<hr>
+<h2 id="中期练习（最后有总结）"><a href="#中期练习（最后有总结）" class="headerlink" title="中期练习（最后有总结）"></a>中期练习（最后有总结）</h2><p><img src="/2017/09/12/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E4%B8%AD%E6%9C%9F%E7%BB%83%E4%B9%A0%E6%80%BB%E7%BB%93/DCF22E7B-6E7A-480C-A03B-E42C9A8DE231.png" alt><br>                    效果图1<br><img src="/2017/09/12/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E4%B8%AD%E6%9C%9F%E7%BB%83%E4%B9%A0%E6%80%BB%E7%BB%93/1DBAF84D-639B-42AF-828F-3D8A1597BF35.png" alt><br>                    效果图2</p>
+<p>我先说说我在拼凑整个基础项目过程中遇到的问题，这里有已经解决的，还有没有解决的问题。其次，我在把各个功能简单的介绍一下，方便以后回忆。</p>
+<h2 id="在拼凑功能时遇到的问题"><a href="#在拼凑功能时遇到的问题" class="headerlink" title="在拼凑功能时遇到的问题"></a>在拼凑功能时遇到的问题</h2><ol>
+<li>添加分页功能时（包括ajax）<ol>
+<li>首先我上来就抄，没有思考一下<ol>
+<li>这个功能是否依赖于jar？<ol>
+<li>依赖于那些架包？</li>
+</ol>
+</li>
+<li>依赖于那些实体类、servlet等.java文件？</li>
+<li>他使用的视图jsp文件是那个？</li>
+</ol>
+</li>
+<li>我直接就是看见那个就粘贴复制那个，造成了很多没见过的异常，其实总结来说一句话“少东西”。在这个过程中不断的增长补补，一次次的启动服务器，很是浪费时间。</li>
+<li>总结：抄，也要讲究思路，不要认为简单，自己也要认真的分析一次。</li>
+</ol>
+</li>
+<li>使用ajax来实现每页显示条数<ol>
+<li><strong>使用ajax造成的问题</strong></li>
+<li>我的确通过ajax实现了将数据的取回并动态刷新了<table>中的数据</table></li>
+<li>但是此时的分页条处理我们手选的那个每页显示，分页条中的其他内容其实是没有变的。<strong>这就是<table>数据和分页条数据显示不同步</table></strong>。</li>
+<li>我现在没时间解决他了，先写下来，以后有时间了整体重新写一下<ol>
+<li>我试过方法将include指令写在ajax中，但是会报错，因为这里使用了jsp指令，这个指令是不会等你js的function触发了之后才执行，他在jsp页面在jvm处理的时候就执行了，这时候还没有给了用户。</li>
+<li>由于这里变成了一个递归所以就会不停地报错，shit。</li>
+<li><code>/* str+=“&lt;div align=‘center’&gt;&lt;jsp:include page=‘/page.jsp’&gt;&lt;/jsp:include&gt;&lt;/div&gt;&quot; */</code></li>
+</ol>
+</li>
+<li><strong>出现这个问题的根本原因是</strong>：没有考虑ajax异步刷新会造成数据不同步，造成在设计的时候没有考虑，最后完成后才发现，想改都不知道去哪下手，还不如重新。</li>
+</ol>
+</li>
+<li>当在一个查询页面加入批量删除，ajax，分页，模糊查询时，这些功能一定会相互影响，我这里就举例说了。因为，<strong>这些问题造成的原因还是我没有进过系统的分析，就急急忙忙的想完成任务</strong>。最后自己看的都恶心。</li>
+</ol>
+<h2 id="从分页（page）中学习到的编程思路"><a href="#从分页（page）中学习到的编程思路" class="headerlink" title="从分页（page）中学习到的编程思路"></a>从分页（page）中学习到的编程思路</h2><ol>
+<li>封装实体对象page.java，让对象作为传递的信息的信使，解决了信息传递不方便的情况，不用一个个传了</li>
+<li>其中这个page对象与视图中的分页栏可以理解成是同一个东西。分页栏就是去除了page对象的内容而已。</li>
+<li>封装page对象可以使得业务分层。当我们知道分页栏其实就是page对象时，我们在编码的时候就不用考虑视图层的内容了，只需考虑“我们的数据源有哪些（视图层传入），这些数据源如处理，并将处理的数据给了page实体对象然他保存，最后通过要返回的数据是page对象和借助page对象让sql查询出的数据集。”</li>
+<li><strong>这个思维的核心就是</strong>：<strong>掌握了我有哪些数据，我要输出哪些数据</strong>。</li>
+<li><strong>当然这也是写servlet的一个主要思维</strong>，page实体对象在这个过程中可以理解成一个小小的技巧吧。</li>
+</ol>
+<h2 id="中期练习总结："><a href="#中期练习总结：" class="headerlink" title="中期练习总结："></a>中期练习总结：</h2><ol>
+<li>写项目时一定要经过严密的思考，尽可能的想清楚们一点。<ol>
+<li><strong>思考的时间一定要超过编码时间。</strong></li>
+</ol>
+</li>
+<li>写Servlet的主要思维<ol>
+<li>掌握了我有哪些数据，我要输出哪些数据</li>
+<li>我（servlet）是老大，我下面是有人的，可不能自己干活，我指挥指挥就行了</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">学习数据结构和算法的基本方法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-12 04:15:00" itemprop="dateCreated datePublished" datetime="2017-09-12T04:15:00+08:00">2017-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2017/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2017</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="学习数据结构和算法的基本方法" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>180</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月12日 下午4:15</p>
+<p><a href="bear://x-callback-url/open-note?id=FA8777A7-E012-45F2-90D2-5A25DAC07C8A-2779-000009EBF6287E94">JULY 算法01</a><br><a href="bear://x-callback-url/open-note?id=4F139F51-5DFC-4E7F-BB29-67A5A127B0D2-2779-000009EC95391653">重新理解数据结构+算法</a></p>
+<h2 id="现在回过头去总结上面的两篇文章"><a href="#现在回过头去总结上面的两篇文章" class="headerlink" title="现在回过头去总结上面的两篇文章"></a>现在回过头去总结上面的两篇文章</h2><ol>
+<li>在第一篇中是从算法的角度（与之对应的是数据结构）去<strong>分析如何去学习一个算法</strong></li>
+<li>而第二偏重使用数据结构的角度去<strong>分析如何设计一个数据结构的</strong></li>
+<li>这两篇文章互为补充，构成了我现在认为学习数据结构和算法的基本方法</li>
+</ol>
+<p>在解决了方法论的问题之后，我们就要安下心去读书，<strong>掌握基础再是最重要的</strong></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84+%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84+%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">重新理解数据结构+算法</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-12 04:15:00" itemprop="dateCreated datePublished" datetime="2017-09-12T04:15:00+08:00">2017-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E7%AE%97%E6%B3%95-%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B-2017/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/czh_算法/算法学习过程/2017</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/12/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%BF%87%E7%A8%8B/2017/%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84+%E7%AE%97%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="重新理解数据结构+算法" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月12日 下午4:15</p>
+<h2 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h2><ol>
+<li>今天的这篇文章最大的收获有<strong>两点</strong><ol>
+<li>数据结构和算法是不同的两个东西</li>
+<li>在广义的数据结构这一大家庭中，可以粗略的分为两个步骤<ol>
+<li>第一步骤是写工具</li>
+<li>第二步骤是使用工具</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>以前说起说数据结构：不就是链表、树、图那些吗。这样去总结数据结构我觉得是很不正确的，因为这两个步骤<ol>
+<li>既说明了<strong>我们学习、使用、创造一个数据结构的步骤</strong>，</li>
+<li>同时也体现了一种分层的思想，这种分层是必须的，因为这两个步骤中需要一个思维的转变<ol>
+<li><strong>当形成一种思维时，思维是可以灵活的用到其他地方的</strong>。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>我主要参考文章<a href="http://blog.csdn.net/zolalad/article/details/28233483" target="_blank" rel="noopener">个人对数据结构的理解和总结 - zolalad的专栏        - CSDN博客</a></li>
+</ol>
+<h2 id="数据结构和算法的不同"><a href="#数据结构和算法的不同" class="headerlink" title="数据结构和算法的不同"></a>数据结构和算法的不同</h2><ol>
+<li>由于要复习考研的知识，我又捡起了数据结构和算法。</li>
+<li>我今天突然意识到算法和数据结构其实是不同的东西，以前我的视角里只有各种算法，分治、回溯、dp等等.算法可以说是一种思想，一种理论的东西，他的实现一定是依靠一定的数据结构，在这一过程中他需要你有抽象概括能力，其实就是需要你转换成计算机语言去表述。</li>
+</ol>
+<h2 id="ADT是核心（抽象数据类型）"><a href="#ADT是核心（抽象数据类型）" class="headerlink" title="ADT是核心（抽象数据类型）"></a>ADT是核心（抽象数据类型）</h2><ol>
+<li><strong>ADT = 数据逻辑结构 + 基本操作</strong><ol>
+<li>这里的基本操作我是忽视的重要知识点</li>
+</ol>
+</li>
+<li>因此学习数据结构的核心就是去掌握每个数据的逻辑结构以及它对应的操作有哪些</li>
+<li>补充<ol>
+<li><strong>ADT是不包含存储结构的</strong></li>
+<li>这个存储结构同样也是需要掌握的</li>
+<li><strong>总结：对于每个知识点，一共需要掌握三个部分</strong>。</li>
+</ol>
+</li>
+</ol>
+<h2 id="区分开逻辑结构和存储结构"><a href="#区分开逻辑结构和存储结构" class="headerlink" title="区分开逻辑结构和存储结构"></a>区分开逻辑结构和存储结构</h2><ol>
+<li>对于一批数据，数据的运算是定义在数据的逻辑结构之上的，而运算的具体实现就依赖于数据的存储结构。</li>
+<li>这里的逻辑结构=数据结构=ADT（不准确）</li>
+<li>可以把ADT就是一个工具类，你作为一个工具类的使用者，不用管它实现；而存储结构可以理解成ADT这个工具的具体实现。<strong>这就说明我的思维要分为两步骤，第一步骤是写工具，然后第二步骤是使用工具</strong>。</li>
+<li>给我的感觉就是，存储结构站在逻辑结构来说其实是不可见的。这种感觉就像我们在javaEE中mvc模式，你一开始在没写业务逻辑之前就要将基本的dao层（以及dbutils）准备的差不多，准备完之后，我们就可以理解成—我只要一句话就可以完成对数据的数据库处理。每当写完dao层之后，我就会提醒自己—忘了dao层是如何实现的，因为这时的角度要从数据处理的角度，转移到业务功能的实现上，你实现dao层的思维和你写业务的思维是不一样的，当然这也体现了mvc架构的最重要的目的。而现在也是一样的，实现一个存储结构就好比是一个你实现dao层，首先完成的是它，当我选好自己适合的存储结构，并通过代码去实现逻辑结构下要求的基本操作时，我就要转变一个编码思路，我才不管你一个insert()操作是使用顺序存储还是链式存储，你给我实现了就行了，我能用insert()完成我想要的功能就可以了。</li>
+</ol>
+<h2 id="数据结构（逻辑结构），存储结构，基本操作三者的关系"><a href="#数据结构（逻辑结构），存储结构，基本操作三者的关系" class="headerlink" title="数据结构（逻辑结构），存储结构，基本操作三者的关系"></a>数据结构（逻辑结构），存储结构，基本操作三者的关系</h2><ol>
+<li>分类<ol>
+<li>基本操作</li>
+<li>基本数据结构（逻辑结构）</li>
+<li>基本存储结构</li>
+</ol>
+</li>
+<li>理解：<ol>
+<li>对于我们常说的数据结构（逻辑结构），存储结构，基本操作者三者来说，他们没啥特别神秘的，因为是是那些固定的几种，各自都不超过10种。</li>
+<li>但是根据他们之间的组合关系（这种组合关系需要和自己的需求相对应）确实特别多的，<strong>举个例子</strong>：同一个逻辑结构-链表，我可以选择让实现不同的基本操作，对应的基本操作我可以根据自己的需要来选择不同的存储结构，我是要顺序的还是链式的，甚至其他的存储结构都可以。这个过程就是一个选择的过程。</li>
+</ol>
+</li>
+</ol>
+<p>附录：一些资料</p>
+<p><a href="https://www.zhihu.com/topic/19591797/top-answers" target="_blank" rel="noopener">数据结构 - 话题精华 - 知乎</a></p>
+<p><a href="http://blog.csdn.net/novelly/article/details/12446715" target="_blank" rel="noopener">优秀博客推荐：各种数据结构与算法知识入门经典 </a></p>
+<p><a href="http://www.cnblogs.com/skywang12345/p/3603935.html" target="_blank" rel="noopener">数据结构与算法系列 目录 - 如果天空不死 - 博客园</a></p>
+<p>这是一篇以前对我启发比较大的一篇文章：<br><a href="http://blog.csdn.net/yapian8/article/details/28240973?utm_source=tuicool&utm_medium=referral" target="_blank" rel="noopener">五大常用算法：分治、动态规划、贪心、回溯和分支界定 - yapian8的专栏        - CSDN博客</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/12/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/servlet%E4%B8%ADfilter%E7%BB%84%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/12/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/servlet%E4%B8%ADfilter%E7%BB%84%E4%BB%B6/" class="post-title-link" itemprop="url">servlet中filter组件</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-12 02:54:00" itemprop="dateCreated datePublished" datetime="2017-09-12T02:54:00+08:00">2017-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/12/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/servlet%E4%B8%ADfilter%E7%BB%84%E4%BB%B6/" class="post-meta-item leancloud_visitors" data-flag-title="servlet中filter组件" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>774</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月12日 下午2:54</p>
+<p>来源：<a href="http://www.imooc.com/article/11667" target="_blank" rel="noopener">浅谈Java Web 之过滤器Filter_慕课手记</a></p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
+<li>关于filter的知识点看那个连接就可以了</li>
+<li>其他就是我对filter的一些理解了</li>
+</ol>
+<h2 id="文中摘抄"><a href="#文中摘抄" class="headerlink" title="文中摘抄"></a>文中摘抄</h2><ol>
+<li>其不用于处理客户端请求，</li>
+<li>只用于对request和response进行修改</li>
+<li>并管理web服务器的所有资源（通过对Jsp文件、Servlet文件、Html文件以及一些静态的图片等资源进行拦截实现）</li>
+</ol>
+<h2 id="我对filter的理解"><a href="#我对filter的理解" class="headerlink" title="我对filter的理解"></a>我对filter的理解</h2><ol>
+<li>这篇文章认为写的很精炼，因此关于filter我也不赘述了</li>
+<li>在会使用filter之后，<strong>我说说我对filter的理解</strong></li>
+<li>Filter的作用在这篇文章中说的是解决了——每个Servlet中都书写同样的代码定会为此工程增添很高的冗余度。作者这么说，也说明了filter其实是可以用servlet代替的，这里先不管他好不好。</li>
+<li>除了这个原因外，我觉得在编写一个filter的过程中，这个过程是独立的。如果我们使用servlet来实现filter的功能，先不谈冗余度的事，在这个过程中我们是把他当做一段逻辑控制来写的，是整个业务逻辑的一部分。而如果写在filter中，写filter的整个过程其实是可以把业务逻辑放在一边，<strong>思维变成了—我给你“配”一个filter</strong>。<strong>filter可以将一部分特定的逻辑代码从原先的业务逻辑代码中抽离出来，这一个“配”字我觉得就是filter的核心，这样的思维才是filter给我们带来最宝贵的东西，体现了一种分离的思想</strong>。</li>
+</ol>
+<h2 id="结合android中的四大组件，我也说说我对组件的理解"><a href="#结合android中的四大组件，我也说说我对组件的理解" class="headerlink" title="结合android中的四大组件，我也说说我对组件的理解"></a>结合android中的四大组件，我也说说我对组件的理解</h2><ol>
+<li>组件的第一点是<strong>独立的</strong>，这点最最重要</li>
+<li>也就是像上面说的filter一样，我可以站在一个第三方的角度，<strong>我给项目配、配、配</strong></li>
+<li>一个组件就像一个配件一样，让项目更加的完整</li>
+<li>我这里只是组件的一个感觉是配，在写项目的时候你可以随时加，你也项目可以一开始就准备好，当然也可以最后再弄，看心情就行了额。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%9C%A8servlet+jsp%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%A7%8B%E5%86%99%E9%80%BB%E8%BE%91%E4%B9%8B%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%9C%A8servlet+jsp%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%A7%8B%E5%86%99%E9%80%BB%E8%BE%91%E4%B9%8B%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="post-title-link" itemprop="url">在servlet+jsp项目开始写逻辑之前的准备工作</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-11 11:55:00" itemprop="dateCreated datePublished" datetime="2017-09-11T11:55:00+08:00">2017-09-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E5%9C%A8servlet+jsp%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%A7%8B%E5%86%99%E9%80%BB%E8%BE%91%E4%B9%8B%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/" class="post-meta-item leancloud_visitors" data-flag-title="在servlet+jsp项目开始写逻辑之前的准备工作" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>240</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月11日 上午11:55</p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ol>
+<li>先看一下这个 <a href="bear://x-callback-url/open-note?id=65FFB9B6-8A1C-4A0F-A067-B363E86EBAD2-2779-000009EC06AF54C5">servlet简介 + 项目配置步骤</a></li>
+<li>新建项目，更改项目字符编码，添加jar包</li>
+<li>webcontent下新建一个floder，直接ui的库文件复制过来，现在不要html页面</li>
+<li>把html文件粘贴到jsp中，jsp的头还得留着啊</li>
+<li>把粘过来的html中的link啥的一些引入库文件地址改一改</li>
+<li>增加项目目录，其中有dao,service,servlet,dbutils</li>
+<li>在web.xml中注册servlet</li>
+<li>再添加各种jar包</li>
+<li>好了！可以开始写逻辑完成功能了。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/cookie%E5%92%8Csession/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/cookie%E5%92%8Csession/" class="post-title-link" itemprop="url">cookie和session</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-11 09:23:00" itemprop="dateCreated datePublished" datetime="2017-09-11T09:23:00+08:00">2017-09-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/cookie%E5%92%8Csession/" class="post-meta-item leancloud_visitors" data-flag-title="cookie和session" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月11日 上午9:23</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ol>
+<li>我结合我昨天看的一个电影加勒比海盗5-死无对证来说明我对cookie和session的理解吧。</li>
+<li>电影中的小男主角在自己还是一个小屁孩的时候，去荷兰号去找父亲，父亲当时将自己脖子中的<strong>项链</strong>给了小男主角，就是希望有一天等小男主角长大之后还可以相认。果然，那主角不负众找到了三叉戟，破除了海洋中的所有诅咒。最后，小男主角和父亲相见的时候，父亲第一眼看的是哪个项链，然后确认了之后他们拥抱在一起（ps：关键是小男主角还找了一个漂亮的媳妇，bravo！）</li>
+<li>先说cookie</li>
+<li>这里的项链就是我们这里的一个cookie，<strong>cookie由服务器产生，cookie在给了客户端之后服务器就没有了</strong>（给了儿子，父亲自然就没了），由于http是无状态的，所以一旦下一次访问（男主就和父亲很难相见），服务器是不认识谁了，但是客户端有了这个cookie，服务器就根据这个cookie知道你是你是谁了，这两个人就相认了。</li>
+<li>这里有几个特殊情况，例如<strong>这个cookie让别人拿走</strong>，用在了其他的浏览器上，那么服务器也是不知道了（这样父亲就认错孩子了），但是利用这种情况，可以做多个客户端浏览器的同步。还有就是一个服务器可以为很多不同的用户服务（父亲有好多的孩子，都给了他们不同的项链），<strong>服务器在把自己的cookie给出去之后，其实对于自己产生的cookie的具体内容也不知道了</strong>，他得根据客户端给他啥，他就知道啥，认为这就是自己给客户端的，简单的说：给啥我要啥（这一点的判断是浏览器根据访问的url来划分的，浏览器访问不同的url，会把不同的url对应的cookie全都传过去），这也就解决了一个服务器多个客户端的问题，客户端给我啥我要啥，这时候可以理解成的情景是：<strong>就是两个人在普通的交流，这个交流就一个回合，但是客户端这人用本子记录内容，但是服务器这个人比较懒</strong>。</li>
+<li><strong>对于服务器来说，只要有人访问他，他就给他一个cookie，其中就是一个Jsessionid</strong>。对于双11来说，你想想他会产生多少个Jsessonid，服务器这么做的原因是想和各种来找他的人都建立起关系，维护住关系。</li>
+<li>cookie中还有一个<strong>domain</strong>的概念，<strong>我理解就是兄弟姐妹之间公用一个cookie作为信物</strong>，而不是每个人一个。</li>
+<li>还要就是session</li>
+<li><strong>Session是保存在服务端</strong>，这个可以理解成父亲在根据cookie认出自己的儿子之后，从自己的记忆中找到了很多自己和儿子相处的儿时时光，这只有父亲一个知道，其他人根本不知道，是私有的。<strong>这里的私有记忆就是session</strong>，只能让服务器自己程序执行的时候使用，作为自己一些功能实现的判断依据，<strong>用来写代码逻辑用的</strong>。</li>
+<li>这里还说明了其实<strong>session和cookie其实是完全不同的东西</strong>。他们之间的联系是当一个 Session 开始时，Servlet 容器将创建一个 HttpSession 对象，Servlet 容器为 HttpSession <strong>分配一个唯一标识符，称为 Session ID</strong>，<strong>这个sessionid是一个cookie</strong>，是为了<strong>让服务端能够区分开不同的用户</strong>，那么根据这个cookie就可以在服务端的代码逻辑中过滤一些人（eg：防止用户没登录就访问购物车界面，然后告知他没登录）。这一点也可以从javaEE手册中证明，session和cookie是没有继承和实现关系的。</li>
+<li>其他：<ol>
+<li>session服务器内存中 cookie客户端硬盘中</li>
+<li>Session的有效时间通过xml控制，而cookie直接通过代码控制<ol>
+<li>Tomcat自带一个web.xml文件，如我们在使用session中没有在自己的项目web.xml中声明有效时间，那么默认使用就是tomcat中web.xml文件的</li>
+</ol>
+</li>
+<li>在禁止使用cookie的地方使用session<ol>
+<li><a href="http://blog.csdn.net/zhaogenzi/article/details/18409951" target="_blank" rel="noopener">response.encodeURL的用法 - zhaogengzi的专栏        - CSDN博客</a></li>
+<li><a href="http://blog.csdn.net/langqiao123/article/details/48489601" target="_blank" rel="noopener">response.encodeURL的用法 - langqiao123的专栏        - CSDN博客</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2017/09/11/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/cookie%E5%92%8Csession/49DA034B-16DD-4417-A5F8-0F19D7872C40.png" alt><br>                可以从http报文头中去观察cookie的过程</p>
+<h2 id="详细的知识点"><a href="#详细的知识点" class="headerlink" title="详细的知识点"></a>详细的知识点</h2><p>直接看这个txt文档排版比较整齐，下面那个是为了方便粘贴复制<br><a href="cookie%E5%92%8Csession.txt">cookie和session.txt</a></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br></pre></td><td class="code"><pre><span class="line">================================</span><br><span class="line">================================</span><br><span class="line">================================</span><br><span class="line"></span><br><span class="line">会话跟踪</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 什么是会话</span><br><span class="line">  * 用户拨打<span class="number">10086</span>，从服务台接通后会话开始；</span><br><span class="line">  * 用户发出话费查询请求，服务台响应。这是该会话中的一个请求；</span><br><span class="line">  * 用户发出套餐变更请求，服务台响应。这是该会话中的又一个请求；</span><br><span class="line">  * ...</span><br><span class="line">  * 用户挂断电话，会话结束。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 会话的特性</span><br><span class="line">  * 一个会话中可能包含多个请求；</span><br><span class="line">  * 一个会话中发出请求的用户是唯一的；</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. JavaWeb会话</span><br><span class="line">  * 从用户打开本站第一个页面开始，会话也开始了；</span><br><span class="line">  * 用户会发出<span class="number">0</span>~n个请求；</span><br><span class="line">  * 用户关闭浏览器会话结束了。</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. 什么是会话跟踪技术</span><br><span class="line">  HTTP是无状态协议，也就是没有记忆力的协议，每个请求之间无法共享数据。</span><br><span class="line">  	这就无法知道会话什么时候开始，什么时候结束，也无法确定发出请求的用户身份。这说明需要使用额外的手段来跟踪会话！</span><br><span class="line">  * 在一个会话中共享数据即会话跟踪技术</span><br><span class="line"></span><br><span class="line">------------------------------------</span><br><span class="line"></span><br><span class="line">Cookie</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 什么是Cookie</span><br><span class="line"></span><br><span class="line">* Cookie是HTTP协议的规范之一，它是服务器和客户端之间传输的小数据。</span><br><span class="line">* 首先由服务器通过响应头把Cookie传输给客户端，客户端会将Cookie保存起来。</span><br><span class="line">* 当客户端再次请求同一服务器时，客户端会在请求头中添加该服务器保存的Cookie，发送给服务器。</span><br><span class="line">* Cookie就是服务器保存在客户端的数据！</span><br><span class="line">* Cookie就是一个键值对！！！</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. Cookie规范</span><br><span class="line">* Cookie通过请求头和响应头在服务器与客户端之间传输；</span><br><span class="line">* Cookie大小限制在<span class="number">4</span>KB之内；</span><br><span class="line">* 一台服务器在一个客户端最多保存<span class="number">20</span>个Cookie；</span><br><span class="line">* 一个浏览器最多可以保存<span class="number">300</span>个Cookie；</span><br><span class="line"></span><br><span class="line">	虽然Cookie规范是如此，但在今天，浏览器厂商的竞争异常激烈，所以多少会超出Cookie规则的限制。但也不会超出过多！</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. Cookie与请求头和响应头</span><br><span class="line"></span><br><span class="line">* 服务器向客户端发送Cookie的响应头为Set-Cookie，例如：Set-Cookie:cookiename=cookievalue</span><br><span class="line">* 客户端向服务器发送Cookie的请求头为Cookie，例如：Cookie:cookiename=cookievalue</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. Servlet中向客户端发送Cookie</span><br><span class="line"> Cookie cookie1 = <span class="keyword">new</span> Cookie(<span class="string">"test1"</span>, <span class="string">"abcdefg"</span>);</span><br><span class="line"> Cookie cookie2 = <span class="keyword">new</span> Cookie(<span class="string">"test2"</span>, <span class="string">"ABCDEFG"</span>);</span><br><span class="line"> response.addCookie(cookie1);</span><br><span class="line"> response.addCookie(cookie2);</span><br><span class="line"></span><br><span class="line"><span class="number">5</span>. Servlet中获取客户端发送过来的Cookie</span><br><span class="line"></span><br><span class="line"> Cookie[] cs = request.getCookies();</span><br><span class="line"> <span class="keyword">if</span>(cs != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span>(Cookie c : cs) &#123;</span><br><span class="line">      System.out.println(c.getName() + <span class="string">"="</span> + c.getValue());</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">Cookie的细节</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. Cookie的maxAge</span><br><span class="line">  当服务器创建Cookie对象后，可以调用setMaxAge()方法设置Cookie的最大生命。</span><br><span class="line">  * maxAge &gt; <span class="number">0</span>：表示Cookie在客户端硬盘上保存的最大时间，单位为秒；</span><br><span class="line">  * maxAge &lt; <span class="number">0</span>：表示Cookie不会被浏览器保存到硬盘上，而只在浏览器内存中存活，一旦客户端关闭浏览器在，那么Cookie就消失；</span><br><span class="line">  * maxAge == <span class="number">0</span>：表示删除Cookie，例如客户端硬盘已经存在名为abc的Cookie，如果服务器再向客户端发送名为abc，并且maxAge为<span class="number">0</span>的Cookie，那么表示删除客户端上的名为abc的Cookie。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. Cookie的path</span><br><span class="line">  浏览器在访问BServlet时，是否要带上AServlet保存的Cookie呢？这要看Cookie的path了。</span><br><span class="line">  现有资源如下：</span><br><span class="line">  * http:<span class="comment">//localhost:8080/day06_2/servlet/AServlet</span></span><br><span class="line">  * http:<span class="comment">//localhost:8080/day06_2/servlet/BServlet，保存名为xxx的Cookie</span></span><br><span class="line">  * http:<span class="comment">//loclahost:8080/day06_2/servlet/CServlet，保存名为yyy的Cookie</span></span><br><span class="line">  * http:<span class="comment">//loclahost:8080/day06_2/servlet/user/DServlet, 保存名为zzz的Cookie</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 没有设置Cookie的path</span></span><br><span class="line">  AServlet &#123;</span><br><span class="line">     Cookie c = <span class="keyword">new</span> Cookie(<span class="string">"xxx"</span>, <span class="string">"XXX"</span>);</span><br><span class="line">     response.addCookie(c);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 设置了Cookie的path为/day06_2</span></span><br><span class="line">  CServlet &#123;</span><br><span class="line">     Cookie c = <span class="keyword">new</span> Cookie(<span class="string">"yyy"</span>, <span class="string">"YYY"</span>);</span><br><span class="line">     c.setPath=<span class="string">"/day06_2"</span>;</span><br><span class="line">    response.addCookie(c);</span><br><span class="line">  &#125;</span><br><span class="line">  DServlet &#123;</span><br><span class="line">    Cookie c = <span class="keyword">new</span> Cookie(<span class="string">"zzz"</span>, <span class="string">"ZZZ"</span>);</span><br><span class="line">    resposne.addCookie(c);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">  在BServlet中保存的Cookie没有设置path，那么它的path默认为当前BServlet的所在路径，即“/day06_2/servlet”。</span><br><span class="line">  在CServlet中保存的Cookie设置了path为/day06_2。</span><br><span class="line">  在DServlet中保存的Cookie没有设置path，那么它的path默认为DServlet的所在路径，即“day06_2/servlet/user”</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  当访问AServlet时，是否要带上xxx这个Cookie呢？因为AServlet的访问路径为/day06_2/servlet/BServlet，它包含了xxx的path，即/day06_2/servlet，所以需要带上。</span><br><span class="line"></span><br><span class="line">  当访问AServlet时，是否要带上yyy这个Cookie呢？因为AServlet的访问路径为/day06_2/servlet/BServlet，它包含了xxx的path，即/day06_2，所以需要带上。</span><br><span class="line"></span><br><span class="line">  当访问AServlet时，是否要带上zzz这个Cookie呢？因为AServlet的访问路径为/day06_2/servlet/BServlet，它不包含zzz的path，即/day06_2/servlet/user，所以不会带上。</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"><span class="number">3</span>. Cookie的domain</span><br><span class="line">  Cookie的path是在同一主机中指定共享Cookie，如果主机不同那么就一定不能共享Cookie，无论path是什么。</span><br><span class="line">  如果希望不同的二级域名中可以共享Cookie，那么就要设置Cookie的domain了。</span><br><span class="line">  例如：news.baidu.com、tieba.baidu.com、zhidao.baidu.com，它们的域名不同，但百度希望它们之间可以共享Cookie，那么就要设置domain了。</span><br><span class="line"></span><br><span class="line">  <span class="number">1</span>). 设置Cookie的path为“/”，例如：cookie.setPath(<span class="string">"/"</span>);</span><br><span class="line">  <span class="number">2</span>). 设置Cookie的domain，例如：cookie.setDomain(<span class="string">".baidu.com"</span>)，其中domain中没有指定域名前缀！</span><br><span class="line"></span><br><span class="line">  在news.baidu.com主机中的某个项目中保存了Cookie</span><br><span class="line">  在tieba.baidu.com主机中某个项目中获取Cookie</span><br><span class="line"></span><br><span class="line">  当然这需要配置两个虚拟主机才行。</span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. Cookie保存中文</span><br><span class="line">  Cookie的name和value都是不能保存中文的，但可以先把中文转换成URL编码，然后在保存到Cookie的name和value中。</span><br><span class="line">  String name = <span class="string">"姓名"</span>;</span><br><span class="line">  String value = <span class="string">"张三"</span>;</span><br><span class="line">  name = URLEncoder.encode(name, <span class="string">"utf-8"</span>);</span><br><span class="line">  value = URLEncoder.encode(value, <span class="string">"utf-8"</span>);</span><br><span class="line"></span><br><span class="line">  Cookie c = <span class="keyword">new</span> Cookie(name, value);</span><br><span class="line">  response.addCookie(c);</span><br><span class="line"></span><br><span class="line">  在获取Cookie时，再使用URL解码即可。</span><br><span class="line">  Cookie[] cs = request.getCookies();</span><br><span class="line">  <span class="keyword">if</span>(cs != <span class="keyword">null</span>) &#123;</span><br><span class="line">    <span class="keyword">for</span>(Cookie c : cs) &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">byte</span>[] b=c.getName().getBytes(iso-<span class="number">8859</span>-<span class="number">1</span>);</span><br><span class="line">	String name = <span class="keyword">new</span> String(b,<span class="string">"utf-8"</span>);</span><br><span class="line">      String name = URLDecoder.decode(c.getName(), <span class="string">"utf-8"</span>);</span><br><span class="line">      String value = URLDecoder.decode(c.getValue(), <span class="string">"utf-8"</span>);</span><br><span class="line">      System.out.println(name + <span class="string">"="</span> + value);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">=============================</span><br><span class="line">=============================</span><br><span class="line">=============================</span><br><span class="line"></span><br><span class="line">HttpSession</span><br><span class="line"></span><br><span class="line">在JavaWeb中提供了HttpSession类，用来表示http会话。</span><br><span class="line"></span><br><span class="line"><span class="number">1</span>. 获取HttpSession</span><br><span class="line">HttpSession session = request.getSession();</span><br><span class="line">HttpSession session = request.getSession(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 域功能</span><br><span class="line">  session是域对象，所以有setAttribute()和getAttribute()等方法</span><br><span class="line">  服务器会为每个会话创建一个session对象，所以session中的数据可供当前会话中所有servlet共享。</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 登录案例</span><br><span class="line">  请求功能：</span><br><span class="line">  <span class="number">1</span>. 如果登录功能，在session中保存user对象</span><br><span class="line">  <span class="number">2</span>. 访问index1.jsp，查看session中是否存在user对象，如果存在，说明已经登录过。</span><br><span class="line">  <span class="number">3</span>. 访问index2.jsp，查看session中是否存在user对象，如果存在，说明已经登录过。</span><br><span class="line">  如果关闭了浏览器，那么会话结束，再打开浏览器就开始了一个新会话，那么直接访问index1.jsp或index2.jsp时，session是新的，没有保存user对象，那么表示还没有登录。</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. session的原理</span><br><span class="line">  session是依赖Cookie实现的。</span><br><span class="line">  session是服务器端对象</span><br><span class="line">  当用户第一次使用session时（表示第一次请求服务器），服务器会创建session，并创建一个Cookie，在Cookie中保存了session的id，发送给客户端。这样客户端就有了自己session的id了。但这个Cookie只在浏览器内存中存在，也就是说，在关闭浏览器窗口后，Cookie就会丢失，也就丢失了sessionId。</span><br><span class="line">  当用户第二次访问服务器时，会在请求中把保存了sessionId的Cookie发送给服务器，服务器通过sessionId查找session对象，然后给使用。也就是说，只要浏览器容器不关闭，无论访问服务器多少次，使用的都是同一个session对象。这样也就可以让多个请求共享同一个session了。</span><br><span class="line">  当用户关闭了浏览器窗口后，再打开浏览器访问服务器，这时请求中没有了sessionId，那么服务器会创建一个session，再把sessionId通过Cookie保存到浏览器中，也是一个新的会话开始了。原来的session会因为长时间无法访问而失效。</span><br><span class="line">  当用户打开某个服务器页面长时间没动作时，这样session会超时失效，当用户再有活动时，服务器通过用户提供的sessionId已经找不到session对象了，那么服务器还是会创建一个新的session对象，再把新的sessionId保存到客户端。这也是一个新的会话开始了。</span><br><span class="line"></span><br><span class="line">　　设置session超时时间</span><br><span class="line">  web.xml文件中配置如下：</span><br><span class="line">    &lt;session-config&gt;</span><br><span class="line">        &lt;session-timeout&gt;30&lt;/session-timeout&gt;</span><br><span class="line">    &lt;/session-config&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">5</span>. session与浏览器</span><br><span class="line"> session对象是保存在服务器端的，而sessionId是通过Cookie保存在客户端的。</span><br><span class="line"> 因为Cookie不能在多个浏览器中共享，所以session也不能在多个浏览器中共享。也就是说，使用IE登录后，再使用FireFox访问服务器还是没有登录的状态。</span><br><span class="line"></span><br><span class="line"> 而且同时打开多个相同浏览器的窗口，是在使用同一session。如果你使用的是老浏览器，例如IE6，那么就会每个窗口一个session。</span><br><span class="line"></span><br><span class="line"><span class="number">6</span>. session的API</span><br><span class="line"> * <span class="function">String <span class="title">getId</span><span class="params">()</span>：获取sessionId；</span></span><br><span class="line"><span class="function"> * <span class="keyword">int</span> <span class="title">getMaxInactiveInterval</span><span class="params">()</span>：获取session可以的最大不活动时间（秒），默认为30分钟。当session在30分钟内没有使用，那么Tomcat会在session池中移除这个session；</span></span><br><span class="line"><span class="function"> * <span class="keyword">void</span> <span class="title">setMaxInactiveInterval</span><span class="params">(<span class="keyword">int</span> interval)</span>：设置session允许的最大不活动时间（秒），如果设置为1秒，那么只要session在1秒内不被使用，那么session就会被移除；</span></span><br><span class="line"><span class="function"> * <span class="keyword">long</span> <span class="title">getCreationTime</span><span class="params">()</span>：返回session的创建时间，返回值为当前时间的毫秒值；</span></span><br><span class="line"><span class="function"> * <span class="keyword">long</span> <span class="title">getLastAccessedTime</span><span class="params">()</span>：返回session的最后活动时间，返回值为当前时间的毫秒值；</span></span><br><span class="line"><span class="function"> * <span class="keyword">void</span> <span class="title">invalidate</span><span class="params">()</span>：让session失效！调用这个方法会被session失效，当session失效后，客户端再次请求，服务器会给客户端创建一个新的session，并在响应中给客户端新session的sessionId；</span></span><br><span class="line"><span class="function"> * <span class="keyword">boolean</span> <span class="title">isNew</span><span class="params">()</span>：查看session是否为新。当客户端第一次请求时，服务器为客户端创建session，但这时服务器还没有响应客户端，也就是还没有把sessionId响应给客户端时，这时session的状态为新。</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">7. URL重写</span></span><br><span class="line"><span class="function"> session依赖Cookie，这是因为服务器需要把sessionId保存到客户端。如果用户的浏览器关闭了Cookie功能，那么session不能使用了！</span></span><br><span class="line"><span class="function"> 还可以在浏览器关闭了Cookie后使用URL重写的方法保存sessionId，这需要在每个URL后面都加上sessionId！这样用户的请求中就包含了sessionId，服务器就可以通过sessionId找到对应的session对象了。</span></span><br><span class="line"><span class="function">  使用response.<span class="title">encodeURL</span><span class="params">()</span>方法对URL进行编码，这样URL中会智能的添加sessionId。</span></span><br><span class="line"><span class="function">　当浏览器支持cookie时，response.<span class="title">encodeURL</span><span class="params">()</span>方法不会在URL后追加sessionId</span></span><br><span class="line"><span class="function">  当浏览器不支持cookie时，response.<span class="title">encodeURL</span><span class="params">()</span>方法会在URL后追加sessionId</span></span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/109/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/109/">109</a><span class="page-number current">110</span><a class="page-number" href="/page/111/">111</a><span class="space">&hellip;</span><a class="page-number" href="/page/122/">122</a><a class="extend next" rel="next" href="/page/111/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/109/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/109/">109</a><span class="page-number current">110</span><a class="page-number" href="/page/111/">111</a><span class="space">&hellip;</span><a class="page-number" href="/page/121/">121</a><a class="extend next" rel="next" href="/page/111/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1313,7 +1428,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1216</span>
+          <span class="site-state-item-count">1209</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1359,7 +1474,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19:01</span>
+    <span title="站点阅读时长">18:59</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

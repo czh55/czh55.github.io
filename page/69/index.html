@@ -158,105 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/08/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E5%9D%90%E6%A0%87%E7%B3%BB%E6%97%8B%E8%BD%AC%E5%8F%98%E6%8D%A2%E5%85%AC%E5%BC%8F%E5%9B%BE%E8%A7%A3+%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F%E6%8E%A8%E5%AF%BC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/08/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E5%9D%90%E6%A0%87%E7%B3%BB%E6%97%8B%E8%BD%AC%E5%8F%98%E6%8D%A2%E5%85%AC%E5%BC%8F%E5%9B%BE%E8%A7%A3+%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F%E6%8E%A8%E5%AF%BC/" class="post-title-link" itemprop="url">坐标系旋转变换公式图解+矩阵形式推导</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-08-24 08:31:00" itemprop="dateCreated datePublished" datetime="2018-08-24T08:31:00+08:00">2018-08-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 16:19:14" itemprop="dateModified" datetime="2020-04-01T16:19:14+08:00">2020-04-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1-%E7%82%B9%E4%BA%91-%E5%8E%9F%E7%90%86/" itemprop="url" rel="index">
-                    <span itemprop="name">e视觉相关/czh_三维建模(点云)/原理#</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/08/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E5%9D%90%E6%A0%87%E7%B3%BB%E6%97%8B%E8%BD%AC%E5%8F%98%E6%8D%A2%E5%85%AC%E5%BC%8F%E5%9B%BE%E8%A7%A3+%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F%E6%8E%A8%E5%AF%BC/" class="post-meta-item leancloud_visitors" data-flag-title="坐标系旋转变换公式图解+矩阵形式推导" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>61</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年8月24日 下午8:31</p>
-<p><a href="http://blog.sina.com.cn/s/blog_3fd642cf0101cc8w.html" target="_blank" rel="noopener">坐标系旋转变换公式图解_impot_新浪博客</a><br><img src="/2018/08/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E5%9D%90%E6%A0%87%E7%B3%BB%E6%97%8B%E8%BD%AC%E5%8F%98%E6%8D%A2%E5%85%AC%E5%BC%8F%E5%9B%BE%E8%A7%A3+%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F%E6%8E%A8%E5%AF%BC/D00BE44D-094A-4F96-A78B-1FD5F1A2F90E.png" alt></p>
-<p><a href="http://www.cnblogs.com/luweimy/p/4121789.html" target="_blank" rel="noopener">旋转坐标转换的矩阵推导 - luweimy - 博客园</a><br><img src="/2018/08/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E5%9D%90%E6%A0%87%E7%B3%BB%E6%97%8B%E8%BD%AC%E5%8F%98%E6%8D%A2%E5%85%AC%E5%BC%8F%E5%9B%BE%E8%A7%A3+%E7%9F%A9%E9%98%B5%E5%BD%A2%E5%BC%8F%E6%8E%A8%E5%AF%BC/C75751C0-749C-4769-A737-1C1EE7BF5D51.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/08/23/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1223,11 +1124,122 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/08/22/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E6%A2%AF%E5%BA%A6%E3%80%81Hessian%E7%9F%A9%E9%98%B5%E3%80%81%E5%B9%B3%E9%9D%A2%E6%96%B9%E7%A8%8B%E7%9A%84%E6%B3%95%E7%BA%BF%E4%BB%A5%E5%8F%8A%E5%87%BD%E6%95%B0%E5%AF%BC%E6%95%B0%E7%9A%84%E5%90%AB%E4%B9%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/08/22/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E6%A2%AF%E5%BA%A6%E3%80%81Hessian%E7%9F%A9%E9%98%B5%E3%80%81%E5%B9%B3%E9%9D%A2%E6%96%B9%E7%A8%8B%E7%9A%84%E6%B3%95%E7%BA%BF%E4%BB%A5%E5%8F%8A%E5%87%BD%E6%95%B0%E5%AF%BC%E6%95%B0%E7%9A%84%E5%90%AB%E4%B9%89/" class="post-title-link" itemprop="url">梯度、Hessian矩阵、平面方程的法线以及函数导数的含义</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-08-22 03:07:00" itemprop="dateCreated datePublished" datetime="2018-08-22T03:07:00+08:00">2018-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:06" itemprop="dateModified" datetime="2020-04-01T16:19:06+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1-%E7%82%B9%E4%BA%91-%E5%8E%9F%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维建模(点云)/原理#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/08/22/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%8E%9F%E7%90%86/%E6%A2%AF%E5%BA%A6%E3%80%81Hessian%E7%9F%A9%E9%98%B5%E3%80%81%E5%B9%B3%E9%9D%A2%E6%96%B9%E7%A8%8B%E7%9A%84%E6%B3%95%E7%BA%BF%E4%BB%A5%E5%8F%8A%E5%87%BD%E6%95%B0%E5%AF%BC%E6%95%B0%E7%9A%84%E5%90%AB%E4%B9%89/" class="post-meta-item leancloud_visitors" data-flag-title="梯度、Hessian矩阵、平面方程的法线以及函数导数的含义" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>409</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年8月22日 下午3:07</p>
+<p><a href="https://blog.csdn.net/xianlingmao/article/details/7883983" target="_blank" rel="noopener">梯度、Hessian矩阵、平面方程的法线以及函数导数的含义 - CSDN博客</a></p>
+<ol>
+<li><strong>Hessian矩阵</strong>：设有凸函数f(X)，X是向量（x1,x2,…, xn)<ol>
+<li>Hessian矩阵M定义为：M的第i行,第j列元素为df(X)/dxidxj, 即为f(X)对于变量xi和xj的<strong>二次偏导数</strong>。</li>
+</ol>
+</li>
+<li><strong>梯度</strong>：设有凸函数f(X)，X是向量（x1,x2,…, xn)，<ol>
+<li>函数f(X)在点X0处的梯度是一个向量，等于（df(X0)_dx1, df(X0)_dx2, …., df(X0)/dxn), 即是对于各个变量的偏导数的向量。</li>
+<li>例子：如果方程是z=f(x,y)，梯度是在XOY平面内的一个向量，与z无关。因此要特别<strong>注意梯度不是点(X，f(X))处的切线方向</strong>。</li>
+</ol>
+</li>
+<li>平面方程的法线：设平面方程Ax+By+Cz+D = 0，向量（A, B, C)为这个平面的法线方向。</li>
+<li>函数导数：y=-kx -b的导数的含义：<strong>（-k）表示的是x轴方向的梯度，值为直线的斜率。</strong></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/68/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/68/">68</a><span class="page-number current">69</span><a class="page-number" href="/page/70/">70</a><span class="space">&hellip;</span><a class="page-number" href="/page/122/">122</a><a class="extend next" rel="next" href="/page/70/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/68/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/68/">68</a><span class="page-number current">69</span><a class="page-number" href="/page/70/">70</a><span class="space">&hellip;</span><a class="page-number" href="/page/121/">121</a><a class="extend next" rel="next" href="/page/70/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1293,7 +1305,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1216</span>
+          <span class="site-state-item-count">1209</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1339,7 +1351,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19:01</span>
+    <span title="站点阅读时长">18:59</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

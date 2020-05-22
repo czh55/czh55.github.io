@@ -158,786 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">php-pear的总结</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-04 08:48:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:48:00+08:00">2017-09-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/" class="post-meta-item leancloud_visitors" data-flag-title="php-pear的总结" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月4日 上午8:48</p>
-<p>我把原来windows的php项目放到Mac上时出现了pear不能正常使用的情况<br><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/001XFkONzy7c4Gcl2Etad.jpeg" alt></p>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/001XFkONzy7c4GdPbTg86.jpeg" alt></p>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/001XFkONzy7c4GfqyBT95.jpeg" alt></p>
-<h3 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h3><ol>
-<li><strong>现象1+现象2：​</strong><ol>
-<li><strong>原因：</strong>表面上看是路径上的问题，但是，本质上是我一开始使用pear的时候理解不到位，按照百度上的各种资料查查查，改改改，以后改的乱七八糟。</li>
-<li><strong>解决：</strong>我在pear中安装了pear install Mail，pear install Mail_Mine，pear install Net_SMTP</li>
-</ol>
-</li>
-<li><strong>现象3：</strong>邮箱的代理密码过期了，重新弄一个就行了<ol>
-<li>参考的文章：<a href="http://www.poluoluo.com/jzxy/201601/450302.html" target="_blank" rel="noopener">PHP使用Pear发送邮件（Windows环境）</a></li>
-</ol>
-</li>
-</ol>
-<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ol>
-<li>对待新的知识我当初没有理解清楚就去做了，当时也是费了千辛万苦，觉得好难，但是现在回过头去看，这么简单的东西一个就应该学会的啊，这是为什么？。</li>
-<li>一方面来说我当时时间紧，不可能等你完全弄懂了在去操作，一方面是自己的能力还是不够，经验还是不足​。</li>
-<li>下图就是我搞出的笑话。</li>
-</ol>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/php-pear%E7%9A%84%E6%80%BB%E7%BB%93/001XFkONzy7c4HC049F67.png" alt></p>
-<ol>
-<li>我一开始就把pear理解成类库，所以就在TP手册中查怎样才能调用第三方类库，最后找到了Vendor，pear也在vendor中有一份</li>
-<li>这样各种策论混在以前用使用pear 又使用vendor，虽然最后功能成功了，但是其实也没学下啥，脑子里一团糟，根本给别人讲不通。</li>
-<li>总结，面对这样的问题，我们首先要看自己有没有一个思路，不要想自己当初一样，就知道熬夜，像无头苍蝇一样乱撞。在保持自己清晰的思路之后，要想到和比自己强的人请教，虚心求教，这方面我的确需要更加努力！ ​</li>
-</ol>
-<h3 id="​附录：安装过程"><a href="#​附录：安装过程" class="headerlink" title="​附录：安装过程"></a>​附录：安装过程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line">Last login: Wed Jun 21 16:44:16 on ttys001</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ kill -INT &#96;cat &#x2F;usr&#x2F;local&#x2F;var&#x2F;run&#x2F;php-fpm.pid&#96;</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php56.plist</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ kill -INT &#96;cat &#x2F;usr&#x2F;local&#x2F;var&#x2F;run&#x2F;php-fpm.pid&#96;</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ echo &#39;export PATH&#x3D;&quot;$(brew --prefix php70)&#x2F;bin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile  #for php</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ echo &#39;export PATH&#x3D;&quot;$(brew --prefix php70)&#x2F;sbin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile  #for php-fpm</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ echo &#39;export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;sbib:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile #for other brew install soft</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ source ~&#x2F;.bash_profile</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ php -v</span><br><span class="line"></span><br><span class="line">PHP 7.0.14 (cli) (built: Dec  9 2016 07:34:25) ( NTS )</span><br><span class="line"></span><br><span class="line">Copyright (c) 1997-2016 The PHP Group</span><br><span class="line"></span><br><span class="line">Zend Engine v3.0.0, Copyright (c) 1998-2016 Zend Technologies</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist</span><br><span class="line"></span><br><span class="line">&#x2F;Users&#x2F;czh&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist: No such file or directory</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php7.plist</span><br><span class="line"></span><br><span class="line">&#x2F;Users&#x2F;czh&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php7.plist: No such file or directory</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ ln -sfv &#x2F;usr&#x2F;local&#x2F;opt&#x2F;php70&#x2F;*.plist ~&#x2F;Library&#x2F;LaunchAgents</span><br><span class="line"></span><br><span class="line">&#x2F;Users&#x2F;czh&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist -&gt; &#x2F;usr&#x2F;local&#x2F;opt&#x2F;php70&#x2F;homebrew.mxcl.php70.plist</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ pear install Mail</span><br><span class="line"></span><br><span class="line">WARNING: configuration download directory &quot;&#x2F;tmp&#x2F;pear&#x2F;install&quot; is not writeable.  Change download_dir config variable to a writeable dir to avoid this warning</span><br><span class="line"></span><br><span class="line">WARNING: channel &quot;pear.php.net&quot; has updated its protocols, use &quot;pear channel-update pear.php.net&quot; to update</span><br><span class="line"></span><br><span class="line">Cannot install, php_dir for channel &quot;pear.php.net&quot; is not writeable by the current user</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo pear install Mail</span><br><span class="line"></span><br><span class="line">Password:</span><br><span class="line"></span><br><span class="line">WARNING: channel &quot;pear.php.net&quot; has updated its protocols, use &quot;pear channel-update pear.php.net&quot; to update</span><br><span class="line"></span><br><span class="line">Did not download optional dependencies: pear&#x2F;Net_SMTP, use --alldeps to download automatically</span><br><span class="line"></span><br><span class="line">pear&#x2F;Mail can optionally use package &quot;pear&#x2F;Net_SMTP&quot; (version &gt;&#x3D; 1.4.1)</span><br><span class="line"></span><br><span class="line">downloading Mail-1.4.1.tgz ...</span><br><span class="line"></span><br><span class="line">Starting to download Mail-1.4.1.tgz (21,756 bytes)</span><br><span class="line"></span><br><span class="line">........done: 21,756 bytes</span><br><span class="line"></span><br><span class="line">install ok: channel:&#x2F;&#x2F;pear.php.net&#x2F;Mail-1.4.1</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo pear install Mail_Mine</span><br><span class="line"></span><br><span class="line">No releases available for package &quot;pear.php.net&#x2F;Mail_Mine&quot;</span><br><span class="line"></span><br><span class="line">install failed</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo pear install Mail_Mime</span><br><span class="line"></span><br><span class="line">WARNING: channel &quot;pear.php.net&quot; has updated its protocols, use &quot;pear channel-update pear.php.net&quot; to update</span><br><span class="line"></span><br><span class="line">downloading Mail_Mime-1.10.1.tgz ...</span><br><span class="line"></span><br><span class="line">Starting to download Mail_Mime-1.10.1.tgz (36,336 bytes)</span><br><span class="line"></span><br><span class="line">..........done: 36,336 bytes</span><br><span class="line"></span><br><span class="line">install ok: channel:&#x2F;&#x2F;pear.php.net&#x2F;Mail_Mime-1.10.1</span><br><span class="line"></span><br><span class="line">czhdeMacBook-Pro:~ czh$ sudo pear install Net_SMTP</span><br><span class="line"></span><br><span class="line">WARNING: channel &quot;pear.php.net&quot; has updated its protocols, use &quot;pear channel-update pear.php.net&quot; to update</span><br><span class="line"></span><br><span class="line">WARNING: &quot;pear&#x2F;Auth_SASL&quot; is deprecated in favor of &quot;pear&#x2F;Auth_SASL2&quot;</span><br><span class="line"></span><br><span class="line">Did not download optional dependencies: pear&#x2F;Auth_SASL, use --alldeps to download automatically</span><br><span class="line"></span><br><span class="line">pear&#x2F;Net_SMTP can optionally use package &quot;pear&#x2F;Auth_SASL&quot; (version &gt;&#x3D; 1.0.5)</span><br><span class="line"></span><br><span class="line">downloading Net_SMTP-1.8.0.tgz ...</span><br><span class="line"></span><br><span class="line">Starting to download Net_SMTP-1.8.0.tgz (14,399 bytes)</span><br><span class="line"></span><br><span class="line">.....done: 14,399 bytes</span><br><span class="line"></span><br><span class="line">downloading Net_Socket-1.2.2.tgz ...</span><br><span class="line"></span><br><span class="line">Starting to download Net_Socket-1.2.2.tgz (6,903 bytes)</span><br><span class="line"></span><br><span class="line">...done: 6,903 bytes</span><br><span class="line"></span><br><span class="line">install ok: channel:&#x2F;&#x2F;pear.php.net&#x2F;Net_Socket-1.2.2</span><br><span class="line"></span><br><span class="line">install ok: channel:&#x2F;&#x2F;pear.php.net&#x2F;Net_SMTP-1.8.0</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E5%AE%89%E8%A3%85php-pear/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E5%AE%89%E8%A3%85php-pear/" class="post-title-link" itemprop="url">Mac中安装php-pear</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-04 08:30:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:30:00+08:00">2017-09-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E5%AE%89%E8%A3%85php-pear/" class="post-meta-item leancloud_visitors" data-flag-title="Mac中安装php-pear" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月4日 上午8:30</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br></pre></td><td class="code"><pre><span class="line">czhdeMacBook-Pro:~ czh$ sudo php -d detect_unicode=<span class="number">0</span> <span class="keyword">go</span>-pear.phar</span><br><span class="line"></span><br><span class="line">Password:</span><br><span class="line"></span><br><span class="line">Below <span class="keyword">is</span> <span class="keyword">a</span> suggested <span class="keyword">file</span> layout <span class="keyword">for</span> your <span class="keyword">new</span> PEAR installation.  To</span><br><span class="line"></span><br><span class="line"><span class="keyword">change</span> individual locations, <span class="built_in">type</span> the <span class="keyword">number</span> in front of the</span><br><span class="line"></span><br><span class="line">directory.  Type <span class="string">'all'</span> <span class="keyword">to</span> <span class="keyword">change</span> <span class="keyword">all</span> of them <span class="built_in">or</span> simply press Enter <span class="keyword">to</span></span><br><span class="line"></span><br><span class="line">accept these locations.</span><br><span class="line"></span><br><span class="line"> <span class="number">1</span>. Installation base ($prefix)                   : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7</span><br><span class="line"></span><br><span class="line"> <span class="number">2</span>. Temporary directory <span class="keyword">for</span> processing            : /tmp/pear/install</span><br><span class="line"></span><br><span class="line"> <span class="number">3</span>. Temporary directory <span class="keyword">for</span> downloads             : /tmp/pear/install</span><br><span class="line"></span><br><span class="line"> <span class="number">4</span>. Binaries directory                            : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/bin</span><br><span class="line"></span><br><span class="line"> <span class="number">5</span>. PHP code directory ($php_dir)                 : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/share/pear</span><br><span class="line"></span><br><span class="line"> <span class="number">6</span>. Documentation directory                       : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/docs</span><br><span class="line"></span><br><span class="line"> <span class="number">7</span>. Data directory                                : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/data</span><br><span class="line"></span><br><span class="line"> <span class="number">8</span>. User-modifiable configuration <span class="keyword">files</span> directory : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/cfg</span><br><span class="line"></span><br><span class="line"> <span class="number">9</span>. Public Web Files directory                    : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/www</span><br><span class="line"></span><br><span class="line"><span class="number">10</span>. System manual pages directory                 : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/man</span><br><span class="line"></span><br><span class="line"><span class="number">11</span>. Tests directory                               : /usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7/tests</span><br><span class="line"></span><br><span class="line"><span class="number">12</span>. Name of configuration <span class="keyword">file</span>                    : /usr/local/etc/php/<span class="number">7.0</span>/pear.<span class="keyword">conf</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>-<span class="number">12</span>, <span class="string">'all'</span> <span class="built_in">or</span> Enter <span class="keyword">to</span> <span class="keyword">continue</span>: <span class="number">1</span></span><br><span class="line"></span><br><span class="line">(Use $prefix <span class="keyword">as</span> <span class="keyword">a</span> shortcut <span class="keyword">for</span> <span class="string">'/usr/local/Cellar/php70/7.0.14_7'</span>, etc.)</span><br><span class="line"></span><br><span class="line">Installation base ($prefix) [/usr/local/Cellar/php70/<span class="number">7.0</span>.<span class="number">14</span>_7] : /usr/local/pear</span><br><span class="line"></span><br><span class="line">Below <span class="keyword">is</span> <span class="keyword">a</span> suggested <span class="keyword">file</span> layout <span class="keyword">for</span> your <span class="keyword">new</span> PEAR installation.  To</span><br><span class="line"></span><br><span class="line"><span class="keyword">change</span> individual locations, <span class="built_in">type</span> the <span class="keyword">number</span> in front of the</span><br><span class="line"></span><br><span class="line">directory.  Type <span class="string">'all'</span> <span class="keyword">to</span> <span class="keyword">change</span> <span class="keyword">all</span> of them <span class="built_in">or</span> simply press Enter <span class="keyword">to</span></span><br><span class="line"></span><br><span class="line">accept these locations.</span><br><span class="line"></span><br><span class="line"> <span class="number">1</span>. Installation base ($prefix)                   : /usr/local/pear</span><br><span class="line"></span><br><span class="line"> <span class="number">2</span>. Temporary directory <span class="keyword">for</span> processing            : /tmp/pear/install</span><br><span class="line"></span><br><span class="line"> <span class="number">3</span>. Temporary directory <span class="keyword">for</span> downloads             : /tmp/pear/install</span><br><span class="line"></span><br><span class="line"> <span class="number">4</span>. Binaries directory                            : /usr/local/pear/bin</span><br><span class="line"></span><br><span class="line"> <span class="number">5</span>. PHP code directory ($php_dir)                 : /usr/local/pear/share/pear</span><br><span class="line"></span><br><span class="line"> <span class="number">6</span>. Documentation directory                       : /usr/local/pear/docs</span><br><span class="line"></span><br><span class="line"> <span class="number">7</span>. Data directory                                : /usr/local/pear/data</span><br><span class="line"></span><br><span class="line"> <span class="number">8</span>. User-modifiable configuration <span class="keyword">files</span> directory : /usr/local/pear/cfg</span><br><span class="line"></span><br><span class="line"> <span class="number">9</span>. Public Web Files directory                    : /usr/local/pear/www</span><br><span class="line"></span><br><span class="line"><span class="number">10</span>. System manual pages directory                 : /usr/local/pear/man</span><br><span class="line"></span><br><span class="line"><span class="number">11</span>. Tests directory                               : /usr/local/pear/tests</span><br><span class="line"></span><br><span class="line"><span class="number">12</span>. Name of configuration <span class="keyword">file</span>                    : /usr/local/etc/php/<span class="number">7.0</span>/pear.<span class="keyword">conf</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>-<span class="number">12</span>, <span class="string">'all'</span> <span class="built_in">or</span> Enter <span class="keyword">to</span> <span class="keyword">continue</span>: <span class="number">4</span></span><br><span class="line"></span><br><span class="line">(Use $prefix <span class="keyword">as</span> <span class="keyword">a</span> shortcut <span class="keyword">for</span> <span class="string">'/usr/local/pear'</span>, etc.)</span><br><span class="line"></span><br><span class="line">Binaries directory [$prefix/bin] : /usr/local/bin</span><br><span class="line"></span><br><span class="line">Below <span class="keyword">is</span> <span class="keyword">a</span> suggested <span class="keyword">file</span> layout <span class="keyword">for</span> your <span class="keyword">new</span> PEAR installation.  To</span><br><span class="line"></span><br><span class="line"><span class="keyword">change</span> individual locations, <span class="built_in">type</span> the <span class="keyword">number</span> in front of the</span><br><span class="line"></span><br><span class="line">directory.  Type <span class="string">'all'</span> <span class="keyword">to</span> <span class="keyword">change</span> <span class="keyword">all</span> of them <span class="built_in">or</span> simply press Enter <span class="keyword">to</span></span><br><span class="line"></span><br><span class="line">accept these locations.</span><br><span class="line"></span><br><span class="line"> <span class="number">1</span>. Installation base ($prefix)                   : /usr/local/pear</span><br><span class="line"></span><br><span class="line"> <span class="number">2</span>. Temporary directory <span class="keyword">for</span> processing            : /tmp/pear/install</span><br><span class="line"></span><br><span class="line"> <span class="number">3</span>. Temporary directory <span class="keyword">for</span> downloads             : /tmp/pear/install</span><br><span class="line"></span><br><span class="line"> <span class="number">4</span>. Binaries directory                            : /usr/local/bin</span><br><span class="line"></span><br><span class="line"> <span class="number">5</span>. PHP code directory ($php_dir)                 : /usr/local/pear/share/pear</span><br><span class="line"></span><br><span class="line"> <span class="number">6</span>. Documentation directory                       : /usr/local/pear/docs</span><br><span class="line"></span><br><span class="line"> <span class="number">7</span>. Data directory                                : /usr/local/pear/data</span><br><span class="line"></span><br><span class="line"> <span class="number">8</span>. User-modifiable configuration <span class="keyword">files</span> directory : /usr/local/pear/cfg</span><br><span class="line"></span><br><span class="line"> <span class="number">9</span>. Public Web Files directory                    : /usr/local/pear/www</span><br><span class="line"></span><br><span class="line"><span class="number">10</span>. System manual pages directory                 : /usr/local/pear/man</span><br><span class="line"></span><br><span class="line"><span class="number">11</span>. Tests directory                               : /usr/local/pear/tests</span><br><span class="line"></span><br><span class="line"><span class="number">12</span>. Name of configuration <span class="keyword">file</span>                    : /usr/local/etc/php/<span class="number">7.0</span>/pear.<span class="keyword">conf</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span>-<span class="number">12</span>, <span class="string">'all'</span> <span class="built_in">or</span> Enter <span class="keyword">to</span> <span class="keyword">continue</span>:</span><br><span class="line"></span><br><span class="line">Beginning install...</span><br><span class="line"></span><br><span class="line">Configuration written <span class="keyword">to</span> /usr/local/etc/php/<span class="number">7.0</span>/pear.<span class="keyword">conf</span>...</span><br><span class="line"></span><br><span class="line">Initialized registry...</span><br><span class="line"></span><br><span class="line">Preparing <span class="keyword">to</span> install...</span><br><span class="line"></span><br><span class="line">installing phar:///Users/czh/<span class="keyword">go</span>-pear.phar/PEAR/<span class="keyword">go</span>-pear-tarballs/Archive_Tar-<span class="number">1.4</span>.<span class="number">2</span>.tar...</span><br><span class="line"></span><br><span class="line">installing phar:///Users/czh/<span class="keyword">go</span>-pear.phar/PEAR/<span class="keyword">go</span>-pear-tarballs/Console_Getopt-<span class="number">1.4</span>.<span class="number">1</span>.tar...</span><br><span class="line"></span><br><span class="line">installing phar:///Users/czh/<span class="keyword">go</span>-pear.phar/PEAR/<span class="keyword">go</span>-pear-tarballs/PEAR-<span class="number">1.10</span>.<span class="number">4</span>.tar...</span><br><span class="line"></span><br><span class="line">installing phar:///Users/czh/<span class="keyword">go</span>-pear.phar/PEAR/<span class="keyword">go</span>-pear-tarballs/Structures_Graph-<span class="number">1.1</span>.<span class="number">1</span>.tar...</span><br><span class="line"></span><br><span class="line">installing phar:///Users/czh/<span class="keyword">go</span>-pear.phar/PEAR/<span class="keyword">go</span>-pear-tarballs/XML_Util-<span class="number">1.4</span>.<span class="number">2</span>.tar...</span><br><span class="line"></span><br><span class="line">install ok: channe<span class="variable">l:</span>//pear.php.net/Archive_Tar-<span class="number">1.4</span>.<span class="number">2</span></span><br><span class="line"></span><br><span class="line">install ok: channe<span class="variable">l:</span>//pear.php.net/Console_Getopt-<span class="number">1.4</span>.<span class="number">1</span></span><br><span class="line"></span><br><span class="line">install ok: channe<span class="variable">l:</span>//pear.php.net/Structures_Graph-<span class="number">1.1</span>.<span class="number">1</span></span><br><span class="line"></span><br><span class="line">install ok: channe<span class="variable">l:</span>//pear.php.net/XML_Util-<span class="number">1.4</span>.<span class="number">2</span></span><br><span class="line"></span><br><span class="line">install ok: channe<span class="variable">l:</span>//pear.php.net/PEAR-<span class="number">1.10</span>.<span class="number">4</span></span><br><span class="line"></span><br><span class="line">PEAR: Optional feature webinstaller available (PEAR<span class="string">'s web-based installer)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">PEAR: Optional feature gtkinstaller available (PEAR'</span>s PHP-GTK-based installer)</span><br><span class="line"></span><br><span class="line">PEAR: Optional feature gtk2installer available (PEAR<span class="string">'s PHP-GTK2-based installer)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">PEAR: To install optional features use "pear install pear/PEAR#featurename"</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">******************************************************************************</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">WARNING!  The include_path defined in the currently used php.ini does not</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">contain the PEAR PHP directory you just specified:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">If the specified directory is also not in the include_path used by</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">your scripts, you will have problems getting any PEAR packages working.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Would you like to alter php.ini ? [Y/n] : Y</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">php.ini include_path updated.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Current include path           : .:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Configured directory           : /usr/local/pear/share/pear</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Currently used php.ini (guess) : /usr/local/etc/php/7.0/php.ini</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Press Enter to continue:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The '</span>pear<span class="string">' command is now at your service at /usr/local/bin/pear</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/" class="post-title-link" itemprop="url">Mac中更改php版本（5.6-7.0）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-04 08:30:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:30:00+08:00">2017-09-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="Mac中更改php版本（5.6-7.0）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>844</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月4日 上午8:30</p>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/01343801-2119-45D9-8BC4-29DE027229CD.png" alt></p>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/26856B9C-166E-4B28-A917-C24E125D937E.png" alt></p>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/0A387C0E-C7B3-4EEC-BD1B-8FF871F439B7.png" alt></p>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/Mac%E4%B8%AD%E6%9B%B4%E6%94%B9php%E7%89%88%E6%9C%AC%EF%BC%885.6-7.0%EF%BC%89/FA7CEF11-2EB9-4759-BE85-5F7C52F7ABAD.png" alt></p>
-<p><strong>简单原理：</strong>关闭原来的php-fpm，将新的环境变量写入，然后设置开机自启。<br><strong>总结：</strong>这回的操作就不是从网上找的，而是靠自己的理解，尝试出来的结果。还是那就话，始终要提醒自己要有一个清晰的头脑去思考问题。​</p>
-<h2 id="补充-用到的指令"><a href="#补充-用到的指令" class="headerlink" title="补充:用到的指令"></a>补充:用到的指令</h2><h3 id="关闭php-fpm"><a href="#关闭php-fpm" class="headerlink" title="关闭php-fpm"></a>关闭php-fpm</h3><p>kill -INT <code>cat /usr/local/var/run/php-fpm.pid</code></p>
-<h3 id="php7-0-写入新的环境变量"><a href="#php7-0-写入新的环境变量" class="headerlink" title="php7.0 写入新的环境变量"></a>php7.0 写入新的环境变量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">echo &#39;export PATH&#x3D;&quot;$(brew --prefix php70)&#x2F;bin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile  #for php</span><br><span class="line"></span><br><span class="line">echo &#39;export PATH&#x3D;&quot;$(brew --prefix php70)&#x2F;sbin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile  #for php-fpm</span><br><span class="line"></span><br><span class="line">echo &#39;export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;bin:&#x2F;usr&#x2F;local&#x2F;sbib:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile #for other brew install soft</span><br><span class="line"></span><br><span class="line">source ~&#x2F;.bash_profile</span><br></pre></td></tr></table></figure>
-
-<h3 id="php开机自启"><a href="#php开机自启" class="headerlink" title="php开机自启"></a>php开机自启</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ln -sfv &#x2F;usr&#x2F;local&#x2F;opt&#x2F;php70&#x2F;*.plist ~&#x2F;Library&#x2F;LaunchAgents</span><br><span class="line"></span><br><span class="line">launchctl load -w ~&#x2F;Library&#x2F;LaunchAgents&#x2F;homebrew.mxcl.php70.plist</span><br><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="其他人的方法："><a href="#其他人的方法：" class="headerlink" title="其他人的方法："></a>其他人的方法：</h2><p><a href="https://segmentfault.com/q/1010000002912955" target="_blank" rel="noopener">刚刚装了php7 nginx下有多个php版本,怎么选择使用哪一个? - SegmentFault</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%884%EF%BC%89mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu%E8%A1%A5%E5%85%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%884%EF%BC%89mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu%E8%A1%A5%E5%85%85/" class="post-title-link" itemprop="url">（4）mac连接腾讯云ubuntu补充</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-04 08:28:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:28:00+08:00">2017-09-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%884%EF%BC%89mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu%E8%A1%A5%E5%85%85/" class="post-meta-item leancloud_visitors" data-flag-title="（4）mac连接腾讯云ubuntu补充" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>258</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月4日 上午8:28</p>
-<p><strong>问题：</strong>在 <del>ssh -I 秘钥  用户名@ip</del> 之后一直都是 <del>operation timed out</del><br><strong>原因：</strong>安全组上没有配置好<br><strong>解决：</strong><br><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%884%EF%BC%89mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu%E8%A1%A5%E5%85%85/001XFkONzy7c19WViOk70.jpeg" alt><br>​注意上图可以直接选择linux 开放22端口，腾讯都给我们想好了</p>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%884%EF%BC%89mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu%E8%A1%A5%E5%85%85/001XFkONzy7c1a2QXmYfc.jpeg" alt></p>
-<h3 id="在这个图中展示了，三个问题"><a href="#在这个图中展示了，三个问题" class="headerlink" title="在这个图中展示了，三个问题"></a>在这个图中展示了，三个问题</h3><ol>
-<li>operation timed out   –配置安全组</li>
-<li>the authenticity of hose*to the list of known host–这个是因为我在已存在的安全组中配置开放22端口。原因我不知道，但是正如腾讯所提示的一样，我们最好还是新建一个安全组去配置22端口。</li>
-<li>权限 –常见问题了​​​</li>
-</ol>
-<p>​</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%883%EF%BC%89%E5%9C%A8ubuntu%E4%B8%AD%E9%85%8D%E7%BD%AEphp%E9%A1%B9%E7%9B%AE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%883%EF%BC%89%E5%9C%A8ubuntu%E4%B8%AD%E9%85%8D%E7%BD%AEphp%E9%A1%B9%E7%9B%AE/" class="post-title-link" itemprop="url">（3）在ubuntu中配置php项目</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-04 08:25:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:25:00+08:00">2017-09-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%883%EF%BC%89%E5%9C%A8ubuntu%E4%B8%AD%E9%85%8D%E7%BD%AEphp%E9%A1%B9%E7%9B%AE/" class="post-meta-item leancloud_visitors" data-flag-title="（3）在ubuntu中配置php项目" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月4日 上午8:25</p>
-<p>首先我先梳理一下思路，然后再中间遇到的问题，逐一说明我的解决方法。</p>
-<p>思路：</p>
-<h3 id="核心操作："><a href="#核心操作：" class="headerlink" title="核心操作："></a>核心操作：</h3><pre><code>mysql -h [IP] -u [user] -p 
-mysql&gt; source _Users_czh_Downloads_*.sql ;
-scp _path_filename username@servername:/path  </code></pre><h2 id="1：连接数据库，将本地的sql表导入"><a href="#1：连接数据库，将本地的sql表导入" class="headerlink" title="1：连接数据库，将本地的sql表导入"></a>1：连接数据库，将本地的sql表导入</h2><pre><code>**1.1：**ERROR 1130: Host &apos;192.168.1.3&apos; is not allowed to connect to this MySQL server 
-         方法：http://blog.csdn.net/july_2/article/details/41896295
-         注意：这里面要注意人家写的用户名 和 密码  这是自己的，千万不要像我一样直接抄，不然报错eg：1.3
-**1.2：**ERROR 1819 (HY000): Your password does not satisfy the current policy requirements
-       原因：在安装完msyql之后，的初始化配置文件中，我把validate_password_policy =1，所以当给新的用户注册密码时，简单密码是通不过的。
-        方法：http://www.cnblogs.com/ivictor/p/5142809.html
-**1.3：**ERROR 1045 (28000): Access denied for user &apos;root&apos;@&apos;localhost&apos; (using password: YES)
-        原因：就是密码输错的，笨蛋！就知道抄，不去理解人家的意思!看图一
-        方法：http://www.cnblogs.com/kerrycode/p/4368312.html
-**1.4:**  Permission denied, please try again(publickey,password)
-        原因：由于您没有将公钥( publickey )  添加到本地 ssh 环境造成的，或者是由于多日未 进行ssh 登录操作，本地 publickey 失效造成的
-       方法：http://www.mr-wu.cn/ssh-permission-denied-publickey/
-                   http://blog.csdn.net/weixin_36397141/article/details/54618867
-                   https://zhidao.baidu.com/question/188203613.html
-       以上三步我都做了。第一步是重点！
-       补充：http://www.cnblogs.com/jiangyao/archive/2011/01/26/1945570.html  scp的操作</code></pre><h3 id="2：在-var-www-html中导入项目"><a href="#2：在-var-www-html中导入项目" class="headerlink" title="2：在/var/www/html中导入项目"></a>2：在/var/www/html中导入项目</h3><pre><code>  导入运行，发现很多错。
-  **2.1：**STORAGE_WRITE_ERROR_:._Runtime_Cache_Home_
-       原因：正如提示的 存储写错误 ，一般都是权限不够
-       解决：给那个Application所有权限就可以了，http://www.thinkphp.cn/topic/22933.html
- **2.2：**Call to undefined function: simplexml_load_string() in cron file
-        原因：本项目需要 php7.0-xml模块,而我安装php7.0的时候没安装
-        解决：sudo apt-get install php7.0-xml  ，https://stackoverflow.com/questions/31206186/call-to-undefined-function-simplexml-load-string-in-cron-file/36407094
- **2.3：**关于 ThinkPHP 在 Nginx 服务器上 使用U方法跳转问题
-        原因：不知道，在Mac window上没问题
-        解决：define(&apos;_PHP_FILE_&apos;,$_SERVER[&apos;SCRIPT_NAME&apos;]);
-            在php入口文件中增加：http://www.cnblogs.com/chy1993/p/6590320.html
-                   修改nginx配置文件：http://blog.csdn.net/df981011512/article/details/53128573
-                   我仅仅修改入口文件就好了！
- **2.4：**关于图片显示不出来
-        原因：一些界面资源我都放在Public中，但是由于nginx严格区分大小写，并且我html中link资源的时写的是public/....所以找不到路径。
-        解决：更改文件夹名
-        补充：重命名命令http://www.linuxidc.com/Linux/2015-01/111116.htm
-**2.5：** thinkphp 在ngin中的配置文件
-        原因:我用了很多网上查了很多，但是都报错，自己就综合写了一个
-        解决：附件1</code></pre><h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><p>1.ubuntu对大小写，权限要求很严格，一定要习惯<br>2.要学会linux中的排错，尤其是根据日志   我也不会！<br>3.服务器中的东西虽然没具体的学过，但是我突然发现，那个nginx的配置文件读起来就和写代码感觉一样!<br>4.百度也要会百度，要提取出问题的关键词</p>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%883%EF%BC%89%E5%9C%A8ubuntu%E4%B8%AD%E9%85%8D%E7%BD%AEphp%E9%A1%B9%E7%9B%AE/5359C348-60F0-49BA-A9B6-B997B738AEB6.png" alt><br>                               图1</p>
-<h3 id="附件一："><a href="#附件一：" class="headerlink" title="附件一："></a>附件一：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 80 default_server;</span><br><span class="line">    listen [::]:80 default_server;</span><br><span class="line"></span><br><span class="line">    root &#x2F;var&#x2F;www;</span><br><span class="line">    index index.php index.html index.htm index.nginx-debian.html;</span><br><span class="line">    </span><br><span class="line">    server_name server_domain_or_IP;</span><br><span class="line"></span><br><span class="line">    error_page  404              &#x2F;404.html;</span><br><span class="line">    location &#x3D; &#x2F;404.html &#123;</span><br><span class="line">        return 404 &#39;Sorry, File not Found!&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">    error_page  500 502 503 504  &#x2F;50x.html;</span><br><span class="line">    location &#x3D; &#x2F;50x.html &#123;</span><br><span class="line">        root   &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html; # windows用户替换这个目录</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">        try_files $uri @rewrite;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location @rewrite &#123;</span><br><span class="line">        set $static 0;</span><br><span class="line">        if  ($uri ~ \.(css|js|jpg|jpeg|png|gif|ico|woff|eot|svg|css\.map|min\.map)$) &#123;</span><br><span class="line">            set $static 1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if ($static &#x3D; 0) &#123;</span><br><span class="line">            rewrite ^&#x2F;(.*)$ &#x2F;index.php?s&#x3D;&#x2F;$1;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ &#x2F;Uploads&#x2F;.*\.php$ &#123;</span><br><span class="line">        deny all;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.php&#x2F; &#123;</span><br><span class="line">       if ($request_uri ~ ^(.+\.php)(&#x2F;.+?)($|\?)) &#123; &#125;</span><br><span class="line">       fastcgi_pass unix:&#x2F;run&#x2F;php&#x2F;php7.0-fpm.sock;</span><br><span class="line">       include snippets&#x2F;fastcgi-php.conf;</span><br><span class="line">       fastcgi_param SCRIPT_NAME     $1;</span><br><span class="line">       fastcgi_param PATH_INFO       $2;</span><br><span class="line">       fastcgi_param SCRIPT_FILENAME $document_root$1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ \.php$ &#123;</span><br><span class="line">        include snippets&#x2F;fastcgi-php.conf;</span><br><span class="line">        fastcgi_pass unix:&#x2F;run&#x2F;php&#x2F;php7.0-fpm.sock;</span><br><span class="line">fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    location ~ &#x2F;\.ht &#123;</span><br><span class="line">        deny  all;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%882%EF%BC%89ubuntu%E4%B8%8A%E9%83%A8%E7%BD%B2php%E7%8E%AF%E5%A2%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%882%EF%BC%89ubuntu%E4%B8%8A%E9%83%A8%E7%BD%B2php%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">（2）ubuntu上部署php环境</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-04 08:20:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:20:00+08:00">2017-09-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%882%EF%BC%89ubuntu%E4%B8%8A%E9%83%A8%E7%BD%B2php%E7%8E%AF%E5%A2%83/" class="post-meta-item leancloud_visitors" data-flag-title="（2）ubuntu上部署php环境" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月4日 上午8:20</p>
-<p>fuck，这篇本来写完了，最后提醒让打开flash，我点‘‘总是打开’’，然后他就给我刷新了！！！！！</p>
-<p>参考文章：<a href="http://www.itnose.net/detail/6628238.html" target="_blank" rel="noopener">手把手教你从头搭建Web服务器及LEMP环境(使用Ubuntu16.04+Nginx+MySQL+PHP)_nginx_WEB-ITnose</a></p>
-<h3 id="注意点："><a href="#注意点：" class="headerlink" title="注意点："></a>注意点：</h3><p>1.要进行mysql安装完后的配置。补充一<br>2.php安装完知道要设置cgi.fix_pathinfo=0，是为了安全。<br>3.涉及到vim，忘了就百度<br>4.我以前竟然不知道外网ip可以直接进去，还以为必须备案，解析了才可以！傻！</p>
-<p>从玩带界面的ubuntu 到 Mac下配置环境 再到<br>服务器中配置环境。从以前的只会照别人的说明书一步步的按，到后来明白为其中的道理，再到现在比较熟练的完成。这也是知识慢慢积累的一个过程，感谢刚哥在配置mac环境时帮助我我这只迷失的羔羊，thanks。</p>
-<h3 id="补充一："><a href="#补充一：" class="headerlink" title="补充一："></a>补充一：</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-<span class="number">219</span>-<span class="number">69</span>-ubuntu:~$ sudo mysql_secure_installation</span><br><span class="line"></span><br><span class="line">Securing the MySQL server deployment.</span><br><span class="line"></span><br><span class="line">Enter password <span class="keyword">for</span> user roo<span class="variable">t:</span></span><br><span class="line"></span><br><span class="line">VALIDATE PASSWORD PLUGIN can <span class="keyword">be</span> used <span class="keyword">to</span> test passwords</span><br><span class="line"><span class="built_in">and</span> improve security. It checks the strength of password</span><br><span class="line"><span class="built_in">and</span> allows the users <span class="keyword">to</span> <span class="keyword">set</span> <span class="keyword">only</span> those passwords which are</span><br><span class="line">secure enough. Would you like <span class="keyword">to</span> setup VALIDATE PASSWORD plugin?</span><br><span class="line"></span><br><span class="line">Press <span class="keyword">y</span>|Y <span class="keyword">for</span> Yes, any other key <span class="keyword">for</span> No: <span class="keyword">y</span></span><br><span class="line"></span><br><span class="line">There are three levels of password validation policy:</span><br><span class="line"></span><br><span class="line">LOW    Length &gt;= <span class="number">8</span></span><br><span class="line">MEDIUM Length &gt;= <span class="number">8</span>, numeric, mixed case, <span class="built_in">and</span> special characters</span><br><span class="line">STRONG Length &gt;= <span class="number">8</span>, numeric, mixed case, special characters <span class="built_in">and</span> dictionary                  <span class="keyword">file</span></span><br><span class="line"></span><br><span class="line">Please enter <span class="number">0</span> = LOW, <span class="number">1</span> = MEDIUM <span class="built_in">and</span> <span class="number">2</span> = STRONG: <span class="number">1</span></span><br><span class="line">Using existing password <span class="keyword">for</span> root.</span><br><span class="line"></span><br><span class="line">Estimated strength of the password: <span class="number">50</span></span><br><span class="line">Change the password <span class="keyword">for</span> root ? ((Press <span class="keyword">y</span>|Y <span class="keyword">for</span> Yes, any other key <span class="keyword">for</span> No) : <span class="keyword">l</span></span><br><span class="line"></span><br><span class="line"> ... skipping.</span><br><span class="line">By default, <span class="keyword">a</span> MySQL installation <span class="built_in">has</span> <span class="keyword">an</span> anonymous user,</span><br><span class="line">allowing anyone <span class="keyword">to</span> <span class="built_in">log</span> into MySQL without having <span class="keyword">to</span> have</span><br><span class="line"><span class="keyword">a</span> user account created <span class="keyword">for</span> them. This <span class="keyword">is</span> intended <span class="keyword">only</span> <span class="keyword">for</span></span><br><span class="line">testing, <span class="built_in">and</span> <span class="keyword">to</span> <span class="keyword">make</span> the installation <span class="keyword">go</span> <span class="keyword">a</span> bit smoother.</span><br><span class="line">You should <span class="built_in">remove</span> them before moving into <span class="keyword">a</span> production</span><br><span class="line">environment.</span><br><span class="line"></span><br><span class="line">Remove anonymous users? (Press <span class="keyword">y</span>|Y <span class="keyword">for</span> Yes, any other key <span class="keyword">for</span> No) : <span class="keyword">l</span></span><br><span class="line"></span><br><span class="line"> ... skipping.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Normally, root should <span class="keyword">only</span> <span class="keyword">be</span> allowed <span class="keyword">to</span> connect from</span><br><span class="line"><span class="string">'localhost'</span>. This ensures that someone cannot guess at</span><br><span class="line">the root password from the network.</span><br><span class="line"></span><br><span class="line">Disallow root login remotely? (Press <span class="keyword">y</span>|Y <span class="keyword">for</span> Yes, any other key <span class="keyword">for</span> No) : <span class="keyword">l</span></span><br><span class="line"></span><br><span class="line"> ... skipping.</span><br><span class="line">By default, MySQL comes with <span class="keyword">a</span> database named <span class="string">'test'</span> that</span><br><span class="line">anyone can access. This <span class="keyword">is</span> also intended <span class="keyword">only</span> <span class="keyword">for</span> testing,</span><br><span class="line"><span class="built_in">and</span> should <span class="keyword">be</span> removed before moving into <span class="keyword">a</span> production</span><br><span class="line">environment.</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Remove test database <span class="built_in">and</span> access <span class="keyword">to</span> it? (Press <span class="keyword">y</span>|Y <span class="keyword">for</span> Yes, any other key <span class="keyword">for</span> No) : <span class="keyword">l</span></span><br><span class="line"></span><br><span class="line"> ... skipping.</span><br><span class="line">Reloading the privilege tables will ensure that <span class="keyword">all</span> <span class="keyword">changes</span></span><br><span class="line">made <span class="keyword">so</span> far will take effect immediately.</span><br><span class="line"></span><br><span class="line">Reload privilege tables now? (Press <span class="keyword">y</span>|Y <span class="keyword">for</span> Yes, any other key <span class="keyword">for</span> No) : <span class="keyword">y</span></span><br><span class="line">Success.</span><br><span class="line"></span><br><span class="line">All done!</span><br></pre></td></tr></table></figure>
-
-
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%882%EF%BC%89ubuntu%E4%B8%8A%E9%83%A8%E7%BD%B2php%E7%8E%AF%E5%A2%83/001XFkONzy7bA2w16ba04&690.jpeg" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%881%EF%BC%89Mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%881%EF%BC%89Mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu/" class="post-title-link" itemprop="url">（1）Mac连接腾讯云ubuntu</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-04 08:16:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:16:00+08:00">2017-09-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_blog/PHP</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%881%EF%BC%89Mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu/" class="post-meta-item leancloud_visitors" data-flag-title="（1）Mac连接腾讯云ubuntu" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>189</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月4日 上午8:16</p>
-<p>参考:<a href="http://chaishiwei.com/blog/926.html" target="_blank" rel="noopener">Mac OS X 通过终端 SSH 连接腾讯云服务器 – 老柴的宅</a></p>
-<p>第一感觉，我学的信息安全知识终于用上了，这些知识看上去全是概念，没啥用，但是对你理解一些操作有很大的帮助。</p>
-<h3 id="两个提醒："><a href="#两个提醒：" class="headerlink" title="两个提醒："></a>两个提醒：</h3><p><strong>first:</strong> 要从腾讯云中创建RSA pair ，然后 bind 一个服务器，将private key 下载下来。<br><strong>second:</strong>一定要更改private key 的权限， 要不会warning。<br><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%881%EF%BC%89Mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu/001XFkONzy7byY38Q9H99&690.jpeg" alt></p>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_blog/php/%EF%BC%881%EF%BC%89Mac%E8%BF%9E%E6%8E%A5%E8%85%BE%E8%AE%AF%E4%BA%91ubuntu/001XFkONzy7byY5HduD17&690.jpeg" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1330,11 +550,935 @@ scp _path_filename username@servername:/path  </code></pre><h2 id="1：连接数
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/02/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-title-link" itemprop="url">表复制（根据一个表创建另一个表）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-02 08:44:00" itemprop="dateCreated datePublished" datetime="2017-09-02T08:44:00+08:00">2017-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="表复制（根据一个表创建另一个表）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>99</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年9月2日 上午8:44</p>
+<p><a href="http://ears.iteye.com/blog/1470605" target="_blank" rel="noopener">CREATE TABLE 表名 AS SELECT 语句</a><br><a href="http://blog.csdn.net/qq_27317147/article/details/52130427" target="_blank" rel="noopener">oracle SELECT INTO 和 INSERT INTO SELECT 两种表复制语句详解</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/02/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-title-link" itemprop="url">表复制（根据一个表创建另一个表）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-02 08:44:00" itemprop="dateCreated datePublished" datetime="2017-09-02T08:44:00+08:00">2017-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="表复制（根据一个表创建另一个表）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>99</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年9月2日 上午8:44</p>
+<p><a href="http://ears.iteye.com/blog/1470605" target="_blank" rel="noopener">CREATE TABLE 表名 AS SELECT 语句</a><br><a href="http://blog.csdn.net/qq_27317147/article/details/52130427" target="_blank" rel="noopener">oracle SELECT INTO 和 INSERT INTO SELECT 两种表复制语句详解</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">PLSQL（PLSQL语法+存储过程+触发器）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-01 10:36:00" itemprop="dateCreated datePublished" datetime="2017-09-01T10:36:00+08:00">2017-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="PLSQL（PLSQL语法+存储过程+触发器）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年9月1日 上午10:36</p>
+<p>这里知识理解一些概念，有一个基本的认识<br>知道ORACLE支持哪些功能，以后一个功能呢不好做的时候，来这里瞧瞧，看有没有正好能用上额特性</p>
+<h2 id="PLSQL中语法特别的地方"><a href="#PLSQL中语法特别的地方" class="headerlink" title="PLSQL中语法特别的地方"></a>PLSQL中语法特别的地方</h2><p>没有逻辑修饰符：|| &amp;&amp;<br>用这些代替：And or between<br>等号：是:= 不是=<br>没有：++ — —<br>|| 内容拼接 隐式转换成字符串连接</p>
+<h2 id="SQL的高级语言特性PLSQL"><a href="#SQL的高级语言特性PLSQL" class="headerlink" title="SQL的高级语言特性PLSQL"></a>SQL的高级语言特性PLSQL</h2><ol>
+<li>所谓的plsql其实就是：sql编程语言一样编程，有高级语言的特性</li>
+<li>If  switch for loop</li>
+<li>Cursor游标 是专门用来解决表中多条数据的情况<ol>
+<li>这个高级语言中没有，是数据库语言中特有的</li>
+<li>和loop连用</li>
+</ol>
+</li>
+<li>类似stl的数据类型<ol>
+<li>Varray </li>
+<li>table </li>
+<li>record</li>
+</ol>
+</li>
+<li>自定义数据类型<ol>
+<li>type</li>
+</ol>
+</li>
+<li>异常<ol>
+<li>支持自定义抛出异常<ol>
+<li>当在函数和存储过程中抛出异常时，可以在调用函数和存储过程的外面进行异常的处理</li>
+</ol>
+</li>
+<li>支持选择自己处理异常，和oracle系统处理异常<ol>
+<li>当没有写exception段时，默认就是让oracle处理异常</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>package<ol>
+<li>这个就是java中的类，不是java中的包</li>
+<li>可以在package中和java一样定义变量，常量，函数（存储过程+函数）等等</li>
+<li>packages + package body</li>
+<li>如何操作<ol>
+<li>不是java中的先new一个对象，然后用对象调用</li>
+<li>Sql中没有new对象，直接使用package名  点就行了</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="存储过程的构成"><a href="#存储过程的构成" class="headerlink" title="存储过程的构成"></a>存储过程的构成</h3><ol>
+<li>给PLSQL去了个名字方便调用</li>
+<li>存储过程</li>
+<li>传入参数</li>
+<li>传出参数</li>
+</ol>
+<h3 id="为什么要封装成存储过程"><a href="#为什么要封装成存储过程" class="headerlink" title="为什么要封装成存储过程?"></a>为什么要封装成存储过程?</h3><ol>
+<li>封装之后方便传入传出参数 </li>
+<li>匿名块只能在数据库环境中调用 存储过程可以被外界调用(比如JDBC)</li>
+</ol>
+<h3 id="函数与存储过程比较："><a href="#函数与存储过程比较：" class="headerlink" title="函数与存储过程比较："></a>函数与存储过程比较：</h3><ol>
+<li>函数可以看做一类特殊的存储过程 没有输出参数 必有唯一返回值</li>
+<li>删掉输出参数，添加返回值</li>
+<li>存储过程可以完全的实现函数的功能</li>
+</ol>
+<h3 id="如何选择函数与存储过程"><a href="#如何选择函数与存储过程" class="headerlink" title="如何选择函数与存储过程"></a>如何选择函数与存储过程</h3><ol>
+<li>当PL-SQL需要嵌在SQL中使用时用函数<ol>
+<li>就像min() max() count()这些函数</li>
+</ol>
+</li>
+<li>当有多个返回值或者要被其它程序调用时用存储过程</li>
+</ol>
+<p>既然利用PLSQL可以实现高级语言的特性，那么当我们实现一个功能的时候，有哪些不同的、或者值得注意的地方</p>
+<p>需求：利用存储过程查询含有特定信息的学生id<br>思路：</p>
+<ol>
+<li>也就是说这个参数可以是学生姓名，生日，电话号等等信息。在java中我们需要对这个特定信息进行判断，写上一堆if，但是在sql中我直接写在where语句中就行了，就省去了判断的过程</li>
+<li>体现了sql的优势，对比与java语言</li>
+</ol>
+<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><ol>
+<li>使用触发器的环境:<ol>
+<li>业务逻辑是多步骤的 而且可能从任意一个步骤执行  一般用触发器链</li>
+<li>传进来的参数 是一行数据  一般用触发器</li>
+</ol>
+</li>
+<li>有了存储过程  为什么还要用触发器<ol>
+<li>存储过程需要特殊的调用方式</li>
+<li>A -&gt;  B  -&gt;  c -&gt;  D-&gt;    <ol>
+<li>连锁操作的业务逻辑 用触发器,JDBC只要正常的SQL语句</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>触发器要注意的地方 <ol>
+<li>暂时用不到的触发器全部禁用  <ol>
+<li>使用disable</li>
+</ol>
+</li>
+<li>避免逻辑死锁<ol>
+<li>一个trigger就是一个线程</li>
+<li>那么，不说自己的创建的线程，光是系统中默认的操作表的线程就有可能和自己的一个trigger线程产生冲突</li>
+</ol>
+</li>
+<li>尽量避免update触发器中对本表的操作</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p>Sequence 就像一个全局int型变量，他可以一直记录一个变量的值</p>
+<hr>
+<hr>
+<p>百度</p>
+<hr>
+<p><a href="http://blog.csdn.net/caoxiaohong1005/article/details/53433131" target="_blank" rel="noopener">Mac下不用虚拟机一样可以使用PLSQL Developer - iCoding91        - CSDN博客</a></p>
+<p>%符号 理解成“的”</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">PLSQL（PLSQL语法+存储过程+触发器）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-01 10:36:00" itemprop="dateCreated datePublished" datetime="2017-09-01T10:36:00+08:00">2017-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="PLSQL（PLSQL语法+存储过程+触发器）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年9月1日 上午10:36</p>
+<p>这里知识理解一些概念，有一个基本的认识<br>知道ORACLE支持哪些功能，以后一个功能呢不好做的时候，来这里瞧瞧，看有没有正好能用上额特性</p>
+<h2 id="PLSQL中语法特别的地方"><a href="#PLSQL中语法特别的地方" class="headerlink" title="PLSQL中语法特别的地方"></a>PLSQL中语法特别的地方</h2><p>没有逻辑修饰符：|| &amp;&amp;<br>用这些代替：And or between<br>等号：是:= 不是=<br>没有：++ — —<br>|| 内容拼接 隐式转换成字符串连接</p>
+<h2 id="SQL的高级语言特性PLSQL"><a href="#SQL的高级语言特性PLSQL" class="headerlink" title="SQL的高级语言特性PLSQL"></a>SQL的高级语言特性PLSQL</h2><ol>
+<li>所谓的plsql其实就是：sql编程语言一样编程，有高级语言的特性</li>
+<li>If  switch for loop</li>
+<li>Cursor游标 是专门用来解决表中多条数据的情况<ol>
+<li>这个高级语言中没有，是数据库语言中特有的</li>
+<li>和loop连用</li>
+</ol>
+</li>
+<li>类似stl的数据类型<ol>
+<li>Varray </li>
+<li>table </li>
+<li>record</li>
+</ol>
+</li>
+<li>自定义数据类型<ol>
+<li>type</li>
+</ol>
+</li>
+<li>异常<ol>
+<li>支持自定义抛出异常<ol>
+<li>当在函数和存储过程中抛出异常时，可以在调用函数和存储过程的外面进行异常的处理</li>
+</ol>
+</li>
+<li>支持选择自己处理异常，和oracle系统处理异常<ol>
+<li>当没有写exception段时，默认就是让oracle处理异常</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>package<ol>
+<li>这个就是java中的类，不是java中的包</li>
+<li>可以在package中和java一样定义变量，常量，函数（存储过程+函数）等等</li>
+<li>packages + package body</li>
+<li>如何操作<ol>
+<li>不是java中的先new一个对象，然后用对象调用</li>
+<li>Sql中没有new对象，直接使用package名  点就行了</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="存储过程的构成"><a href="#存储过程的构成" class="headerlink" title="存储过程的构成"></a>存储过程的构成</h3><ol>
+<li>给PLSQL去了个名字方便调用</li>
+<li>存储过程</li>
+<li>传入参数</li>
+<li>传出参数</li>
+</ol>
+<h3 id="为什么要封装成存储过程"><a href="#为什么要封装成存储过程" class="headerlink" title="为什么要封装成存储过程?"></a>为什么要封装成存储过程?</h3><ol>
+<li>封装之后方便传入传出参数 </li>
+<li>匿名块只能在数据库环境中调用 存储过程可以被外界调用(比如JDBC)</li>
+</ol>
+<h3 id="函数与存储过程比较："><a href="#函数与存储过程比较：" class="headerlink" title="函数与存储过程比较："></a>函数与存储过程比较：</h3><ol>
+<li>函数可以看做一类特殊的存储过程 没有输出参数 必有唯一返回值</li>
+<li>删掉输出参数，添加返回值</li>
+<li>存储过程可以完全的实现函数的功能</li>
+</ol>
+<h3 id="如何选择函数与存储过程"><a href="#如何选择函数与存储过程" class="headerlink" title="如何选择函数与存储过程"></a>如何选择函数与存储过程</h3><ol>
+<li>当PL-SQL需要嵌在SQL中使用时用函数<ol>
+<li>就像min() max() count()这些函数</li>
+</ol>
+</li>
+<li>当有多个返回值或者要被其它程序调用时用存储过程</li>
+</ol>
+<p>既然利用PLSQL可以实现高级语言的特性，那么当我们实现一个功能的时候，有哪些不同的、或者值得注意的地方</p>
+<p>需求：利用存储过程查询含有特定信息的学生id<br>思路：</p>
+<ol>
+<li>也就是说这个参数可以是学生姓名，生日，电话号等等信息。在java中我们需要对这个特定信息进行判断，写上一堆if，但是在sql中我直接写在where语句中就行了，就省去了判断的过程</li>
+<li>体现了sql的优势，对比与java语言</li>
+</ol>
+<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><ol>
+<li>使用触发器的环境:<ol>
+<li>业务逻辑是多步骤的 而且可能从任意一个步骤执行  一般用触发器链</li>
+<li>传进来的参数 是一行数据  一般用触发器</li>
+</ol>
+</li>
+<li>有了存储过程  为什么还要用触发器<ol>
+<li>存储过程需要特殊的调用方式</li>
+<li>A -&gt;  B  -&gt;  c -&gt;  D-&gt;    <ol>
+<li>连锁操作的业务逻辑 用触发器,JDBC只要正常的SQL语句</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>触发器要注意的地方 <ol>
+<li>暂时用不到的触发器全部禁用  <ol>
+<li>使用disable</li>
+</ol>
+</li>
+<li>避免逻辑死锁<ol>
+<li>一个trigger就是一个线程</li>
+<li>那么，不说自己的创建的线程，光是系统中默认的操作表的线程就有可能和自己的一个trigger线程产生冲突</li>
+</ol>
+</li>
+<li>尽量避免update触发器中对本表的操作</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p>Sequence 就像一个全局int型变量，他可以一直记录一个变量的值</p>
+<hr>
+<hr>
+<p>百度</p>
+<hr>
+<p><a href="http://blog.csdn.net/caoxiaohong1005/article/details/53433131" target="_blank" rel="noopener">Mac下不用虚拟机一样可以使用PLSQL Developer - iCoding91        - CSDN博客</a></p>
+<p>%符号 理解成“的”</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">ORACLE的三个客户端工具</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-09-01 05:44:00" itemprop="dateCreated datePublished" datetime="2017-09-01T05:44:00+08:00">2017-09-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/" class="post-meta-item leancloud_visitors" data-flag-title="ORACLE的三个客户端工具" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>329</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年9月1日 下午5:44</p>
+<p>ORACLE SQL Developer<br>Navticat premium<br>PL/SQL</p>
+<ol>
+<li>我觉得最好的是ORACLE SQL Developer</li>
+<li>这个是oracle官方出的<a href="http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" target="_blank" rel="noopener">Oracle SQL Developer Downloads</a></li>
+<li>可以支持多系统，包括mac</li>
+<li>官方手册<a href="http://www.oracle.com/ocom/groups/public/@otn/documents/webcontent/229076_zhs.htm#t3" target="_blank" rel="noopener">使用 SQL Developer 开发和调试 PL/SQL</a>等</li>
+<li>左侧有各种功能支持，右击就可以<ol>
+<li>他的使用和PL_SQL差不多，但是界面美化比PL_SQL好多了</li>
+<li>与navicat相比，navicat毕竟不是亲生的，左侧功能的支持不好，比如package</li>
+</ol>
+</li>
+</ol>
+<p><img src="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/C188C2C6-B90B-4ADA-B0EC-B1F196F279E2.png" alt><br>可以看出他们可以同时连接<br>但是在navicat中添加的数据，在PL/SQL中会乱码<br><a href="http://blog.csdn.net/aovenus/article/details/12648751" target="_blank" rel="noopener">plsql查询数据显示为乱码解决方法 - aovenus的专栏        - CSDN博客</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">SQL表连接</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-31 11:03:00" itemprop="dateCreated datePublished" datetime="2017-08-31T11:03:00+08:00">2017-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-meta-item leancloud_visitors" data-flag-title="SQL表连接" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>92</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午11:03</p>
+<h2 id="连接有哪些"><a href="#连接有哪些" class="headerlink" title="连接有哪些"></a>连接有哪些</h2><ol>
+<li>固定的：外键连接</li>
+<li>额外的：看自己有啥要求，或者要过滤那些情况<ol>
+<li><strong>关键是要明白自己的需求</strong></li>
+<li>然后转换成里逻辑表达式</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">SQL表连接</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-31 11:03:00" itemprop="dateCreated datePublished" datetime="2017-08-31T11:03:00+08:00">2017-08-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-meta-item leancloud_visitors" data-flag-title="SQL表连接" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>92</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午11:03</p>
+<h2 id="连接有哪些"><a href="#连接有哪些" class="headerlink" title="连接有哪些"></a>连接有哪些</h2><ol>
+<li>固定的：外键连接</li>
+<li>额外的：看自己有啥要求，或者要过滤那些情况<ol>
+<li><strong>关键是要明白自己的需求</strong></li>
+<li>然后转换成里逻辑表达式</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/113/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/113/">113</a><span class="page-number current">114</span><a class="page-number" href="/page/115/">115</a><span class="space">&hellip;</span><a class="page-number" href="/page/122/">122</a><a class="extend next" rel="next" href="/page/115/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/113/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/113/">113</a><span class="page-number current">114</span><a class="page-number" href="/page/115/">115</a><span class="space">&hellip;</span><a class="page-number" href="/page/121/">121</a><a class="extend next" rel="next" href="/page/115/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1400,7 +1544,7 @@ scp _path_filename username@servername:/path  </code></pre><h2 id="1：连接数
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1216</span>
+          <span class="site-state-item-count">1209</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1446,7 +1590,7 @@ scp _path_filename username@servername:/path  </code></pre><h2 id="1：连接数
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19:01</span>
+    <span title="站点阅读时长">18:59</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

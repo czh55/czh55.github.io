@@ -158,117 +158,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/" class="post-title-link" itemprop="url">lombok</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2018-03-08 10:35:00" itemprop="dateCreated datePublished" datetime="2018-03-08T10:35:00+08:00">2018-03-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/分布式集群</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/" class="post-meta-item leancloud_visitors" data-flag-title="lombok" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2018年3月8日 上午10:35</p>
-<h2 id="主要功能："><a href="#主要功能：" class="headerlink" title="主要功能："></a>主要功能：</h2><p>Lombok是一个可以通过简单的<strong>注解形式</strong>来帮助我们简化消除一些必须有但显得很臃肿的Java代码的工具，通过使用对应的注解，<strong>可以在编译源码的时候</strong>生成对应的方法。</p>
-<h2 id="官网："><a href="#官网：" class="headerlink" title="官网："></a>官网：</h2><p>lombok:<a href="https://projectlombok.org/" target="_blank" rel="noopener">Project Lombok</a><br>反编译软件：<a href="http://jd.benow.ca/" target="_blank" rel="noopener">Java Decompiler</a> 功能：class-&gt;java</p>
-<h2 id="lombok原理"><a href="#lombok原理" class="headerlink" title="lombok原理"></a>lombok原理</h2><p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/05EAF38D-F7FD-456E-B93A-7E13853D6B98.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/A35775FA-6EF3-495A-AE22-A879CE654A0C.png" alt></p>
-<h2 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h2><ol>
-<li>@data注解会自动生成toString，EqualsAndHashCode(<strong>默认全变量</strong>)，get,set方法</li>
-<li>我们一般不使用@data，而是使用：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Getter</span><br><span class="line">@Setter</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@AllArgsConstructor</span><br></pre></td></tr></table></figure>
-
-</li>
-</ol>
-<h2 id="在项目中配置："><a href="#在项目中配置：" class="headerlink" title="在项目中配置："></a>在项目中配置：</h2><p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/F7086915-5723-48F5-8F6D-FFDA76E37A51.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/1B4B7164-475B-47C7-832C-3782B10F3EB7.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/0BCEBE95-327D-43F9-A6F7-2662C26F1C38.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/353FC2E4-2124-40DB-BA0D-D7B6571B4537.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/9896CCC2-95E2-4422-AB58-F13423DDB6B0.png" alt></p>
-<h2 id="使用maven打包时跳过单元测试，生成class文件"><a href="#使用maven打包时跳过单元测试，生成class文件" class="headerlink" title="使用maven打包时跳过单元测试，生成class文件"></a>使用maven打包时跳过单元测试，生成class文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">localhost:mmallv4.0 czh$ mvn clean package -Dmaven.test.skip&#x3D;true</span><br><span class="line">[INFO] Scanning for projects...</span><br><span class="line">[WARNING] </span><br><span class="line">[WARNING] Some problems were encountered while building the effective model for com:mmall:war:2.0-SNAPSHOT</span><br><span class="line">[WARNING] &#39;build.plugins.plugin.version&#39; for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 292, column 15</span><br><span class="line">[WARNING] </span><br><span class="line">[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.</span><br><span class="line">[WARNING] </span><br><span class="line">[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.</span><br><span class="line">[WARNING] </span><br><span class="line">[INFO]                                                                         </span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Building mmall Maven Webapp 2.0-SNAPSHOT</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-clean-plugin:2.4.1:clean (default-clean) @ mmall ---</span><br><span class="line">[INFO] Deleting &#x2F;Users&#x2F;czh&#x2F;IdeaProjects&#x2F;mmallv4.0&#x2F;target</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-resources-plugin:2.5:resources (default-resources) @ mmall ---</span><br><span class="line">[debug] execute contextualize</span><br><span class="line">[INFO] Using &#39;UTF-8&#39; encoding to copy filtered resources.</span><br><span class="line">[INFO] Copying 4 resources</span><br><span class="line">[INFO] Copying 12 resources</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-compiler-plugin:2.3.2:compile (default-compile) @ mmall ---</span><br><span class="line">[INFO] Compiling 70 source files to &#x2F;Users&#x2F;czh&#x2F;IdeaProjects&#x2F;mmallv4.0&#x2F;target&#x2F;classes</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-resources-plugin:2.5:testResources (default-testResources) @ mmall ---</span><br><span class="line">[debug] execute contextualize</span><br><span class="line">[INFO] Using &#39;UTF-8&#39; encoding to copy filtered resources.</span><br><span class="line">[INFO] skip non existing resourceDirectory &#x2F;Users&#x2F;czh&#x2F;IdeaProjects&#x2F;mmallv4.0&#x2F;src&#x2F;test&#x2F;resources</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-compiler-plugin:2.3.2:testCompile (default-testCompile) @ mmall ---</span><br><span class="line">[INFO] Not compiling test sources</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-surefire-plugin:2.10:test (default-test) @ mmall ---</span><br><span class="line">[WARNING] The POM for org.apache.maven:maven-plugin-api:jar:2.0.9 is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details</span><br><span class="line">[INFO] Tests are skipped.</span><br><span class="line">[INFO] </span><br><span class="line">[INFO] --- maven-war-plugin:2.1.1:war (default-war) @ mmall ---</span><br><span class="line">[INFO] Packaging webapp</span><br><span class="line">[INFO] Assembling webapp [mmall] in [&#x2F;Users&#x2F;czh&#x2F;IdeaProjects&#x2F;mmallv4.0&#x2F;target&#x2F;mmall]</span><br><span class="line">[INFO] Processing war project</span><br><span class="line">[INFO] Copying webapp resources [&#x2F;Users&#x2F;czh&#x2F;IdeaProjects&#x2F;mmallv4.0&#x2F;src&#x2F;main&#x2F;webapp]</span><br><span class="line">[INFO] Webapp assembled in [647 msecs]</span><br><span class="line">[INFO] Building war: &#x2F;Users&#x2F;czh&#x2F;IdeaProjects&#x2F;mmallv4.0&#x2F;target&#x2F;mmall.war</span><br><span class="line">[INFO] WEB-INF&#x2F;web.xml already added, skipping</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] BUILD SUCCESS</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">[INFO] Total time: 10.264s</span><br><span class="line">[INFO] Finished at: Thu Mar 08 11:16:04 CST 2018</span><br><span class="line">[INFO] Final Memory: 23M&#x2F;369M</span><br><span class="line">[INFO] ------------------------------------------------------------------------</span><br><span class="line">localhost:mmallv4.0 czh$</span><br></pre></td></tr></table></figure>
-
-<p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/E8FE2E98-CF9F-41C2-8E43-315EB6334303.png" alt><br><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/DA5B495F-F0E4-49AC-863A-8146EE7CF023.png" alt></p>
-<h2 id="最后，将class文件用反编译软件打开"><a href="#最后，将class文件用反编译软件打开" class="headerlink" title="最后，将class文件用反编译软件打开"></a>最后，将class文件用反编译软件打开</h2><p><img src="/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E5%88%86%E5%B8%83%E5%BC%8F%E9%9B%86%E7%BE%A4/lombok/1FB68AAE-742B-4DE0-A952-B03BBF40D26F.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/08/web%E5%BC%80%E5%8F%91/czh_java/%E6%AF%95%E8%AE%BE/maven%20project%E4%B8%AD%E7%BA%A2%E7%BA%BF%E6%8A%A5%E9%94%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1406,11 +1295,114 @@
   
   
 
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/03/03/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5/%E5%B0%8F%E8%B1%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%90%91%E9%87%8F%E5%8C%96%E6%80%9D%E7%BB%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/03/03/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5/%E5%B0%8F%E8%B1%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%90%91%E9%87%8F%E5%8C%96%E6%80%9D%E7%BB%B4/" class="post-title-link" itemprop="url">向量化思维</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-03-03 11:36:00" itemprop="dateCreated datePublished" datetime="2018-03-03T11:36:00+08:00">2018-03-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 19:41:52" itemprop="dateModified" datetime="2020-03-12T19:41:52+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-mac-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5-%E5%B0%8F%E8%B1%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-knowledge/" itemprop="url" rel="index">
+                    <span itemprop="name">c数据科学/mac_机器学习/入门阶段/小象机器学习/knowledge</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/03/03/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5/%E5%B0%8F%E8%B1%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%90%91%E9%87%8F%E5%8C%96%E6%80%9D%E7%BB%B4/" class="post-meta-item leancloud_visitors" data-flag-title="向量化思维" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>149</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2018年3月3日 下午11:36</p>
+<p><a href="https://zhuanlan.zhihu.com/p/26989675" target="_blank" rel="noopener">向量化编程的总结记录</a></p>
+<ol>
+<li>我先前就意识到了这一点，但是没有把它叫做是向量化思维。</li>
+<li>我觉得把它说成一种思维有点高看他了，说白了就是数学上一种计算方式的改变：<strong>将数学式子转化为矩阵进行运算，多了一层转化，但是却使编程更加简单，写公式的时候也更加简洁</strong></li>
+<li>就是这里的转化： 参考自<a href="bear://x-callback-url/open-note?id=103E897D-9B58-4148-9D3E-55DE0230D10F-331-0000967C7120F872">雪球的开端</a><br><img src="/2018/03/03/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5/%E5%B0%8F%E8%B1%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%90%91%E9%87%8F%E5%8C%96%E6%80%9D%E7%BB%B4/14A1C158-6E14-443C-B7AB-5DBCCF5A48BD.png" alt></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
   </div>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/93/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/93/">93</a><span class="page-number current">94</span><a class="page-number" href="/page/95/">95</a><span class="space">&hellip;</span><a class="page-number" href="/page/122/">122</a><a class="extend next" rel="next" href="/page/95/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/93/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/93/">93</a><span class="page-number current">94</span><a class="page-number" href="/page/95/">95</a><span class="space">&hellip;</span><a class="page-number" href="/page/121/">121</a><a class="extend next" rel="next" href="/page/95/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1476,7 +1468,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1216</span>
+          <span class="site-state-item-count">1209</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1522,7 +1514,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">19:01</span>
+    <span title="站点阅读时长">18:59</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>
