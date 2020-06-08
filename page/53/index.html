@@ -158,6 +158,790 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%96%E5%8F%82%E7%9F%A9%E9%98%B5%E7%9A%84%E7%8E%B0%E5%AE%9E%E5%90%AB%E4%B9%89%EF%BC%9A%E7%9B%B8%E6%9C%BA%E5%9D%90%E6%A0%87%E4%B8%BA%E5%95%A5%E6%98%AF-R%E2%80%99*T/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%96%E5%8F%82%E7%9F%A9%E9%98%B5%E7%9A%84%E7%8E%B0%E5%AE%9E%E5%90%AB%E4%B9%89%EF%BC%9A%E7%9B%B8%E6%9C%BA%E5%9D%90%E6%A0%87%E4%B8%BA%E5%95%A5%E6%98%AF-R%E2%80%99*T/" class="post-title-link" itemprop="url">外参矩阵的现实含义：相机坐标为啥是-R’*T</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-05 11:05:00" itemprop="dateCreated datePublished" datetime="2019-03-05T11:05:00+08:00">2019-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:14" itemprop="dateModified" datetime="2020-04-01T16:19:14+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/知识点#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%96%E5%8F%82%E7%9F%A9%E9%98%B5%E7%9A%84%E7%8E%B0%E5%AE%9E%E5%90%AB%E4%B9%89%EF%BC%9A%E7%9B%B8%E6%9C%BA%E5%9D%90%E6%A0%87%E4%B8%BA%E5%95%A5%E6%98%AF-R%E2%80%99*T/" class="post-meta-item leancloud_visitors" data-flag-title="外参矩阵的现实含义：相机坐标为啥是-R’*T" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>165</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年3月5日 下午11:05</p>
+<ol>
+<li>本质：代表两个相机的相对位置，可以通过刚性变换得到</li>
+<li>其实，一拿到一张照片的时候，一个新的三维坐标已近建立了<ol>
+<li>几个照片就有几个三维坐标</li>
+</ol>
+</li>
+<li><strong>最终达到的效果：换了个坐标系</strong></li>
+<li><strong>要想有RT的前提条件是</strong>：要有两个坐标系同时存在</li>
+</ol>
+<p><a href="https://blog.csdn.net/dudu815110/article/details/79423105" target="_blank" rel="noopener">摄像机标定外参矩阵中照亮和t的理解 - Cooper.zhang - CSDN博客</a></p>
+<ol>
+<li><strong>用1，2就是可以解释4</strong><br><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%A4%96%E5%8F%82%E7%9F%A9%E9%98%B5%E7%9A%84%E7%8E%B0%E5%AE%9E%E5%90%AB%E4%B9%89%EF%BC%9A%E7%9B%B8%E6%9C%BA%E5%9D%90%E6%A0%87%E4%B8%BA%E5%95%A5%E6%98%AF-R%E2%80%99*T/2C14F3BA-4F80-4EF8-BF46-5BE6C59BB5E8.png" alt></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%9C%AC%E8%B4%A8%E7%9F%A9%E9%98%B5%EF%BC%8C%E5%9F%BA%E6%9C%AC%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%9C%AC%E8%B4%A8%E7%9F%A9%E9%98%B5%EF%BC%8C%E5%9F%BA%E6%9C%AC%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">本质矩阵，基本矩阵的区别</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-05 11:05:00" itemprop="dateCreated datePublished" datetime="2019-03-05T11:05:00+08:00">2019-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:06" itemprop="dateModified" datetime="2020-04-01T16:19:06+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/知识点#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E6%9C%AC%E8%B4%A8%E7%9F%A9%E9%98%B5%EF%BC%8C%E5%9F%BA%E6%9C%AC%E7%9F%A9%E9%98%B5%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-meta-item leancloud_visitors" data-flag-title="本质矩阵，基本矩阵的区别" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>151</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年3月5日 下午11:05</p>
+<ol>
+<li>本质矩阵：只到达了相机坐标系，还处在三维阶段，只是利用刚体变换了一下坐标系<ol>
+<li>其中包含了外参</li>
+</ol>
+</li>
+<li>基本矩阵：就比较<strong>基本</strong>了，到达了像素坐标系，是二维坐标系<ol>
+<li>不仅包含了外参，还包含了内参</li>
+</ol>
+</li>
+<li><strong>基本矩阵包含了本质矩阵。</strong></li>
+<li><strong>在实现过程中：</strong><ol>
+<li>我们是先通过匹配点对求本质矩阵</li>
+<li>在通过本质矩阵*k，求基本矩阵。</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Undefined%20symbols%20for%20architecture%20x86_64%E9%94%99%E8%AF%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Undefined%20symbols%20for%20architecture%20x86_64%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">Undefined symbols for architecture x86_64错误</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-05 08:29:00" itemprop="dateCreated datePublished" datetime="2019-03-05T08:29:00+08:00">2019-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:14" itemprop="dateModified" datetime="2020-04-01T16:19:14+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/工具#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Undefined%20symbols%20for%20architecture%20x86_64%E9%94%99%E8%AF%AF/" class="post-meta-item leancloud_visitors" data-flag-title="Undefined symbols for architecture x86_64错误" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年3月5日 下午8:29</p>
+<h2 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h2><ol>
+<li>这个错误的意思：<strong>就是没有找到方法的实现</strong></li>
+<li>那我们就猜测出现的原因：<ol>
+<li><strong>cmake中没有引入我们需要的问题</strong></li>
+<li>编译器的版本不正确<ol>
+<li>debug\release</li>
+<li>32\64</li>
+</ol>
+</li>
+<li>方法实现我们忘了写了</li>
+<li>参考：<ol>
+<li><a href="https://www.jianshu.com/p/50e200e9e8cd" target="_blank" rel="noopener">Undefined symbols for architecture x86_64 - 简书</a></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="修改之前："><a href="#修改之前：" class="headerlink" title="修改之前："></a>修改之前：</h3><p><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Undefined%20symbols%20for%20architecture%20x86_64%E9%94%99%E8%AF%AF/9A9F423C-FCE2-42EF-8802-085D618FB32D.png" alt></p>
+<h3 id="修改之后："><a href="#修改之后：" class="headerlink" title="修改之后："></a>修改之后：</h3><p><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Undefined%20symbols%20for%20architecture%20x86_64%E9%94%99%E8%AF%AF/55BF6C93-5347-4322-B23C-1308ED29F222.png" alt></p>
+<h3 id="修改方法："><a href="#修改方法：" class="headerlink" title="修改方法："></a>修改方法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set(VISUAL_HEADER visualizer.h)  #$&#123;VISUAL_HEADER&#125;</span><br><span class="line">set(VISUAL_SOURCE visualizer.cc)</span><br><span class="line">add_executable(task3_test_ba $&#123;BA_FILES&#125; $&#123;VISUAL_HEADER&#125; $&#123;VISUAL_SOURCE&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="也是一样的错误："><a href="#也是一样的错误：" class="headerlink" title="也是一样的错误："></a>也是一样的错误：</h2><p>unknown load command 0x32<br><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Undefined%20symbols%20for%20architecture%20x86_64%E9%94%99%E8%AF%AF/4AFAED5C-E720-4E43-BED7-C509C41714FB.png" alt></p>
+<h2 id="详细错误："><a href="#详细错误：" class="headerlink" title="详细错误："></a>详细错误：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Undefined symbols for architecture x86_64:</span><br><span class="line">  &quot;features::Visualizer::draw_matches(std::shared_ptr&lt;core::Image&lt;unsigned char&gt; const&gt;, std::shared_ptr&lt;core::Image&lt;unsigned char&gt; const&gt;, std::vector&lt;sfm::Correspondence2D2D, std::allocator&lt;sfm::Correspondence2D2D&gt; &gt; const&amp;)&quot;, referenced from:</span><br><span class="line">      visualize_matching(features::Matching::Result const&amp;, std::shared_ptr&lt;core::Image&lt;unsigned char&gt; &gt;, std::shared_ptr&lt;core::Image&lt;unsigned char&gt; &gt;, std::vector&lt;math::Vector&lt;float, 2&gt;, std::allocator&lt;math::Vector&lt;float, 2&gt; &gt; &gt; const&amp;, std::vector&lt;math::Vector&lt;float, 2&gt;, std::allocator&lt;math::Vector&lt;float, 2&gt; &gt; &gt; const&amp;) in class3_test_bundle_adjustment.cc.o</span><br><span class="line">  &quot;features::Visualizer::draw_keypoints(std::shared_ptr&lt;core::Image&lt;unsigned char&gt; const&gt;, std::vector&lt;features::Visualizer::Keypoint, std::allocator&lt;features::Visualizer::Keypoint&gt; &gt; const&amp;, features::Visualizer::KeypointStyle)&quot;, referenced from:</span><br><span class="line">      sift_feature_matching(sfm::FeatureSet&amp;, sfm::FeatureSet&amp;, std::shared_ptr&lt;core::Image&lt;unsigned char&gt; &gt;, std::shared_ptr&lt;core::Image&lt;unsigned char&gt; &gt;) in class3_test_bundle_adjustment.cc.o</span><br><span class="line">ld: symbol(s) not found for architecture x86_64</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/linux%E4%B8%8B%E4%BD%BF%E7%94%A8Bundler%20+%20CMVS-PMVS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/linux%E4%B8%8B%E4%BD%BF%E7%94%A8Bundler%20+%20CMVS-PMVS/" class="post-title-link" itemprop="url">linux下使用Bundler + CMVS-PMVS</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-05 08:23:00" itemprop="dateCreated datePublished" datetime="2019-03-05T08:23:00+08:00">2019-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:06" itemprop="dateModified" datetime="2020-04-01T16:19:06+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/工具#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/linux%E4%B8%8B%E4%BD%BF%E7%94%A8Bundler%20+%20CMVS-PMVS/" class="post-meta-item leancloud_visitors" data-flag-title="linux下使用Bundler + CMVS-PMVS" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>115</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年3月5日 下午8:23</p>
+<p><a href="https://blog.csdn.net/u013358387/article/details/71576660" target="_blank" rel="noopener">linux下使用Bundler + CMVS-PMVS进行三维重建 - 幸福liwenchao 的专栏 - CSDN博客</a></p>
+<h3 id="执行方式："><a href="#执行方式：" class="headerlink" title="执行方式："></a>执行方式：</h3><ol>
+<li>cd命令进入到ET文件夹下，然后执行以下命令：<code>../../RunBundler.sh</code></li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/ubuntu16%E5%AE%89%E8%A3%85Parallels-Tool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/ubuntu16%E5%AE%89%E8%A3%85Parallels-Tool/" class="post-title-link" itemprop="url">ubuntu16安装Parallels-Tool</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-05 08:22:00" itemprop="dateCreated datePublished" datetime="2019-03-05T08:22:00+08:00">2019-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:06" itemprop="dateModified" datetime="2020-04-01T16:19:06+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/工具#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/ubuntu16%E5%AE%89%E8%A3%85Parallels-Tool/" class="post-meta-item leancloud_visitors" data-flag-title="ubuntu16安装Parallels-Tool" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>111</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年3月5日 下午8:22</p>
+<p><a href="https://github.com/zxxf18/fix-Parallels-Tools-for-Ubuntu" target="_blank" rel="noopener">GitHub - zxxf18/fix-Parallels-Tools-for-Ubuntu: modified Parallels Tools for Ubuntu （modify install error）</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Clion%E8%BF%9B%E8%A1%8Cdebug%E7%9A%84%E8%AE%BE%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Clion%E8%BF%9B%E8%A1%8Cdebug%E7%9A%84%E8%AE%BE%E7%BD%AE/" class="post-title-link" itemprop="url">Clion进行debug的设置</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-05 08:21:00" itemprop="dateCreated datePublished" datetime="2019-03-05T08:21:00+08:00">2019-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:14" itemprop="dateModified" datetime="2020-04-01T16:19:14+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/工具#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Clion%E8%BF%9B%E8%A1%8Cdebug%E7%9A%84%E8%AE%BE%E7%BD%AE/" class="post-meta-item leancloud_visitors" data-flag-title="Clion进行debug的设置" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>30</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年3月5日 下午8:21</p>
+<h2 id="Clion进行debug的设置"><a href="#Clion进行debug的设置" class="headerlink" title="Clion进行debug的设置"></a>Clion进行debug的设置</h2><p><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Clion%E8%BF%9B%E8%A1%8Cdebug%E7%9A%84%E8%AE%BE%E7%BD%AE/904D910F-95D2-43B3-8D33-2FB5821B1F93.png" alt></p>
+<p><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E5%B7%A5%E5%85%B7/Clion%E8%BF%9B%E8%A1%8Cdebug%E7%9A%84%E8%AE%BE%E7%BD%AE/6CA9D700-FBB4-4FCB-B7A8-80183F567939.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/" class="post-title-link" itemprop="url">对极几何</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-03-05 08:21:00" itemprop="dateCreated datePublished" datetime="2019-03-05T08:21:00+08:00">2019-03-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:14" itemprop="dateModified" datetime="2020-04-01T16:19:14+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/知识点#</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/" class="post-meta-item leancloud_visitors" data-flag-title="对极几何" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>826</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年3月5日 下午8:21<br><a href="https://zhuanlan.zhihu.com/p/33458436" target="_blank" rel="noopener">对极几何与基本矩阵 - 知乎</a></p>
+<ol>
+<li>解释清楚了对极几何</li>
+<li>对极几何是几何关系，我们要<strong>转换成代数形式</strong>，让计算机求解</li>
+<li>根据我们建立的<strong>三维转换模型</strong>(世界坐标系、相机坐标系、图像坐标系)，我们可以推导出有以下两个关系成立：<br><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/CBC6CDCB-A7FB-4FC9-A6C3-555652E28C3A.png" alt><pre><code>1. 这里的**观测点**：指的是在相机坐标系下</code></pre><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/340CFB45-684E-4BD9-8582-2DF97FA971BB.png" alt></li>
+<li>根据以上<strong>两个初始模型</strong>，我们可以可以联立，不断简化<ol>
+<li><strong>简化的目标</strong>：将未知参数\R T尽肯能的放在一起，最后从结果上看看要求解这两个参数，我们需要哪些条件。</li>
+</ol>
+</li>
+<li><strong>这篇文章没有讲解求解的过程</strong></li>
+</ol>
+<h2 id="对极点可以在图像外"><a href="#对极点可以在图像外" class="headerlink" title="对极点可以在图像外"></a>对极点可以在图像外</h2><p><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/6D2C36E4-ECD9-4F4E-8699-5C5CFACE597C.png" alt></p>
+<ol>
+<li>对极点，对极线<ol>
+<li>我们可以看到在左图对极平面旋转时<strong>对极点</strong>是不变的，而在相机图像上所有<strong>对极线</strong>都会交于对极点</li>
+<li>这个对极点就是另一个相机中心在其图像上的像，*当然正如右图所示， <em>对极点可以在图像外</em> *。</li>
+<li>一种极端的情况就是：<strong>立体匹配</strong>，也就是相机标定之后，尽可能的要<strong>基线与相机平面平行</strong></li>
+</ol>
+</li>
+<li>理解这里的<strong>“对”</strong><ol>
+<li>需要理解这里的场景：两个相机面对着现实中的一根棍子</li>
+<li>这根棍子，会在两个相机中都成像，也就是<strong>一对像</strong></li>
+</ol>
+</li>
+</ol>
+<h3 id="我们知道由相机1到相机2是刚体运动，那么观测点P在相机1坐标系的坐标就可以通过刚体转换变成相机2坐标系下"><a href="#我们知道由相机1到相机2是刚体运动，那么观测点P在相机1坐标系的坐标就可以通过刚体转换变成相机2坐标系下" class="headerlink" title="我们知道由相机1到相机2是刚体运动，那么观测点P在相机1坐标系的坐标就可以通过刚体转换变成相机2坐标系下"></a>我们知道由相机1到相机2是刚体运动，那么<em>观测点P</em>在相机1坐标系的坐标就可以通过刚体转换变成相机2坐标系下</h3><p>这句话的理解：</p>
+<ol>
+<li><strong>空间中一个坐标系，总可以通过刚体变换转换到另外一个个坐标系的</strong><ol>
+<li>相机坐标系的X轴和Y轴分别平行于图像的x轴和y轴，z轴垂直与成像平面并且z轴的方向的设置将使摄像机前的所有的z坐标为正数。</li>
+<li><strong>两个视角都按上面的方法各自建立一套坐标系</strong></li>
+</ol>
+</li>
+<li>有这么一个问题：<ol>
+<li>一个不动的物体，我们用同一个相机从两个角度去照下两张照片。问题：这两张照片假设放在拍摄地点不动，<strong>照片中的所有点</strong>是否可以按照<strong>同一个旋转平移矩阵</strong>直接转换得到？<ol>
+<li>这个问题，<strong>我们通过生活经验就可以知道是可以的</strong>，但是具体的转换关系可能我们并不知道。<ol>
+<li><strong>说明这个问题就是一个建模求解的问题</strong><br><img src="/2019/03/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%AF%B9%E6%9E%81%E5%87%A0%E4%BD%95/CBC6CDCB-A7FB-4FC9-A6C3-555652E28C3A%202.png" alt></li>
+</ol>
+</li>
+<li>这里的P‘和P其实是整张图片的二维坐标(z=0)，根据这个公式，我们<strong>一次性</strong>就可以得到另一位置的图像(也是二维的)。<ol>
+<li>这个转换的过程我们要从三维空间想象，但是转换的结果P’我们可以理解成二维的。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%85%A5%E9%97%A8%E9%98%B6%E6%AE%B5/%E5%B0%8F%E8%B1%A1%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E7%9B%AE%E5%89%8D%E5%9C%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%93%B6%E9%A2%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -261,189 +1045,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/04/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/[2017]SFM+PE+CL/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/04/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2017%5DSFM+PE+CL/" class="post-title-link" itemprop="url">2017SFM+PE+CL</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-03-04 03:34:00" itemprop="dateCreated datePublished" datetime="2019-03-04T03:34:00+08:00">2019-03-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:58:03" itemprop="dateModified" datetime="2020-03-12T19:58:03+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3-czh-%E8%AE%BA%E6%96%87-%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6-%E7%B4%A2%E5%BC%95/" itemprop="url" rel="index">
-                    <span itemprop="name">d科研相关/czh_论文/视频求速度_索引</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/03/04/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2017%5DSFM+PE+CL/" class="post-meta-item leancloud_visitors" data-flag-title="2017SFM+PE+CL" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年3月4日 下午3:34<br>Single Scene and Path Reconstruction with a Monocular Camera Using Integral Concurrent Learning</p>
-<p>SFM的问题对象就是：<strong>depth information</strong></p>
-<ol>
-<li>estimate the structure of the scene（get <strong>depth information</strong>）<ol>
-<li>利用：scale information<ol>
-<li>multiple calibrated cameras may be used, for example, stereo vision, to <strong>recover the exact scale</strong> (cf., [1], [2])<ol>
-<li>[1] R. Hartley and A. Zisserman, Multiple View Geometry in Computer Vision. Cambridge University Press, 2003.</li>
-<li>[2] Y. Ma, S. Soatto, J. Kosecka, and S. Sastry, An Invitation to 3-D Vision.</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>利用<strong>motion</strong> (cf., [3]–[16]), such as, linear and angular velocities of the camera.<ol>
-<li>Kalman ﬁlter (<strong>EKF</strong>) to estimate depth<ol>
-<li>[3] S. Soatto, R. Frezza, and P. Perona, “Motion estimation via dynamic vision,” IEEE Trans. Autom. Control, vol. 41, no. 3, pp. 393–413, 1996.</li>
-<li>[4] L. Matthies, T. Kanade, and R. Szeliski, “Kalman ﬁlter-based algorithm for estimating depth from image sequences,” Int. J. Comput. Vision, vol. 3, pp. 209–236, 1989.</li>
-<li>[5] H. Kano, B. K. Ghosh, and H. Kanai, “Single camera based motion and shape estimation using extended Kalman ﬁltering,” Math. Comput. Modell., vol. 34, pp. 511–525, 2001.</li>
-<li>[6] A. Chiuso, P. Favaro, H. Jin, and S. Soatto, “Structure from motion causally integrated over time,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 24, no. 4, pp. 523–535, Apr. 2002.</li>
-</ol>
-</li>
-<li><strong>exponential</strong>(快速、指数级) convergence of the structure estimate assuming a persistence of excitation (<strong>PE</strong>) condition is met<ol>
-<li>[7] X. Chen and H. Kano, “State observer for a class of nonlinear systems and its application to machine vision,” IEEE Trans. Autom. Control, vol. 49, no. 11, pp. 2085–2091, 2004.</li>
-<li>[14] A. De Luca, G. Oriolo, and P. Robuffo Giordano, “Feature depth observation for image-based visual servoing: Theory and experiments,” Int. J. Robot. Res., vol. 27, no. 10, pp. 1093–1116, 2008.</li>
-<li>Extended Output Jacobian condition<ol>
-<li>[15] F. Morbidi and D. Prattichizzo, “Range estimation from a moving camera: an immersion and invariance approach,” in Proc. IEEE Int. Conf. Robot. Autom., Kobe, Japan, May 2009, pp. 2810–2815.</li>
-</ol>
-</li>
-<li>[16] A. Dani, N. Fischer, Z. Kan, and W. E. Dixon, “Globally exponentially stable observer for vision-based range estimation,” Mechatron., vol. 22, no. 4, pp. 381–389, Special Issue on Visual Servoing 2012.</li>
-</ol>
-</li>
-<li>show <strong>asymptotic</strong>（渐进） convergence of the structure estimation errors<ol>
-<li>[8] N. Zarrouati, E. Aldea, and P. Rouchon, “So(3)-invariant asymptotic observers for dense depth ﬁeld estimation based on visual data and known camera motion,” in Proc. Am. Control Conf., Fairmont Queen Elizabeth, Montreal, Canada, Jun. 2012, pp. 4116–4123.</li>
-<li>[9] D. Braganza, D. M. Dawson, and T. Hughes, “Euclidean position estimation of static features using a moving camera with known velocities,” in Proc. IEEE Conf. Decis. Control, New Orleans, LA, USA, Dec. 2007, pp. 2695–2700.</li>
-<li>[10] S. Gupta, D. Aiken, G. Hu, and W. E. Dixon, “Lyapunov-based range and motion identiﬁcation for a nonafﬁne perspective dynamic system,” in Proc. Am. Control Conf., Minneapolis, Minnesota, Jun. 2006, pp. 4471–4476.</li>
-<li>[11] W. E. Dixon, Y. Fang, D. M. Dawson, and T. J. Flynn, “Range identiﬁcation for perspective vision systems,” IEEE Trans. Autom. Control, vol. 48, pp. 2232–2238, 2003.</li>
-<li>[12] G. Hu, D. Aiken, S. Gupta, and W. Dixon, “Lyapunov-based range identiﬁcation for a paracatadioptric system,” IEEE Trans. Autom. Control, vol. 53, no. 7, pp. 1775–1781, 2008.</li>
-<li>[13] D. Karagiannis and A. Astolﬁ, “A new solution to the problem of range identiﬁcation in perspective vision systems,” IEEE Trans. Autom. Control, vol. 50, no. 12, pp. 2074–2077, 2005.</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>SFM<ol>
-<li>SFM的缺点：In SfM approaches, the potential for <strong>limited parallax</strong> still exists, but in many cases a camera may</li>
-<li>两种方式去处理SFM的缺点：<ol>
-<li><strong>online</strong> iterative methods<ol>
-<li>定义：assume <strong>continuous measurements</strong> of the scene by <strong>the camera</strong></li>
-<li><strong>[3]–[16]</strong></li>
-<li>concurrent learning(CL)<ol>
-<li>解释：relaxes the <strong>PE</strong> assumption</li>
-<li><strong>[22]–[26]</strong></li>
-<li>[22] G. V. Chowdhary and E. N. Johnson, “Theory and ﬂight-test validation of a concurrent-learning adaptive controller,” J. Guid. Control Dynam., vol. 34, no. 2, pp. 592–607, Mar. 2011.</li>
-<li>[23] G. Chowdhary, M. Mühlegg, J. How, and F. Holzapfel, “Concurrent learning adaptive model predictive control,” in Advances in Aerospace Guidance, Navigation and Control, Q. Chu, B. Mulder, D. Choukroun, E.-J. van Kampen, C. de Visser, and G. Looye, Eds. Springer Berlin Heidelberg, 2013, pp. 29–47.</li>
-<li>[24] G. Chowdhary, T. Yucelen, M. Mühlegg, and E. N. Johnson, “Concurrent learning adaptive control of linear systems with exponentially convergent bounds,” Int. J. Adapt. Control Signal Process., vol. 27, no. 4, pp. 280–301, 2013.Springer, 2004.</li>
-<li>[25] R. Kamalapurkar, P. Walters, and W. E. Dixon, “Concurrent learningbased approximate optimal regulation,” in Proc. IEEE Conf. Decis. Control, Florence, IT, Dec. 2013, pp. 6256–6261.</li>
-<li>[26] A. Parikh, R. Kamalapurkar, and W. E. Dixon. (2015) Integral concurrent learning: Adaptive control with parameter convergence without PE or state derivatives. arXiv:1512.03464.</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><strong>ofﬂine</strong> batch methods<ol>
-<li>[1] R. Hartley and A. Zisserman, Multiple View Geometry in Computer Vision. Cambridge University Press, 2003.</li>
-<li>[2] Y. Ma, S. Soatto, J. Kosecka, and S. Sastry, An Invitation to 3-D Vision.</li>
-<li>[17] J. Oliensis, “A <strong>critique</strong> of structure-from-motion algorithms,” Comput.Vis. Image. Understand., vol. 80, pp. 172–214, 2000.</li>
-<li>results do show <strong>convergence</strong><ol>
-<li>[18] J. Oliensis and R. Hartley, “Iterative extensions of the strum/triggs algorithm: convergence and nonconvergence,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 29, no. 12, pp. 2217–2233, 2007.</li>
-<li>[19] F. Kahl and R. Hartley, “Multiple-view geometry under the L ∞ -norm,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 30, no. 9, pp. 1603–1617, Sep. 2008.</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<p>[20] K. Reif and R. Unbehauen, “The extended kalman ﬁlter as an exponential observer for nonlinear systems,” IEEE Trans. Signal Process., vol. 47, no. 8, pp. 2324–2328, 1999.</p>
-<p>[21] M. Boutayeb, H. Rafaralahy, and M. Darouach, “Convergence analysis of the extended Kalman ﬁlter used as an observer for nonlinear deterministic discrete -time systems,” IEEE Trans. on Autom. Control, vol. 42, no. 4, pp. 581–586, 1997.</p>
-<p>[27] Z. Bell, A. Parikh, J. Nezvadovitz, and W. E. Dixon, “Adaptive control of a surface marine craft with parameter identiﬁcation using integral concurrent learning,” in Proc. IEEE Conf. Decis. Contr., 2016.</p>
-<p>[28] J. Shi and C. Tomasi, “Good features to track,” in Proc. IEEE Conf.Comput. Vis. Pattern Recognit., 1994, pp. 593–600.</p>
-<p>[29] J.-Y. Bouguet, “Pyramidal implementation of the afﬁne lucas kanade feature tracker description of the algorithm,” Intel Corporation, vol. 5, no. 1-10, p. 4, 2001.</p>
-<p>[30] B. Lucas and T. Kanade, “An iterative image registration technique with an application to stereo vision,” in Proc. Int. Joint Conf. Artif. Intell., 1981, pp. 674–679.</p>
-<p>[31] G. Chowdhary and E. Johnson, “A singular value maximizing data recording algorithm for concurrent learning,” in Proc. American Control Conf., 2011, pp. 3547–3552.</p>
-<p>[32] M. Krstic, I. Kanellakopoulos, and P. V. Kokotovic, Nonlinear and Adaptive Control Design. New York, NY, USA: John Wiley &amp; Sons, 1995.</p>
-<p>[33] W. E. Dixon, A. Behal, D. M. Dawson, and S. Nagarkatti, Nonlinear Control of Engineering Systems: A Lyapunov-Based Approach. Birkhauser: Boston, 2003.</p>
-<p>[34] H. K. Khalil, Nonlinear Systems, 3rd ed. Upper Saddle River, NJ:Prentice Hall, 2002.</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/03/01/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A(%E5%86%99%E7%9A%84%E5%A5%BD)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -523,884 +1124,6 @@
       
           <p>2019年3月1日 下午4:58</p>
 <p><a href="http://zhaoxuhui.top/blog/2018/04/17/CameraCalibration.html" target="_blank" rel="noopener">相机畸变与标定</a><br>讲的特别好：<br><a href="https://www.zdaiot.com/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/%E7%9B%B8%E6%9C%BA%E6%A0%87%E5%AE%9A/" target="_blank" rel="noopener">相机标定 | zdaiot</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/[2017]NRSFM+isometric%20SfT/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2017%5DNRSFM+isometric%20SfT/" class="post-title-link" itemprop="url">2017NRSFM+isometric SfT</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-02-28 12:27:00" itemprop="dateCreated datePublished" datetime="2019-02-28T12:27:00+08:00">2019-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:58:03" itemprop="dateModified" datetime="2020-03-12T19:58:03+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3-czh-%E8%AE%BA%E6%96%87-%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6-%E7%B4%A2%E5%BC%95/" itemprop="url" rel="index">
-                    <span itemprop="name">d科研相关/czh_论文/视频求速度_索引</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2017%5DNRSFM+isometric%20SfT/" class="post-meta-item leancloud_visitors" data-flag-title="2017NRSFM+isometric SfT" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年2月28日 下午12:27</p>
-<p>[2017 PAMI]A Stable Analytical Framework for Isometric Shape-from-Template by Surface Integration</p>
-<p>2019年2月28日 下午2:12</p>
-<ol>
-<li><p>这篇文章也就是在<strong>改进SFT</strong>，改进的方向是：</p>
-<ol>
-<li>大的噪点</li>
-<li>object is small or viewed from larger distances</li>
-<li>提出：ﬁrst-order quantities: the depth-gradient or the surface normal</li>
-</ol>
-</li>
-<li><p>Non-Rigid Shape-from-Motion (<strong>NRSfM</strong>)</p>
-<ol>
-<li><strong>3.</strong>C. Bregler, A. Hertzmann, H. Biermann, “Recovering non-rigid 3D shape from image streams”,<em>Proc. IEEE Int. Conf. Comput. Vis. Pattern Recog.</em>, pp. 690-696, 2000.</li>
-<li><strong>4.</strong>L. Torresani, A. Hertzmann, C. Bregler, “Nonrigid structure-from-motion: Estimating shape and motion with hierarchical priors”,<em>IEEE Trans. Pattern Anal. Mach. Intell.</em>, vol. 30, no. 5, pp. 878-892, May 2008.</li>
-<li><strong>5.</strong>A. Del Bue, “A factorization approach to structure from motion with shape priors”,<em>Proc. IEEE Int. Conf. Comput. Vis. Pattern Recog.</em>, pp. 1-8, 2008.</li>
-<li><strong>6.</strong>J. Taylor, A. D. Jepson, K. N. Kutulakos, “Non-rigid structure from locally-rigid motion”,<em>Proc. IEEE Int. Conf. Comput. Vis. Pattern Recog.</em>, pp. 2761-2768, 2010.</li>
-<li><strong>7.</strong>S. Vicente, L. Agapito, “Soft inextensibility constraints for template-free non-rigid reconstruction”,<em>Proc. 12th Eur. Conf. Computer Vision</em>, pp. 426-440, 2012.</li>
-<li><strong>8.</strong>T. Collins, A. Bartoli, “Locally affine and planar deformable surface reconstruction from video”,<em>Proc. Int. Workshop Vis. Model. Vis.</em>, pp. 339-346, 2010.</li>
-<li><strong>9.</strong>A. Chhatkuli, D. Pizarro, A. Bartoli, “Non-rigid shape-from-motion for isometric surfaces using infinitesimal planarity”,<em>Proc. Brit. Mach. Vision Conf.</em>, 2014.</li>
-</ol>
-</li>
-<li><p><strong>isometric SfT(Shape-from-Template)</strong></p>
-<ol>
-<li>论文发展：<ol>
-<li><strong>14.</strong>A. Bartoli, T. Collins, “Template-based isometric deformable 3D reconstruction with sampling-based focal length self-calibration”,<em>Proc. IEEE Int. Conf. Comput. Vis. Pattern Recog.</em>, pp. 1514-1521, 2013.</li>
-<li><strong>18.</strong>F. Brunet, A. Bartoli, 照亮. Hartley, “Monocular template-based 3D surface reconstruction: Convex inextensible and nonconvex isometric methods”,<em>Comput. Vis. Image Understanding</em>, vol. 125, pp. 138-154, 2014.</li>
-<li><strong>12.</strong>A. Bartoli, Y. Gérard, F. Chadebecq, T. Collins, D. Pizarro, “Shape-from-template”,<em>IEEE Trans. Pattern Anal. Mach. Intell.</em>, vol. 37, no. 10, pp. 2099-2118, Oct. 2015.</li>
-<li><strong>19.</strong>T. Collins, A. Bartoli, “Realtime shape-from-template: System and applications”,<em>Proc. IEEE Int. Symp. Mixed Augmented Reality</em>, pp. 116-119, 2015.</li>
-</ol>
-</li>
-<li>relaxes isometry with <strong>inextensibility</strong>.Inextensibility means the distance between the neighboring points remain inferior to their geodesic distance in the template<ol>
-<li>论文发展：<ol>
-<li><strong>10.</strong>M. Perriollat, R. Hartley, A. Bartoli, “Monocular template-based reconstruction of inextensible surfaces”,<em>Int. J. Comput. Vis.</em>, vol. 95, no. 2, pp. 124-137, 2011.</li>
-<li><strong>11.</strong> <em>M. Salzmann, P. Fua, “Linear local models for monocular reconstruction of deformable surfaces”,_IEEE Trans. Pattern Anal. Mach. Intell.</em>, vol. 33, no. 5, pp. 931-944, May 2011._</li>
-<li><strong>13.</strong>T. D. Ngo, J. O. stlund, P. Fua, “Template-based monocular 3D shape recovery using Laplacian meshes”,<em>IEEE Trans. Pattern Anal. Mach. Intell.</em>, vol. 38, no. 1, pp. 172-187, Jan. 2016.</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>解决问题：<ol>
-<li><strong>registration</strong> between the template and image is solved using, for example, point correspondences </li>
-<li><strong>remove outliers</strong> during registration[15],[16],[17]while <strong>small noise</strong> in correspondences has to be dealt with in the reconstruction step<ol>
-<li><strong>15.</strong>J. Pilet, V. Lepetit, P. Fua, “Fast non-rigid surface detection registration and realistic augmentation”,<em>Int. J. Comput. Vis.</em>, vol. 76, no. 2, pp. 109-122, 2008.</li>
-<li><strong>16.</strong>D. Pizarro, A. Bartoli, “Feature-based deformable surface detection with self-occlusion reasoning”,<em>Int. J. Comput. Vis.</em>, vol. 97, no. 1, pp. 54-70, 2012.</li>
-<li><strong>17.</strong>T. Collins, A. Bartoli, “Using isometry to classify correct_incorrect 3D-2D correspondences”,_Proc. 13th Eur. Conf. Comput. Vision/, pp. 325-340, 2014.</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="另一种分类："><a href="#另一种分类：" class="headerlink" title="另一种分类："></a>另一种分类：</h2><p>In order to organize the discussion on previous works in <strong>isometric SfT,</strong> we classify the methods based on their <em>final constraints and the way they are optimized</em>:</p>
-<ol>
-<li>_i)_zeroth-order methods based on inextensibility[11],[13],</li>
-<li>_ii)_statistically optimal cost refinement[18],[19]and</li>
-<li><em>iii)_analytical solutions from quadratic PDEs[12],[14]. The MDH-based methods in_i)</em>[10],[11]solve the SfT problem by maximizing depth while putting an upper bound on the distance between neighboring points.</li>
-</ol>
-<p><strong>1.</strong> R. I. Hartley, A. Zisserman, Multiple View Geometry in Computer Vision, Cambridge, U.K.:Cambridge Univ. Press, 2004.<br>Show Context <a href="https://doi.org/10.1017/CBO9780511811685" target="_blank" rel="noopener">CrossRef</a>  <a href="https://scholar.google.com/scholar?as_q=Multiple+View+Geometry+in+Computer+Vision&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>2.</strong>L. Maier-Hein, A. Groch, A. Bartoli, S. Bodenstedt, G. Boissonnat, P. Chang et al., “Comparative validation of single-shot optical techniques for laparoscopic 3D surface reconstruction”,<em>IEEE Trans. Med. Imag.</em>, vol. 33, no. 10, pp. 1913-1930, May 2014.<br> <a href="https://ieeexplore.ieee.org/document/6820756" target="_blank" rel="noopener">View Article</a>  <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6820756" target="_blank" rel="noopener">Full Text: PDF </a> (1540KB) <a href="https://scholar.google.com/scholar?as_q=Comparative+validation+of+single-shot+optical+techniques+for+laparoscopic+3D%0A+surface+reconstruction&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a> </p>
-<p><strong>20.</strong>T. Collins, P. Mesejo, A. Bartoli, “An analysis of errors in graph-based keypoint matching and proposed solutions”,<em>Proc. 13th Eur. Conf. Comput. Vision</em>, pp. 138-153, 2014.<br><strong>21.</strong>T. Collins, A. Bartoli, “Infinitesimal plane-based pose estimation”,<em>Int. J. Comput. Vis.</em>, vol. 109, no. 3, pp. 252-286, 2014.<br><strong>22.</strong>A. Chhatkuli, D. Pizarro, A. Bartoli, “Stable template-based isometric 3D reconstruction in all imaging conditions by linear least-squares”,<em>Proc. IEEE Conf. Comput. Vis. Pattern Recog.</em>, pp. 708-715, 2014.<br><strong>23.</strong>照亮. W. Sumner, J. Popović, “Deformation transfer for triangle meshes”,<em>ACM Trans. Graph.</em>, vol. 23, no. 3, pp. 399-405, 2004.<br><strong>24.</strong>O. Sorkine, D. Cohen-Or, Y. Lipman, M. Alexa, C. Rössl, H.-P. Seidel, “Laplacian surface editing”,<em>Proc. Eurographics_ACM SIGGRAPH Symp. Geom. Process./, pp. 175-184, 2004.<br><strong>25.</strong>A. Bartoli, D. Pizarro, T. Collins, “A robust analytical solution to isometric shape-from-template with focal length calibration”,_Proc. IEEE Int. Conf. Comput. Vision</em>, pp. 961-968, 2013.<br><strong>26.</strong>D. Pizarro, A. Bartoli, T. Collins, “Isowarp and conwarp: Warps that exactly comply with weak-perspective projection of deforming objects”,<em>Proc. Brit. Mach. Vision Conf.</em>, pp. 104.1-104.11, 2013.<br>Show Context <a href="https://doi.org/10.5244/C.27.104" target="_blank" rel="noopener">CrossRef</a>  <a href="https://scholar.google.com/scholar?as_q=Isowarp%0A+and+conwarp%3A+Warps+that+exactly+comply+with+weak-perspective+projection+of+deforming+objects&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>27.</strong>P. Dierckx, Curve Surface Fitting Splines, London, U.K.:Oxford Univ. Press, 1993.<br>Show Context <a href="https://scholar.google.com/scholar?as_q=Curve+Surface+Fitting+Splines&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>28.</strong>D. G. Lowe, “Distinctive image features from scale-invariant keypoints”,<em>Int. J. Comput. Vis.</em>, vol. 60, no. 2, pp. 91-110, 2004.<br>Show Context <a href="https://doi.org/10.1023/B:VISI.0000029664.99615.94" target="_blank" rel="noopener">CrossRef</a>  <a href="https://scholar.google.com/scholar?as_q=Distinctive+image+features+from+scale-invariant+keypoints%2C&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>29.</strong>P. F. Alcantarilla, A. Bartoli, A. J. Davison, “KAZE features”,<em>Proc. 12th Eur. Conf. Comput. Vis.</em>, pp. 214-227, 2012.<br>Show Context <a href="https://scholar.google.com/scholar?as_q=KAZE%0A+features&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>30.</strong>G. A. Puerto, G. L. Mariottini,<em>IEEE Trans. Med. Imag.</em>, vol. 32, no. 7, pp. 1201-1214, Jul. 2013.<br>Show Context <a href="https://ieeexplore.ieee.org/document/6410427" target="_blank" rel="noopener">View Article</a>  <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6410427" target="_blank" rel="noopener">Full Text: PDF </a> (1989KB) <a href="https://scholar.google.com/scholar?as_q=IEEE+Trans.+Med.+Imag.&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>31.</strong>M. Perriollat, A. Bartoli, “A computational model of bounded developable surfaces with application to image-based three-dimensional reconstruction.”,<em>J. Vis. Comput. Animation</em>, vol. 24, no. 5, pp. 459-476, 2013.<br>Show Context <a href="https://doi.org/10.1002/cav.1478" target="_blank" rel="noopener">CrossRef</a>  <a href="https://scholar.google.com/scholar?as_q=A+computational+model+of+bounded+developable+surfaces+with+application+to+image-based%0A+three-dimensional+reconstruction.&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a><br><strong>32.</strong>A. Varol, M. Salzmann, P. Fua, 照亮. Urtasun, “A constrained latent variable model”,<em>Proc. IEEE Int. Conf. Comput. Vis. Pattern Recog.</em>, pp. 2248-2255, 2012.<br>Show Context <a href="https://scholar.google.com/scholar?as_q=A+constrained+latent+variable+model&as_occt=title&hl=en&as_sdt=0%2C31" target="_blank" rel="noopener">Google Scholar</a> </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/[2018]SFM+3Dshape(NRSFM)+isometric%20SfT+calibrated%20camera/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2018%5DSFM+3Dshape(NRSFM)+isometric%20SfT+calibrated%20camera/" class="post-title-link" itemprop="url">2018SFM+3Dshape(NRSFM)+isometric SfT+calibrated camera</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-02-28 09:53:00" itemprop="dateCreated datePublished" datetime="2019-02-28T09:53:00+08:00">2019-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:58:03" itemprop="dateModified" datetime="2020-03-12T19:58:03+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3-czh-%E8%AE%BA%E6%96%87-%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6-%E7%B4%A2%E5%BC%95/" itemprop="url" rel="index">
-                    <span itemprop="name">d科研相关/czh_论文/视频求速度_索引</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2018%5DSFM+3Dshape(NRSFM)+isometric%20SfT+calibrated%20camera/" class="post-meta-item leancloud_visitors" data-flag-title="2018SFM+3Dshape(NRSFM)+isometric SfT+calibrated camera" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.7k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年2月28日 上午9:53</p>
-<p>[2018]Incremental Non-Rigid Structure-from-Motion with Unknown Focal Length</p>
-<p>2019年2月28日 下午2:12</p>
-<ol>
-<li><p>对<strong>SFT</strong>的改进，改进的方向是Unknown Focal Length</p>
-</li>
-<li><p>[1]. Longuet-Higgins, H.: A computer algorithm for <strong>reconstructing a scene</strong> from two projections.Nature 293 (1981) 133–135</p>
-<ol>
-<li>改进：<ol>
-<li>[2]. Nist´er, D.: An efﬁcient solution to the ﬁve-point relative pose problem. IEEE Trans. Pattern Anal. Mach. Intell. 26(6) (2004) 756–777</li>
-<li>[3]. Hartley, R.I., Zisserman, A.: Multiple View Geometry in Computer Vision. Second edn.Cambridge University Press, ISBN: 0521540518 (2004)</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>product：</p>
-<ol>
-<li>[4]. PhotoScan, A.: Agisoft PhotoScan User Manual Professional Edition, Version 1.2. (2017)</li>
-<li>[5]. ReCap, A.: ReCap 360 – Advanced Workﬂows. (2015)</li>
-</ol>
-</li>
-</ol>
-<ol>
-<li><p>[8]. Bregler, C., Hertzmann, A., Biermann, H.: Recovering non-rigid <strong>3D shape</strong> from image streams. In: CVPR. (2000)</p>
-<ol>
-<li>改进<ol>
-<li>[9]. Torresani, L., Hertzmann, A., Bregler, C.: Nonrigid structure-from-motion: Estimating shape and motion with hierarchical priors. IEEE Trans. Pattern Anal. Mach. Intell. 30(5) (2008) 878–892</li>
-<li>[10]. Del Bue, A.: A factorization approach to structure from motion with shape priors. In: CVPR.(2008)</li>
-<li>[12]. Fayad, J., Agapito, L., Del Bue, A.: Piecewise quadratic reconstruction of non-rigid surfaces from monocular sequences. In: ECCV. (2010)</li>
-<li>[14]. Taylor, J., Jepson, A.D., Kutulakos, K.N.: Non-rigid structure from locally-rigid motion. In:CVPR. (2010)</li>
-<li><em>[7]. Dai, Y., Li, H., He, M.: A simple prior-free method for non-rigid structure-from-motion factorization. In: CVPR. (2012)</em></li>
-<li>[11]. Garg, R., Roussos, A., Agapito, L.: Dense variational reconstruction of non-rigid surfaces from monocular video. In: CVPR. (2013)</li>
-<li>[13]. Agudo, A., Montiel, J., Agapito, L., Calvo, B.: Online dense non-rigid 3d shape and camera motion recovery. In: BMVC. (2014)</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>SfT：评价： use of the <strong>isometric deformation prior</strong> with the perspective camera is considered to be the state-of-the-art</p>
-<ol>
-<li>[15]. Bartoli, A., Pizarro, D., Collins, T.: A robust analytical solution to isometric shape-fromtemplate with focal length calibration. In: ICCV. (2013)</li>
-<li>[18]. Bartoli, A., Collins, T.: Template-based isometric deformable 3D reconstruction with sampling-based focal length self-calibration. In: CVPR. (2013)</li>
-<li>[16]. Ngo, T.D., ¨Ostlund, J.O., Fua, P.: Template-based monocular 3D shape recovery using laplacian meshes. IEEE Transactions on Pattern Analysis and Machine Intelligence 38(1) (2016) 172–187</li>
-<li>[17]. Chhatkuli, A., Pizarro, D., Bartoli, A., Collins, T.: A stable analytical framework for isometric shape-from-template by surface integration. IEEE Transactions on Pattern Analysis and Machine Intelligence 39(5) (2017) 833–850</li>
-</ol>
-</li>
-</ol>
-<ol>
-<li>all of these methods discussed here require the <strong>calibrated camera</strong> for reconstruction and do not provide any insights on how they can be extended to an uncalibrated camera<ol>
-<li><strong>NRSfM methods</strong> [6, 19, 25–27] also use <strong>isometry or inextensibility</strong> with the <strong>perspective camera model</strong><ol>
-<li>[25]. Vicente, S., Agapito, L.: Soft inextensibility constraints for template-free non-rigid reconstruction. In: ECCV. (2012)</li>
-<li>[26]. Chhatkuli, A., Pizarro, D., Bartoli, A.: Stable template-based isometric 3D reconstruction in all imaging conditions by linear least-squares. In: CVPR. (2014)</li>
-<li>[27]. Parashar, S., Pizarro, D., Bartoli, A.: Isometric non-rigid shape-from-motion in linear time.In: CVPR. (2016)</li>
-<li>[19]. Chhatkuli, A., Pizarro, D., Collins, T., Bartoli, A.: Inextensible non-rigid shape-from-motion by second-order cone programming. In: CVPR. (2016)</li>
-<li><em>[6]. Ji, P., Li, H., Dai, Y., Reid, I.: ”Maximizing Rigidity” revisited: A convex programming approach for generic 3d shape reconstruction from multiple perspective views. In: ICCV. (2017)</em></li>
-</ol>
-</li>
-<li>widely explored in the <strong>template-based methods</strong><ol>
-<li>[20]. Perriollat, M., Hartley, R., Bartoli, A.: Monocular template-based reconstruction of inextensible surfaces. International Journal of Computer Vision 95(2) (2011) 124–137</li>
-<li>[21]. Salzmann, M., Fua, P.: Linear local models for monocular reconstruction of deformable surfaces. IEEE Transactions on Pattern Analysis and Machine Intelligence 33(5) (2011) 931–944</li>
-<li>[24]. Bartoli, A., G´erard, Y., Chadebecq, F., Collins, T., Pizarro, D.: Shape-from-template. IEEE Trans. Pattern Anal. Mach. Intell. 37(10) (2015) 2099–2118</li>
-</ol>
-</li>
-<li>use <strong>energy minimization</strong> approach on an initial solution also use the <strong>perspective camera model</strong> but with a <strong>piece-wise rigidity prior</strong><ol>
-<li>[22]. Kumar, S., Dai, Y., Li, H.: Monocular dense 3d reconstruction of a complex dynamic scene from two perspective frames. In: ICCV. (2017)</li>
-<li>[23]. Russell, C., Yu, R., Agapito, L.: Video pop-up: Monocular 3d reconstruction of dynamic scenes. In: ECCV. (2014)</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<ol>
-<li><p>[28]. Xiao, J., Kanade, T.: <strong>Uncalibrated</strong> perspective reconstruction of deformable structures. In:Tenth IEEE International Conference on Computer Vision (ICCV’05) Volume 1. Volume 2. (2005) 1075–1082 Vol. 2</p>
-<ol>
-<li>[29]. Salzmann, M., Hartley, R., Fua, P.: Convex optimization for deformable surface 3-D tracking.In: ICCV. (2007)</li>
-<li>[30]. Akhter, I., Sheikh, Y., Khan, S., Kanade, T.: Trajectory space: A dual representation for nonrigid structure from motion. IEEE TPAMI 33(7) (2011) 1442–1456</li>
-</ol>
-</li>
-<li><p>Nist´er, D.: Untwisting a projective reconstruction. International Journal of Computer Vision 60(2) (2004) 165–183</p>
-</li>
-<li><p>Chandraker, M., Agarwal, S., Kahl, F., Nist´er, D., Kriegman, D.: Autocalibration via rankconstrained estimation of the absolute quadric. In: Computer Vision and Pattern Recognition, 2007. CVPR’07. IEEE Conference on, IEEE (2007) 1–8</p>
-</li>
-<li><p>Dijkstra, E.W.: A note on two problems in connexion with graphs. Numer. Math. 1(1) (1959) 269–271</p>
-</li>
-<li><p>Varol, A., Salzmann, M., Fua, P., Urtasun, R.: A constrained latent variable model. In:CVPR. (2012)</p>
-</li>
-<li><p>Chhatkuli, A., Pizarro, D., Bartoli, A.: Non-rigid shape-from-motion for isometric surfaces using inﬁnitesimal planarity. In: BMVC. (2014)</p>
-</li>
-<li><p>White, R., Crane, K., Forsyth, D.: Capturing and animating occluded cloth. In: SIGGRAPH.(2007)</p>
-</li>
-<li><p>Sundaram, N., Brox, T., Keutzer, K.: Dense point trajectories by gpu-accelerated large displacement optical ﬂow. In: ECCV. (2010)</p>
-</li>
-<li><p>Innmann, M., Zollh¨ofer, M., Nießner, M., Theobalt, C., Stamminger, M. In: VolumeDeform:Real-Time Volumetric Non-rigid Reconstruction. Springer International Publishing, Cham (2016) 362–379</p>
-</li>
-<li><p>Gotardo, P.F., Martinez, A.M.: Computing smooth time trajectories for camera and deformable shape in structure from motion with occlusion. IEEE Trans. on Pattern Analysis and Machine Intelligence 33(10) (2011) 2051–2065</p>
-</li>
-<li><p>Chhatkuli, A., Pizarro, D., Collins, T., Bartoli, A.: Inextensible non-rigid structure-frommotion by second-order cone programming. IEEE Transactions on Pattern Analysis and Machine Intelligence PP(99) (2017) 1–1</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%E8%AE%BA%E6%96%87%E7%B4%A2%E5%BC%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%E8%AE%BA%E6%96%87%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">论文索引</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-02-28 09:49:00" itemprop="dateCreated datePublished" datetime="2019-02-28T09:49:00+08:00">2019-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:58:03" itemprop="dateModified" datetime="2020-03-12T19:58:03+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3-czh-%E8%AE%BA%E6%96%87-%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6-%E7%B4%A2%E5%BC%95/" itemprop="url" rel="index">
-                    <span itemprop="name">d科研相关/czh_论文/视频求速度_索引</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%E8%AE%BA%E6%96%87%E7%B4%A2%E5%BC%95/" class="post-meta-item leancloud_visitors" data-flag-title="论文索引" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>497</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年2月28日 上午9:49</p>
-<p>2019年3月1日 上午11:21</p>
-<ol>
-<li>作为自己的<strong>论文索引库</strong>，这样就可以很快的查到<strong>关键点论文</strong>对我所<strong>查询论文</strong>的评价</li>
-<li>这个库的关键是：找到<strong>关键点论文</strong>，通过它们来建立索引</li>
-</ol>
-<p>有以下几个问题需要注意：</p>
-<ol>
-<li>每篇文章为了体现自己的重要性，都会将原先的工作汇聚为一个大类，并且指出这个大类中的通病，进而引出自己的创新点。</li>
-<li>在这个过程中，就会有意识的省略一些对自己没有好处的文章，也就是说：作者概括出来的这一大类并不是近几年的全部发展，只挑取了对自己有利的一部分。</li>
-</ol>
-<p>2019年4月4日 下午9:40<br><a href="bear://x-callback-url/open-note?id=77E9FE30-FE32-4A45-B9B3-2F7069D33D3A-2091-0001169F66E95C8F">NRSFM和trajectory reconstruction之间的区别</a></p>
-<p><a href="bear://x-callback-url/open-note?id=7A9F0531-C9FA-45E3-AEC8-752BDD503491-1592-00016020C91BB222">[2017]SFM+PE+CL</a><br><a href="bear://x-callback-url/open-note?id=17F3D960-1DC7-4D56-8BF1-9570F5895399-1592-0000DBE2EC8C7597">[2015]Trajectory Triangulation+NRSFM</a>-清晰<br><a href="bear://x-callback-url/open-note?id=7C23C326-2437-4C45-B433-B31A9E94AB02-1592-0001559B3E4C01DE">[2018]SaMfM(trajectory triangulation)</a><br><a href="bear://x-callback-url/open-note?id=D7285937-DED9-47FA-B700-A38A7ADBB536-1592-0000BE8B7A736D46">[2010 ECCV]SFM+3D trajectory+NRSFM</a><br><a href="bear://x-callback-url/open-note?id=7F117E72-D06E-441F-9567-722DFE85B89E-1592-0000D4A628A1732F">[2017]NRSFM+isometric SfT</a><br><a href="bear://x-callback-url/open-note?id=547E3B25-E3F5-42D0-80DA-8CFD3E9BF738-1592-0000CB3DD291FB38">[2012 CVPR 戴玉超]NRSFM</a><br><a href="bear://x-callback-url/open-note?id=530DB846-E568-4BFD-ADA3-0DA894DA479C-1592-0000CCF56E61B917">[2018]SFM+3Dshape(NRSFM)+isometric SfT+calibrated camera</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/[2012%20CVPR%20%E6%88%B4%E7%8E%89%E8%B6%85]NRSFM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2012%20CVPR%20%E6%88%B4%E7%8E%89%E8%B6%85%5DNRSFM/" class="post-title-link" itemprop="url">2012 CVPR 戴玉超NRSFM</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-02-28 09:21:00" itemprop="dateCreated datePublished" datetime="2019-02-28T09:21:00+08:00">2019-02-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:58:03" itemprop="dateModified" datetime="2020-03-12T19:58:03+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3-czh-%E8%AE%BA%E6%96%87-%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6-%E7%B4%A2%E5%BC%95/" itemprop="url" rel="index">
-                    <span itemprop="name">d科研相关/czh_论文/视频求速度_索引</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/02/28/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2012%20CVPR%20%E6%88%B4%E7%8E%89%E8%B6%85%5DNRSFM/" class="post-meta-item leancloud_visitors" data-flag-title="2012 CVPR 戴玉超NRSFM" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年2月28日 上午9:21</p>
-<p> [2012 CVPR 戴玉超]A Simple Prior-free Method for Non-Rigid Structure-from-Motion Factorization</p>
-<p>2019年2月28日 上午9:22</p>
-<ol>
-<li><p>这篇文章的牛逼之处在于：<strong>没有先验知识的约束了</strong>，这就是改进史上的一个重大突破</p>
-</li>
-<li><p>[7] C. Bregler, A. Hertzmann, and H. Biermann. Recovering non-rigid 3D shape from image streams. In CVPR, pages 690–696, 2000. 1, 2</p>
-<ol>
-<li>评价：<ol>
-<li><strong>assuming</strong> that the nonrigid shape deformation follows a low-order linear combination model</li>
-</ol>
-</li>
-<li>关键问题：该问题本身确实存在不适定或约束不足的问题，即仅基于正交正态性约束，无法唯一地恢复非刚性形状基及其对应的形状系数<ol>
-<li>[26] J. Xiao, J.-x. Chai, and T. Kanade. A closed-form solution to non-rigid shape and motion recovery. In ECCV, pages 573–587, 2004. 1, 2, 3, 4, 6</li>
-</ol>
-</li>
-<li>改进：introducing various <strong>prior knowledge</strong> to the problem at hand. They do so by assuming various constraints about the nonrigid scene, about the nonrigid shape bases, about the coefﬁcients, about the deformation, about the shape itself, or about the camera motion etc.<ol>
-<li>[1] H. Aanæs and F. Kahl. Estimation of deformable structure and motion. In Workshop on Vision and Modelling of Dynamic Scenes, ECCV, pages 1–4, 2002. 2</li>
-<li>[5] A. Bartoli, V. Gay-Bellile, U. Castellani, J. Peyras, S. Olsen, and P. Sayd. Coarse-to-ﬁne low-rank structure-from-motion. In CVPR, pages 1–8, 2008. 1, 2</li>
-<li>[11] A. Del Bue. A factorization approach to structure from motion with shape priors. In CVPR, pages 1–8, 2008. 1, 2</li>
-<li>[25] L. Torresani, A. Hertzmann, and C. Bregler. Nonrigid structure-from-motion: Estimating shape and motion with hierarchical priors. PAMI, 30, 2008. 1, 5, 6, 7</li>
-<li>[3] I. Akhter, Y. Sheikh, S. Khan, and T. Kanade. Nonrigid structure from motion in trajectory space. In NIPS, 2008. 1, 2, 4, 5, 6, 8</li>
-<li>[11] A. Del Bue. A factorization approach to structure from motion with shape priors. In CVPR, pages 1–8, 2008. 1, 2</li>
-<li>[21] M. Paladini, A. D. Bue, M. Stosic, M. Dodig, J. Xavier, andL. Agapito. Factorization for non-rigid and articulated structure using metric projections. In CVPR, pages 2898–2905, 2009. 1, 5, 6</li>
-<li>[22] V. Rabaud and S. Belongie. Linear embeddings in non-rigid structure from motion. In CVPR, pages 2427–2434, 2009. 2</li>
-<li>[13] J. Fayad, L. Agapito, and A. Del Bue. Piecewise quadratic reconstruction of non-rigid surfaces from monocular sequences. In ECCV, pages 297–310, 2010. 2</li>
-<li>[24] J. Taylor, A. D. Jepson, and K. N. Kutulakos. Non-rigid structure from locally-rigid motion. In CVPR, pages 27612768, 2010. 2</li>
-<li>[14] P. Gotardo and A. Martinez. Computing smooth timetrajectories for camera and deformable shape in structure from motion with occlusion. PAMI, 33(10):2051–2065, 2011. 1, 2, 4, 5, 6</li>
-</ol>
-</li>
-<li>改进：<ol>
-<li>[2] I. Akhter, Y. Sheikh, and S. Khan. In defense of orthonormality constraints for nonrigid structure from motion. In CVPR, pages 1534–1541, 2009. 2, 4, 6</li>
-<li>[16] R. Hartley and R. Vidal. Perspective nonrigid shape and motion recovery. In ECCV, pages 276–289, 2008. 2</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<p>[4] R. Angst, C. Zach, and M. Pollefeys. The generalized tracenorm and its application to structure-from-motion problems. In ICCV, pages 1–8, 2011. 3, 8</p>
-<p>[6] M. Brand. A direct method for 3D factorization of nonrigid motion observed in 2D. In CVPR, 2005. 2, 4</p>
-<p>[8] A. M. Buchanan and A. W. Fitzgibbon. Damped newton algorithms for matrix factorization with missing data. In CVPR, pages 316–322, 2005. 8</p>
-<p>[9] E. Cand`es, X. Li, Y. Ma, and J. Wright. Robust principal component analysis. J. ACM, 58(3):11:1–37, 2011. 8</p>
-<p>[10] Y. Dai, H. Li, and M. He. Element-wise factorization for n-view projective reconstruction. In ECCV, pages 396–409, 2010. 8</p>
-<p>[12] A. Eriksson and A. van den Hengel. Efﬁcient computation of robust low-rank matrix approximations in the presence of missing data using the L 1 norm. In CVPR, pages 771–778, 2010. 8</p>
-<p>[15] P. Gotardo and A. Martinez. Non-rigid structure from motion with complementary rank-3 spaces. In CVPR, pages 30653072, 2011. 6</p>
-<p>[17] H. Li. Two-view motion segmentation from linear programming relaxation. In CVPR, pages 1 –8, june 2007. 8</p>
-<p>[18] H. Li. Consensus set maximization with guaranteed global optimality for robust geometry estimation. In ICCV, pages 1074–1080. IEEE, 2009. 8</p>
-<p>[19] G. Liu, Z. Lin, S. Yan, J. Sun, Y. Yu, and Y. Ma. Robust recovery of subspace structures by low-rank representation. CoRR, abs/1010.2955, 2010. 5</p>
-<p>[20] S. Ma, D. Goldfarb, and L. Chen. Fixed point and bregman iterative methods for matrix rank minimization. Mathematical Programming, Series A, 128(1,2):321–353, 2011. 5</p>
-<p>[23] B. Recht, M. Fazel, and P. A. Parrilo. Guaranteed minimumrank solutions of linear matrix equations via nuclear norm minimization. SIAM Review, 52(3):471–501, 2010. 3</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/" class="post-title-link" itemprop="url">文献阅读和文献综述</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-02-27 06:50:00" itemprop="dateCreated datePublished" datetime="2019-02-27T06:50:00+08:00">2019-02-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:58:03" itemprop="dateModified" datetime="2020-03-12T19:58:03+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3-czh-%E7%A7%91%E7%A0%94-%E7%BB%8F%E9%AA%8C/" itemprop="url" rel="index">
-                    <span itemprop="name">d科研相关/czh_科研/经验#</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/" class="post-meta-item leancloud_visitors" data-flag-title="文献阅读和文献综述" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>125</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年2月27日 下午6:50</p>
-<p>注：这篇文章中提到的方法都围绕一个目的：<strong>明确自己的问题</strong>，并且重新认识之后得到自己的<strong>知识体系框架</strong>。这里提到的方法都是为了教你达到这个目的。</p>
-<h2 id="总流程："><a href="#总流程：" class="headerlink" title="总流程："></a>总流程：</h2><p><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/26AF6921-C737-4E97-9191-C86619A9A4DD.png" alt><br><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/EF17D60A-457D-4626-81CF-CD67380DD195.png" alt></p>
-<h2 id="文献阅读中要思考的问题："><a href="#文献阅读中要思考的问题：" class="headerlink" title="文献阅读中要思考的问题："></a>文献阅读中要思考的问题：</h2><p><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/C608C055-EEBA-48A2-BED9-2833FAC530B9.png" alt><br><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/88359FF7-13E4-4659-852C-414CBE01D318.png" alt><br><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/D0233ECC-6753-448B-A56F-CFDEAD871EC9.png" alt><br><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/40DEC5A9-0A62-4249-83FC-10C8684ADBB3.png" alt></p>
-<h2 id="写文献综述要思考的问题；"><a href="#写文献综述要思考的问题；" class="headerlink" title="写文献综述要思考的问题；"></a>写文献综述要思考的问题；</h2><p><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/12313754-B2A2-4CE0-9C4F-AAB32247C85B.png" alt><br><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/C97265A6-7918-425F-8033-ECEB86825B7A.png" alt><br><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/936B726C-5DEA-41BC-BCB4-90E3EB28B973.png" alt><br><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/52F24B69-C392-4124-81E5-7D7BA39A5442.png" alt><br><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/ACDA888E-B3AE-4BD9-B962-ADD52A10A6C9.png" alt></p>
-<h2 id="文献综述的步骤和格式"><a href="#文献综述的步骤和格式" class="headerlink" title="文献综述的步骤和格式"></a>文献综述的步骤和格式</h2><p><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/3FA1D3DD-64F7-4678-89FB-33A343D6E523.png" alt><br><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/D36ADE56-5C8F-4375-A2B8-8F36A81DD846.png" alt></p>
-<h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><p><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/D84C7E51-C042-4C41-9925-9E34E46FABAB.png" alt><br><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/C71272EB-48B2-4E42-BDEB-17DAB7C16842.png" alt><br><img src="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E7%A7%91%E7%A0%94/%E7%BB%8F%E9%AA%8C/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E5%92%8C%E6%96%87%E7%8C%AE%E7%BB%BC%E8%BF%B0/DBA3A2EB-118B-40A2-A800-218AD23A7A32.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/[2010%20ECCV]SFM+3D%20trajectory+NRSFM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2010%20ECCV%5DSFM+3D%20trajectory+NRSFM/" class="post-title-link" itemprop="url">2010 ECCVSFM+3D trajectory+NRSFM</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-02-27 06:37:00" itemprop="dateCreated datePublished" datetime="2019-02-27T06:37:00+08:00">2019-02-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:58:03" itemprop="dateModified" datetime="2020-03-12T19:58:03+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3-czh-%E8%AE%BA%E6%96%87-%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6-%E7%B4%A2%E5%BC%95/" itemprop="url" rel="index">
-                    <span itemprop="name">d科研相关/czh_论文/视频求速度_索引</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/02/27/d%E7%A7%91%E7%A0%94%E7%9B%B8%E5%85%B3/czh_%E8%AE%BA%E6%96%87/%E8%A7%86%E9%A2%91%E6%B1%82%E9%80%9F%E5%BA%A6_%E7%B4%A2%E5%BC%95/%5B2010%20ECCV%5DSFM+3D%20trajectory+NRSFM/" class="post-meta-item leancloud_visitors" data-flag-title="2010 ECCVSFM+3D trajectory+NRSFM" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年2月27日 下午6:37</p>
-<p>[2010 ECCV]3D Reconstruction of a Moving Point from a Series of 2D Projections</p>
-<p>2019年2月27日 下午6:50</p>
-<ol>
-<li><p>4，7，10他们之间是并列关系，<strong>是不用的场景，建立不同的数学模型去处理</strong></p>
-</li>
-<li><p>这篇文章的创新点是：找到了一种新的关系。<strong>相机位置+二维特征点位置</strong>与<strong>特征点三维轨迹</strong>的数学模型关系。</p>
-</li>
-<li><p>他们之间的相同点是：都是针对一个场景，建立了数学模型去求解。</p>
-</li>
-<li><p>Longuet-Higgins, H.: A computer algorithm for <strong>reconstructing a scene from two projections</strong>. Nature (1981)</p>
-<ol>
-<li>改进：the <strong>geometry</strong> involved in reconstructing 3D scenes has been developed<ol>
-<li>Hartley, R., Zisserman, A.: Multiple View Geometry in Computer Vision. Cambridge University Press (2004)</li>
-<li>Faugeras, O., Luong, Q.T.: The geometry of multiple images. MIT Press (2001)</li>
-<li>Ma, Y., Soatto, S., Kosecka, J., Sastry, S.S.: An invitation to 3-D vision: From images to Geometric Models. Springer (2001)</li>
-</ol>
-</li>
-</ol>
-</li>
-<li><p>Avidan, S., Shashua, A.: Trajectory triangulation: 3D <strong>reconstruction of moving points</strong> from a monocular image sequence. TPAMI 22 (2000) 348–357</p>
-<ol>
-<li>extended to a <strong>general trajectory</strong> using the polynomial representation<ol>
-<li>[9].Wolf, L., Shashua, A.: On projection matrices P k → P 2 , k = 3, · · ·, 6, and their applications in computer vision. In: ICCV. (2002)</li>
-<li>[7].Kaminski, J.Y., Teicher, M.: A general framework for trajectory triangulation. J.Math. Imaging Vis. 21 (2004) 27–41</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<ol start="10">
-<li>Bregler, C., Hertzmann, A., Biermann, H.: <strong>Recovering non-rigid 3D shape</strong> from image streams. In: CVPR. (2000)<ol>
-<li>应用了：<ol>
-<li>Tomasi, C., Kanade, T.: Shape and motion from image streams under orthography:a factorization method. IJCV 9 (1992) 137–154</li>
-</ol>
-</li>
-<li>改进：specify <strong>shape priors</strong> depending on models</li>
-<li>改进：represent the instantaneous shape of an object as a linear combination of basis shapes<ol>
-<li>Xiao, J., Kanade, T.: Non-rigid shape and motion recovery: Degenerate deformations. In: CVPR. (2004)</li>
-<li>Bue, A.D.: A factorization approach to structure from motion with shape priors.In: CVPR. (2008)</li>
-<li>Bartoli, A., Gay-Bellile, V., Castellani, U., Peyras, J., Olsen, S., Sayd, P.: Coarseto-ﬁne low-rank structure-from-motion. In: CVPR. (2008)</li>
-<li>Torresani, L., Hertzmann, A., Bregler, C.: Nonrigid structure-from-motion: Estimating shape and motion with hierarchical priors. TPAMI 30 (2008) 878–892</li>
-<li>Paladini, M., Del Bue, A., Stoˇsi´c, M., Dodig, M., Xavier, J., Agapito, L.: Factorization for non-rigid and articulated structure using metric projections. In: CVPR. (2009)</li>
-</ol>
-</li>
-<li>applied factorization techniques to estimate nonrigid structure<strong>DCT</strong><ol>
-<li>Akhter, I., Sheikh, Y., Khan, S., Kanade, T.: Nonrigid structure from motion in trajectory space. In: NIPS. (2008) </li>
-</ol>
-</li>
-<li>relaxed the constraint of <strong>orthography</strong><ol>
-<li>Hartley, R., Vidal, R.: Perspective nonrigid shape and motion recovery. In: ECCV.(2008)</li>
-<li>Vidal, R., Abretske, D.: Nonrigid shape and motion from multiple perspective views. In: ECCV. (2006)</li>
-</ol>
-</li>
-<li>An analysis is presented which geometrically describes the reconstruction problem as fundamentally restricted by the <strong>correlation</strong> <em>between the motion of the camera center and the motion of a scene point trajectory</em>.<ol>
-<li>此文位置</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<ol start="20">
-<li><p>The static scene reconstruction is based on the structure from motion algorithm</p>
-<ol>
-<li>Snavely, N., Seitz, S.M., Szeliski, R.: Photo tourism: Exploring photo collections in 3D. SIGGRAPH 25 (2006) 835–845</li>
-</ol>
-</li>
-<li><p>Shashua, A., Wolf, L.: Homography tensors: On algebraic entities that represent three views of static or moving planar points. In: ECCV. (2000)</p>
-</li>
-</ol>
-<ol start="19">
-<li>Akhter, I., Sheikh, Y., Khan, S.: In defense of orthonormality constraints for nonrigid structure from motion. In: CVPR. (2009)</li>
-</ol>
 
       
     </div>
@@ -1536,7 +1259,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/52/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><span class="page-number current">53</span><a class="page-number" href="/page/54/">54</a><span class="space">&hellip;</span><a class="page-number" href="/page/121/">121</a><a class="extend next" rel="next" href="/page/54/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/52/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/52/">52</a><span class="page-number current">53</span><a class="page-number" href="/page/54/">54</a><span class="space">&hellip;</span><a class="page-number" href="/page/119/">119</a><a class="extend next" rel="next" href="/page/54/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1602,14 +1325,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1209</span>
+          <span class="site-state-item-count">1189</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">104</span>
+        <span class="site-state-item-count">98</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1643,12 +1366,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.3m</span>
+    <span title="站点总字数">1.2m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">18:59</span>
+    <span title="站点阅读时长">18:55</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2020年5月4日 下午5:33注：本文主要参考《C++ Primer》 总结： 我认为要区分这三个定义变量、函数、甚至是类中的使用方法，关键还是要站在需求的角度，千万别背，背会了也不会用。C++的设计者当初也是为了满足用户的需求在后期加上的这些功能，并且通过关键字的方式开放给程序员。  讲解static const的文章c - Const vs Static Const - Stack Over">
+<meta property="og:type" content="article">
+<meta property="og:title" content="static,const,consexpr的总结对比">
+<meta property="og:url" content="http://chenzhiheng.cn/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/e_%E8%AF%AD%E8%A8%80/c_c++/static,const,consexpr%E7%9A%84%E6%80%BB%E7%BB%93%E5%AF%B9%E6%AF%94/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2020年5月4日 下午5:33注：本文主要参考《C++ Primer》 总结： 我认为要区分这三个定义变量、函数、甚至是类中的使用方法，关键还是要站在需求的角度，千万别背，背会了也不会用。C++的设计者当初也是为了满足用户的需求在后期加上的这些功能，并且通过关键字的方式开放给程序员。  讲解static const的文章c - Const vs Static Const - Stack Over">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-03T21:33:00.000Z">
+<meta property="article:modified_time" content="2020-06-08T07:40:55.086Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://chenzhiheng.cn/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/e_%E8%AF%AD%E8%A8%80/c_c++/static,const,consexpr%E7%9A%84%E6%80%BB%E7%BB%93%E5%AF%B9%E6%AF%94/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>static,const,consexpr的总结对比 | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/e_%E8%AF%AD%E8%A8%80/c_c++/static,const,consexpr%E7%9A%84%E6%80%BB%E7%BB%93%E5%AF%B9%E6%AF%94/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          static,const,consexpr的总结对比
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-04 05:33:00" itemprop="dateCreated datePublished" datetime="2020-05-04T05:33:00+08:00">2020-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-08 15:40:55" itemprop="dateModified" datetime="2020-06-08T15:40:55+08:00">2020-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-e-%E8%AF%AD%E8%A8%80-c-c/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/e_语言/c_c++</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/e_%E8%AF%AD%E8%A8%80/c_c++/static,const,consexpr%E7%9A%84%E6%80%BB%E7%BB%93%E5%AF%B9%E6%AF%94/" class="post-meta-item leancloud_visitors" data-flag-title="static,const,consexpr的总结对比" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2020年5月4日 下午5:33<br>注：本文主要参考《C++ Primer》</p>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><ol>
+<li>我认为要区分这三个定义变量、函数、甚至是类中的使用方法，关键还是要站在需求的角度，千万别背，背会了也不会用。C++的设计者当初也是为了满足用户的需求在后期加上的这些功能，并且通过关键字的方式开放给程序员。</li>
+</ol>
+<h4 id="讲解static-const的文章"><a href="#讲解static-const的文章" class="headerlink" title="讲解static const的文章"></a>讲解static const的文章</h4><p><a href="https://stackoverflow.com/questions/6381088/const-vs-static-const?noredirect=1&lq=1" target="_blank" rel="noopener">c - Const vs Static Const - Stack Overflow</a><br><a href="https://stackoverflow.com/questions/13185751/what-is-the-difference-between-static-const-and-const" target="_blank" rel="noopener">c - What is the difference between static const and const? - Stack Overflow</a></p>
+<ul>
+<li><strong>Addendum:</strong> Note that the behavior is different in C++. In C++, a const variable has internal linkage by default, so <strong>static const is redundant</strong> and <strong>extern const is necessary</strong> to get a constant with external linkage.</li>
+</ul>
+<h4 id="六个关键性的思考角度、概念："><a href="#六个关键性的思考角度、概念：" class="headerlink" title="六个关键性的思考角度、概念："></a>六个关键性的思考角度、概念：</h4><ol>
+<li>名字作用域，对象声明周期 -&gt; P184</li>
+<li>编译，运行 -&gt; P58</li>
+<li>声明，定义  -&gt; P41</li>
+<li>有一个问题，为什么C++要设计六个概念？或者扩大点说，语言为什么要设计这些概念？<ol>
+<li>名字作用域，对象声明周期：域、周期都是表示的是范围的意思，在语言中加入范围的感念，可以有效的区分我们不再需要的定义、值，就像是标签一样，我们就可以将抛弃掉，有效的节省内存的使用</li>
+<li>编译，运行 ：关键是这里的编译，这其中就需要涉及到类型这个概念，动态类型语言不需要编译，静态类型需要需要编译(因为编译才定义成了静态类型语言)，语言有了类型可以很好的帮助人类进行抽象，也可以进行进行类型的检查，将问题提前锁定在编译器更加安全</li>
+<li>声明，定义：是C++为了运行程序拆分成多个逻辑部分来编写，所以支持了分离式编译，该机制允许将程序分割为若干的文件，每个文件可被单独编译。因此，C++将声明定义分开，这样就可以做到文件间共享代码的方法<ol>
+<li>声明：使得名字为程序所知，一个文件如果想使用别处定义的名字则必须包含对那个名字的声明</li>
+<li>定义：负责创建于名字关联的实体</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h4 id="Static-全局变量-函数中-类中"><a href="#Static-全局变量-函数中-类中" class="headerlink" title="Static:全局变量 函数中 类中"></a>Static:全局变量 函数中 类中</h4><ol>
+<li>全局变量：生命周期知道程序结束，作用域仅限于当前源文件</li>
+<li>函数：P184局部对象-&gt;P43名字作用域，对象生命周期<ol>
+<li>自动对象-&gt;P40 默认初始化</li>
+<li>局部静态对象</li>
+</ol>
+</li>
+<li>类：P269 类的静态成员<ol>
+<li>声明静态成员</li>
+<li>使用类的静态成员</li>
+<li>定义静态成员</li>
+<li>静态成员的类内初始化</li>
+<li>静态成员能用于某些场景，而普通成员不行</li>
+</ol>
+</li>
+</ol>
+<h4 id="Constexpr："><a href="#Constexpr：" class="headerlink" title="Constexpr："></a>Constexpr：</h4><ol>
+<li>P58 constexpr常量表达式<ol>
+<li>常量表达式</li>
+<li>constexpr变量</li>
+<li>字面值类型</li>
+<li>指针和constexpr</li>
+</ol>
+</li>
+<li>函数中：P214 <ol>
+<li>constexpr函数</li>
+<li>把内联函数和constexpr函数放在头文件内</li>
+</ol>
+</li>
+<li>类中：P267 字面值常量类<ol>
+<li>constexpr构造函数</li>
+</ol>
+</li>
+</ol>
+<h4 id="Const-："><a href="#Const-：" class="headerlink" title="Const ："></a>Const ：</h4><ol>
+<li><a href="https://blog.csdn.net/qq_32599479/article/details/80703759" target="_blank" rel="noopener">static和const关键字的作用_JavaScript_许政的博客-CSDN博客</a><ol>
+<li>欲阻止一个变量被改变，可以使用const关键字。在定义该const变量时，通常需要对它进行初始化，因为以后就没有机会再去改变它了</li>
+<li>对指针来说<ol>
+<li>可以指定指针本身为const，也可以指定指针所指的数据为const，或二者同时指定为const</li>
+</ol>
+</li>
+<li>在一个函数声明中<ol>
+<li>const可以修饰形参，表明它是一个输入参数，在函数内部不能改变其值</li>
+</ol>
+</li>
+<li>对于类的成员函数<ol>
+<li>若指定其为const类型，则表明其是一个常函数，不能修改类的 成员变量</li>
+</ol>
+</li>
+<li>对于类的成员函数<ol>
+<li>有时候必须指定其返回值为const类型，以使得其返回值不为“左值”<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> classA <span class="keyword">operator</span>*(<span class="keyword">const</span> classA&amp; a1,<span class="keyword">const</span> classA&amp; a2); <span class="comment">//operator*的返回结果必须是一个const对象</span></span><br><span class="line">classA a, b, c;<span class="comment">//如果不是，这样的变态代码也不会编译出错</span></span><br><span class="line">(a * b) = c; <span class="comment">// 对a*b的结果赋值,显然不符合编程者的初衷，也没有任何意义</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>与constexpr的区别：<ol>
+<li>constexpr的语义是：值在编译期就确定，并且在运行期不会改变。</li>
+<li>const指的是运行期：<ol>
+<li>const变量的值可以在运行期再确定，编译器可以不确定，const保证的是运行期的不能改变变量的值，否则会报错</li>
+</ol>
+</li>
+<li>总结，constexpr和const最大的区别：值最晚什么时候确定，给的下限；并没有规定上限。<ol>
+<li>const：       |——————编译期———————|—————运行期———————|</li>
+<li>constexpr:  |——————编译期———————|</li>
+<li>上面表示的是值必须在指定区间中确定，否则出错</li>
+</ol>
+</li>
+<li>eg:P58<ol>
+<li>使用const的常量表达式<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常量表达式</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> max_files = <span class="number">20</span>;<span class="comment">//max_files是常量表达式</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> limit = max_files + <span class="number">1</span>;<span class="comment">//limit是常量表达式</span></span><br><span class="line"><span class="comment">// 非常量表达式</span></span><br><span class="line"><span class="keyword">int</span> staff_size = <span class="number">27</span>;<span class="comment">//staff不是常量表达式</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> sz = get_size();<span class="comment">//sz不是常量表达式</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">1.尽管staff_size的初始值是一个字面常量，但是由于他的数据类型只是普通的int而非const int,所以他不属于常量表达式</span></span><br><span class="line"><span class="comment">2.尽管sz本身是一个常量，但是他的具体值知道运行时才能或得到，所以也不是常量表达式</span></span><br></pre></td></tr></table></figure></li>
+<li>使用constexpr的常量表达式<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// constexpr类型以便编译器来验证变量的值是否是一个常量表达式</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> mf = <span class="number">20</span>;<span class="comment">//20是常量表达式</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> limit = mf + <span class="number">1</span>;<span class="comment">//mf + 1是常量表达式</span></span><br><span class="line"><span class="keyword">constexpr</span> <span class="keyword">int</span> sz = <span class="built_in">size</span>();<span class="comment">//只有size是一个constexpr函数时，才是一条正确的声明语句</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/03/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E7%B3%BB%E7%BB%9F/linux%E5%86%85%E6%A0%B8%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%A0%B8%E5%BF%83%E9%83%A8%E4%BB%B6%EF%BC%9A%E8%BF%9B%E7%A8%8B%EF%BC%8C%E5%86%85%E5%AD%98/" rel="prev" title="linux内核的两个核心部件：进程，内存">
+      <i class="fa fa-chevron-left"></i> linux内核的两个核心部件：进程，内存
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E7%B3%BB%E7%BB%9F/linux%E5%86%85%E6%A0%B8%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%AD%90%E7%B3%BB%E7%BB%9F/" rel="next" title="linux内核任务调度子系统">
+      linux内核任务调度子系统 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#总结："><span class="nav-number">1.</span> <span class="nav-text">总结：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#讲解static-const的文章"><span class="nav-number">2.</span> <span class="nav-text">讲解static const的文章</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#六个关键性的思考角度、概念："><span class="nav-number">3.</span> <span class="nav-text">六个关键性的思考角度、概念：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Static-全局变量-函数中-类中"><span class="nav-number">4.</span> <span class="nav-text">Static:全局变量 函数中 类中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Constexpr："><span class="nav-number">5.</span> <span class="nav-text">Constexpr：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Const-："><span class="nav-number">6.</span> <span class="nav-text">Const ：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1189</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">18:55</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '3c77278c2931bf1377319af02fc6f937',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

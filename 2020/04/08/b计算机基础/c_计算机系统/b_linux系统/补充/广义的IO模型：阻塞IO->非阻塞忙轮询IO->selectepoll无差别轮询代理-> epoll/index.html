@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="广义的IO模型：阻塞I&#x2F;O-&gt;非阻塞忙轮询I&#x2F;O-&gt;select&#x2F;epoll无差别轮询代理-&gt; epoll#b计算机基础&#x2F;c_计算机系统&#x2F;b_linux系统&#x2F;补充2020年4月8日 下午3:25 总结： 下面这篇文章其实写的非常好，我反复多了多次才明白其中的关键： 首先，你需要理解流的概念： 其实我们在server定义socket的时候server &#x3D; socket(AF_INE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="b计算机基础&#x2F;c_计算机系统&#x2F;b_linux系统&#x2F;补充&#x2F;广义的IO模型：阻塞IO-&gt;非阻塞忙轮询IO-&gt;selectepoll无差别轮询代理-&gt; epoll">
+<meta property="og:url" content="http://chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E8%A1%A5%E5%85%85/%E5%B9%BF%E4%B9%89%E7%9A%84IO%E6%A8%A1%E5%9E%8B%EF%BC%9A%E9%98%BB%E5%A1%9EIO-%3E%E9%9D%9E%E9%98%BB%E5%A1%9E%E5%BF%99%E8%BD%AE%E8%AF%A2IO-%3Eselectepoll%E6%97%A0%E5%B7%AE%E5%88%AB%E8%BD%AE%E8%AF%A2%E4%BB%A3%E7%90%86-%3E%20epoll/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="广义的IO模型：阻塞I&#x2F;O-&gt;非阻塞忙轮询I&#x2F;O-&gt;select&#x2F;epoll无差别轮询代理-&gt; epoll#b计算机基础&#x2F;c_计算机系统&#x2F;b_linux系统&#x2F;补充2020年4月8日 下午3:25 总结： 下面这篇文章其实写的非常好，我反复多了多次才明白其中的关键： 首先，你需要理解流的概念： 其实我们在server定义socket的时候server &#x3D; socket(AF_INE">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-08T07:25:56.234Z">
+<meta property="article:modified_time" content="2020-05-02T13:03:38.075Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E8%A1%A5%E5%85%85/%E5%B9%BF%E4%B9%89%E7%9A%84IO%E6%A8%A1%E5%9E%8B%EF%BC%9A%E9%98%BB%E5%A1%9EIO-%3E%E9%9D%9E%E9%98%BB%E5%A1%9E%E5%BF%99%E8%BD%AE%E8%AF%A2IO-%3Eselectepoll%E6%97%A0%E5%B7%AE%E5%88%AB%E8%BD%AE%E8%AF%A2%E4%BB%A3%E7%90%86-%3E%20epoll/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>b计算机基础/c_计算机系统/b_linux系统/补充/广义的IO模型：阻塞IO->非阻塞忙轮询IO->selectepoll无差别轮询代理-> epoll | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E8%A1%A5%E5%85%85/%E5%B9%BF%E4%B9%89%E7%9A%84IO%E6%A8%A1%E5%9E%8B%EF%BC%9A%E9%98%BB%E5%A1%9EIO-%3E%E9%9D%9E%E9%98%BB%E5%A1%9E%E5%BF%99%E8%BD%AE%E8%AF%A2IO-%3Eselectepoll%E6%97%A0%E5%B7%AE%E5%88%AB%E8%BD%AE%E8%AF%A2%E4%BB%A3%E7%90%86-%3E%20epoll/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          b计算机基础/c_计算机系统/b_linux系统/补充/广义的IO模型：阻塞IO->非阻塞忙轮询IO->selectepoll无差别轮询代理-> epoll
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-08 15:25:56" itemprop="dateCreated datePublished" datetime="2020-04-08T15:25:56+08:00">2020-04-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-05-02 21:03:38" itemprop="dateModified" datetime="2020-05-02T21:03:38+08:00">2020-05-02</time>
+              </span>
+
+          
+            <span id="/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E8%A1%A5%E5%85%85/%E5%B9%BF%E4%B9%89%E7%9A%84IO%E6%A8%A1%E5%9E%8B%EF%BC%9A%E9%98%BB%E5%A1%9EIO-%3E%E9%9D%9E%E9%98%BB%E5%A1%9E%E5%BF%99%E8%BD%AE%E8%AF%A2IO-%3Eselectepoll%E6%97%A0%E5%B7%AE%E5%88%AB%E8%BD%AE%E8%AF%A2%E4%BB%A3%E7%90%86-%3E%20epoll/" class="post-meta-item leancloud_visitors" data-flag-title="b计算机基础/c_计算机系统/b_linux系统/补充/广义的IO模型：阻塞IO->非阻塞忙轮询IO->selectepoll无差别轮询代理-> epoll" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="广义的IO模型：阻塞I-O-gt-非阻塞忙轮询I-O-gt-select-epoll无差别轮询代理-gt-epoll"><a href="#广义的IO模型：阻塞I-O-gt-非阻塞忙轮询I-O-gt-select-epoll无差别轮询代理-gt-epoll" class="headerlink" title="广义的IO模型：阻塞I/O-&gt;非阻塞忙轮询I/O-&gt;select/epoll无差别轮询代理-&gt; epoll"></a>广义的IO模型：阻塞I/O-&gt;非阻塞忙轮询I/O-&gt;select/epoll无差别轮询代理-&gt; epoll</h1><p>#b计算机基础/c_计算机系统/b_linux系统/补充<br>2020年4月8日 下午3:25</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><ol>
+<li>下面这篇文章其实写的非常好，我反复多了多次才明白其中的关键：<ol>
+<li>首先，你需要理解流的概念：<ol>
+<li>其实我们在server定义socket的时候<code>server = socket(AF_INET, SOCK_STREAM)</code>，这个定义会产生一个流，只不过在没有client进行连接的时候，这个流中的内容为空而已。</li>
+<li>在代码中我就一直疑惑：<strong>流数组</strong>是从哪里来的？<ol>
+<li>上面我们知道定义socket会产生一个流(“缓冲区空”)，当client连接server的时候，这个流中就会有信息在传递(“缓冲区非空”)</li>
+<li>这里比较特殊的一个地方是：<strong>socket流中的信息也是一个流</strong>，代表着不同client与server的链接。</li>
+<li>当有n个client与server进行连接的时候，加上原本socket，在当前进程中，就会有n+1个流对象</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>整个的IO模型，其实就是信息在流上进行一个个进行传递的过程。有些流中传递的还是流，有些流中传递的时候真正的byte数据。</li>
+<li>IO模型与网络IO模型的关系：<ol>
+<li>我目前见过做多的就是网络IO模型，当你把client与server之间的socket连接理解成一个流的时候，你就会发现其实就是IO模型，不要因为加上了网络就觉得难以理解</li>
+<li>IO模型的基础操作单位是流，具体你是什么流(文件，socket，pipe)对于IO模型来说其实是透明的，流这个抽象就能把具体的子类对上层隐藏。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="python代码实现："><a href="#python代码实现：" class="headerlink" title="python代码实现："></a>python代码实现：</h3><p><a href="https://blog.csdn.net/u013210620/article/details/78733743" target="_blank" rel="noopener">python基础-io模型、阻塞、非阻塞、io多路复用_Python_金丙坤-CSDN博客</a><br><strong>io模型、阻塞、非阻塞、io多路复用</strong>这四种对应的client，server代码！</p>
+<h3 id="概念的理解："><a href="#概念的理解：" class="headerlink" title="概念的理解："></a>概念的理解：</h3><p>补充：<a href="https://blog.csdn.net/feitianxuxue/article/details/17078179" target="_blank" rel="noopener">Epoll之ET、LT模式_网络_feitianxuxue的专栏-CSDN博客</a></p>
+<ol>
+<li><p>在使用epoll时，在函数 epoll_ctl中如果不设定，epoll_event 的event默认为LT（水平触发）模式。</p>
+</li>
+<li><p>LT模式</p>
+<ol>
+<li><strong>使用LT模式意味着只要fd处于可读或者可写状态，每次epoll_wait都会返回该fd</strong>，这样的话会带来很大的系统开销，且处理时候每次都需要把这些fd轮询一遍，如果fd的数量巨大，不管有没有事件发生，epoll_wait都会触发这些fd的轮询判断。</li>
+</ol>
+</li>
+<li><p>ET模式：</p>
+<ol>
+<li>在ET模式下，当有事件发生时，系统只会通知你一次，即在调用epoll_wait返回fd后，不管这个事件你处理还是没处理，处理完没有处理完，当再次调用epoll_wait时，都不会再返回该fd，这样的话程序员要自己保证在事件发生时要及时有效的处理完该事件。</li>
+</ol>
+</li>
+<li><p><em>首先我们来定义流的概念</em></p>
+<ol>
+<li>一个流可以是文件，socket，pipe等等可以进行I/O操作的内核对象。</li>
+<li>不管是文件，还是套接字，还是管道，我们都可以把他们看作流。</li>
+</ol>
+</li>
+<li><p>之后我们来讨论<strong>I/O的操作</strong>，通过read，我们可以从流中读入数据；通过write，我们可以往流写入数据。现在假定一个情形，我们需要从流中读数据，<strong>但是流中还没有数据</strong>，（典型的例子为，客户端要从socket读如数据，但是服务器还没有把数据传回来），这时候该怎么办？</p>
+<ul>
+<li>阻塞。阻塞是个什么概念呢？比如某个时候你在等快递，但是你不知道快递什么时候过来，而且你没有别的事可以干（或者说接下来的事要等快递来了才能做）；那么你可以去睡觉了，因为你知道快递把货送来时一定会给你打个电话（假定一定能叫醒你）。</li>
+<li>非阻塞<strong>忙</strong>轮询。接着上面等快递的例子，如果用忙轮询的方法，那么你需要知道快递员的手机号，然后每分钟给他挂个电话：“你到了没？”<ul>
+<li>很明显一般人不会用第二种做法，不仅显很无脑，浪费话费不说，还占用了快递员大量的时间。</li>
+<li>大部分程序也不会用第二种做法，因为第一种方法经济而简单，经济是指消耗很少的CPU时间，如果线程睡眠了，就掉出了系统的调度队列，暂时不会去瓜分CPU宝贵的时间片了。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>为了了解阻塞是如何进行的，我们来讨论<strong>缓冲区</strong>，以及内核缓冲区，最终把I_O事件解释清楚。缓冲区的引入是为了减少频繁I_O操作而引起频繁的系统调用（你知道它很慢的），当你操作一个流时，更多的是以缓冲区为单位进行操作，这是相对于用户空间而言。对于内核来说，也需要缓冲区。<br>假设有一个管道，进程A为管道的写入方，Ｂ为管道的读出方。</p>
+<ul>
+<li><strong>假设一开始内核缓冲区是空的，B作为读出方，被阻塞着</strong>。然后首先A往管道写入，这时候内核缓冲区由空的状态变到非空状态，内核就会产生一个事件告诉Ｂ该醒来了，这个事件姑且称之为“缓冲区非空”。</li>
+<li>但是“缓冲区非空”事件通知B后，B却还没有读出数据；且内核许诺了不能把写入管道中的数据丢掉这个时候，Ａ写入的数据会滞留在内核缓冲区中，如果内核也缓冲区满了，B仍未开始读数据，最终内核缓冲区会被填满，这个时候会产生一个I/O事件，<strong>告诉进程A，你该等等（阻塞）了</strong>，我们把这个事件定义为“缓冲区满”。</li>
+<li>假设后来Ｂ终于开始读数据了，于是内核的缓冲区空了出来，这时候内核会告诉A，内核缓冲区有空位了，你可以从长眠中醒来了，继续写数据了，我们把这个事件叫做“缓冲区非满”</li>
+<li>也许事件Y1已经通知了A，但是A也没有数据写入了，而Ｂ继续读出数据，知道内核缓冲区空了。<strong>这个时候内核就告诉B，你需要阻塞了！</strong>，我们把这个时间定为“缓冲区空”。</li>
+<li>这四个情形涵盖了四个I_O事件，缓冲区满，缓冲区空，缓冲区非空，缓冲区非满（注都是说的内核缓冲区，且这四个术语都是我生造的，仅为解释其原理而造）。 <em>_<strong>_这四个I_O事件是进行阻塞同步的根本</strong></em> 。（如果不能理解“同步”是什么概念，请学习操作系统的锁，信号量，条件变量等任务同步方面的相关知识）。</li>
+</ul>
+</li>
+<li><p>然后我们来说说<strong>阻塞I/O的缺点</strong>。</p>
+<ol>
+<li>阻塞I_O模式下，一个线程只能处理一个流的I_O事件。如果想要同时处理多个流，要么多进程(fork)，要么多线程(pthread_create)，很不幸这两种方法效率都不高。</li>
+</ol>
+</li>
+<li><p>于是再来考虑<strong>非阻塞忙轮询的I/O方式</strong>，我们发现我们可以同时处理多个流了（把一个流从阻塞模式切换到非阻塞模式再此不予讨论）：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> true &#123;</span><br><span class="line">	<span class="keyword">for</span> I <span class="keyword">in</span> stream[]&#123; <span class="comment">#一直轮询</span></span><br><span class="line">		<span class="keyword">if</span> I has data</span><br><span class="line">			read until unavailable</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>我们只要不停的把所有流从头到尾问一遍，又从头开始。这样就可以处理多个流了，但这样的做法显然不好，因为如果所有的流都没有数据，那么只会白白浪费CPU。这里要补充一点，阻塞模式下，内核对于I_O事件的处理是阻塞或者唤醒，而非阻塞模式下则把I_O事件交给其他对象（后文介绍的select以及epoll）处理甚至直接忽略。</li>
+</ul>
+</li>
+<li><p>为了避免CPU空转，可以引进了<strong>一个代理（一开始有一位叫做select的代理，后来又有一位叫做poll的代理，不过两者的本质是一样的）</strong>。这个代理比较厉害，可以同时观察许多流的I_O事件，在空闲的时候，<em>**_会把当前线程阻塞掉</em>**_，当有一个或多个流有I_O事件时，就从阻塞态中醒来，于是我们的程序就会轮询一遍所有的流（于是我们可以把“忙”字去掉了）。代码长这样:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> true &#123;</span><br><span class="line">	select(streams[]) <span class="comment"># 增加的这步</span></span><br><span class="line">	<span class="keyword">for</span> I <span class="keyword">in</span> streams[] &#123;</span><br><span class="line">		<span class="keyword">if</span> I has data</span><br><span class="line">			read until unavailable</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>于是，如果没有I_O事件产生，我们的程序就会阻塞在select处。但是依然有个问题，我们从select那里仅仅知道了，有I_O事件发生了，但却并不知道是那几个流（可能有一个，多个，甚至全部），我们只能<strong>无差别轮询</strong>所有流，找出能读出数据，或者写入数据的流，对他们进行操作。</li>
+<li>但是使用select，我们有O(n)的无差别轮询复杂度，同时处理的流越多，每一次无差别轮询时间就越长。再次</li>
+</ul>
+</li>
+<li><p><strong>说了这么多，终于能好好解释epoll了</strong></p>
+<ul>
+<li>Epoll可以理解为event poll，不同于忙轮询和无差别轮询，epoll之会把哪个流发生了怎样的I_O事件通知我们。此时我们对这些流的操作都是有意义的。（复杂度降低到了O(k)，k为产生I_O事件的流的个数，也有认为O(1)的[更新 1]）</li>
+<li>epoll实现机制：<ul>
+<li><strong>使用epoll的时候，内核会维护一个就绪的链表，这个链表里面的东西就是”那些发生了I/O事件的流”</strong>。</li>
+<li>而这些文件描述符是如何被添加到就绪链表里面的呢？是通过注册的那些回调函数实现的。</li>
+<li><em>而怎么知道这些文件描述符上发生的是什么事件呢？这个就需要我们自己在代码里面去判断了。epoll这个函数返回的只是那些发生了事件的文件描述符。</em> 因为这些事件是你自己给这个文件描述符的，所以你可以通过代码判断发生了什么I/O事件。</li>
+<li>于是就有”epoll只会把哪个流发生了怎样的I/O事件通知我们”。</li>
+</ul>
+</li>
+<li>在讨论epoll的实现细节之前，先把epoll的相关操作列出[更新 2]：<ol>
+<li>epoll_create 创建一个epoll对象，一般epollfd = epoll_create()</li>
+<li>epoll_ctl （epoll_add_epoll_del的合体），往epoll对象中增加_删除某一个流的某一个事件</li>
+<li>比如</li>
+<li>epoll_ctl(epollfd, EPOLL_CTL_ADD, socket, EPOLLIN);有缓冲区内有数据时epoll_wait返回</li>
+<li>epoll_ctl(epollfd, EPOLL_CTL_DEL, socket, EPOLLOUT);缓冲区可写入时epoll_wait返回</li>
+<li>epoll_wait(epollfd,…)等待直到注册的事件发生</li>
+<li>（注：当对一个非阻塞流的读写发生缓冲区满或缓冲区空，write/read会返回-1，并设置errno=EAGAIN。而epoll只关心缓冲区非满和缓冲区非空事件）。</li>
+</ol>
+</li>
+<li>一个epoll模式的代码大概的样子是：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> true &#123;</span><br><span class="line">	active_stream[] = epoll_wait(epollfd) <span class="comment"># 关键步骤</span></span><br><span class="line">	<span class="keyword">for</span> I <span class="keyword">in</span> active_stream[] &#123;</span><br><span class="line">		read <span class="keyword">or</span> write till unavailable</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>限于篇幅，这里只讲了揭示原理性的东西，至于epoll的使用细节，请参考man和google，实现细节，请参阅linux kernel source。</li>
+<li>[更新1]: 原文为O(1)，但实际上O(k)更为准确</li>
+<li>[更新2]: 原文所列第二点说法让人产生EPOLLIN/EPOLLOUT等同于“缓冲区非空”和“缓冲区非满”的事件，但并非如此，详细可以Google关于epoll的边缘触发和水平触发。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/08/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/e_%E8%AF%AD%E8%A8%80/c_c++/%E4%B8%93%E9%A2%98%E7%9F%A5%E8%AF%865%EF%BC%9A%E5%86%85%E5%AD%98%E7%9B%B8%E5%85%B3/" rel="prev" title="专题知识5：内存相关">
+      <i class="fa fa-chevron-left"></i> 专题知识5：内存相关
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/10/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/e_%E8%AF%AD%E8%A8%80/c_2020%E9%87%8D%E5%AD%A6c++/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%89%8D%E4%B8%83%E7%AB%A0%E4%B9%A0%E9%A2%98/%E5%89%8D%E4%B8%83%E7%AB%A0%E4%B9%A0%E9%A2%98/" rel="next" title="b计算机基础/e_语言/c_2020重学c++/知识点/前七章习题/前七章习题">
+      b计算机基础/e_语言/c_2020重学c++/知识点/前七章习题/前七章习题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#广义的IO模型：阻塞I-O-gt-非阻塞忙轮询I-O-gt-select-epoll无差别轮询代理-gt-epoll"><span class="nav-number">1.</span> <span class="nav-text">广义的IO模型：阻塞I&#x2F;O-&gt;非阻塞忙轮询I&#x2F;O-&gt;select&#x2F;epoll无差别轮询代理-&gt; epoll</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结："><span class="nav-number">1.0.1.</span> <span class="nav-text">总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python代码实现："><span class="nav-number">1.0.2.</span> <span class="nav-text">python代码实现：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概念的理解："><span class="nav-number">1.0.3.</span> <span class="nav-text">概念的理解：</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1189</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">18:55</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '74fed07417b923d172fd4029d3eee74c',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

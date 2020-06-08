@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="资源(缓存&#x2F;IO&#x2F;变量&#x2F;代码段)的获取、放入安全#b计算机基础&#x2F;c_计算机系统&#x2F;b_linux系统&#x2F;补充2020年4月27日 下午11:35 注：这篇是从安全的角度去考虑的，另外还有从效率的角度去思考效率这个这个角度我认为是一个tradeoff,计算机软件体系是一个从底层开始层层抽象发展的，这个的目的是为了上下层抽象的过程中简化编程的思维，但是对于数据的处理、拷贝、交互来说，应该是扁平的，这中间就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="b计算机基础&#x2F;c_计算机系统&#x2F;b_linux系统&#x2F;补充&#x2F;资源(缓存IO变量代码段)的获取、放入安全">
+<meta property="og:url" content="http://chenzhiheng.cn/2020/04/27/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E8%A1%A5%E5%85%85/%E8%B5%84%E6%BA%90(%E7%BC%93%E5%AD%98IO%E5%8F%98%E9%87%8F%E4%BB%A3%E7%A0%81%E6%AE%B5)%E7%9A%84%E8%8E%B7%E5%8F%96%E3%80%81%E6%94%BE%E5%85%A5%E5%AE%89%E5%85%A8/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="资源(缓存&#x2F;IO&#x2F;变量&#x2F;代码段)的获取、放入安全#b计算机基础&#x2F;c_计算机系统&#x2F;b_linux系统&#x2F;补充2020年4月27日 下午11:35 注：这篇是从安全的角度去考虑的，另外还有从效率的角度去思考效率这个这个角度我认为是一个tradeoff,计算机软件体系是一个从底层开始层层抽象发展的，这个的目的是为了上下层抽象的过程中简化编程的思维，但是对于数据的处理、拷贝、交互来说，应该是扁平的，这中间就">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-27T15:35:09.662Z">
+<meta property="article:modified_time" content="2020-04-28T03:15:34.099Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://chenzhiheng.cn/2020/04/27/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E8%A1%A5%E5%85%85/%E8%B5%84%E6%BA%90(%E7%BC%93%E5%AD%98IO%E5%8F%98%E9%87%8F%E4%BB%A3%E7%A0%81%E6%AE%B5)%E7%9A%84%E8%8E%B7%E5%8F%96%E3%80%81%E6%94%BE%E5%85%A5%E5%AE%89%E5%85%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>b计算机基础/c_计算机系统/b_linux系统/补充/资源(缓存IO变量代码段)的获取、放入安全 | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2020/04/27/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E8%A1%A5%E5%85%85/%E8%B5%84%E6%BA%90(%E7%BC%93%E5%AD%98IO%E5%8F%98%E9%87%8F%E4%BB%A3%E7%A0%81%E6%AE%B5)%E7%9A%84%E8%8E%B7%E5%8F%96%E3%80%81%E6%94%BE%E5%85%A5%E5%AE%89%E5%85%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          b计算机基础/c_计算机系统/b_linux系统/补充/资源(缓存IO变量代码段)的获取、放入安全
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-27 23:35:09" itemprop="dateCreated datePublished" datetime="2020-04-27T23:35:09+08:00">2020-04-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 11:15:34" itemprop="dateModified" datetime="2020-04-28T11:15:34+08:00">2020-04-28</time>
+              </span>
+
+          
+            <span id="/2020/04/27/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E8%A1%A5%E5%85%85/%E8%B5%84%E6%BA%90(%E7%BC%93%E5%AD%98IO%E5%8F%98%E9%87%8F%E4%BB%A3%E7%A0%81%E6%AE%B5)%E7%9A%84%E8%8E%B7%E5%8F%96%E3%80%81%E6%94%BE%E5%85%A5%E5%AE%89%E5%85%A8/" class="post-meta-item leancloud_visitors" data-flag-title="b计算机基础/c_计算机系统/b_linux系统/补充/资源(缓存IO变量代码段)的获取、放入安全" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>935</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="资源-缓存-IO-变量-代码段-的获取、放入安全"><a href="#资源-缓存-IO-变量-代码段-的获取、放入安全" class="headerlink" title="资源(缓存/IO/变量/代码段)的获取、放入安全"></a>资源(缓存/IO/变量/代码段)的获取、放入安全</h1><p>#b计算机基础/c_计算机系统/b_linux系统/补充<br>2020年4月27日 下午11:35</p>
+<p>注：这篇是从安全的角度去考虑的，另外还有从效率的角度去思考<br>效率这个这个角度我认为是一个tradeoff,计算机软件体系是一个从底层开始层层抽象发展的，这个的目的是为了上下层抽象的过程中简化编程的思维，但是对于数据的处理、拷贝、交互来说，应该是扁平的，这中间就会有矛盾，面对这样的矛盾，我们处理的方法就是让数据的交互来说尽可能的放在这个体系的底层，也就是内核层去完成，尽量不要用到用户态，这个就减少了没有实际效率意义的内核态与用户态之间的数据拷贝，一个专业的名次是0拷贝。</p>
+<h4 id="多线程核心知识的两个层面去理解："><a href="#多线程核心知识的两个层面去理解：" class="headerlink" title="多线程核心知识的两个层面去理解："></a>多线程核心知识的两个层面去理解：</h4><ol>
+<li>本质讨论的都是资源的获取和放入</li>
+<li>【资源本身】资源的两种保护形式-主动、被动：<ul>
+<li>主动：缓存/IO为空 <ul>
+<li>这里的空就可以等价的理解为加了锁</li>
+<li>缓存 IO有四种状态 <a href="bear://x-callback-url/open-note?id=28DD9699-859D-4E62-B989-DD32C0C31845-1248-0000FF1164D1C1D6">广义的IO模型：阻塞I/O-&gt;非阻塞忙轮询I/O-&gt;select/epoll无差别轮询代理-&gt; epoll</a></li>
+</ul>
+</li>
+<li>被动：缓存_操作对象(变量_代码段)有，但加锁 ==》都会造成线程的阻塞</li>
+<li>独立于线程之外的资源对象：缓存、IO，变量、C++全局变量(要注意这里的全局变量)</li>
+</ul>
+</li>
+<li>【获取资源方】操作对象面对锁、等待、空之后的做法种类：<ul>
+<li>上面说明了不同的场景原因，以及唯一的操作者线程，不同的被操作对象，但是操作方都是线程为单位</li>
+<li>但是没有提到线程他对待这样的事情有几种处理方法：阻塞待唤醒、忙轮询、一遍轮询、不轮询直接获得操作对象<ul>
+<li><a href="bear://x-callback-url/open-note?id=28DD9699-859D-4E62-B989-DD32C0C31845-1248-0000FF1164D1C1D6">广义的IO模型：阻塞I/O-&gt;非阻塞忙轮询I/O-&gt;select/epoll无差别轮询代理-&gt; epoll</a></li>
+<li>我们一般在程序里默认是线程阻塞待唤醒<ul>
+<li><a href="bear://x-callback-url/open-note?id=A3A21BAA-50BE-4E30-B30D-331422005335-14547-00013A674895D522">目录(现代C++)</a>中的安全部分</li>
+</ul>
+</li>
+<li><a href="bear://x-callback-url/open-note?id=C059DA71-C50E-48D6-A01D-F2C7A43913DC-699-0000BB15FF1A8239">线程安全的策略</a>java中</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>上面三点说明了如何处理，如果不处理会出现什么情况：<ul>
+<li>为什么我们再多线程下需要使用锁？<ul>
+<li>脏数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="我们可以根据场景进行自定义设计的地方："><a href="#我们可以根据场景进行自定义设计的地方：" class="headerlink" title="我们可以根据场景进行自定义设计的地方："></a>我们可以根据场景进行自定义设计的地方：</h4><ul>
+<li><strong>选择合适的锁的类型</strong><ul>
+<li>锁就是字面意思：锁住大门，不让你进。他有酸甜苦辣味，看你的需要选取。不同的锁的类型，体现你对资源的管理方式。</li>
+</ul>
+</li>
+<li>从线程的角度，你希望线程遇到阻塞之后，如何行事呢？<ul>
+<li>阻塞待唤醒、忙轮询、一遍轮询、不轮询直接获得操作对象等</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/04/27/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/h_%E7%AE%97%E6%B3%95/leetcode/%E9%A2%98%E7%9B%AE/%5B%E6%91%98%E6%8A%84%5Dmap%E7%9A%84%E6%8E%92%E5%BA%8F/" rel="prev" title="摘抄map的排序">
+      <i class="fa fa-chevron-left"></i> 摘抄map的排序
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/04/28/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/e_%E8%AF%AD%E8%A8%80/c_%E7%8E%B0%E4%BB%A3c++/%E4%B8%8D%E8%83%BD%E5%9C%A8%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E9%87%8C%E9%9D%A2%E6%8A%9B%E5%87%BA%E5%BC%82%E5%B8%B8%E6%B6%89%E5%8F%8A%E5%88%B0C++%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E7%9A%84%E7%90%86%E8%A7%A3/" rel="next" title="不能在析构函数里面抛出异常涉及到C++异常处理的理解">
+      不能在析构函数里面抛出异常涉及到C++异常处理的理解 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#资源-缓存-IO-变量-代码段-的获取、放入安全"><span class="nav-number">1.</span> <span class="nav-text">资源(缓存&#x2F;IO&#x2F;变量&#x2F;代码段)的获取、放入安全</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多线程核心知识的两个层面去理解："><span class="nav-number">1.0.0.1.</span> <span class="nav-text">多线程核心知识的两个层面去理解：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#我们可以根据场景进行自定义设计的地方："><span class="nav-number">1.0.0.2.</span> <span class="nav-text">我们可以根据场景进行自定义设计的地方：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1189</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">18:55</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '66f24a7d6e54cd8c073323e16051248c',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

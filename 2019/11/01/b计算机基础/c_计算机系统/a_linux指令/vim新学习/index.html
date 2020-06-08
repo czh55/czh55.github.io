@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="vim新学习#b计算机基础&#x2F;c_计算机系统&#x2F;a_linux指令2019年11月1日 下午5:38 vim全选，全部复制，全部删除 - 星草感觉 - 博客园  “+y  复制选中内容到＋寄存器，也就是系统的剪贴板，供其他程序用 全部复制：按esc后，然后ggyG 全部删除：按esc后，然后dG  linux   vi &amp; vim 插入 删除 修改 文本 - 数据之美的博客 - CSDN博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="b计算机基础&#x2F;c_计算机系统&#x2F;a_linux指令&#x2F;vim新学习">
+<meta property="og:url" content="http://chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/a_linux%E6%8C%87%E4%BB%A4/vim%E6%96%B0%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="vim新学习#b计算机基础&#x2F;c_计算机系统&#x2F;a_linux指令2019年11月1日 下午5:38 vim全选，全部复制，全部删除 - 星草感觉 - 博客园  “+y  复制选中内容到＋寄存器，也就是系统的剪贴板，供其他程序用 全部复制：按esc后，然后ggyG 全部删除：按esc后，然后dG  linux   vi &amp; vim 插入 删除 修改 文本 - 数据之美的博客 - CSDN博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-11-01T09:38:34.235Z">
+<meta property="article:modified_time" content="2020-01-08T14:27:24.677Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/a_linux%E6%8C%87%E4%BB%A4/vim%E6%96%B0%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>b计算机基础/c_计算机系统/a_linux指令/vim新学习 | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/a_linux%E6%8C%87%E4%BB%A4/vim%E6%96%B0%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          b计算机基础/c_计算机系统/a_linux指令/vim新学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-11-01 17:38:34" itemprop="dateCreated datePublished" datetime="2019-11-01T17:38:34+08:00">2019-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-08 22:27:24" itemprop="dateModified" datetime="2020-01-08T22:27:24+08:00">2020-01-08</time>
+              </span>
+
+          
+            <span id="/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/a_linux%E6%8C%87%E4%BB%A4/vim%E6%96%B0%E5%AD%A6%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="b计算机基础/c_计算机系统/a_linux指令/vim新学习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="vim新学习"><a href="#vim新学习" class="headerlink" title="vim新学习"></a>vim新学习</h1><p>#b计算机基础/c_计算机系统/a_linux指令<br>2019年11月1日 下午5:38</p>
+<p><a href="https://www.cnblogs.com/webStyle/p/4354464.html" target="_blank" rel="noopener">vim全选，全部复制，全部删除 - 星草感觉 - 博客园</a></p>
+<ul>
+<li>“+y  复制选中内容到＋寄存器，也就是系统的剪贴板，供其他程序用</li>
+<li><strong>全部复制：</strong>按esc后，然后ggyG</li>
+<li><strong>全部删除：</strong>按esc后，然后dG</li>
+</ul>
+<p><a href="https://blog.csdn.net/oppo62258801/article/details/79075410" target="_blank" rel="noopener">linux   vi &amp; vim 插入 删除 修改 文本 - 数据之美的博客 - CSDN博客</a></p>
+<h4 id="修改文本字母"><a href="#修改文本字母" class="headerlink" title="修改文本字母"></a>修改文本字母</h4><ol>
+<li>r+字母</li>
+<li>s+n字母</li>
+<li><strong>n+s+n字母</strong><ul>
+<li>替换光标所在位置后面数字指定数量的文本为任意输入文本，与前面一个命令的区别就是替换指定数量的字母</li>
+</ul>
+</li>
+<li>R+n字母<h4 id="修改文本块"><a href="#修改文本块" class="headerlink" title="修改文本块"></a>修改文本块</h4></li>
+<li>c+w</li>
+<li><strong>c+2w</strong></li>
+<li>c+b<ul>
+<li>往前修改一个文本单词，此命令会从光标位置往前删除一个单词，并使 vi 进入插入编辑模式进行文本插入</li>
+</ul>
+</li>
+<li>c+2b<ul>
+<li>往前修改数字指定数量的文本单词，并使 vi 进入插入编辑模式进行文本插入</li>
+</ul>
+</li>
+<li>c+0<ul>
+<li>删除光标位置到行首的所有文本，并使 vi 进入插入编辑模式进行文本插入</li>
+</ul>
+</li>
+<li><strong>c+$</strong>  <ul>
+<li>删除光标位置到行末的所有文本，并使 vi 进入插入编辑模式进行文本插入</li>
+</ul>
+</li>
+</ol>
+<p><a href="https://www.cnblogs.com/laizhenghong2012/p/8964455.html" target="_blank" rel="noopener">Vim使用技巧：撤销与恢复撤销 - wallace-lai - 博客园</a><br>撤销：<code>u</code><br>恢复撤销：<code>Ctrl + r</code></p>
+<p><a href="https://www.cnblogs.com/hangaozu/p/7544325.html" target="_blank" rel="noopener">vim选中字符复制/剪切/粘贴 - 飞雪安能住酒中 - 博客园</a><br><code>ctrl + v</code> + <code>hjkl</code></p>
+<p><a href="https://blog.csdn.net/mokill0911/article/details/27753785" target="_blank" rel="noopener">将vim中内容复制到系统剪贴板</a></p>
+<ul>
+<li>:reg 查看寄存器，可以看到vim自带的剪贴板里的内容， 在安装了gnome后能看到里面新增了一个 + 寄存器，这就是和系统同步的寄存器。</li>
+<li><code>Shift+ v</code> 使用可视化模式，也可以配合光标移动键选择文本。</li>
+</ul>
+<h4 id="全局操作："><a href="#全局操作：" class="headerlink" title="全局操作："></a>全局操作：</h4><ol>
+<li>缩进</li>
+<li>字符串替换：<ul>
+<li><code>:%s/XXX/YYY/g</code> 全局替换</li>
+<li><code>:s/p1/p2/g</code>: 将当前行中所有p1均用p2替代 </li>
+<li><code>:n1,n2s/p1/p2/g</code>: 将第n1至n2行中所有p1均用p2替代</li>
+<li><a href="https://blog.csdn.net/lucyxu107/article/details/84316375" target="_blank" rel="noopener">vim批量替换</a></li>
+</ul>
+</li>
+<li>复制：不是ctr+v<ol>
+<li><code>Shift+ v</code> 使用可视化模式，也可以配合光标移动键选择文本。 </li>
+</ol>
+</li>
+</ol>
+<p><a href="http://www.ruanyifeng.com/blog/2018/09/vimrc.html" target="_blank" rel="noopener">Vim 配置入门 - 阮一峰的网络日志</a></p>
+<ol>
+<li>其实就是在将vim中的set命令，我经常使用的有<code>set nu</code></li>
+<li>还有一些其他的：<ol>
+<li><code>syntax on</code>打开语法高亮。</li>
+<li><code>set encoding=utf-8</code> 设置编码</li>
+<li><strong>缩进</strong><ol>
+<li><code>set autoindent</code><ul>
+<li>按下回车键后，下一行的缩进会自动跟上一行的缩进保持一致。</li>
+</ul>
+</li>
+<li><code>set shiftwidth=4</code><ul>
+<li>在文本上按下&gt;&gt;（增加一级缩进）、&lt;&lt;（取消一级缩进）或者==（取消全部缩进）时，每一级的字符数。</li>
+</ul>
+</li>
+<li><code>set expandtab</code><ul>
+<li>由于 Tab 键在不同的编辑器缩进不一致，该设置自动将 Tab 转为空格。</li>
+</ul>
+</li>
+<li><code>set softtabstop=2</code>Tab 转为多少个空格</li>
+</ol>
+</li>
+<li>外观<ol>
+<li><code>set relativenumber</code><ul>
+<li>显示光标所在的当前行的行号，其他行都为相对于该行的相对行号。</li>
+</ul>
+</li>
+<li><code>set cursorline</code>光标所在的当前行高亮。</li>
+<li><code>set textwidth=80</code> 设置行宽，即一行显示多少个字符。</li>
+<li><code>set  ruler</code>在状态栏显示光标的当前位置（位于哪一行哪一列）</li>
+</ol>
+</li>
+<li>搜索<ol>
+<li><code>set showmatch</code> <ol>
+<li>光标遇到圆括号、方括号、大括号时，自动高亮对应的另一个圆括号、方括号和大括号</li>
+</ol>
+</li>
+<li><code>set hlsearch</code>搜索时，高亮显示匹配结果。</li>
+<li><code>set incsearch</code><ul>
+<li>输入搜索模式时，每输入一个字符，就自动跳到第一个匹配的结果。</li>
+</ul>
+</li>
+<li><code>set ignorecase</code><ul>
+<li>搜索时忽略大小写。</li>
+</ul>
+</li>
+<li><code>set smartcase</code><ul>
+<li>如果同时打开了ignorecase，那么对于只有一个大写字母的搜索词，将大小写敏感；其他情况都是大小写不敏感。比如，搜索Test时，将不匹配test；搜索test时，将匹配Test。</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>编辑<ol>
+<li><code>set spell spelllang=en_us</code>打开英语单词的拼写检查。</li>
+<li><code>set nobackup</code><ol>
+<li>不创建备份文件。默认情况下，文件保存时，会额外创建一个备份文件，它的文件名是在原文件名的末尾，再添加一个波浪号（〜）。</li>
+</ol>
+</li>
+<li><code>set noswapfile</code><ol>
+<li>不创建交换文件。交换文件主要用于系统崩溃时恢复文件，文件名的开头是.、结尾是.swp。</li>
+</ol>
+</li>
+<li><code>set undofile</code><ol>
+<li>保留撤销历史。</li>
+<li>Vim 会在编辑时保存操作历史，用来供用户撤消更改。默认情况下，操作记录只在本次编辑时有效，一旦编辑结束、文件关闭，操作历史就消失了。</li>
+<li>打开这个设置，可以在文件关闭后，操作记录保留在一个文件里面，继续存在。这意味着，重新打开一个文件，可以撤销上一次编辑时的操作。撤消文件是跟原文件保存在一起的隐藏文件，文件名以.un~开头。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">set backupdir&#x3D;~&#x2F;.vim&#x2F;.backup&#x2F;&#x2F;  </span><br><span class="line">set directory&#x3D;~&#x2F;.vim&#x2F;.swp&#x2F;&#x2F;</span><br><span class="line">set undodir&#x3D;~&#x2F;.vim&#x2F;.undo&#x2F;&#x2F; </span><br><span class="line">设置备份文件、交换文件、操作历史文件的保存位置。</span><br><span class="line">结尾的&#x2F;&#x2F;表示生成的文件名带有绝对路径，路径中用%替换目录分隔符，这样可以防止文件重名</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><code>set autoread</code><ol>
+<li>打开文件监视。如果在编辑过程中文件发生外部改变（比如被别的编辑器编辑了），就会发出提示。</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/a_linux%E6%8C%87%E4%BB%A4/%E8%A7%A3%E5%8E%8Btar+unzip%E7%9A%84%E7%89%B9%E6%AE%8A%E7%94%A8%E6%B3%95/" rel="prev" title="b计算机基础/c_计算机系统/a_linux指令/解压tar+unzip的特殊用法">
+      <i class="fa fa-chevron-left"></i> b计算机基础/c_计算机系统/a_linux指令/解压tar+unzip的特殊用法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/11/01/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/a_linux%E6%8C%87%E4%BB%A4/shell(%E5%AE%9E%E4%BE%8B%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96dl%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95)/" rel="next" title="b计算机基础/c_计算机系统/a_linux指令/shell(实例完成自动化dl模型测试)">
+      b计算机基础/c_计算机系统/a_linux指令/shell(实例完成自动化dl模型测试) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#vim新学习"><span class="nav-number">1.</span> <span class="nav-text">vim新学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改文本字母"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">修改文本字母</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改文本块"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">修改文本块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#全局操作："><span class="nav-number">1.0.0.3.</span> <span class="nav-text">全局操作：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1189</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">18:55</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '7bff4fabc66798b9851ff64d81a0e360',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

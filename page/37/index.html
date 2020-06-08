@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/05/27/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/Bounding%20box%20regression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +172,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/05/27/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5/" class="post-title-link" itemprop="url">混淆矩阵</a>
+            <a href="/2019/06/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/Bounding%20box%20regression/" class="post-title-link" itemprop="url">Bounding box regression</a>
         </h1>
 
         <div class="post-meta">
@@ -182,14 +182,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-27 10:40:00" itemprop="dateCreated datePublished" datetime="2019-05-27T10:40:00+08:00">2019-05-27</time>
+              <time title="创建时间：2019-06-06 05:04:00" itemprop="dateCreated datePublished" datetime="2019-06-06T05:04:00+08:00">2019-06-06</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
+                <time title="修改时间：2020-04-12 19:32:44" itemprop="dateModified" datetime="2020-04-12T19:32:44+08:00">2020-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -197,14 +197,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-knowledge/" itemprop="url" rel="index">
-                    <span itemprop="name">c数据科学/czh_机器学习/knowledge</span>
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-tracker-%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_tracker/积累</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2019/05/27/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5/" class="post-meta-item leancloud_visitors" data-flag-title="混淆矩阵" title="阅读次数">
+            <span id="/2019/06/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/Bounding%20box%20regression/" class="post-meta-item leancloud_visitors" data-flag-title="Bounding box regression" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -216,7 +216,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>71</span>
+              <span>190</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -235,820 +235,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2019年5月27日 下午10:40</p>
-<p><a href="https://www.jianshu.com/p/c61ae11cc5f6" target="_blank" rel="noopener">机器学习之分类性能度量指标 : ROC曲线、AUC值、正确率、召回率 - 简书</a><br><img src="/2019/05/27/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5/145616-0a7a7fd1ff77dcd9.png" alt></p>
-<h3 id="weka的参数"><a href="#weka的参数" class="headerlink" title="weka的参数"></a>weka的参数</h3><p><img src="/2019/05/27/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5/6AD127F0-2665-45F0-8349-D7AA53CC2C8B.png" alt></p>
-<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="bear://x-callback-url/open-note?id=43BD8148-D6C8-4E08-84FA-64508551AABD-10144-0001697F9744D302">评价指标之：AUC</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/05/26/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/weka-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E5%92%8C%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/26/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/weka-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E5%92%8C%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">weka-学习资料和使用操作</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-26 02:51:00" itemprop="dateCreated datePublished" datetime="2019-05-26T02:51:00+08:00">2019-05-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-knowledge/" itemprop="url" rel="index">
-                    <span itemprop="name">c数据科学/czh_机器学习/knowledge</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/05/26/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/weka-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E5%92%8C%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C/" class="post-meta-item leancloud_visitors" data-flag-title="weka-学习资料和使用操作" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>481</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年5月26日 下午2:51</p>
-<h3 id="主页"><a href="#主页" class="headerlink" title="主页"></a>主页</h3><p><a href="https://www.cs.waikato.ac.nz/ml/weka/index.html" target="_blank" rel="noopener">Weka 3 - Data Mining with Open Source Machine Learning Software in Java</a></p>
-<h3 id="weka的几个突出特点："><a href="#weka的几个突出特点：" class="headerlink" title="weka的几个突出特点："></a>weka的几个突出特点：</h3><ol>
-<li>能够对训练数据进行解剖，具体到每一个数据我们都是可以可视化的看到</li>
-</ol>
-<h3 id="Documentation"><a href="#Documentation" class="headerlink" title="Documentation"></a>Documentation</h3><p><a href="https://www.cs.waikato.ac.nz/ml/weka/documentation.html" target="_blank" rel="noopener">Weka 3 - Data Mining with Open Source Machine Learning Software in Java</a></p>
+          <p>2019年6月6日 下午5:04<br><a href="http://caffecn.cn/?/question/160" target="_blank" rel="noopener">bounding box regression - CaffeCN深度学习社区</a><br><a href="https://blog.csdn.net/zijin0802034/article/details/77685438" target="_blank" rel="noopener">边框回归(Bounding Box Regression)详解 - 南有乔木NTU的博客 - CSDN博客</a></p>
 <ol>
-<li>Wiki<ol>
-<li><a href="https://waikato.github.io/weka-wiki/learning_resources/" target="_blank" rel="noopener">Learning resources - Weka Wiki</a></li>
-</ol>
-</li>
-<li>package<ol>
-<li><a href="http://weka.sourceforge.net/packageMetaData/" target="_blank" rel="noopener">Waikato Environment for Knowledge Analysis (WEKA)</a></li>
-</ol>
-</li>
-<li>API<ol>
-<li><a href="http://weka.sourceforge.net/doc.dev/" target="_blank" rel="noopener">Generated Documentation (Untitled)</a></li>
-</ol>
-</li>
-<li>book<ol>
-<li><a href="https://www.cs.waikato.ac.nz/ml/weka/Witten_et_al_2016_appendix.pdf" target="_blank" rel="noopener">https://www.cs.waikato.ac.nz/ml/weka/Witten_et_al_2016_appendix.pdf</a></li>
-</ol>
-</li>
-<li>Video<ol>
-<li><a href="https://www.cs.waikato.ac.nz/ml/weka/mooc/dataminingwithweka/" target="_blank" rel="noopener">Data Mining with Weka</a> </li>
-<li><a href="https://www.cs.waikato.ac.nz/ml/weka/mooc/moredataminingwithweka/" target="_blank" rel="noopener">More Data Mining with Weka</a> </li>
-<li><a href="https://www.cs.waikato.ac.nz/ml/weka/mooc/advanceddataminingwithweka/" target="_blank" rel="noopener">Advanced Data Mining with Weka</a> </li>
-</ol>
-</li>
-</ol>
-<h2 id="具体的使用："><a href="#具体的使用：" class="headerlink" title="具体的使用："></a>具体的使用：</h2><h3 id="均值-最大小值-标准差"><a href="#均值-最大小值-标准差" class="headerlink" title="均值 最大小值 标准差"></a>均值 最大小值 标准差</h3><p><img src="/2019/05/26/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/weka-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E5%92%8C%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C/FECC55B3-06FC-484A-8A6A-A884CEE7529E.png" alt></p>
-<h3 id="属性值的统计分布"><a href="#属性值的统计分布" class="headerlink" title="属性值的统计分布"></a>属性值的统计分布</h3><p><img src="/2019/05/26/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/weka-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E5%92%8C%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C/F3897107-9872-4D20-B53D-16138CE16044.png" alt></p>
-<h2 id="属性间的相关性"><a href="#属性间的相关性" class="headerlink" title="属性间的相关性"></a>属性间的相关性</h2><p><img src="/2019/05/26/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/weka-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E5%92%8C%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C/291DB66E-DABD-4815-89DD-0958F6AD7752.png" alt><br><img src="/2019/05/26/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/weka-%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99%E5%92%8C%E4%BD%BF%E7%94%A8%E6%93%8D%E4%BD%9C/25D854D6-96CD-4C63-B784-37D402FC51C4.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/05/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E8%89%BE2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E8%89%BE2/" class="post-title-link" itemprop="url">计算机视觉-艾2</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-25 10:17:00" itemprop="dateCreated datePublished" datetime="2019-05-25T10:17:00+08:00">2019-05-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-knowledge/" itemprop="url" rel="index">
-                    <span itemprop="name">c数据科学/czh_机器学习/knowledge</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/05/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E8%89%BE2/" class="post-meta-item leancloud_visitors" data-flag-title="计算机视觉-艾2" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>636</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年5月25日 下午10:17</p>
-<p><a href="file:///Users/czh/Documents/课件汇总/[艾云峰]计算机视觉/重要知识点">重要知识点</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">6.PyTorch.pdf</span><br><span class="line">7.Tensorflow.pdf</span><br><span class="line">8.Static_Dynamic_Graph.pdf</span><br><span class="line">10.Weight_Initialization.pdf</span><br><span class="line">11.Batch_Normalization.pdf</span><br><span class="line">12.Optimization.pdf</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>Static_Dynamic_Graph<ol>
-<li>我终于理解<strong>图</strong>这个概念从哪来的的：<strong>【图】来源于求解梯度的反向传播算法</strong>，而PyTorch和Tensorflow只是实现了这种概念而已。</li>
-</ol>
-</li>
-<li>Weight_Initialization<ol>
-<li>权重的初始化，我一直理解不深，觉得随便初始化效果都一样</li>
-<li><strong>这里的关键是他们是用什么衡量初始化的好坏？</strong><ol>
-<li>他们将每层的输出(通过激活函数之后)的<strong>结果直方图</strong>画出来。</li>
-<li>这个直方图不能<strong>全部</strong>集中在0、1、-1这些地方，而是应该<strong>有分布</strong>的分布在-1~1之间</li>
-</ol>
-</li>
-<li>如何找到好的初始化权重？<ol>
-<li>我认为他们就是试出来的</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Batch_Normalization<ol>
-<li>主要思想：<ol>
-<li>目的：和Weight_Initialization的目的相同，都是要让<strong>每层的输出满足合理的分布</strong></li>
-<li>方法：既然找到一个<strong>好的初始化权重</strong>很难，那么，我们就<strong>让每层不太好的输出，强行的转化为较好的分布</strong></li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Optimization<ol>
-<li>SGD：就是简单的<code>负梯度大小 * 步长(学习率)</code></li>
-<li>SGD+momentum：<br><img src="/2019/05/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E8%89%BE2/1B06775C-1016-428C-8005-A50DEFDA8CB1.png" alt><ol start="2">
-<li>理解：要尽可能的<strong>维持上一步的速度</strong>,上下步之间有了关系</li>
-</ol>
-</li>
-<li>Adam<ol>
-<li>理解：有一定的<strong>自适应性</strong><br><img src="/2019/05/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E8%89%BE2/8CEBE263-2647-4BDF-8EEC-27A6CD1E8381.png" alt><ol start="2">
-<li><strong>猫咬自己的尾巴</strong>，有点类似于迭代运算</li>
-<li><strong>自己(x)影响下一轮的自己</strong></li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/05/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/unbalance%20data/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/unbalance%20data/" class="post-title-link" itemprop="url">unbalance data</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-25 09:49:00" itemprop="dateCreated datePublished" datetime="2019-05-25T09:49:00+08:00">2019-05-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-knowledge/" itemprop="url" rel="index">
-                    <span itemprop="name">c数据科学/czh_机器学习/knowledge</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/05/25/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/unbalance%20data/" class="post-meta-item leancloud_visitors" data-flag-title="unbalance data" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>157</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年5月25日 下午9:49</p>
-<h2 id="文章："><a href="#文章：" class="headerlink" title="文章："></a>文章：</h2><p><a href="http://www.svds.com/learning-imbalanced-classes/" target="_blank" rel="noopener">Learning from Imbalanced Classes - Silicon Valley Data Science</a></p>
-<h2 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h2><p><a href="https://github.com/yanshanjing/learning-from-imbalanced-classes" target="_blank" rel="noopener">GitHub - yanshanjing/learning-from-imbalanced-classes: Learning From Imbalanced Classes</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/05/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/mac%E4%B8%ADOpenMP%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/mac%E4%B8%ADOpenMP%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" class="post-title-link" itemprop="url">mac中OpenMP环境安装</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-25 09:45:00" itemprop="dateCreated datePublished" datetime="2019-05-25T09:45:00+08:00">2019-05-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-%E7%8E%AF%E5%A2%83/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_分布式/并行计算/环境</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/05/25/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/mac%E4%B8%ADOpenMP%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85/" class="post-meta-item leancloud_visitors" data-flag-title="mac中OpenMP环境安装" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年5月25日 下午9:45</p>
-<h3 id="自己编写的指令："><a href="#自己编写的指令：" class="headerlink" title="自己编写的指令："></a>自己编写的指令：</h3><p><code>openmp_bin</code></p>
-<p><a href="https://stackoverflow.com/questions/43555410/enable-openmp-support-in-clang-in-mac-os-x-sierra-mojave" target="_blank" rel="noopener">macos - Enable OpenMP support in clang in Mac OS X (Sierra &amp; Mojave) - Stack Overflow</a></p>
-<h3 id="安装指令："><a href="#安装指令：" class="headerlink" title="安装指令："></a>安装指令：</h3><p><code>brew install llvm</code></p>
-<h3 id="安装结果，这个结果中提示了一些重要的配置信息"><a href="#安装结果，这个结果中提示了一些重要的配置信息" class="headerlink" title="安装结果，这个结果中提示了一些重要的配置信息"></a>安装结果，这个结果中提示了一些重要的配置信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;&gt; Summary</span><br><span class="line">🍺  &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;llvm&#x2F;8.0.0_1: 6,807 files, 3.3GB</span><br><span class="line">Error: libomp 7.0.0 is already installed</span><br><span class="line">To upgrade to 8.0.0, run &#96;brew upgrade libomp&#96;.</span><br><span class="line">&#x3D;&#x3D;&gt; Caveats</span><br><span class="line">&#x3D;&#x3D;&gt; llvm</span><br><span class="line">To use the bundled libc++ please add the following LDFLAGS:</span><br><span class="line">  LDFLAGS&#x3D;&quot;-L&#x2F;usr&#x2F;local&#x2F;opt&#x2F;llvm&#x2F;lib -Wl,-rpath,&#x2F;usr&#x2F;local&#x2F;opt&#x2F;llvm&#x2F;lib&quot;</span><br><span class="line"></span><br><span class="line">llvm is keg-only, which means it was not symlinked into &#x2F;usr&#x2F;local,</span><br><span class="line">because macOS already provides this software and installing another version in</span><br><span class="line">parallel can cause all kinds of trouble.</span><br><span class="line"></span><br><span class="line">If you need to have llvm first in your PATH run:</span><br><span class="line">  echo &#39;export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;opt&#x2F;llvm&#x2F;bin:$PATH&quot;&#39; &gt;&gt; ~&#x2F;.bash_profile</span><br><span class="line"></span><br><span class="line">For compilers to find llvm you may need to set:</span><br><span class="line">  export LDFLAGS&#x3D;&quot;-L&#x2F;usr&#x2F;local&#x2F;opt&#x2F;llvm&#x2F;lib&quot;</span><br><span class="line">  export CPPFLAGS&#x3D;&quot;-I&#x2F;usr&#x2F;local&#x2F;opt&#x2F;llvm&#x2F;include&quot;</span><br></pre></td></tr></table></figure>
-
-<h3 id="openMP程序编译执行方法"><a href="#openMP程序编译执行方法" class="headerlink" title="openMP程序编译执行方法"></a>openMP程序编译执行方法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">localhost:OpenMP czh$ &#x2F;usr&#x2F;local&#x2F;opt&#x2F;llvm&#x2F;bin&#x2F;clang -fopenmp test.c</span><br><span class="line">localhost:OpenMP czh$ ls</span><br><span class="line">a.out	test.c</span><br><span class="line">localhost:OpenMP czh$ a.out</span><br><span class="line">-bash: a.out: command not found</span><br><span class="line">localhost:OpenMP czh$ .&#x2F;a.out</span><br><span class="line">Hello World from thread &#x3D; 0</span><br><span class="line">Number of threads &#x3D; 4</span><br><span class="line">Hello World from thread &#x3D; 2</span><br><span class="line">Hello World from thread &#x3D; 3</span><br><span class="line">Hello World from thread &#x3D; 1</span><br></pre></td></tr></table></figure>
-
-<h3 id="bash-profile的配置，简化编译指令alias"><a href="#bash-profile的配置，简化编译指令alias" class="headerlink" title="~/.bash_profile的配置，简化编译指令alias"></a>~/.bash_profile的配置，简化编译指令alias</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#llvm OpenMP</span><br><span class="line">export PATH&#x3D;&quot;&#x2F;usr&#x2F;local&#x2F;opt&#x2F;llvm&#x2F;bin:$PATH&quot;</span><br><span class="line">alias openmp_bin&#x3D;&#39;&#x2F;usr&#x2F;local&#x2F;opt&#x2F;llvm&#x2F;bin&#x2F;clang -fopenmp&#39;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">localhost:OpenMP czh$ openmp_bin test.c</span><br><span class="line">localhost:OpenMP czh$ ls</span><br><span class="line">a.out	test.c</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/05/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/OpenMP%E6%95%99%E7%A8%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/OpenMP%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">OpenMP教程</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-24 09:14:00" itemprop="dateCreated datePublished" datetime="2019-05-24T09:14:00+08:00">2019-05-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 16:46:20" itemprop="dateModified" datetime="2020-03-12T16:46:20+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-czh-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">b计算机基础/czh_分布式/并行计算/知识点</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/05/24/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/czh_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%9F%A5%E8%AF%86%E7%82%B9/OpenMP%E6%95%99%E7%A8%8B/" class="post-meta-item leancloud_visitors" data-flag-title="OpenMP教程" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>30</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年5月24日 下午9:14</p>
-<p><a href="https://computing.llnl.gov/tutorials/openMP/" target="_blank" rel="noopener">OpenMP</a>这个教程比较详细</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/05/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/Homography%20%E7%9F%A5%E5%A4%9A%E5%B0%91%EF%BC%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/Homography%20%E7%9F%A5%E5%A4%9A%E5%B0%91%EF%BC%9F/" class="post-title-link" itemprop="url">Homography 知多少？</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-24 03:33:00" itemprop="dateCreated datePublished" datetime="2019-05-24T03:33:00+08:00">2019-05-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 16:19:14" itemprop="dateModified" datetime="2020-04-01T16:19:14+08:00">2020-04-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/知识点#</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/05/24/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/Homography%20%E7%9F%A5%E5%A4%9A%E5%B0%91%EF%BC%9F/" class="post-meta-item leancloud_visitors" data-flag-title="Homography 知多少？" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>443</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年5月24日 下午3:33</p>
-<p>::Homography = 单应矩阵 = 3*3矩阵::</p>
-<h3 id="从数学推导的角度"><a href="#从数学推导的角度" class="headerlink" title="从数学推导的角度"></a>从数学推导的角度</h3><p><a href="https://blog.csdn.net/heyijia0327/article/details/53782094" target="_blank" rel="noopener">Homography 知多少？ - 知行合一 - CSDN博客</a><br>这篇文章不仅仅讲了Homography</p>
-<ol>
-<li>从几何模型推导出来<strong>一般形式的Homography</strong>：描述<strong>非纯旋转</strong>(还有平移)的所有观测点都在<strong>同一平面</strong>的情况</li>
-<li>Homography描述相机的<strong>纯旋转</strong>和<strong>非共面情形</strong></li>
-<li><strong>即非共面情形，又不是纯旋转</strong>，那我们使用一个Homography矩阵来进行坐标点的转换误差会咋样?</li>
-<li>由H矩阵到本征矩阵E，<ol>
-<li>来引出<strong>六点法</strong>，四个共面点确定H,两个非共面点确定极点。</li>
-<li><strong>8点法</strong>计算求解本征矩阵<strong>不能应用于共面的情形</strong><ol>
-<li>这里使用<strong>反正法</strong>，说明在这种情况下有无数的解</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<p>这里写的并不是特别详细，由于涉及到画图和公式，我写到笔记本上了： 日期：2019年6月26日 </p>
-<h3 id="从应用的角度："><a href="#从应用的角度：" class="headerlink" title="从应用的角度："></a>从应用的角度：</h3><p><a href="https://www.learnopencv.com/homography-examples-using-opencv-python-c/" target="_blank" rel="noopener">Homography Examples using OpenCV ( Python / C ++ ) | Learn OpenCV</a><br><a href="https://blog.csdn.net/liuphahaha/article/details/50719275" target="_blank" rel="noopener">Opencv日常之Homography - liuphahaha的专栏 - CSDN博客</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/05/21/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%90%91%E9%87%8F%E7%82%B9%E4%B9%98%EF%BC%88%E5%86%85%E7%A7%AF%EF%BC%89%E5%92%8C%E5%8F%89%E4%B9%98%EF%BC%88%E5%A4%96%E7%A7%AF%E3%80%81%E5%90%91%E9%87%8F%E7%A7%AF%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/21/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%90%91%E9%87%8F%E7%82%B9%E4%B9%98%EF%BC%88%E5%86%85%E7%A7%AF%EF%BC%89%E5%92%8C%E5%8F%89%E4%B9%98%EF%BC%88%E5%A4%96%E7%A7%AF%E3%80%81%E5%90%91%E9%87%8F%E7%A7%AF%EF%BC%89/" class="post-title-link" itemprop="url">向量点乘（内积）和叉乘（外积、向量积）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2019-05-21 08:31:00" itemprop="dateCreated datePublished" datetime="2019-05-21T08:31:00+08:00">2019-05-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-01 16:19:06" itemprop="dateModified" datetime="2020-04-01T16:19:06+08:00">2020-04-01</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA-%E5%9B%BE%E7%89%87-%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index">
-                    <span itemprop="name">e视觉相关/czh_三维重建(图片)/知识点#</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2019/05/21/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E9%87%8D%E5%BB%BA(%E5%9B%BE%E7%89%87)/%E7%9F%A5%E8%AF%86%E7%82%B9/%E5%90%91%E9%87%8F%E7%82%B9%E4%B9%98%EF%BC%88%E5%86%85%E7%A7%AF%EF%BC%89%E5%92%8C%E5%8F%89%E4%B9%98%EF%BC%88%E5%A4%96%E7%A7%AF%E3%80%81%E5%90%91%E9%87%8F%E7%A7%AF%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="向量点乘（内积）和叉乘（外积、向量积）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>395</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2019年5月21日 下午8:31<br><a href="https://blog.csdn.net/dcrmg/article/details/52416832" target="_blank" rel="noopener">向量点乘（内积）和叉乘（外积、向量积）概念及几何意义解读 - 牧野的博客 - CSDN博客</a></p>
-<h3 id="点乘结论："><a href="#点乘结论：" class="headerlink" title="点乘结论："></a>点乘结论：</h3><ul>
-<li>点乘<ul>
-<li>向量的点乘,也叫向量的内积、数量积，对两个向量执行点乘运算，就是对这两个向量对应位一一相乘之后求和的操作，点乘的结果是一个标量。</li>
+<li>::学的是什么？::也就是<strong>motivation</strong><ol>
+<li>是<strong>feature map</strong>和<strong>平移差值、缩放比例</strong>之间的关系</li>
+<li><strong>不是：坐标之间的转化关系</strong><ul>
+<li>估计box坐标信息和正确box坐标之间的关系</li>
 </ul>
 </li>
-<li>点乘几何意义<ol>
-<li>意义1：在b向量在a向量方向上的投影</li>
-<li>意义2：可以计算向量a和向量b之间的夹角。从而就可以进一步判断这两个向量是否是同一方向，是否正交(也就是垂直)等方向关系</li>
 </ol>
 </li>
-</ul>
-<hr>
-<h3 id="叉乘结论"><a href="#叉乘结论" class="headerlink" title="叉乘结论"></a>叉乘结论</h3><ul>
-<li>叉乘：<ul>
-<li>两个向量的叉乘，又叫向量积、外积、叉积，叉乘的运算结果是一个向量而不是一个标量。并且两个向量的叉积与这两个向量组成的坐标平面垂直。</li>
-</ul>
-</li>
-<li>叉乘几何意义：<ol>
-<li>在3D图像学中，叉乘的概念非常有用，可以通过两个向量的叉乘，生成第三个垂直于a，b的法向量，从而构建X、Y、Z坐标系</li>
-<li>在二维空间中，叉乘还有另外一个几何意义就是：aXb等于由向量a和向量b构成的平行四边形的面积</li>
 </ol>
-</li>
-</ul>
+<h3 id="这里面有一点需要理解"><a href="#这里面有一点需要理解" class="headerlink" title="这里面有一点需要理解"></a>这里面有一点需要理解</h3><p><img src="/2019/06/06/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/Bounding%20box%20regression/F62CB61B-2039-456E-8989-214E6DC32622.png" alt></p>
 
       
     </div>
@@ -1068,7 +266,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/05/20/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E8%89%BE1/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1082,7 +280,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/05/20/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E8%89%BE1/" class="post-title-link" itemprop="url">计算机视觉-艾1</a>
+            <a href="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/" class="post-title-link" itemprop="url">FasterR-CNN(object-detection)</a>
         </h1>
 
         <div class="post-meta">
@@ -1092,14 +290,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-20 10:45:00" itemprop="dateCreated datePublished" datetime="2019-05-20T10:45:00+08:00">2019-05-20</time>
+              <time title="创建时间：2019-06-05 12:16:00" itemprop="dateCreated datePublished" datetime="2019-06-05T12:16:00+08:00">2019-06-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
+                <time title="修改时间：2020-04-01 16:19:13" itemprop="dateModified" datetime="2020-04-01T16:19:13+08:00">2020-04-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1107,14 +305,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-knowledge/" itemprop="url" rel="index">
-                    <span itemprop="name">c数据科学/czh_机器学习/knowledge</span>
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-tracker-%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_tracker/积累</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2019/05/20/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E8%89%BE1/" class="post-meta-item leancloud_visitors" data-flag-title="计算机视觉-艾1" title="阅读次数">
+            <span id="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/" class="post-meta-item leancloud_visitors" data-flag-title="FasterR-CNN(object-detection)" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1126,7 +324,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>392</span>
+              <span>830</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1145,32 +343,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2019年5月20日 上午10:45</p>
-<p><a href="file:///Users/czh/Documents/课件汇总/[艾云峰]计算机视觉/重要知识点">重要知识点</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.Hyperparameters_cross_validation_vailidation.pdf</span><br><span class="line">2.SVM-loss.pdf</span><br><span class="line">3.Regularization.pdf</span><br><span class="line">4.Backprop.pdf</span><br><span class="line">5.Conv Layer.pdf</span><br></pre></td></tr></table></figure>
-
+          <p>2019年6月5日 下午12:16</p>
+<p>2019年10月20日 下午9:48<br><a href="https://blog.csdn.net/sinat_33486980/article/details/81099093" target="_blank" rel="noopener">faster R-CNN中anchors 的生成过程（generate_anchors源码解析）</a><br><img src="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/D6532830-D32E-417F-A60E-DB40A0B698B9.png" alt><br><img src="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/08F33A4A-51F8-4E5E-8AF4-DC7473FDA9C4.png" alt></p>
+<p><a href="file:///Users/czh/Documents/课件汇总/[艾云峰]计算机视觉/重要知识点">重要知识点</a>中的<strong>[R-CNN]</strong>cs231n_2019_lecture12.pdf</p>
 <ol>
-<li>Cs231n的ppt写的非常循序渐进，对初学者友好，并且能够讲清楚基本的概念</li>
-<li>我从ppt中提取出了几个我自己认为重要的知识点<ol>
-<li><strong>Hyperparameters_cross_validation_vailidation</strong></li>
-<li><strong>SVM-loss</strong><ol>
-<li>这个loss其中也包含<strong>超参数</strong></li>
-<li>理解的方法：<strong>举个例子，在数轴上画，多画几个就能感受出来。</strong></li>
+<li>这里面有两个重要的知识点，重点讲解其中的<strong>Anchor的概念</strong>，另一个Roi(regin object interest)<ol>
+<li>应为在tracker中， <a href="bear://x-callback-url/open-note?id=22BE9091-7C9A-4BBC-9028-F697C56EF56C-1203-000007F526F049A4">SiamRPN系列文章</a>可以说是来源与R-CNN，其中的这个Anchor更是一提再提</li>
 </ol>
 </li>
-<li><strong>Regularization</strong><ol>
-<li>正则的理解</li>
+<li>Anchor<ol>
+<li>这个概念来源于：Insert Region Proposal Network (<strong>RPN</strong>) to predict <strong>proposals</strong> from features，目的是使用CNN来预测proposal，来提高速度和准确率</li>
+<li>定义：<ol>
+<li>Imagine an <strong>anchor box</strong> of <strong>fixed size</strong> at <strong>each point</strong> in the feature map<ol>
+<li>他就是一个矩形框</li>
+<li>并且长宽是超参数，不能改</li>
 </ol>
 </li>
-<li><strong>Backprop</strong><br><img src="/2019/05/20/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89-%E8%89%BE1/39E5C057-9664-4410-84D4-57A1F6D70884.png" alt><ol start="2">
-<li>这张图真的太重要的，解决我对矩阵的一个心病。但是其中没有包括<strong>张量</strong>的内容</li>
-<li>内容主要涉及到<strong>矩阵求导</strong></li>
 </ol>
 </li>
-<li><strong>Conv Layer</strong><ol>
-<li>主要是计算网络中<strong>参数的个数</strong>方法</li>
+<li>Box transforms<ol>
+<li>是一个与<strong>每一个anchor</strong>对应的概念</li>
+<li>定义：<ol>
+<li>For <strong>positive boxes</strong>, also predict a transformation from the anchor to the <strong>ground-truth box</strong> (<strong>regress 4 numbers per pixel</strong>)</li>
+<li>这里一定要注意是针对 <strong>positive boxes</strong>，也就是只有被判断为正样本的anchor才有Box transforms</li>
+<li><strong>这样做原因</strong>：我们现在通过anchor这个矩形区域可以大致判断是可以选为proposel，但是这个<strong>anchor并不是最准确的</strong>，那么我们就要<strong>学习一下在已知anchor对应的point是positive之后，周围哪些transforms是更好的</strong>。<br><img src="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/60BE1904-6F80-4EEC-A755-407B731A2300.png" alt></li>
 </ol>
 </li>
+</ol>
+</li>
+<li>为了考虑更多的情况，我们一般选取多个(K个) anchor，当然就会导致更多的Box transforms<br><img src="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/9B29BD2A-06A1-455E-8358-91FE7132DDA3.png" alt></li>
+<li><strong>Anchor可以为Box transforms的种子</strong></li>
+</ol>
+</li>
+<li>最后结果：<ol>
+<li>整体上看FasterR-CNN:就有4个loss<br><img src="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/FasterR-CNN(object-detection)/492FBD4B-30D5-4E73-BABB-92353F4FD08A.png" alt></li>
 </ol>
 </li>
 </ol>
@@ -1193,7 +399,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/05/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%B7%A5%E7%A8%8B/%E5%BD%93%E5%89%8D%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E4%B8%AD%E4%BE%9D%E7%84%B6%E8%BF%98%E5%AD%98%E5%9C%A8%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/%E7%9B%AE%E5%BD%95(tracker%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE)/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1207,7 +413,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2019/05/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%B7%A5%E7%A8%8B/%E5%BD%93%E5%89%8D%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E4%B8%AD%E4%BE%9D%E7%84%B6%E8%BF%98%E5%AD%98%E5%9C%A8%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">当前项目开发中依然还存在的几个问题</a>
+            <a href="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/%E7%9B%AE%E5%BD%95(tracker%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE)/" class="post-title-link" itemprop="url">目录(tracker开源项目)</a>
         </h1>
 
         <div class="post-meta">
@@ -1217,7 +423,112 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2019-05-18 11:33:00" itemprop="dateCreated datePublished" datetime="2019-05-18T11:33:00+08:00">2019-05-18</time>
+              <time title="创建时间：2019-06-05 12:16:00" itemprop="dateCreated datePublished" datetime="2019-06-05T12:16:00+08:00">2019-06-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-12 19:31:53" itemprop="dateModified" datetime="2020-04-12T19:31:53+08:00">2020-04-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-tracker-%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_tracker/积累</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/%E7%9B%AE%E5%BD%95(tracker%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE)/" class="post-meta-item leancloud_visitors" data-flag-title="目录(tracker开源项目)" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>314</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年6月5日 下午12:16</p>
+<p>2019年11月14日 下午10:45<br><a href="bear://x-callback-url/open-note?id=C451B767-A8BD-4129-88E7-D0EACFF0196F-827-0001546C8785C100">追踪的评价指标讲解(摘抄)</a></p>
+<p>2019年11月1日 下午4:33<br><a href="bear://x-callback-url/open-note?id=C417868D-595D-442B-90F3-3E38A1D2DD6B-15210-00017C3ECEF1853B">pysot中比较有价值的issue</a></p>
+<p>2019年9月2日 下午1:59<br><a href="bear://x-callback-url/open-note?id=1FB926CE-753F-4D2C-A2A6-F64E0838CF71-1464-000007BFEF162DEF">GOTURN</a></p>
+<p>知识点：<br><a href="bear://x-callback-url/open-note?id=B9507CB6-BE6A-4EAE-B786-3BB58BB060F6-1203-00005E8B0B02A61C">Bounding box regression</a><br><a href="bear://x-callback-url/open-note?id=A8CD71AD-351D-46EA-A1AD-D158AB708434-1203-00001BE8A08F92A2">FasterR-CNN(object-detection)</a><br><a href="bear://x-callback-url/open-note?id=742C0F9B-6DD3-4C7E-86E4-327626C37996-9635-0002FFF70ADB7099">打印：相关滤波法</a> 难点</p>
+<p>pysot<br><a href="bear://x-callback-url/open-note?id=22BE9091-7C9A-4BBC-9028-F697C56EF56C-1203-000007F526F049A4">SiamRPN系列文章</a><br><a href="bear://x-callback-url/open-note?id=D290B219-ECD2-4321-ADBA-7B1FE161F51B-20692-0001B09EB4E68A42">Mac下使用商汤pysot</a></p>
+<p>总结：<br><a href="bear://x-callback-url/open-note?id=999B8A9F-FF2F-4B6C-BC1D-812D32CBBBB3-9635-00026CC899B9A9B5">tracking 总结：刚刚接触时的内容，留恋</a></p>
+<p>其他项目：<br><a href="bear://x-callback-url/open-note?id=E53F72A7-6F1F-4E6F-9CB4-5AB80FA21A73-1203-000005210600A00E">MDNet</a><br><a href="bear://x-callback-url/open-note?id=2E1ED97E-6D9D-4ED8-91D6-B4BFBE0CDB0F-1908-00004A20651A1B57">github项目：vehicle-dsm运行</a></p>
+<h3 id="目标检测："><a href="#目标检测：" class="headerlink" title="目标检测："></a>目标检测：</h3><p>2019年7月26日 下午7:45<br><a href="bear://x-callback-url/open-note?id=57CB0E3F-3DD7-486D-96FC-739153476534-4481-0000219E189D6D36">混合编程原理 + darknet + yolo3</a><br><a href="bear://x-callback-url/open-note?id=800FE2C0-CB82-48AD-9823-F3E24314CE9A-4481-00001C358A499374">使用Yolo3在GPU上训练自己打标签的数据</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E5%9F%BA%E7%A1%80/%E5%BF%AB%E9%80%9F%E4%BA%86%E8%A7%A3%E4%B8%80%E7%AF%87%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E7%9A%84%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E5%9F%BA%E7%A1%80/%E5%BF%AB%E9%80%9F%E4%BA%86%E8%A7%A3%E4%B8%80%E7%AF%87%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E7%9A%84%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">快速了解一篇深度学习论文核心概念的技巧</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-05 11:20:00" itemprop="dateCreated datePublished" datetime="2019-06-05T11:20:00+08:00">2019-06-05</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1232,14 +543,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1-%E7%82%B9%E4%BA%91-%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index">
-                    <span itemprop="name">e视觉相关/czh_三维建模(点云)/工程#</span>
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-tracker-%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_tracker/基础</span>
                   </a>
                 </span>
             </span>
 
           
-            <span id="/2019/05/18/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_%E4%B8%89%E7%BB%B4%E5%BB%BA%E6%A8%A1(%E7%82%B9%E4%BA%91)/%E5%B7%A5%E7%A8%8B/%E5%BD%93%E5%89%8D%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E4%B8%AD%E4%BE%9D%E7%84%B6%E8%BF%98%E5%AD%98%E5%9C%A8%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="当前项目开发中依然还存在的几个问题" title="阅读次数">
+            <span id="/2019/06/05/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E5%9F%BA%E7%A1%80/%E5%BF%AB%E9%80%9F%E4%BA%86%E8%A7%A3%E4%B8%80%E7%AF%87%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%AE%BA%E6%96%87%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E7%9A%84%E6%8A%80%E5%B7%A7/" class="post-meta-item leancloud_visitors" data-flag-title="快速了解一篇深度学习论文核心概念的技巧" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1251,7 +562,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>551</span>
+              <span>206</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1270,23 +581,678 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2019年5月18日 下午11:33</p>
+          <p>2019年6月5日 上午11:20</p>
+<h2 id="快速了解一篇深度学习论文核心概念的技巧："><a href="#快速了解一篇深度学习论文核心概念的技巧：" class="headerlink" title="快速了解一篇深度学习论文核心概念的技巧："></a>快速了解一篇深度学习论文核心概念的技巧：</h2><p>::准备：一定要提醒自己以自己的思路为主，从论文中找描述来作为自己思路的血肉::</p>
+<h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步:"></a>第一步:</h3><ol>
+<li>::学的是什么？::也就是<strong>motivation</strong><ol>
+<li>这个直接从论文中找到原句，找到<strong>最</strong>让你理解的</li>
+</ol>
+</li>
+<li>学习到的东西如何解决你的问题？<ol>
+<li>这个需要自己去理解了motivation之后自己回答<h3 id="第二步：这部分也是从论文中直接找"><a href="#第二步：这部分也是从论文中直接找" class="headerlink" title="第二步：这部分也是从论文中直接找"></a>第二步：这部分也是从论文中直接找</h3></li>
+</ol>
+</li>
+<li>你是如何构建网络去学的？</li>
+<li>输入、输出的具体格式是啥？</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E6%8E%A8%E5%AF%BC%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E6%8E%A8%E5%AF%BC%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86/" class="post-title-link" itemprop="url">条件概率推导贝叶斯定理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-04 12:20:00" itemprop="dateCreated datePublished" datetime="2019-06-04T12:20:00+08:00">2019-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-knowledge/" itemprop="url" rel="index">
+                    <span itemprop="name">c数据科学/czh_机器学习/knowledge</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/06/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E6%8E%A8%E5%AF%BC%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="条件概率推导贝叶斯定理" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>63</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年6月4日 下午12:20<br><a href="https://zh.wikipedia.org/wiki/%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86" target="_blank" rel="noopener">贝叶斯定理 - 维基百科，自由的百科全书</a><br><a href="https://zh.wikipedia.org/wiki/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87" target="_blank" rel="noopener">条件概率 - 维基百科，自由的百科全书</a></p>
+<p><img src="/2019/06/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E6%8E%A8%E5%AF%BC%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86/708D6DFF-968D-4E25-BA50-89C948F12D5D.png" alt></p>
+<h3 id="从条件概率推导贝叶斯定理"><a href="#从条件概率推导贝叶斯定理" class="headerlink" title="从条件概率推导贝叶斯定理"></a>从条件概率推导贝叶斯定理</h3><p><img src="/2019/06/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E6%8E%A8%E5%AF%BC%E8%B4%9D%E5%8F%B6%E6%96%AF%E5%AE%9A%E7%90%86/BA481947-5BF0-4C2F-8C06-73AC2DAC3702.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/MDNet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/MDNet/" class="post-title-link" itemprop="url">MDNet</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-04 11:35:00" itemprop="dateCreated datePublished" datetime="2019-06-04T11:35:00+08:00">2019-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:13" itemprop="dateModified" datetime="2020-04-01T16:19:13+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-tracker-%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_tracker/积累</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/06/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/MDNet/" class="post-meta-item leancloud_visitors" data-flag-title="MDNet" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年6月4日 下午11:35</p>
+<p>我认为MDNet就是在R-CNN上进行更改的，核心有两个</p>
 <ol>
-<li>filtering和registration这两个项目都是<strong>使用.h直接实现函数</strong><ol>
-<li>其实，<strong>只有.h就不算是单独的项目</strong>，应为对这两个项目点击编译，<strong>其实编译器啥都没有做，因为没有cpp文件</strong>。于直接放在polyfit项目中作用完全一致，只不过这样结构上更加分明一下而已。</li>
-<li>.h文件真正起作用的时候是在cpp中include，然后当成cpp的一部分进行处理</li>
-<li>由于这两个项目中的.h文件只在polyfit这个主文件下被包含使用，那么也<strong>只有polyfit项目编译时</strong>，才会对对这些.h中的函数进行编译！</li>
-</ol>
-</li>
-<li>plane_detection_liu这个项目是<strong>从exe项目直接改过来的</strong>，编译成了<strong>lib包</strong>的形式，然后在polyfit项目中调用这个lib包和对应的路径。<ol>
-<li>这样的操作就说明，对于polyfit这个主项目来说，plane_detection_liu项目就和PCL库一样，我们可以把<strong>他理解成单独的一部分进行操作</strong>。<ol>
-<li>也就是说，我们可以新建一个项目plane_detection_liu，在这个项目生产lib文件，然后拷给polyfit项目，效果是一样的，</li>
+<li>Motivation1是明确问题思路，Motivation2是简化问题</li>
+<li>与R-CNN的区别：<ol>
+<li>由于是一个跟踪问题，他可以<strong>在线更新模型</strong></li>
+<li>Motivation1明确了自己<strong>网络模型学习的对象</strong>：<strong>某种追踪的共性</strong></li>
 </ol>
 </li>
 </ol>
-</li>
-<li>除了plane_detection_liu这个项目，其他的项目都是dll项目，但是并没有使用所谓的引导函数dllmain.c等写法，我也不知道为啥</li>
+<h3 id="我认为的一个缺点："><a href="#我认为的一个缺点：" class="headerlink" title="我认为的一个缺点："></a>我认为的一个缺点：</h3><ol>
+<li>MDNet在<strong>训练的过程</strong>中(<strong>输入输出</strong>)没有使用<strong>视频的上下帧之</strong>间的关系，<strong>帧之间的关系是浪费了</strong><ol>
+<li>Box regression</li>
 </ol>
+</li>
+</ol>
+<h3 id="Project-Webpage："><a href="#Project-Webpage：" class="headerlink" title="Project Webpage："></a>Project Webpage：</h3><p><a href="http://cvlab.postech.ac.kr/research/mdnet/" target="_blank" rel="noopener">Learning Multi-Domain Convolutional Neural Networks for Visual Tracking</a></p>
+<h3 id="翻译："><a href="#翻译：" class="headerlink" title="翻译："></a>翻译：</h3><p><a href="https://zhuanlan.zhihu.com/p/25312850" target="_blank" rel="noopener">小网络自训练跟踪算法MDNet: Learning Multi-Domain Convolutional Neural Networks for Visual Tracking - 知乎</a></p>
+<ol>
+<li><strong>Motivation</strong><ol>
+<li>所有的跟踪目标，虽然类别各不相同，但其实他们应该都存在<strong>某种共性</strong>，这是需要网络去学的。<ol>
+<li><strong>这个模型中所指的共性</strong>：::输入的condition是目标还是背景的在所有训练集数据中的共性::</li>
+</ol>
+</li>
+<li>在跟踪问题中，<strong>一个网络只需要分两类：目标和背景</strong>。而且目标一般都相对比较小，那么其实<strong>不需要这么大的网络</strong>，会增加计算负担</li>
+</ol>
+</li>
+<li>网络在线更新策略</li>
+<li>目标跟踪<ol>
+<li>采样256个<strong>candidates</strong></li>
+<li><strong>输出</strong>是一个二维的向量，分别表示输入的<strong>bounding box</strong>是目标和背景的概率</li>
+<li>最后得到的candidate其实不是直接作为目标，还要做一部<strong>bounding box regression</strong></li>
+</ol>
+</li>
+</ol>
+<h3 id="Python版本："><a href="#Python版本：" class="headerlink" title="Python版本："></a>Python版本：</h3><p><a href="https://github.com/HyeonseobNam/py-MDNet" target="_blank" rel="noopener">GitHub - HyeonseobNam/py-MDNet: MDNet PyTorch implementation</a></p>
+<ol>
+<li>使用cpu版本：<ol>
+<li><a href="https://github.com/HyeonseobNam/py-MDNet/issues/11" target="_blank" rel="noopener">Support CPU Mode · Issue #11 · HyeonseobNam/py-MDNet · GitHub</a></li>
+</ol>
+</li>
+<li><a href="https://blog.csdn.net/discoverer100/article/details/88073827" target="_blank" rel="noopener">MDNet视频目标跟踪源码运行笔记（Python 2.7版本）——Training and then testing模式 - 越野者的博客 - CSDN博客</a></li>
+</ol>
+<h3 id="MatLab版："><a href="#MatLab版：" class="headerlink" title="MatLab版："></a>MatLab版：</h3><p><a href="https://github.com/HyeonseobNam/MDNet" target="_blank" rel="noopener">GitHub - HyeonseobNam/MDNet: Learning Multi-Domain Convolutional Neural Networks for Visual Tracking</a></p>
+<h3 id="运行参数："><a href="#运行参数：" class="headerlink" title="运行参数："></a>运行参数：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">python tracking_only&#x2F;run_tracker.py -s dataset_rectify_lib_ball -d</span><br><span class="line"></span><br><span class="line">python tracking_only&#x2F;run_tracker.py -s DragonBaby -d</span><br></pre></td></tr></table></figure>
+<p><img src="/2019/06/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/MDNet/A3881D7B-94F7-4EBC-8349-50B249C3C737.png" alt></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/mac%E4%B8%8B%E4%BD%BF%E7%94%A8%E5%95%86%E6%B1%A4pysot/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/mac%E4%B8%8B%E4%BD%BF%E7%94%A8%E5%95%86%E6%B1%A4pysot/" class="post-title-link" itemprop="url">mac下使用商汤pysot</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-04 03:35:00" itemprop="dateCreated datePublished" datetime="2019-06-04T03:35:00+08:00">2019-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-01 16:19:05" itemprop="dateModified" datetime="2020-04-01T16:19:05+08:00">2020-04-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3-czh-tracker-%E7%A7%AF%E7%B4%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">e视觉相关/czh_tracker/积累</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/06/04/e%E8%A7%86%E8%A7%89%E7%9B%B8%E5%85%B3/czh_tracker/%E7%A7%AF%E7%B4%AF/mac%E4%B8%8B%E4%BD%BF%E7%94%A8%E5%95%86%E6%B1%A4pysot/" class="post-meta-item leancloud_visitors" data-flag-title="mac下使用商汤pysot" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年6月4日 下午3:35</p>
+<p><a href="https://www.infoq.cn/article/YRAmUHoKxEaYikv_eua8" target="_blank" rel="noopener">三次成功挑战目标跟踪算法极限，商汤开源SiamRPN系列算法</a></p>
+<p><a href="https://github.com/STVIR/pysot" target="_blank" rel="noopener">GitHub - STVIR/pysot: SenseTime Research platform for single object tracking, implementing algorithms like SiamRPN and SiamMask.</a></p>
+<h3 id="安装环境："><a href="#安装环境：" class="headerlink" title="安装环境："></a>安装环境：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pip install torch pyyaml yacs tqdm colorama matplotlib cython tensorboardX</span><br><span class="line"></span><br><span class="line">python tools&#x2F;demo.py \</span><br><span class="line">    --config experiments&#x2F;siamrpn_r50_l234_dwxcorr&#x2F;config.yaml \</span><br><span class="line">    --snapshot experiments&#x2F;siamrpn_r50_l234_dwxcorr&#x2F;model.pth \</span><br><span class="line">    --video demo&#x2F;bag.avi</span><br></pre></td></tr></table></figure>
+<p>注意：<a href="https://github.com/STVIR/pysot/issues/16" target="_blank" rel="noopener">请教 · Issue #16 · STVIR/pysot · GitHub</a><br><code>python setup.py build_ext --inplace</code></p>
+<h2 id="每次必执行："><a href="#每次必执行：" class="headerlink" title="每次必执行："></a>每次必执行：</h2><p>否则：ModuleNotFoundError: No module named ‘pysot’<br><code>export PYTHONPATH=/Users/czh/tracker/pysot:$PYTHONPATH</code></p>
+<h3 id="siamrpn-r50-l234-dwxcorr-35fps"><a href="#siamrpn-r50-l234-dwxcorr-35fps" class="headerlink" title="siamrpn_r50_l234_dwxcorr:35fps"></a>siamrpn_r50_l234_dwxcorr:35fps</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python tools&#x2F;demo.py \</span><br><span class="line">    --config experiments&#x2F;siamrpn_r50_l234_dwxcorr&#x2F;config.yaml \</span><br><span class="line">    --snapshot experiments&#x2F;siamrpn_r50_l234_dwxcorr&#x2F;model.pth \</span><br><span class="line">    --video demo&#x2F;dataset_rectify_lib_ball&#x2F;left</span><br></pre></td></tr></table></figure>
+
+<h3 id="siamrpn-alex-dwxcorr-180pfs"><a href="#siamrpn-alex-dwxcorr-180pfs" class="headerlink" title="siamrpn_alex_dwxcorr:180pfs"></a>siamrpn_alex_dwxcorr:180pfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python tools&#x2F;demo.py \</span><br><span class="line">    --config experiments&#x2F;siamrpn_alex_dwxcorr&#x2F;config.yaml \</span><br><span class="line">    --snapshot experiments&#x2F;siamrpn_alex_dwxcorr&#x2F;model.pth \</span><br><span class="line">    --video demo&#x2F;dataset_rectify_lib_ball&#x2F;left</span><br></pre></td></tr></table></figure>
+
+<h3 id="siammask-r50-l3-56pfs"><a href="#siammask-r50-l3-56pfs" class="headerlink" title="siammask_r50_l3:56pfs"></a>siammask_r50_l3:56pfs</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python tools&#x2F;demo.py \</span><br><span class="line">    --config experiments&#x2F;siammask_r50_l3&#x2F;config.yaml \</span><br><span class="line">    --snapshot experiments&#x2F;siammask_r50_l3&#x2F;model.pth \</span><br><span class="line">    --video ..&#x2F;data&#x2F;dataset_rectify_lib_ball&#x2F;left</span><br></pre></td></tr></table></figure>
+
+<h3 id="siamrpn-mobilev2-l234-dwxcorr-75fps"><a href="#siamrpn-mobilev2-l234-dwxcorr-75fps" class="headerlink" title="siamrpn_mobilev2_l234_dwxcorr:75fps"></a>siamrpn_mobilev2_l234_dwxcorr:75fps</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">python tools&#x2F;demo.py \</span><br><span class="line">    --config experiments&#x2F;siamrpn_mobilev2_l234_dwxcorr&#x2F;config.yaml \</span><br><span class="line">    --snapshot experiments&#x2F;siamrpn_mobilev2_l234_dwxcorr&#x2F;model.pth \</span><br><span class="line">    --video demo&#x2F;dataset_rectify_lib_ball&#x2F;left</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%84%9F%E5%8F%97%E9%87%8E/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%84%9F%E5%8F%97%E9%87%8E/" class="post-title-link" itemprop="url">卷积神经网络的感受野</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-04 01:02:00" itemprop="dateCreated datePublished" datetime="2019-06-04T01:02:00+08:00">2019-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-knowledge/" itemprop="url" rel="index">
+                    <span itemprop="name">c数据科学/czh_机器学习/knowledge</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/06/04/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/knowledge/%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E6%84%9F%E5%8F%97%E9%87%8E/" class="post-meta-item leancloud_visitors" data-flag-title="卷积神经网络的感受野" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>28</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年6月4日 下午1:02</p>
+<p><a href="https://zhuanlan.zhihu.com/p/44106492" target="_blank" rel="noopener">卷积神经网络的感受野 - 知乎</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/02/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/plan/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0plan/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/02/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/plan/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0plan/" class="post-title-link" itemprop="url">机器学习plan</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-02 12:40:00" itemprop="dateCreated datePublished" datetime="2019-06-02T12:40:00+08:00">2019-06-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 19:41:53" itemprop="dateModified" datetime="2020-03-12T19:41:53+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6-czh-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0-plan/" itemprop="url" rel="index">
+                    <span itemprop="name">c数据科学/czh_机器学习/plan</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/06/02/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/czh_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/plan/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0plan/" class="post-meta-item leancloud_visitors" data-flag-title="机器学习plan" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>48</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年6月2日 下午12:40</p>
+<h3 id="cs231n"><a href="#cs231n" class="headerlink" title="cs231n"></a>cs231n</h3><ol>
+<li>残差网络的具体训练过程</li>
+<li>r-CNN  fast r-CNN的</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/06/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/g_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/MPI%E5%AE%89%E8%A3%85%E6%89%A7%E8%A1%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/g_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/MPI%E5%AE%89%E8%A3%85%E6%89%A7%E8%A1%8C/" class="post-title-link" itemprop="url">MPI安装执行</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-02 10:21:00" itemprop="dateCreated datePublished" datetime="2019-06-02T10:21:00+08:00">2019-06-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-08 15:40:30" itemprop="dateModified" datetime="2020-06-08T15:40:30+08:00">2020-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-g-%E5%88%86%E5%B8%83%E5%BC%8F-%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97-%E7%8E%AF%E5%A2%83/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/g_分布式/并行计算/环境</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/06/02/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/g_%E5%88%86%E5%B8%83%E5%BC%8F/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/%E7%8E%AF%E5%A2%83/MPI%E5%AE%89%E8%A3%85%E6%89%A7%E8%A1%8C/" class="post-meta-item leancloud_visitors" data-flag-title="MPI安装执行" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>552</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2019年6月2日 上午10:21</p>
+<h3 id="正确的编译和执行方法："><a href="#正确的编译和执行方法：" class="headerlink" title="正确的编译和执行方法："></a>正确的编译和执行方法：</h3><ol>
+<li><code>localhost:code czh$ mpicc mpi_hello_world</code></li>
+<li><code>localhost:code czh$ mpiexec -n 4 ./a.out</code><br><a href="https://stackoverflow.com/questions/47472153/mpi-mpirun-execvp-error-no-such-file-or-directory" target="_blank" rel="noopener">MPI mpirun execvp error: no such file or directory - Stack Overflow</a></li>
+</ol>
+<h3 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h3><p><a href="https://mpitutorial.com/" target="_blank" rel="noopener">A Comprehensive MPI Tutorial Resource · MPI Tutorial</a></p>
+<h3 id="安装路径"><a href="#安装路径" class="headerlink" title="安装路径"></a>安装路径</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Warning: mpich dependency gcc was built with a different C++ standard</span><br><span class="line">library (libstdc++ from clang). This may cause problems at runtime.</span><br><span class="line">🍺  &#x2F;usr&#x2F;local&#x2F;Cellar&#x2F;mpich&#x2F;3.3_1: 883 files, 14.8MB</span><br></pre></td></tr></table></figure>
+
+<h3 id="mpicc"><a href="#mpicc" class="headerlink" title="mpicc"></a>mpicc</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">localhost:~ czh$ which mpicc</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;bin&#x2F;mpicc</span><br></pre></td></tr></table></figure>
+
+<h3 id="mpiexec"><a href="#mpiexec" class="headerlink" title="mpiexec"></a>mpiexec</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">localhost:code czh$ which mpiexec</span><br><span class="line">&#x2F;usr&#x2F;local&#x2F;bin&#x2F;mpiexec</span><br></pre></td></tr></table></figure>
+
+
 
       
     </div>
@@ -1306,7 +1272,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/36/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/121/">121</a><a class="extend next" rel="next" href="/page/38/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/36/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/36/">36</a><span class="page-number current">37</span><a class="page-number" href="/page/38/">38</a><span class="space">&hellip;</span><a class="page-number" href="/page/119/">119</a><a class="extend next" rel="next" href="/page/38/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1372,14 +1338,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1209</span>
+          <span class="site-state-item-count">1189</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">104</span>
+        <span class="site-state-item-count">98</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1413,12 +1379,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.3m</span>
+    <span title="站点总字数">1.2m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">18:59</span>
+    <span title="站点阅读时长">18:55</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

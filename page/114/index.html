@@ -158,7 +158,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%EF%BC%88SQL%E6%B5%8B%E8%AF%95%E9%A2%98%EF%BC%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -172,7 +172,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/" class="post-title-link" itemprop="url">JDBC</a>
+            <a href="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%EF%BC%88SQL%E6%B5%8B%E8%AF%95%E9%A2%98%EF%BC%89/" class="post-title-link" itemprop="url">SQL如何分析（SQL测试题）</a>
         </h1>
 
         <div class="post-meta">
@@ -182,7 +182,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-09-04 08:08:00" itemprop="dateCreated datePublished" datetime="2017-09-04T08:08:00+08:00">2017-09-04</time>
+              <time title="创建时间：2017-08-30 04:37:00" itemprop="dateCreated datePublished" datetime="2017-08-30T04:37:00+08:00">2017-08-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -204,7 +204,7 @@
             </span>
 
           
-            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/" class="post-meta-item leancloud_visitors" data-flag-title="JDBC" title="阅读次数">
+            <span id="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%EF%BC%88SQL%E6%B5%8B%E8%AF%95%E9%A2%98%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="SQL如何分析（SQL测试题）" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -216,301 +216,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>5.9k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月4日 上午8:08</p>
-<h2 id="ORACLE-MYSQL-对比"><a href="#ORACLE-MYSQL-对比" class="headerlink" title="ORACLE MYSQL 对比"></a>ORACLE MYSQL 对比</h2><ol>
-<li>分页<ol>
-<li>ORACLE的rownum</li>
-<li>MYSQL的limit</li>
-</ol>
-</li>
-<li>group by<ol>
-<li>ORACLE会丢失没有声明字段</li>
-<li>MYSQL不会丢失</li>
-</ol>
-</li>
-<li>select 临时表<ol>
-<li>ORACLE需要使用dual临时表</li>
-<li>MYSQL不需要使用临时表就可以直接操作select语句</li>
-</ol>
-</li>
-<li>时间类函数<ol>
-<li>MYSQL的时间操作函数更加方便</li>
-<li>这可以作为选数据库的依据</li>
-</ol>
-</li>
-<li>事务提交<ol>
-<li>ORACLE需要手动提交</li>
-<li>MYSQL如果想自己手动提交需要些start transaction</li>
-</ol>
-</li>
-<li>主键<ol>
-<li>ORACLE主键不自增，需要使用sequence对象来是实现</li>
-<li>MYSQL声明为primary key时，自动递增</li>
-</ol>
-</li>
-</ol>
-<h2 id="JDBC-java-database-connection"><a href="#JDBC-java-database-connection" class="headerlink" title="JDBC:  java  database  connection"></a>JDBC:  java  database  connection</h2><ol>
-<li>jdbc是一门使用java后台完成数据库访问的技术。</li>
-<li>使用jdbc操作数据库需要做以下准备：<ol>
-<li>准备工作：<ol>
-<li>mysql:    mysql-connector-java-5.1.22.jar </li>
-<li>oracle:   jdbc_lib_ojdbc6.jar</li>
-<li>Oralce的架包，自己安装包中就有，路径如图1</li>
-<li>Mysql去网上找吧</li>
-</ol>
-</li>
-<li>加载驱动类</li>
-<li>获取数据库连接对象connection</li>
-<li>通过connection 获取操作数据库的对象  statement    </li>
-<li>使用statement对象操作数据库完成相应的业务          </li>
-<li>处理结果集          </li>
-<li>关闭资源，释放空间。</li>
-</ol>
-</li>
-</ol>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/C4E67CA8-02F2-47E3-BC3E-7648597C6677.png" alt><br>                                图1</p>
-<hr>
-<h2 id="statement"><a href="#statement" class="headerlink" title="statement"></a>statement</h2><h3 id="MYSQL-statement-例子"><a href="#MYSQL-statement-例子" class="headerlink" title="MYSQL  statement 例子"></a>MYSQL  statement 例子</h3><p>例子：<a href="http://www.cnblogs.com/wuyuegb2312/p/3872607.html" target="_blank" rel="noopener">通过JDBC进行简单的增删改查（以MySQL为例） - 五岳 - 博客园</a><br>注：这里例子里面用的是<code>pstmt = (PreparedStatement) conn.prepareStatement(sql);</code>，代替了<code>Statement sta = conn.createStatement();</code>。也就是能够使用预编译来传参。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JdbcDemo1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//1、加载驱动类</span></span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">	  		<span class="comment">//2、获取数据库连接对象connection //jdbc:mysql://localhost:3306/test?useUnicode=true&amp;characterEncoding=utf8</span></span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/wordpress"</span>,<span class="string">"root"</span>, <span class="string">""</span>);</span><br><span class="line">	  		<span class="comment">//System.out.println(conn);</span></span><br><span class="line">	  		<span class="comment">//3、通过connection 获取操作数据库的对象  statement</span></span><br><span class="line">	  		Statement sta = conn.createStatement();</span><br><span class="line">	  		<span class="comment">//4、使用statement对象操作数据库完成相应的业务</span></span><br><span class="line">	  		ResultSet rs = sta.executeQuery(<span class="string">"select * from wp_users"</span>);</span><br><span class="line">	  		<span class="comment">//5、处理结果集</span></span><br><span class="line">	  		<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">	  			System.out.println(rs.getString(<span class="string">"user_login"</span>)+<span class="string">"---"</span>+rs.getString(<span class="string">"user_pass"</span>));</span><br><span class="line">	  		&#125;</span><br><span class="line">	  		<span class="comment">//6、关闭资源，释放空间。</span></span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;</span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="ORACLE-statement-例子"><a href="#ORACLE-statement-例子" class="headerlink" title="ORACLE statement 例子"></a>ORACLE statement 例子</h3><p>注意：jdbc:oracle:thin:@192.168.42.43:1521:orcl 要写当前具体ip，不能写localhost,127.0.0.1 不知道为啥</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCDemo2</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="comment">//1、加载驱动类</span></span><br><span class="line">			Class.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);</span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:oracle:thin:@192.168.42.43:1521:orcl"</span>,<span class="string">"gao"</span>, <span class="string">"gao"</span>);</span><br><span class="line">	  		<span class="comment">//System.out.println(conn);</span></span><br><span class="line">	  		<span class="comment">//3、通过connection 获取操作数据库的对象  statement</span></span><br><span class="line">	  		Statement sta = conn.createStatement();</span><br><span class="line">	  		<span class="comment">//4、使用statement对象操作数据库完成相应的业务</span></span><br><span class="line">	  		<span class="comment">//ResultSet rs = sta.executeQuery("select * from stu");</span></span><br><span class="line">	  		<span class="keyword">int</span> a =sta.executeUpdate(<span class="string">"delete from stu where s_id = 20"</span>);</span><br><span class="line">	  		<span class="keyword">int</span> b =sta.executeUpdate(<span class="string">"insert into stu(s_id,s_name) values(9,'aaa')"</span>);</span><br><span class="line">	  		<span class="comment">//5、处理结果集</span></span><br><span class="line"><span class="comment">//	  		while(rs.next())&#123;</span></span><br><span class="line"><span class="comment">//	  			System.out.println(rs.getString("s_name")+"---"+rs.getString("s_addr"));</span></span><br><span class="line"><span class="comment">//	  		&#125;</span></span><br><span class="line">	  		System.out.println(a + b);</span><br><span class="line">	  		<span class="comment">//6、关闭资源，释放空间。</span></span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;</span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="JDBC预编译-preparstatement"><a href="#JDBC预编译-preparstatement" class="headerlink" title="JDBC预编译 preparstatement"></a>JDBC预编译 preparstatement</h2><p>增删改</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCDemo4</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/test4?useUnicode=true&amp;characterEncoding=utf8"</span>,<span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">	  		String sql = <span class="string">"insert into people(name,age,sex) values(?,?,?)"</span>;</span><br><span class="line">	  		PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">	  		ps.setString(<span class="number">1</span>, <span class="string">"mike"</span>);</span><br><span class="line">	  		ps.setString(<span class="number">3</span>, <span class="string">"boy"</span>);</span><br><span class="line">	  		ps.setInt(<span class="number">2</span>, <span class="number">20</span>);</span><br><span class="line">	  		<span class="keyword">int</span> a = ps.executeUpdate();</span><br><span class="line">	  		System.out.println(a);</span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;</span><br><span class="line">	  		                                          </span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCDemo3</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/test4?useUnicode=true&amp;characterEncoding=utf8"</span>,<span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">	  		<span class="comment">//获取预编译对象  preparstatement</span></span><br><span class="line">	  		PreparedStatement ps = conn.prepareStatement(<span class="string">"select * from people where id = ? "</span>);</span><br><span class="line">	  		<span class="comment">//如果预编译对象绑定的sql中含有参数。那么在操作数据库之前需将参数依次传入</span></span><br><span class="line">	  		ps.setInt(<span class="number">1</span>, <span class="number">9</span>);</span><br><span class="line">	  		<span class="comment">//执行对应的操作，获得对应结果集</span></span><br><span class="line">	  		ResultSet rs = ps.executeQuery();</span><br><span class="line">	  		<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">	  			System.out.println(rs.getString(<span class="string">"name"</span>));</span><br><span class="line">	  		&#125;</span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;</span><br><span class="line">	  		</span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="JDCB批处理"><a href="#JDCB批处理" class="headerlink" title="JDCB批处理"></a>JDCB批处理</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.weixin;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCDemo5</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">	  		Connection conn = DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/test4?useUnicode=true&amp;characterEncoding=utf8"</span>,<span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">	  		String sql = <span class="string">"insert into people(name,age,sex) values(?,?,?)"</span>;</span><br><span class="line">	  		<span class="comment">//Statement sta = conn.createStatement();</span></span><br><span class="line">	  		</span><br><span class="line">	  		<span class="comment">//打开一个预编译对象  同时绑定sql</span></span><br><span class="line">	  		PreparedStatement ps = conn.prepareStatement(sql);</span><br><span class="line">	  		ps.setString(<span class="number">1</span>, <span class="string">"bob"</span>);</span><br><span class="line">	  		ps.setString(<span class="number">3</span>, <span class="string">"boy"</span>);</span><br><span class="line">	  		ps.setInt(<span class="number">2</span>, <span class="number">22</span>);</span><br><span class="line">	  		<span class="comment">//将本条sql处理 加入批处理</span></span><br><span class="line">	  		ps.addBatch();</span><br><span class="line">	  		</span><br><span class="line">	  		ps.setString(<span class="number">1</span>, <span class="string">"mary"</span>);</span><br><span class="line">	  		ps.setString(<span class="number">3</span>, <span class="string">"girl"</span>);</span><br><span class="line">	  		ps.setInt(<span class="number">2</span>, <span class="number">18</span>);</span><br><span class="line">	  		<span class="comment">//将重新设置参数后的预编译sql继续加入批处理</span></span><br><span class="line">	  		ps.addBatch();</span><br><span class="line">	  		<span class="comment">//同时也可以绑定多条静态sql</span></span><br><span class="line">	  		ps.addBatch(<span class="string">"insert into people(name,age,sex) values('rose',19,'girl')"</span>);</span><br><span class="line">	  		<span class="comment">//执行批处理任务</span></span><br><span class="line">	  		<span class="keyword">int</span>[] counts = ps.executeBatch();</span><br><span class="line">	  		ps.clearBatch();</span><br><span class="line">	  		<span class="keyword">for</span> (<span class="keyword">int</span> i : counts) &#123;</span><br><span class="line">				System.out.println(i);</span><br><span class="line">			&#125;</span><br><span class="line">	  		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">	  			conn.close();</span><br><span class="line">	  		&#125;                                      </span><br><span class="line">		&#125;<span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<hr>
-<h2 id="Java-project中引入架包"><a href="#Java-project中引入架包" class="headerlink" title="Java project中引入架包"></a>Java project中引入架包</h2><p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/5D211FBE-E59C-4843-B8A3-3410198A7C9A.png" alt><br>                                 图1<br><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/0060E218-A512-4F0C-BCF2-64F64AFC098A.png" alt><br>                         图2：这里要选取Add External JARS<br><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/CDCAE6A2-9A8E-4100-8797-24D4854C79A5.png" alt><br>                                 图3</p>
-<h3 id="查看架包重要引入的文件Driver-jar"><a href="#查看架包重要引入的文件Driver-jar" class="headerlink" title="查看架包重要引入的文件Driver.jar"></a>查看架包重要引入的文件Driver.jar</h3><p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/59B89FBA-3107-4F1A-AE8F-2E0CFD9C77E0.png" alt></p>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC/E2E762E8-3A15-4A4B-81F5-4A613591CBC5.png" alt></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%EF%BC%8C%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B0%81%E8%A3%85DbUtiles%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%EF%BC%8C%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B0%81%E8%A3%85DbUtiles%E7%B1%BB/" class="post-title-link" itemprop="url">JDBC，通过属性配置文件封装DbUtiles类</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-04 04:56:00" itemprop="dateCreated datePublished" datetime="2017-09-04T04:56:00+08:00">2017-09-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%EF%BC%8C%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B0%81%E8%A3%85DbUtiles%E7%B1%BB/" class="post-meta-item leancloud_visitors" data-flag-title="JDBC，通过属性配置文件封装DbUtiles类" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>6.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月4日 下午4:56</p>
-<h2 id="概述："><a href="#概述：" class="headerlink" title="概述："></a>概述：</h2><p><strong>封装的效果</strong>：在逻辑层中，能够通过一个简单的sql语句，就可以拿到一个list对象，这个list对象中包含了自己要查询的数据<br><strong>改进：</strong>在起到封装的效果之后，我们可以在对数据库连接的效率进行优化。因为，当我们每次对一条sql语句进行查询的时候，我们要新建一次与数据库的连接，然后再断开连接。这样周而复始，其实是很浪费数据库资源的，尤其是多用户同时操作数据库时。所以，我们能不能这连接进行复用，而不是一次性的？<br><strong>改进参考：</strong><a href="bear://x-callback-url/open-note?id=69A28996-5973-42D6-82BA-D8D817CFE503-2779-000009EC16AF3B64">两种数据库连接池 （2017/9/5）</a></p>
-<h2 id="属性配置文件"><a href="#属性配置文件" class="headerlink" title="属性配置文件"></a>属性配置文件</h2><p>建File类型文件 最后起名的时候加上.properties<br><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%EF%BC%8C%E9%80%9A%E8%BF%87%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%B0%81%E8%A3%85DbUtiles%E7%B1%BB/00A8A935-EC5E-4791-A559-9BF4CE43EDA0.png" alt></p>
-<h2 id="引用属性配置文件（static）"><a href="#引用属性配置文件（static）" class="headerlink" title="引用属性配置文件（static）"></a>引用属性配置文件（static）</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 静态代码块   类加载时完成数据初始化</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		Properties p = <span class="keyword">new</span> Properties();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			p.load(DbUtils.class.getClassLoader().getResourceAsStream("com/shanxi/properties/dbUtils.properties"));</span><br><span class="line">			driverUrl = p.getProperty(<span class="string">"driverUrl"</span>);</span><br><span class="line">			url = p.getProperty(<span class="string">"url"</span>);</span><br><span class="line">			username = p.getProperty(<span class="string">"username"</span>);</span><br><span class="line">			password =  p.getProperty(<span class="string">"password"</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<p>注意：这里的属性文件的位置，要写全</p>
-<h2 id="完整的DbUtiles类-属性配置"><a href="#完整的DbUtiles类-属性配置" class="headerlink" title="完整的DbUtiles类 + 属性配置"></a>完整的DbUtiles类 + 属性配置</h2><h3 id="写这个封装类，学到了以下几点"><a href="#写这个封装类，学到了以下几点" class="headerlink" title="写这个封装类，学到了以下几点"></a>写这个封装类，学到了以下几点</h3><ol>
-<li>如何处理输入数据<ol>
-<li>这里要转换成数组输入</li>
-</ol>
-</li>
-<li>如何处理输出数据<ol>
-<li>这要转换成list<map>类型输出</map></li>
-</ol>
-</li>
-<li>说白了，<strong>其实就是各种类型之间的转换</strong><ol>
-<li>转成<strong>数组</strong>类型</li>
-<li>转成<strong>list</strong>类型</li>
-<li>转成<strong>map</strong>类型</li>
-<li>转成<strong>字符串</strong>类型</li>
-<li>转成其他<strong>范式集合</strong>类型</li>
-<li>常见的就以上几种</li>
-</ol>
-</li>
-</ol>
-<h2 id="附录代码"><a href="#附录代码" class="headerlink" title="附录代码"></a>附录代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.shanxi.dbUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStream;</span><br><span class="line"><span class="keyword">import</span> java.sql.Connection;</span><br><span class="line"><span class="keyword">import</span> java.sql.DriverManager;</span><br><span class="line"><span class="keyword">import</span> java.sql.PreparedStatement;</span><br><span class="line"><span class="keyword">import</span> java.sql.ResultSet;</span><br><span class="line"><span class="keyword">import</span> java.sql.SQLException;</span><br><span class="line"><span class="keyword">import</span> java.sql.Statement;</span><br><span class="line"><span class="keyword">import</span> java.sql.Types;</span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Properties;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * 数据库工具类</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DbUtils</span> </span>&#123;</span><br><span class="line">	<span class="comment">//数据库连接对象  Connection</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Connection conn;</span><br><span class="line">	<span class="comment">//操作数据库对象Statement</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> Statement sta;</span><br><span class="line">	<span class="comment">//操作数据库预编译对象Preparstatement</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> PreparedStatement ps;</span><br><span class="line">	<span class="comment">//驱动类地址</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String driverUrl;</span><br><span class="line">	<span class="comment">//URL数据库连接</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String url;</span><br><span class="line">	<span class="comment">//用户名</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String username;</span><br><span class="line">	<span class="comment">//密码</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String password;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 静态代码块   类加载时完成数据初始化</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">static</span> &#123;</span><br><span class="line">		Properties p = <span class="keyword">new</span> Properties();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			p.load(DbUtils.class.getClassLoader().getResourceAsStream("com/shanxi/properties/dbUtils.properties"));</span><br><span class="line">			driverUrl = p.getProperty(<span class="string">"driverUrl"</span>);</span><br><span class="line">			url = p.getProperty(<span class="string">"url"</span>);</span><br><span class="line">			username = p.getProperty(<span class="string">"username"</span>);</span><br><span class="line">			password =  p.getProperty(<span class="string">"password"</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 获取Connection连接的方法</span></span><br><span class="line"><span class="comment">	 * @return conn</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span>  Connection <span class="title">getConnection</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(driverUrl);</span><br><span class="line">			conn = DriverManager.getConnection(url, username, password);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> conn;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的查询方法 </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> List&lt;Map&lt;String,Object&gt;&gt; queryForList(String sql)&#123;</span><br><span class="line">		List&lt;Map&lt;String,Object&gt;&gt; list =  <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			</span><br><span class="line">			conn = getConnection();</span><br><span class="line">			sta = conn.createStatement();</span><br><span class="line">			ResultSet rs = sta.executeQuery(sql);</span><br><span class="line">			list = rsToList(rs);</span><br><span class="line">			close();</span><br><span class="line">			</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的增删改方法</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">excuteUpdate</span><span class="params">(String sql)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 支持预编译的查询方法</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> List&lt;Map&lt;String,Object&gt;&gt; queryForList(String sql,<span class="keyword">int</span>[] type,Object[] obj)&#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			conn = getConnection();</span><br><span class="line">			ps = conn.prepareStatement(sql);</span><br><span class="line">			<span class="comment">//循环遍历参数数组 并将数组中的值设置给预编译sql</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; obj.length; i++) &#123;</span><br><span class="line">				<span class="keyword">switch</span> (type[i]) &#123;</span><br><span class="line">				<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">					ps.setInt(i+<span class="number">1</span>,Integer.parseInt(obj[i].toString()));</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				<span class="keyword">default</span>:</span><br><span class="line">					ps.setString(i+<span class="number">1</span>,obj[i].toString());</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			ResultSet rs = ps.executeQuery();</span><br><span class="line">			list = rsToList(rs);</span><br><span class="line">			close();</span><br><span class="line">		</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 支持预编译的增删改方法    </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">excuteUpdate</span><span class="params">(String sql,<span class="keyword">int</span>[] type,Object[] obj)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 不支持预编译的计数查询方法    </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">queryForCount</span><span class="params">(String sql)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 支持预编译的计数查询方法</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">queryForCount</span><span class="params">(String sql,<span class="keyword">int</span>[] type,Object[] obj)</span></span>&#123;</span><br><span class="line">		</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 将resultSet结果集转换为List</span></span><br><span class="line"><span class="comment">	 * @param rs    封装数据的resultSet</span></span><br><span class="line"><span class="comment">	 * @return  	数据转换后的List</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> List&lt;Map&lt;String, Object&gt;&gt; rsToList(ResultSet rs) &#123;</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list = <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			<span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">				Map&lt;String, Object&gt;  map =  <span class="keyword">new</span> HashMap&lt;String,Object&gt;();</span><br><span class="line">				<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= rs.getMetaData().getColumnCount(); i++) &#123;</span><br><span class="line">					<span class="keyword">switch</span> (rs.getMetaData().getColumnType(i)) &#123;</span><br><span class="line">					<span class="keyword">case</span> Types.INTEGER:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getInt(i));</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">case</span> Types.VARCHAR:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getString(i));</span><br><span class="line">						<span class="keyword">break</span>;</span><br><span class="line">					<span class="keyword">default</span>:</span><br><span class="line">						map.put(rs.getMetaData().getColumnName(i),rs.getObject(i));</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				list.add(map);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="keyword">return</span> list;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	 * 关闭Connection连接的方法</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(conn!=<span class="keyword">null</span>)&#123;</span><br><span class="line">			<span class="keyword">try</span> &#123;</span><br><span class="line">				conn.close();</span><br><span class="line">			&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;<span class="keyword">finally</span> &#123;</span><br><span class="line">				<span class="keyword">try</span> &#123;</span><br><span class="line">					conn.close();</span><br><span class="line">				&#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">					e.printStackTrace();</span><br><span class="line">					System.gc();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		</span><br><span class="line">		List&lt;Map&lt;String, Object&gt;&gt; list =  <span class="keyword">new</span> ArrayList&lt;Map&lt;String, Object&gt;&gt;();</span><br><span class="line">		<span class="comment">//测试非预编译方法</span></span><br><span class="line"><span class="comment">//		String sql ="select * from people";</span></span><br><span class="line"><span class="comment">//		list = DbUtils.queryForList(sql);</span></span><br><span class="line"><span class="comment">//		for (Map&lt;String, Object&gt; map : list) &#123;</span></span><br><span class="line"><span class="comment">//			System.out.println(map.get("name")+"---"+map.get("age"));</span></span><br><span class="line"><span class="comment">//		&#125;</span></span><br><span class="line">		<span class="comment">//测试预编译对象</span></span><br><span class="line">		String sql1 =<span class="string">"select * from people where age = ? and sex= ? and salary &gt;?"</span>;</span><br><span class="line">		<span class="keyword">int</span> [] type = &#123;Types.INTEGER,Types.VARCHAR,Types.FLOAT&#125;;</span><br><span class="line">		Object[] obj = &#123;<span class="number">20</span>,<span class="string">"男"</span>,<span class="number">3500</span>&#125;;</span><br><span class="line">		list = DbUtils.queryForList(sql1,type,obj);</span><br><span class="line">		<span class="keyword">for</span> (Map&lt;String, Object&gt; map : list) &#123;</span><br><span class="line">			System.out.println(map.get(<span class="string">"name"</span>)+<span class="string">"---"</span>+map.get(<span class="string">"age"</span>));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注：这个没有写完</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#driverUrl&#x3D;com.mysql.jdbc.Driver</span><br><span class="line">#url &#x3D;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test4?useUnicode&#x3D;true&amp;characterEncoding&#x3D;utf8</span><br><span class="line">#username&#x3D;root</span><br><span class="line">#password&#x3D;root</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">driverUrl&#x3D;oracle.jdbc.driver.OracleDriver</span><br><span class="line">url &#x3D;jdbc:oracle:thin:@192.168.42.43:1521:orcl</span><br><span class="line">username&#x3D;gao</span><br><span class="line">password&#x3D;gao</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/" class="post-title-link" itemprop="url">JDBC常见错误</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-04 02:37:00" itemprop="dateCreated datePublished" datetime="2017-09-04T02:37:00+08:00">2017-09-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/" class="post-meta-item leancloud_visitors" data-flag-title="JDBC常见错误" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>131</span>
+              <span>1.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -529,830 +235,79 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2017年9月4日 下午2:37</p>
-<h2 id="乱码"><a href="#乱码" class="headerlink" title="乱码"></a>乱码</h2><ol>
-<li>当我们从jdbc中插入数据库的值为乱码时，要查看当前project的编码方式（从propertise），如下图（这里是UTF-8）。</li>
-<li>如果数据库的编码是UTF-8，而project的编码是gbk，那么就会出现插入的数据库信息乱码。</li>
-</ol>
-<p><img src="/2017/09/04/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/JDBC%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF/7DCBDEC6-A0D6-4297-BBD5-7FF73DC7CC5C.png" alt></p>
+          <p>#web开发/czh_blog/数据库<br>2017年8月30日 下午4:37</p>
+<p><strong>面试的重点在画星号的题</strong><br><a href="sql%E5%9F%BA%E7%A1%80%E7%BB%83%E4%B9%A0%E9%A2%98.txt">sql基础练习题.txt</a><br><a href="%E7%BB%B4%E4%BF%A1%E7%A7%91%E6%8A%80_%E5%86%85%E9%83%A8Oracle%E6%B5%8B%E8%AF%95%E9%A2%98%E8%AF%95%E5%8D%B7_%E7%94%B0%E7%92%9F%E9%9C%9E.doc">维信科技_内部Oracle测试题试卷_田璟霞.doc</a></p>
+<h3 id="下面两个知识点之间的关系"><a href="#下面两个知识点之间的关系" class="headerlink" title="下面两个知识点之间的关系"></a>下面两个知识点之间的关系</h3><p>SQL嵌套是sql分析步骤中，针对整理型情况下的总结<br>一般的限制型，用的比较少</p>
+<h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><p><strong>写SQL时函数的使用可以帮助我们实现一些很难实现的功能</strong><br>例如<br>    1. min<br>    2. max</p>
+<p><strong>e.g</strong>.：scott账户下的功能功能测试（上面的题2中有）<br>我这里就没有使用min函数来解决-取得部门最低的人的工资 ，我想的是自己写复杂的sql来实现，最后也没有成功</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 13.	显示部门内最低工资比20部门最低工资要高的部门编号以及部门内最低工资。++++++++</span></span><br><span class="line">	<span class="keyword">select</span> * <span class="keyword">from</span> (</span><br><span class="line">	<span class="keyword">select</span> e.deptno,<span class="keyword">min</span>(e.sal) min_sal <span class="keyword">from</span> emp e <span class="keyword">GROUP</span> <span class="keyword">BY</span> e.deptno </span><br><span class="line">	)a</span><br><span class="line">	<span class="keyword">where</span> a.min_sal &gt; (<span class="keyword">SELECT</span> <span class="keyword">min</span>(sal) <span class="keyword">from</span> emp <span class="keyword">where</span> deptno = <span class="number">20</span> <span class="keyword">group</span> <span class="keyword">by</span> deptno)</span><br></pre></td></tr></table></figure>
 
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/02/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-title-link" itemprop="url">表复制（根据一个表创建另一个表）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-02 08:44:00" itemprop="dateCreated datePublished" datetime="2017-09-02T08:44:00+08:00">2017-09-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="表复制（根据一个表创建另一个表）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>99</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#web开发/czh_blog/数据库<br>2017年9月2日 上午8:44</p>
-<p><a href="http://ears.iteye.com/blog/1470605" target="_blank" rel="noopener">CREATE TABLE 表名 AS SELECT 语句</a><br><a href="http://blog.csdn.net/qq_27317147/article/details/52130427" target="_blank" rel="noopener">oracle SELECT INTO 和 INSERT INTO SELECT 两种表复制语句详解</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/02/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-title-link" itemprop="url">表复制（根据一个表创建另一个表）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-02 08:44:00" itemprop="dateCreated datePublished" datetime="2017-09-02T08:44:00+08:00">2017-09-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/02/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E8%A1%A8%E5%A4%8D%E5%88%B6%EF%BC%88%E6%A0%B9%E6%8D%AE%E4%B8%80%E4%B8%AA%E8%A1%A8%E5%88%9B%E5%BB%BA%E5%8F%A6%E4%B8%80%E4%B8%AA%E8%A1%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="表复制（根据一个表创建另一个表）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>99</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#web开发/czh_blog/数据库<br>2017年9月2日 上午8:44</p>
-<p><a href="http://ears.iteye.com/blog/1470605" target="_blank" rel="noopener">CREATE TABLE 表名 AS SELECT 语句</a><br><a href="http://blog.csdn.net/qq_27317147/article/details/52130427" target="_blank" rel="noopener">oracle SELECT INTO 和 INSERT INTO SELECT 两种表复制语句详解</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">PLSQL（PLSQL语法+存储过程+触发器）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-01 10:36:00" itemprop="dateCreated datePublished" datetime="2017-09-01T10:36:00+08:00">2017-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="PLSQL（PLSQL语法+存储过程+触发器）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#web开发/czh_blog/数据库<br>2017年9月1日 上午10:36</p>
-<p>这里知识理解一些概念，有一个基本的认识<br>知道ORACLE支持哪些功能，以后一个功能呢不好做的时候，来这里瞧瞧，看有没有正好能用上额特性</p>
-<h2 id="PLSQL中语法特别的地方"><a href="#PLSQL中语法特别的地方" class="headerlink" title="PLSQL中语法特别的地方"></a>PLSQL中语法特别的地方</h2><p>没有逻辑修饰符：|| &amp;&amp;<br>用这些代替：And or between<br>等号：是:= 不是=<br>没有：++ — —<br>|| 内容拼接 隐式转换成字符串连接</p>
-<h2 id="SQL的高级语言特性PLSQL"><a href="#SQL的高级语言特性PLSQL" class="headerlink" title="SQL的高级语言特性PLSQL"></a>SQL的高级语言特性PLSQL</h2><ol>
-<li>所谓的plsql其实就是：sql编程语言一样编程，有高级语言的特性</li>
-<li>If  switch for loop</li>
-<li>Cursor游标 是专门用来解决表中多条数据的情况<ol>
-<li>这个高级语言中没有，是数据库语言中特有的</li>
-<li>和loop连用</li>
+<h2 id="分析sql的步骤"><a href="#分析sql的步骤" class="headerlink" title="分析sql的步骤"></a>分析sql的步骤</h2><ol>
+<li>Sql分成两种：<strong>限制性 + 整理型</strong></li>
+<li>第一步:涉及到几张表，把它们<strong>连起来</strong><ol>
+<li>两种方法<ol>
+<li>from</li>
+<li>join</li>
 </ol>
 </li>
-<li>类似stl的数据类型<ol>
-<li>Varray </li>
-<li>table </li>
-<li>record</li>
-</ol>
-</li>
-<li>自定义数据类型<ol>
-<li>type</li>
-</ol>
-</li>
-<li>异常<ol>
-<li>支持自定义抛出异常<ol>
-<li>当在函数和存储过程中抛出异常时，可以在调用函数和存储过程的外面进行异常的处理</li>
-</ol>
-</li>
-<li>支持选择自己处理异常，和oracle系统处理异常<ol>
-<li>当没有写exception段时，默认就是让oracle处理异常</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>package<ol>
-<li>这个就是java中的类，不是java中的包</li>
-<li>可以在package中和java一样定义变量，常量，函数（存储过程+函数）等等</li>
-<li>packages + package body</li>
-<li>如何操作<ol>
-<li>不是java中的先new一个对象，然后用对象调用</li>
-<li>Sql中没有new对象，直接使用package名  点就行了</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="存储过程的构成"><a href="#存储过程的构成" class="headerlink" title="存储过程的构成"></a>存储过程的构成</h3><ol>
-<li>给PLSQL去了个名字方便调用</li>
-<li>存储过程</li>
-<li>传入参数</li>
-<li>传出参数</li>
-</ol>
-<h3 id="为什么要封装成存储过程"><a href="#为什么要封装成存储过程" class="headerlink" title="为什么要封装成存储过程?"></a>为什么要封装成存储过程?</h3><ol>
-<li>封装之后方便传入传出参数 </li>
-<li>匿名块只能在数据库环境中调用 存储过程可以被外界调用(比如JDBC)</li>
-</ol>
-<h3 id="函数与存储过程比较："><a href="#函数与存储过程比较：" class="headerlink" title="函数与存储过程比较："></a>函数与存储过程比较：</h3><ol>
-<li>函数可以看做一类特殊的存储过程 没有输出参数 必有唯一返回值</li>
-<li>删掉输出参数，添加返回值</li>
-<li>存储过程可以完全的实现函数的功能</li>
-</ol>
-<h3 id="如何选择函数与存储过程"><a href="#如何选择函数与存储过程" class="headerlink" title="如何选择函数与存储过程"></a>如何选择函数与存储过程</h3><ol>
-<li>当PL-SQL需要嵌在SQL中使用时用函数<ol>
-<li>就像min() max() count()这些函数</li>
-</ol>
-</li>
-<li>当有多个返回值或者要被其它程序调用时用存储过程</li>
-</ol>
-<p>既然利用PLSQL可以实现高级语言的特性，那么当我们实现一个功能的时候，有哪些不同的、或者值得注意的地方</p>
-<p>需求：利用存储过程查询含有特定信息的学生id<br>思路：</p>
-<ol>
-<li>也就是说这个参数可以是学生姓名，生日，电话号等等信息。在java中我们需要对这个特定信息进行判断，写上一堆if，但是在sql中我直接写在where语句中就行了，就省去了判断的过程</li>
-<li>体现了sql的优势，对比与java语言</li>
-</ol>
-<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><ol>
-<li>使用触发器的环境:<ol>
-<li>业务逻辑是多步骤的 而且可能从任意一个步骤执行  一般用触发器链</li>
-<li>传进来的参数 是一行数据  一般用触发器</li>
-</ol>
-</li>
-<li>有了存储过程  为什么还要用触发器<ol>
-<li>存储过程需要特殊的调用方式</li>
-<li>A -&gt;  B  -&gt;  c -&gt;  D-&gt;    <ol>
-<li>连锁操作的业务逻辑 用触发器,JDBC只要正常的SQL语句</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>触发器要注意的地方 <ol>
-<li>暂时用不到的触发器全部禁用  <ol>
-<li>使用disable</li>
-</ol>
-</li>
-<li>避免逻辑死锁<ol>
-<li>一个trigger就是一个线程</li>
-<li>那么，不说自己的创建的线程，光是系统中默认的操作表的线程就有可能和自己的一个trigger线程产生冲突</li>
-</ol>
-</li>
-<li>尽量避免update触发器中对本表的操作</li>
-</ol>
-</li>
-</ol>
-<hr>
-<p>Sequence 就像一个全局int型变量，他可以一直记录一个变量的值</p>
-<hr>
-<hr>
-<p>百度</p>
-<hr>
-<p><a href="http://blog.csdn.net/caoxiaohong1005/article/details/53433131" target="_blank" rel="noopener">Mac下不用虚拟机一样可以使用PLSQL Developer - iCoding91        - CSDN博客</a></p>
-<p>%符号 理解成“的”</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-title-link" itemprop="url">PLSQL（PLSQL语法+存储过程+触发器）</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-01 10:36:00" itemprop="dateCreated datePublished" datetime="2017-09-01T10:36:00+08:00">2017-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/PLSQL%EF%BC%88PLSQL%E8%AF%AD%E6%B3%95+%E5%AD%98%E5%82%A8%E8%BF%87%E7%A8%8B+%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="PLSQL（PLSQL语法+存储过程+触发器）" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#web开发/czh_blog/数据库<br>2017年9月1日 上午10:36</p>
-<p>这里知识理解一些概念，有一个基本的认识<br>知道ORACLE支持哪些功能，以后一个功能呢不好做的时候，来这里瞧瞧，看有没有正好能用上额特性</p>
-<h2 id="PLSQL中语法特别的地方"><a href="#PLSQL中语法特别的地方" class="headerlink" title="PLSQL中语法特别的地方"></a>PLSQL中语法特别的地方</h2><p>没有逻辑修饰符：|| &amp;&amp;<br>用这些代替：And or between<br>等号：是:= 不是=<br>没有：++ — —<br>|| 内容拼接 隐式转换成字符串连接</p>
-<h2 id="SQL的高级语言特性PLSQL"><a href="#SQL的高级语言特性PLSQL" class="headerlink" title="SQL的高级语言特性PLSQL"></a>SQL的高级语言特性PLSQL</h2><ol>
-<li>所谓的plsql其实就是：sql编程语言一样编程，有高级语言的特性</li>
-<li>If  switch for loop</li>
-<li>Cursor游标 是专门用来解决表中多条数据的情况<ol>
-<li>这个高级语言中没有，是数据库语言中特有的</li>
-<li>和loop连用</li>
-</ol>
-</li>
-<li>类似stl的数据类型<ol>
-<li>Varray </li>
-<li>table </li>
-<li>record</li>
-</ol>
-</li>
-<li>自定义数据类型<ol>
-<li>type</li>
-</ol>
-</li>
-<li>异常<ol>
-<li>支持自定义抛出异常<ol>
-<li>当在函数和存储过程中抛出异常时，可以在调用函数和存储过程的外面进行异常的处理</li>
-</ol>
-</li>
-<li>支持选择自己处理异常，和oracle系统处理异常<ol>
-<li>当没有写exception段时，默认就是让oracle处理异常</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>package<ol>
-<li>这个就是java中的类，不是java中的包</li>
-<li>可以在package中和java一样定义变量，常量，函数（存储过程+函数）等等</li>
-<li>packages + package body</li>
-<li>如何操作<ol>
-<li>不是java中的先new一个对象，然后用对象调用</li>
-<li>Sql中没有new对象，直接使用package名  点就行了</li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="存储过程的构成"><a href="#存储过程的构成" class="headerlink" title="存储过程的构成"></a>存储过程的构成</h3><ol>
-<li>给PLSQL去了个名字方便调用</li>
-<li>存储过程</li>
-<li>传入参数</li>
-<li>传出参数</li>
-</ol>
-<h3 id="为什么要封装成存储过程"><a href="#为什么要封装成存储过程" class="headerlink" title="为什么要封装成存储过程?"></a>为什么要封装成存储过程?</h3><ol>
-<li>封装之后方便传入传出参数 </li>
-<li>匿名块只能在数据库环境中调用 存储过程可以被外界调用(比如JDBC)</li>
-</ol>
-<h3 id="函数与存储过程比较："><a href="#函数与存储过程比较：" class="headerlink" title="函数与存储过程比较："></a>函数与存储过程比较：</h3><ol>
-<li>函数可以看做一类特殊的存储过程 没有输出参数 必有唯一返回值</li>
-<li>删掉输出参数，添加返回值</li>
-<li>存储过程可以完全的实现函数的功能</li>
-</ol>
-<h3 id="如何选择函数与存储过程"><a href="#如何选择函数与存储过程" class="headerlink" title="如何选择函数与存储过程"></a>如何选择函数与存储过程</h3><ol>
-<li>当PL-SQL需要嵌在SQL中使用时用函数<ol>
-<li>就像min() max() count()这些函数</li>
-</ol>
-</li>
-<li>当有多个返回值或者要被其它程序调用时用存储过程</li>
-</ol>
-<p>既然利用PLSQL可以实现高级语言的特性，那么当我们实现一个功能的时候，有哪些不同的、或者值得注意的地方</p>
-<p>需求：利用存储过程查询含有特定信息的学生id<br>思路：</p>
-<ol>
-<li>也就是说这个参数可以是学生姓名，生日，电话号等等信息。在java中我们需要对这个特定信息进行判断，写上一堆if，但是在sql中我直接写在where语句中就行了，就省去了判断的过程</li>
-<li>体现了sql的优势，对比与java语言</li>
-</ol>
-<h3 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h3><ol>
-<li>使用触发器的环境:<ol>
-<li>业务逻辑是多步骤的 而且可能从任意一个步骤执行  一般用触发器链</li>
-<li>传进来的参数 是一行数据  一般用触发器</li>
-</ol>
-</li>
-<li>有了存储过程  为什么还要用触发器<ol>
-<li>存储过程需要特殊的调用方式</li>
-<li>A -&gt;  B  -&gt;  c -&gt;  D-&gt;    <ol>
-<li>连锁操作的业务逻辑 用触发器,JDBC只要正常的SQL语句</li>
-</ol>
-</li>
-</ol>
-</li>
-<li>触发器要注意的地方 <ol>
-<li>暂时用不到的触发器全部禁用  <ol>
-<li>使用disable</li>
-</ol>
-</li>
-<li>避免逻辑死锁<ol>
-<li>一个trigger就是一个线程</li>
-<li>那么，不说自己的创建的线程，光是系统中默认的操作表的线程就有可能和自己的一个trigger线程产生冲突</li>
-</ol>
-</li>
-<li>尽量避免update触发器中对本表的操作</li>
-</ol>
-</li>
-</ol>
-<hr>
-<p>Sequence 就像一个全局int型变量，他可以一直记录一个变量的值</p>
-<hr>
-<hr>
-<p>百度</p>
-<hr>
-<p><a href="http://blog.csdn.net/caoxiaohong1005/article/details/53433131" target="_blank" rel="noopener">Mac下不用虚拟机一样可以使用PLSQL Developer - iCoding91        - CSDN博客</a></p>
-<p>%符号 理解成“的”</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">ORACLE的三个客户端工具</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-09-01 05:44:00" itemprop="dateCreated datePublished" datetime="2017-09-01T05:44:00+08:00">2017-09-01</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/" class="post-meta-item leancloud_visitors" data-flag-title="ORACLE的三个客户端工具" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>329</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>2017年9月1日 下午5:44</p>
-<p>ORACLE SQL Developer<br>Navticat premium<br>PL/SQL</p>
-<ol>
-<li>我觉得最好的是ORACLE SQL Developer</li>
-<li>这个是oracle官方出的<a href="http://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" target="_blank" rel="noopener">Oracle SQL Developer Downloads</a></li>
-<li>可以支持多系统，包括mac</li>
-<li>官方手册<a href="http://www.oracle.com/ocom/groups/public/@otn/documents/webcontent/229076_zhs.htm#t3" target="_blank" rel="noopener">使用 SQL Developer 开发和调试 PL/SQL</a>等</li>
-<li>左侧有各种功能支持，右击就可以<ol>
-<li>他的使用和PL_SQL差不多，但是界面美化比PL_SQL好多了</li>
-<li>与navicat相比，navicat毕竟不是亲生的，左侧功能的支持不好，比如package</li>
-</ol>
-</li>
-</ol>
-<p><img src="/2017/09/01/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%E7%9A%84%E4%B8%89%E4%B8%AA%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%B7%A5%E5%85%B7/C188C2C6-B90B-4ADA-B0EC-B1F196F279E2.png" alt><br>可以看出他们可以同时连接<br>但是在navicat中添加的数据，在PL/SQL中会乱码<br><a href="http://blog.csdn.net/aovenus/article/details/12648751" target="_blank" rel="noopener">plsql查询数据显示为乱码解决方法 - aovenus的专栏        - CSDN博客</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Zhiheng Chen">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">SQL表连接</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2017-08-31 11:03:00" itemprop="dateCreated datePublished" datetime="2017-08-31T11:03:00+08:00">2017-08-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
-                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-meta-item leancloud_visitors" data-flag-title="SQL表连接" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>92</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午11:03</p>
-<h2 id="连接有哪些"><a href="#连接有哪些" class="headerlink" title="连接有哪些"></a>连接有哪些</h2><ol>
+<li><strong>连接有哪些</strong>？<ol>
 <li>固定的：外键连接</li>
-<li>额外的：看自己有啥要求，或者要过滤那些情况<ol>
+<li>额外的：看自己有啥要求，或者要过滤那些情况</li>
 <li><strong>关键是要明白自己的需求</strong></li>
 <li>然后转换成里逻辑表达式</li>
 </ol>
 </li>
+<li>参考： <a href="bear://x-callback-url/open-note?id=0B6BB8FD-4231-4B0F-86F9-4EBF81832E2C-2779-000009EC08D84AF5">SQL表连接</a></li>
+</ol>
+</li>
+<li>第二步：在第一步组成的表的基础上，<strong>有哪些限制</strong><ol>
+<li>限制，<strong>指的就是句子中的修饰部分</strong></li>
+<li>简单的sql，文中的限制能很快的转换成一下五种情况<ol>
+<li><blockquote>
+</blockquote>
+</li>
+<li>&lt; </li>
+<li>=  </li>
+<li>in   </li>
+<li>not in </li>
+<li>max</li>
+<li>min</li>
+<li>count</li>
+<li>sum</li>
+</ol>
+</li>
+<li>难的sql，就需要自己将<strong>中文转述成一种能用数学表达式表示的形式</strong></li>
+</ol>
+</li>
+<li>有一些题他的目的<strong>不在于限制，而是在于整理</strong> 如这里的<strong>16、17、18</strong><ol>
+<li>当侧重点在于<strong>整理</strong>时，需要重点<strong>考虑SQL嵌套</strong></li>
+<li>需要你利用<strong>相关子查询</strong>的知识去<strong>增加一些列</strong>去解决</li>
+<li>其实，这里<strong>select伪列</strong>的作用就是去针<strong>当前表每一条信息去做统计</strong></li>
+<li>后续<ol>
+<li>有些题还需要对统计出来的<strong>select伪列做统计</strong></li>
+<li>这时只能在当前表的外面做查询限制，不能写在当前表中，因为：sql的执行顺序，伪列的产生在最后执行，位于where这些限制的之后执行</li>
+</ol>
+</li>
+<li>参考 <a href="bear://x-callback-url/open-note?id=966ACD87-A8E3-43BA-9230-2D23CF8DBE70-2779-000009EC08A64596">SQL相关子查询的补充</a> </li>
+</ol>
+</li>
+</ol>
+<h2 id="什么时候会产生SQL嵌套（子查询-相关子查询）"><a href="#什么时候会产生SQL嵌套（子查询-相关子查询）" class="headerlink" title="什么时候会产生SQL嵌套（子查询+相关子查询）"></a>什么时候会产生SQL嵌套（子查询+相关子查询）</h2><ol>
+<li><strong>当前限制条件需要单独查询一次时</strong>，用在条件判断中作为条件的值传入  </li>
+<li><strong>要对表中的信息进行初步过滤时</strong>，用作临时视图存在    </li>
+<li><strong>统计新信息时</strong>，用作创建伪列存在</li>
+<li><strong>查询伪列时</strong>，要对伪列中的信息进行限制</li>
+</ol>
+<h2 id="group-by-相关："><a href="#group-by-相关：" class="headerlink" title="group by 相关："></a>group by 相关：</h2><p>来源：<a href="http://www.cnblogs.com/rainman/archive/2013/05/01/3053703.html" target="_blank" rel="noopener">SQL中Group By的使用 - Rain  Man - 博客园</a><br>Having和where的区别：<br><img src="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E5%A6%82%E4%BD%95%E5%88%86%E6%9E%90%EF%BC%88SQL%E6%B5%8B%E8%AF%95%E9%A2%98%EF%BC%89/6D8DED7B-44CA-4B25-B504-E71E0DA96536.png" alt></p>
+<h2 id="区分子查询-相关子查询"><a href="#区分子查询-相关子查询" class="headerlink" title="区分子查询+相关子查询"></a>区分子查询+相关子查询</h2><p>子查询：嵌套在其他查询中的查询称之。<br>子查询又称内部，而包含子查询的语句称之外部查询（又称主查询）。<br>所有的子查询可以分为两类，即相关子查询和非相关子查询   </p>
+<ol>
+<li><strong>非相关子查询</strong>是独立于外部查询的子查询，子查询总共执行一次，执行完毕后将值传递给外部查询。   </li>
+<li><strong>相关子查询</strong>的执行依赖于外部查询的数据，外部查询执行一行，子查询就执行一次。<br>故非相关子查询比相关子查询效率高  </li>
+</ol>
+<h2 id="伪列概念："><a href="#伪列概念：" class="headerlink" title="伪列概念："></a>伪列概念：</h2><ol>
+<li>伪列：数据库没有实际保存的列。</li>
+<li>普通的列，是实际有存储的，在物理存储上就有这个数据。伪列就没有，是算出来的。可以认为是一种特殊的函数。</li>
+<li>如rowid，rowscn，rownum等等</li>
 </ol>
 
       
@@ -1373,7 +328,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E8%A1%A5%E5%85%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1387,7 +342,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-title-link" itemprop="url">SQL表连接</a>
+            <a href="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E8%A1%A5%E5%85%85/" class="post-title-link" itemprop="url">SQL相关子查询的补充</a>
         </h1>
 
         <div class="post-meta">
@@ -1397,7 +352,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2017-08-31 11:03:00" itemprop="dateCreated datePublished" datetime="2017-08-31T11:03:00+08:00">2017-08-31</time>
+              <time title="创建时间：2017-08-30 02:39:00" itemprop="dateCreated datePublished" datetime="2017-08-30T02:39:00+08:00">2017-08-30</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
@@ -1419,7 +374,7 @@
             </span>
 
           
-            <span id="/2017/08/31/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E8%A1%A8%E8%BF%9E%E6%8E%A5/" class="post-meta-item leancloud_visitors" data-flag-title="SQL表连接" title="阅读次数">
+            <span id="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_blog/%E6%95%B0%E6%8D%AE%E5%BA%93/SQL%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E8%A1%A5%E5%85%85/" class="post-meta-item leancloud_visitors" data-flag-title="SQL相关子查询的补充" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1431,7 +386,7 @@
                 <i class="fa fa-file-word-o"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>92</span>
+              <span>972</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1450,15 +405,1047 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>#web开发/czh_blog/数据库<br>2017年8月31日 上午11:03</p>
-<h2 id="连接有哪些"><a href="#连接有哪些" class="headerlink" title="连接有哪些"></a>连接有哪些</h2><ol>
-<li>固定的：外键连接</li>
-<li>额外的：看自己有啥要求，或者要过滤那些情况<ol>
-<li><strong>关键是要明白自己的需求</strong></li>
-<li>然后转换成里逻辑表达式</li>
+          <p>#web开发/czh_blog/数据库<br>2017年8月30日 下午2:39</p>
+<p><strong>相关子查询：子查询中会使用外部表</strong></p>
+<h2 id="两种情况会出现先查询外部产生表的第一条信息，用这条信息中的内容在内部表中匹配查询信息"><a href="#两种情况会出现先查询外部产生表的第一条信息，用这条信息中的内容在内部表中匹配查询信息" class="headerlink" title="两种情况会出现先查询外部产生表的第一条信息，用这条信息中的内容在内部表中匹配查询信息"></a>两种情况会出现先查询<em>外部产生表的第一条信息</em>，用这条信息中的内容在内部表中匹配查询信息</h2><ol>
+<li>这个可以作为我原先总结的<strong>第三种写sql思维的补充</strong></li>
+<li><strong>select</strong><ol>
+<li>使用情形：当我们的需要对<strong>中间表（视图）</strong>中的<strong>每一条数据进行处理</strong>时</li>
+<li>例子<ol>
+<li>这里可以很容的查出来每个学生的总分zcj对应的表</li>
+<li><code>select sc.s,sum(sc.score) zcj from sc group by sc.s</code></li>
+<li>然后，在这个表的基础上进行查询，查询出来的内容中的<strong>具体某个人的信息中的总分</strong>都要和整个表中的<strong>所有人的总分</strong>进行比较，然后看看<strong>有几个</strong>人比他大。</li>
+<li>最后的数值，就是他的排名<ol>
+<li>这里的关键是：<strong>select到from之间的语句是</strong>：<strong>可以进行单独的sql语句执行的</strong>。这条是这种写法成立的本质原因</li>
+<li>执行的时候，<strong>a.zcj就是一个具体的数值</strong>。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--18、查询学生的总成绩并进行排名</span></span><br><span class="line"><span class="keyword">select</span> a.s,a.zcj,</span><br><span class="line">(<span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> </span><br><span class="line">        (<span class="keyword">select</span> sc.s,<span class="keyword">sum</span>(sc.score) zcj <span class="keyword">from</span> sc <span class="keyword">group</span> <span class="keyword">by</span> sc.s) b <span class="keyword">where</span> b.zcj&gt;a.zcj</span><br><span class="line">)+<span class="number">1</span> mc</span><br><span class="line"> <span class="keyword">from</span> </span><br><span class="line">        (</span><br><span class="line">        <span class="keyword">select</span> sc.s,<span class="keyword">sum</span>(sc.score) zcj <span class="keyword">from</span> sc <span class="keyword">group</span> <span class="keyword">by</span> sc.s</span><br><span class="line">        ) a </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> mc;</span><br></pre></td></tr></table></figure></li>
 </ol>
 </li>
 </ol>
+</li>
+<li>另外一种写法：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> b.s,b.zcj,<span class="keyword">count</span>(<span class="number">1</span>) mc <span class="keyword">from</span>  (<span class="keyword">select</span> sc.s,<span class="keyword">sum</span>(sc.score) zcj <span class="keyword">from</span> sc <span class="keyword">group</span> <span class="keyword">by</span> sc.s) b ,  (<span class="keyword">select</span> sc.s,<span class="keyword">sum</span>(sc.score) zcj <span class="keyword">from</span> sc <span class="keyword">group</span> <span class="keyword">by</span> sc.s) a <span class="keyword">where</span> b.zcj&lt;=a.zcj <span class="keyword">GROUP</span> <span class="keyword">BY</span> b.s <span class="keyword">ORDER</span> <span class="keyword">BY</span> mc</span><br></pre></td></tr></table></figure></li>
+<li>区别在于：b.zcj&lt;=a.zcj  这是由于主表不一样，上面的是a,下面的是b</li>
+<li>体现的重要知识点是：b.zcj&lt;=a.zcj  两个变量可以直接比较，平常我们都是其中一个是变量</li>
+</ol>
+</li>
+<li><strong>exit</strong><ol>
+<li>以前的文章写过<a href="bear://x-callback-url/open-note?id=841A654A-5853-4CFD-972D-E90B1DE681B3-2779-000009EC0796A800">SQL书本笔记摘抄</a></li>
+</ol>
+</li>
+</ol>
+<h2 id="表的结构"><a href="#表的结构" class="headerlink" title="表的结构"></a>表的结构</h2><p>图</p>
+<p>总体的结构</p>
+<p>的 的用法</p>
+<p>主干</p>
+<p>拼</p>
+<p>4+2</p>
+<p>select</p>
+<p>group</p>
+<p>6<br>7</p>
+<p>datetime Oracle没有</p>
+<p>select 中使用group by ，那么select能查出来的结果一定要使用goup by 来分组</p>
+<p>Rownum</p>
+<p>null  count</p>
+<p>数据类型</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E8%A1%A5%E5%85%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E8%A1%A5%E5%85%85/" class="post-title-link" itemprop="url">SQL相关子查询的补充</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-30 02:39:00" itemprop="dateCreated datePublished" datetime="2017-08-30T02:39:00+08:00">2017-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/SQL%E7%9B%B8%E5%85%B3%E5%AD%90%E6%9F%A5%E8%AF%A2%E7%9A%84%E8%A1%A5%E5%85%85/" class="post-meta-item leancloud_visitors" data-flag-title="SQL相关子查询的补充" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>972</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>#web开发/czh_blog/数据库<br>2017年8月30日 下午2:39</p>
+<p><strong>相关子查询：子查询中会使用外部表</strong></p>
+<h2 id="两种情况会出现先查询外部产生表的第一条信息，用这条信息中的内容在内部表中匹配查询信息"><a href="#两种情况会出现先查询外部产生表的第一条信息，用这条信息中的内容在内部表中匹配查询信息" class="headerlink" title="两种情况会出现先查询外部产生表的第一条信息，用这条信息中的内容在内部表中匹配查询信息"></a>两种情况会出现先查询<em>外部产生表的第一条信息</em>，用这条信息中的内容在内部表中匹配查询信息</h2><ol>
+<li>这个可以作为我原先总结的<strong>第三种写sql思维的补充</strong></li>
+<li><strong>select</strong><ol>
+<li>使用情形：当我们的需要对<strong>中间表（视图）</strong>中的<strong>每一条数据进行处理</strong>时</li>
+<li>例子<ol>
+<li>这里可以很容的查出来每个学生的总分zcj对应的表</li>
+<li><code>select sc.s,sum(sc.score) zcj from sc group by sc.s</code></li>
+<li>然后，在这个表的基础上进行查询，查询出来的内容中的<strong>具体某个人的信息中的总分</strong>都要和整个表中的<strong>所有人的总分</strong>进行比较，然后看看<strong>有几个</strong>人比他大。</li>
+<li>最后的数值，就是他的排名<ol>
+<li>这里的关键是：<strong>select到from之间的语句是</strong>：<strong>可以进行单独的sql语句执行的</strong>。这条是这种写法成立的本质原因</li>
+<li>执行的时候，<strong>a.zcj就是一个具体的数值</strong>。<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--18、查询学生的总成绩并进行排名</span></span><br><span class="line"><span class="keyword">select</span> a.s,a.zcj,</span><br><span class="line">(<span class="keyword">select</span> <span class="keyword">count</span>(<span class="number">1</span>) <span class="keyword">from</span> </span><br><span class="line">        (<span class="keyword">select</span> sc.s,<span class="keyword">sum</span>(sc.score) zcj <span class="keyword">from</span> sc <span class="keyword">group</span> <span class="keyword">by</span> sc.s) b <span class="keyword">where</span> b.zcj&gt;a.zcj</span><br><span class="line">)+<span class="number">1</span> mc</span><br><span class="line"> <span class="keyword">from</span> </span><br><span class="line">        (</span><br><span class="line">        <span class="keyword">select</span> sc.s,<span class="keyword">sum</span>(sc.score) zcj <span class="keyword">from</span> sc <span class="keyword">group</span> <span class="keyword">by</span> sc.s</span><br><span class="line">        ) a </span><br><span class="line"><span class="keyword">order</span> <span class="keyword">by</span> mc;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+</li>
+<li>另外一种写法：<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> b.s,b.zcj,<span class="keyword">count</span>(<span class="number">1</span>) mc <span class="keyword">from</span>  (<span class="keyword">select</span> sc.s,<span class="keyword">sum</span>(sc.score) zcj <span class="keyword">from</span> sc <span class="keyword">group</span> <span class="keyword">by</span> sc.s) b ,  (<span class="keyword">select</span> sc.s,<span class="keyword">sum</span>(sc.score) zcj <span class="keyword">from</span> sc <span class="keyword">group</span> <span class="keyword">by</span> sc.s) a <span class="keyword">where</span> b.zcj&lt;=a.zcj <span class="keyword">GROUP</span> <span class="keyword">BY</span> b.s <span class="keyword">ORDER</span> <span class="keyword">BY</span> mc</span><br></pre></td></tr></table></figure></li>
+<li>区别在于：b.zcj&lt;=a.zcj  这是由于主表不一样，上面的是a,下面的是b</li>
+<li>体现的重要知识点是：b.zcj&lt;=a.zcj  两个变量可以直接比较，平常我们都是其中一个是变量</li>
+</ol>
+</li>
+<li><strong>exit</strong><ol>
+<li>以前的文章写过<a href="bear://x-callback-url/open-note?id=841A654A-5853-4CFD-972D-E90B1DE681B3-2779-000009EC0796A800">SQL书本笔记摘抄</a></li>
+</ol>
+</li>
+</ol>
+<h2 id="表的结构"><a href="#表的结构" class="headerlink" title="表的结构"></a>表的结构</h2><p>图</p>
+<p>总体的结构</p>
+<p>的 的用法</p>
+<p>主干</p>
+<p>拼</p>
+<p>4+2</p>
+<p>select</p>
+<p>group</p>
+<p>6<br>7</p>
+<p>datetime Oracle没有</p>
+<p>select 中使用group by ，那么select能查出来的结果一定要使用goup by 来分组</p>
+<p>Rownum</p>
+<p>null  count</p>
+<p>数据类型</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E5%AE%9E%E7%8E%B0%E5%90%84%E7%A7%8D%E5%8A%A8%E7%94%BB%E7%9A%84%E7%BB%8F%E9%AA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E5%AE%9E%E7%8E%B0%E5%90%84%E7%A7%8D%E5%8A%A8%E7%94%BB%E7%9A%84%E7%BB%8F%E9%AA%8C/" class="post-title-link" itemprop="url">js实现各种动画的经验</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-30 01:03:00" itemprop="dateCreated datePublished" datetime="2017-08-30T01:03:00+08:00">2017-08-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/30/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E5%AE%9E%E7%8E%B0%E5%90%84%E7%A7%8D%E5%8A%A8%E7%94%BB%E7%9A%84%E7%BB%8F%E9%AA%8C/" class="post-meta-item leancloud_visitors" data-flag-title="js实现各种动画的经验" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>412</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年8月30日 下午1:03</p>
+<h3 id="不完善的地方"><a href="#不完善的地方" class="headerlink" title="不完善的地方"></a>不完善的地方</h3><ol>
+<li>没有经过大的检测</li>
+<li>应该讲具体的每个知识点的连接放上去</li>
+</ol>
+<h2 id="动画的几个要素"><a href="#动画的几个要素" class="headerlink" title="动画的几个要素"></a>动画的几个要素</h2><ol>
+<li>事件源<strong>（html）</strong></li>
+<li>事件处理<strong>（函数）</strong></li>
+<li>事件类型（事件句柄）<strong>（触发类型）</strong></li>
+</ol>
+<h2 id="先弄清楚几个问题（对应上面说的动画的几个要素）"><a href="#先弄清楚几个问题（对应上面说的动画的几个要素）" class="headerlink" title="先弄清楚几个问题（对应上面说的动画的几个要素）"></a>先弄清楚几个问题（对应上面说的动画的几个要素）</h2><ol>
+<li>由谁触发</li>
+<li>怎样触发</li>
+<li>触发后如何执行<ol>
+<li>拆分，一部分一部分的完成</li>
+<li>把每部分步骤细化</li>
+<li><strong>先别想程序，先站在生活的角度把步骤写出来</strong></li>
+</ol>
+</li>
+<li>排除</li>
+</ol>
+<h2 id="将具体细化的每一部分与知识相连接"><a href="#将具体细化的每一部分与知识相连接" class="headerlink" title="将具体细化的每一部分与知识相连接"></a>将具体细化的每一部分与知识相连接</h2><ol>
+<li><strong>只有两中实现方式</strong>：对象的属性 或 对象的方法</li>
+<li><strong>一个最小的功能</strong>的实现是通过控制对象属性？还是通过对象的方法</li>
+<li>对象<ol>
+<li>BOM对象：就是那几种，用的比较少吧</li>
+<li>JS对象：通过js来产生DOM对象（<strong>JS对象可以是一个统称</strong>）</li>
+<li><strong>DOM</strong>对象：（<strong>DOM中属性、文本等也可以当做对象来操作</strong>）<ol>
+<li>Html标签（元素）<ol>
+<li>通用的标签操作<ol>
+<li>DOM树的增删改查</li>
+</ol>
+</li>
+<li>特有的标签操作<ol>
+<li>不同的标签有不同的设置项</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>event对象（全局变量）<ol>
+<li>鼠标</li>
+<li>键盘</li>
+<li><strong>Event就像一个boss，可以全局的看，并且还可以控制一定的事件</strong></li>
+</ol>
+</li>
+<li>属性</li>
+<li>文本、注释</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%2011g%20%E7%9A%84%E4%BA%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%2011g%20%E7%9A%84%E4%BA%86%E8%A7%A3/" class="post-title-link" itemprop="url">ORACLE 11g 的了解</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-28 08:23:00" itemprop="dateCreated datePublished" datetime="2017-08-28T08:23:00+08:00">2017-08-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/ORACLE%2011g%20%E7%9A%84%E4%BA%86%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="ORACLE 11g 的了解" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>536</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年8月28日 上午8:23</p>
+<h2 id="关于oracle的的一些基础知识"><a href="#关于oracle的的一些基础知识" class="headerlink" title="关于oracle的的一些基础知识"></a>关于oracle的的一些基础知识</h2><p><a href="http://www.cnblogs.com/hoobey/p/6010804.html" target="_blank" rel="noopener">Oracle 11g安装步骤详谈 - starskyhu - 博客园</a><br><a href="http://blog.csdn.net/sz_bdqn/article/details/17225515" target="_blank" rel="noopener">Oracle 11g 默认用户名和密码 - sz_bdqn的专栏        - CSDN博客</a><br><a href="http://blog.csdn.net/v123411739/article/details/19007083" target="_blank" rel="noopener">Oracle_11g中解决被锁定的scott用户的方法 - CSDN博客</a></p>
+<h2 id="表空间的概念"><a href="#表空间的概念" class="headerlink" title="表空间的概念"></a>表空间的概念</h2><p><a href="https://www.zhihu.com/question/20396730" target="_blank" rel="noopener">请问下oracle为什么要创建表空间？表空间该如何创建？是将所有表放入一个表空间，还是将几个大表放入表空间？ - 知乎</a><br><a href="https://www.zhihu.com/question/20396730" target="_blank" rel="noopener">请问下oracle为什么要创建表空间？表空间该如何创建？是将所有表放入一个表空间，还是将几个大表放入表空间？ - 知乎</a><br><a href="https://baike.baidu.com/item/%E8%A1%A8%E7%A9%BA%E9%97%B4/1269860?fr=aladdin" target="_blank" rel="noopener">表空间_百度百科</a></p>
+<h2 id="Sql语句总结"><a href="#Sql语句总结" class="headerlink" title="Sql语句总结"></a>Sql语句总结</h2><p><a href="http://www.cnblogs.com/wishyouhappy/p/3700683.html" target="_blank" rel="noopener">常用sql语句及案例（oracle） - wishyouhappy - 博客园</a><br><a href="http://www.cnblogs.com/jiangxinnju/p/5840420.html" target="_blank" rel="noopener">Oracle系统表整理+常用SQL语句收集 - Aloys寒风 - 博客园</a></p>
+<h2 id="五种约束"><a href="#五种约束" class="headerlink" title="五种约束"></a>五种约束</h2><ol>
+<li>主键约束 primary key:保证数据不能为空，切不能重复</li>
+<li>非空约束：保证了该列不能存储null</li>
+<li>默认值约束 not null：如果用户不为此列添加数据，那么数据字典会为该列添加默认值</li>
+<li>Check约束 check：为某一列添加条件约束，如果用户不满足条件，那么操作被驳回</li>
+<li>唯一约束 unique：数据唯一性</li>
+<li>外键约束 foreign key：存在于两张表中，有其中一张表的某一字段指向另一章标的主键，从而让两张表产生关系</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/" class="post-title-link" itemprop="url">用Navicat premium连接win7虚拟机中的ORACLE11g（附账户密码）</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-28 04:55:00" itemprop="dateCreated datePublished" datetime="2017-08-28T04:55:00+08:00">2017-08-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/" class="post-meta-item leancloud_visitors" data-flag-title="用Navicat premium连接win7虚拟机中的ORACLE11g（附账户密码）" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>941</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年8月28日 下午4:55</p>
+<p>Navicat的官方手册：<br><a href="https://www.navicat.com.cn/manual/online_manual/en/navicat/mac_manual/#/main_window_0" target="_blank" rel="noopener">Navicat Tutorials | Navicat Online Manual</a></p>
+<h2 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h2><p>当我升级了Mac os10.13后，出现ORA-21561: OID generation failed这个错误。这是由于升级系统导致的问题。<br>解决：<a href="http://blog.csdn.net/elonlink/article/details/52635523" target="_blank" rel="noopener">解决 ORA-21561: OID generation failed - ElonLink的博客        - CSDN博客</a><br>我的步骤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Last login: Sun Oct  8 13:09:31 on ttys000</span><br><span class="line">czhdeMacBook-Pro:~ czh$ hostname</span><br><span class="line">czhdeMacBook-Pro.local</span><br><span class="line">czhdeMacBook-Pro:~ czh$ cd &#x2F;etc</span><br><span class="line">czhdeMacBook-Pro:etc czh$ open hosts</span><br><span class="line">czhdeMacBook-Pro:etc czh$ sudo scutil --set HostName localhost</span><br><span class="line">Password:</span><br><span class="line">czhdeMacBook-Pro:etc czh$</span><br></pre></td></tr></table></figure>
+
+<p>下面是一个错误，其实我还遇见的好多问题，但是按下面的步骤改的改的就好得了，具体哪个问题怎么呢解决我就不知道了<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/054C0361-E15F-44DA-A9BE-9A1E59404D59.png" alt></p>
+<h2 id="将虚拟机中的防火墙关掉"><a href="#将虚拟机中的防火墙关掉" class="headerlink" title="将虚拟机中的防火墙关掉"></a>将虚拟机中的防火墙关掉</h2><p><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/526697B9-6A3C-486C-96F9-D098987FF7A2.png" alt><br>否则出现超时timeout的错误：<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/47961D9F-712B-4612-ADD7-87E07D4D50FD.png" alt></p>
+<h2 id="连接过程的注意事项"><a href="#连接过程的注意事项" class="headerlink" title="连接过程的注意事项"></a>连接过程的注意事项</h2><ol>
+<li>这里要使用SID，不要使用service Name </li>
+</ol>
+<p><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/78FF4B68-7470-4CF7-BCCA-9B067AD56DE1.png" alt></p>
+<ol start="2">
+<li><p>要填虚拟机中的ip(这里的192.168.42.64)<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/0F0F071A-50B5-4895-A590-E259FACD6DED.png" alt></p>
+</li>
+<li><p>要将虚拟机设置为桥接模式，为了保证虚拟机与主机在同一网段（这里的42）<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/6C65A24D-B5AB-4C6D-8B20-3037AB1825B7.png" alt></p>
+</li>
+</ol>
+<h2 id="关于PL-SQL-Developer"><a href="#关于PL-SQL-Developer" class="headerlink" title="关于PL/SQL Developer"></a>关于PL/SQL Developer</h2><ol>
+<li>我的虚拟机装的是win7，好像win7中安装PL/SQL本身就要问题，我查了好久，但是还是解决不了，我放弃了，因为我找不到原因。</li>
+<li>换用navicat效果一样</li>
+</ol>
+<p><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/8E6AF536-7A0D-439C-A988-9F72A8FF7295.png" alt></p>
+<h2 id="关于ORACLE中的配置文件的修改"><a href="#关于ORACLE中的配置文件的修改" class="headerlink" title="关于ORACLE中的配置文件的修改"></a>关于ORACLE中的配置文件的修改</h2><ol>
+<li>网上有好多blog都是让改oracle中的这两个问题，我这里没有改，也照样解决了问题（能不改就不改）<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/39F20A9E-F6AF-4279-B777-A65B2A1A6710.png" alt><br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/7007E912-D4C1-4D6B-957F-EDD6C494A3E5.png" alt></li>
+</ol>
+<h2 id="在navicat中注册新用户"><a href="#在navicat中注册新用户" class="headerlink" title="在navicat中注册新用户"></a>在navicat中注册新用户</h2><p><a href="http://www.cnblogs.com/renboqie/p/5635611.html" target="_blank" rel="noopener">navicat 关于orcale新建表空间，用户和权限分配 - 仁波切 - 博客园</a></p>
+<ol>
+<li>这里的User Name这一项一定要大写（不能写成chen）<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/FB3A10AD-BF7F-4649-80C7-9F7186EA05C0.png" alt></li>
+<li>这里的chen就是错的，而且role这里我虽然给CHEN设置的ROLE是DBA，但是这里的role依然要选default，不要选DBA<br><img src="/2017/08/28/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/%E7%94%A8Navicat%20premium%E8%BF%9E%E6%8E%A5win7%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%AD%E7%9A%84ORACLE11g%EF%BC%88%E9%99%84%E8%B4%A6%E6%88%B7%E5%AF%86%E7%A0%81%EF%BC%89/FC24BDD4-4988-4ED7-99F2-35DC559C8D59.png" alt></li>
+</ol>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><p>在这里：<a href="bear://x-callback-url/open-note?id=D03220D3-BB27-4183-9EB2-EC2D0EA099FB-6818-00002D988DF620BA">软件开发的相关密码</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/" class="post-title-link" itemprop="url">ThinkPHP源码分析（核心）-7</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-23 10:57:00" itemprop="dateCreated datePublished" datetime="2017-08-23T10:57:00+08:00">2017-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_blog/PHP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析（核心）-7" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>880</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年8月23日 上午10:57</p>
+<h2 id="TP中的一个特点"><a href="#TP中的一个特点" class="headerlink" title="TP中的一个特点"></a>TP中的一个特点</h2><ol>
+<li><p>TP执行过程中很大部分都是<strong>环境的配置</strong>，这里要<strong>组织各种不同位置、不同作用的文件</strong>。那么，如何组织他们之间的工作其实也是一个大工程，就好像一个公司，<strong>boss需要思考</strong>自己需要哪些职位、各个职位他们之间如何协作、如何调节他们之间的关系、出现冲突如何处理、如何处理人员的流动（CBD模式）</p>
+</li>
+<li><p>这个的环境配置不仅仅是各种<strong>数组配置文件（define,static）</strong></p>
+</li>
+<li><p>还有各种<strong>类加载（include)</strong>，类加载之后是为了可以直接使用他们的方法</p>
+</li>
+<li><p>这里说是为了说明方法的来源，<strong>我以前目光里只有配置文件</strong></p>
+</li>
+</ol>
+<h2 id="TP中函数的特点、及它引出的深层思考"><a href="#TP中函数的特点、及它引出的深层思考" class="headerlink" title="TP中函数的特点、及它引出的深层思考"></a>TP中函数的特点、及它引出的深层思考</h2><ol>
+<li><p>TP中<strong>单个函数却要执行多个功能</strong>，这中情况还不少</p>
+</li>
+<li><p>这就导致的他的函数会有很多的判断，这样不仅加大了自己设计代码时的难度，让读的人也不舒服</p>
+</li>
+<li><p>但是，这样做的好处就是让上层使用更加方便</p>
+</li>
+<li><p>各有利弊吧</p>
+</li>
+<li><p><strong>还有另一种情形：</strong></p>
+</li>
+<li><p>就是其实功能说起来也很简单，让我实现的话也觉得不难</p>
+</li>
+<li><p>但是，当你去看他函数写的实现过程时，各种判断，绕来绕去，觉得麻烦</p>
+</li>
+<li><p>当然，这样麻烦不是由于人家水平不行，而是由于<strong>要站在一个框架的高度去思考</strong>，它自然就复杂了</p>
+</li>
+<li><p>我们思考的时候都是<strong>单一情景下的，而框架中的情景太多，那么，自然会让一个功能的实现过程变得复杂，需要各种判断、处理</strong></p>
+</li>
+<li><p>这就是<strong>框架设计者设计的核心</strong>，在开工之前需要进行严密的思考。</p>
+</li>
+<li><p><strong>理清各种情景，各种情景之间的关系</strong></p>
+</li>
+<li><p>这也是各个框架最不同、最有价值的地方</p>
+</li>
+<li><p>像老师说的看一个<strong>string类</strong>等是怎样实现的，这些其实都是<strong>框架的皮毛</strong>了</p>
+</li>
+</ol>
+<p>最后：<strong>看框架的人，最高境界就是能理清楚上面说的，能够画出他们之间的逻辑关系图</strong></p>
+<p>到现在为止我就把TP一个应用的启动过程看完了，没完成的有</p>
+<ol>
+<li>TP的core代码，在Library/Think目录下的那些.php文件<ol>
+<li>我只粗略的看了看Hook.class.php，Dispatcher.class.php</li>
+</ol>
+</li>
+<li>在 <a href="bear://x-callback-url/open-note?id=29F62E49-0E3B-40CE-98F0-DCC5C69E67DE-2779-000009EC0DA8F32F">ThinkPHP源码分析-2</a>中关于View的一些东西我没有看，这个其实很关键的，但是没时间了<ol>
+<li><a href="http://www.daydaytc.com/php/142.html" target="_blank" rel="noopener">Thinkphp源码分析系列（七）–控制器基类-TC部落</a></li>
+<li><a href="http://www.daydaytc.com/php/206.html" target="_blank" rel="noopener">Thinkphp源码分析系列（九）–视图view类-TC部落</a><br><img src="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89-7/1B8462AB-C0AE-4F49-8BA8-078CAA355211.png" alt></li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-6/" class="post-title-link" itemprop="url">ThinkPHP源码分析-6</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-23 08:18:00" itemprop="dateCreated datePublished" datetime="2017-08-23T08:18:00+08:00">2017-08-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_blog/PHP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/23/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-6/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析-6" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>334</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年8月23日 上午8:18</p>
+<h2 id="Hook-class-php"><a href="#Hook-class-php" class="headerlink" title="Hook.class.php"></a>Hook.class.php</h2><ol>
+<li>这个类其实很简单，其中有一个$tags static数组变量用来报错tag和行为的对应关系</li>
+<li>static public function listen($tag, &amp;$params=NULL)这个监听函数，其实是一个执行函数，他直接调用了  static public function exec($name, $tag,&amp;$params=NULL)函数来执行给的tag对应的行为</li>
+<li>除了上面核心的，其他的都是$tags的导入、获取方法</li>
+</ol>
+<h2 id="Dispatcher-class-php"><a href="#Dispatcher-class-php" class="headerlink" title="Dispatcher.class.php"></a>Dispatcher.class.php</h2><ol>
+<li>URL映射到控制器，将URL进行解析对应到相应控制器的方法</li>
+<li>这里并不执行，最后要将解析结果保存在define中、全局变量中</li>
+<li>还有具体的看他的解析过程</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/22/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-5/" class="post-title-link" itemprop="url">ThinkPHP源码分析-5</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-22 09:51:00" itemprop="dateCreated datePublished" datetime="2017-08-22T09:51:00+08:00">2017-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-blog-PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_blog/PHP</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_blog/php/ThinkPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90-5/" class="post-meta-item leancloud_visitors" data-flag-title="ThinkPHP源码分析-5" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>178</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年8月22日 上午9:51</p>
+<p>方法的执行是一个短暂的过程，那么他如何维持它的效果</p>
+<ol>
+<li>字符串<ol>
+<li>define</li>
+<li>static变量</li>
+<li>数组</li>
+</ol>
+</li>
+<li>这就涉及到一个抽象的过程，一个抽象的状态你用一个字符串来表示，这个字符串就是所谓的状态</li>
+<li>这说明了两点<ol>
+<li>字符串（数组）是每一个项目的核心。不论是用来处理数据、还是完成让人不可思议的功能</li>
+<li>抽象建模的能力。不是实物的东西，用一个字符串（数组）来表示</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2017/08/22/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%A2%B3%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%A2%B3%E7%90%86/" class="post-title-link" itemprop="url">js知识体系的梳理</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-08-22 05:29:00" itemprop="dateCreated datePublished" datetime="2017-08-22T05:29:00+08:00">2017-08-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-12 20:06:07" itemprop="dateModified" datetime="2020-03-12T20:06:07+08:00">2020-03-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/web%E5%BC%80%E5%8F%91-czh-java-%E9%9D%9E%E6%A1%86%E6%9E%B6Web%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index">
+                    <span itemprop="name">web开发/czh_java/非框架Web技术</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%A2%B3%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="js知识体系的梳理" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>132</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>2017年8月22日 下午5:29</p>
+<h2 id="由这几部分组成"><a href="#由这几部分组成" class="headerlink" title="由这几部分组成"></a>由这几部分组成</h2><ol>
+<li>Js的非对象语法规则：这个其实简单，基本上和其他语言一致，一定不会造成大问题</li>
+<li>对象：如图1<ol>
+<li>javaScript对象</li>
+<li>Browser对象</li>
+<li>DOM对象</li>
+<li>HTML对象</li>
+</ol>
+</li>
+<li>事件机制：<ol>
+<li>事件包括：事件源()</li>
+</ol>
+</li>
+</ol>
+<p>对象的来源<br>如何操作对象<br>对象可以干什么</p>
+<p><img src="/2017/08/22/web%E5%BC%80%E5%8F%91/czh_java/%E9%9D%9E%E6%A1%86%E6%9E%B6web%E6%8A%80%E6%9C%AF/js%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%E7%9A%84%E6%A2%B3%E7%90%86/DB08A82B-088F-4DFA-A8D5-140AF9DEC958.png" alt></p>
 
       
     </div>
@@ -1478,7 +1465,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/113/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/113/">113</a><span class="page-number current">114</span><a class="page-number" href="/page/115/">115</a><span class="space">&hellip;</span><a class="page-number" href="/page/121/">121</a><a class="extend next" rel="next" href="/page/115/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/113/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/113/">113</a><span class="page-number current">114</span><a class="page-number" href="/page/115/">115</a><span class="space">&hellip;</span><a class="page-number" href="/page/119/">119</a><a class="extend next" rel="next" href="/page/115/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1544,14 +1531,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1209</span>
+          <span class="site-state-item-count">1189</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">104</span>
+        <span class="site-state-item-count">98</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
   </nav>
@@ -1585,12 +1572,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">1.3m</span>
+    <span title="站点总字数">1.2m</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">18:59</span>
+    <span title="站点阅读时长">18:55</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
   </div>

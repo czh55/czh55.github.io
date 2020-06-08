@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2020年5月6日 上午9:30 参考：位置有关码和位置无关码详细解释_C&#x2F;C++_shenlong1356的博客-CSDN博客位置无关码、位置有关码、链接地址、加载地址_运维_漫不经心-CSDN博客伪指令ADR和LDR的区别_嵌入式_墨的博客-CSDN博客汇编LDR指令_网络_JadyC的博客-CSDN博客 1.核心概念总结 在移植 uboot 时，接触到一个概念叫做 位置无关码，那么与它对应的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从.C .S代码对应到内存位置：理解链接地址、运行地址、位置无关码、位置有关码">
+<meta property="og:url" content="http://chenzhiheng.cn/2020/05/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%BB%8E.C%20.S%E4%BB%A3%E7%A0%81%E5%AF%B9%E5%BA%94%E5%88%B0%E5%86%85%E5%AD%98%E4%BD%8D%E7%BD%AE%EF%BC%9A%E7%90%86%E8%A7%A3/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2020年5月6日 上午9:30 参考：位置有关码和位置无关码详细解释_C&#x2F;C++_shenlong1356的博客-CSDN博客位置无关码、位置有关码、链接地址、加载地址_运维_漫不经心-CSDN博客伪指令ADR和LDR的区别_嵌入式_墨的博客-CSDN博客汇编LDR指令_网络_JadyC的博客-CSDN博客 1.核心概念总结 在移植 uboot 时，接触到一个概念叫做 位置无关码，那么与它对应的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-05-06T01:30:00.000Z">
+<meta property="article:modified_time" content="2020-06-08T07:40:34.502Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://chenzhiheng.cn/2020/05/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%BB%8E.C%20.S%E4%BB%A3%E7%A0%81%E5%AF%B9%E5%BA%94%E5%88%B0%E5%86%85%E5%AD%98%E4%BD%8D%E7%BD%AE%EF%BC%9A%E7%90%86%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>从.C .S代码对应到内存位置：理解链接地址、运行地址、位置无关码、位置有关码 | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2020/05/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%BB%8E.C%20.S%E4%BB%A3%E7%A0%81%E5%AF%B9%E5%BA%94%E5%88%B0%E5%86%85%E5%AD%98%E4%BD%8D%E7%BD%AE%EF%BC%9A%E7%90%86%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从.C .S代码对应到内存位置：理解链接地址、运行地址、位置无关码、位置有关码
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-05-06 09:30:00" itemprop="dateCreated datePublished" datetime="2020-05-06T09:30:00+08:00">2020-05-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-08 15:40:34" itemprop="dateModified" datetime="2020-06-08T15:40:34+08:00">2020-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-a-%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3-arm/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/a_硬件相关/arm</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/05/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%BB%8E.C%20.S%E4%BB%A3%E7%A0%81%E5%AF%B9%E5%BA%94%E5%88%B0%E5%86%85%E5%AD%98%E4%BD%8D%E7%BD%AE%EF%BC%9A%E7%90%86%E8%A7%A3/" class="post-meta-item leancloud_visitors" data-flag-title="从.C .S代码对应到内存位置：理解链接地址、运行地址、位置无关码、位置有关码" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>6.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>6 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2020年5月6日 上午9:30</p>
+<h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="https://blog.csdn.net/shenlong1356/article/details/104602535" target="_blank" rel="noopener">位置有关码和位置无关码详细解释_C/C++_shenlong1356的博客-CSDN博客</a><br><a href="https://blog.csdn.net/lizuobin2/article/details/52049892" target="_blank" rel="noopener">位置无关码、位置有关码、链接地址、加载地址_运维_漫不经心-CSDN博客</a><br><a href="https://blog.csdn.net/waynewu919512/article/details/46848715" target="_blank" rel="noopener">伪指令ADR和LDR的区别_嵌入式_墨的博客-CSDN博客</a><br><a href="https://blog.csdn.net/JadyC/article/details/90677782" target="_blank" rel="noopener">汇编LDR指令_网络_JadyC的博客-CSDN博客</a></p>
+<h3 id="1-核心概念总结"><a href="#1-核心概念总结" class="headerlink" title="1.核心概念总结"></a>1.核心概念总结</h3><ol>
+<li>在移植 uboot 时，接触到一个概念叫做 位置无关码，那么与它对应的就是位置有关码。提到这两个概念就还得提一提链接地址、运行地址。<ol>
+<li>链接地址，链接脚本里指定的，理论上程序运行时所处的地址。在编译时，编译器会根据链接地址来翻译位置有关码。</li>
+<li>运行地址，程序运行时，实际所处的地址。</li>
+</ol>
+</li>
+<li>位置无关码，位置有关码，是相对于一条指令的正常目的来说的。<ol>
+<li>比如 ldr r0 ,=标号，它的正常目的是取得标号处的地址，对于这个目的，它是位置有关码，运行的地址不对就获取不到正确的标号地址，其实它无论在哪都是获取的程序运行地址等于链接地址时，标号的地址，如果你就是想要这个值，那么用这条指令是非常正确的，就不用理会什么位置无关码，位置有关码的概念了，这一点非常重要。</li>
+<li>因此，当运行地址不等于链接地址时，并不是不可以用位置无关码，而是要看你用位置无关码是否达到了你想要的目的。</li>
+</ol>
+</li>
+<li><strong>位置无关码，依赖于程序当前运行的PC值</strong>，进行相对的跳转，导致的结果就是，无论代码在哪，总能达到指令的正常目的，因此是位置无关的。</li>
+<li><strong>位置有关码，不依赖当前PC值</strong>，是绝对跳转，只有程序运行在链接地址处时，才能达到指令的正常目的，因此是位置有关系的。</li>
+</ol>
+<h3 id="2-从代码实践分析"><a href="#2-从代码实践分析" class="headerlink" title="2.从代码实践分析"></a>2.从代码实践分析</h3><h5 id="下面，我们来看常用的汇编指令以及C语言中哪些操作是位置有关码，哪些是位置无关码。"><a href="#下面，我们来看常用的汇编指令以及C语言中哪些操作是位置有关码，哪些是位置无关码。" class="headerlink" title="下面，我们来看常用的汇编指令以及C语言中哪些操作是位置有关码，哪些是位置无关码。"></a>下面，我们来看常用的汇编指令以及C语言中哪些操作是位置有关码，哪些是位置无关码。</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 汇编</span></span><br><span class="line">SECTIONS &#123;</span><br><span class="line">    . = <span class="number">0x33f80000</span>;</span><br><span class="line">    .<span class="built_in">text</span> : &#123; *(.<span class="built_in">text</span>) &#125;</span><br><span class="line">    </span><br><span class="line">    . = ALIGN(<span class="number">4</span>);</span><br><span class="line">    .rodata : &#123;*(.rodata*)&#125; </span><br><span class="line">    </span><br><span class="line">    . = ALIGN(<span class="number">4</span>);</span><br><span class="line">    .data : &#123; *(.data) &#125;</span><br><span class="line">    </span><br><span class="line">    . = ALIGN(<span class="number">4</span>);</span><br><span class="line">    __bss_start = .;</span><br><span class="line">    .bss : &#123; *(.bss)  *(COMMON) &#125;</span><br><span class="line">    __bss_end = .;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 汇编</span></span><br><span class="line">.<span class="built_in">text</span></span><br><span class="line">.global _start</span><br><span class="line">_start:</span><br><span class="line"> </span><br><span class="line">	bl close_watch_dog		<span class="comment">/* 相对跳转，位置无关 */</span></span><br><span class="line">	bl _start</span><br><span class="line">	adr r0, close_watch_dog	<span class="comment">/* 获取标号地址，位置无关 */</span></span><br><span class="line">	</span><br><span class="line">	ldr r0, SMRDATA			<span class="comment">/* 获取标号处的值，位置无关 */</span></span><br><span class="line"> </span><br><span class="line">	ldr r0, =<span class="number">0x12345678</span></span><br><span class="line">	ldr r0, =SMRDATA        <span class="comment">/* 获取标号地址，位置有关 */</span></span><br><span class="line">	ldr r0, =main			<span class="comment">/* 获取函数名的地址，位置有关 */</span></span><br><span class="line">	ldr r0 ,=__bss_start	<span class="comment">/* 获取链接脚本里标号的地址，位置有关 */</span></span><br><span class="line"> </span><br><span class="line">	</span><br><span class="line">close_watch_dog:</span><br><span class="line">	mov r1, #<span class="number">0</span></span><br><span class="line">	str r1, [r0]</span><br><span class="line">	mov pc, lr</span><br><span class="line">	</span><br><span class="line">SMRDATA:</span><br><span class="line">    .<span class="keyword">word</span>  <span class="number">0x22111120</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">abc</span><span class="params">()</span></span>&#123;</span><br><span class="line">	a = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> b;</span><br><span class="line">	a =<span class="number">1</span> ;</span><br><span class="line">	b =<span class="number">1</span> ;</span><br><span class="line">	abc();</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="编译后的反汇编代码："><a href="#编译后的反汇编代码：" class="headerlink" title="编译后的反汇编代码："></a>编译后的反汇编代码：</h5><ol>
+<li>编译后的<strong>反汇编</strong>代码如下，<strong>0x33f80000代表链接地址</strong></li>
+<li>如果我们把代码加载到<strong>0x33f80000处运行，</strong>此时运行的地址和链接地址完全一样，也就是下面的反汇编图<strong>，</strong></li>
+<li><strong>此时，链接地址 = 运行地址</strong><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 反汇编</span></span><br><span class="line"><span class="number">33f</span>80000 &lt;_start&gt;:</span><br><span class="line"><span class="number">33f</span>80000:	eb000006 	bl	<span class="number">33f</span>80020 &lt;close_watch_dog&gt;</span><br><span class="line"><span class="number">33f</span>80004:	ebfffffd 	bl	<span class="number">33f</span>80000 &lt;_start&gt;</span><br><span class="line"><span class="number">33f</span>80008:	e28f0010 	add	r0, pc, #<span class="number">16</span></span><br><span class="line"><span class="number">33f</span>8000c:	e59f0018 	ldr	r0, [pc, #<span class="number">24</span>]	; <span class="number">33f</span>8002c &lt;SMRDATA&gt;</span><br><span class="line"><span class="number">33f</span>80010:	e59f0018 	ldr	r0, [pc, #<span class="number">24</span>]	; <span class="number">33f</span>80030 &lt;SMRDATA+<span class="number">0x4</span>&gt;</span><br><span class="line"><span class="number">33f</span>80014:	e59f0018 	ldr	r0, [pc, #<span class="number">24</span>]	; <span class="number">33f</span>80034 &lt;SMRDATA+<span class="number">0x8</span>&gt;</span><br><span class="line"><span class="number">33f</span>80018:	e59f0018 	ldr	r0, [pc, #<span class="number">24</span>]	; <span class="number">33f</span>80038 &lt;SMRDATA+<span class="number">0xc</span>&gt;</span><br><span class="line"><span class="number">33f</span>8001c:	e59f0018 	ldr	r0, [pc, #<span class="number">24</span>]	; <span class="number">33f</span>8003c &lt;SMRDATA+<span class="number">0x10</span>&gt;</span><br><span class="line"> </span><br><span class="line"><span class="number">33f</span>80020 &lt;close_watch_dog&gt;:</span><br><span class="line"><span class="number">33f</span>80020:	e3a01000 	mov	r1, #<span class="number">0</span></span><br><span class="line"><span class="number">33f</span>80024:	e5801000 	str	r1, [r0]</span><br><span class="line"><span class="number">33f</span>80028:	e1a0f00e 	mov	pc, lr</span><br><span class="line"> </span><br><span class="line"><span class="number">33f</span>8002c &lt;SMRDATA&gt;:</span><br><span class="line"><span class="number">33f</span>8002c:	<span class="number">22111120</span> 	andscs	r1, r1, #<span class="number">8</span></span><br><span class="line"><span class="number">33f</span>80030:	<span class="number">12345678</span> 	eorsne	r5, r4, #<span class="number">125829120</span>	; <span class="number">0x7800000</span></span><br><span class="line"><span class="number">33f</span>80034:	<span class="number">33f</span>8002c 	mvnscc	r0, #<span class="number">44</span>	; <span class="number">0x2c</span></span><br><span class="line"><span class="number">33f</span>80038:	<span class="number">33f</span>80064 	mvnscc	r0, #<span class="number">100</span>	; <span class="number">0x64</span></span><br><span class="line"><span class="number">33f</span>8003c:	<span class="number">33f</span>800a0 	mvnscc	r0, #<span class="number">160</span>	; <span class="number">0xa0</span></span><br><span class="line"> </span><br><span class="line"><span class="number">33f</span>80040 &lt;abc&gt;:</span><br><span class="line"><span class="number">33f</span>80040:	e52db004 	push	&#123;fp&#125;		; (str fp, [sp, #<span class="number">-4</span>]!)</span><br><span class="line"><span class="number">33f</span>80044:	e28db000 	add	fp, sp, #<span class="number">0</span></span><br><span class="line"><span class="number">33f</span>80048:	e59f3010 	ldr	r3, [pc, #<span class="number">16</span>]	; <span class="number">33f</span>80060 &lt;abc+<span class="number">0x20</span>&gt;</span><br><span class="line"><span class="number">33f</span>8004c:	e3a02002 	mov	r2, #<span class="number">2</span></span><br><span class="line"><span class="number">33f</span>80050:	e5832000 	str	r2, [r3]</span><br><span class="line"><span class="number">33f</span>80054:	e28bd000 	add	sp, fp, #<span class="number">0</span></span><br><span class="line"><span class="number">33f</span>80058:	e8bd0800 	pop	&#123;fp&#125;</span><br><span class="line"><span class="number">33f</span>8005c:	e12fff1e 	bx	lr</span><br><span class="line"><span class="number">33f</span>80060:	<span class="number">33f</span>800a0 	mvnscc	r0, #<span class="number">160</span>	; <span class="number">0xa0</span></span><br><span class="line"> </span><br><span class="line"><span class="number">33f</span>80064 &lt;main&gt;:</span><br><span class="line"><span class="number">33f</span>80064:	e92d4800 	push	&#123;fp, lr&#125;</span><br><span class="line"><span class="number">33f</span>80068:	e28db004 	add	fp, sp, #<span class="number">4</span></span><br><span class="line"><span class="number">33f</span>8006c:	e24dd008 	sub	sp, sp, #<span class="number">8</span></span><br><span class="line"><span class="number">33f</span>80070:	e59f3024 	ldr	r3, [pc, #<span class="number">36</span>]	; <span class="number">33f</span>8009c &lt;main+<span class="number">0x38</span>&gt;</span><br><span class="line"><span class="number">33f</span>80074:	e3a02001 	mov	r2, #<span class="number">1</span></span><br><span class="line"><span class="number">33f</span>80078:	e5832000 	str	r2, [r3]</span><br><span class="line"><span class="number">33f</span>8007c:	e3a03001 	mov	r3, #<span class="number">1</span></span><br><span class="line"><span class="number">33f</span>80080:	e50b3008 	str	r3, [fp, #<span class="number">-8</span>]</span><br><span class="line"><span class="number">33f</span>80084:	ebffffed 	bl	<span class="number">33f</span>80040 &lt;abc&gt;</span><br><span class="line"><span class="number">33f</span>80088:	e3a03000 	mov	r3, #<span class="number">0</span></span><br><span class="line"><span class="number">33f</span>8008c:	e1a00003 	mov	r0, r3</span><br><span class="line"><span class="number">33f</span>80090:	e24bd004 	sub	sp, fp, #<span class="number">4</span></span><br><span class="line"><span class="number">33f</span>80094:	e8bd4800 	pop	&#123;fp, lr&#125;</span><br><span class="line"><span class="number">33f</span>80098:	e12fff1e 	bx	lr</span><br><span class="line"><span class="number">33f</span>8009c:	<span class="number">33f</span>800a0 	mvnscc	r0, #<span class="number">160</span>	; <span class="number">0xa0</span></span><br><span class="line"> </span><br><span class="line">Disassembly of section .bss:</span><br><span class="line"> </span><br><span class="line"><span class="number">33f</span>800a0 &lt;a&gt;:</span><br><span class="line"><span class="number">33f</span>800a0:	<span class="number">00000000</span> 	andeq	r0, r0, r0</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h5 id="假设拷贝到内存之后对应的地址"><a href="#假设拷贝到内存之后对应的地址" class="headerlink" title="假设拷贝到内存之后对应的地址"></a>假设拷贝到内存之后对应的地址</h5><ol>
+<li>如果我们把代码<strong>加载到0x00000000处运行</strong>，此时实际运行的情况应该是下面这样的：此时<strong>链接地址≠运行地址</strong></li>
+<li><strong>注意：</strong>下面的不是反汇编的到的，<strong>反汇编得到的还是上面那样的</strong>，下面的只是我们根据实际运行情况描绘的</li>
+<li><strong>0x00000000代表的是实际运行地址</strong><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 反汇编</span></span><br><span class="line"><span class="number">00000000</span> &lt;_start&gt;:</span><br><span class="line"><span class="number">00000000</span>:	eb000006 	bl	<span class="number">33f</span>80020 &lt;close_watch_dog&gt;</span><br><span class="line"><span class="number">00000004</span>:	ebfffffd 	bl	<span class="number">33f</span>80000 &lt;_start&gt;</span><br><span class="line"><span class="number">00000008</span>:	e28f0010 	add	r0, pc, #<span class="number">16</span></span><br><span class="line"><span class="number">0000000</span>c:	e59f0018 	ldr	r0, [pc, #<span class="number">24</span>]	; </span><br><span class="line"><span class="number">00000010</span>:	e59f0018 	ldr	r0, [pc, #<span class="number">24</span>]	; </span><br><span class="line"><span class="number">00000014</span>:	e59f0018 	ldr	r0, [pc, #<span class="number">24</span>]	; </span><br><span class="line"><span class="number">00000018</span>:	e59f0018 	ldr	r0, [pc, #<span class="number">24</span>]	; </span><br><span class="line"><span class="number">0000001</span>c:	e59f0018 	ldr	r0, [pc, #<span class="number">24</span>]	; </span><br><span class="line"> </span><br><span class="line"><span class="number">00000020</span> &lt;close_watch_dog&gt;:</span><br><span class="line"><span class="number">00000020</span>:	e3a01000 	mov	r1, #<span class="number">0</span></span><br><span class="line"><span class="number">00000024</span>:	e5801000 	str	r1, [r0]</span><br><span class="line"><span class="number">00000028</span>:	e1a0f00e 	mov	pc, lr</span><br><span class="line"> </span><br><span class="line"><span class="number">0000002</span>c &lt;SMRDATA&gt;:</span><br><span class="line"><span class="number">0000002</span>c:	<span class="number">22111120</span> 	andscs	r1, r1, #<span class="number">8</span></span><br><span class="line"><span class="number">00000030</span>:	<span class="number">12345678</span> 	eorsne	r5, r4, #<span class="number">125829120</span>	; <span class="number">0x7800000</span></span><br><span class="line"><span class="number">00000034</span>:	<span class="number">33f</span>8002c 	mvnscc	r0, #<span class="number">44</span>	; <span class="number">0x2c</span></span><br><span class="line"><span class="number">00000038</span>:	<span class="number">33f</span>80064 	mvnscc	r0, #<span class="number">100</span>	; <span class="number">0x64</span></span><br><span class="line"><span class="number">0000003</span>c:	<span class="number">33f</span>800a0 	mvnscc	r0, #<span class="number">160</span>	; <span class="number">0xa0</span></span><br><span class="line"> </span><br><span class="line"><span class="number">00000040</span> &lt;abc&gt;:</span><br><span class="line"><span class="number">00000040</span>:	e52db004 	push	&#123;fp&#125;		; (str fp, [sp, #<span class="number">-4</span>]!)</span><br><span class="line"><span class="number">00000044</span>:	e28db000 	add	fp, sp, #<span class="number">0</span></span><br><span class="line"><span class="number">00000048</span>:	e59f3010 	ldr	r3, [pc, #<span class="number">16</span>]	; <span class="number">33f</span>80060 &lt;abc+<span class="number">0x20</span>&gt;</span><br><span class="line"><span class="number">0000004</span>c:	e3a02002 	mov	r2, #<span class="number">2</span></span><br><span class="line"><span class="number">00000050</span>:	e5832000 	str	r2, [r3]</span><br><span class="line"><span class="number">00000054</span>:	e28bd000 	add	sp, fp, #<span class="number">0</span></span><br><span class="line"><span class="number">00000058</span>:	e8bd0800 	pop	&#123;fp&#125;</span><br><span class="line"><span class="number">0000005</span>c:	e12fff1e 	bx	lr</span><br><span class="line"><span class="number">00000060</span>:	<span class="number">33f</span>800a0 	mvnscc	r0, #<span class="number">160</span>	; <span class="number">0xa0</span></span><br><span class="line"> </span><br><span class="line"><span class="number">00000064</span> &lt;main&gt;:</span><br><span class="line"><span class="number">00000064</span>:	e92d4800 	push	&#123;fp, lr&#125;</span><br><span class="line"><span class="number">00000068</span>:	e28db004 	add	fp, sp, #<span class="number">4</span></span><br><span class="line"><span class="number">0000006</span>c:	e24dd008 	sub	sp, sp, #<span class="number">8</span></span><br><span class="line"><span class="number">00000070</span>:	e59f3024 	ldr	r3, [pc, #<span class="number">36</span>]	; <span class="number">33f</span>8009c &lt;main+<span class="number">0x38</span>&gt;</span><br><span class="line"><span class="number">00000074</span>:	e3a02001 	mov	r2, #<span class="number">1</span></span><br><span class="line"><span class="number">00000078</span>:	e5832000 	str	r2, [r3]</span><br><span class="line"><span class="number">0000007</span>c:	e3a03001 	mov	r3, #<span class="number">1</span></span><br><span class="line"><span class="number">00000080</span>:	e50b3008 	str	r3, [fp, #<span class="number">-8</span>]</span><br><span class="line"><span class="number">00000084</span>:	ebffffed 	bl	<span class="number">33f</span>80040 &lt;abc&gt;</span><br><span class="line"><span class="number">00000088</span>:	e3a03000 	mov	r3, #<span class="number">0</span></span><br><span class="line"><span class="number">0000008</span>c:	e1a00003 	mov	r0, r3</span><br><span class="line"><span class="number">00000090</span>:	e24bd004 	sub	sp, fp, #<span class="number">4</span></span><br><span class="line"><span class="number">00000094</span>:	e8bd4800 	pop	&#123;fp, lr&#125;</span><br><span class="line"><span class="number">00000098</span>:	e12fff1e 	bx	lr</span><br><span class="line"><span class="number">0000009</span>c:	<span class="number">33f</span>800a0 	mvnscc	r0, #<span class="number">160</span>	; <span class="number">0xa0</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="代码分析："><a href="#代码分析：" class="headerlink" title="代码分析："></a>代码分析：</h3><h5 id="一、BL指令"><a href="#一、BL指令" class="headerlink" title="一、BL指令"></a>一、BL指令</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bl  close_watch_dog   <span class="comment">//*位置无关码*</span></span><br><span class="line"><span class="number">33f</span>80000 : eb000006  bl <span class="number">33f</span>80020</span><br></pre></td></tr></table></figure>
+<ol>
+<li><strong>b 是相对跳转：跳转地址 = PC （PC=当前地址+8）+ 偏移值</strong></li>
+<li>偏移值：机器码 0xeb000006 低 24位 0x000006 按符号为扩展为 32 位 0x00000006 正数，向后跳转 0x6 * 4（32位位4字节）=（24）字节 也就是 0x18</li>
+<li>起始运行地址为0x0000000时：    0x00000000（当前运行地址） + 8 + 0x18（偏移地址） = 0x00000020 跳转到正确位置</li>
+<li>起始运行地址为0x3ff80000时：    0x3ff80000（当前运行地址）   + 8 + 0x18（偏移地址） = 0x33f80020  跳转到正确位置<h5 id="二、ADR"><a href="#二、ADR" class="headerlink" title="二、ADR"></a>二、ADR</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adr r0, close_watch_dog     <span class="comment">/* 获取标号处的地址，*位置无关码*，伪指令 */</span></span><br><span class="line"><span class="number">33f</span>80008:  e28f0010  add  r0,  pc,  #<span class="number">16</span></span><br></pre></td></tr></table></figure></li>
+<li><strong>跳转地址 = PC （PC=当前地址+8）+ 偏移值</strong></li>
+<li>1、运行地址为0：                         0 + 8 + 16 = 0x20                             正确</li>
+<li>2、运行地址为0x3ff80000:           0x3ff80008 + 8 + 16 = 0x33f80020   正确</li>
+<li>Adr 获取的是标号处的“实际”地址，标号在哪就是哪个地址，跟位置无关，总能获得想要的值。<h5 id="三、LDR"><a href="#三、LDR" class="headerlink" title="三、LDR"></a>三、LDR</h5><h6 id="LDR-1"><a href="#LDR-1" class="headerlink" title="LDR-1"></a>LDR-1</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ldr r0, SMRDATA       <span class="comment">/* 获取标号处的值，*位置无关* *伪指令和下面的中间加上=号的不同**/</span></span><br><span class="line"><span class="number">33f</span>8000c:e59f0018  ldr   r0, [pc, #<span class="number">24</span>];</span><br></pre></td></tr></table></figure></li>
+<li>起始运行地址地址0：         r0 = c + 8 + 24 = 0x2c                            处   <strong>22111120</strong>                    </li>
+<li>起始运行地址0x3ff80000:   r0 = 0x3ff8000c + 8 + 24 = 0x33f8002c  处 <strong>22111120</strong>     和上面得到的一样，所以和位置无关                 <h6 id="LDR-2"><a href="#LDR-2" class="headerlink" title="LDR-2"></a>LDR-2</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Ldr r0, =SMRDATA     <span class="comment">/* 获取标号地址，*位置有关* *这个中间加了= 不是伪指令，和上面的不同* */</span></span><br><span class="line"><span class="number">33f</span>80014: e59f0018ldrr0,  [pc, #<span class="number">24</span>];  <span class="number">33f</span>80034 &lt;SMRDATA+<span class="number">0x8</span>&gt;</span><br></pre></td></tr></table></figure></li>
+<li><strong>起始运行地址0：  r0 = 0x14 + 8 + 24 = 0x34 处的值 33f8002c 与实际运行地址0x0000002c不同 ,所以不正确</strong><ol>
+<li><strong>假设我要用这个地址去取值，或者用这个地址去跳转函数，而此时实际的变量或者函数根本不在链接地址处，这样肯定就出错了</strong></li>
+</ol>
+</li>
+<li>起始运行地址0x3ff80000:      r0 = 0x3ff80014 + 8 + 24 = 0x33f80034 处的值<strong>33f8002c</strong>和实际运行地址<strong>33f8002c</strong>相同 正确<h6 id="LDR-3"><a href="#LDR-3" class="headerlink" title="LDR-3"></a>LDR-3</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ldr r0, =main<span class="comment">/* 获取函数名的地址，位置有关 */</span></span><br><span class="line">ldr r0 ,=__bss_start <span class="comment">/* 获取链接脚本里标号的地址，位置有关 */</span></span><br></pre></td></tr></table></figure></li>
+<li>这俩和 ldr r0, =SMRDATA 一致，位置有关，在0地址处运行不正确。</li>
+</ol>
+<h3 id="C函数"><a href="#C函数" class="headerlink" title="C函数"></a>C函数</h3><h5 id="1-全局变量"><a href="#1-全局变量" class="headerlink" title="1.全局变量"></a>1.全局变量</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">abc</span><span class="params">()</span></span>&#123;    <span class="comment">//c语言函数abc()</span></span><br><span class="line">	a = <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//对c语言函数反汇编</span></span><br><span class="line"> </span><br><span class="line"><span class="number">33f</span>80040 &lt;abc&gt;:</span><br><span class="line"><span class="number">33f</span>80040:	e52db004 	push	&#123;fp&#125;		; (str fp, [sp, #<span class="number">-4</span>]!)</span><br><span class="line"><span class="number">33f</span>80044:	e28db000 	add	fp, sp, #<span class="number">0</span></span><br><span class="line"><span class="number">33f</span>80048:	e59f3010 	ldr	r3, [pc, #<span class="number">16</span>]	; <span class="number">33f</span>80060 &lt;abc+<span class="number">0x20</span>&gt; <span class="comment">//取出全局变量a</span></span><br><span class="line"><span class="number">33f</span>8004c:	e3a02002 	mov	r2, #<span class="number">2</span></span><br><span class="line"><span class="number">33f</span>80050:	e5832000 	str	r2, [r3]   <span class="comment">//对全局变量赋值2</span></span><br><span class="line"><span class="number">33f</span>80054:	e28bd000 	add	sp, fp, #<span class="number">0</span></span><br><span class="line"><span class="number">33f</span>80058:	e8bd0800 	pop	&#123;fp&#125;</span><br><span class="line"><span class="number">33f</span>8005c:	e12fff1e 	bx	lr</span><br><span class="line"><span class="number">33f</span>80060:	<span class="number">33f</span>800a0 	mvnscc	r0, #<span class="number">160</span>	; <span class="number">0xa0</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="number">33f</span>800a0 &lt;a&gt;:   <span class="comment">//全局变量a</span></span><br><span class="line"><span class="number">33f</span>800a0:	<span class="number">00000000</span> 	andeq	r0, r0, r0</span><br></pre></td></tr></table></figure>
+<ol>
+<li>R3 为全局变量 a 的地址，无论a 是存放在 0起始的地址还是0x33f80000起始的地址，它都认为 a 的地址是 0x33f800a0 。<strong>因此，C函数中调用全局变量是位置有关码。</strong></li>
+</ol>
+<h5 id="2-函数调用"><a href="#2-函数调用" class="headerlink" title="2.函数调用"></a>2.函数调用</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">33f</span>80084: ebffffed bl  <span class="number">33f</span>80040 &lt;abc&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li><strong>由于 main 函数和 abc 函数挨得比较近，在32M范围之内，因此被翻译成了一条 bl 指令</strong>，<strong>那么与位置无关。</strong></li>
+<li><strong>如果，调用的函数比较远，大于32M的话，我认为是与位置有关系的</strong>，这个不再验证了。</li>
+</ol>
+<h5 id="3-局部变量"><a href="#3-局部变量" class="headerlink" title="3.局部变量"></a>3.局部变量</h5><p>局部变量在函数刚开始的地方被压入栈，赋值语句被翻译成：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">33f</span>8007c: e3a03001 movr3, #<span class="number">1</span></span><br><span class="line"><span class="number">33f</span>80080: e50b3008 str r3, [fp, #<span class="number">-8</span>]</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/05/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E7%B3%BB%E7%BB%9F/IPC%E4%B8%AD%EF%BC%9A%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98%E7%9A%84%E5%88%9B%E5%BB%BA%E5%92%8C%E6%98%A0%E5%B0%84%E8%BF%87%E7%A8%8B/" rel="prev" title="IPC中：共享内存的创建和映射过程">
+      <i class="fa fa-chevron-left"></i> IPC中：共享内存的创建和映射过程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/05/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/ARM%E7%BC%96%E7%A8%8B%E7%9A%84%E5%87%A0%E4%B8%AA%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/" rel="next" title="ARM编程的几个核心概念">
+      ARM编程的几个核心概念 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考："><span class="nav-number">1.</span> <span class="nav-text">参考：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-核心概念总结"><span class="nav-number">2.</span> <span class="nav-text">1.核心概念总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-从代码实践分析"><span class="nav-number">3.</span> <span class="nav-text">2.从代码实践分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#下面，我们来看常用的汇编指令以及C语言中哪些操作是位置有关码，哪些是位置无关码。"><span class="nav-number">3.0.1.</span> <span class="nav-text">下面，我们来看常用的汇编指令以及C语言中哪些操作是位置有关码，哪些是位置无关码。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编译后的反汇编代码："><span class="nav-number">3.0.2.</span> <span class="nav-text">编译后的反汇编代码：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#假设拷贝到内存之后对应的地址"><span class="nav-number">3.0.3.</span> <span class="nav-text">假设拷贝到内存之后对应的地址</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码分析："><span class="nav-number">4.</span> <span class="nav-text">代码分析：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一、BL指令"><span class="nav-number">4.0.1.</span> <span class="nav-text">一、BL指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二、ADR"><span class="nav-number">4.0.2.</span> <span class="nav-text">二、ADR</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三、LDR"><span class="nav-number">4.0.3.</span> <span class="nav-text">三、LDR</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#LDR-1"><span class="nav-number">4.0.3.1.</span> <span class="nav-text">LDR-1</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#LDR-2"><span class="nav-number">4.0.3.2.</span> <span class="nav-text">LDR-2</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#LDR-3"><span class="nav-number">4.0.3.3.</span> <span class="nav-text">LDR-3</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C函数"><span class="nav-number">5.</span> <span class="nav-text">C函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-全局变量"><span class="nav-number">5.0.1.</span> <span class="nav-text">1.全局变量</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-函数调用"><span class="nav-number">5.0.2.</span> <span class="nav-text">2.函数调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-局部变量"><span class="nav-number">5.0.3.</span> <span class="nav-text">3.局部变量</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1189</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">18:55</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '72a8d98721ef39f69682cfc87e846bc0',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

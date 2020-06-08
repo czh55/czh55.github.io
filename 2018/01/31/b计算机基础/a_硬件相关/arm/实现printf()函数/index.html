@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2018年1月31日 下午1:15 实现arm中的printf函数源代码(注释是重点)：.c文件 my_printf.c  uart.c main.c12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现printf()函数">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E5%AE%9E%E7%8E%B0printf()%E5%87%BD%E6%95%B0/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2018年1月31日 下午1:15 实现arm中的printf函数源代码(注释是重点)：.c文件 my_printf.c  uart.c main.c12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-01-30T17:15:00.000Z">
+<meta property="article:modified_time" content="2020-06-08T07:40:32.706Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://chenzhiheng.cn/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E5%AE%9E%E7%8E%B0printf()%E5%87%BD%E6%95%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>实现printf()函数 | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E5%AE%9E%E7%8E%B0printf()%E5%87%BD%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          实现printf()函数
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-01-31 01:15:00" itemprop="dateCreated datePublished" datetime="2018-01-31T01:15:00+08:00">2018-01-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-08 15:40:32" itemprop="dateModified" datetime="2020-06-08T15:40:32+08:00">2020-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-a-%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3-arm/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/a_硬件相关/arm</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E5%AE%9E%E7%8E%B0printf()%E5%87%BD%E6%95%B0/" class="post-meta-item leancloud_visitors" data-flag-title="实现printf()函数" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2018年1月31日 下午1:15</p>
+<h2 id="实现arm中的printf函数源代码-注释是重点-："><a href="#实现arm中的printf函数源代码-注释是重点-：" class="headerlink" title="实现arm中的printf函数源代码(注释是重点)："></a>实现arm中的printf函数源代码(注释是重点)：</h2><h3 id="c文件"><a href="#c文件" class="headerlink" title=".c文件"></a>.c文件</h3><ol>
+<li>my_printf.c </li>
+<li>uart.c</li>
+<li>main.c<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br></pre></td><td class="code"><pre><span class="line">my_printf.c </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span>  <span class="meta-string">"my_printf.h"</span></span></span><br><span class="line">==================================================================================================</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> *  va_list;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面这段是利用宏来完成功能，用宏来代替函数，牛逼</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _INTSIZEOF(n)   ( (sizeof(n) + sizeof(int) - 1) &amp; ~(sizeof(int) - 1) )</span></span><br><span class="line"><span class="comment">//宏本身就是一个赋值语句，牛逼</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> va_start(ap,v)  ( ap = (va_list)&amp;v + _INTSIZEOF(v) )</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//逗号表达式功能：（表达式1，表达式2）运算顺序是表达式1--&gt;表达式2，返回表达式2的结果</span></span><br><span class="line"><span class="comment">//下面两种写法作用一致</span></span><br><span class="line"><span class="comment">//#define va_arg(ap,t)    ( *(t *)((ap += _INTSIZEOF(t)) - _INTSIZEOF(t)) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> va_arg(ap,t)    ( *(t *)( ap=ap + _INTSIZEOF(t), ap- _INTSIZEOF(t)) )</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> va_end(ap)      ( ap = (va_list)0 )</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//==================================================================================================</span></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> hex_tab[]=&#123;<span class="string">'0'</span>,<span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span>,<span class="string">'5'</span>,<span class="string">'6'</span>,<span class="string">'7'</span>,\</span><br><span class="line">		                 <span class="string">'8'</span>,<span class="string">'9'</span>,<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>,<span class="string">'f'</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出显示char</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">outc</span><span class="params">(<span class="keyword">int</span> c)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	__out_putchar(c);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出显示string</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">outs</span> <span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (*s != <span class="string">'\0'</span>)	</span><br><span class="line">		__out_putchar(*s++);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 输出显示number:传入n，进制，前导位，最大宽度。最后要转化成字符串输出！！</span></span><br><span class="line"><span class="comment">//这个函数得打断点看输出，我没有看！</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">out_num</span><span class="params">(<span class="keyword">long</span> n, <span class="keyword">int</span> base,<span class="keyword">char</span> lead,<span class="keyword">int</span> maxwidth)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">long</span> m=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">char</span> buf[MAX_NUMBER_BYTES], *s = buf + <span class="keyword">sizeof</span>(buf);</span><br><span class="line">	<span class="keyword">int</span> count=<span class="number">0</span>,i=<span class="number">0</span>;</span><br><span class="line">			</span><br><span class="line"></span><br><span class="line">	*--s = <span class="string">'\0'</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (n &lt; <span class="number">0</span>)&#123;</span><br><span class="line">		m = -n;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span>&#123;</span><br><span class="line">		m = n;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">do</span>&#123;</span><br><span class="line">		*--s = hex_tab[m%base];</span><br><span class="line">		count++;</span><br><span class="line">	&#125;<span class="keyword">while</span> ((m /= base) != <span class="number">0</span>);</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span>( maxwidth &amp;&amp; count &lt; maxwidth)&#123;</span><br><span class="line">		<span class="keyword">for</span> (i=maxwidth - count; i; i--)	</span><br><span class="line">			*--s = lead;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (n &lt; <span class="number">0</span>)</span><br><span class="line">		*--s = <span class="string">'-'</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">return</span> outs(s);</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="comment">//my_vprintf函数，通过调整指向+步长去完成printf的功能</span></span><br><span class="line"><span class="comment">/*reference :   int vprintf(const char *format, va_list ap); */</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">my_vprintf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *fmt, va_list ap)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">char</span> lead=<span class="string">' '</span>;</span><br><span class="line">	<span class="keyword">int</span>  maxwidth=<span class="number">0</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">for</span>(; *fmt != <span class="string">'\0'</span>; fmt++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="comment">//初始化</span></span><br><span class="line">		lead=<span class="string">' '</span>;</span><br><span class="line">		maxwidth=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (*fmt != <span class="string">'%'</span>) &#123;</span><br><span class="line">			outc(*fmt);</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">			</span><br><span class="line">		<span class="comment">//format : %08d, %8d,%d,%u,%x,%f,%c,%s </span></span><br><span class="line">		fmt++;</span><br><span class="line">		<span class="comment">//处理前导零</span></span><br><span class="line">		<span class="keyword">if</span>(*fmt == <span class="string">'0'</span>)&#123;</span><br><span class="line">			lead = <span class="string">'0'</span>;</span><br><span class="line">			fmt++;	</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		</span><br><span class="line">		<span class="comment">//设置最大宽度</span></span><br><span class="line">		<span class="keyword">while</span>(*fmt &gt;= <span class="string">'0'</span> &amp;&amp; *fmt &lt;= <span class="string">'9'</span>)&#123;</span><br><span class="line">			maxwidth *=<span class="number">10</span>;</span><br><span class="line">			maxwidth += (*fmt - <span class="string">'0'</span>);</span><br><span class="line">			fmt++;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//根据列类型符：先取值，再移动指针。</span></span><br><span class="line">		<span class="comment">//va_arg的作用是：取出当前ap指向的数据，然后ap再根据“步长”去移动到下一个位置</span></span><br><span class="line">		<span class="comment">//这样做的好处：这时的“步长”就是当前取出这个数据的长度，牛逼🐂！</span></span><br><span class="line">		<span class="comment">//va_arg的“返回值”=当前ap指向的数据</span></span><br><span class="line">		<span class="comment">//out_num()函数的参数: 当前ap指向的数据 + </span></span><br><span class="line">		<span class="keyword">switch</span> (*fmt) &#123;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'d'</span>: out_num(va_arg(ap, <span class="keyword">int</span>),          <span class="number">10</span>,lead,maxwidth); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'o'</span>: out_num(va_arg(ap, <span class="keyword">unsigned</span> <span class="keyword">int</span>),  <span class="number">8</span>,lead,maxwidth); <span class="keyword">break</span>;				</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'u'</span>: out_num(va_arg(ap, <span class="keyword">unsigned</span> <span class="keyword">int</span>), <span class="number">10</span>,lead,maxwidth); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'x'</span>: out_num(va_arg(ap, <span class="keyword">unsigned</span> <span class="keyword">int</span>), <span class="number">16</span>,lead,maxwidth); <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'c'</span>: outc(va_arg(ap, <span class="keyword">int</span>   )); <span class="keyword">break</span>;		</span><br><span class="line">			<span class="keyword">case</span> <span class="string">'s'</span>: outs(va_arg(ap, <span class="keyword">char</span> *)); <span class="keyword">break</span>;		  		</span><br><span class="line">			</span><br><span class="line">			<span class="keyword">default</span>:  </span><br><span class="line">				outc(*fmt);</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重点：实现printf</span></span><br><span class="line"><span class="comment">//reference :  int printf(const char *format, ...); </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">printf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *fmt, ...)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/*这个指针ap，我觉得倒是很有话说</span></span><br><span class="line"><span class="comment">	 *因为指针体现出了printf这个函数的本质，最精华的地方：所有的取值都是通过ap这一个指针来实现的！！</span></span><br><span class="line"><span class="comment">	 *通过调整指针的指向+步长，来最终确定我们的操作。</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	va_list ap;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//va_start这个宏，就是一个赋值语句。作用：给ap赋值，初始化ap指针的指向为第一个参数fmt</span></span><br><span class="line">	va_start(ap, fmt);</span><br><span class="line">	<span class="comment">//my_vprintf函数，通过调整指向+步长去完成printf的功能</span></span><br><span class="line">	my_vprintf(fmt, ap);	</span><br><span class="line">	<span class="comment">//防止“野指针”</span></span><br><span class="line">	va_end(ap);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//测试函数</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">my_printf_test</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"This is www.100ask.org   my_printf test\n\r"</span>) ;	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test char           =%c,%c\n\r"</span>, <span class="string">'A'</span>,<span class="string">'a'</span>) ;	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test decimal number =%d\n\r"</span>,    <span class="number">123456</span>) ;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test decimal number =%d\n\r"</span>,    <span class="number">-123456</span>) ;	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test hex     number =0x%x\n\r"</span>,  <span class="number">0x55aa55aa</span>) ;	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"test string         =%s\n\r"</span>,    <span class="string">"www.100ask.org"</span>) ;	</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=%08d\n\r"</span>,   <span class="number">12345</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=%8d\n\r"</span>,    <span class="number">12345</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=0x%08x\n\r"</span>, <span class="number">0x12345</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=0x%8x\n\r"</span>,  <span class="number">0x12345</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=0x%02x\n\r"</span>, <span class="number">0x1</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=0x%2x\n\r"</span>,  <span class="number">0x1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=%05d\n\r"</span>, <span class="number">0x1</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"num=%5d\n\r"</span>,  <span class="number">0x1</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">uart.c</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"s3c2440_soc.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 初始化UART芯片</span></span><br><span class="line"><span class="comment">/* 115200,8n1 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">uart0_init</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//这是根据电路原理图来设定的，本身GPIO就是一个通用口</span></span><br><span class="line">	<span class="comment">/* 设置引脚用于串口 */</span></span><br><span class="line">	<span class="comment">/* GPH2,3用于TxD0, RxD0 */</span></span><br><span class="line">	GPHCON &amp;= ~((<span class="number">3</span>&lt;&lt;<span class="number">4</span>) | (<span class="number">3</span>&lt;&lt;<span class="number">6</span>));</span><br><span class="line">	GPHCON |= ((<span class="number">2</span>&lt;&lt;<span class="number">4</span>) | (<span class="number">2</span>&lt;&lt;<span class="number">6</span>));</span><br><span class="line"></span><br><span class="line">	GPHUP &amp;= ~((<span class="number">1</span>&lt;&lt;<span class="number">2</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">3</span>));  <span class="comment">/* 使能内部上拉 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="comment">//manual中专门以小结将波特率，直接告诉你使用那些寄存器，怎么使用，公式是啥，写的很完善。</span></span><br><span class="line">	<span class="comment">/* 设置波特率 */</span></span><br><span class="line">	<span class="comment">/* UBRDIVn = (int)( UART clock / ( buad rate x 16) ) –1</span></span><br><span class="line"><span class="comment">	 *  UART clock = 50M</span></span><br><span class="line"><span class="comment">	 *  UBRDIVn = (int)( 50000000 / ( 115200 x 16) ) –1 = 26</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	UCON0 = <span class="number">0x00000005</span>; <span class="comment">/* PCLK,中断/查询模式 */</span></span><br><span class="line">	UBRDIV0 = <span class="number">26</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 设置数据格式 */</span></span><br><span class="line">	ULCON0 = <span class="number">0x00000003</span>; <span class="comment">/* 8n1: 8个数据位, 无较验位, 1个停止位 */</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/*  */</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向pc显示器发送显示数据，按char</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">putchar</span><span class="params">(<span class="keyword">int</span> c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/* UTRSTAT0 */</span></span><br><span class="line">	<span class="comment">/* UTXH0 */</span></span><br><span class="line">	<span class="comment">//为啥是UTRSTAT0，这里的0是哪里来的？Each UART channel contains two 64-byte FIFOs for receiver and transmitter.</span></span><br><span class="line">	<span class="comment">//这个问题应该一开始就问，根本原因是原理图中使用的是TxD0,RxD0。版子的厂家电路就是这样焊好的！！！你要咋吧</span></span><br><span class="line">	<span class="keyword">while</span> (!(UTRSTAT0 &amp; (<span class="number">1</span>&lt;&lt;<span class="number">2</span>)));</span><br><span class="line"></span><br><span class="line">	<span class="comment">//manual中总体介绍中，并没有提到UTXH0寄存器，但是在手册中最后说明寄存器中有：There are three UART transmit buffer registers including UTXH0, UTXH1 and UTXH2 in the UART block.</span></span><br><span class="line">	<span class="comment">//也许像这种数据寄存器，就当成默认有的吧，所以manual就直接写在寄存器部分！！</span></span><br><span class="line">	UTXH0 = (<span class="keyword">unsigned</span> <span class="keyword">char</span>)c;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 拿回从pc显示器输入的值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getchar</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (!(UTRSTAT0 &amp; (<span class="number">1</span>&lt;&lt;<span class="number">0</span>)));</span><br><span class="line">	<span class="keyword">return</span> URXH0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 向pc显示器发送显示数据，按字符串</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">puts</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span> (*s)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">putchar</span>(*s);</span><br><span class="line">		s++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">main.c</span><br><span class="line"><span class="comment">// 这里就是这节函数牛逼的地方，不用像stdio.h这种系统函数库，全是自己写的</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"s3c2440_soc.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"uart.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span>  <span class="meta-string">"my_printf.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">char</span> c;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//初始化uart</span></span><br><span class="line">	uart0_init();</span><br><span class="line">	<span class="comment">//pc显示字符串：Hello, world!</span></span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">"Hello, world!\n\r"</span>);</span><br><span class="line">	<span class="comment">//测试printf函数</span></span><br><span class="line">	my_printf_test();</span><br><span class="line">	</span><br><span class="line">	<span class="comment">//pc与arm的交互行为：又来有往</span></span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		c = getchar();</span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">'\r'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (c == <span class="string">'\n'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">putchar</span>(<span class="string">'\r'</span>);</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">putchar</span>(c);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="h文件"><a href="#h文件" class="headerlink" title=".h文件"></a>.h文件</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">uart.h</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _UART_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _UART_H</span></span><br><span class="line">	<span class="comment">//声明本身的函数</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">uart0_init</span><span class="params">()</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">putchar</span><span class="params">(<span class="keyword">int</span> c)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">getchar</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">puts</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *s)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">my_printf.h</span><br><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> _MY_PRINTF_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _MY_PRINTF_H</span></span><br><span class="line">	<span class="comment">// 说明my_printf.c依赖于uart.c</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"uart.h"</span></span></span><br><span class="line">	<span class="comment">// 宏定义</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span>  __out_putchar  putchar</span></span><br><span class="line"></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span>  MAX_NUMBER_BYTES  64</span></span><br><span class="line">	<span class="comment">// 声明本身的所带有的函数</span></span><br><span class="line">	<span class="function"><span class="keyword">extern</span> <span class="keyword">int</span> <span class="title">my_printf_test</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">printf</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *fmt, ...)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">/* _MY_PRINTF_H */</span></span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/01/29/c%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/mac_%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/%E5%9F%BA%E6%9C%AC/%E4%B8%83%E6%9C%88%E5%9C%A8%E7%BA%BF/%E9%9B%AA%E7%90%83%E7%9A%84%E5%BC%80%E7%AB%AF/" rel="prev" title="雪球的开端">
+      <i class="fa fa-chevron-left"></i> 雪球的开端
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/01/31/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E5%A6%82%E4%BD%95%E7%9C%8B2440%20Manual/" rel="next" title="如何看2440 Manual">
+      如何看2440 Manual <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#实现arm中的printf函数源代码-注释是重点-："><span class="nav-number">1.</span> <span class="nav-text">实现arm中的printf函数源代码(注释是重点)：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#c文件"><span class="nav-number">1.1.</span> <span class="nav-text">.c文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#h文件"><span class="nav-number">1.2.</span> <span class="nav-text">.h文件</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1189</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">18:55</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '5b33ac6251800cb953a2dbf693935747',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

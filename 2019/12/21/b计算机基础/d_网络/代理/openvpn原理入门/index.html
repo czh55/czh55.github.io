@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2019年12月21日 上午11:26 2.1.1.2.1 OpenVPN原理与实现浅析 · suhao&#x2F;awesome Wiki · GitHub  这种文章容易被删，这里留一份pdf2.1.1.2.1 OpenVPN原理与实现浅析 · suhaoawesome Wiki · GitHub.pdf  openvpn简易原理：两个关键词(虚拟网卡上建立的虚拟的局域网络) 虚拟网卡 在Linux2.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openvpn原理入门">
+<meta property="og:url" content="http://chenzhiheng.cn/2019/12/21/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/d_%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/openvpn%E5%8E%9F%E7%90%86%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2019年12月21日 上午11:26 2.1.1.2.1 OpenVPN原理与实现浅析 · suhao&#x2F;awesome Wiki · GitHub  这种文章容易被删，这里留一份pdf2.1.1.2.1 OpenVPN原理与实现浅析 · suhaoawesome Wiki · GitHub.pdf  openvpn简易原理：两个关键词(虚拟网卡上建立的虚拟的局域网络) 虚拟网卡 在Linux2.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-21T03:26:00.000Z">
+<meta property="article:modified_time" content="2020-06-08T07:41:08.923Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://chenzhiheng.cn/2019/12/21/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/d_%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/openvpn%E5%8E%9F%E7%90%86%E5%85%A5%E9%97%A8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>openvpn原理入门 | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2019/12/21/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/d_%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/openvpn%E5%8E%9F%E7%90%86%E5%85%A5%E9%97%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          openvpn原理入门
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-21 11:26:00" itemprop="dateCreated datePublished" datetime="2019-12-21T11:26:00+08:00">2019-12-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-08 15:41:08" itemprop="dateModified" datetime="2020-06-08T15:41:08+08:00">2020-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-d-%E7%BD%91%E7%BB%9C-%E4%BB%A3%E7%90%86/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/d_网络/代理</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2019/12/21/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/d_%E7%BD%91%E7%BB%9C/%E4%BB%A3%E7%90%86/openvpn%E5%8E%9F%E7%90%86%E5%85%A5%E9%97%A8/" class="post-meta-item leancloud_visitors" data-flag-title="openvpn原理入门" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2019年12月21日 上午11:26</p>
+<p><a href="https://github.com/suhao/awesome/wiki/2.1.1.2.1-OpenVPN%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0%E6%B5%85%E6%9E%90" target="_blank" rel="noopener">2.1.1.2.1 OpenVPN原理与实现浅析 · suhao/awesome Wiki · GitHub</a></p>
+<ul>
+<li>这种文章容易被删，这里留一份pdf<br><a href="2.1.1.2.1%20OpenVPN%E5%8E%9F%E7%90%86%E4%B8%8E%E5%AE%9E%E7%8E%B0%E6%B5%85%E6%9E%90%20%C2%B7%20suhaoawesome%20Wiki%20%C2%B7%20GitHub.pdf">2.1.1.2.1 OpenVPN原理与实现浅析 · suhaoawesome Wiki · GitHub.pdf</a></li>
+</ul>
+<h3 id="openvpn简易原理：两个关键词-虚拟网卡上建立的虚拟的局域网络"><a href="#openvpn简易原理：两个关键词-虚拟网卡上建立的虚拟的局域网络" class="headerlink" title="openvpn简易原理：两个关键词(虚拟网卡上建立的虚拟的局域网络)"></a>openvpn简易原理：两个关键词(虚拟网卡上建立的虚拟的局域网络)</h3><ol>
+<li>虚拟网卡<ol>
+<li>在Linux2.4版本之上，操作系统支持一个名为tun的设备，驱动程序中包含一个字符设备驱动和一个网卡驱动。<ul>
+<li><em><strong>网卡驱动</strong>可以把从TCP/IP协议栈收到的数据包结构转发到tun设备读取列表，用户进程通过调用read可获取完整的IP数据包传递给用户</em></li>
+<li><strong>字符驱动</strong>的write可以把用户数据传入TCP/IP协议栈</li>
+<li>设备以字符设备形式被读写，能够配置IP地址和路由</li>
+</ul>
+</li>
+<li>OpenVPN实现SSLVPN，虚拟网卡是关键</li>
+</ol>
+</li>
+<li>虚拟的局域网络<ol>
+<li>OpenVPN服务器一般需要配置一个<strong>虚拟IP地址池</strong>和一个<strong>自用的静态虚拟IP地址</strong>（静态地址和地址池必须在同一个子网中），然后为每一个成功建立SSL连接的客户端动态分配一个虚拟IP地址池中未分配的地址。</li>
+<li>从而将物理网络中的客户端和OpenVPN服务器就连接成一个虚拟网络上的星型结构局域网， <em><strong>OpenVPN服务器成为每个客户端在虚拟网络上的网关</strong></em> 。</li>
+<li>OpenVPN服务器同时提供对客户端虚拟网卡的路由管理。</li>
+<li>当客户端对OpenVPN服务器后端的应用服务器的任何访问时，数据包都会经过路由流经虚拟网卡， <em><strong>OpenVPN程序在虚拟网卡上截获数据IP报文，然后使用SSL协议将这些IP报文封装起来，再经过物理网卡发送出去</strong></em> 。</li>
+<li><em>OpenVPN的服务器和客户端在虚拟网卡之上建立起一个虚拟的局域网络</em> ，这个虚拟的局域网对系统的用户来说是透明的</li>
+</ol>
+</li>
+</ol>
+<h3 id="使用openvpn的场景："><a href="#使用openvpn的场景：" class="headerlink" title="使用openvpn的场景："></a>使用openvpn的场景：</h3><ol>
+<li>首先，有两台服务器：A,B，这两台本身就是可以ping通的。</li>
+<li>那么，既然A,B之间本身就是可以建立连接的，eg:ssh，为什么还需要使用openvpn?<ol>
+<li>当A希望访问C时，并且不希望让C知道是A在访问时(当A无法之间访问C，需要通过B来间接访问)，这时就需要<strong>对C来说，需要让B来代理A，代替A来访问C</strong></li>
+<li>当A,B之间需要指定<strong>自定义的局域网网段地址</strong>时，这时就需要虚拟一个网卡，在这个网卡上建立自定义的局域网网段地址。</li>
+</ol>
+</li>
+</ol>
+<h3 id="服务端参数讲解："><a href="#服务端参数讲解：" class="headerlink" title="服务端参数讲解："></a>服务端参数讲解：</h3><p>这部分摘自<a href="https://andblog.cn/?p=2213" target="_blank" rel="noopener">openvpn简易安装脚本-江哥架构师笔记</a>的中.sh源码！！</p>
+<ol>
+<li>扩展配置：<ol>
+<li>是否需要设置客户端默认路由走openvpn网络？<ul>
+<li><code>push &quot;redirect-gateway def1 bypass-dhcp&quot;</code></li>
+<li><a href="http://www.voidcn.com/article/p-fosgwdko-bgz.html" target="_blank" rel="noopener">openvpn中push “redirect-gateway def1 bypass-dhcp”小解 - 程序园</a></li>
+<li>openvpn中服务器推送redirect-gateway def1 bypass-dhcp的目的是在所有客户端的默认网关都将重定向到VPN</li>
+</ul>
+</li>
+<li>是否需要给客户端推送静态路由，访问指定的网络号时走openvpn网络？<ul>
+<li><code>push \&quot;route ${intranet_route_info} vpn_gateway \&quot;</code></li>
+</ul>
+</li>
+<li>是否需要开启客户端密码认证？<ul>
+<li><code>auth-user-pass-verify ../checkpsw.sh via-env  #使用密码文件认证</code></li>
+<li><code>username-as-common-name  #暂不明，和auth-user-pass-verify 一起使用</code></li>
+</ul>
+</li>
+</ol>
+</li>
+<li>标准配置：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Local $IP     #指定监听的本机IP(因为有些计算机具备多个IP地址)，该命令是可选的，默认监听所有IP地址。</span><br><span class="line">port 1194             #指定监听的本机端口号</span><br><span class="line">proto udp             #指定采用的传输协议，可以选择tcp或udp</span><br><span class="line">dev tun               #指定创建的通信隧道类型，可选tun或tap</span><br><span class="line">ca ca.crt             #指定CA证书的文件路径</span><br><span class="line">cert server.crt       #指定服务器端的证书文件路径</span><br><span class="line">key server.key    #指定服务器端的私钥文件路径</span><br><span class="line">dh dh1024.pem         #指定迪菲赫尔曼参数的文件路径</span><br><span class="line">server $NETMASK   #指定虚拟局域网占用的IP地址段和子网掩码，此处配置的服务器自身占用10.0.0.1。</span><br><span class="line">ifconfig-pool-persist ipp.txt   #服务器自动给客户端分配IP后，客户端下次连接时，仍然采用上次的IP地址(第一次分配的IP保存在ipp.txt中，下一次分配其中保存的IP)。</span><br><span class="line">tls-auth ta.key 0     #开启TLS-auth，使用ta.key防御攻击。服务器端的第二个参数值为0，客户端的为1。</span><br><span class="line">keepalive 10 120      #每10秒ping一次，连接超时时间设为120秒。</span><br><span class="line">comp-lzo              #开启VPN连接压缩，如果服务器端开启，客户端也必须开启</span><br><span class="line">client-to-client      #允许客户端与客户端相连接，默认情况下客户端只能与服务器相连接</span><br><span class="line">persist-key</span><br><span class="line">persist-tun           #持久化选项可以尽量避免访问在重启时由于用户权限降低而无法访问的某些资源。</span><br><span class="line">status openvpn-status.log    #指定记录OpenVPN状态的日志文件路径</span><br><span class="line">verb 3                #指定日志文件的记录详细级别，可选0-9，等级越高日志内容越详细</span><br><span class="line">duplicate-cn   #允许一个客户端证书同时被多个终端使用</span><br><span class="line">max-clients 1000  #客户端链接最大数量</span><br><span class="line">script-security 3 # 开启配置文件中自定义脚本</span><br></pre></td></tr></table></figure></li>
+<li>其他：<ul>
+<li>配置iptables转发设置<ul>
+<li><code>iptables -t nat -A POSTROUTING -s 172.16.98.0/24 -o eth1 -j MASQUERADE</code></li>
+<li>不指定外网网卡的话，客户端可以连接内网！如果是为了拨入内网，去掉-o eth1即可</li>
+</ul>
+</li>
+<li>push<ul>
+<li><a href="https://my.oschina.net/longquan/blog/662871?p=1" target="_blank" rel="noopener">openvpn的使用 - gaolongquan的个人空间 - OSCHINA</a></li>
+<li><a href="https://www.choyri.com/note/openvpn-pit.html" target="_blank" rel="noopener">OpenVPN使用过程中的一些坑 - Choyri’s Blog</a>这篇文章说dns可以不添加。</li>
+<li><a href="http://blog.chinaunix.net/uid-192452-id-3060529.html" target="_blank" rel="noopener">OpenVPN的DNS设置-mfc42d-ChinaUnix博客</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">push “redirect-gateway def1 bypass-dhcp” #客户端所有流量走OPENVPN服务器,包括浏览器访问，这样出口就是vpn服务器的出口IP</span><br><span class="line">#push &quot;route 192.168.20.0 255.255.255.0&quot; #拨入内网后可以和其他网段通信</span><br><span class="line">push “dhcp-option DNS 223.5.5.5”   #客户端如果设置了全部走OPENVPN，需要自定设置一下dns才能上网</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/12/21/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/a_linux%E6%8C%87%E4%BB%A4/%E6%9F%A5%E7%9C%8B%E5%85%AC%E7%BD%91%E5%92%8C%E5%86%85%E7%BD%91ip/" rel="prev" title="b计算机基础/c_计算机系统/a_linux指令/查看公网和内网ip">
+      <i class="fa fa-chevron-left"></i> b计算机基础/c_计算机系统/a_linux指令/查看公网和内网ip
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/12/21/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/d_%E7%BD%91%E7%BB%9C/%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/openvpn%E7%AE%80%E6%98%93%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC(%E8%BF%99%E4%B8%AA%E8%84%9A%E6%9C%AC%E5%86%99%E7%9A%84%E7%9B%B8%E5%BD%93%E5%A5%BD)/" rel="next" title="openvpn简易安装脚本(这个脚本写的相当好)">
+      openvpn简易安装脚本(这个脚本写的相当好) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#openvpn简易原理：两个关键词-虚拟网卡上建立的虚拟的局域网络"><span class="nav-number">1.</span> <span class="nav-text">openvpn简易原理：两个关键词(虚拟网卡上建立的虚拟的局域网络)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用openvpn的场景："><span class="nav-number">2.</span> <span class="nav-text">使用openvpn的场景：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端参数讲解："><span class="nav-number">3.</span> <span class="nav-text">服务端参数讲解：</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1189</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">18:55</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '9f3965f0b40cde99a83f0e8d3617d8bf',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"chenzhiheng.cn","root":"/","scheme":"Pisces","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="2018年2月6日 上午9:59 程序流程图： 可以很直观的看到：初始化在arm中真的是一个非常非常简单，但是却十分关键的步骤 这样的本质原因是：ARM大部分功能都是基于在开发板上人家已经实现的功能，在java框架使用中，我们使用的是他们类的接口，而在ARM中我们使用的是寄存器接口   流线的让你去真正的是先功能的步骤，相比而言就少了很多  程序代码：（重要点都在注释中）几个重要的易错知识点 使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中断程序分析">
+<meta property="og:url" content="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/index.html">
+<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:description" content="2018年2月6日 上午9:59 程序流程图： 可以很直观的看到：初始化在arm中真的是一个非常非常简单，但是却十分关键的步骤 这样的本质原因是：ARM大部分功能都是基于在开发板上人家已经实现的功能，在java框架使用中，我们使用的是他们类的接口，而在ARM中我们使用的是寄存器接口   流线的让你去真正的是先功能的步骤，相比而言就少了很多  程序代码：（重要点都在注释中）几个重要的易错知识点 使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/Untitled%20Diagram.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/B1F4994E-7B9F-4895-BB75-CB3DCFFE826C.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/32B28A84-1053-4CE1-B259-3F6315FB922F.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/99B71ADB-F52A-4576-B94C-47E7FE605F05.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/BA787641-70CB-4F5E-B9AD-461125143682.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/9143E2F6-9E97-4F9C-A721-533B3737CC35.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/A2E9438E-B43F-4425-8B94-812DADCEF3B8.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/5FC870EE-CADC-4A4F-B292-FE0D3F7C79AD.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/5F88C98F-B087-47F0-94C9-8342300BFA5D.png">
+<meta property="og:image" content="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/A7DE51EC-9C83-49CA-8C27-8B3932E35045.png">
+<meta property="article:published_time" content="2018-02-06T01:59:00.000Z">
+<meta property="article:modified_time" content="2020-06-08T07:41:08.659Z">
+<meta property="article:author" content="Zhiheng Chen">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/Untitled%20Diagram.png">
+
+<link rel="canonical" href="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>中断程序分析 | 陈志恒的技术博客</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6bc779d0e3be483fc01e871fbb7cef3d";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">陈志恒的技术博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://chenzhiheng.cn/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Zhiheng Chen">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="陈志恒的技术博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          中断程序分析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-02-06 09:59:00" itemprop="dateCreated datePublished" datetime="2018-02-06T09:59:00+08:00">2018-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-06-08 15:41:08" itemprop="dateModified" datetime="2020-06-08T15:41:08+08:00">2020-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80-a-%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3-arm/" itemprop="url" rel="index">
+                    <span itemprop="name">b计算机基础/a_硬件相关/arm</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/" class="post-meta-item leancloud_visitors" data-flag-title="中断程序分析" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>2018年2月6日 上午9:59</p>
+<h2 id="程序流程图："><a href="#程序流程图：" class="headerlink" title="程序流程图："></a>程序流程图：</h2><ol>
+<li>可以很直观的看到：<strong>初始化</strong>在arm中真的是一个非常非常简单，但是却十分关键的步骤<ol>
+<li><strong>这样的本质原因是</strong>：ARM大部分功能都是基于在开发板上人家已经实现的功能，在java框架使用中，我们使用的是他们类的接口，而在ARM中我们使用的是<strong>寄存器接口</strong></li>
+</ol>
+</li>
+<li>流线的让你去真正的是先功能的步骤，相比而言就少了很多<br><img src="/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/Untitled%20Diagram.png" alt></li>
+</ol>
+<h2 id="程序代码：（重要点都在注释中）"><a href="#程序代码：（重要点都在注释中）" class="headerlink" title="程序代码：（重要点都在注释中）"></a>程序代码：（重要点都在注释中）</h2><h3 id="几个重要的易错知识点"><a href="#几个重要的易错知识点" class="headerlink" title="几个重要的易错知识点"></a>几个重要的易错知识点</h3><ol>
+<li><p>使用字符串时要4字节对齐：<br><img src="/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/B1F4994E-7B9F-4895-BB75-CB3DCFFE826C.png" alt></p>
+</li>
+<li><p>在.S中调用c函数时，会自动保存R4~R11 和 fp,sp其他的需要自己保存（有证明）。<br>证明：<br><img src="/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/32B28A84-1053-4CE1-B259-3F6315FB922F.png" alt><br><img src="/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/99B71ADB-F52A-4576-B94C-47E7FE605F05.png" alt><br>所以当我们需要在调用函数前后，使用未保存的寄存器如LR。那么需要我们自己手动保存。<br><img src="/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/BA787641-70CB-4F5E-B9AD-461125143682.png" alt></p>
+</li>
+<li><p>对于程序运行过程中调用异常处理程序，在.S文件中基本所有的寄存器都需要我们自己保存，只有当前异常对应的<strong>有备份的特有寄存器</strong>才可以不保存。<br><img src="/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/9143E2F6-9E97-4F9C-A721-533B3737CC35.png" alt><br>具体的情况看下图<br><img src="/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/A2E9438E-B43F-4425-8B94-812DADCEF3B8.png" alt></p>
+</li>
+</ol>
+<p><strong>注：调用c函数的过程和调用异常处理函数的过程是两个相互独立的过程，所以那些寄存器该不该手动保存有着不同的评判方式，我一开始就没有区分开他们两个。</strong><br>4. 考虑特殊情况：当我们从Nand flash启动，程序读入到SRAM中<br>    1. 当 start.S文件 &lt; 4kb   &amp;  .c文件<strong>不能全部</strong>读入SRAM中<br>        1. 当我们调用c函数时，一定要使用绝对跳转/前一步已经绝对跳转，这样就能保证一定调用SDRAM中复制过来的c函数<br><img src="/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/5FC870EE-CADC-4A4F-B292-FE0D3F7C79AD.png" alt><br><img src="/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/5F88C98F-B087-47F0-94C9-8342300BFA5D.png" alt><br>    2. 当 start.S文件 &gt; 4kb  （光.S文件就到达了4k，更别说.c文件了）<br><img src="/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90/A7DE51EC-9C83-49CA-8C27-8B3932E35045.png" alt><br>5. <strong>start.S文件中的函数名</strong>，本质就是一个地址值，也可以理解成汇编文件中的一个变量，这个变量的值是一个地址。<br>6. 进入到start.S文件的中断程序之后，我们<strong>设置的sp</strong>，是当前异常模式下的SP，<strong>虽然他们在写程序时都是使用相同的名字SP，但在arm硬件中他们是不同的寄存器。</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br></pre></td><td class="code"><pre><span class="line">start.S</span><br><span class="line"></span><br><span class="line">.<span class="built_in">text</span></span><br><span class="line">.global _start</span><br><span class="line"></span><br><span class="line">_start:</span><br><span class="line">	b reset          <span class="comment">/* vector 0 : reset */</span></span><br><span class="line">	ldr pc, und_addr <span class="comment">/* vector 4 : und */</span></span><br><span class="line">	ldr pc, swi_addr <span class="comment">/* vector 8 : swi */</span></span><br><span class="line">	b halt			 <span class="comment">/* vector 0x0c : prefetch aboot */</span></span><br><span class="line">	b halt			 <span class="comment">/* vector 0x10 : data abort */</span></span><br><span class="line">	b halt			 <span class="comment">/* vector 0x14 : reserved */</span></span><br><span class="line">	ldr pc, irq_addr <span class="comment">/* vector 0x18 : irq */</span></span><br><span class="line">	b halt			 <span class="comment">/* vector 0x1c : fiq */</span></span><br><span class="line"><span class="comment">/* 这里要区分ldr pc, irq_addr 与 ldr pc, =irq_addr*/</span></span><br><span class="line"><span class="comment">/* 第一个：代表要获取irq_addr地址处的值，理解成*irq_addr */</span></span><br><span class="line"><span class="comment">/* 第二个：代表要获取irq_addr本身这个地址值，理解成&amp; irq_addr*/</span></span><br><span class="line">und_addr:</span><br><span class="line">	.<span class="keyword">word</span> do_und</span><br><span class="line"></span><br><span class="line">swi_addr:</span><br><span class="line">	.<span class="keyword">word</span> do_swi</span><br><span class="line"></span><br><span class="line">irq_addr:</span><br><span class="line">	.<span class="keyword">word</span> do_irq</span><br><span class="line"></span><br><span class="line">do_und:</span><br><span class="line">	<span class="comment">/* 执行到这里之前:</span></span><br><span class="line"><span class="comment">	 * 1. lr_und保存有被中断模式中的下一条即将执行的指令的地址</span></span><br><span class="line"><span class="comment">	 * 2. SPSR_und保存有被中断模式的CPSR</span></span><br><span class="line"><span class="comment">	 * 3. CPSR中的M4-M0被设置为11011, 进入到und模式</span></span><br><span class="line"><span class="comment">	 * 4. 跳到0x4的地方执行程序 </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* sp_und未设置, 先设置它 */</span></span><br><span class="line">	ldr sp, =<span class="number">0x34000000</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 在und异常处理函数中有可能会修改r0-r12, 所以先保存 */</span></span><br><span class="line">	<span class="comment">/* lr是异常处理完后的返回地址, 也要保存 */</span></span><br><span class="line">	stmdb sp!, &#123;r0-r12, lr&#125;  </span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 保存现场 */</span></span><br><span class="line">	<span class="comment">/* 处理und异常 */</span></span><br><span class="line">	mrs r0, cpsr</span><br><span class="line">	ldr r1, =und_string</span><br><span class="line">	bl printException</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 恢复现场 */</span></span><br><span class="line">	ldmia sp!, &#123;r0-r12, pc&#125;^  <span class="comment">/* ^会把spsr的值恢复到cpsr里 */</span></span><br><span class="line">	</span><br><span class="line">und_string:</span><br><span class="line">	.<span class="built_in">string</span> <span class="string">"undefined instruction exception"</span></span><br><span class="line"></span><br><span class="line">.align <span class="number">4</span></span><br><span class="line"></span><br><span class="line">do_swi:</span><br><span class="line">	<span class="comment">/* 执行到这里之前:</span></span><br><span class="line"><span class="comment">	 * 1. lr_svc保存有被中断模式中的下一条即将执行的指令的地址</span></span><br><span class="line"><span class="comment">	 * 2. SPSR_svc保存有被中断模式的CPSR</span></span><br><span class="line"><span class="comment">	 * 3. CPSR中的M4-M0被设置为10011, 进入到svc模式</span></span><br><span class="line"><span class="comment">	 * 4. 跳到0x08的地方执行程序 </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* sp_svc未设置, 先设置它 */</span></span><br><span class="line">	ldr sp, =<span class="number">0x33e00000</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 保存现场 */</span></span><br><span class="line">	<span class="comment">/* 在swi异常处理函数中有可能会修改r0-r12, 所以先保存 */</span></span><br><span class="line">	<span class="comment">/* lr是异常处理完后的返回地址, 也要保存 */</span></span><br><span class="line">	stmdb sp!, &#123;r0-r12, lr&#125;  </span><br><span class="line"></span><br><span class="line">	mov r4, lr</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 处理swi异常 */</span></span><br><span class="line">	mrs r0, cpsr</span><br><span class="line">	ldr r1, =swi_string</span><br><span class="line">	bl printException</span><br><span class="line"></span><br><span class="line">	sub r0, r4, #<span class="number">4</span></span><br><span class="line">	bl printSWIVal</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 恢复现场 */</span></span><br><span class="line">	ldmia sp!, &#123;r0-r12, pc&#125;^  <span class="comment">/* ^会把spsr的值恢复到cpsr里 */</span></span><br><span class="line">	</span><br><span class="line">swi_string:</span><br><span class="line">	.<span class="built_in">string</span> <span class="string">"swi exception"</span></span><br><span class="line"></span><br><span class="line">.align <span class="number">4</span></span><br><span class="line"></span><br><span class="line">do_irq:</span><br><span class="line">	<span class="comment">/* 执行到这里之前:</span></span><br><span class="line"><span class="comment">	 * 1. lr_irq保存有被中断模式中的下一条即将执行的指令的地址</span></span><br><span class="line"><span class="comment">	 * 2. SPSR_irq保存有被中断模式的CPSR</span></span><br><span class="line"><span class="comment">	 * 3. CPSR中的M4-M0被设置为10010, 进入到irq模式</span></span><br><span class="line"><span class="comment">	 * 4. 跳到0x18的地方执行程序 </span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* sp_irq未设置, 先设置它 */</span></span><br><span class="line">	ldr sp, =<span class="number">0x33d00000</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 保存现场 */</span></span><br><span class="line">	<span class="comment">/* 在irq异常处理函数中有可能会修改r0-r12, 所以先保存 */</span></span><br><span class="line">	<span class="comment">/* lr-4是异常处理完后的返回地址, 也要保存 */</span></span><br><span class="line">	sub lr, lr, #<span class="number">4</span></span><br><span class="line">	stmdb sp!, &#123;r0-r12, lr&#125;  </span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 处理irq异常 */</span></span><br><span class="line">	bl handle_irq_c</span><br><span class="line">	</span><br><span class="line">	<span class="comment">/* 恢复现场 */</span></span><br><span class="line">	ldmia sp!, &#123;r0-r12, pc&#125;^  <span class="comment">/* ^会把spsr_irq的值恢复到cpsr里 */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">reset:</span><br><span class="line">	<span class="comment">/* 关闭看门狗 */</span></span><br><span class="line">	ldr r0, =<span class="number">0x53000000</span></span><br><span class="line">	ldr r1, =<span class="number">0</span></span><br><span class="line">	str r1, [r0]</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 设置MPLL, FCLK : HCLK : PCLK = 400m : 100m : 50m */</span></span><br><span class="line">	<span class="comment">/* LOCKTIME(0x4C000000) = 0xFFFFFFFF */</span></span><br><span class="line">	ldr r0, =<span class="number">0x4C000000</span></span><br><span class="line">	ldr r1, =<span class="number">0xFFFFFFFF</span></span><br><span class="line">	str r1, [r0]</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* CLKDIVN(0x4C000014) = 0X5, tFCLK:tHCLK:tPCLK = 1:4:8  */</span></span><br><span class="line">	ldr r0, =<span class="number">0x4C000014</span></span><br><span class="line">	ldr r1, =<span class="number">0x5</span></span><br><span class="line">	str r1, [r0]</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 设置CPU工作于异步模式 */</span></span><br><span class="line">	mrc p15,<span class="number">0</span>,r0,c1,c0,<span class="number">0</span></span><br><span class="line">	orr r0,r0,#<span class="number">0xc0000000</span>   <span class="comment">//R1_nF:OR:R1_iA</span></span><br><span class="line">	mcr p15,<span class="number">0</span>,r0,c1,c0,<span class="number">0</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 设置MPLLCON(0x4C000004) = (92&lt;&lt;12)|(1&lt;&lt;4)|(1&lt;&lt;0) </span></span><br><span class="line"><span class="comment">	 *  m = MDIV+8 = 92+8=100</span></span><br><span class="line"><span class="comment">	 *  p = PDIV+2 = 1+2 = 3</span></span><br><span class="line"><span class="comment">	 *  s = SDIV = 1</span></span><br><span class="line"><span class="comment">	 *  FCLK = 2*m*Fin/(p*2^s) = 2*100*12/(3*2^1)=400M</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	ldr r0, =<span class="number">0x4C000004</span></span><br><span class="line">	ldr r1, =(<span class="number">92</span>&lt;&lt;<span class="number">12</span>)|(<span class="number">1</span>&lt;&lt;<span class="number">4</span>)|(<span class="number">1</span>&lt;&lt;<span class="number">0</span>)</span><br><span class="line">	str r1, [r0]</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 一旦设置PLL, 就会锁定lock time直到PLL输出稳定</span></span><br><span class="line"><span class="comment">	 * 然后CPU工作于新的频率FCLK</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 设置内存: sp 栈 */</span></span><br><span class="line">	<span class="comment">/* 分辨是nor/nand启动</span></span><br><span class="line"><span class="comment">	 * 写0到0地址, 再读出来</span></span><br><span class="line"><span class="comment">	 * 如果得到0, 表示0地址上的内容被修改了, 它对应ram, 这就是nand启动</span></span><br><span class="line"><span class="comment">	 * 否则就是nor启动</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	mov r1, #<span class="number">0</span></span><br><span class="line">	ldr r0, [r1] <span class="comment">/* 读出原来的值备份 */</span></span><br><span class="line">	str r1, [r1] <span class="comment">/* 0-&gt;[0] */</span> </span><br><span class="line">	ldr r2, [r1] <span class="comment">/* r2=[0] */</span></span><br><span class="line">	cmp r1, r2   <span class="comment">/* r1==r2? 如果相等表示是NAND启动 */</span></span><br><span class="line">	ldr sp, =<span class="number">0x40000000</span>+<span class="number">4096</span> <span class="comment">/* 先假设是nor启动 */</span></span><br><span class="line">	moveq sp, #<span class="number">4096</span>  <span class="comment">/* nand启动 */</span></span><br><span class="line">	streq r0, [r1]   <span class="comment">/* 恢复原来的值 */</span></span><br><span class="line"></span><br><span class="line">	bl sdram_init</span><br><span class="line">	<span class="comment">//bl sdram_init2	 /* 用到有初始值的数组, 不是位置无关码 */</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 重定位text, rodata, data段整个程序 */</span></span><br><span class="line">	bl copy2sdram</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 清除BSS段 */</span></span><br><span class="line">	bl clean_bss</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 复位之后, cpu处于svc模式</span></span><br><span class="line"><span class="comment">	 * 现在, 切换到usr模式</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	mrs r0, cpsr         <span class="comment">/* 读出cpsr */</span></span><br><span class="line">	bic r0, r0, #<span class="number">0xf</span>     <span class="comment">/* 修改M4-M0为0b10000, 进入usr模式 */</span></span><br><span class="line">	bic r0, r0, #(<span class="number">1</span>&lt;&lt;<span class="number">7</span>)  <span class="comment">/* 清除I位, 使能中断 */</span></span><br><span class="line">	msr cpsr, r0</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 设置 sp_usr */</span></span><br><span class="line">	ldr sp, =<span class="number">0x33f00000</span></span><br><span class="line"></span><br><span class="line">	ldr pc, =sdram</span><br><span class="line">sdram:</span><br><span class="line">	bl uart0_init</span><br><span class="line"></span><br><span class="line">	bl print1</span><br><span class="line">	<span class="comment">/* 故意加入一条未定义指令 */</span></span><br><span class="line">und_code:</span><br><span class="line">	.<span class="keyword">word</span> <span class="number">0xdeadc0de</span>  <span class="comment">/* 未定义指令 */</span></span><br><span class="line">	bl print2</span><br><span class="line"></span><br><span class="line">	swi <span class="number">0x123</span>  <span class="comment">/* 执行此命令, 触发SWI异常, 进入0x8执行 */</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//bl main  /* 使用BL命令相对跳转, 程序仍然在NOR/sram执行 */</span></span><br><span class="line">	ldr pc, =main  <span class="comment">/* 绝对跳转, 跳到SDRAM */</span></span><br><span class="line"></span><br><span class="line">halt:</span><br><span class="line">	b halt</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">mian.c</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"s3c2440_soc.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"uart.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"init.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> g_Char = <span class="string">'A'</span>;</span><br><span class="line"><span class="keyword">char</span> g_Char3 = <span class="string">'a'</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">char</span> g_Char2 = <span class="string">'B'</span>;</span><br><span class="line"><span class="keyword">int</span> g_A = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> g_B;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	led_init();</span><br><span class="line">	interrupt_init();  <span class="comment">/* 初始化中断控制器 */</span></span><br><span class="line">	key_eint_init();   <span class="comment">/* 初始化按键, 设为中断源 */</span></span><br><span class="line">	</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">"\n\rg_A = "</span>);</span><br><span class="line">	printHex(g_A);</span><br><span class="line">	<span class="built_in">puts</span>(<span class="string">"\n\r"</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> 0		</span></span><br><span class="line">		<span class="built_in">puts</span>(<span class="string">"\n\rg_Char = "</span>);</span><br><span class="line">		printHex(g_Char);</span><br><span class="line">		<span class="built_in">puts</span>(<span class="string">"\n\r"</span>);</span><br><span class="line"></span><br><span class="line"> 		<span class="built_in">puts</span>(<span class="string">"\n\rg_Char3 = "</span>);</span><br><span class="line">		printHex(g_Char3);</span><br><span class="line">		<span class="built_in">puts</span>(<span class="string">"\n\r"</span>);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">		<span class="built_in">putchar</span>(g_Char);</span><br><span class="line">		g_Char++;</span><br><span class="line"></span><br><span class="line">		<span class="built_in">putchar</span>(g_Char3);</span><br><span class="line">		g_Char3++;</span><br><span class="line">		<span class="built_in">delay</span>(<span class="number">1000000</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line">interrupt.c</span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"s3c2440_soc.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// interrupt controller章节</span></span><br><span class="line"><span class="comment">/* SRCPND 用来显示哪个中断产生了, 需要清除对应位</span></span><br><span class="line"><span class="comment"> * bit0-eint0</span></span><br><span class="line"><span class="comment"> * bit2-eint2</span></span><br><span class="line"><span class="comment"> * bit5-eint8_23</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* INTMSK 用来屏蔽中断, 1-masked</span></span><br><span class="line"><span class="comment"> * bit0-eint0</span></span><br><span class="line"><span class="comment"> * bit2-eint2</span></span><br><span class="line"><span class="comment"> * bit5-eint8_23</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* INTPND 用来显示当前优先级最高的、正在发生的中断, 需要清除对应位</span></span><br><span class="line"><span class="comment"> * bit0-eint0</span></span><br><span class="line"><span class="comment"> * bit2-eint2</span></span><br><span class="line"><span class="comment"> * bit5-eint8_23</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* INTOFFSET : 用来显示INTPND中哪一位被设置为1</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 初始化中断控制器 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">interrupt_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	INTMSK &amp;= ~((<span class="number">1</span>&lt;&lt;<span class="number">0</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">2</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">5</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// I/O port章节</span></span><br><span class="line"><span class="comment">/* 初始化按键, 设为中断源 */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">key_eint_init</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/* 配置GPIO为中断引脚 */</span></span><br><span class="line">	GPFCON &amp;= ~((<span class="number">3</span>&lt;&lt;<span class="number">0</span>) | (<span class="number">3</span>&lt;&lt;<span class="number">4</span>));</span><br><span class="line">	GPFCON |= ((<span class="number">2</span>&lt;&lt;<span class="number">0</span>) | (<span class="number">2</span>&lt;&lt;<span class="number">4</span>));   <span class="comment">/* S2,S3被配置为中断引脚 */</span></span><br><span class="line"></span><br><span class="line">	GPGCON &amp;= ~((<span class="number">3</span>&lt;&lt;<span class="number">6</span>) | (<span class="number">3</span>&lt;&lt;<span class="number">22</span>));</span><br><span class="line">	GPGCON |= ((<span class="number">2</span>&lt;&lt;<span class="number">6</span>) | (<span class="number">2</span>&lt;&lt;<span class="number">22</span>));   <span class="comment">/* S4,S5被配置为中断引脚 */</span></span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 设置中断触发方式: 双边沿触发 */</span></span><br><span class="line">	EXTINT0 |= (<span class="number">7</span>&lt;&lt;<span class="number">0</span>) | (<span class="number">7</span>&lt;&lt;<span class="number">8</span>);     <span class="comment">/* S2,S3 */</span></span><br><span class="line">	EXTINT1 |= (<span class="number">7</span>&lt;&lt;<span class="number">12</span>);             <span class="comment">/* S4 */</span></span><br><span class="line">	EXTINT2 |= (<span class="number">7</span>&lt;&lt;<span class="number">12</span>);             <span class="comment">/* S5 */</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 设置EINTMASK使能eint11,19 */</span></span><br><span class="line">	EINTMASK &amp;= ~((<span class="number">1</span>&lt;&lt;<span class="number">11</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">19</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 读EINTPEND分辨率哪个EINT产生(eint4~23)</span></span><br><span class="line"><span class="comment"> * 清除中断时, 写EINTPEND的相应位</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">key_eint_irq</span><span class="params">(<span class="keyword">int</span> irq)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> val = EINTPEND;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> val1 = GPFDAT;</span><br><span class="line">	<span class="keyword">unsigned</span> <span class="keyword">int</span> val2 = GPGDAT;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (irq == <span class="number">0</span>) <span class="comment">/* eint0 : s2 控制 D12 */</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (val1 &amp; (<span class="number">1</span>&lt;&lt;<span class="number">0</span>)) <span class="comment">/* s2 --&gt; gpf6 */</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">/* 松开 */</span></span><br><span class="line">			GPFDAT |= (<span class="number">1</span>&lt;&lt;<span class="number">6</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">/* 按下 */</span></span><br><span class="line">			GPFDAT &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">6</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (irq == <span class="number">2</span>) <span class="comment">/* eint2 : s3 控制 D11 */</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (val1 &amp; (<span class="number">1</span>&lt;&lt;<span class="number">2</span>)) <span class="comment">/* s3 --&gt; gpf5 */</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">/* 松开 */</span></span><br><span class="line">			GPFDAT |= (<span class="number">1</span>&lt;&lt;<span class="number">5</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="comment">/* 按下 */</span></span><br><span class="line">			GPFDAT &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">5</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (irq == <span class="number">5</span>) <span class="comment">/* eint8_23, eint11--s4 控制 D10, eint19---s5 控制所有LED */</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (val &amp; (<span class="number">1</span>&lt;&lt;<span class="number">11</span>)) <span class="comment">/* eint11 */</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (val2 &amp; (<span class="number">1</span>&lt;&lt;<span class="number">3</span>)) <span class="comment">/* s4 --&gt; gpf4 */</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">/* 松开 */</span></span><br><span class="line">				GPFDAT |= (<span class="number">1</span>&lt;&lt;<span class="number">4</span>);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">/* 按下 */</span></span><br><span class="line">				GPFDAT &amp;= ~(<span class="number">1</span>&lt;&lt;<span class="number">4</span>);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (val &amp; (<span class="number">1</span>&lt;&lt;<span class="number">19</span>)) <span class="comment">/* eint19 */</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (val2 &amp; (<span class="number">1</span>&lt;&lt;<span class="number">11</span>))</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">/* 松开 */</span></span><br><span class="line">				<span class="comment">/* 熄灭所有LED */</span></span><br><span class="line">				GPFDAT |= ((<span class="number">1</span>&lt;&lt;<span class="number">4</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">5</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">6</span>));</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="comment">/* 按下: 点亮所有LED */</span></span><br><span class="line">				GPFDAT &amp;= ~((<span class="number">1</span>&lt;&lt;<span class="number">4</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">5</span>) | (<span class="number">1</span>&lt;&lt;<span class="number">6</span>));</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	EINTPEND = val;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">handle_irq_c</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">/* 分辨中断源 */</span></span><br><span class="line">	<span class="keyword">int</span> <span class="built_in">bit</span> = INTOFFSET;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 调用对应的处理函数 */</span></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">bit</span> == <span class="number">0</span> || <span class="built_in">bit</span> == <span class="number">2</span> || <span class="built_in">bit</span> == <span class="number">5</span>)  <span class="comment">/* eint0,2,eint8_23 */</span></span><br><span class="line">	&#123;</span><br><span class="line">		key_eint_irq(<span class="built_in">bit</span>); <span class="comment">/* 处理中断, 清中断源EINTPEND */</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/* 清中断 : 从源头开始清 */</span></span><br><span class="line">	SRCPND = (<span class="number">1</span>&lt;&lt;<span class="built_in">bit</span>);</span><br><span class="line">	INTPND = (<span class="number">1</span>&lt;&lt;<span class="built_in">bit</span>);	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/02/04/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E5%AF%B9ARM%E7%9A%84%E7%90%86%E8%A7%A3/" rel="prev" title="对ARM的理解">
+      <i class="fa fa-chevron-left"></i> 对ARM的理解
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/02/06/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/a_%E7%A1%AC%E4%BB%B6%E7%9B%B8%E5%85%B3/arm/%E5%BC%82%E5%B8%B8%EF%BC%88%E4%B8%AD%E6%96%AD%EF%BC%89%E7%AC%94%E8%AE%B0/" rel="next" title="异常（中断）笔记">
+      异常（中断）笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#程序流程图："><span class="nav-number">1.</span> <span class="nav-text">程序流程图：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序代码：（重要点都在注释中）"><span class="nav-number">2.</span> <span class="nav-text">程序代码：（重要点都在注释中）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#几个重要的易错知识点"><span class="nav-number">2.1.</span> <span class="nav-text">几个重要的易错知识点</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Zhiheng Chen</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">1189</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">98</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhiheng Chen</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">1.2m</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">18:55</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.7.1
+  </div>
+
+        
+
+
+
+
+
+
+  <script>
+  function leancloudSelector(url) {
+    url = encodeURI(url);
+    return document.getElementById(url).querySelector('.leancloud-visitors-count');
+  }
+  if (CONFIG.page.isPost) {
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.getAttribute('id'));
+      var title = visitors.getAttribute('data-flag-title');
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .then(response => response.json())
+              .then(() => {
+                leancloudSelector(url).innerText = counter.time + 1;
+              })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              })
+          } else {
+              Counter('post', '/classes/Counter', { title: title, url: url, time: 1 })
+                .then(response => response.json())
+                .then(() => {
+                  leancloudSelector(url).innerText = 1;
+                })
+                .catch(error => {
+                  console.error('Failed to create', error);
+                });
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  } else {
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.getAttribute('id'));
+      });
+
+      Counter('get', `/classes/Counter?where=${JSON.stringify({ url: { '$in': entries } })}`)
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length === 0) {
+            document.querySelectorAll('.leancloud_visitors .leancloud-visitors-count').forEach(element => {
+              element.innerText = 0;
+            });
+            return;
+          }
+          for (let item of results) {
+            let { url, time } = item;
+            leancloudSelector(url).innerText = time;
+          }
+          for (let url of entries) {
+            var element = leancloudSelector(url);
+            if (element.innerText == '') {
+              element.innerText = 0;
+            }
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+  }
+
+  fetch('https://app-router.leancloud.cn/2/route?appId=QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz')
+    .then(response => response.json())
+    .then(({ api_server }) => {
+      var Counter = (method, url, data) => {
+        return fetch(`https://${api_server}/1.1${url}`, {
+          method: method,
+          headers: {
+            'X-LC-Id'     : 'QiM1vjQ7SAoirKD4qY57L82O-gzGzoHsz',
+            'X-LC-Key'    : 'aOHhzmfDblK0HGWUqEyb6ra2',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '10d97dabaab8bba50fa2',
+      clientSecret: 'caa4dcba9aee16c976853a4c4e9c41fcdce58a81',
+      repo        : 'gitalk-comments',
+      owner       : 'czh55',
+      admin       : ['czh55'],
+      id          : '23ef767b8e32419c0373e7d5123edd5c',
+        language: '',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>
