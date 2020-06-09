@@ -24,7 +24,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux文件系统-虚拟文件系统设计">
 <meta property="og:url" content="http://chenzhiheng.cn/2020/05/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E7%B3%BB%E7%BB%9F/linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F-%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/index.html">
-<meta property="og:site_name" content="陈志恒的技术博客">
+<meta property="og:site_name" content="Zhiheng Chen的博客">
 <meta property="og:description" content="2020年5月9日 下午10:58 硬件文件系统 VS 虚拟文件系统 硬件文件系统 ：硬件文件存储模式设计，解决如何存储的问题 虚拟文件系统 ：数据结构的设计，来模拟我们需要的关系、逻辑，来达到抽象的目的，进行统一的文件管理，叫做虚拟文件系统  核心：简单做一个梳理，帮助理解记忆  对于每一个进程，打开的文件都有一个文件描述符，在 files_struct 里面会有文件描述符数组。每个一个文件描述">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://chenzhiheng.cn/2020/05/09/b%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/c_%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F/b_linux%E7%B3%BB%E7%BB%9F/%E7%B3%BB%E7%BB%9F/linux%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F-%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/8070294bacd74e0ac5ccc5ac88be1bb9.png">
@@ -49,7 +49,7 @@
   };
 </script>
 
-  <title>linux文件系统-虚拟文件系统设计 | 陈志恒的技术博客</title>
+  <title>linux文件系统-虚拟文件系统设计 | Zhiheng Chen的博客</title>
   
 
 
@@ -102,7 +102,7 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">陈志恒的技术博客</span>
+        <span class="site-title">Zhiheng Chen的博客</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -124,11 +124,6 @@
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -176,7 +171,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="陈志恒的技术博客">
+      <meta itemprop="name" content="Zhiheng Chen的博客">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
